@@ -1,0 +1,190 @@
+/* === Base === */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Georgia, "Times New Roman", "Noto Serif CJK SC", serif;
+  font-size: 16px;
+  line-height: 1.7;
+  color: #222;
+  background: #fff;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 40px 20px 60px;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* === Language Switcher === */
+.lang-switcher {
+  position: fixed;
+  top: 12px;
+  right: 20px;
+  z-index: 100;
+  display: flex;
+  gap: 4px;
+}
+
+.lang-btn {
+  border: 1px solid #bbb;
+  background: #fff;
+  padding: 3px 10px;
+  font-size: 13px;
+  font-family: sans-serif;
+  cursor: pointer;
+  color: #666;
+  border-radius: 3px;
+  transition: all 0.2s;
+}
+
+.lang-btn:hover {
+  border-color: #666;
+  color: #333;
+}
+
+.lang-btn.active {
+  background: #222;
+  color: #fff;
+  border-color: #222;
+}
+
+/* === Header === */
+.header {
+  text-align: center;
+  margin-bottom: 36px;
+  padding-top: 20px;
+}
+
+.photo {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 16px;
+  /* placeholder styling when image not available */
+  background: #e0e0e0;
+}
+
+h1 {
+  font-size: 28px;
+  font-weight: normal;
+  margin-bottom: 8px;
+  letter-spacing: 1px;
+}
+
+.affiliation {
+  font-size: 16px;
+  color: #444;
+  margin-bottom: 4px;
+}
+
+.address {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.contact {
+  font-size: 14px;
+  color: #666;
+}
+
+.contact a {
+  color: #1a6eb5;
+}
+
+/* === Sections === */
+.section {
+  margin-bottom: 30px;
+}
+
+.section h2 {
+  font-size: 20px;
+  font-weight: normal;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 6px;
+  margin-bottom: 14px;
+  letter-spacing: 0.5px;
+}
+
+.section h3 {
+  font-size: 17px;
+  font-weight: normal;
+  font-style: italic;
+  margin: 18px 0 10px 0;
+  color: #444;
+}
+
+/* === Lists === */
+ul {
+  padding-left: 22px;
+  margin-bottom: 10px;
+}
+
+li {
+  margin-bottom: 6px;
+}
+
+.pub-list li {
+  margin-bottom: 10px;
+  padding-left: 4px;
+}
+
+/* === Links === */
+a {
+  color: #1a6eb5;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* === Placeholder text === */
+.placeholder-text {
+  color: #999;
+  font-style: italic;
+}
+
+/* === Footer === */
+.footer {
+  margin-top: 40px;
+  padding-top: 16px;
+  border-top: 1px solid #ddd;
+  font-size: 13px;
+  color: #999;
+  text-align: center;
+}
+
+/* === Print === */
+@media print {
+  .lang-switcher {
+    position: static;
+    margin-bottom: 20px;
+  }
+  body {
+    padding: 0;
+    max-width: none;
+  }
+}
+
+/* === Mobile === */
+@media (max-width: 480px) {
+  body {
+    padding: 30px 16px 40px;
+    font-size: 15px;
+  }
+  h1 {
+    font-size: 24px;
+  }
+  .photo {
+    width: 110px;
+    height: 110px;
+  }
+  .lang-switcher {
+    top: 8px;
+    right: 12px;
+  }
+}
