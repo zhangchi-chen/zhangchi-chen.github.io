@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>2026年复几何青年论坛</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+* {box-sizing: border-box}
+body {
+font-family: "Lato", sans-serif;
+margin: 0;
+}
+
+header {
+  background-color: #ccc;
+  background-image: url("bg-header-1.png");
+  padding: 60px;
+  text-align: left;
+  color: white;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.tab {
+  width: 100%;
+  background-color: #ddd;
+  overflow: auto;
+}
+
+.tab button {
+  float: left;
+  background-color: #ddd;
+  color: black;
+  padding: 22px 16px;
+  border: none;
+  outline: none;
+  text-align: left;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 0.9rem;
+}
+
+.tab button:hover {
+  background-color: #000;
+  color: white;
+}
+
+.tab button.active {
+  background-color: #B70031;
+  color: white;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  border: 1px solid #ddd;
+  font-size: 13px;
+}
+
+th,tr,td{
+border: 1px solid #ddd;
+}
+
+th, td {
+  text-align: center;
+  padding: 16px;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2
+}
+
+.tabcontent {
+  float: left;
+  padding: 10px 12px;
+  border-left: none;
+}
+
+.text {
+  position: relative;
+  padding-left: 13px;
+  margin: 24px 0;
+  color:#B70031;
+}
+
+.text:before {
+  content: "";
+  background-color: #B70031;
+  width: 5px;
+  height: 2rem;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  margin-top: -1rem;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}
+
+p {
+font-size: 0.8rem;
+}
+h3 {
+font-size: 1.2rem;
+}
+h5 {
+font-size: 1rem;
+}
+
+@media (max-width: 600px) {
+  .tab button {
+    width:100%;
+    float: none;
+    display: block;
+  }
+}
+
+</style>
+</head>
+<body>
+
+<header>
+    <div>
+        <h1>2026年复几何青年论坛</h1>
+        <h3>2026 Complex Geometry Youth Forum</h3>
+        <br/>
+        <p>11月7日 -- 8日 (7 -- 8, November)</p>
+    </div>
+</header>
+
+<div class="tab">
+    <button class="tablinks" onclick="openPage(event, 'Home')" id="defaultOpen"><i class="fa fa-lg fa-home"></i> 主页 Home </button>
+    <button class="tablinks" onclick="openPage(event, 'Program')"><i class='fa fa-lg fa-calendar'></i> 日程安排 Program </button>
+    <button class="tablinks" onclick="openPage(event, 'Content')"><i class='fa fa-lg fa-file-text'></i> 题目摘要 Title & Abstract </button>
+    <button class="tablinks" onclick="openPage(event, 'Traffic')"><i class='fa fa-lg fa-car'></i> 交通 Traffic </button>
+    <button class="tablinks" onclick="openPage(event, 'Registration')"><i class='fa fa-lg fa-pencil'></i> 注册 Registration </button>
+</div>
+
+<div id="Home" class="tabcontent">
+    <h3 class="text"><strong>会议时间 Date</strong></h3>
+    <p>2026年11月7日至8日（11月6日报到，11月8日离会）</p>
+    <hr />
+
+    <h3 class="text"><strong>会议地点 Place</strong></h3>
+    <p>华东师范大学闵行校区数学楼102报告厅</p>
+    <hr />
+
+    <h3 class="text"><strong>邀请报告人 Invited Speakers</strong></h3>
+    <p>方汉隆 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 北京大学</p>
+    <p>黄国坚 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 深圳大学</p>
+    <p>欧阳泽轩 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 北京大学</p>
+    <p>王成茜 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 清华大学</p>
+    <p>温洋 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 北京大学</p>
+    <p>夏铭辰 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 中国科学技术大学</p>
+    <p>彦文娇 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 北京师范大学</p>
+    <p>张良迪 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 重庆理工大学</p>
+    <hr />
+
+    <h3 class="text"><strong>Problem Session 报告人</strong></h3>
+    <p>傅吉祥 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 复旦大学</p>
+    <hr />
+
+    <h3 class="text"><strong>组织者 Organizers</strong></h3>
+    <p>陈张弛（华东师范大学）</p>
+    <p>李琼玲（南开大学）</p>
+    <p>饶胜（武汉大学）</p>
+    <p>万学远（重庆理工大学）</p>
+    <p>肖建（清华大学）</p>
+    <hr />
+</div>
+
+<div id="Program" class="tabcontent">
+    <h3 class="text"><strong>日程安排 Program</strong></h3>
+    <p>TBA</p>
+</div>
+
+<div id="Content" class="tabcontent">
+    <h3 class="text"><strong>题目摘要 Title & Abstract</strong></h3>
+
+    <h5><b>方汉隆</b>（北京大学）</h5>
+    <p style="text-align:justify!important;"><b>题目：</b> TBA</p>
+    <hr />
+
+    <h5><b>黄国坚</b>（深圳大学）</h5>
+    <p style="text-align:justify!important;"><b>题目：</b> TBA</p>
+    <hr />
+
+    <h5><b>欧阳泽轩</b>（北京大学）</h5>
+    <p style="text-align:justify!important;"><b>题目：</b> TBA</p>
+    <hr />
+
+    <h5><b>王成茜</b>（清华大学）</h5>
+    <p style="text-align:justify!important;"><b>题目：</b> TBA</p>
+    <hr />
+
+    <h5><b>温洋</b>（北京大学）</h5>
+    <p style="text-align:justify!important;"><b>题目：</b> TBA</p>
+    <hr />
+
+    <h5><b>夏铭辰</b>（中国科学技术大学）</h5>
+    <p style="text-align:justify!important;"><b>题目：</b> TBA</p>
+    <hr />
+
+    <h5><b>彦文娇</b>（北京师范大学）</h5>
+    <p style="text-align:justify!important;"><b>题目：</b> TBA</p>
+    <hr />
+
+    <h5><b>张良迪</b>（重庆理工大学）</h5>
+    <p style="text-align:justify!important;"><b>题目：</b> TBA</p>
+    <hr />
+
+    <h3 class="text"><strong>Problem Session</strong></h3>
+
+    <h5><b>傅吉祥</b>（复旦大学）</h5>
+    <p style="text-align:justify!important;"><b>题目：</b> TBA</p>
+    <hr />
+</div>
+
+<div id="Traffic" class="tabcontent">
+    <div>
+        <h3 class="text"><strong>住宿信息 Accommodation</strong></h3>
+        <p>住宿酒店为华东师范大学闵行校区旁边的<b>宝龙艺悦酒店</b>(地址: 上海市闵行区吴泾尚义路39弄1号, 电话: 021-33880888)。</p>
+
+        <h3 class="text"><strong>从机场/火车站至酒店 From Airports/Stations to Hotel</strong></h3>
+
+        <h5><b>上海浦东机场至酒店:</b></h5>
+        <p>从浦东机场站乘坐地铁2号线，至世纪大道站换乘地铁9号线，至桂林路站换乘地铁15号线，至永德路站下车，步行约1.2公里到达宝龙艺悦酒店(步行导航请参考下图)，总耗时约2小时40分钟。</p>
+        <p>乘坐出租车约需1小时(非高峰时段)，费用约200元。</p>
+
+        <h5><b>上海火车站至酒店:</b></h5>
+        <p>从上海火车站乘坐地铁1号线或3号线，至上海南站换乘地铁15号线，至永德路站下车，步行约1.2公里到达宝龙艺悦酒店(步行导航请参考下图)，总耗时约1小时30分钟。</p>
+        <p>乘坐出租车约需50分钟(非高峰时段)，费用约140元。</p>
+
+        <h5><b>上海虹桥机场/上海虹桥火车站至酒店:</b></h5>
+        <p>从虹桥站乘坐地铁2号线，至娄山关路站换乘地铁15号线，至永德路站下车，步行约1.2公里到达宝龙艺悦酒店(步行导航请参考下图)，总耗时约1小时40分钟。</p>
+        <p>乘坐出租车约需40分钟(非高峰时段)，费用约120元。</p>
+
+        <h5><b>上海南站至酒店:</b></h5>
+        <p>从上海南站乘坐地铁15号线，至永德路站下车，步行约1.2公里到达宝龙艺悦酒店(步行导航请参考下图)，总耗时约50分钟。</p>
+        <p>乘坐出租车约需30分钟(非高峰时段)，费用约60元。</p>
+        <div style="text-align:center;">
+        <img src="yongdestation-hotel1.png" alt="永德路地铁站至宝龙艺悦酒店步行导航" width="50%" height="auto">
+        <p>永德路地铁站至宝龙艺悦酒店步行导航图</p>
+        </div>
+    </div>
+
+    <div>
+        <h3 class="text"><strong>从酒店至数学楼 From Hotel to Math Building</strong></h3>
+        <p>从宝龙艺悦酒店步行至数学楼路程约1.5公里，用时约20分钟，步行导航请参考下图。</p>
+        <div style="text-align:center;">
+        <img src="hotel-mathbuilding.png" alt="宝龙艺悦酒店至数学楼步行导航" width="50%" height="auto">
+        <p>宝龙艺悦酒店至数学楼步行导航图</p>
+        </div>
+    </div>
+</div>
+
+<div id="Registration" class="tabcontent">
+    <h3 class="text"><strong>注册 Registration</strong></h3>
+    <p>请点击以下链接或扫描二维码注册，&nbsp; 截止日期：2026年10月30日 </p>
+    <p>本次论坛计划安排3-4个博士或博士后报告，每个20分钟。欢迎自荐报名。有意向的报告人，请在10月10日前发送论文至zcchen@math.ecnu.edu.cn。报名截止后我们会选择安排，并提供资助。</p>
+    <p> https://www.wenjuan.com/s/F7VVFbg/ </p>
+    <img src="qr.png" alt="注册二维码" width="50%" height="auto">
+</div>
+
+<script>
+function openPage(evt, pageName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(pageName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+
+document.getElementById("defaultOpen").click();
+</script>
+
+</body>
+</html>
