@@ -1,0 +1,89 @@
+@import url("../style.css");
+
+body {
+  max-width: 820px;
+}
+
+.skill-header {
+  margin: 24px 0 34px;
+}
+
+.skill-header h1 {
+  line-height: 1.25;
+}
+
+.subtitle {
+  color: #555;
+  margin-top: 10px;
+}
+
+.back-link {
+  font-size: 14px;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 18px 0 4px;
+}
+
+.button-link {
+  display: inline-block;
+  border: 1px solid #1a6eb5;
+  border-radius: 4px;
+  padding: 6px 12px;
+}
+
+.button-link.primary {
+  color: #fff;
+  background: #1a6eb5;
+}
+
+.button-link.primary:hover {
+  background: #145789;
+  text-decoration: none;
+}
+
+.notice {
+  background: #f6f8fa;
+  border-left: 3px solid #1a6eb5;
+  padding: 12px 14px;
+  margin: 14px 0;
+}
+
+ol {
+  padding-left: 22px;
+  margin-bottom: 10px;
+}
+
+pre {
+  background: #f6f8fa;
+  border: 1px solid #e2e6ea;
+  border-radius: 4px;
+  padding: 14px;
+  margin: 12px 0;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.9em;
+}
+
+.checksum {
+  font-size: 12px;
+}
+
+.checksum code {
+  overflow-wrap: anywhere;
+  word-break: break-all;
+}
+
+@media (max-width: 480px) {
+  .skill-header {
+    padding-top: 16px;
+  }
+}

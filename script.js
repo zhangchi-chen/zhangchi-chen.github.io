@@ -11,6 +11,9 @@
 
   btnCn.addEventListener('click', function () { setLang('cn'); });
   btnEn.addEventListener('click', function () { setLang('en'); });
+  window.addEventListener('hashchange', function () {
+    setLang(window.location.hash === '#en' ? 'en' : 'cn');
+  });
 
   function setLang(lang) {
     if (lang === 'cn') {
@@ -18,6 +21,10 @@
       contentEn.style.display = 'none';
       btnCn.classList.add('active');
       btnEn.classList.remove('active');
+      btnCn.setAttribute('aria-pressed', 'true');
+      btnEn.setAttribute('aria-pressed', 'false');
+      contentCn.setAttribute('aria-hidden', 'false');
+      contentEn.setAttribute('aria-hidden', 'true');
       window.location.hash = '';
       document.documentElement.lang = 'zh-CN';
     } else {
@@ -25,6 +32,10 @@
       contentEn.style.display = '';
       btnCn.classList.remove('active');
       btnEn.classList.add('active');
+      btnCn.setAttribute('aria-pressed', 'false');
+      btnEn.setAttribute('aria-pressed', 'true');
+      contentCn.setAttribute('aria-hidden', 'true');
+      contentEn.setAttribute('aria-hidden', 'false');
       window.location.hash = '#en';
       document.documentElement.lang = 'en';
     }

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Analysis Proof &amp; Manuscript Refinement</title>
+  <meta name="description" content="A public standalone Codex skill for auditing and refining proofs and proof-centered manuscripts in mathematical analysis.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="lang-switcher">
+    <button id="btn-cn" class="lang-btn active" aria-pressed="true" aria-controls="lang-cn">中文</button>
+    <button id="btn-en" class="lang-btn" aria-pressed="false" aria-controls="lang-en">English</button>
+  </div>
+
+  <div id="lang-cn" class="lang-content">
+    <header class="skill-header">
+      <p class="back-link"><a href="../">← 返回个人主页</a></p>
+      <h1>Analysis Proof &amp; Manuscript Refinement</h1>
+      <p class="subtitle">用于数学分析证明与证明型稿件审阅的公开 standalone Codex skill</p>
+      <div class="actions">
+        <a class="button-link primary" href="../downloads/analysis-proof-manuscript-refinement-v0.1.0.zip">下载 ZIP</a>
+        <a class="button-link" href="https://github.com/zhangchi-chen/zhangchi-chen.github.io/tree/analysis-proof-manuscript-refinement-v0.1.0/skills/analysis-proof-manuscript-refinement">审阅源码</a>
+        <a class="button-link" href="https://github.com/zhangchi-chen/zhangchi-chen.github.io/blob/analysis-proof-manuscript-refinement-v0.1.0/skills/analysis-proof-manuscript-refinement/LICENSE">MIT License</a>
+        <a class="button-link" href="tutorial.md">Markdown 教程</a>
+      </div>
+    </header>
+
+    <section class="section">
+      <h2>它做什么</h2>
+      <p>审阅已有证明的正确性、缺失假设和依赖关系，整理定理与章节结构，统一记号，并检查 LaTeX 结构和交叉引用。它不会替代作者核验或形式化证明助理。</p>
+    </section>
+
+    <section class="section">
+      <h2>Codex 桌面应用一键安装</h2>
+      <p>在一个新的 Codex 任务中粘贴下面的提示词：</p>
+      <pre><code>使用 $skill-installer 从下面的 GitHub 目录安装 skill：
+https://github.com/zhangchi-chen/zhangchi-chen.github.io/tree/analysis-proof-manuscript-refinement-v0.1.0/skills/analysis-proof-manuscript-refinement
+
+不要修改或覆盖任何现有 skill。如果目标目录已经存在，停止并报告。安装后确认 skill 名称和实际安装位置，并告诉我它应在下一轮可用；如果下一轮仍未出现，再建议重启 Codex。</code></pre>
+      <p>Codex 可能请求联网下载和写入用户 skill 目录的授权；批准前请核对仓库所有者、版本标签和目标目录。安装完成后的下一轮消息中显式调用：</p>
+      <pre><code>请使用 $analysis-proof-manuscript-refinement 审阅我附上的证明，优先报告正确性问题和缺失假设；先给出按严重程度排序的发现，不要直接改写文件。</code></pre>
+    </section>
+
+    <section class="section">
+      <h2>手动安装</h2>
+      <ol>
+        <li>下载 ZIP 并解压。</li>
+        <li>将完整文件夹放入 macOS/Linux 的 <code>$HOME/.agents/skills/</code>，或 Windows PowerShell 的 <code>$HOME\.agents\skills\</code>。</li>
+        <li>如果 Codex 没有自动发现它，重启 Codex。</li>
+      </ol>
+      <p>手动安装使用当前官方用户级目录；<code>$skill-installer</code> 可能使用随 Codex 版本变化的受管目录，请以它报告的实际路径为准。</p>
+      <p class="checksum">SHA-256: <code>7cad41218c3266d883c082598da4f76be76a766f0a7e4010e95093f9ada43e2b</code></p>
+      <p>MIT 许可只覆盖该公开 skill 包，不覆盖个人主页的其他内容。</p>
+    </section>
+
+    <section class="section">
+      <h2>隐私与安全</h2>
+      <div class="notice">本次发布包只有纯文本的 Markdown、YAML 和 LICENSE 文件；没有脚本、可执行文件、MCP 依赖、遥测或自动网络请求，也没有来自个人论文或未公开研究的案例、定理、专用记号或文件路径。核心审阅不要求联网；若用户明确授权来源核查，Codex 可能使用运行环境提供的搜索工具。</div>
+      <p>skill 本身不会新增数据传输渠道；Codex 及用户启用的工具仍会按照其运行环境和账户设置处理用户提交的稿件。提交未公开或保密稿件前，请确认账户数据控制、单位政策和上传授权，并按需删除作者、机构、致谢和文件元数据。建议安装前先审阅源码。</p>
+    </section>
+
+    <section class="section">
+      <h2>分发说明</h2>
+      <p>这是 standalone skill 的源码分发版本。OpenAI 当前建议把面向更广泛用户的可安装分发进一步封装为 plugin；本版本主要用于直接审阅、安装和试用。参见 <a href="https://developers.openai.com/codex/skills">OpenAI skill 文档</a>。</p>
+    </section>
+
+    <footer class="footer"><p>Version 0.1.0 · 2026</p></footer>
+  </div>
+
+  <div id="lang-en" class="lang-content" style="display:none;">
+    <header class="skill-header">
+      <p class="back-link"><a href="../#en">← Back to homepage</a></p>
+      <h1>Analysis Proof &amp; Manuscript Refinement</h1>
+      <p class="subtitle">A public standalone Codex skill for auditing mathematical-analysis proofs and proof-centered manuscripts</p>
+      <div class="actions">
+        <a class="button-link primary" href="../downloads/analysis-proof-manuscript-refinement-v0.1.0.zip">Download ZIP</a>
+        <a class="button-link" href="https://github.com/zhangchi-chen/zhangchi-chen.github.io/tree/analysis-proof-manuscript-refinement-v0.1.0/skills/analysis-proof-manuscript-refinement">Review source</a>
+        <a class="button-link" href="https://github.com/zhangchi-chen/zhangchi-chen.github.io/blob/analysis-proof-manuscript-refinement-v0.1.0/skills/analysis-proof-manuscript-refinement/LICENSE">MIT License</a>
+        <a class="button-link" href="tutorial.md">Markdown tutorial</a>
+      </div>
+    </header>
+
+    <section class="section">
+      <h2>What it does</h2>
+      <p>It audits existing proofs for correctness, missing hypotheses, and dependencies; reorganizes theorem and section structure; aligns notation; and checks LaTeX structure and cross-references. It does not replace author verification or a formal proof assistant.</p>
+    </section>
+
+    <section class="section">
+      <h2>One-prompt installation in Codex desktop</h2>
+      <p>Paste the following into a new Codex task:</p>
+      <pre><code>Use $skill-installer to install the skill from this GitHub directory:
+https://github.com/zhangchi-chen/zhangchi-chen.github.io/tree/analysis-proof-manuscript-refinement-v0.1.0/skills/analysis-proof-manuscript-refinement
+
+Do not modify or overwrite any existing skill. If the destination already exists, stop and report it. After installation, confirm the skill name and actual install location, and tell me it should be available on the next turn. If it is still missing on the next turn, then suggest restarting Codex.</code></pre>
+      <p>Codex may request permission to download from GitHub and write to the user skill directory. Verify the repository owner, version tag, and destination before approving. Invoke the skill explicitly in the next message after installation:</p>
+      <pre><code>Use $analysis-proof-manuscript-refinement to audit the attached proof. Prioritize correctness issues and missing hypotheses, return findings in severity order, and do not edit files yet.</code></pre>
+    </section>
+
+    <section class="section">
+      <h2>Manual installation</h2>
+      <ol>
+        <li>Download and extract the ZIP.</li>
+        <li>Place the complete folder in <code>$HOME/.agents/skills/</code> on macOS/Linux, or <code>$HOME\.agents\skills\</code> in Windows PowerShell.</li>
+        <li>Restart Codex if it is not detected automatically.</li>
+      </ol>
+      <p>Manual installation follows the current official user-level location. <code>$skill-installer</code> may use a managed location that varies by Codex version; rely on the actual path it reports.</p>
+      <p class="checksum">SHA-256: <code>7cad41218c3266d883c082598da4f76be76a766f0a7e4010e95093f9ada43e2b</code></p>
+      <p>The MIT license applies only to this public skill package, not to other content on the personal website.</p>
+    </section>
+
+    <section class="section">
+      <h2>Privacy and security</h2>
+      <div class="notice">This release contains only plain-text Markdown, YAML, and LICENSE files. It has no scripts, executables, MCP dependencies, telemetry, or automatic network requests, and no case study, theorem, specialized notation, or file path taken from a personal paper or unpublished research. Core review does not require network access; if the user explicitly authorizes source verification, Codex may use search tools provided by its environment.</div>
+      <p>The skill adds no data-transfer channel of its own. Codex and any user-enabled tools still process submitted manuscripts according to their environment and account settings. Before submitting unpublished or confidential manuscripts, confirm account data controls, institutional policy, and authorization to upload; remove author, affiliation, acknowledgements, and file metadata when appropriate. Review the source before installing.</p>
+    </section>
+
+    <section class="section">
+      <h2>Distribution note</h2>
+      <p>This is a standalone source distribution. OpenAI currently recommends packaging reusable skills as plugins for broader installable distribution; this version is intended for direct review, installation, and experimentation. See the <a href="https://developers.openai.com/codex/skills">OpenAI skill documentation</a>.</p>
+    </section>
+
+    <footer class="footer"><p>Version 0.1.0 · 2026</p></footer>
+  </div>
+
+  <script src="../script.js"></script>
+</body>
+</html>

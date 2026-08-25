@@ -1,0 +1,4 @@
+interface:
+  display_name: "Analysis Proof & Manuscript Refinement"
+  short_description: "Audit proofs and proof-centered analysis manuscripts."
+  default_prompt: "Use $analysis-proof-manuscript-refinement to audit the attached proof for correctness and return prioritized findings without editing."
