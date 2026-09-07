@@ -1,4 +1,8 @@
-"""Exact checks for Section 5 of main.tex. Run with Python 3 and SymPy."""
+"""Section 5 seed case: n=6, k=2 under SD (main-2.tex).
+Run with Python 3 and SymPy, or paste into SageMathCell in Python mode.
+The named seed check verifies positive definite coefficients and a nonzero kernel.
+Additional exact identities support the rank extension proved in the paper.
+"""
 from itertools import combinations
 import sympy as sp
 
@@ -56,7 +60,16 @@ pairs6 = list(combinations(range(6), 2))
 kernel = sp.Matrix([-2*ustar if i//2 == j//2 else 1
                     for i, j in pairs6])
 assert all(sp.simplify(c) == 0 for c in D(0, tstar)*kernel)
-print("Explicit nonzero kernel over Q(sqrt(6)): PASS")
+assert tstar.is_positive is True
+assert (sp.Rational(1, 2)-tstar).is_positive is True
+assert any(c != 0 for c in kernel)
+for S in (S1, S2, S3):
+    coefficient = sp.eye(2)+sp.sqrt(tstar)*S
+    assert coefficient == coefficient.conjugate().T
+    assert coefficient[0, 0].is_positive is True
+    assert sp.simplify(coefficient.det()-(1-tstar)) == 0
+assert (1-tstar).is_positive is True
+print("Section 5 seed (n=6, k=2): positive definite SD coefficients and nonzero kernel: PASS")
 
 # The text proves these counting identities for every m.
 # Check the full matrices at three successive sizes, symbolically in t.

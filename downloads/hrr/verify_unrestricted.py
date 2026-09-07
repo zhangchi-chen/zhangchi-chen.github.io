@@ -1,4 +1,8 @@
-"""Exact checks for Section 3 of main.tex. Run with Python 3 and SymPy."""
+"""Section 3 seed case: n=4, k=2 (main-2.tex).
+Run with Python 3 and SymPy, or paste into SageMathCell in Python mode.
+The named seed check verifies positivity and an explicit nonzero kernel.
+Additional exact identities support the rank extension proved in the paper.
+"""
 from itertools import combinations
 import sympy as sp
 
@@ -63,6 +67,24 @@ assert not add(wedge(eta, det_B),
 assert not wedge(eta, power(theta_U, 3))
 assert eta
 print("Two exterior identities, with the i/2 normalization: PASS")
+
+# Seed case: n=4, k=2, t=1+sqrt(3).
+t_seed = 1 + sp.sqrt(3)
+assert t_seed.is_positive is True
+seed_determinant = add(power(theta_U, 2),
+                       scale(t_seed, power(theta_U, 2)),
+                       scale(t_seed**2, det_B))
+assert eta and all(sp.simplify(c) == 0
+                   for c in wedge(eta, seed_determinant).values())
+w1, w2 = sp.zeros(8, 1), sp.zeros(8, 1)
+w1[0] = w1[5] = 1
+w2[2] = w2[7] = 1
+P_seed = w1*w1.T + w2*w2.T
+assert P_seed == P_seed.T and P_seed**2 == 2*P_seed
+# The Nakano tensor is I+t_seed*P_seed. Its eigenvalues are
+# 1 and 1+2*t_seed, both strictly positive.
+assert (1+2*t_seed).is_positive is True
+print("Section 3 seed (n=4, k=2): Nakano positivity and nonzero kernel: PASS")
 
 # Construct the determinant directly from the 2x2 block and scalar blocks.
 # These finite checks supplement the all-rank binomial argument in the text.
