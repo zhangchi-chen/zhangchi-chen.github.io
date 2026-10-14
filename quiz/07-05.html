@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stolz 定理 · 自测</title>
+<style>
+:root{--bg:#0d1524;--bg2:#14213a;--panel:#172540;--grid:#2a3956;--fg:#e8edf5;--muted:#8d9ab0;--gold:#f2c14e;--red:#ef5b52;--teal:#3cc6c9;--blue:#79a8ff;--green:#6fd38a}
+*{box-sizing:border-box}
+html{background:var(--bg)}
+body{margin:0;background:linear-gradient(160deg,var(--bg),var(--bg2) 60%,var(--bg));min-height:100vh;color:var(--fg);
+ font-family:"Noto Sans SC","Noto Sans CJK SC","PingFang SC","Microsoft YaHei","Segoe UI",system-ui,sans-serif;line-height:1.6}
+main{max-width:1060px;margin:0 auto;padding:40px 18px 64px}
+.kicker{color:var(--muted);letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:clamp(30px,5vw,46px);margin:6px 0 4px}
+.sub{color:var(--gold);font-size:18px;margin:0 0 26px}
+section{background:rgba(23,37,64,.72);border:1px solid var(--grid);border-radius:16px;padding:22px 24px;margin:18px 0}
+h2{font-size:20px;margin:0 0 12px;color:var(--fg)} h2 .n{color:var(--gold);margin-right:6px}
+p{margin:8px 0}
+.m{font-family:"STIX Two Math","Cambria Math","Latin Modern Math","Times New Roman",serif;font-style:italic;white-space:nowrap;font-size:1.08em}
+.m sub,.m sup{font-size:.7em} .m sub.lim{font-style:italic}
+.limw{display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;font-style:normal;line-height:1.1;margin-right:.2em}
+.limsub{font-size:.62em;font-style:italic}
+.scroll{overflow-x:auto}
+.card p,.banner,section>p{overflow-x:auto}
+.frac{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;margin:0 .15em}
+.frac>span:first-child{border-bottom:1px solid currentColor;padding:0 .2em}
+.frac>span{line-height:1.25}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}
+@media(max-width:760px){.two{grid-template-columns:1fr}}
+table{width:100%;border-collapse:collapse;font-size:16px}
+th,td{padding:9px 10px;border-bottom:1px solid var(--grid);text-align:left;vertical-align:middle}
+th{color:var(--blue);font-weight:600}
+td.arrow{color:var(--gold);text-align:center;width:40px}
+td.lab{color:var(--muted);font-size:13px}
+.banner{border-radius:12px;padding:10px 14px;margin-top:10px;display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.banner.lh{background:#1b2a48}.banner.sc{background:#2a2a1c;border:1px solid var(--gold);color:var(--gold)}
+.banner .tag{color:var(--muted);min-width:110px}.banner.sc .tag{color:var(--gold)}
+.card{border-radius:12px;padding:12px 16px;margin:10px 0;background:#13203a}
+.card.g{border:1.5px solid var(--gold)}.card.b{border:1.5px solid var(--blue)}
+.card h3{margin:0 0 6px;font-size:17px}.card.g h3{color:var(--gold)}.card.b h3{color:var(--blue)}
+.check{list-style:none;padding:0;margin:8px 0}
+.check li{padding:7px 0;border-bottom:1px dashed var(--grid)}
+.check .ok{color:var(--green);font-weight:700}.check .no{color:var(--red);font-weight:700}
+.fig{width:100%;height:auto;display:block;background:#0f1a2e;border-radius:12px;border:1px solid var(--grid)}
+.fig .ax{stroke:var(--muted);stroke-width:1.5}.fig .axl{fill:var(--muted);font:italic 14px serif}
+.fig .path{fill:none;stroke:#9fb3c8;stroke-width:2.2}.fig .pt{fill:var(--fg)}
+.fig .chord{stroke:var(--gold);stroke-width:2;stroke-dasharray:8 6}
+.fig .seg{stroke:var(--teal);stroke-width:5;stroke-linecap:round}
+.fig .db{stroke:var(--blue);stroke-width:1.8;stroke-dasharray:4 4}.fig .da{stroke:var(--red);stroke-width:1.8;stroke-dasharray:4 4}
+.fig .tda{fill:var(--red);font:italic 13px serif}.fig .tdb{fill:var(--blue);font:italic 13px serif}
+.fig .tpt{fill:var(--fg);font:italic 13px serif}.fig .tch{fill:var(--gold);font:italic 13px serif}
+.fig .band{fill:rgba(242,193,78,.18);stroke:var(--gold);stroke-dasharray:5 4}
+.fig .head{fill:var(--red);opacity:.88}.fig .tail{fill:var(--teal);opacity:.88}
+.fig .avg{stroke:var(--fg);stroke-width:2.5}.fig .tavg{fill:var(--fg);font:italic 13px serif}
+.fig .tband{fill:var(--gold);font:italic 12px serif}.fig .thead{fill:var(--red);font:12px sans-serif;font-weight:700}
+.eq{margin:8px 0;padding:8px 12px;background:#101b31;border-radius:10px;overflow-x:auto}
+.eq .lab{color:var(--muted);font-size:13px;margin-right:10px}
+.box{border:1.5px solid var(--gold);background:#2a2a1c;color:var(--gold);border-radius:10px;padding:8px 12px;margin-top:8px}
+.ok{color:var(--green)}.no{color:var(--red)}
+.mis td:nth-child(3){color:#ffb3ae}
+.quiz .q{border:1px solid var(--grid);border-radius:12px;padding:12px 14px;margin:10px 0;background:#13203a}
+.quiz .qt{font-weight:600;margin-bottom:8px}
+.quiz .opts{display:flex;flex-wrap:wrap;gap:8px}
+.quiz .opt{text-align:left;max-width:100%;border:1px solid var(--grid);border-radius:999px;padding:4px 12px;background:#0f1a2e;color:var(--fg);cursor:pointer;font:inherit}
+.quiz .opt.sel{border-color:var(--blue);color:var(--blue)}
+.quiz .opt.right{border-color:var(--green);background:rgba(111,211,138,.15);color:var(--green)}
+.quiz .opt.wrong{border-color:var(--red);color:var(--red)}
+.quiz .rv{margin-top:10px;background:transparent;border:1px solid var(--gold);color:var(--gold);border-radius:8px;padding:4px 12px;cursor:pointer;font:inherit}
+.quiz .ex{display:none;margin-top:8px;color:var(--fg);background:#101b31;border-left:3px solid var(--green);padding:8px 10px;border-radius:6px}
+.quiz .ex.show{display:block}
+footer{color:var(--muted);font-size:13px;text-align:center;margin-top:26px}
+
+/* ---- 手机自测单页覆盖层（深浅主题自适应：浅色文件有 --paper，深色有 --bg/--fg） ---- */
+html,body{margin:0;background:var(--bg,var(--paper));color:var(--fg,var(--ink));
+  font-family:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC","Source Han Sans SC",system-ui,-apple-system,sans-serif}
+/* 中和原幻灯片容器的隐藏/定位，让 section 直接作为文档流内容 */
+section.slide{display:block!important;position:static!important;width:auto!important;height:auto!important;
+  padding:0!important;background:none!important;box-shadow:none!important;transform:none!important}
+.page{max-width:720px;margin:0 auto;padding:18px 16px 60px}
+.topbar{border-bottom:2px solid var(--grid,var(--line,var(--rule,#e3e0d6)));padding-bottom:10px;margin-bottom:6px}
+.topbar h1{font-size:20px;margin:0}
+.lead{color:var(--muted);font-size:15px;margin:12px 0 2px;line-height:1.6}
+/* 表格 → 竖屏卡片（仅 slide 式页面有表格） */
+table.t{display:block;width:auto;border:0}
+table.t tbody,table.t tr,table.t td,table.t th{display:block;border:0;width:auto}
+table.t thead{display:none}
+table.t tr{background:var(--card);border:1.5px solid var(--rule);border-radius:14px;
+  padding:14px 16px;margin:14px 0;font-size:19px;line-height:1.7}
+table.t td{padding:6px 0}
+table.t td:last-child{border-top:1.5px dashed var(--rule);margin-top:6px;padding-top:10px}
+.q{display:block;text-align:center}
+.reveal{cursor:pointer;border:2px dashed var(--rule);border-radius:10px;
+  padding:6px 22px;color:var(--muted);font-size:16px;background:none;font-family:inherit}
+.ans{display:none;line-height:1.8}
+.shown .ans{display:block} .shown .reveal{display:none}
+/* quiz-section 式页面：原 section 自带卡片样式，仅收窄内边距 */
+section.quiz{padding:6px 2px;margin:8px 0;background:none;border:0}
+section.quiz .q{margin:12px 0;text-align:left}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="topbar">
+    <h1>Stolz 定理 · 自测</h1>
+  </div>
+  
+  <div class="quiz">
+  <section class="quiz"><p style="color:var(--muted)">先选一个答案，再点击查看。</p><div class="q"><div class="qt">1. 在对照词典中，增量 <span class="m">Δa<sub>n</sub> = a<sub>n+1</sub> − a<sub>n</sub></span> 对应的是……</div><div class="opts"><button class="opt" type="button" data-c="0">A. <span class="m">f(x)/g(x)</span></button><button class="opt" type="button" data-c="1">B. <span class="m">f′(x)</span></button><button class="opt" type="button" data-c="0">C. <span class="m">∫ f′</span></button></div><button class="rv" type="button" data-reveal="查看答案" data-hide="收起答案">查看答案</button><div class="ex"><b>答案: B.</b> 一步增量是离散的导数，累加增量是离散的积分。</div></div><div class="q"><div class="qt">2. 对 <span class="m">b<sub>n</sub> = 2 − 1/n</span>，<span class="m">a<sub>n</sub> = 3 − 1/n</span>，清单中哪一项不成立？</div><div class="opts"><button class="opt" type="button" data-c="0">A. 严格递增</button><button class="opt" type="button" data-c="1">B. <span class="m">b<sub>n</sub> → +∞</span></button><button class="opt" type="button" data-c="0">C. 增量之比有极限</button></div><button class="rv" type="button" data-reveal="查看答案" data-hide="收起答案">查看答案</button><div class="ex"><b>答案: B.</b> <span class="m">b<sub>n</sub></span> 递增但始终小于 2，开头冲不掉，于是 <span class="m"><span class="frac"><span>a<sub>n</sub></span><span>b<sub>n</sub></span></span></span> → 3/2 而不是 1。</div></div><div class="q"><div class="qt">3. 证明中，初始存量 aₘ, bₘ 为什么最终无关紧要？</div><div class="opts"><button class="opt" type="button" data-c="1">A. 它被 <span class="m">b<sub>n</sub> → +∞</span> 除掉了</button><button class="opt" type="button" data-c="0">B. 可以取 aₘ = 0</button><button class="opt" type="button" data-c="0">C. 因为 ε → 0</button></div><button class="rv" type="button" data-reveal="查看答案" data-hide="收起答案">查看答案</button><div class="ex"><b>答案: A.</b> 头部以 <span class="m">(a<sub>m</sub> − (L ± ε)b<sub>m</sub>)/b<sub>n</sub></span> 的形式出现，因 <span class="m">b<sub>n</sub> → +∞</span> 而趋于 0。</div></div><div class="q"><div class="qt">4. 对每个固定的 ε，夹逼直接得到什么？</div><div class="opts"><button class="opt" type="button" data-c="0">A. <span class="m">lim aₙ/bₙ = L + ε</span></button><button class="opt" type="button" data-c="1">B. 上极限 ≤ L + ε 且 下极限 ≥ L − ε</button><button class="opt" type="button" data-c="0">C. 增量变得单调</button></div><button class="rv" type="button" data-reveal="查看答案" data-hide="收起答案">查看答案</button><div class="ex"><b>答案: B.</b> 上极限与下极限都被困在 L 的 ε 邻域内；ε 任意，二者只能在 L 相遇。</div></div><div class="q"><div class="qt">5. <span class="m">lim (1 + 2 + … + n)/n²</span> 等于多少？</div><div class="opts"><button class="opt" type="button" data-c="0">A. 1</button><button class="opt" type="button" data-c="1">B. 1/2</button><button class="opt" type="button" data-c="0">C. 0</button></div><button class="rv" type="button" data-reveal="查看答案" data-hide="收起答案">查看答案</button><div class="ex"><b>答案: B.</b> 增量分别为 n + 1 与 2n + 1，其比趋于 1/2，且 n² 严格递增趋于 +∞。</div></div><div class="q"><div class="qt">6. <span class="m">a<sub>n</sub> = (−1)<sup>n</sup></span>，<span class="m">b<sub>n</sub> = n</span> 这个例子说明……</div><div class="opts"><button class="opt" type="button" data-c="1">A. 定理的逆命题不成立</button><button class="opt" type="button" data-c="0">B. <span class="m">b<sub>n</sub></span> 必须有界</button><button class="opt" type="button" data-c="0">C. 必须用 0/0 型</button></div><button class="rv" type="button" data-reveal="查看答案" data-hide="收起答案">查看答案</button><div class="ex"><b>答案: A.</b> <span class="m"><span class="frac"><span>a<sub>n</sub></span><span>b<sub>n</sub></span></span></span> → 0，但增量之比 2(−1)<sup>n+1</sup> 没有极限：定理是单向的。</div></div></section>
+  </div>
+</div>
+<script>
+document.querySelectorAll('.reveal').forEach(function(b){
+  b.addEventListener('click',function(){this.closest('.q').classList.add('shown')});
+});
+/* 按页面 DOM 特征自适配各批次回件的交互（逻辑均照搬原版） */
+if (document.querySelector('.qt3')) {
+  /* .qt3 式（02-03）：按钮点击后父卡 shown、按钮隐藏 */
+  document.querySelectorAll('.qt3 button').forEach(function(b){
+    b.addEventListener('click',function(){b.parentNode.classList.add('shown');b.style.display='none';});});
+} else if (document.querySelector('.quiz li.q')) {
+  /* ol/li 式（02-06）：.ans 切换 + data-ok 选项高亮 */
+  document.querySelectorAll('.quiz li.q').forEach(function(q){
+    var b=q.querySelector('button'),a=q.querySelector('.ans'),ok=q.querySelector('.opts li[data-ok]');
+    b.addEventListener('click',function(){var on=a.classList.toggle('show');ok.classList.toggle('ok',on);
+      b.textContent=on?b.dataset.hide:b.dataset.show;b.setAttribute('aria-expanded',on);});});
+} else if (document.querySelector('.quiz .q .rv')) {
+  /* opt/rv/ex 式（07-05）：选项标记 sel，展开按钮标出对错 */
+  document.querySelectorAll('.quiz .q').forEach(function(q){
+    var opts=q.querySelectorAll('.opt'), ex=q.querySelector('.ex'), btn=q.querySelector('.rv');
+    opts.forEach(function(o){o.addEventListener('click',function(){
+      if(ex.classList.contains('show'))return;
+      opts.forEach(function(x){x.classList.remove('sel')}); o.classList.add('sel');});});
+    btn.addEventListener('click',function(){
+      var show=!ex.classList.contains('show'); ex.classList.toggle('show',show);
+      opts.forEach(function(o){
+        o.classList.remove('right','wrong');
+        if(show){ if(o.dataset.c==='1')o.classList.add('right'); else if(o.classList.contains('sel'))o.classList.add('wrong'); }
+      });
+      btn.textContent=show?btn.dataset.hide:btn.dataset.reveal;
+    });
+  });
+} else if (document.querySelector('.quiz .q[data-ok]')) {
+  /* data-ok 式（02-07）：点击后展开 .ans 并高亮正确选项 */
+  document.querySelectorAll('.quiz .q').forEach(function(q){
+    var btn=q.querySelector('button');
+    btn.addEventListener('click',function(){
+      q.classList.add('open');
+      var k=parseInt(q.getAttribute('data-ok'),10);
+      q.querySelectorAll('.opts span')[k].classList.add('ok');
+      btn.disabled=true; btn.style.opacity=.5; });
+  });
+} else {
+  /* .opt 选择题 + 展开按钮式（02-04） */
+  document.querySelectorAll('.q button').forEach(function(b){
+    b.addEventListener('click',function(){
+      var q=b.closest('.q'), open=q.classList.toggle('open');
+      q.querySelectorAll('.opt').forEach(function(o){ if(o.dataset.c==='1') o.classList.toggle('correct',open); });
+      if(b.dataset.hide&&b.dataset.show) b.textContent=open?b.dataset.hide:b.dataset.show;
+    });
+  });
+}
+</script>
+</body>
+</html>

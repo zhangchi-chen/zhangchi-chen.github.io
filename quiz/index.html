@@ -12,13 +12,16 @@ html,body{margin:0;background:#fbfaf6;color:var(--ink);
 .page{max-width:720px;margin:0 auto;padding:28px 18px 60px}
 h1{font-size:22px;margin:0 0 4px}
 .sub{color:var(--muted);font-size:14px;margin:0 0 22px}
+h2{font-size:15px;color:var(--muted);font-weight:600;margin:26px 0 8px;
+  border-bottom:1px solid var(--rule);padding-bottom:6px}
 .item{background:var(--card);border:1.5px solid var(--rule);border-radius:14px;
-  padding:14px 18px;margin:12px 0}
-.item .t{font-size:17px;font-weight:600}
-.item .meta{color:var(--muted);font-size:13px;margin:2px 0 10px}
-a.btn{display:inline-block;margin-right:10px;color:var(--seq);text-decoration:none;
-  border:1.5px solid var(--seq);border-radius:9px;padding:4px 14px;font-size:14px}
-a.btn:hover{background:#eef5fb}
+  padding:12px 18px;margin:10px 0;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.item .t{font-size:16px;text-decoration:none;color:var(--ink)}
+div.item .t:hover,a.item:hover .t{color:var(--seq)}
+.item .n{color:var(--muted);font-size:13px;white-space:nowrap}
+a.item{text-decoration:none;color:var(--ink)}
+a.item:hover{border-color:var(--seq);background:#f3f8fc}
+.en{font-size:13px;color:var(--seq);white-space:nowrap}
 .note{color:var(--muted);font-size:13px;margin-top:20px;line-height:1.7}
 </style>
 </head>
@@ -27,16 +30,26 @@ a.btn:hover{background:#eef5fb}
   <h1>数学分析 · 视频配套自测</h1>
   <p class="sub">Calculus (Mathematical Analysis) · Self-quizzes for the video series</p>
 
+  <h2>第 2 章 数列极限</h2>
   <div class="item">
-    <div class="t">02-01 数列的收敛（ε–N 定义）</div>
-    <div class="meta">Convergence of Sequences · 5 题判断 / 5 true-false questions</div>
-    <a class="btn" href="02-01.html">中文版</a>
-    <a class="btn" href="02-01-en.html">English</a>
+    <a class="t" href="02-01.html">02-01 数列的收敛（ε–N 定义）</a>
+    <span><span class="n">5 题</span> · <a class="en" href="02-01-en.html">EN</a></span>
   </div>
+  <a class="item" href="02-02.html"><span class="t">02-02 收敛的性质</span><span class="n">6 题</span></a>
+  <a class="item" href="02-03.html"><span class="t">02-03 极限的四则运算</span><span class="n">5 题</span></a>
+  <a class="item" href="02-04.html"><span class="t">02-04 迫敛法（夹逼）</span><span class="n">6 题</span></a>
+  <a class="item" href="02-05.html"><span class="t">02-05 单调有界定理</span><span class="n">6 题</span></a>
+  <a class="item" href="02-06.html"><span class="t">02-06 子列与致密性定理</span><span class="n">6 题</span></a>
+  <a class="item" href="02-07.html"><span class="t">02-07 柯西收敛准则</span><span class="n">6 题</span></a>
+  <a class="item" href="02-08.html"><span class="t">02-08 无穷大量的比较</span><span class="n">6 题</span></a>
+  <a class="item" href="02-09.html"><span class="t">02-09 Stirling 公式</span><span class="n">6 题</span></a>
+
+  <h2>第 7 章 实数的完备性</h2>
+  <a class="item" href="07-05.html"><span class="t">07-05 Stolz 定理</span><span class="n">6 题</span></a>
 
   <p class="note">
-    每集讲解视频发布在 B 站，看完视频点进来做几道题，点击"查看"核对答案。<br>
-    One short quiz per lecture video (on Bilibili). Tap "Reveal" to check each answer.<br>
+    每集讲解视频发布在 B 站，看完视频点进来做几道题，点击"查看答案"核对。<br>
+    One short quiz per lecture video (on Bilibili). Tap the button to reveal each answer.<br>
     更新中，随视频逐集增加。 Quizzes are added as videos are released.
   </p>
 </div>

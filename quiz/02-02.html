@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>收敛数列的基本性质 · 自测</title>
+<style>
+:root{--bg:#0e1a2b;--card:#15263d;--ink:#eef2f7;--muted:#9fb0c6;--blue:#5ab0ff;--teal:#4fd1b5;--orange:#ffb454;
+--red:#ff6b6b;--green:#6bd38a;--purple:#c39bff;--gold:#ffd166;--line:#26405f}
+*{box-sizing:border-box}
+html{scroll-snap-type:y proximity}
+body{margin:0;background:radial-gradient(1200px 700px at 20% 0%,#16304f 0%,var(--bg) 60%);background-color:var(--bg);color:var(--ink);
+font:18px/1.6 "Noto Sans SC","Noto Sans CJK SC","PingFang SC","Microsoft YaHei",system-ui,-apple-system,"Segoe UI",sans-serif}
+math{font-family:"Latin Modern Math","STIX Two Math","Cambria Math",math;font-size:1.08em}
+math[display=block]{margin:.5em 0;font-size:1.18em}
+.dm{overflow-x:auto;max-width:100%}
+.frame,.grid>div{min-width:0}
+.slide{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:32px 16px;scroll-snap-align:start}
+.frame{width:min(1180px,100%);background:linear-gradient(180deg,#172b45,#132339);border:1px solid var(--line);border-radius:22px;
+padding:clamp(20px,4vw,44px);box-shadow:0 20px 60px rgba(0,0,0,.35)}
+.kicker{color:var(--muted);font-size:.85rem;letter-spacing:.06em;text-transform:uppercase}
+h1{font-size:clamp(1.9rem,4.5vw,3rem);line-height:1.15;margin:.2em 0 .25em}
+h2{font-size:clamp(1.35rem,3vw,1.9rem);margin:0 0 .6em;display:flex;align-items:center;gap:.5em}
+h2::before{content:"";width:8px;height:1.2em;border-radius:4px;background:var(--accent,var(--blue))}
+h3{font-size:1.05rem;margin:1.1em 0 .4em;color:var(--muted)}
+.sub{color:var(--blue);font-size:1.2rem;margin:0 0 1.2em}
+.thm{border-left:6px solid var(--accent,var(--blue));background:#1b3150;border-radius:12px;padding:14px 18px;margin:0 0 1em}
+.thm .h{font-weight:700;color:var(--accent,var(--blue));margin-bottom:.25em}
+.grid{display:grid;grid-template-columns:1.05fr 1fr;gap:28px;align-items:start}
+@media (max-width:860px){.grid{grid-template-columns:1fr}}
+ol,ul{padding-left:1.25em;margin:.3em 0}li{margin:.35em 0}
+svg{width:100%;height:auto;display:block;background:#10203a;border:1px solid var(--line);border-radius:14px;padding:6px}
+svg .lab{font:16px "Latin Modern Math","STIX Two Math","Cambria Math",serif;font-style:italic}
+svg .cap{font:14px "Noto Sans SC","Noto Sans CJK SC",system-ui,sans-serif;fill:var(--ink)}
+.b{fill:var(--blue)}.t{fill:var(--teal)}.g{fill:var(--gold)}.m{fill:var(--muted)}.p{fill:var(--purple)}.o{fill:var(--orange)}.r{fill:var(--red)}.gr{fill:var(--green)}
+.cap.t{fill:var(--teal)}.cap.o{fill:var(--orange)}.cap.gr{fill:var(--green)}
+.note{background:#112036;border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin:.8em 0}
+.warn{border-color:#6b3a3a;background:#2a1a24}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin:1em 0}
+.chip{border:1px solid var(--line);border-radius:999px;padding:6px 14px;background:#112036}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:.5em 0 1em}
+@media (max-width:760px){.cards{grid-template-columns:1fr}}
+.card{background:#1b3150;border-radius:14px;padding:16px;border-top:5px solid var(--c);text-align:center}
+.card b{color:var(--c);display:block;margin-bottom:.4em}
+.motto{font-size:clamp(1.15rem,2.6vw,1.5rem);font-weight:700;color:var(--gold);text-align:center;border:2px solid var(--gold);border-radius:14px;padding:14px;margin:1em 0}
+.muted{color:var(--muted)}
+.nw{white-space:nowrap}
+footer{color:var(--muted);font-size:.85rem;margin-top:1.2em}
+.hint{position:fixed;right:16px;bottom:12px;color:var(--muted);font-size:.8rem;opacity:.75}
+@media print{.slide{min-height:auto;page-break-after:always}.hint{display:none}}
+
+.qt{display:grid;gap:14px;margin-top:18px}
+.qt-item{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 18px}
+.qt-q{color:var(--ink);font-size:17px;margin:0 0 8px}
+.qt-opts{color:var(--muted);font-size:15px;line-height:1.9;margin:0 0 10px}
+.qt button.reveal{background:transparent;border:1px solid var(--teal);color:var(--teal);
+border-radius:8px;padding:5px 14px;font-size:14px;cursor:pointer}
+.qt .ans{display:none;margin-top:10px;padding:10px 14px;border-left:3px solid var(--green);
+background:rgba(107,211,138,.08);color:var(--ink);font-size:15px;line-height:1.8;border-radius:0 8px 8px 0}
+.qt .ans b{color:var(--green)}
+.qt-item.shown .ans{display:block}
+
+/* ---- 手机自测单页覆盖层（深浅主题自适应：浅色文件有 --paper，深色有 --bg/--fg） ---- */
+html,body{margin:0;background:var(--bg,var(--paper));color:var(--fg,var(--ink));
+  font-family:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC","Source Han Sans SC",system-ui,-apple-system,sans-serif}
+/* 中和原幻灯片容器的隐藏/定位，让 section 直接作为文档流内容 */
+section.slide{display:block!important;position:static!important;width:auto!important;height:auto!important;
+  padding:0!important;background:none!important;box-shadow:none!important;transform:none!important}
+.page{max-width:720px;margin:0 auto;padding:18px 16px 60px}
+.topbar{border-bottom:2px solid var(--grid,var(--line,var(--rule,#e3e0d6)));padding-bottom:10px;margin-bottom:6px}
+.topbar h1{font-size:20px;margin:0}
+.lead{color:var(--muted);font-size:15px;margin:12px 0 2px;line-height:1.6}
+/* 表格 → 竖屏卡片（仅 slide 式页面有表格） */
+table.t{display:block;width:auto;border:0}
+table.t tbody,table.t tr,table.t td,table.t th{display:block;border:0;width:auto}
+table.t thead{display:none}
+table.t tr{background:var(--card);border:1.5px solid var(--rule);border-radius:14px;
+  padding:14px 16px;margin:14px 0;font-size:19px;line-height:1.7}
+table.t td{padding:6px 0}
+table.t td:last-child{border-top:1.5px dashed var(--rule);margin-top:6px;padding-top:10px}
+.q{display:block;text-align:center}
+.reveal{cursor:pointer;border:2px dashed var(--rule);border-radius:10px;
+  padding:6px 22px;color:var(--muted);font-size:16px;background:none;font-family:inherit}
+.ans{display:none;line-height:1.8}
+.shown .ans{display:block} .shown .reveal{display:none}
+/* quiz-section 式页面：原 section 自带卡片样式，仅收窄内边距 */
+section.quiz{padding:6px 2px;margin:8px 0;background:none;border:0}
+section.quiz .q{margin:12px 0;text-align:left}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="topbar">
+    <h1>收敛数列的基本性质 · 自测</h1>
+  </div>
+  
+  <div class="quiz">
+  <section class="slide"><div class="frame" style="--accent:var(--gold);max-width:960px">
+<style>
+.qt{display:grid;gap:14px;margin-top:18px}
+.qt-item{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 18px}
+.qt-q{color:var(--ink);font-size:17px;margin:0 0 8px}
+.qt-opts{color:var(--muted);font-size:15px;line-height:1.9;margin:0 0 10px}
+.qt button.reveal{background:transparent;border:1px solid var(--teal);color:var(--teal);
+border-radius:8px;padding:5px 14px;font-size:14px;cursor:pointer}
+.qt .ans{display:none;margin-top:10px;padding:10px 14px;border-left:3px solid var(--green);
+background:rgba(107,211,138,.08);color:var(--ink);font-size:15px;line-height:1.8;border-radius:0 8px 8px 0}
+.qt .ans b{color:var(--green)}
+.qt-item.shown .ans{display:block}
+</style>
+<div class="qt">
+<div class="qt-item"><p class="qt-q">1. 若 aₙ → a 且 aₙ → b，则一定有（　）</p>
+<p class="qt-opts">A. a = b　　B. a ≠ b　　C. a、b 可以不相等</p>
+<button class="reveal">查看答案</button>
+<div class="ans"><b>A。</b>取 ε₀ = |b−a|/2，以 a、b 为中心的两条 ε₀ 带不相交；n 充分大时 aₙ 要同时落在两条带内，矛盾。</div></div>
+
+<div class="qt-item"><p class="qt-q">2. 下列数列中有界但不收敛的是（　）</p>
+<p class="qt-opts">A. aₙ = n　　B. aₙ = (−1)ⁿ　　C. aₙ = 1/n</p>
+<button class="reveal">查看答案</button>
+<div class="ans"><b>B。</b>|(−1)ⁿ| ≤ 1 有界，但在 −1 与 1 之间来回跳动，由唯一性不可能收敛。A 无界；C 收敛于 0——有界只是必要条件。</div></div>
+
+<div class="qt-item"><p class="qt-q">3. 若 lim aₙ = 2，取 a′ = 1，则存在 N，当 n &gt; N 时必有（　）</p>
+<p class="qt-opts">A. aₙ &gt; 2　　B. aₙ &gt; 1　　C. aₙ &gt; 0 但未必 &gt; 1</p>
+<button class="reveal">查看答案</button>
+<div class="ans"><b>B。</b>保号性保证的是：对任意 a′ ∈ (0, 2)，最终 aₙ &gt; a′。它保证超过 0 与 2 之间的任何数，但不保证超过 2 本身。</div></div>
+
+<div class="qt-item"><p class="qt-q">4. 证明收敛数列有界时，经典取法是（　）</p>
+<p class="qt-opts">A. ε = 1　　B. ε₀ = |b−a|/2　　C. ε = a − a′</p>
+<button class="reveal">查看答案</button>
+<div class="ans"><b>A。</b>三个证明各配一把钥匙：有界性取 ε = 1（尾部落入 (a−1, a+1)）；唯一性取 ε₀ = |b−a|/2；保号性取 ε = a − a′（常取 a′ = a/2）。</div></div>
+
+<div class="qt-item"><p class="qt-q">5. 若 n 充分大时 aₙ ≤ bₙ 且两数列都收敛，则（　）</p>
+<p class="qt-opts">A. lim aₙ &lt; lim bₙ　　B. lim aₙ ≤ lim bₙ　　C. 必有 lim aₙ = lim bₙ</p>
+<button class="reveal">查看答案</button>
+<div class="ans"><b>B。</b>严格不等号取极限后可能退化为等号：对每个 n 有 1/n &gt; 0，但 lim 1/n = 0。</div></div>
+
+<div class="qt-item"><p class="qt-q">6. 推论证明中取 ε = (b−a)/2，得到的中间分界数是（　）</p>
+<p class="qt-opts">A. (b−a)/2　　B. (a+b)/2　　C. b − a</p>
+<button class="reveal">查看答案</button>
+<div class="ans"><b>B。</b>n 充分大时 aₙ &lt; a + ε = (a+b)/2 = b − ε &lt; bₙ——两边的带子恰好以中点为界。</div></div>
+</div>
+</div></section>
+  </div>
+</div>
+<script>
+document.querySelectorAll('.reveal').forEach(function(b){
+  b.addEventListener('click',function(){this.closest('.q').classList.add('shown')});
+});
+/* 按页面 DOM 特征自适配各批次回件的交互（逻辑均照搬原版） */
+if (document.querySelector('.qt3')) {
+  /* .qt3 式（02-03）：按钮点击后父卡 shown、按钮隐藏 */
+  document.querySelectorAll('.qt3 button').forEach(function(b){
+    b.addEventListener('click',function(){b.parentNode.classList.add('shown');b.style.display='none';});});
+} else if (document.querySelector('.quiz li.q')) {
+  /* ol/li 式（02-06）：.ans 切换 + data-ok 选项高亮 */
+  document.querySelectorAll('.quiz li.q').forEach(function(q){
+    var b=q.querySelector('button'),a=q.querySelector('.ans'),ok=q.querySelector('.opts li[data-ok]');
+    b.addEventListener('click',function(){var on=a.classList.toggle('show');ok.classList.toggle('ok',on);
+      b.textContent=on?b.dataset.hide:b.dataset.show;b.setAttribute('aria-expanded',on);});});
+} else if (document.querySelector('.quiz .q .rv')) {
+  /* opt/rv/ex 式（07-05）：选项标记 sel，展开按钮标出对错 */
+  document.querySelectorAll('.quiz .q').forEach(function(q){
+    var opts=q.querySelectorAll('.opt'), ex=q.querySelector('.ex'), btn=q.querySelector('.rv');
+    opts.forEach(function(o){o.addEventListener('click',function(){
+      if(ex.classList.contains('show'))return;
+      opts.forEach(function(x){x.classList.remove('sel')}); o.classList.add('sel');});});
+    btn.addEventListener('click',function(){
+      var show=!ex.classList.contains('show'); ex.classList.toggle('show',show);
+      opts.forEach(function(o){
+        o.classList.remove('right','wrong');
+        if(show){ if(o.dataset.c==='1')o.classList.add('right'); else if(o.classList.contains('sel'))o.classList.add('wrong'); }
+      });
+      btn.textContent=show?btn.dataset.hide:btn.dataset.reveal;
+    });
+  });
+} else if (document.querySelector('.quiz .q[data-ok]')) {
+  /* data-ok 式（02-07）：点击后展开 .ans 并高亮正确选项 */
+  document.querySelectorAll('.quiz .q').forEach(function(q){
+    var btn=q.querySelector('button');
+    btn.addEventListener('click',function(){
+      q.classList.add('open');
+      var k=parseInt(q.getAttribute('data-ok'),10);
+      q.querySelectorAll('.opts span')[k].classList.add('ok');
+      btn.disabled=true; btn.style.opacity=.5; });
+  });
+} else {
+  /* .opt 选择题 + 展开按钮式（02-04） */
+  document.querySelectorAll('.q button').forEach(function(b){
+    b.addEventListener('click',function(){
+      var q=b.closest('.q'), open=q.classList.toggle('open');
+      q.querySelectorAll('.opt').forEach(function(o){ if(o.dataset.c==='1') o.classList.toggle('correct',open); });
+      if(b.dataset.hide&&b.dataset.show) b.textContent=open?b.dataset.hide:b.dataset.show;
+    });
+  });
+}
+</script>
+</body>
+</html>

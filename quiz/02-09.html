@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2.9 · Stirling 公式 · 自测</title>
+<style>
+:root{--bg:#0d1220;--panel:#161d30;--edge:#2e3854;--txt:#f1f5f9;--txt2:#94a3b8;--amber:#f5b942;--blue:#4cc3f0;--green:#5be3a4;--rose:#f26b8a;--violet:#b48cff}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--txt);font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans","Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif;line-height:1.6}
+main{max-width:1100px;margin:0 auto;padding:32px 20px 60px}
+header{display:flex;justify-content:space-between;align-items:center;gap:16px;border-bottom:1px solid var(--edge);padding-bottom:16px;margin-bottom:8px}
+header h1{font-size:1.9rem;margin:0}
+.pill{border:2px solid var(--amber);color:var(--amber);border-radius:999px;padding:4px 14px;font-weight:700;font-size:.85rem;letter-spacing:.06em;white-space:nowrap}
+.sub{color:var(--txt2);margin:0 0 28px;font-size:1.05rem}
+section{margin:36px 0}
+h2{font-size:1.35rem;margin:0 0 12px;border-left:5px solid var(--amber);padding-left:12px}
+.theorem{background:var(--panel);border:1px solid var(--edge);border-radius:16px;padding:20px 24px}
+.theorem h2{border-left-color:var(--blue)}
+.formula{font-size:1.6rem;text-align:center;margin:14px 0;line-height:1.35;overflow-x:auto;letter-spacing:.01em}
+.formula.small{font-size:1.35rem}
+.frac{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;margin:0 .15em}
+.frac>span{display:block;padding:0 .25em}
+.frac>span:first-child{border-bottom:1.5px solid currentColor}
+.sq{white-space:nowrap}.sq .rad{border-top:1.5px solid currentColor;padding:0 .1em}
+.c-amber{color:var(--amber)}.c-blue{color:var(--blue)}.c-green{color:var(--green)}.c-rose{color:var(--rose)}.c-violet{color:var(--violet)}
+.factors{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-top:12px}
+.factor{background:#0f1526;border:1px solid var(--edge);border-radius:12px;padding:12px 14px}
+.factor b{display:block;font-size:1.2rem;margin-bottom:4px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}
+@media (max-width:800px){.grid2{grid-template-columns:1fr}}
+figure{margin:0;background:var(--panel);border:1px solid var(--edge);border-radius:14px;padding:10px}
+figure.wide{max-width:760px;margin:0 auto}
+figcaption{color:var(--txt2);font-size:.9rem;padding:6px 6px 2px}
+table{width:100%;border-collapse:collapse;background:var(--panel);border:1px solid var(--edge);border-radius:12px;overflow:hidden;font-variant-numeric:tabular-nums}
+th,td{padding:10px 12px;text-align:center;border-bottom:1px solid var(--edge);white-space:nowrap}
+th{background:#222b45}
+.skel{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.skel div{background:var(--panel);border-radius:12px;padding:12px 16px;border-top:4px solid var(--blue)}
+.skel div:nth-child(2){border-top-color:var(--amber)}.skel div:nth-child(3){border-top-color:var(--green)}
+.quiz{background:var(--panel);border:1px solid var(--edge);border-radius:16px;padding:20px 24px}
+.quiz h2{border-left-color:var(--violet)}
+.q{border-top:1px solid var(--edge);padding:16px 0}
+.q p{margin:0 0 8px;font-weight:600}
+.opts{display:grid;gap:6px;margin:0 0 10px}
+.opt{display:flex;gap:10px;align-items:baseline;background:#0f1526;border:1px solid var(--edge);border-radius:10px;padding:8px 12px;cursor:pointer}
+.opt:hover{border-color:var(--violet)}
+.opt .k{font-weight:700;color:var(--violet);min-width:1.4em}
+.opt.sel{border-color:var(--amber)}
+.opt.right{border-color:var(--green);background:rgba(91,227,164,.08)}
+.opt.wrong{border-color:var(--rose);opacity:.7}
+button.reveal{background:var(--violet);color:#0d1220;border:0;border-radius:999px;padding:8px 18px;font-weight:700;cursor:pointer;font-size:.95rem}
+button.reveal:disabled{opacity:.5;cursor:default}
+.ans{display:none;margin-top:10px;padding:10px 14px;border-left:4px solid var(--green);background:rgba(91,227,164,.08);border-radius:8px}
+.ans.show{display:block}
+footer{color:var(--txt2);font-size:.85rem;border-top:1px solid var(--edge);margin-top:40px;padding-top:14px}
+
+/* ---- 手机自测单页覆盖层（深浅主题自适应：浅色文件有 --paper，深色有 --bg/--fg） ---- */
+html,body{margin:0;background:var(--bg,var(--paper));color:var(--fg,var(--ink));
+  font-family:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC","Source Han Sans SC",system-ui,-apple-system,sans-serif}
+/* 中和原幻灯片容器的隐藏/定位，让 section 直接作为文档流内容 */
+section.slide{display:block!important;position:static!important;width:auto!important;height:auto!important;
+  padding:0!important;background:none!important;box-shadow:none!important;transform:none!important}
+.page{max-width:720px;margin:0 auto;padding:18px 16px 60px}
+.topbar{border-bottom:2px solid var(--grid,var(--line,var(--rule,#e3e0d6)));padding-bottom:10px;margin-bottom:6px}
+.topbar h1{font-size:20px;margin:0}
+.lead{color:var(--muted);font-size:15px;margin:12px 0 2px;line-height:1.6}
+/* 表格 → 竖屏卡片（仅 slide 式页面有表格） */
+table.t{display:block;width:auto;border:0}
+table.t tbody,table.t tr,table.t td,table.t th{display:block;border:0;width:auto}
+table.t thead{display:none}
+table.t tr{background:var(--card);border:1.5px solid var(--rule);border-radius:14px;
+  padding:14px 16px;margin:14px 0;font-size:19px;line-height:1.7}
+table.t td{padding:6px 0}
+table.t td:last-child{border-top:1.5px dashed var(--rule);margin-top:6px;padding-top:10px}
+.q{display:block;text-align:center}
+.reveal{cursor:pointer;border:2px dashed var(--rule);border-radius:10px;
+  padding:6px 22px;color:var(--muted);font-size:16px;background:none;font-family:inherit}
+.ans{display:none;line-height:1.8}
+.shown .ans{display:block} .shown .reveal{display:none}
+/* quiz-section 式页面：原 section 自带卡片样式，仅收窄内边距 */
+section.quiz{padding:6px 2px;margin:8px 0;background:none;border:0}
+section.quiz .q{margin:12px 0;text-align:left}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="topbar">
+    <h1>2.9 · Stirling 公式 · 自测</h1>
+  </div>
+  
+  <div class="quiz">
+  <section class="quiz">
+<p class="sub" style="margin-bottom:6px">围绕本讲要点的六道小题。先选答案，再点击揭晓。</p>
+<div class="q" data-answer="1"><p>1. Stirling 公式中，哪个因子是增长的主引擎？</p><div class="opts"><div class="opt"><span class="k">A)</span><span>√(2πn)</span></div><div class="opt"><span class="k">B)</span><span>(n/e)ⁿ</span></div><div class="opt"><span class="k">C)</span><span>e^(θₙ/(12n))</span></div></div><button class="reveal" type="button">揭晓答案</button><div class="ans"><b class="c-green">正确答案： B) (n/e)ⁿ</b><br>(n/e)ⁿ 是底数不断变大的指数增长；√(2πn) 只是多项式因子，e^(θₙ/(12n)) 介于 1 与 e^(1/(12n)) 之间。</div></div><div class="q" data-answer="1"><p>2. 在证明骨架中，比较 Σ ln k 与 ∫ ln x dx 得到了什么？</p><div class="opts"><div class="opt"><span class="k">A)</span><span>常数的精确值 √(2π)</span></div><div class="opt"><span class="k">B)</span><span>bₙ = ln n! − (n+½)·ln n + n 单调有界，从而 n!/(√n·(n/e)ⁿ) 介于两个正常数之间</span></div><div class="opt"><span class="k">C)</span><span>n! 比 nⁿ 增长更快</span></div></div><button class="reveal" type="button">揭晓答案</button><div class="ans"><b class="c-green">正确答案： B) bₙ = ln n! − (n+½)·ln n + n 单调有界，从而 n!/(√n·(n/e)ⁿ) 介于两个正常数之间</b><br>第一步只把形状 √n·(n/e)ⁿ 确定到相差一个常数因子，常数的值此时还未知。</div></div><div class="q" data-answer="1"><p>3. Wallis 公式在证明中起什么作用？</p><div class="opts"><div class="opt"><span class="k">A)</span><span>证明 bₙ 收敛</span></div><div class="opt"><span class="k">B)</span><span>钉死常数：Wallis 比值趋于 C²/4，于是 C²/4 = π/2，C = √(2π)</span></div><div class="opt"><span class="k">C)</span><span>说明相对误差约为 1/(12n)</span></div></div><button class="reveal" type="button">揭晓答案</button><div class="ans"><b class="c-green">正确答案： B) 钉死常数：Wallis 比值趋于 C²/4，于是 C²/4 = π/2，C = √(2π)</b><br>把 n! ≈ C√n(n/e)ⁿ 代入 Wallis 比值，n 与 e 的幂全部约掉，只剩 C²/4，它必须等于 π/2。</div></div><div class="q" data-answer="1"><p>4. n = 10 时，√(2πn)·(n/e)ⁿ 的相对误差大约是多少？</p><div class="opts"><div class="opt"><span class="k">A)</span><span>约 8%</span></div><div class="opt"><span class="k">B)</span><span>约 0.8%</span></div><div class="opt"><span class="k">C)</span><span>约 0.08%</span></div></div><button class="reveal" type="button">揭晓答案</button><div class="ans"><b class="c-green">正确答案： B) 约 0.8%</b><br>误差约为 1/(12n) = 1/120 ≈ 0.83%，已经不足 1%。</div></div><div class="q" data-answer="0"><p>5. 固定 a &gt; 1，aⁿ/n! ≈ (ae/n)ⁿ/√(2πn)。当 n &gt; a·e 之后会怎样？</p><div class="opts"><div class="opt"><span class="k">A)</span><span>底数 ae/n 小于 1，比值迅速趋于 0</span></div><div class="opt"><span class="k">B)</span><span>比值稳定在 √(2πn) 附近</span></div><div class="opt"><span class="k">C)</span><span>比值继续像 (ae)ⁿ 一样增长</span></div></div><button class="reveal" type="button">揭晓答案</button><div class="ans"><b class="c-green">正确答案： A) 底数 ae/n 小于 1，比值迅速趋于 0</b><br>越过 n = a·e 后底数小于 1，n 次幂的衰减快于任何等比数列，aⁿ/n! → 0。</div></div><div class="q" data-answer="0"><p>6. 下列哪个表达式给出 ln n! 的主项？</p><div class="opts"><div class="opt"><span class="k">A)</span><span>n ln n − n</span></div><div class="opt"><span class="k">B)</span><span>n ln n + n</span></div><div class="opt"><span class="k">C)</span><span>½·ln(2πn)</span></div></div><button class="reveal" type="button">揭晓答案</button><div class="ans"><b class="c-green">正确答案： A) n ln n − n</b><br>ln n! = n ln n − n + ½·ln(2πn) + θₙ/(12n)；前两项占主导，½·ln(2πn) 是低阶项。</div></div>
+</section>
+  </div>
+</div>
+<script>
+document.querySelectorAll('.reveal').forEach(function(b){
+  b.addEventListener('click',function(){this.closest('.q').classList.add('shown')});
+});
+/* 按页面 DOM 特征自适配各批次回件的交互（逻辑均照搬原版） */
+if (document.querySelector('.qt3')) {
+  /* .qt3 式（02-03）：按钮点击后父卡 shown、按钮隐藏 */
+  document.querySelectorAll('.qt3 button').forEach(function(b){
+    b.addEventListener('click',function(){b.parentNode.classList.add('shown');b.style.display='none';});});
+} else if (document.querySelector('.quiz li.q')) {
+  /* ol/li 式（02-06）：.ans 切换 + data-ok 选项高亮 */
+  document.querySelectorAll('.quiz li.q').forEach(function(q){
+    var b=q.querySelector('button'),a=q.querySelector('.ans'),ok=q.querySelector('.opts li[data-ok]');
+    b.addEventListener('click',function(){var on=a.classList.toggle('show');ok.classList.toggle('ok',on);
+      b.textContent=on?b.dataset.hide:b.dataset.show;b.setAttribute('aria-expanded',on);});});
+} else if (document.querySelector('.quiz .q .rv')) {
+  /* opt/rv/ex 式（07-05）：选项标记 sel，展开按钮标出对错 */
+  document.querySelectorAll('.quiz .q').forEach(function(q){
+    var opts=q.querySelectorAll('.opt'), ex=q.querySelector('.ex'), btn=q.querySelector('.rv');
+    opts.forEach(function(o){o.addEventListener('click',function(){
+      if(ex.classList.contains('show'))return;
+      opts.forEach(function(x){x.classList.remove('sel')}); o.classList.add('sel');});});
+    btn.addEventListener('click',function(){
+      var show=!ex.classList.contains('show'); ex.classList.toggle('show',show);
+      opts.forEach(function(o){
+        o.classList.remove('right','wrong');
+        if(show){ if(o.dataset.c==='1')o.classList.add('right'); else if(o.classList.contains('sel'))o.classList.add('wrong'); }
+      });
+      btn.textContent=show?btn.dataset.hide:btn.dataset.reveal;
+    });
+  });
+} else if (document.querySelector('.quiz .q[data-ok]')) {
+  /* data-ok 式（02-07）：点击后展开 .ans 并高亮正确选项 */
+  document.querySelectorAll('.quiz .q').forEach(function(q){
+    var btn=q.querySelector('button');
+    btn.addEventListener('click',function(){
+      q.classList.add('open');
+      var k=parseInt(q.getAttribute('data-ok'),10);
+      q.querySelectorAll('.opts span')[k].classList.add('ok');
+      btn.disabled=true; btn.style.opacity=.5; });
+  });
+} else {
+  /* .opt 选择题 + 展开按钮式（02-04） */
+  document.querySelectorAll('.q button').forEach(function(b){
+    b.addEventListener('click',function(){
+      var q=b.closest('.q'), open=q.classList.toggle('open');
+      q.querySelectorAll('.opt').forEach(function(o){ if(o.dataset.c==='1') o.classList.toggle('correct',open); });
+      if(b.dataset.hide&&b.dataset.show) b.textContent=open?b.dataset.hide:b.dataset.show;
+    });
+  });
+}
+</script>
+</body>
+</html>
