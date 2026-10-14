@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>收敛数列的基本性质</title>
+<style>
+:root{--bg:#0e1a2b;--card:#15263d;--ink:#eef2f7;--muted:#9fb0c6;--blue:#5ab0ff;--teal:#4fd1b5;--orange:#ffb454;
+--red:#ff6b6b;--green:#6bd38a;--purple:#c39bff;--gold:#ffd166;--line:#26405f}
+*{box-sizing:border-box}
+html{scroll-snap-type:y proximity}
+body{margin:0;background:radial-gradient(1200px 700px at 20% 0%,#16304f 0%,var(--bg) 60%);background-color:var(--bg);color:var(--ink);
+font:18px/1.6 "Noto Sans SC","Noto Sans CJK SC","PingFang SC","Microsoft YaHei",system-ui,-apple-system,"Segoe UI",sans-serif}
+math{font-family:"Latin Modern Math","STIX Two Math","Cambria Math",math;font-size:1.08em}
+math[display=block]{margin:.5em 0;font-size:1.18em}
+.dm{overflow-x:auto;max-width:100%}
+.frame,.grid>div{min-width:0}
+.slide{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:32px 16px;scroll-snap-align:start}
+.frame{width:min(1180px,100%);background:linear-gradient(180deg,#172b45,#132339);border:1px solid var(--line);border-radius:22px;
+padding:clamp(20px,4vw,44px);box-shadow:0 20px 60px rgba(0,0,0,.35)}
+.kicker{color:var(--muted);font-size:.85rem;letter-spacing:.06em;text-transform:uppercase}
+h1{font-size:clamp(1.9rem,4.5vw,3rem);line-height:1.15;margin:.2em 0 .25em}
+h2{font-size:clamp(1.35rem,3vw,1.9rem);margin:0 0 .6em;display:flex;align-items:center;gap:.5em}
+h2::before{content:"";width:8px;height:1.2em;border-radius:4px;background:var(--accent,var(--blue))}
+h3{font-size:1.05rem;margin:1.1em 0 .4em;color:var(--muted)}
+.sub{color:var(--blue);font-size:1.2rem;margin:0 0 1.2em}
+.thm{border-left:6px solid var(--accent,var(--blue));background:#1b3150;border-radius:12px;padding:14px 18px;margin:0 0 1em}
+.thm .h{font-weight:700;color:var(--accent,var(--blue));margin-bottom:.25em}
+.grid{display:grid;grid-template-columns:1.05fr 1fr;gap:28px;align-items:start}
+@media (max-width:860px){.grid{grid-template-columns:1fr}}
+ol,ul{padding-left:1.25em;margin:.3em 0}li{margin:.35em 0}
+svg{width:100%;height:auto;display:block;background:#10203a;border:1px solid var(--line);border-radius:14px;padding:6px}
+svg .lab{font:16px "Latin Modern Math","STIX Two Math","Cambria Math",serif;font-style:italic}
+svg .cap{font:14px "Noto Sans SC","Noto Sans CJK SC",system-ui,sans-serif;fill:var(--ink)}
+.b{fill:var(--blue)}.t{fill:var(--teal)}.g{fill:var(--gold)}.m{fill:var(--muted)}.p{fill:var(--purple)}.o{fill:var(--orange)}.r{fill:var(--red)}.gr{fill:var(--green)}
+.cap.t{fill:var(--teal)}.cap.o{fill:var(--orange)}.cap.gr{fill:var(--green)}
+.note{background:#112036;border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin:.8em 0}
+.warn{border-color:#6b3a3a;background:#2a1a24}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin:1em 0}
+.chip{border:1px solid var(--line);border-radius:999px;padding:6px 14px;background:#112036}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:.5em 0 1em}
+@media (max-width:760px){.cards{grid-template-columns:1fr}}
+.card{background:#1b3150;border-radius:14px;padding:16px;border-top:5px solid var(--c);text-align:center}
+.card b{color:var(--c);display:block;margin-bottom:.4em}
+.motto{font-size:clamp(1.15rem,2.6vw,1.5rem);font-weight:700;color:var(--gold);text-align:center;border:2px solid var(--gold);border-radius:14px;padding:14px;margin:1em 0}
+.muted{color:var(--muted)}
+.nw{white-space:nowrap}
+footer{color:var(--muted);font-size:.85rem;margin-top:1.2em}
+.hint{position:fixed;right:16px;bottom:12px;color:var(--muted);font-size:.8rem;opacity:.75}
+@media print{.slide{min-height:auto;page-break-after:always}.hint{display:none}}
+</style><style>
+#mv-bar{position:fixed;left:0;right:0;top:0;z-index:99;display:flex;align-items:center;
+  gap:12px;padding:9px 14px;font-size:14px;
+  background:color-mix(in srgb,var(--bg,var(--paper,#fbfaf6)) 84%,transparent);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--grid,var(--line,var(--rule,#e3e0d6)))}
+#mv-bar .mv-home{color:var(--blue,#1f72b0);text-decoration:none;white-space:nowrap}
+#mv-bar .mv-title{flex:1;text-align:center;font-weight:600;overflow:hidden;
+  text-overflow:ellipsis;white-space:nowrap;opacity:.85}
+#mv-bar .mv-quiz{color:#fff;background:#1f72b0;text-decoration:none;border-radius:8px;
+  padding:4px 12px;white-space:nowrap;font-size:13.5px}
+@media (max-width:480px){#mv-bar .mv-title{font-size:12.5px}}
+</style></head>
+<body><div id="mv-bar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span class="mv-title">02-02 收敛的性质</span><a class="mv-quiz" href="../quiz/02-02.html">去自测 →</a></div>
+<section class="slide" id="s1"><div class="frame">
+<div class="kicker">§2.2 · 数学分析（一）</div>
+<h1>收敛数列的基本性质</h1><p class="sub">唯一性 · 有界性 · 保号性</p>
+<div class="grid"><div>
+<p>收敛数列有无穷多项，而极限只是一个数——正是这一个数，控制住了几乎所有的项。</p>
+<h3>回顾定义</h3><div class="dm"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mrow><msub><mi>a</mi><mi>n</mi></msub><mo>&#x02192;</mo><mi>A</mi><mtext>&#x000A0;</mtext><mo>&#x021D4;</mo><mtext>&#x000A0;</mtext><mo>&#x02200;</mo><mspace width="0.167em" /><mi>&#x003B5;</mi><mo>&#x0003E;</mo><mn>0</mn><mo>&#x0002C;</mo><mtext>&#x000A0;</mtext><mo>&#x02203;</mo><mspace width="0.167em" /><mi>N</mi><mo>&#x0002C;</mo><mtext>&#x000A0;</mtext><mo>&#x02200;</mo><mspace width="0.167em" /><mi>n</mi><mo>&#x0003E;</mo><mi>N</mi><mi>:</mi><mtext>&#x000A0;</mtext><mo stretchy="false" lspace="0.05em" rspace="0.05em">|</mo><msub><mi>a</mi><mi>n</mi></msub><mo>&#x02212;</mo><mi>A</mi><mo stretchy="false" lspace="0.05em" rspace="0.05em">|</mo><mo>&#x0003C;</mo><mi>&#x003B5;</mi></mrow></math></div>
+<p>对任意 <span class="nw"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mi>&#x003B5;</mi><mo>&#x0003E;</mo><mn>0</mn></mrow></math>，</span>某个 <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mi>N</mi></mrow></math> 之后的每一项都落在带 <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mo stretchy="false">&#x00028;</mo><mi>A</mi><mo>&#x02212;</mo><mi>&#x003B5;</mi><mo>&#x0002C;</mo><mtext>&#x000A0;</mtext><mi>A</mi><mo>&#x0002B;</mo><mi>&#x003B5;</mi><mo stretchy="false">&#x00029;</mo></mrow></math> 内；带外只有有限项。</p>
+<div class="note"><b>类比：</b>极限就像<i>总部</i>，几乎所有分部都被锁在总部周围的一条带内。</div>
+</div><div><svg viewBox="0 0 560 260" role="img" aria-label="收敛数列在 N 之后进入 A 附近的带内">
+<rect x="60" y="72.5" width="480" height="58.3" fill="var(--teal)" opacity=".18"/>
+<line x1="60" y1="72.5" x2="540" y2="72.5" stroke="var(--teal)" stroke-dasharray="6 5"/>
+<line x1="60" y1="130.8" x2="540" y2="130.8" stroke="var(--teal)" stroke-dasharray="6 5"/>
+<line x1="60" y1="101.7" x2="540" y2="101.7" stroke="var(--blue)" stroke-width="2.5"/>
+<line x1="60" y1="160.0" x2="548" y2="160.0" stroke="var(--muted)"/>
+<line x1="60" y1="230" x2="60" y2="14" stroke="var(--muted)"/>
+<line x1="148.0" y1="20" x2="148.0" y2="230" stroke="var(--gold)" stroke-dasharray="7 5"/>
+<circle cx="76.0" cy="-9.2" r="4.2" fill="var(--orange)"/><circle cx="92.0" cy="167.6" r="4.2" fill="var(--orange)"/><circle cx="108.0" cy="53.0" r="4.2" fill="var(--orange)"/><circle cx="124.0" cy="140.9" r="4.2" fill="var(--orange)"/><circle cx="140.0" cy="68.5" r="4.2" fill="var(--orange)"/><circle cx="156.0" cy="130.6" r="4.2" fill="var(--teal)"/><circle cx="172.0" cy="75.9" r="4.2" fill="var(--teal)"/><circle cx="188.0" cy="125.0" r="4.2" fill="var(--teal)"/><circle cx="204.0" cy="80.3" r="4.2" fill="var(--teal)"/><circle cx="220.0" cy="121.4" r="4.2" fill="var(--teal)"/><circle cx="236.0" cy="83.3" r="4.2" fill="var(--teal)"/><circle cx="252.0" cy="118.9" r="4.2" fill="var(--teal)"/><circle cx="268.0" cy="85.5" r="4.2" fill="var(--teal)"/><circle cx="284.0" cy="117.0" r="4.2" fill="var(--teal)"/><circle cx="300.0" cy="87.1" r="4.2" fill="var(--teal)"/><circle cx="316.0" cy="115.5" r="4.2" fill="var(--teal)"/><circle cx="332.0" cy="88.4" r="4.2" fill="var(--teal)"/><circle cx="348.0" cy="114.3" r="4.2" fill="var(--teal)"/><circle cx="364.0" cy="89.5" r="4.2" fill="var(--teal)"/><circle cx="380.0" cy="113.4" r="4.2" fill="var(--teal)"/><circle cx="396.0" cy="90.4" r="4.2" fill="var(--teal)"/><circle cx="412.0" cy="112.6" r="4.2" fill="var(--teal)"/><circle cx="428.0" cy="91.1" r="4.2" fill="var(--teal)"/><circle cx="444.0" cy="111.9" r="4.2" fill="var(--teal)"/><circle cx="460.0" cy="91.8" r="4.2" fill="var(--teal)"/><circle cx="476.0" cy="111.3" r="4.2" fill="var(--teal)"/><circle cx="492.0" cy="92.3" r="4.2" fill="var(--teal)"/><circle cx="508.0" cy="110.8" r="4.2" fill="var(--teal)"/><circle cx="524.0" cy="92.8" r="4.2" fill="var(--teal)"/><circle cx="540.0" cy="110.3" r="4.2" fill="var(--teal)"/>
+<text x="52" y="106.7" text-anchor="end" class="lab b">A</text>
+<text x="52" y="77.5" text-anchor="end" class="lab t">A+ε</text>
+<text x="52" y="135.8" text-anchor="end" class="lab t">A−ε</text>
+<text x="148.0" y="252" text-anchor="middle" class="lab g">N</text>
+<text x="540" y="180.0" text-anchor="end" class="lab m">n</text>
+<text x="348.0" y="28.8" text-anchor="middle" class="cap t">n > N 的项全在带内</text>
+<text x="204.0" y="203.8" class="cap o">带外只有有限项</text>
+</svg></div></div>
+</div></section>
+
+<section class="slide" id="s2"><div class="frame" style="--accent:var(--blue)">
+<h2>定理 2.2（唯一性）</h2>
+<div class="thm"><div class="h">定理 2.2（唯一性）</div>若数列 <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mo stretchy="false">&#x0007B;</mo><msub><mi>a</mi><mi>n</mi></msub><mo stretchy="false">&#x0007D;</mo></mrow></math> 收敛，则它的极限是唯一的。</div>
+<div class="grid"><div><ol><li>设 <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><msub><mi>a</mi><mi>n</mi></msub><mo>&#x02192;</mo><mi>a</mi></mrow></math> 且 <span class="nw"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><msub><mi>a</mi><mi>n</mi></msub><mo>&#x02192;</mo><mi>b</mi></mrow></math>，</span><span class="nw"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mi>a</mi><mo>&#x02260;</mo><mi>b</mi></mrow></math>。</span>取 <span class="nw"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><msub><mi>&#x003B5;</mi><mn>0</mn></msub><mo>&#x0003D;</mo><mstyle displaystyle="true" scriptlevel="0"><mfrac><mrow><mo stretchy="false" lspace="0.05em" rspace="0.05em">|</mo><mi>b</mi><mo>&#x02212;</mo><mi>a</mi><mo stretchy="false" lspace="0.05em" rspace="0.05em">|</mo></mrow><mrow><mn>2</mn></mrow></mfrac></mstyle></mrow></math>。</span></li><li><span class="nw"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mi>n</mi><mo>&#x0003E;</mo><msub><mi>N</mi><mn>1</mn></msub><mo>&#x021D2;</mo><msub><mi>a</mi><mi>n</mi></msub><mo>&#x02208;</mo><mo stretchy="false">&#x00028;</mo><mi>a</mi><mo>&#x02212;</mo><msub><mi>&#x003B5;</mi><mn>0</mn></msub><mo>&#x0002C;</mo><mtext>&#x000A0;</mtext><mi>a</mi><mo>&#x0002B;</mo><msub><mi>&#x003B5;</mi><mn>0</mn></msub><mo stretchy="false">&#x00029;</mo></mrow></math>；</span>&nbsp; <span class="nw"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mi>n</mi><mo>&#x0003E;</mo><msub><mi>N</mi><mn>2</mn></msub><mo>&#x021D2;</mo><msub><mi>a</mi><mi>n</mi></msub><mo>&#x02208;</mo><mo stretchy="false">&#x00028;</mo><mi>b</mi><mo>&#x02212;</mo><msub><mi>&#x003B5;</mi><mn>0</mn></msub><mo>&#x0002C;</mo><mtext>&#x000A0;</mtext><mi>b</mi><mo>&#x0002B;</mo><msub><mi>&#x003B5;</mi><mn>0</mn></msub><mo stretchy="false">&#x00029;</mo></mrow></math>。</span></li><li>当 <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mi>n</mi><mo>&#x0003E;</mo><mo>max</mo><mo stretchy="false">&#x0007B;</mo><msub><mi>N</mi><mn>1</mn></msub><mo>&#x0002C;</mo><msub><mi>N</mi><mn>2</mn></msub><mo stretchy="false">&#x0007D;</mo></mrow></math> 时，<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><msub><mi>a</mi><mi>n</mi></msub></mrow></math> 要同时落在两条带内——而两带不相交。矛盾，故 <span class="nw"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mi>a</mi><mo>&#x0003D;</mo><mi>b</mi></mrow></math>。</span></li></ol>
+<p class="muted">★ 总部的地址只有一个。</p></div>
+<div><svg viewBox="0 0 560 200" role="img" aria-label="以 a、b 为中心、半径 ε₀ 的两条不相交的带">
+<rect x="100.0" y="65" width="180.0" height="90" fill="var(--blue)" opacity=".2"/>
+<rect x="280.0" y="65" width="180.0" height="90" fill="var(--purple)" opacity=".2"/>
+<line x1="280.0" y1="65" x2="280.0" y2="155" stroke="var(--muted)" stroke-dasharray="5 4"/>
+<line x1="30.0" y1="110" x2="530.0" y2="110" stroke="var(--muted)" stroke-width="2"/>
+<circle cx="190.0" cy="110" r="5" fill="var(--blue)"/><circle cx="370.0" cy="110" r="5" fill="var(--purple)"/>
+<text x="190.0" y="140" text-anchor="middle" class="lab b">a</text>
+<text x="370.0" y="140" text-anchor="middle" class="lab p">b</text>
+<line x1="190.0" y1="50" x2="280.0" y2="50" stroke="var(--gold)"/>
+<text x="235.0" y="42" text-anchor="middle" class="lab g">ε₀</text>
+<line x1="280.0" y1="50" x2="370.0" y2="50" stroke="var(--gold)"/>
+<text x="325.0" y="42" text-anchor="middle" class="lab g">ε₀</text>
+<text x="280.0" y="185" text-anchor="middle" class="cap">两条带互不相交</text>
+</svg></div></div>
+</div></section>
+
+<section class="slide" id="s3"><div class="frame" style="--accent:var(--teal)">
+<h2>定理 2.3（有界性）</h2>
+<div class="thm"><div class="h">定理 2.3（有界性）</div>若 <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mo stretchy="false">&#x0007B;</mo><msub><mi>a</mi><mi>n</mi></msub><mo stretchy="false">&#x0007D;</mo></mrow></math> 收敛，则 <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mo stretchy="false">&#x0007B;</mo><msub><mi>a</mi><mi>n</mi></msub><mo stretchy="false">&#x0007D;</mo></mrow></math> 有界，即存在 <span class="nw"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mi>M</mi><mo>&#x0003E;</mo><mn>0</mn></mrow></math>，</span>使得对一切正整数 <span class="nw"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mi>n</mi></mrow></math>，</span>都有 <span class="nw"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mo stretchy="false" lspace="0.05em" rspace="0.05em">|</mo><msub><mi>a</mi><mi>n</mi></msub><mo stretchy="false" lspace="0.05em" rspace="0.05em">|</mo><mo>&#x02264;</mo><mi>M</mi></mrow></math>。</span></div>
+<div class="grid"><div><ol><li>取 <span class="nw"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mi>&#x003B5;</mi><mo>&#x0003D;</mo><mn>1</mn></mrow></math>：</span>存在 <span class="nw"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mi>N</mi></mrow></math>，</span>当 <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mi>n</mi><mo>&#x0003E;</mo><mi>N</mi></mrow></math> 时 <span class="nw"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><msub><mi>a</mi><mi>n</mi></msub><mo>&#x02208;</mo><mo stretchy="false">&#x00028;</mo><mi>a</mi><mo>&#x02212;</mo><mn>1</mn><mo>&#x0002C;</mo><mtext>&#x000A0;</mtext><mi>a</mi><mo>&#x0002B;</mo><mn>1</mn><mo stretchy="false">&#x00029;</mo></mrow></math>，</span>所以尾部满足 <span class="nw"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mo stretchy="false" lspace="0.05em" rspace="0.05em">|</mo><msub><mi>a</mi><mi>n</mi></msub><mo stretchy="false" lspace="0.05em" rspace="0.05em">|</mo><mo>&#x0003C;</mo><mo stretchy="false" lspace="0.05em" rspace="0.05em">|</mo><mi>a</mi><mo stretchy="false" lspace="0.05em" rspace="0.05em">|</mo><mo>&#x0002B;</mo><mn>1</mn></mrow></math>。</span></li><li>只剩下有限项 <span class="nw"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><msub><mi>a</mi><mn>1</mn></msub><mo>&#x0002C;</mo><mi>&#x02026;</mi><mo>&#x0002C;</mo><msub><mi>a</mi><mi>N</mi></msub></mrow></math>；</span>有限个数总有最大值。</li><li>取 <span class="nw"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mi>M</mi><mo>&#x0003D;</mo><mo>max</mo><mo stretchy="false">&#x0007B;</mo><mo stretchy="false" lspace="0.05em" rspace="0.05em">|</mo><msub><mi>a</mi><mn>1</mn></msub><mo stretchy="false" lspace="0.05em" rspace="0.05em">|</mo><mo>&#x0002C;</mo><mi>&#x02026;</mi><mo>&#x0002C;</mo><mo stretchy="false" lspace="0.05em" rspace="0.05em">|</mo><msub><mi>a</mi><mi>N</mi></msub><mo stretchy="false" lspace="0.05em" rspace="0.05em">|</mo><mo>&#x0002C;</mo><mtext>&#x000A0;</mtext><mo stretchy="false" lspace="0.05em" rspace="0.05em">|</mo><mi>a</mi><mo stretchy="false" lspace="0.05em" rspace="0.05em">|</mo><mo>&#x0002B;</mo><mn>1</mn><mo stretchy="false">&#x0007D;</mo></mrow></math>，</span>则对一切 <span class="nw"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mi>n</mi></mrow></math>，</span><span class="nw"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mo stretchy="false" lspace="0.05em" rspace="0.05em">|</mo><msub><mi>a</mi><mi>n</mi></msub><mo stretchy="false" lspace="0.05em" rspace="0.05em">|</mo><mo>&#x02264;</mo><mi>M</mi></mrow></math>。</span><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mo>&#x0220E;</mo></mrow></math></li></ol>
+<h3>例题</h3><p><span class="nw"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><msub><mi>a</mi><mi>n</mi></msub><mo>&#x0003D;</mo><mstyle displaystyle="true" scriptlevel="0"><mfrac><mrow><mi>n</mi></mrow><mrow><mi>n</mi><mo>&#x0002B;</mo><mn>1</mn></mrow></mfrac></mstyle><mo>&#x02192;</mo><mn>1</mn></mrow></math>。</span>取 <span class="nw"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mi>&#x003B5;</mi><mo>&#x0003D;</mo><mn>1</mn></mrow></math>：</span>对每个 <span class="nw"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mi>n</mi></mrow></math>，</span><span class="nw"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mo stretchy="false" lspace="0.05em" rspace="0.05em">|</mo><msub><mi>a</mi><mi>n</mi></msub><mo>&#x02212;</mo><mn>1</mn><mo stretchy="false" lspace="0.05em" rspace="0.05em">|</mo><mo>&#x0003D;</mo><mstyle displaystyle="true" scriptlevel="0"><mfrac><mrow><mn>1</mn></mrow><mrow><mi>n</mi><mo>&#x0002B;</mo><mn>1</mn></mrow></mfrac></mstyle><mo>&#x0003C;</mo><mn>1</mn></mrow></math>，</span> 所以 <span class="nw"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mn>0</mn><mo>&#x0003C;</mo><msub><mi>a</mi><mi>n</mi></msub><mo>&#x0003C;</mo><mn>2</mn></mrow></math>，</span>取 <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mi>M</mi><mo>&#x0003D;</mo><mn>2</mn></mrow></math> 即可。</p></div>
+<div><svg viewBox="0 0 560 280" role="img" aria-label="尾部落在 (a−1, a+1) 内；全部项介于 −M 与 M 之间">
+<rect x="161.2" y="61.8" width="358.8" height="59.7" fill="var(--teal)" opacity=".18"/>
+<line x1="60" y1="34.9" x2="520" y2="34.9" stroke="var(--gold)" stroke-dasharray="8 6"/>
+<line x1="60" y1="238.1" x2="520" y2="238.1" stroke="var(--gold)" stroke-dasharray="8 6"/>
+<line x1="60" y1="91.7" x2="520" y2="91.7" stroke="var(--blue)" stroke-width="2.5"/>
+<line x1="60" y1="136.5" x2="528" y2="136.5" stroke="var(--muted)"/>
+<line x1="60" y1="250" x2="60" y2="14" stroke="var(--muted)"/>
+<line x1="161.2" y1="20" x2="161.2" y2="250" stroke="var(--gold)" stroke-dasharray="7 5"/>
+<circle cx="78.4" cy="184.3" r="4.2" fill="var(--orange)"/><circle cx="96.8" cy="34.9" r="4.2" fill="var(--orange)"/><circle cx="115.2" cy="148.4" r="4.2" fill="var(--orange)"/><circle cx="133.6" cy="51.4" r="4.2" fill="var(--orange)"/><circle cx="152.0" cy="118.6" r="4.2" fill="var(--orange)"/><circle cx="170.4" cy="66.3" r="4.2" fill="var(--teal)"/><circle cx="188.8" cy="114.1" r="4.2" fill="var(--teal)"/><circle cx="207.2" cy="71.5" r="4.2" fill="var(--teal)"/><circle cx="225.6" cy="110.0" r="4.2" fill="var(--teal)"/><circle cx="244.0" cy="74.8" r="4.2" fill="var(--teal)"/><circle cx="262.4" cy="107.3" r="4.2" fill="var(--teal)"/><circle cx="280.8" cy="77.1" r="4.2" fill="var(--teal)"/><circle cx="299.2" cy="105.4" r="4.2" fill="var(--teal)"/><circle cx="317.6" cy="78.8" r="4.2" fill="var(--teal)"/><circle cx="336.0" cy="103.9" r="4.2" fill="var(--teal)"/><circle cx="354.4" cy="80.1" r="4.2" fill="var(--teal)"/><circle cx="372.8" cy="102.7" r="4.2" fill="var(--teal)"/><circle cx="391.2" cy="81.1" r="4.2" fill="var(--teal)"/><circle cx="409.6" cy="101.8" r="4.2" fill="var(--teal)"/><circle cx="428.0" cy="82.0" r="4.2" fill="var(--teal)"/><circle cx="446.4" cy="101.0" r="4.2" fill="var(--teal)"/><circle cx="464.8" cy="82.7" r="4.2" fill="var(--teal)"/><circle cx="483.2" cy="100.4" r="4.2" fill="var(--teal)"/><circle cx="501.6" cy="83.3" r="4.2" fill="var(--teal)"/><circle cx="520.0" cy="99.8" r="4.2" fill="var(--teal)"/>
+<text x="52" y="39.9" text-anchor="end" class="lab g">M</text>
+<text x="52" y="243.1" text-anchor="end" class="lab g">−M</text>
+<text x="52" y="96.7" text-anchor="end" class="lab b">a</text>
+<text x="526" y="66.8" class="lab t">a+1</text>
+<text x="526" y="126.6" class="lab t">a−1</text>
+<text x="161.2" y="272" text-anchor="middle" class="lab g">N</text>
+</svg>
+<div class="note warn"><b style="color:var(--red)">必要，但不充分</b><br>收敛 <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mo>&#x021D2;</mo></mrow></math> 有界，但反之不成立：<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><msub><mi>a</mi><mi>n</mi></msub><mo>&#x0003D;</mo><mo stretchy="false">&#x00028;</mo><mo>&#x02212;</mo><mn>1</mn><msup><mo stretchy="false">&#x00029;</mo><mi>n</mi></msup></mrow></math> 满足 <span class="nw"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mo stretchy="false" lspace="0.05em" rspace="0.05em">|</mo><msub><mi>a</mi><mi>n</mi></msub><mo stretchy="false" lspace="0.05em" rspace="0.05em">|</mo><mo>&#x02264;</mo><mn>1</mn></mrow></math>，</span>却在 <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mo>&#x02212;</mo><mn>1</mn></mrow></math> 与 <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mn>1</mn></mrow></math> 之间来回跳动，所以发散。</div></div></div>
+</div></section>
+
+<section class="slide" id="s4"><div class="frame" style="--accent:var(--gold)">
+<h2>定理 2.4（保号性）</h2>
+<div class="thm"><div class="h">定理 2.4（保号性）</div>若 <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mo>lim</mo><msub><mi>a</mi><mi>n</mi></msub><mo>&#x0003D;</mo><mi>a</mi><mo>&#x0003E;</mo><mn>0</mn></mrow></math>（或 <span class="nw"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mo>&#x0003C;</mo><mn>0</mn></mrow></math>），</span>则对任意 <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><msup><mi>a</mi><mi>&#x02032;</mi></msup><mo>&#x02208;</mo><mo stretchy="false">&#x00028;</mo><mn>0</mn><mo>&#x0002C;</mo><mi>a</mi><mo stretchy="false">&#x00029;</mo></mrow></math>（或 <span class="nw"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><msup><mi>a</mi><mi>&#x02032;</mi></msup><mo>&#x02208;</mo><mo stretchy="false">&#x00028;</mo><mi>a</mi><mo>&#x0002C;</mo><mn>0</mn><mo stretchy="false">&#x00029;</mo></mrow></math>），</span>存在 <span class="nw"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mi>N</mi></mrow></math>，</span>使得当 <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mi>n</mi><mo>&#x0003E;</mo><mi>N</mi></mrow></math> 时，有 <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><msub><mi>a</mi><mi>n</mi></msub><mo>&#x0003E;</mo><msup><mi>a</mi><mi>&#x02032;</mi></msup></mrow></math>（或 <span class="nw"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><msub><mi>a</mi><mi>n</mi></msub><mo>&#x0003C;</mo><msup><mi>a</mi><mi>&#x02032;</mi></msup></mrow></math>）。</span>实际中常取 <span class="nw"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><msup><mi>a</mi><mi>&#x02032;</mi></msup><mo>&#x0003D;</mo><mi>a</mi><mo lspace="0" rspace="0">/</mo><mn>2</mn></mrow></math>。</span></div>
+<div class="grid"><div><ol><li>取 <span class="nw"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mi>&#x003B5;</mi><mo>&#x0003D;</mo><mi>a</mi><mo>&#x02212;</mo><msup><mi>a</mi><mi>&#x02032;</mi></msup><mo>&#x0003E;</mo><mn>0</mn></mrow></math>。</span>当 <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mi>n</mi><mo>&#x0003E;</mo><mi>N</mi></mrow></math> 时：<span class="nw"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><msub><mi>a</mi><mi>n</mi></msub><mo>&#x0003E;</mo><mi>a</mi><mo>&#x02212;</mo><mi>&#x003B5;</mi><mo>&#x0003D;</mo><msup><mi>a</mi><mi>&#x02032;</mi></msup></mrow></math>。</span></li><li>取 <span class="nw"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><msup><mi>a</mi><mi>&#x02032;</mi></msup><mo>&#x0003D;</mo><mi>a</mi><mo lspace="0" rspace="0">/</mo><mn>2</mn></mrow></math>：</span>当 <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mi>n</mi></mrow></math> 充分大时，<span class="nw"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><msub><mi>a</mi><mi>n</mi></msub><mo>&#x0003E;</mo><mstyle displaystyle="true" scriptlevel="0"><mfrac><mrow><mi>a</mi></mrow><mrow><mn>2</mn></mrow></mfrac></mstyle><mo>&#x0003E;</mo><mn>0</mn></mrow></math>。</span></li></ol>
+<div class="note"><b>几何意义：</b>极限为正，则整个尾部都为正——总部在正半轴，几乎所有成员也在正半轴。</div>
+<div class="thm" style="--accent:var(--purple)"><div class="h">推论</div>若 <span class="nw"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mo>lim</mo><msub><mi>a</mi><mi>n</mi></msub><mo>&#x0003D;</mo><mi>a</mi></mrow></math>，</span><span class="nw"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mo>lim</mo><msub><mi>b</mi><mi>n</mi></msub><mo>&#x0003D;</mo><mi>b</mi></mrow></math>，</span>且 <span class="nw"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mi>a</mi><mo>&#x0003C;</mo><mi>b</mi></mrow></math>，</span>则当 <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mi>n</mi></mrow></math> 充分大时，<span class="nw"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><msub><mi>a</mi><mi>n</mi></msub><mo>&#x0003C;</mo><msub><mi>b</mi><mi>n</mi></msub></mrow></math>。</span><div class="muted" style="margin-top:.4em">思路：取 <span class="nw"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mi>&#x003B5;</mi><mo>&#x0003D;</mo><mstyle displaystyle="true" scriptlevel="0"><mfrac><mrow><mi>b</mi><mo>&#x02212;</mo><mi>a</mi></mrow><mrow><mn>2</mn></mrow></mfrac></mstyle></mrow></math>，</span>当 <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mi>n</mi></mrow></math> 充分大时 <span class="nw"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><msub><mi>a</mi><mi>n</mi></msub><mo>&#x0003C;</mo><mstyle displaystyle="true" scriptlevel="0"><mfrac><mrow><mi>a</mi><mo>&#x0002B;</mo><mi>b</mi></mrow><mrow><mn>2</mn></mrow></mfrac></mstyle><mo>&#x0003C;</mo><msub><mi>b</mi><mi>n</mi></msub></mrow></math>。</span></div></div></div>
+<div><svg viewBox="0 0 560 260" role="img" aria-label="极限 a 为正：整个尾部都在 a/2 > 0 之上">
+<rect x="189.6" y="20" width="340.4" height="147.0" fill="var(--green)" opacity=".10"/>
+<line x1="70" y1="83.0" x2="530" y2="83.0" stroke="var(--blue)" stroke-width="2.5"/>
+<line x1="70" y1="125.0" x2="530" y2="125.0" stroke="var(--gold)" stroke-dasharray="8 6"/>
+<line x1="70" y1="167.0" x2="538" y2="167.0" stroke="var(--muted)"/>
+<line x1="70" y1="230" x2="70" y2="14" stroke="var(--muted)"/>
+<line x1="189.6" y1="20" x2="189.6" y2="230" stroke="var(--gold)" stroke-dasharray="7 5"/>
+<circle cx="88.4" cy="214.2" r="4.2" fill="var(--red)"/><circle cx="106.8" cy="151.2" r="4.2" fill="var(--muted)"/><circle cx="125.2" cy="185.4" r="4.2" fill="var(--red)"/><circle cx="143.6" cy="130.2" r="4.2" fill="var(--muted)"/><circle cx="162.0" cy="30.5" r="4.2" fill="var(--muted)"/><circle cx="180.4" cy="140.8" r="4.2" fill="var(--muted)"/><circle cx="198.8" cy="122.4" r="4.2" fill="var(--green)"/><circle cx="217.2" cy="47.6" r="4.2" fill="var(--green)"/><circle cx="235.6" cy="115.2" r="4.2" fill="var(--green)"/><circle cx="254.0" cy="53.4" r="4.2" fill="var(--green)"/><circle cx="272.4" cy="110.4" r="4.2" fill="var(--green)"/><circle cx="290.8" cy="57.4" r="4.2" fill="var(--green)"/><circle cx="309.2" cy="107.0" r="4.2" fill="var(--green)"/><circle cx="327.6" cy="60.4" r="4.2" fill="var(--green)"/><circle cx="346.0" cy="104.4" r="4.2" fill="var(--green)"/><circle cx="364.4" cy="62.7" r="4.2" fill="var(--green)"/><circle cx="382.8" cy="102.4" r="4.2" fill="var(--green)"/><circle cx="401.2" cy="64.5" r="4.2" fill="var(--green)"/><circle cx="419.6" cy="100.7" r="4.2" fill="var(--green)"/><circle cx="438.0" cy="66.0" r="4.2" fill="var(--green)"/><circle cx="456.4" cy="99.4" r="4.2" fill="var(--green)"/><circle cx="474.8" cy="67.2" r="4.2" fill="var(--green)"/><circle cx="493.2" cy="98.2" r="4.2" fill="var(--green)"/><circle cx="511.6" cy="68.3" r="4.2" fill="var(--green)"/><circle cx="530.0" cy="97.2" r="4.2" fill="var(--green)"/>
+<text x="62" y="88.0" text-anchor="end" class="lab b">a</text>
+<text x="62" y="130.0" text-anchor="end" class="lab g">a/2</text>
+<text x="62" y="172.0" text-anchor="end" class="lab m">0</text>
+<text x="189.6" y="252" text-anchor="middle" class="lab g">N</text>
+<text x="364.4" y="33.1" text-anchor="middle" class="cap gr">尾部 > a/2 > 0</text>
+</svg></div></div>
+</div></section>
+
+<section class="slide" id="s5"><div class="frame" style="--accent:var(--teal)">
+<h2>三个证明的共同模式</h2>
+<div class="cards"><div class="card" style="--c:var(--blue)"><b>唯一性</b><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><msub><mi>&#x003B5;</mi><mn>0</mn></msub><mo>&#x0003D;</mo><mstyle displaystyle="true" scriptlevel="0"><mfrac><mrow><mo stretchy="false" lspace="0.05em" rspace="0.05em">|</mo><mi>b</mi><mo>&#x02212;</mo><mi>a</mi><mo stretchy="false" lspace="0.05em" rspace="0.05em">|</mo></mrow><mrow><mn>2</mn></mrow></mfrac></mstyle></mrow></math></div><div class="card" style="--c:var(--teal)"><b>有界性</b><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mi>&#x003B5;</mi><mo>&#x0003D;</mo><mn>1</mn></mrow></math></div><div class="card" style="--c:var(--gold)"><b>保号性</b><span class="nw"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mi>&#x003B5;</mi><mo>&#x0003D;</mo><mi>a</mi><mo>&#x02212;</mo><msup><mi>a</mi><mi>&#x02032;</mi></msup></mrow></math>，</span>常取 <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><msup><mi>a</mi><mi>&#x02032;</mi></msup><mo>&#x0003D;</mo><mstyle displaystyle="true" scriptlevel="0"><mfrac><mrow><mi>a</mi></mrow><mrow><mn>2</mn></mrow></mfrac></mstyle></mrow></math></div></div>
+<div class="motto">选定一个具体的 ε，让定义替你完成证明。</div>
+<div class="grid"><div>
+<h3>附注 · 定理 2.5（保序性）</h3>
+<div class="thm"><div class="h">定理 2.5（保序性）</div>若 <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mi>n</mi></mrow></math> 充分大时 <span class="nw"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><msub><mi>a</mi><mi>n</mi></msub><mo>&#x02264;</mo><msub><mi>b</mi><mi>n</mi></msub></mrow></math>，</span>且两数列都收敛，则 <span class="nw"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mo>lim</mo><msub><mi>a</mi><mi>n</mi></msub><mo>&#x02264;</mo><mo>lim</mo><msub><mi>b</mi><mi>n</mi></msub></mrow></math>。</span></div>
+<div class="note warn"><b>注意：</b>严格不等号取极限后可能退化为等号：对每个 <span class="nw"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mi>n</mi></mrow></math>，</span><span class="nw"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mstyle displaystyle="true" scriptlevel="0"><mfrac><mn>1</mn><mi>n</mi></mfrac></mstyle><mo>&#x0003E;</mo><mn>0</mn></mrow></math>，</span>但 <span class="nw"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mo>lim</mo><mstyle displaystyle="true" scriptlevel="0"><mfrac><mn>1</mn><mi>n</mi></mfrac></mstyle><mo>&#x0003D;</mo><mn>0</mn></mrow></math>。</span></div></div>
+<div><svg viewBox="0 0 460 200" role="img" aria-label="1/n 恒为正，但极限为 0">
+<line x1="40" y1="156.5" x2="430" y2="156.5" stroke="var(--red)" stroke-width="2.5"/>
+<line x1="40" y1="170" x2="40" y2="11" stroke="var(--muted)"/>
+<circle cx="55.6" cy="21.7" r="4" fill="var(--teal)"/><circle cx="71.2" cy="89.1" r="4" fill="var(--teal)"/><circle cx="86.8" cy="111.6" r="4" fill="var(--teal)"/><circle cx="102.4" cy="122.8" r="4" fill="var(--teal)"/><circle cx="118.0" cy="129.6" r="4" fill="var(--teal)"/><circle cx="133.6" cy="134.1" r="4" fill="var(--teal)"/><circle cx="149.2" cy="137.3" r="4" fill="var(--teal)"/><circle cx="164.8" cy="139.7" r="4" fill="var(--teal)"/><circle cx="180.4" cy="141.5" r="4" fill="var(--teal)"/><circle cx="196.0" cy="143.0" r="4" fill="var(--teal)"/><circle cx="211.6" cy="144.3" r="4" fill="var(--teal)"/><circle cx="227.2" cy="145.3" r="4" fill="var(--teal)"/><circle cx="242.8" cy="146.2" r="4" fill="var(--teal)"/><circle cx="258.4" cy="146.9" r="4" fill="var(--teal)"/><circle cx="274.0" cy="147.5" r="4" fill="var(--teal)"/><circle cx="289.6" cy="148.1" r="4" fill="var(--teal)"/><circle cx="305.2" cy="148.6" r="4" fill="var(--teal)"/><circle cx="320.8" cy="149.0" r="4" fill="var(--teal)"/><circle cx="336.4" cy="149.4" r="4" fill="var(--teal)"/><circle cx="352.0" cy="149.8" r="4" fill="var(--teal)"/><circle cx="367.6" cy="150.1" r="4" fill="var(--teal)"/><circle cx="383.2" cy="150.4" r="4" fill="var(--teal)"/><circle cx="398.8" cy="150.7" r="4" fill="var(--teal)"/><circle cx="414.4" cy="150.9" r="4" fill="var(--teal)"/><circle cx="430.0" cy="151.1" r="4" fill="var(--teal)"/>
+<text x="32" y="161.5" text-anchor="end" class="lab r">0</text>
+<text x="65.6" y="26.7" class="lab t">1/n</text>
+<text x="258.4" y="95.9" text-anchor="middle" class="cap">1/n > 0，但 lim 1/n = 0</text>
+</svg></div></div>
+<footer>视频 02-02 配套讲义 · 收敛数列的唯一性、有界性与保号性</footer>
+</div></section>
+
+<section class="slide"><div class="frame" style="--accent:var(--gold);max-width:960px">
+<h2 style="color:var(--ink)">自测 · 检验一下</h2>
+<style>
+.qt{display:grid;gap:14px;margin-top:18px}
+.qt-item{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 18px}
+.qt-q{color:var(--ink);font-size:17px;margin:0 0 8px}
+.qt-opts{color:var(--muted);font-size:15px;line-height:1.9;margin:0 0 10px}
+.qt button.reveal{background:transparent;border:1px solid var(--teal);color:var(--teal);
+border-radius:8px;padding:5px 14px;font-size:14px;cursor:pointer}
+.qt .ans{display:none;margin-top:10px;padding:10px 14px;border-left:3px solid var(--green);
+background:rgba(107,211,138,.08);color:var(--ink);font-size:15px;line-height:1.8;border-radius:0 8px 8px 0}
+.qt .ans b{color:var(--green)}
+.qt-item.shown .ans{display:block}
+</style>
+<div class="qt">
+<div class="qt-item"><p class="qt-q">1. 若 aₙ → a 且 aₙ → b，则一定有（　）</p>
+<p class="qt-opts">A. a = b　　B. a ≠ b　　C. a、b 可以不相等</p>
+<button class="reveal">查看答案</button>
+<div class="ans"><b>A。</b>取 ε₀ = |b−a|/2，以 a、b 为中心的两条 ε₀ 带不相交；n 充分大时 aₙ 要同时落在两条带内，矛盾。</div></div>
+
+<div class="qt-item"><p class="qt-q">2. 下列数列中有界但不收敛的是（　）</p>
+<p class="qt-opts">A. aₙ = n　　B. aₙ = (−1)ⁿ　　C. aₙ = 1/n</p>
+<button class="reveal">查看答案</button>
+<div class="ans"><b>B。</b>|(−1)ⁿ| ≤ 1 有界，但在 −1 与 1 之间来回跳动，由唯一性不可能收敛。A 无界；C 收敛于 0——有界只是必要条件。</div></div>
+
+<div class="qt-item"><p class="qt-q">3. 若 lim aₙ = 2，取 a′ = 1，则存在 N，当 n &gt; N 时必有（　）</p>
+<p class="qt-opts">A. aₙ &gt; 2　　B. aₙ &gt; 1　　C. aₙ &gt; 0 但未必 &gt; 1</p>
+<button class="reveal">查看答案</button>
+<div class="ans"><b>B。</b>保号性保证的是：对任意 a′ ∈ (0, 2)，最终 aₙ &gt; a′。它保证超过 0 与 2 之间的任何数，但不保证超过 2 本身。</div></div>
+
+<div class="qt-item"><p class="qt-q">4. 证明收敛数列有界时，经典取法是（　）</p>
+<p class="qt-opts">A. ε = 1　　B. ε₀ = |b−a|/2　　C. ε = a − a′</p>
+<button class="reveal">查看答案</button>
+<div class="ans"><b>A。</b>三个证明各配一把钥匙：有界性取 ε = 1（尾部落入 (a−1, a+1)）；唯一性取 ε₀ = |b−a|/2；保号性取 ε = a − a′（常取 a′ = a/2）。</div></div>
+
+<div class="qt-item"><p class="qt-q">5. 若 n 充分大时 aₙ ≤ bₙ 且两数列都收敛，则（　）</p>
+<p class="qt-opts">A. lim aₙ &lt; lim bₙ　　B. lim aₙ ≤ lim bₙ　　C. 必有 lim aₙ = lim bₙ</p>
+<button class="reveal">查看答案</button>
+<div class="ans"><b>B。</b>严格不等号取极限后可能退化为等号：对每个 n 有 1/n &gt; 0，但 lim 1/n = 0。</div></div>
+
+<div class="qt-item"><p class="qt-q">6. 推论证明中取 ε = (b−a)/2，得到的中间分界数是（　）</p>
+<p class="qt-opts">A. (b−a)/2　　B. (a+b)/2　　C. b − a</p>
+<button class="reveal">查看答案</button>
+<div class="ans"><b>B。</b>n 充分大时 aₙ &lt; a + ε = (a+b)/2 = b − ε &lt; bₙ——两边的带子恰好以中点为界。</div></div>
+</div>
+</div></section>
+<script>
+Array.prototype.forEach.call(document.querySelectorAll('.qt .reveal'),function(b){
+ b.addEventListener('click',function(){b.parentNode.classList.add('shown');b.style.display='none';});});
+</script>
+
+<div class="hint">使用 ← → 键或滚动浏览</div>
+<script>
+(function(){var s=[].slice.call(document.querySelectorAll('.slide'));
+document.addEventListener('keydown',function(e){
+ if(['ArrowRight','ArrowLeft','PageDown','PageUp'].indexOf(e.key)<0)return;
+ var y=window.scrollY+10,i=0;for(var k=0;k<s.length;k++)if(s[k].offsetTop<=y)i=k;
+ i+= (e.key==='ArrowRight'||e.key==='PageDown')?1:-1; i=Math.max(0,Math.min(s.length-1,i));
+ s[i].scrollIntoView({behavior:'smooth'});e.preventDefault();});})();
+</script>
+<script>
+(function(){
+  var deck=document.getElementById('deck');
+  if(deck){
+    deck.style.top='44px';
+    function fit(){
+      var s=Math.min(window.innerWidth/1280,(window.innerHeight-44)/720,1.5);
+      deck.style.transform='scale('+s+')';
+    }
+    window.addEventListener('resize',fit);fit();
+  }else{
+    document.body.style.paddingTop='44px';
+  }
+})();
+</script></body></html>

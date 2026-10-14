@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2.9 · Stirling 公式</title>
+<style>
+:root{--bg:#0d1220;--panel:#161d30;--edge:#2e3854;--txt:#f1f5f9;--txt2:#94a3b8;--amber:#f5b942;--blue:#4cc3f0;--green:#5be3a4;--rose:#f26b8a;--violet:#b48cff}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--txt);font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans","Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif;line-height:1.6}
+main{max-width:1100px;margin:0 auto;padding:32px 20px 60px}
+header{display:flex;justify-content:space-between;align-items:center;gap:16px;border-bottom:1px solid var(--edge);padding-bottom:16px;margin-bottom:8px}
+header h1{font-size:1.9rem;margin:0}
+.pill{border:2px solid var(--amber);color:var(--amber);border-radius:999px;padding:4px 14px;font-weight:700;font-size:.85rem;letter-spacing:.06em;white-space:nowrap}
+.sub{color:var(--txt2);margin:0 0 28px;font-size:1.05rem}
+section{margin:36px 0}
+h2{font-size:1.35rem;margin:0 0 12px;border-left:5px solid var(--amber);padding-left:12px}
+.theorem{background:var(--panel);border:1px solid var(--edge);border-radius:16px;padding:20px 24px}
+.theorem h2{border-left-color:var(--blue)}
+.formula{font-size:1.6rem;text-align:center;margin:14px 0;line-height:1.35;overflow-x:auto;letter-spacing:.01em}
+.formula.small{font-size:1.35rem}
+.frac{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;margin:0 .15em}
+.frac>span{display:block;padding:0 .25em}
+.frac>span:first-child{border-bottom:1.5px solid currentColor}
+.sq{white-space:nowrap}.sq .rad{border-top:1.5px solid currentColor;padding:0 .1em}
+.c-amber{color:var(--amber)}.c-blue{color:var(--blue)}.c-green{color:var(--green)}.c-rose{color:var(--rose)}.c-violet{color:var(--violet)}
+.factors{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-top:12px}
+.factor{background:#0f1526;border:1px solid var(--edge);border-radius:12px;padding:12px 14px}
+.factor b{display:block;font-size:1.2rem;margin-bottom:4px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}
+@media (max-width:800px){.grid2{grid-template-columns:1fr}}
+figure{margin:0;background:var(--panel);border:1px solid var(--edge);border-radius:14px;padding:10px}
+figure.wide{max-width:760px;margin:0 auto}
+figcaption{color:var(--txt2);font-size:.9rem;padding:6px 6px 2px}
+table{width:100%;border-collapse:collapse;background:var(--panel);border:1px solid var(--edge);border-radius:12px;overflow:hidden;font-variant-numeric:tabular-nums}
+th,td{padding:10px 12px;text-align:center;border-bottom:1px solid var(--edge);white-space:nowrap}
+th{background:#222b45}
+.skel{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.skel div{background:var(--panel);border-radius:12px;padding:12px 16px;border-top:4px solid var(--blue)}
+.skel div:nth-child(2){border-top-color:var(--amber)}.skel div:nth-child(3){border-top-color:var(--green)}
+.quiz{background:var(--panel);border:1px solid var(--edge);border-radius:16px;padding:20px 24px}
+.quiz h2{border-left-color:var(--violet)}
+.q{border-top:1px solid var(--edge);padding:16px 0}
+.q p{margin:0 0 8px;font-weight:600}
+.opts{display:grid;gap:6px;margin:0 0 10px}
+.opt{display:flex;gap:10px;align-items:baseline;background:#0f1526;border:1px solid var(--edge);border-radius:10px;padding:8px 12px;cursor:pointer}
+.opt:hover{border-color:var(--violet)}
+.opt .k{font-weight:700;color:var(--violet);min-width:1.4em}
+.opt.sel{border-color:var(--amber)}
+.opt.right{border-color:var(--green);background:rgba(91,227,164,.08)}
+.opt.wrong{border-color:var(--rose);opacity:.7}
+button.reveal{background:var(--violet);color:#0d1220;border:0;border-radius:999px;padding:8px 18px;font-weight:700;cursor:pointer;font-size:.95rem}
+button.reveal:disabled{opacity:.5;cursor:default}
+.ans{display:none;margin-top:10px;padding:10px 14px;border-left:4px solid var(--green);background:rgba(91,227,164,.08);border-radius:8px}
+.ans.show{display:block}
+footer{color:var(--txt2);font-size:.85rem;border-top:1px solid var(--edge);margin-top:40px;padding-top:14px}
+</style>
+<style>
+#mv-bar{position:fixed;left:0;right:0;top:0;z-index:99;display:flex;align-items:center;
+  gap:12px;padding:9px 14px;font-size:14px;
+  background:color-mix(in srgb,var(--bg,var(--paper,#fbfaf6)) 84%,transparent);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--grid,var(--line,var(--rule,#e3e0d6)))}
+#mv-bar .mv-home{color:var(--blue,#1f72b0);text-decoration:none;white-space:nowrap}
+#mv-bar .mv-title{flex:1;text-align:center;font-weight:600;overflow:hidden;
+  text-overflow:ellipsis;white-space:nowrap;opacity:.85}
+#mv-bar .mv-quiz{color:#fff;background:#1f72b0;text-decoration:none;border-radius:8px;
+  padding:4px 12px;white-space:nowrap;font-size:13.5px}
+@media (max-width:480px){#mv-bar .mv-title{font-size:12.5px}}
+</style></head>
+<body><div id="mv-bar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span class="mv-title">02-09 Stirling 公式</span><a class="mv-quiz" href="../quiz/02-09.html">去自测 →</a></div>
+<main>
+<header><h1>2.9 · Stirling 公式</h1><span class="pill">选修深度</span></header>
+<p class="sub">n! 究竟有多大？——用光滑曲线丈量锯齿阶梯</p>
+
+<section class="theorem">
+<h2>定理（Stirling 公式）</h2>
+<div class="formula">n! = <span class="c-blue">√(2πn)</span> · <span class="c-amber">(n/e)<sup>n</sup></span> · <span class="c-green">e<sup>θ<sub>n</sub>/(12n)</sup></span></div>
+<p style="text-align:center;color:var(--txt2);margin:0">其中 0 &lt; θ<sub>n</sub> &lt; 1；特别地，</p>
+<div class="formula">n! ~ √(2πn) · (n/e)<sup>n</sup></div>
+<div class="factors"><div class="factor"><b style="color:#4cc3f0">√(2πn)</b><span>温和的多项式因子</span></div><div class="factor"><b style="color:#f5b942">(n/e)ⁿ</b><span>主引擎：指数增长，且底数本身在变大</span></div><div class="factor"><b style="color:#5be3a4">e^(θₙ/(12n))</b><span>微小修正，夹在 1 与 e^(1/(12n)) 之间</span></div></div>
+</section>
+
+<section>
+<h2>1 · 为什么精确大小很重要</h2>
+<p>增长阶梯 ln n ≪ n<sup>k</sup> ≪ a<sup>n</sup> ≪ n! ≪ n<sup>n</sup> 只给出排序。要知道 n! 究竟比 a<sup>n</sup> 领先<em>多少</em>，就需要 n! 的精确形状——这正是 Stirling 公式用三个因子给出的。</p>
+</section>
+
+<section>
+<h2>2 · 骨架第一步——性质良好的比值</h2>
+<p>先取对数：ln n! = ln 1 + ln 2 + … + ln n 是一段 n 级阶梯，第 k 级高 ln k。再叠上光滑曲线 ln x，其积分 ∫<sub>1</sub><sup>n</sup> ln x dx = n ln n − n + 1。阶梯与曲线每级约差半格——这就是 n + ½ 的来历。</p>
+<p class="formula small" style="text-align:left">定义 &nbsp;b<sub>n</sub> = ln n! − (n + ½)·ln n + n。</p>
+<p>下降量 b<sub>n</sub> − b<sub>n+1</sub> = (n + ½)·ln(1 + 1/n) − 1 为正且约为 1/(12n²)：一小薄片。所以 b<sub>n</sub> 单调递减且有下界，必收敛于某个极限 c。取指数后，n! / (√n·(n/e)ⁿ) = e<sup>b<sub>n</sub></sup> 始终介于两个正常数 A 与 B 之间——形状对了，只差一个常数。</p>
+<div class="formula small">b<sub>n</sub> − b<sub>n+1</sub> ≈ <span class="frac"><span>1</span><span>12n²</span></span> &gt; 0, &nbsp;&nbsp; A ≤ <span class="frac"><span>n!</span><span>√n · (n/e)<sup>n</sup></span></span> = e<sup>b<sub>n</sub></sup> ≤ B</div>
+<div class="grid2">
+<figure><svg viewBox="0 0 640 360" width="100%" role="img" aria-label="ln k 的阶梯与曲线 ln x" xmlns="http://www.w3.org/2000/svg" font-family="system-ui, -apple-system, Segoe UI, Roboto, Noto Sans, Noto Sans CJK SC, sans-serif"><line x1="56" y1="316.0" x2="622" y2="316.0" stroke="#2e3854" stroke-width="1"/>
+<text x="48" y="321.0" text-anchor="end" fill="#94a3b8" font-size="13">0</text>
+<line x1="56" y1="206.4" x2="622" y2="206.4" stroke="#2e3854" stroke-width="1"/>
+<text x="48" y="211.4" text-anchor="end" fill="#94a3b8" font-size="13">1</text>
+<line x1="56" y1="96.7" x2="622" y2="96.7" stroke="#2e3854" stroke-width="1"/>
+<text x="48" y="101.7" text-anchor="end" fill="#94a3b8" font-size="13">2</text>
+<line x1="56.0" y1="20" x2="56.0" y2="316" stroke="#2e3854" stroke-width="1"/>
+<text x="56.0" y="334" text-anchor="middle" fill="#94a3b8" font-size="13">0</text>
+<line x1="109.4" y1="20" x2="109.4" y2="316" stroke="#2e3854" stroke-width="1"/>
+<text x="109.4" y="334" text-anchor="middle" fill="#94a3b8" font-size="13">1</text>
+<line x1="162.8" y1="20" x2="162.8" y2="316" stroke="#2e3854" stroke-width="1"/>
+<text x="162.8" y="334" text-anchor="middle" fill="#94a3b8" font-size="13">2</text>
+<line x1="216.2" y1="20" x2="216.2" y2="316" stroke="#2e3854" stroke-width="1"/>
+<text x="216.2" y="334" text-anchor="middle" fill="#94a3b8" font-size="13">3</text>
+<line x1="269.6" y1="20" x2="269.6" y2="316" stroke="#2e3854" stroke-width="1"/>
+<text x="269.6" y="334" text-anchor="middle" fill="#94a3b8" font-size="13">4</text>
+<line x1="323.0" y1="20" x2="323.0" y2="316" stroke="#2e3854" stroke-width="1"/>
+<text x="323.0" y="334" text-anchor="middle" fill="#94a3b8" font-size="13">5</text>
+<line x1="376.4" y1="20" x2="376.4" y2="316" stroke="#2e3854" stroke-width="1"/>
+<text x="376.4" y="334" text-anchor="middle" fill="#94a3b8" font-size="13">6</text>
+<line x1="429.8" y1="20" x2="429.8" y2="316" stroke="#2e3854" stroke-width="1"/>
+<text x="429.8" y="334" text-anchor="middle" fill="#94a3b8" font-size="13">7</text>
+<line x1="483.2" y1="20" x2="483.2" y2="316" stroke="#2e3854" stroke-width="1"/>
+<text x="483.2" y="334" text-anchor="middle" fill="#94a3b8" font-size="13">8</text>
+<line x1="536.6" y1="20" x2="536.6" y2="316" stroke="#2e3854" stroke-width="1"/>
+<text x="536.6" y="334" text-anchor="middle" fill="#94a3b8" font-size="13">9</text>
+<line x1="590.0" y1="20" x2="590.0" y2="316" stroke="#2e3854" stroke-width="1"/>
+<text x="590.0" y="334" text-anchor="middle" fill="#94a3b8" font-size="13">10</text>
+<line x1="56" y1="20" x2="56" y2="316" stroke="#64748b" stroke-width="1.5"/>
+<line x1="56" y1="316" x2="622" y2="316" stroke="#64748b" stroke-width="1.5"/>
+<text x="622" y="354" text-anchor="end" fill="#94a3b8" font-size="13">k</text>
+<rect x="56.0" y="316.0" width="53.4" height="0.0" fill="#f5b942" fill-opacity="0.22" stroke="#f5b942" stroke-width="1.5"/>
+<rect x="109.4" y="240.0" width="53.4" height="76.0" fill="#f5b942" fill-opacity="0.22" stroke="#f5b942" stroke-width="1.5"/>
+<rect x="162.8" y="195.6" width="53.4" height="120.4" fill="#f5b942" fill-opacity="0.22" stroke="#f5b942" stroke-width="1.5"/>
+<rect x="216.2" y="164.0" width="53.4" height="152.0" fill="#f5b942" fill-opacity="0.22" stroke="#f5b942" stroke-width="1.5"/>
+<rect x="269.6" y="139.6" width="53.4" height="176.4" fill="#f5b942" fill-opacity="0.22" stroke="#f5b942" stroke-width="1.5"/>
+<rect x="323.0" y="119.6" width="53.4" height="196.4" fill="#f5b942" fill-opacity="0.22" stroke="#f5b942" stroke-width="1.5"/>
+<rect x="376.4" y="102.7" width="53.4" height="213.3" fill="#f5b942" fill-opacity="0.22" stroke="#f5b942" stroke-width="1.5"/>
+<rect x="429.8" y="88.0" width="53.4" height="228.0" fill="#f5b942" fill-opacity="0.22" stroke="#f5b942" stroke-width="1.5"/>
+<rect x="483.2" y="75.1" width="53.4" height="240.9" fill="#f5b942" fill-opacity="0.22" stroke="#f5b942" stroke-width="1.5"/>
+<rect x="536.6" y="63.6" width="53.4" height="252.4" fill="#f5b942" fill-opacity="0.22" stroke="#f5b942" stroke-width="1.5"/>
+<path d="M109.4,316.0 L112.1,310.7 L114.7,305.6 L117.4,300.7 L120.1,296.0 L122.7,291.5 L125.4,287.2 L128.1,283.1 L130.8,279.1 L133.4,275.3 L136.1,271.5 L138.8,268.0 L141.4,264.5 L144.1,261.1 L146.8,257.8 L149.4,254.6 L152.1,251.6 L154.8,248.6 L157.5,245.6 L160.1,242.8 L162.8,240.0 L162.8,240.0 L109.4,240.0 Z" fill="#f26b8a" fill-opacity="0.45"/>
+<path d="M109.4,316.0 L162.8,240.0" fill="none" stroke="#ffffff" stroke-width="1.2" stroke-linejoin="round" stroke-dasharray="4 3"/>
+<path d="M162.8,240.0 L165.5,237.3 L168.1,234.7 L170.8,232.1 L173.5,229.6 L176.1,227.1 L178.8,224.7 L181.5,222.3 L184.2,220.0 L186.8,217.8 L189.5,215.5 L192.2,213.4 L194.8,211.2 L197.5,209.2 L200.2,207.1 L202.8,205.1 L205.5,203.1 L208.2,201.2 L210.8,199.3 L213.5,197.4 L216.2,195.6 L216.2,195.6 L162.8,195.6 Z" fill="#f26b8a" fill-opacity="0.45"/>
+<path d="M162.8,240.0 L216.2,195.6" fill="none" stroke="#ffffff" stroke-width="1.2" stroke-linejoin="round" stroke-dasharray="4 3"/>
+<path d="M216.2,195.6 L218.9,193.7 L221.5,192.0 L224.2,190.2 L226.9,188.5 L229.5,186.8 L232.2,185.1 L234.9,183.5 L237.5,181.8 L240.2,180.2 L242.9,178.7 L245.6,177.1 L248.2,175.6 L250.9,174.1 L253.6,172.6 L256.2,171.1 L258.9,169.6 L261.6,168.2 L264.2,166.8 L266.9,165.4 L269.6,164.0 L269.6,164.0 L216.2,164.0 Z" fill="#f26b8a" fill-opacity="0.45"/>
+<path d="M216.2,195.6 L269.6,164.0" fill="none" stroke="#ffffff" stroke-width="1.2" stroke-linejoin="round" stroke-dasharray="4 3"/>
+<path d="M269.6,164.0 L272.3,162.7 L274.9,161.3 L277.6,160.0 L280.3,158.7 L282.9,157.4 L285.6,156.1 L288.3,154.8 L290.9,153.6 L293.6,152.3 L296.3,151.1 L299.0,149.9 L301.6,148.7 L304.3,147.5 L307.0,146.3 L309.6,145.2 L312.3,144.0 L315.0,142.9 L317.6,141.8 L320.3,140.7 L323.0,139.6 L323.0,139.6 L269.6,139.6 Z" fill="#f26b8a" fill-opacity="0.45"/>
+<path d="M269.6,164.0 L323.0,139.6" fill="none" stroke="#ffffff" stroke-width="1.2" stroke-linejoin="round" stroke-dasharray="4 3"/>
+<path d="M323.0,139.6 L325.7,138.5 L328.3,137.4 L331.0,136.3 L333.7,135.3 L336.3,134.2 L339.0,133.2 L341.7,132.1 L344.3,131.1 L347.0,130.1 L349.7,129.1 L352.3,128.1 L355.0,127.1 L357.7,126.2 L360.4,125.2 L363.0,124.2 L365.7,123.3 L368.4,122.3 L371.0,121.4 L373.7,120.5 L376.4,119.6 L376.4,119.6 L323.0,119.6 Z" fill="#f26b8a" fill-opacity="0.45"/>
+<path d="M323.0,139.6 L376.4,119.6" fill="none" stroke="#ffffff" stroke-width="1.2" stroke-linejoin="round" stroke-dasharray="4 3"/>
+<path d="M376.4,119.6 L379.0,118.7 L381.7,117.8 L384.4,116.9 L387.1,116.0 L389.7,115.1 L392.4,114.2 L395.1,113.4 L397.7,112.5 L400.4,111.6 L403.1,110.8 L405.7,110.0 L408.4,109.1 L411.1,108.3 L413.8,107.5 L416.4,106.7 L419.1,105.8 L421.8,105.0 L424.4,104.2 L427.1,103.5 L429.8,102.7 L429.8,102.7 L376.4,102.7 Z" fill="#f26b8a" fill-opacity="0.45"/>
+<path d="M376.4,119.6 L429.8,102.7" fill="none" stroke="#ffffff" stroke-width="1.2" stroke-linejoin="round" stroke-dasharray="4 3"/>
+<path d="M429.8,102.7 L432.4,101.9 L435.1,101.1 L437.8,100.3 L440.5,99.6 L443.1,98.8 L445.8,98.1 L448.5,97.3 L451.1,96.6 L453.8,95.8 L456.5,95.1 L459.1,94.4 L461.8,93.7 L464.5,92.9 L467.2,92.2 L469.8,91.5 L472.5,90.8 L475.2,90.1 L477.8,89.4 L480.5,88.7 L483.2,88.0 L483.2,88.0 L429.8,88.0 Z" fill="#f26b8a" fill-opacity="0.45"/>
+<path d="M429.8,102.7 L483.2,88.0" fill="none" stroke="#ffffff" stroke-width="1.2" stroke-linejoin="round" stroke-dasharray="4 3"/>
+<path d="M483.2,88.0 L485.8,87.3 L488.5,86.7 L491.2,86.0 L493.8,85.3 L496.5,84.7 L499.2,84.0 L501.9,83.3 L504.5,82.7 L507.2,82.0 L509.9,81.4 L512.5,80.7 L515.2,80.1 L517.9,79.5 L520.5,78.8 L523.2,78.2 L525.9,77.6 L528.6,77.0 L531.2,76.3 L533.9,75.7 L536.6,75.1 L536.6,75.1 L483.2,75.1 Z" fill="#f26b8a" fill-opacity="0.45"/>
+<path d="M483.2,88.0 L536.6,75.1" fill="none" stroke="#ffffff" stroke-width="1.2" stroke-linejoin="round" stroke-dasharray="4 3"/>
+<path d="M536.6,75.1 L539.2,74.5 L541.9,73.9 L544.6,73.3 L547.2,72.7 L549.9,72.1 L552.6,71.5 L555.3,70.9 L557.9,70.4 L560.6,69.8 L563.3,69.2 L565.9,68.6 L568.6,68.0 L571.3,67.5 L573.9,66.9 L576.6,66.3 L579.3,65.8 L582.0,65.2 L584.6,64.7 L587.3,64.1 L590.0,63.6 L590.0,63.6 L536.6,63.6 Z" fill="#f26b8a" fill-opacity="0.45"/>
+<path d="M536.6,75.1 L590.0,63.6" fill="none" stroke="#ffffff" stroke-width="1.2" stroke-linejoin="round" stroke-dasharray="4 3"/>
+<path d="M109.4,316.0 L111.8,311.2 L114.2,306.6 L116.6,302.1 L119.0,297.9 L121.4,293.8 L123.8,289.8 L126.2,286.0 L128.6,282.3 L131.0,278.7 L133.4,275.3 L135.8,271.9 L138.2,268.7 L140.6,265.5 L143.0,262.4 L145.4,259.5 L147.8,256.5 L150.2,253.7 L152.6,251.0 L155.1,248.3 L157.5,245.6 L159.9,243.1 L162.3,240.6 L164.7,238.1 L167.1,235.7 L169.5,233.4 L171.9,231.1 L174.3,228.8 L176.7,226.6 L179.1,224.5 L181.5,222.3 L183.9,220.3 L186.3,218.2 L188.7,216.2 L191.1,214.2 L193.5,212.3 L195.9,210.4 L198.3,208.5 L200.7,206.7 L203.1,204.9 L205.5,203.1 L207.9,201.4 L210.3,199.7 L212.7,198.0 L215.1,196.3 L217.5,194.6 L219.9,193.0 L222.3,191.4 L224.7,189.9 L227.1,188.3 L229.5,186.8 L231.9,185.3 L234.3,183.8 L236.7,182.3 L239.1,180.9 L241.6,179.4 L244.0,178.0 L246.4,176.6 L248.8,175.3 L251.2,173.9 L253.6,172.6 L256.0,171.2 L258.4,169.9 L260.8,168.6 L263.2,167.4 L265.6,166.1 L268.0,164.8 L270.4,163.6 L272.8,162.4 L275.2,161.2 L277.6,160.0 L280.0,158.8 L282.4,157.6 L284.8,156.5 L287.2,155.3 L289.6,154.2 L292.0,153.1 L294.4,152.0 L296.8,150.9 L299.2,149.8 L301.6,148.7 L304.0,147.6 L306.4,146.6 L308.8,145.5 L311.2,144.5 L313.6,143.5 L316.0,142.4 L318.4,141.4 L320.8,140.4 L323.2,139.4 L325.7,138.5 L328.1,137.5 L330.5,136.5 L332.9,135.6 L335.3,134.6 L337.7,133.7 L340.1,132.8 L342.5,131.8 L344.9,130.9 L347.3,130.0 L349.7,129.1 L352.1,128.2 L354.5,127.3 L356.9,126.5 L359.3,125.6 L361.7,124.7 L364.1,123.9 L366.5,123.0 L368.9,122.2 L371.3,121.3 L373.7,120.5 L376.1,119.7 L378.5,118.8 L380.9,118.0 L383.3,117.2 L385.7,116.4 L388.1,115.6 L390.5,114.8 L392.9,114.0 L395.3,113.3 L397.7,112.5 L400.1,111.7 L402.5,111.0 L404.9,110.2 L407.3,109.5 L409.8,108.7 L412.2,108.0 L414.6,107.2 L417.0,106.5 L419.4,105.8 L421.8,105.0 L424.2,104.3 L426.6,103.6 L429.0,102.9 L431.4,102.2 L433.8,101.5 L436.2,100.8 L438.6,100.1 L441.0,99.4 L443.4,98.7 L445.8,98.1 L448.2,97.4 L450.6,96.7 L453.0,96.1 L455.4,95.4 L457.8,94.7 L460.2,94.1 L462.6,93.4 L465.0,92.8 L467.4,92.2 L469.8,91.5 L472.2,90.9 L474.6,90.2 L477.0,89.6 L479.4,89.0 L481.8,88.4 L484.2,87.8 L486.6,87.1 L489.0,86.5 L491.4,85.9 L493.8,85.3 L496.3,84.7 L498.7,84.1 L501.1,83.5 L503.5,82.9 L505.9,82.4 L508.3,81.8 L510.7,81.2 L513.1,80.6 L515.5,80.0 L517.9,79.5 L520.3,78.9 L522.7,78.3 L525.1,77.8 L527.5,77.2 L529.9,76.7 L532.3,76.1 L534.7,75.5 L537.1,75.0 L539.5,74.5 L541.9,73.9 L544.3,73.4 L546.7,72.8 L549.1,72.3 L551.5,71.8 L553.9,71.2 L556.3,70.7 L558.7,70.2 L561.1,69.7 L563.5,69.1 L565.9,68.6 L568.3,68.1 L570.7,67.6 L573.1,67.1 L575.5,66.6 L577.9,66.1 L580.4,65.6 L582.8,65.1 L585.2,64.6 L587.6,64.1 L590.0,63.6" fill="none" stroke="#4cc3f0" stroke-width="3" stroke-linejoin="round"/>
+<text x="162.8" y="47.4" text-anchor="start" fill="#f5b942" font-size="15" font-weight="600">阶梯：Σ ln k</text>
+<text x="162.8" y="72.6" text-anchor="start" fill="#4cc3f0" font-size="15" font-weight="600">曲线：ln x</text>
+<text x="162.8" y="97.8" text-anchor="start" fill="#f26b8a" font-size="15" font-weight="600">半格之和 ≈ ½·ln n</text></svg><figcaption>图 1 · 阶梯 Σ ln k（柱）与曲线 ln x。玫红色三角是“半格”；白色虚线弦把每个三角一分为二，剩下的薄片之和就是极限 c。</figcaption></figure>
+<figure><svg viewBox="0 0 640 300" width="100%" role="img" aria-label="数列 b_n 收敛" xmlns="http://www.w3.org/2000/svg" font-family="system-ui, -apple-system, Segoe UI, Roboto, Noto Sans, Noto Sans CJK SC, sans-serif"><line x1="60" y1="260.0" x2="622" y2="260.0" stroke="#2e3854" stroke-width="1"/>
+<text x="52" y="265.0" text-anchor="end" fill="#94a3b8" font-size="13">0.90</text>
+<line x1="60" y1="215.6" x2="622" y2="215.6" stroke="#2e3854" stroke-width="1"/>
+<text x="52" y="220.6" text-anchor="end" fill="#94a3b8" font-size="13">0.92</text>
+<line x1="60" y1="171.3" x2="622" y2="171.3" stroke="#2e3854" stroke-width="1"/>
+<text x="52" y="176.3" text-anchor="end" fill="#94a3b8" font-size="13">0.94</text>
+<line x1="60" y1="126.9" x2="622" y2="126.9" stroke="#2e3854" stroke-width="1"/>
+<text x="52" y="131.9" text-anchor="end" fill="#94a3b8" font-size="13">0.96</text>
+<line x1="60" y1="82.5" x2="622" y2="82.5" stroke="#2e3854" stroke-width="1"/>
+<text x="52" y="87.5" text-anchor="end" fill="#94a3b8" font-size="13">0.98</text>
+<line x1="60" y1="38.2" x2="622" y2="38.2" stroke="#2e3854" stroke-width="1"/>
+<text x="52" y="43.2" text-anchor="end" fill="#94a3b8" font-size="13">1.00</text>
+<line x1="103.2" y1="16" x2="103.2" y2="260" stroke="#2e3854" stroke-width="1"/>
+<text x="103.2" y="278" text-anchor="middle" fill="#94a3b8" font-size="13">1</text>
+<line x1="146.5" y1="16" x2="146.5" y2="260" stroke="#2e3854" stroke-width="1"/>
+<text x="146.5" y="278" text-anchor="middle" fill="#94a3b8" font-size="13">2</text>
+<line x1="189.7" y1="16" x2="189.7" y2="260" stroke="#2e3854" stroke-width="1"/>
+<text x="189.7" y="278" text-anchor="middle" fill="#94a3b8" font-size="13">3</text>
+<line x1="232.9" y1="16" x2="232.9" y2="260" stroke="#2e3854" stroke-width="1"/>
+<text x="232.9" y="278" text-anchor="middle" fill="#94a3b8" font-size="13">4</text>
+<line x1="276.2" y1="16" x2="276.2" y2="260" stroke="#2e3854" stroke-width="1"/>
+<text x="276.2" y="278" text-anchor="middle" fill="#94a3b8" font-size="13">5</text>
+<line x1="319.4" y1="16" x2="319.4" y2="260" stroke="#2e3854" stroke-width="1"/>
+<text x="319.4" y="278" text-anchor="middle" fill="#94a3b8" font-size="13">6</text>
+<line x1="362.6" y1="16" x2="362.6" y2="260" stroke="#2e3854" stroke-width="1"/>
+<text x="362.6" y="278" text-anchor="middle" fill="#94a3b8" font-size="13">7</text>
+<line x1="405.8" y1="16" x2="405.8" y2="260" stroke="#2e3854" stroke-width="1"/>
+<text x="405.8" y="278" text-anchor="middle" fill="#94a3b8" font-size="13">8</text>
+<line x1="449.1" y1="16" x2="449.1" y2="260" stroke="#2e3854" stroke-width="1"/>
+<text x="449.1" y="278" text-anchor="middle" fill="#94a3b8" font-size="13">9</text>
+<line x1="492.3" y1="16" x2="492.3" y2="260" stroke="#2e3854" stroke-width="1"/>
+<text x="492.3" y="278" text-anchor="middle" fill="#94a3b8" font-size="13">10</text>
+<line x1="535.5" y1="16" x2="535.5" y2="260" stroke="#2e3854" stroke-width="1"/>
+<text x="535.5" y="278" text-anchor="middle" fill="#94a3b8" font-size="13">11</text>
+<line x1="578.8" y1="16" x2="578.8" y2="260" stroke="#2e3854" stroke-width="1"/>
+<text x="578.8" y="278" text-anchor="middle" fill="#94a3b8" font-size="13">12</text>
+<line x1="60" y1="16" x2="60" y2="260" stroke="#64748b" stroke-width="1.5"/>
+<line x1="60" y1="260" x2="622" y2="260" stroke="#64748b" stroke-width="1.5"/>
+<text x="622" y="294" text-anchor="end" fill="#94a3b8" font-size="13">n</text>
+<path d="M103.2,218.0 L622.0,218.0" fill="none" stroke="#5be3a4" stroke-width="2" stroke-linejoin="round" stroke-dasharray="7 5"/>
+<path d="M103.2,38.2 L146.5,126.3 L189.7,156.6 L232.9,171.9 L276.2,181.1 L319.4,187.2 L362.6,191.6 L405.8,194.9 L449.1,197.5 L492.3,199.5 L535.5,201.2 L578.8,202.6" fill="none" stroke="#f5b942" stroke-width="1.5" stroke-linejoin="round"/>
+<circle cx="103.2" cy="38.2" r="5" fill="#f5b942"/>
+<circle cx="146.5" cy="126.3" r="5" fill="#f5b942"/>
+<circle cx="189.7" cy="156.6" r="5" fill="#f5b942"/>
+<circle cx="232.9" cy="171.9" r="5" fill="#f5b942"/>
+<circle cx="276.2" cy="181.1" r="5" fill="#f5b942"/>
+<circle cx="319.4" cy="187.2" r="5" fill="#f5b942"/>
+<circle cx="362.6" cy="191.6" r="5" fill="#f5b942"/>
+<circle cx="405.8" cy="194.9" r="5" fill="#f5b942"/>
+<circle cx="449.1" cy="197.5" r="5" fill="#f5b942"/>
+<circle cx="492.3" cy="199.5" r="5" fill="#f5b942"/>
+<circle cx="535.5" cy="201.2" r="5" fill="#f5b942"/>
+<circle cx="578.8" cy="202.6" r="5" fill="#f5b942"/>
+<text x="111.9" y="210.0" text-anchor="start" fill="#5be3a4" font-size="14" font-weight="600">c = ln √(2π) ≈ 0.919</text>
+<text x="276.2" y="71.5" text-anchor="start" fill="#f5b942" font-size="15" font-weight="600">bₙ = ln n! − (n+½)·ln n + n</text></svg><figcaption>图 2 · b<sub>n</sub> = ln n! − (n + ½)·ln n + n 递减收敛到 c = ln √(2π) ≈ 0.919。</figcaption></figure>
+</div>
+</section>
+
+<section>
+<h2>3 · 骨架第二步——Wallis 公式钉死常数</h2>
+<p>Wallis 公式：</p>
+<div class="formula"><span class="frac"><span>π</span><span>2</span></span> = lim<sub>n→∞</sub> <span class="frac"><span>2·2·4·4·…·(2n)·(2n)</span><span>1·3·3·5·…·(2n−1)·(2n+1)</span></span></div>
+<p>把它想成两段交错的阶梯——偶数积与奇数积的部分乘积——从两侧向 π/2 收紧。把乘积改写成阶乘：2·4·…·2n = 2ⁿ·n!，1·3·…·(2n−1) = (2n)!/(2ⁿ·n!)，于是第 n 个 Wallis 比值为 W<sub>n</sub> = 2<sup>4n</sup>(n!)<sup>4</sup> / (((2n)!)<sup>2</sup>(2n+1))。代入第一步的 n! ≈ C·√n·(n/e)ⁿ（(2n)! 用同一个 C）：n 与 e 的幂全部约掉，W<sub>n</sub> → C²/4。因此 C²/4 = π/2，C = √(2π)，两个界被挤到一起：A = B = √(2π)。</p>
+<div class="formula small">W<sub>n</sub> = <span class="frac"><span>2<sup>4n</sup>(n!)<sup>4</sup></span><span>((2n)!)<sup>2</sup>(2n+1)</span></span> → <span class="frac"><span>C²</span><span>4</span></span> = <span class="frac"><span>π</span><span>2</span></span> &nbsp;⇒&nbsp; C = √(2π)</div>
+<figure class="wide"><svg viewBox="0 0 640 320" width="100%" role="img" aria-label="Wallis 部分乘积向 π/2 收紧" xmlns="http://www.w3.org/2000/svg" font-family="system-ui, -apple-system, Segoe UI, Roboto, Noto Sans, Noto Sans CJK SC, sans-serif"><line x1="56" y1="230.5" x2="622" y2="230.5" stroke="#2e3854" stroke-width="1"/>
+<text x="48" y="235.5" text-anchor="end" fill="#94a3b8" font-size="13">1.4</text>
+<line x1="56" y1="164.5" x2="622" y2="164.5" stroke="#2e3854" stroke-width="1"/>
+<text x="48" y="169.5" text-anchor="end" fill="#94a3b8" font-size="13">1.6</text>
+<line x1="56" y1="98.5" x2="622" y2="98.5" stroke="#2e3854" stroke-width="1"/>
+<text x="48" y="103.5" text-anchor="end" fill="#94a3b8" font-size="13">1.8</text>
+<line x1="56" y1="32.5" x2="622" y2="32.5" stroke="#2e3854" stroke-width="1"/>
+<text x="48" y="37.5" text-anchor="end" fill="#94a3b8" font-size="13">2.0</text>
+<line x1="64.0" y1="16" x2="64.0" y2="280" stroke="#2e3854" stroke-width="1"/>
+<text x="64.0" y="298" text-anchor="middle" fill="#94a3b8" font-size="13">1</text>
+<line x1="103.8" y1="16" x2="103.8" y2="280" stroke="#2e3854" stroke-width="1"/>
+<text x="103.8" y="298" text-anchor="middle" fill="#94a3b8" font-size="13">2</text>
+<line x1="143.7" y1="16" x2="143.7" y2="280" stroke="#2e3854" stroke-width="1"/>
+<text x="143.7" y="298" text-anchor="middle" fill="#94a3b8" font-size="13">3</text>
+<line x1="183.5" y1="16" x2="183.5" y2="280" stroke="#2e3854" stroke-width="1"/>
+<text x="183.5" y="298" text-anchor="middle" fill="#94a3b8" font-size="13">4</text>
+<line x1="223.4" y1="16" x2="223.4" y2="280" stroke="#2e3854" stroke-width="1"/>
+<text x="223.4" y="298" text-anchor="middle" fill="#94a3b8" font-size="13">5</text>
+<line x1="263.3" y1="16" x2="263.3" y2="280" stroke="#2e3854" stroke-width="1"/>
+<text x="263.3" y="298" text-anchor="middle" fill="#94a3b8" font-size="13">6</text>
+<line x1="303.1" y1="16" x2="303.1" y2="280" stroke="#2e3854" stroke-width="1"/>
+<text x="303.1" y="298" text-anchor="middle" fill="#94a3b8" font-size="13">7</text>
+<line x1="343.0" y1="16" x2="343.0" y2="280" stroke="#2e3854" stroke-width="1"/>
+<text x="343.0" y="298" text-anchor="middle" fill="#94a3b8" font-size="13">8</text>
+<line x1="382.8" y1="16" x2="382.8" y2="280" stroke="#2e3854" stroke-width="1"/>
+<text x="382.8" y="298" text-anchor="middle" fill="#94a3b8" font-size="13">9</text>
+<line x1="422.7" y1="16" x2="422.7" y2="280" stroke="#2e3854" stroke-width="1"/>
+<text x="422.7" y="298" text-anchor="middle" fill="#94a3b8" font-size="13">10</text>
+<line x1="462.6" y1="16" x2="462.6" y2="280" stroke="#2e3854" stroke-width="1"/>
+<text x="462.6" y="298" text-anchor="middle" fill="#94a3b8" font-size="13">11</text>
+<line x1="502.4" y1="16" x2="502.4" y2="280" stroke="#2e3854" stroke-width="1"/>
+<text x="502.4" y="298" text-anchor="middle" fill="#94a3b8" font-size="13">12</text>
+<line x1="542.3" y1="16" x2="542.3" y2="280" stroke="#2e3854" stroke-width="1"/>
+<text x="542.3" y="298" text-anchor="middle" fill="#94a3b8" font-size="13">13</text>
+<line x1="582.1" y1="16" x2="582.1" y2="280" stroke="#2e3854" stroke-width="1"/>
+<text x="582.1" y="298" text-anchor="middle" fill="#94a3b8" font-size="13">14</text>
+<line x1="56" y1="16" x2="56" y2="280" stroke="#64748b" stroke-width="1.5"/>
+<line x1="56" y1="280" x2="622" y2="280" stroke="#64748b" stroke-width="1.5"/>
+<text x="622" y="314" text-anchor="end" fill="#94a3b8" font-size="13">n</text>
+<path d="M56.0,174.1 L622.0,174.1" fill="none" stroke="#4cc3f0" stroke-width="2" stroke-linejoin="round" stroke-dasharray="7 5"/>
+<path d="M64.0,252.5 L103.8,252.5 L103.8,223.2 L143.7,223.2 L143.7,209.8 L183.5,209.8 L183.5,202.1 L223.4,202.1 L223.4,197.1 L263.3,197.1 L263.3,193.7 L303.1,193.7 L303.1,191.1 L343.0,191.1 L343.0,189.2 L382.8,189.2 L382.8,187.6 L422.7,187.6 L422.7,186.3 L462.6,186.3 L462.6,185.3 L502.4,185.3 L502.4,184.4 L542.3,184.4 L542.3,183.6 L582.1,183.6 L582.1,183.0 L622.0,183.0" fill="none" stroke="#f5b942" stroke-width="2.6" stroke-linejoin="round"/><circle cx="64.0" cy="252.5" r="3.5" fill="#f5b942"/>
+<circle cx="103.8" cy="223.2" r="3.5" fill="#f5b942"/>
+<circle cx="143.7" cy="209.8" r="3.5" fill="#f5b942"/>
+<circle cx="183.5" cy="202.1" r="3.5" fill="#f5b942"/>
+<circle cx="223.4" cy="197.1" r="3.5" fill="#f5b942"/>
+<circle cx="263.3" cy="193.7" r="3.5" fill="#f5b942"/>
+<circle cx="303.1" cy="191.1" r="3.5" fill="#f5b942"/>
+<circle cx="343.0" cy="189.2" r="3.5" fill="#f5b942"/>
+<circle cx="382.8" cy="187.6" r="3.5" fill="#f5b942"/>
+<circle cx="422.7" cy="186.3" r="3.5" fill="#f5b942"/>
+<circle cx="462.6" cy="185.3" r="3.5" fill="#f5b942"/>
+<circle cx="502.4" cy="184.4" r="3.5" fill="#f5b942"/>
+<circle cx="542.3" cy="183.6" r="3.5" fill="#f5b942"/>
+<circle cx="582.1" cy="183.0" r="3.5" fill="#f5b942"/>
+<path d="M64.0,32.5 L103.8,32.5 L103.8,105.8 L143.7,105.8 L143.7,129.3 L183.5,129.3 L183.5,140.8 L223.4,140.8 L223.4,147.6 L263.3,147.6 L263.3,152.1 L303.1,152.1 L303.1,155.3 L343.0,155.3 L343.0,157.7 L382.8,157.7 L382.8,159.5 L422.7,159.5 L422.7,161.0 L462.6,161.0 L462.6,162.2 L502.4,162.2 L502.4,163.2 L542.3,163.2 L542.3,164.1 L582.1,164.1 L582.1,164.8 L622.0,164.8" fill="none" stroke="#f26b8a" stroke-width="2.6" stroke-linejoin="round"/><circle cx="64.0" cy="32.5" r="3.5" fill="#f26b8a"/>
+<circle cx="103.8" cy="105.8" r="3.5" fill="#f26b8a"/>
+<circle cx="143.7" cy="129.3" r="3.5" fill="#f26b8a"/>
+<circle cx="183.5" cy="140.8" r="3.5" fill="#f26b8a"/>
+<circle cx="223.4" cy="147.6" r="3.5" fill="#f26b8a"/>
+<circle cx="263.3" cy="152.1" r="3.5" fill="#f26b8a"/>
+<circle cx="303.1" cy="155.3" r="3.5" fill="#f26b8a"/>
+<circle cx="343.0" cy="157.7" r="3.5" fill="#f26b8a"/>
+<circle cx="382.8" cy="159.5" r="3.5" fill="#f26b8a"/>
+<circle cx="422.7" cy="161.0" r="3.5" fill="#f26b8a"/>
+<circle cx="462.6" cy="162.2" r="3.5" fill="#f26b8a"/>
+<circle cx="502.4" cy="163.2" r="3.5" fill="#f26b8a"/>
+<circle cx="542.3" cy="164.1" r="3.5" fill="#f26b8a"/>
+<circle cx="582.1" cy="164.8" r="3.5" fill="#f26b8a"/>
+<text x="68.0" y="167.1" text-anchor="start" fill="#4cc3f0" font-size="15" font-weight="600">π/2</text>
+<text x="303.1" y="45.7" text-anchor="start" fill="#f26b8a" font-size="15" font-weight="600">上阶梯：以 2n 结尾（偶）</text>
+<text x="303.1" y="243.7" text-anchor="start" fill="#f5b942" font-size="15" font-weight="600">下阶梯：以 2n+1 结尾（奇）</text></svg><figcaption>图 3 · 下阶梯（以 2n+1 结尾的奇数积）与上阶梯（以 2n 结尾）夹住 π/2；二者之比 (2n+1)/(2n) → 1。</figcaption></figure>
+</section>
+
+<section>
+<h2>4 · 数值——修正到底有多小</h2>
+<div class="grid2">
+<div><table><thead><tr><th>n</th><th>n!</th><th>√(2πn)·(n/e)ⁿ</th><th>相对误差</th><th>1/(12n)</th></tr></thead><tbody><tr><td>5</td><td class="c-amber">120</td><td class="c-blue">118.02</td><td class="c-rose">1.65 %</td><td class="c-green">1.67 %</td></tr><tr><td>10</td><td class="c-amber">3,628,800</td><td class="c-blue">3,598,696</td><td class="c-rose">0.83 %</td><td class="c-green">0.83 %</td></tr><tr><td>20</td><td class="c-amber">2.4329 × 10<sup>18</sup></td><td class="c-blue">2.4228 × 10<sup>18</sup></td><td class="c-rose">0.42 %</td><td class="c-green">0.42 %</td></tr></tbody></table><p>相对误差为 1 − e<sup>−θ<sub>n</sub>/(12n)</sup> ≈ 1/(12n)：n = 10 时修正已不足 1%，修正因子本身为 e<sup>1/120</sup> ≈ 1.0084。</p></div>
+<figure><svg viewBox="0 0 420 260" width="100%" role="img" aria-label="相对误差与 1/(12n) 的比较" xmlns="http://www.w3.org/2000/svg" font-family="system-ui, -apple-system, Segoe UI, Roboto, Noto Sans, Noto Sans CJK SC, sans-serif"><line x1="44" y1="224.0" x2="406" y2="224.0" stroke="#2e3854" stroke-width="1"/>
+<text x="36" y="229.0" text-anchor="end" fill="#94a3b8" font-size="13">0.0%</text>
+<line x1="44" y1="171.4" x2="406" y2="171.4" stroke="#2e3854" stroke-width="1"/>
+<text x="36" y="176.4" text-anchor="end" fill="#94a3b8" font-size="13">0.5%</text>
+<line x1="44" y1="118.7" x2="406" y2="118.7" stroke="#2e3854" stroke-width="1"/>
+<text x="36" y="123.7" text-anchor="end" fill="#94a3b8" font-size="13">1.0%</text>
+<line x1="44" y1="66.1" x2="406" y2="66.1" stroke="#2e3854" stroke-width="1"/>
+<text x="36" y="71.1" text-anchor="end" fill="#94a3b8" font-size="13">1.5%</text>
+<line x1="44" y1="24" x2="44" y2="224" stroke="#64748b" stroke-width="1.5"/>
+<line x1="44" y1="224" x2="406" y2="224" stroke="#64748b" stroke-width="1.5"/>
+<path d="M44.0,118.7 L406.0,118.7" fill="none" stroke="#64748b" stroke-width="1.2" stroke-linejoin="round" stroke-dasharray="5 4"/>
+<rect x="71.2" y="50.2" width="38.5" height="173.8" fill="#f5b942" rx="2"/>
+<text x="90.4" y="46.2" text-anchor="middle" fill="#f5b942" font-size="12" font-weight="normal">1.65</text>
+<rect x="114.1" y="48.6" width="38.5" height="175.4" fill="#5be3a4" rx="2"/>
+<text x="133.4" y="44.6" text-anchor="middle" fill="#5be3a4" font-size="12" font-weight="normal">1.67</text>
+<text x="111.9" y="242.0" text-anchor="middle" fill="#94a3b8" font-size="13" font-weight="normal">n = 5</text>
+<rect x="184.3" y="136.7" width="38.5" height="87.3" fill="#f5b942" rx="2"/>
+<text x="203.5" y="132.7" text-anchor="middle" fill="#f5b942" font-size="12" font-weight="normal">0.83</text>
+<rect x="227.3" y="136.3" width="38.5" height="87.7" fill="#5be3a4" rx="2"/>
+<text x="246.5" y="132.3" text-anchor="middle" fill="#5be3a4" font-size="12" font-weight="normal">0.83</text>
+<text x="225.0" y="242.0" text-anchor="middle" fill="#94a3b8" font-size="13" font-weight="normal">n = 10</text>
+<rect x="297.4" y="180.2" width="38.5" height="43.8" fill="#f5b942" rx="2"/>
+<text x="316.6" y="176.2" text-anchor="middle" fill="#f5b942" font-size="12" font-weight="normal">0.42</text>
+<rect x="340.4" y="180.1" width="38.5" height="43.9" fill="#5be3a4" rx="2"/>
+<text x="359.6" y="176.1" text-anchor="middle" fill="#5be3a4" font-size="12" font-weight="normal">0.42</text>
+<text x="338.1" y="242.0" text-anchor="middle" fill="#94a3b8" font-size="13" font-weight="normal">n = 20</text>
+<rect x="219" y="40" width="12" height="12" fill="#f5b942"/><text x="234.1" y="50.8" text-anchor="start" fill="#94a3b8" font-size="12" font-weight="normal">误差</text>
+<rect x="321" y="40" width="12" height="12" fill="#5be3a4"/><text x="335.9" y="50.8" text-anchor="start" fill="#94a3b8" font-size="12" font-weight="normal">1/(12n)</text></svg><figcaption>图 4 · 相对误差（琥珀色）紧贴 1/(12n)（绿色）。</figcaption></figure>
+</div>
+</section>
+
+<section>
+<h2>5 · 收获——带数字的 aⁿ 与 n! 之争</h2>
+<p>再取一次对数：ln n! ≈ n ln n − n + ½·ln(2πn)，主项为 n ln n − n。回到 a<sup>n</sup> 与 n! 的较量：</p>
+<div class="formula small"><span class="frac"><span>a<sup>n</sup></span><span>n!</span></span> ≈ <span class="frac"><span>(ae/n)<sup>n</sup></span><span>√(2πn)</span></span> → 0 &nbsp;(n → ∞)</div>
+<p>一旦 n 超过 a·e，底数 ae/n 就小于 1，n 次幂把比值压向 0——这就是带上数字的增长阶梯。同样的渐近式驱动着 Σ xⁿ/n! 这类级数的比值判别法（对所有 x 收敛），以及概率论中的大 n 近似，例如 C(2n, n) ≈ 4ⁿ/√(πn)。</p>
+<figure class="wide"><svg viewBox="0 0 640 330" width="100%" role="img" aria-label="a = 10 时的比值 a^n / n!" xmlns="http://www.w3.org/2000/svg" font-family="system-ui, -apple-system, Segoe UI, Roboto, Noto Sans, Noto Sans CJK SC, sans-serif"><line x1="56" y1="274.8" x2="622" y2="274.8" stroke="#2e3854" stroke-width="1"/>
+<text x="48" y="279.8" text-anchor="end" fill="#94a3b8" font-size="13">10⁻¹²</text>
+<line x1="56" y1="213.9" x2="622" y2="213.9" stroke="#2e3854" stroke-width="1"/>
+<text x="48" y="218.9" text-anchor="end" fill="#94a3b8" font-size="13">10⁻⁸</text>
+<line x1="56" y1="153.0" x2="622" y2="153.0" stroke="#2e3854" stroke-width="1"/>
+<text x="48" y="158.0" text-anchor="end" fill="#94a3b8" font-size="13">10⁻⁴</text>
+<line x1="56" y1="92.1" x2="622" y2="92.1" stroke="#2e3854" stroke-width="1"/>
+<text x="48" y="97.1" text-anchor="end" fill="#94a3b8" font-size="13">1</text>
+<line x1="56" y1="31.2" x2="622" y2="31.2" stroke="#2e3854" stroke-width="1"/>
+<text x="48" y="36.2" text-anchor="end" fill="#94a3b8" font-size="13">10⁴</text>
+<line x1="56.0" y1="16" x2="56.0" y2="290" stroke="#2e3854" stroke-width="1"/>
+<text x="56.0" y="308" text-anchor="middle" fill="#94a3b8" font-size="13">0</text>
+<line x1="117.5" y1="16" x2="117.5" y2="290" stroke="#2e3854" stroke-width="1"/>
+<text x="117.5" y="308" text-anchor="middle" fill="#94a3b8" font-size="13">5</text>
+<line x1="179.0" y1="16" x2="179.0" y2="290" stroke="#2e3854" stroke-width="1"/>
+<text x="179.0" y="308" text-anchor="middle" fill="#94a3b8" font-size="13">10</text>
+<line x1="240.6" y1="16" x2="240.6" y2="290" stroke="#2e3854" stroke-width="1"/>
+<text x="240.6" y="308" text-anchor="middle" fill="#94a3b8" font-size="13">15</text>
+<line x1="302.1" y1="16" x2="302.1" y2="290" stroke="#2e3854" stroke-width="1"/>
+<text x="302.1" y="308" text-anchor="middle" fill="#94a3b8" font-size="13">20</text>
+<line x1="363.6" y1="16" x2="363.6" y2="290" stroke="#2e3854" stroke-width="1"/>
+<text x="363.6" y="308" text-anchor="middle" fill="#94a3b8" font-size="13">25</text>
+<line x1="425.1" y1="16" x2="425.1" y2="290" stroke="#2e3854" stroke-width="1"/>
+<text x="425.1" y="308" text-anchor="middle" fill="#94a3b8" font-size="13">30</text>
+<line x1="486.7" y1="16" x2="486.7" y2="290" stroke="#2e3854" stroke-width="1"/>
+<text x="486.7" y="308" text-anchor="middle" fill="#94a3b8" font-size="13">35</text>
+<line x1="548.2" y1="16" x2="548.2" y2="290" stroke="#2e3854" stroke-width="1"/>
+<text x="548.2" y="308" text-anchor="middle" fill="#94a3b8" font-size="13">40</text>
+<line x1="609.7" y1="16" x2="609.7" y2="290" stroke="#2e3854" stroke-width="1"/>
+<text x="609.7" y="308" text-anchor="middle" fill="#94a3b8" font-size="13">45</text>
+<line x1="56" y1="16" x2="56" y2="290" stroke="#64748b" stroke-width="1.5"/>
+<line x1="56" y1="290" x2="622" y2="290" stroke="#64748b" stroke-width="1.5"/>
+<text x="622" y="324" text-anchor="end" fill="#94a3b8" font-size="13">n</text>
+<path d="M56.0,92.1 L622.0,92.1" fill="none" stroke="#64748b" stroke-width="1.2" stroke-linejoin="round"/>
+<rect x="390.5" y="16" width="231.5" height="274" fill="#f26b8a" fill-opacity="0.08"/>
+<path d="M390.5,290.0 L390.5,16.0" fill="none" stroke="#f26b8a" stroke-width="2" stroke-linejoin="round" stroke-dasharray="7 5"/>
+<path d="M68.3,76.4 L71.0,73.8 L73.7,71.4 L76.4,69.2 L79.1,67.1 L81.8,65.1 L84.5,63.2 L87.3,61.5 L90.0,59.8 L92.7,58.2 L95.4,56.8 L98.1,55.4 L100.8,54.1 L103.5,52.8 L106.2,51.7 L108.9,50.6 L111.6,49.6 L114.3,48.6 L117.0,47.7 L119.7,46.9 L122.4,46.1 L125.2,45.3 L127.9,44.6 L130.6,44.0 L133.3,43.4 L136.0,42.9 L138.7,42.4 L141.4,42.0 L144.1,41.5 L146.8,41.2 L149.5,40.9 L152.2,40.6 L154.9,40.3 L157.6,40.1 L160.3,39.9 L163.0,39.8 L165.8,39.7 L168.5,39.6 L171.2,39.6 L173.9,39.6 L176.6,39.6 L179.3,39.7 L182.0,39.8 L184.7,39.9 L187.4,40.1 L190.1,40.2 L192.8,40.4 L195.5,40.7 L198.2,40.9 L200.9,41.2 L203.7,41.5 L206.4,41.9 L209.1,42.2 L211.8,42.6 L214.5,43.0 L217.2,43.5 L219.9,43.9 L222.6,44.4 L225.3,44.9 L228.0,45.4 L230.7,46.0 L233.4,46.6 L236.1,47.2 L238.8,47.8 L241.5,48.4 L244.3,49.1 L247.0,49.7 L249.7,50.4 L252.4,51.2 L255.1,51.9 L257.8,52.6 L260.5,53.4 L263.2,54.2 L265.9,55.0 L268.6,55.9 L271.3,56.7 L274.0,57.6 L276.7,58.4 L279.4,59.3 L282.2,60.3 L284.9,61.2 L287.6,62.1 L290.3,63.1 L293.0,64.1 L295.7,65.1 L298.4,66.1 L301.1,67.1 L303.8,68.2 L306.5,69.2 L309.2,70.3 L311.9,71.4 L314.6,72.5 L317.3,73.6 L320.1,74.8 L322.8,75.9 L325.5,77.1 L328.2,78.3 L330.9,79.5 L333.6,80.7 L336.3,81.9 L339.0,83.1 L341.7,84.4 L344.4,85.7 L347.1,86.9 L349.8,88.2 L352.5,89.5 L355.2,90.8 L357.9,92.2 L360.7,93.5 L363.4,94.9 L366.1,96.2 L368.8,97.6 L371.5,99.0 L374.2,100.4 L376.9,101.8 L379.6,103.3 L382.3,104.7 L385.0,106.1 L387.7,107.6 L390.4,109.1 L393.1,110.6 L395.8,112.1 L398.6,113.6 L401.3,115.1 L404.0,116.6 L406.7,118.2 L409.4,119.7 L412.1,121.3 L414.8,122.9 L417.5,124.5 L420.2,126.1 L422.9,127.7 L425.6,129.3 L428.3,130.9 L431.0,132.6 L433.7,134.2 L436.5,135.9 L439.2,137.5 L441.9,139.2 L444.6,140.9 L447.3,142.6 L450.0,144.3 L452.7,146.0 L455.4,147.8 L458.1,149.5 L460.8,151.3 L463.5,153.0 L466.2,154.8 L468.9,156.6 L471.6,158.3 L474.3,160.1 L477.1,161.9 L479.8,163.8 L482.5,165.6 L485.2,167.4 L487.9,169.3 L490.6,171.1 L493.3,173.0 L496.0,174.8 L498.7,176.7 L501.4,178.6 L504.1,180.5 L506.8,182.4 L509.5,184.3 L512.2,186.2 L515.0,188.2 L517.7,190.1 L520.4,192.1 L523.1,194.0 L525.8,196.0 L528.5,197.9 L531.2,199.9 L533.9,201.9 L536.6,203.9 L539.3,205.9 L542.0,207.9 L544.7,209.9 L547.4,212.0 L550.1,214.0 L552.8,216.1 L555.6,218.1 L558.3,220.2 L561.0,222.2 L563.7,224.3 L566.4,226.4 L569.1,228.5 L571.8,230.6 L574.5,232.7 L577.2,234.8 L579.9,236.9 L582.6,239.0 L585.3,241.2 L588.0,243.3 L590.7,245.5 L593.5,247.6 L596.2,249.8 L598.9,252.0 L601.6,254.1 L604.3,256.3 L607.0,258.5 L609.7,260.7" fill="none" stroke="#4cc3f0" stroke-width="2.4" stroke-linejoin="round"/>
+<circle cx="68.3" cy="76.9" r="3.5" fill="#f5b942"/>
+<circle cx="80.6" cy="66.2" r="3.5" fill="#f5b942"/>
+<circle cx="92.9" cy="58.3" r="3.5" fill="#f5b942"/>
+<circle cx="105.2" cy="52.2" r="3.5" fill="#f5b942"/>
+<circle cx="117.5" cy="47.6" r="3.5" fill="#f5b942"/>
+<circle cx="129.8" cy="44.3" r="3.5" fill="#f5b942"/>
+<circle cx="142.1" cy="41.9" r="3.5" fill="#f5b942"/>
+<circle cx="154.4" cy="40.4" r="3.5" fill="#f5b942"/>
+<circle cx="166.7" cy="39.7" r="3.5" fill="#f5b942"/>
+<circle cx="179.0" cy="39.7" r="3.5" fill="#f5b942"/>
+<circle cx="191.3" cy="40.4" r="3.5" fill="#f5b942"/>
+<circle cx="203.7" cy="41.6" r="3.5" fill="#f5b942"/>
+<circle cx="216.0" cy="43.3" r="3.5" fill="#f5b942"/>
+<circle cx="228.3" cy="45.5" r="3.5" fill="#f5b942"/>
+<circle cx="240.6" cy="48.2" r="3.5" fill="#f5b942"/>
+<circle cx="252.9" cy="51.3" r="3.5" fill="#f5b942"/>
+<circle cx="265.2" cy="54.8" r="3.5" fill="#f5b942"/>
+<circle cx="277.5" cy="58.7" r="3.5" fill="#f5b942"/>
+<circle cx="289.8" cy="63.0" r="3.5" fill="#f5b942"/>
+<circle cx="302.1" cy="67.5" r="3.5" fill="#f5b942"/>
+<circle cx="314.4" cy="72.4" r="3.5" fill="#f5b942"/>
+<circle cx="326.7" cy="77.7" r="3.5" fill="#f5b942"/>
+<circle cx="339.0" cy="83.2" r="3.5" fill="#f5b942"/>
+<circle cx="351.3" cy="89.0" r="3.5" fill="#f5b942"/>
+<circle cx="363.6" cy="95.0" r="3.5" fill="#f5b942"/>
+<circle cx="375.9" cy="101.3" r="3.5" fill="#f5b942"/>
+<circle cx="388.2" cy="107.9" r="3.5" fill="#f5b942"/>
+<circle cx="400.5" cy="114.7" r="3.5" fill="#f5b942"/>
+<circle cx="412.8" cy="121.7" r="3.5" fill="#f5b942"/>
+<circle cx="425.1" cy="129.0" r="3.5" fill="#f5b942"/>
+<circle cx="437.4" cy="136.5" r="3.5" fill="#f5b942"/>
+<circle cx="449.7" cy="144.2" r="3.5" fill="#f5b942"/>
+<circle cx="462.0" cy="152.1" r="3.5" fill="#f5b942"/>
+<circle cx="474.3" cy="160.2" r="3.5" fill="#f5b942"/>
+<circle cx="486.7" cy="168.4" r="3.5" fill="#f5b942"/>
+<circle cx="499.0" cy="176.9" r="3.5" fill="#f5b942"/>
+<circle cx="511.3" cy="185.6" r="3.5" fill="#f5b942"/>
+<circle cx="523.6" cy="194.4" r="3.5" fill="#f5b942"/>
+<circle cx="535.9" cy="203.4" r="3.5" fill="#f5b942"/>
+<circle cx="548.2" cy="212.5" r="3.5" fill="#f5b942"/>
+<circle cx="560.5" cy="221.9" r="3.5" fill="#f5b942"/>
+<circle cx="572.8" cy="231.4" r="3.5" fill="#f5b942"/>
+<circle cx="585.1" cy="241.0" r="3.5" fill="#f5b942"/>
+<circle cx="597.4" cy="250.8" r="3.5" fill="#f5b942"/>
+<circle cx="609.7" cy="260.7" r="3.5" fill="#f5b942"/>
+<text x="384.5" y="277.8" text-anchor="end" fill="#f26b8a" font-size="14" font-weight="600">n = a·e</text>
+<text x="80.6" y="236.7" text-anchor="start" fill="#f5b942" font-size="14" font-weight="600">aⁿ/n!（精确值）</text>
+<text x="80.6" y="262.6" text-anchor="start" fill="#4cc3f0" font-size="14" font-weight="600">(ae/n)ⁿ / √(2πn)</text>
+<text x="597.4" y="37.3" text-anchor="end" fill="#94a3b8" font-size="14" font-weight="normal">a = 10</text></svg><figcaption>图 5 · a = 10 时的 a<sup>n</sup>/n!（点：精确值；线：(ae/n)ⁿ/√(2πn)）；越过 n = a·e ≈ 27 后比值迅速坍缩。</figcaption></figure>
+</section>
+
+<section>
+<h2>一句话证明骨架</h2>
+<p>积分比较（Σ ln k 对比 ∫ ln x dx）→ b<sub>n</sub> 单调有界 → Wallis 公式钉死常数 √(2π)。</p>
+</section>
+
+<section class="quiz">
+<h2>自测</h2>
+<p class="sub" style="margin-bottom:6px">围绕本讲要点的六道小题。先选答案，再点击揭晓。</p>
+<div class="q" data-answer="1"><p>1. Stirling 公式中，哪个因子是增长的主引擎？</p><div class="opts"><div class="opt"><span class="k">A)</span><span>√(2πn)</span></div><div class="opt"><span class="k">B)</span><span>(n/e)ⁿ</span></div><div class="opt"><span class="k">C)</span><span>e^(θₙ/(12n))</span></div></div><button class="reveal" type="button">揭晓答案</button><div class="ans"><b class="c-green">正确答案： B) (n/e)ⁿ</b><br>(n/e)ⁿ 是底数不断变大的指数增长；√(2πn) 只是多项式因子，e^(θₙ/(12n)) 介于 1 与 e^(1/(12n)) 之间。</div></div><div class="q" data-answer="1"><p>2. 在证明骨架中，比较 Σ ln k 与 ∫ ln x dx 得到了什么？</p><div class="opts"><div class="opt"><span class="k">A)</span><span>常数的精确值 √(2π)</span></div><div class="opt"><span class="k">B)</span><span>bₙ = ln n! − (n+½)·ln n + n 单调有界，从而 n!/(√n·(n/e)ⁿ) 介于两个正常数之间</span></div><div class="opt"><span class="k">C)</span><span>n! 比 nⁿ 增长更快</span></div></div><button class="reveal" type="button">揭晓答案</button><div class="ans"><b class="c-green">正确答案： B) bₙ = ln n! − (n+½)·ln n + n 单调有界，从而 n!/(√n·(n/e)ⁿ) 介于两个正常数之间</b><br>第一步只把形状 √n·(n/e)ⁿ 确定到相差一个常数因子，常数的值此时还未知。</div></div><div class="q" data-answer="1"><p>3. Wallis 公式在证明中起什么作用？</p><div class="opts"><div class="opt"><span class="k">A)</span><span>证明 bₙ 收敛</span></div><div class="opt"><span class="k">B)</span><span>钉死常数：Wallis 比值趋于 C²/4，于是 C²/4 = π/2，C = √(2π)</span></div><div class="opt"><span class="k">C)</span><span>说明相对误差约为 1/(12n)</span></div></div><button class="reveal" type="button">揭晓答案</button><div class="ans"><b class="c-green">正确答案： B) 钉死常数：Wallis 比值趋于 C²/4，于是 C²/4 = π/2，C = √(2π)</b><br>把 n! ≈ C√n(n/e)ⁿ 代入 Wallis 比值，n 与 e 的幂全部约掉，只剩 C²/4，它必须等于 π/2。</div></div><div class="q" data-answer="1"><p>4. n = 10 时，√(2πn)·(n/e)ⁿ 的相对误差大约是多少？</p><div class="opts"><div class="opt"><span class="k">A)</span><span>约 8%</span></div><div class="opt"><span class="k">B)</span><span>约 0.8%</span></div><div class="opt"><span class="k">C)</span><span>约 0.08%</span></div></div><button class="reveal" type="button">揭晓答案</button><div class="ans"><b class="c-green">正确答案： B) 约 0.8%</b><br>误差约为 1/(12n) = 1/120 ≈ 0.83%，已经不足 1%。</div></div><div class="q" data-answer="0"><p>5. 固定 a &gt; 1，aⁿ/n! ≈ (ae/n)ⁿ/√(2πn)。当 n &gt; a·e 之后会怎样？</p><div class="opts"><div class="opt"><span class="k">A)</span><span>底数 ae/n 小于 1，比值迅速趋于 0</span></div><div class="opt"><span class="k">B)</span><span>比值稳定在 √(2πn) 附近</span></div><div class="opt"><span class="k">C)</span><span>比值继续像 (ae)ⁿ 一样增长</span></div></div><button class="reveal" type="button">揭晓答案</button><div class="ans"><b class="c-green">正确答案： A) 底数 ae/n 小于 1，比值迅速趋于 0</b><br>越过 n = a·e 后底数小于 1，n 次幂的衰减快于任何等比数列，aⁿ/n! → 0。</div></div><div class="q" data-answer="0"><p>6. 下列哪个表达式给出 ln n! 的主项？</p><div class="opts"><div class="opt"><span class="k">A)</span><span>n ln n − n</span></div><div class="opt"><span class="k">B)</span><span>n ln n + n</span></div><div class="opt"><span class="k">C)</span><span>½·ln(2πn)</span></div></div><button class="reveal" type="button">揭晓答案</button><div class="ans"><b class="c-green">正确答案： A) n ln n − n</b><br>ln n! = n ln n − n + ½·ln(2πn) + θₙ/(12n)；前两项占主导，½·ln(2πn) 是低阶项。</div></div>
+</section>
+
+<footer>第 2.9 讲 · 数学分析（大一） · 选修深度</footer>
+</main>
+<script>
+document.querySelectorAll('.q').forEach(function(q){
+  var opts=q.querySelectorAll('.opt'), btn=q.querySelector('button.reveal'), ans=q.querySelector('.ans');
+  var correct=parseInt(q.getAttribute('data-answer'),10);
+  opts.forEach(function(o,i){o.addEventListener('click',function(){if(q.classList.contains('done'))return;opts.forEach(function(x){x.classList.remove('sel')});o.classList.add('sel');});});
+  btn.addEventListener('click',function(){
+    q.classList.add('done');
+    opts.forEach(function(o,i){var was=o.classList.contains('sel');o.classList.remove('sel');if(i===correct){o.classList.add('right');}else if(was){o.classList.add('wrong');}});
+    ans.classList.add('show'); btn.disabled=true;
+  });
+});
+</script>
+<script>
+(function(){
+  var deck=document.getElementById('deck');
+  if(deck){
+    deck.style.top='44px';
+    function fit(){
+      var s=Math.min(window.innerWidth/1280,(window.innerHeight-44)/720,1.5);
+      deck.style.transform='scale('+s+')';
+    }
+    window.addEventListener('resize',fit);fit();
+  }else{
+    document.body.style.paddingTop='44px';
+  }
+})();
+</script></body>
+</html>
