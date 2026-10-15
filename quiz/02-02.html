@@ -146,7 +146,7 @@ background:rgba(107,211,138,.08);color:var(--ink);font-size:15px;line-height:1.8
 </div>
 <script>
 document.querySelectorAll('.reveal').forEach(function(b){
-  b.addEventListener('click',function(){this.closest('.q').classList.add('shown')});
+  b.addEventListener('click',function(){var t=this.closest('.q,.qt-item');if(t)t.classList.add('shown')});
 });
 /* 按页面 DOM 特征自适配各批次回件的交互（逻辑均照搬原版） */
 if (document.querySelector('.qt3')) {

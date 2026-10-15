@@ -139,7 +139,7 @@ background:rgba(107,211,138,.08);color:var(--ink);font-size:15px;line-height:1.8
 </div>
 <script>
 document.querySelectorAll('.reveal').forEach(function(b){
-  b.addEventListener('click',function(){this.closest('.q').classList.add('shown')});
+  b.addEventListener('click',function(){var t=this.closest('.q,.qt-item');if(t)t.classList.add('shown')});
 });
 /* h2 锚点式回件（.opt 选择题 + 展开按钮）的原生交互 */
 document.querySelectorAll('.q button').forEach(function(b){
