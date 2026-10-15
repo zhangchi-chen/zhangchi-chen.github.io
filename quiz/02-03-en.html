@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>极限的四则运算 · 自测</title>
+<style>
+:root{--bg:#f4f6fa;--card:#ffffff;--ink:#1b2235;--dim:#55607a;--acc:#2a6cc0;--line:#dfe4ee;--good:#1f8a50;--bad:#c0392b}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:"Inter","Noto Sans SC","PingFang SC","Microsoft YaHei",system-ui,sans-serif}
+.slide{max-width:1400px;margin:0 auto;padding:28px 28px 20px}
+header{display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap;border-bottom:2px solid var(--ink);padding-bottom:10px;margin-bottom:16px}
+h1{margin:0;font-size:32px;letter-spacing:-.01em}
+header .sub{color:var(--dim);font-size:15px}
+.thm{background:var(--card);border-left:5px solid var(--acc);border-radius:8px;padding:12px 18px;margin-bottom:16px;font-size:17px;line-height:1.9}
+.thm b{color:var(--acc);margin-right:8px}
+.grid{display:grid;grid-template-columns:repeat(6,1fr);gap:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px;font-size:15px;line-height:1.75}
+.c1,.c2{grid-column:span 3}.c3,.c4,.c5{grid-column:span 2}
+.card h2{font-size:17px;margin:0 0 6px}
+.card ul{margin:4px 0 0;padding-left:18px}
+.card svg{display:block;width:100%;max-width:340px;margin:8px auto 2px;height:auto}
+.card svg .m{font-family:"Latin Modern Math","Cambria Math","STIX Two Math",serif;font-style:italic;font-size:13px;fill:#1b2235}
+.qs{display:flex;gap:18px;flex-wrap:wrap;margin-top:4px}
+.qs span{background:#fbeef0;border-radius:6px;padding:2px 10px}
+.good{color:var(--good);font-weight:600}.bad{color:var(--bad);font-weight:600}
+footer{color:var(--dim);font-size:12px;margin-top:12px;text-align:right}
+math{font-size:1.08em}
+math[display=block]{margin:6px 0;font-size:1.12em}
+@media (max-width:980px){.grid{grid-template-columns:1fr}.c1,.c2,.c3,.c4,.c5{grid-column:auto}.slide{padding:16px}h1{font-size:26px}}
+
+.qt3{display:grid;gap:12px}
+.qt3 .qi{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--acc);border-radius:8px;padding:12px 16px}
+.qt3 .qq{color:var(--ink);font-size:16px;margin:0 0 6px}
+.qt3 .qo{color:var(--dim);font-size:14.5px;line-height:1.9;margin:0 0 8px}
+.qt3 button{background:#fff;border:1px solid var(--acc);color:var(--acc);border-radius:6px;padding:4px 12px;font-size:13.5px;cursor:pointer}
+.qt3 .ans{display:none;margin-top:8px;padding:8px 12px;border-left:3px solid var(--good);background:rgba(31,138,80,.06);color:var(--ink);font-size:14.5px;line-height:1.8;border-radius:0 6px 6px 0}
+.qt3 .ans b{color:var(--good)}
+.qt3 .qi.shown .ans{display:block}
+
+/* ---- 手机自测单页覆盖层 ---- */
+html,body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC","Source Han Sans SC",system-ui,-apple-system,sans-serif}
+/* 中和原幻灯片容器的隐藏/定位，让 section 直接作为文档流内容 */
+section.slide{display:block!important;position:static!important;width:auto!important;height:auto!important;
+  padding:0!important;background:none!important;box-shadow:none!important;transform:none!important}
+.page{max-width:720px;margin:0 auto;padding:18px 16px 60px}
+.topbar{border-bottom:2px solid var(--rule);padding-bottom:10px;margin-bottom:6px}
+.topbar h1{font-size:20px;margin:0}
+.lead{color:var(--muted);font-size:15px;margin:12px 0 2px;line-height:1.6}
+/* 表格 → 竖屏卡片 */
+table.t{display:block;width:auto;border:0}
+table.t tbody,table.t tr,table.t td,table.t th{display:block;border:0;width:auto}
+table.t thead{display:none}
+table.t tr{background:var(--card);border:1.5px solid var(--rule);border-radius:14px;
+  padding:14px 16px;margin:14px 0;font-size:19px;line-height:1.7}
+table.t td{padding:6px 0}
+table.t td:last-child{border-top:1.5px dashed var(--rule);margin-top:6px;padding-top:10px}
+.q{display:block;text-align:center}
+.reveal{cursor:pointer;border:2px dashed var(--rule);border-radius:10px;
+  padding:6px 22px;color:var(--muted);font-size:16px;background:none;font-family:inherit}
+.ans{display:none;line-height:1.8}
+.shown .ans{display:block} .shown .reveal{display:none}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="topbar">
+    <h1>极限的四则运算 · 自测</h1>
+  </div>
+  
+  
+<style>
+.qt3{display:grid;gap:12px}
+.qt3 .qi{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--acc);border-radius:8px;padding:12px 16px}
+.qt3 .qq{color:var(--ink);font-size:16px;margin:0 0 6px}
+.qt3 .qo{color:var(--dim);font-size:14.5px;line-height:1.9;margin:0 0 8px}
+.qt3 button{background:#fff;border:1px solid var(--acc);color:var(--acc);border-radius:6px;padding:4px 12px;font-size:13.5px;cursor:pointer}
+.qt3 .ans{display:none;margin-top:8px;padding:8px 12px;border-left:3px solid var(--good);background:rgba(31,138,80,.06);color:var(--ink);font-size:14.5px;line-height:1.8;border-radius:0 6px 6px 0}
+.qt3 .ans b{color:var(--good)}
+.qt3 .qi.shown .ans{display:block}
+</style>
+<div class="qt3">
+<div class="qi"><p class="qq">1. 写 aₙ = a + αₙ、bₙ = b + βₙ（αₙ, βₙ → 0），乘积展开后的"二阶噪声"项是（　）</p>
+<p class="qo">A. aβₙ　　B. bαₙ　　C. αₙβₙ</p>
+<button>查看答案</button>
+<div class="ans"><b>C。</b>噪声 × 噪声是更高阶的小量，衰减得比 αₙ、βₙ 都快——这正是"常数 + 无穷小"机制能穿透乘法的原因。</div></div>
+<div class="qi"><p class="qq">2. 当分母极限 b = 0 时，商 aₙ/bₙ 的极限（　）</p>
+<p class="qo">A. 一定不存在　　B. 一定存在　　C. 三种结局都可能</p>
+<button>查看答案</button>
+<div class="ans"><b>C。</b>(1/n)/(1/n²) = n → ∞；(1/n²)/(1/n) → 0；((−1)ⁿ/n)/(1/n) 发散——什么都可能发生，所以商法则无法挽救。</div></div>
+<div class="qi"><p class="qq">3. 护城河论证：b ≠ 0 时，最终必有 |bₙ| ≥（　）</p>
+<p class="qo">A. |b|　　B. |b|/2　　C. 2|b|</p>
+<button>查看答案</button>
+<div class="ans"><b>B。</b>从某项起 bₙ 落在 b 的 |b|/2 带内，离 0 只会更远——1/bₙ 因此有界，除法安全。</div></div>
+<div class="qi"><p class="qq">4. (−1)ⁿ 与 (−1)ⁿ⁺¹ 都发散，其和恒为 0。这说明（　）</p>
+<p class="qo">A. 发散 + 发散必发散　　B. 法则是单向的　　C. 法则有错</p>
+<button>查看答案</button>
+<div class="ans"><b>B。</b>收敛 + 收敛 ⇒ 收敛成立，但反向不成立。法则是计算的凭证，不是判断收敛的工具。</div></div>
+<div class="qi"><p class="qq">5. 误差预算 |aₙbₙ − ab| ≤ |a||βₙ| + |b||αₙ| + |αₙ||βₙ| 中按 ε/3 分配，是为了（　）</p>
+<p class="qo">A. 每个误差源各自领额度　　B. 让 N 更小　　C. 消掉交叉项</p>
+<button>查看答案</button>
+<div class="ans"><b>A。</b>三个误差源各分一份 ε，各自找到自己的 N，最后取最大——证明是记账，不是魔法。</div></div>
+</div></section>
+<script>
+Array.prototype.forEach.call(document.querySelectorAll('.qt3 button'),function(b){
+ b.addEventListener('click',function(){b.parentNode.classList.add('shown');b.style.display='none';});});
+</script>
+
+</div>
+<footer>第 02-03 集 · 大一数学分析</footer>
+
+</div>
+<script>
+document.querySelectorAll('.reveal').forEach(function(b){
+  b.addEventListener('click',function(){this.closest('.q').classList.add('shown')});
+});
+/* h2 锚点式回件（.opt 选择题 + 展开按钮）的原生交互 */
+document.querySelectorAll('.q button').forEach(function(b){
+  b.addEventListener('click',function(){
+    var q=b.closest('.q'), open=q.classList.toggle('open');
+    q.querySelectorAll('.opt').forEach(function(o){ if(o.dataset.c==='1') o.classList.toggle('correct',open); });
+    if(b.dataset.hide&&b.dataset.show) b.textContent=open?b.dataset.hide:b.dataset.show;
+  });
+});
+</script>
+</body>
+</html>

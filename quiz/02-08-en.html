@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>无穷大的比阶：增长阶梯 · 自测</title>
+<style>
+:root{--bg:#0c1424;--panel:rgba(255,255,255,0.04);--line:rgba(255,255,255,0.1);--txt:#eef2f8;--muted:#93a0b8;--acc:#ffd166;--ok:#7ee0a3;
+ --ln:#5fd4c9;--n:#86d36f;--pw:#f4d35e;--ex:#f59e4c;--fa:#f26b7c;--nn:#c48cf7}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}
+body{margin:0;background:linear-gradient(#0d1527,#0a1020);color:var(--txt);font-family:Inter,"Segoe UI",Roboto,"Helvetica Neue","Noto Sans","Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif;line-height:1.55;font-size:17px}
+.wrap{max-width:1040px;margin:0 auto;padding:40px 20px 80px}
+header{margin-bottom:36px}header h1{font-size:40px;margin:0 0 6px;letter-spacing:-0.01em}header p{color:var(--muted);margin:0}
+.chain{font-size:clamp(24px,4.2vw,40px);font-weight:700;text-align:center;margin:28px 0 10px;text-shadow:0 0 24px rgba(255,255,255,0.18)}
+.cond{display:inline-block;border:1px solid rgba(255,209,102,0.5);background:rgba(255,209,102,0.1);color:var(--acc);border-radius:999px;padding:4px 16px;font-weight:600}
+.center{text-align:center}
+section{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:26px 28px;margin:22px 0}
+section h2{margin:0 0 14px;font-size:26px}section h2 .tag{display:inline-block;font-size:13px;font-weight:600;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:2px 10px;margin-right:10px;vertical-align:middle}
+p{margin:10px 0}sup,sub{font-size:0.72em;line-height:0}b{font-weight:700}
+.row{display:flex;gap:24px;flex-wrap:wrap;align-items:flex-start}.row>*{flex:1 1 300px;min-width:0}
+.fig{width:100%;height:auto;display:block;background:rgba(0,0,0,0.18);border-radius:12px;padding:8px;font-family:inherit}
+.fig .tick{fill:#93a0b8;font-size:15px}.fig.small{max-width:300px}.fig.stairs{max-width:600px;margin:0 auto}
+.caption{color:var(--muted);font-size:14px;margin-top:6px}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:14px 0}
+.step{border-radius:12px;padding:10px 12px;border:1px solid var(--line);background:rgba(255,255,255,0.03)}.step .k{font-size:13px;color:var(--muted)}.step .v{font-size:22px;font-weight:700}
+.ln{color:var(--ln)}.n{color:var(--n)}.pw{color:var(--pw)}.ex{color:var(--ex)}.fa{color:var(--fa)}.nn{color:var(--nn)}.ok{color:var(--ok)}.acc{color:var(--acc)}.muted{color:var(--muted)}
+.quiz ol{list-style:none;padding:0;margin:0;counter-reset:q}.quiz li{border-top:1px solid var(--line);padding:16px 0}.quiz li:first-child{border-top:0}
+.q{font-weight:600;margin-bottom:8px}.q::before{counter-increment:q;content:counter(q) ". ";color:var(--muted)}
+.opts{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 10px}.opt{border:1px solid var(--line);border-radius:10px;padding:6px 12px;background:rgba(255,255,255,0.03)}
+.opt.right{border-color:var(--ok);background:rgba(126,224,163,0.12);color:var(--ok);font-weight:600}
+button.reveal{font:inherit;font-size:14px;font-weight:600;color:#0c1424;background:var(--acc);border:0;border-radius:999px;padding:6px 16px;cursor:pointer}button.reveal:hover{filter:brightness(1.08)}
+.expl{display:none;margin-top:8px;color:var(--ok)}.expl.show{display:block}.expl .lbl{color:var(--muted);font-weight:600;margin-right:6px}
+footer{color:var(--muted);font-size:13px;text-align:center;margin-top:30px}
+@media(max-width:600px){header h1{font-size:30px}section{padding:18px 16px}body{font-size:16px}}
+
+/* ---- 手机自测单页覆盖层 ---- */
+html,body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC","Source Han Sans SC",system-ui,-apple-system,sans-serif}
+/* 中和原幻灯片容器的隐藏/定位，让 section 直接作为文档流内容 */
+section.slide{display:block!important;position:static!important;width:auto!important;height:auto!important;
+  padding:0!important;background:none!important;box-shadow:none!important;transform:none!important}
+.page{max-width:720px;margin:0 auto;padding:18px 16px 60px}
+.topbar{border-bottom:2px solid var(--rule);padding-bottom:10px;margin-bottom:6px}
+.topbar h1{font-size:20px;margin:0}
+.lead{color:var(--muted);font-size:15px;margin:12px 0 2px;line-height:1.6}
+/* 表格 → 竖屏卡片 */
+table.t{display:block;width:auto;border:0}
+table.t tbody,table.t tr,table.t td,table.t th{display:block;border:0;width:auto}
+table.t thead{display:none}
+table.t tr{background:var(--card);border:1.5px solid var(--rule);border-radius:14px;
+  padding:14px 16px;margin:14px 0;font-size:19px;line-height:1.7}
+table.t td{padding:6px 0}
+table.t td:last-child{border-top:1.5px dashed var(--rule);margin-top:6px;padding-top:10px}
+.q{display:block;text-align:center}
+.reveal{cursor:pointer;border:2px dashed var(--rule);border-radius:10px;
+  padding:6px 22px;color:var(--muted);font-size:16px;background:none;font-family:inherit}
+.ans{display:none;line-height:1.8}
+.shown .ans{display:block} .shown .reveal{display:none}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="topbar">
+    <h1>无穷大的比阶：增长阶梯 · 自测</h1>
+  </div>
+  
+  <ol><li data-answer="1"><div class="q">下面哪条链是正确的增长阶梯（k ≥ 1 固定，a &gt; 1）？</div><div class="opts"><span class="opt">A. n! ≪ aⁿ ≪ nᵏ ≪ nⁿ</span><span class="opt">B. ln n ≪ n ≪ nᵏ ≪ aⁿ ≪ n! ≪ nⁿ</span><span class="opt">C. ln n ≪ aⁿ ≪ nᵏ ≪ n! ≪ nⁿ</span></div><button class="reveal" type="button" data-show="查看答案" data-hide="收起">查看答案</button><div class="expl"><span class="lbl">答案 B.</span>对数、幂、指数、阶乘、nⁿ 依次排列，相邻两项之比都趋于 0。</div></li><li data-answer="0"><div class="q">证明 ln n ≪ n 时，为 ln 的每次增量“付账”的是哪个不等式？</div><div class="opts"><span class="opt">A. ln(1 + x) ≤ x</span><span class="opt">B. 二项式定理</span><span class="opt">C. 均值不等式</span></div><button class="reveal" type="button" data-show="查看答案" data-hide="收起">查看答案</button><div class="expl"><span class="lbl">答案 A.</span>ln(1 + 1/k) ≤ 1/k ≤ 1，所以 ln(n+1) = Σ ln(1 + 1/k) ≤ n；再把同一工具用到 √n 上得 ln n ≤ 2√n。</div></li><li data-answer="1"><div class="q">为什么二项展开中只留一项就能击倒 nᵏ？</div><div class="opts"><span class="opt">A. 因为 C(n, k+1) = 2ⁿ</span><span class="opt">B. 因为 (1+b)ⁿ 各项都为正，而 C(n, k+1)bᵏ⁺¹ 的增长是常数乘以 nᵏ⁺¹</span><span class="opt">C. 因为必须有 b &gt; 1</span></div><button class="reveal" type="button" data-show="查看答案" data-hide="收起">查看答案</button><div class="expl"><span class="lbl">答案 B.</span>丢掉正项只会让和变小，而保留的那一项 ≥ c·nᵏ⁺¹，比 nᵏ 多出一个 n 的因子。</div></li><li data-answer="2"><div class="q">在 aⁿ/n! = (a/1)(a/2)⋯(a/n) 中，从哪里开始每个新因子都小于 ½？</div><div class="opts"><span class="opt">A. 从 n = 1 开始</span><span class="opt">B. n &gt; a 之后</span><span class="opt">C. n &gt; 2a 之后</span></div><button class="reveal" type="button" data-show="查看答案" data-hide="收起">查看答案</button><div class="expl"><span class="lbl">答案 C.</span>a/n &lt; ½ 当且仅当 n &gt; 2a；此后乘积每步至少减半，趋于 0。</div></li><li data-answer="2"><div class="q">1.01ⁿ 与 n¹⁰⁰ 比较，哪种说法正确？</div><div class="opts"><span class="opt">A. 1.01 太接近 1，n¹⁰⁰ 永远更大</span><span class="opt">B. 从 n = 100 起 1.01ⁿ 就更大</span><span class="opt">C. 1.01ⁿ 终将胜出，但要到 n ≈ 10⁵ 之后</span></div><button class="reveal" type="button" data-show="查看答案" data-hide="收起">查看答案</button><div class="expl"><span class="lbl">答案 C.</span>a = 1.01 &gt; 1 且 k = 100 固定，所以指数最终获胜；交叉点约在 n ≈ 1.17×10⁵，那时两边都有 507 位数字。</div></li><li data-answer="2"><div class="q">下面哪种取法会破坏 nᵏ ≪ aⁿ 这一级？</div><div class="opts"><span class="opt">A. a = 1.0001</span><span class="opt">B. k = 50</span><span class="opt">C. a = 1</span></div><button class="reveal" type="button" data-show="查看答案" data-hide="收起">查看答案</button><div class="expl"><span class="lbl">答案 C.</span>a = 1 时“指数”是常数 1；任何 a &gt; 1，哪怕再接近 1，对固定的 k 都终将胜出。</div></li></ol></section>
+<footer>02-08 · 无穷大的比阶：增长阶梯</footer>
+</div><script>
+document.querySelectorAll('.quiz li').forEach(function(li){
+  var btn=li.querySelector('button.reveal'), ex=li.querySelector('.expl'), ans=parseInt(li.getAttribute('data-answer'),10), opts=li.querySelectorAll('.opt');
+  var show=btn.getAttribute('data-show'), hide=btn.getAttribute('data-hide');
+  btn.addEventListener('click',function(){
+    var open=ex.classList.toggle('show'); opts.forEach(function(o,i){o.classList.toggle('right',open&&i===ans)}); btn.textContent=open?hide:show;
+  });
+});
+</script></body></html>
+</div>
+<script>
+document.querySelectorAll('.reveal').forEach(function(b){
+  b.addEventListener('click',function(){this.closest('.q').classList.add('shown')});
+});
+/* h2 锚点式回件（.opt 选择题 + 展开按钮）的原生交互 */
+document.querySelectorAll('.q button').forEach(function(b){
+  b.addEventListener('click',function(){
+    var q=b.closest('.q'), open=q.classList.toggle('open');
+    q.querySelectorAll('.opt').forEach(function(o){ if(o.dataset.c==='1') o.classList.toggle('correct',open); });
+    if(b.dataset.hide&&b.dataset.show) b.textContent=open?b.dataset.hide:b.dataset.show;
+  });
+});
+</script>
+</body>
+</html>

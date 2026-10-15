@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>单调 + 有界 ⇒ 收敛 · 自测</title>
+<style>
+:root{--bg:#0e1522;--pan:#16213a;--grid:#25324a;--fg:#e8edf5;--dim:#8a97ab;--amb:#f5b544;--blu:#5ab0ff;--grn:#52d17c;--red:#ff6b6b}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.6 system-ui,-apple-system,"Segoe UI","Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:28px 16px 60px}
+h1{font-size:1.9rem;margin:.2em 0 .1em}
+.sub{color:var(--dim);margin:0 0 1.2em}
+h2{color:var(--amb);font-size:1.15rem;border-bottom:1px solid var(--grid);padding-bottom:.35em;margin:2em 0 .8em}
+.card{background:var(--pan);border:1px solid var(--grid);border-radius:12px;padding:16px 18px;margin:12px 0}
+.thm{border-color:var(--amb)}
+.thm b{color:var(--amb)}
+.m{font-family:Georgia,"Times New Roman","Noto Serif",serif;font-style:normal;font-size:1.05em;white-space:nowrap}
+.m.long{white-space:normal}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}}
+svg{width:100%;height:auto;display:block}
+svg .ax{font:11px system-ui,"Noto Sans SC",sans-serif;fill:var(--dim)}
+svg .cap{font:13px Georgia,"Times New Roman",serif;fill:var(--fg)}
+ol.steps{padding-left:1.3em;margin:.4em 0} ol.steps li{margin:.35em 0}
+.bad{border-color:var(--red)} .bad h3{color:var(--red)}
+.good{border-color:var(--grn)} .good h3{color:var(--grn)}
+h3{margin:.1em 0 .5em;font-size:1.02rem}
+.strike{text-decoration:line-through;text-decoration-color:var(--red);text-decoration-thickness:2px}
+.note{color:var(--dim);font-size:.93em}
+.hl{color:var(--amb)} .ok{color:var(--grn)} .no{color:var(--red)}
+table{border-collapse:collapse;width:100%;font-size:.95em}
+td,th{padding:5px 8px;border-bottom:1px solid var(--grid);text-align:left}
+th{color:var(--dim);font-weight:500}
+tr.last td{color:var(--grn);font-weight:600}
+.quiz .q{background:var(--pan);border:1px solid var(--grid);border-radius:12px;padding:12px 16px;margin:10px 0}
+.quiz .qt{margin:0 0 .4em;font-weight:600}
+.quiz .opts{display:flex;min-width:0;flex-wrap:wrap;gap:6px 18px;margin:.2em 0 .6em}
+.quiz .opt{padding:2px 8px;border-radius:6px;border:1px solid transparent}
+.quiz .opt.correct{border-color:var(--grn);background:rgba(82,209,124,.12);color:var(--grn)}
+.quiz button{background:transparent;color:var(--amb);border:1px solid var(--amb);border-radius:8px;padding:4px 12px;font:inherit;font-size:.9em;cursor:pointer}
+.quiz button:hover{background:rgba(245,181,68,.12)}
+.quiz .exp{display:none;margin:.6em 0 0;color:var(--fg)}
+.quiz .q.open .exp{display:block}
+footer{color:var(--dim);font-size:.85em;margin-top:2.5em}
+
+/* ---- 手机自测单页覆盖层 ---- */
+html,body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC","Source Han Sans SC",system-ui,-apple-system,sans-serif}
+/* 中和原幻灯片容器的隐藏/定位，让 section 直接作为文档流内容 */
+section.slide{display:block!important;position:static!important;width:auto!important;height:auto!important;
+  padding:0!important;background:none!important;box-shadow:none!important;transform:none!important}
+.page{max-width:720px;margin:0 auto;padding:18px 16px 60px}
+.topbar{border-bottom:2px solid var(--rule);padding-bottom:10px;margin-bottom:6px}
+.topbar h1{font-size:20px;margin:0}
+.lead{color:var(--muted);font-size:15px;margin:12px 0 2px;line-height:1.6}
+/* 表格 → 竖屏卡片 */
+table.t{display:block;width:auto;border:0}
+table.t tbody,table.t tr,table.t td,table.t th{display:block;border:0;width:auto}
+table.t thead{display:none}
+table.t tr{background:var(--card);border:1.5px solid var(--rule);border-radius:14px;
+  padding:14px 16px;margin:14px 0;font-size:19px;line-height:1.7}
+table.t td{padding:6px 0}
+table.t td:last-child{border-top:1.5px dashed var(--rule);margin-top:6px;padding-top:10px}
+.q{display:block;text-align:center}
+.reveal{cursor:pointer;border:2px dashed var(--rule);border-radius:10px;
+  padding:6px 22px;color:var(--muted);font-size:16px;background:none;font-family:inherit}
+.ans{display:none;line-height:1.8}
+.shown .ans{display:block} .shown .reveal{display:none}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="topbar">
+    <h1>单调 + 有界 ⇒ 收敛 · 自测</h1>
+  </div>
+  
+  <section class="quiz"><div class="q"><p class="qt">1. 下列哪个数列有界但发散？</p><div class="opts"><span class="opt" data-ok="0">A. aₙ = 1/n</span><span class="opt" data-ok="1">B. aₙ = (−1)ⁿ</span><span class="opt" data-ok="0">C. aₙ = 2 − 1/n</span></div><button type="button" data-show="显示答案" data-hide="隐藏答案">显示答案</button><p class="exp"><b class="ok">答案：B。</b>(−1)ⁿ 始终在 [−1, 1] 内，却永远交替，没有极限；另两个都单调有界。</p></div><div class="q"><p class="qt">2. 用三步法处理 aₙ₊₁ = f(aₙ) 时，何时才能确信 L = f(L) 的根就是极限？</p><div class="opts"><span class="opt" data-ok="0">A. 一解出 L = f(L) 就可以</span><span class="opt" data-ok="1">B. 证明数列单调有界之后</span><span class="opt" data-ok="0">C. 算出前三项之后</span></div><button type="button" data-show="显示答案" data-hide="隐藏答案">显示答案</button><p class="exp"><b class="ok">答案：B。</b>只有单调有界才保证极限存在；之后取极限才说明它满足 L = f(L)。</p></div><div class="q"><p class="qt">3. 对 a₁ = √2, aₙ₊₁ = √(2 + aₙ)，归纳步证明的是什么？</p><div class="opts"><span class="opt" data-ok="1">A. aₙ &lt; 2 ⇒ aₙ₊₁ &lt; 2</span><span class="opt" data-ok="0">B. aₙ &gt; 2 ⇒ aₙ₊₁ &gt; 2</span><span class="opt" data-ok="0">C. 对所有 n，aₙ = 2</span></div><button type="button" data-show="显示答案" data-hide="隐藏答案">显示答案</button><p class="exp"><b class="ok">答案：A。</b>若 aₙ &lt; 2，则 aₙ₊₁ = √(2 + aₙ) &lt; √4 = 2；而 a₁ = √2 &lt; 2 作为起点。</p></div><div class="q"><p class="qt">4. a₁ = 1, aₙ₊₁ = 2aₙ。解 L = 2L 得 L = 0。哪项正确？</p><div class="opts"><span class="opt" data-ok="0">A. aₙ → 0</span><span class="opt" data-ok="1">B. aₙ → ∞，L = 0 并不是极限</span><span class="opt" data-ok="0">C. aₙ → 1</span></div><button type="button" data-show="显示答案" data-hide="隐藏答案">显示答案</button><p class="exp"><b class="ok">答案：B。</b>aₙ = 2ⁿ⁻¹ → ∞；L = f(L) 不涉及极限是否存在，先用它就是循环论证。</p></div><div class="q"><p class="qt">5. 对 aₙ₊₁ = aₙ²，取 a₁ = 0.5，数列会……</p><div class="opts"><span class="opt" data-ok="1">A. 递减趋于 0</span><span class="opt" data-ok="0">B. 收敛到 1</span><span class="opt" data-ok="0">C. 递增趋于 ∞</span></div><button type="button" data-show="显示答案" data-hide="隐藏答案">显示答案</button><p class="exp"><b class="ok">答案：A。</b>起点在 (0, 1) 内，平方使每项变小；递减且以 0 为下界，故趋于 0。</p></div><div class="q"><p class="qt">6. 为什么说 lim (1 + 1/n)ⁿ 是 1^∞ 型？</p><div class="opts"><span class="opt" data-ok="1">A. 底数趋于 1，而指数趋于 ∞</span><span class="opt" data-ok="0">B. 因为极限等于 1</span><span class="opt" data-ok="0">C. 因为数列递减</span></div><button type="button" data-show="显示答案" data-hide="隐藏答案">显示答案</button><p class="exp"><b class="ok">答案：A。</b>底数 → 1 与指数 → ∞ 相互角力，不能用“1 的任何次方都是 1”判断；这里极限是 e。</p></div></section>
+<footer>第 2.5 集 · 单调有界原理与数 e</footer>
+
+</div>
+<script>
+document.querySelectorAll('.reveal').forEach(function(b){
+  b.addEventListener('click',function(){this.closest('.q').classList.add('shown')});
+});
+/* h2 锚点式回件（.opt 选择题 + 展开按钮）的原生交互 */
+document.querySelectorAll('.q button').forEach(function(b){
+  b.addEventListener('click',function(){
+    var q=b.closest('.q'), open=q.classList.toggle('open');
+    q.querySelectorAll('.opt').forEach(function(o){ if(o.dataset.c==='1') o.classList.toggle('correct',open); });
+    if(b.dataset.hide&&b.dataset.show) b.textContent=open?b.dataset.hide:b.dataset.show;
+  });
+});
+</script>
+</body>
+</html>

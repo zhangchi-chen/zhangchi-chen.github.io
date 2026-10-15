@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Stolz–Cesàro Theorem</title><style>
+:root{--bg:#0d1524;--bg2:#14213a;--panel:#172540;--grid:#2a3956;--fg:#e8edf5;--muted:#8d9ab0;--gold:#f2c14e;--red:#ef5b52;--teal:#3cc6c9;--blue:#79a8ff;--green:#6fd38a}
+*{box-sizing:border-box}
+html{background:var(--bg)}
+body{margin:0;background:linear-gradient(160deg,var(--bg),var(--bg2) 60%,var(--bg));min-height:100vh;color:var(--fg);
+ font-family:"Noto Sans SC","Noto Sans CJK SC","PingFang SC","Microsoft YaHei","Segoe UI",system-ui,sans-serif;line-height:1.6}
+main{max-width:1060px;margin:0 auto;padding:40px 18px 64px}
+.kicker{color:var(--muted);letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:clamp(30px,5vw,46px);margin:6px 0 4px}
+.sub{color:var(--gold);font-size:18px;margin:0 0 26px}
+section{background:rgba(23,37,64,.72);border:1px solid var(--grid);border-radius:16px;padding:22px 24px;margin:18px 0}
+h2{font-size:20px;margin:0 0 12px;color:var(--fg)} h2 .n{color:var(--gold);margin-right:6px}
+p{margin:8px 0}
+.m{font-family:"STIX Two Math","Cambria Math","Latin Modern Math","Times New Roman",serif;font-style:italic;white-space:nowrap;font-size:1.08em}
+.m sub,.m sup{font-size:.7em} .m sub.lim{font-style:italic}
+.limw{display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;font-style:normal;line-height:1.1;margin-right:.2em}
+.limsub{font-size:.62em;font-style:italic}
+.scroll{overflow-x:auto}
+.card p,.banner,section>p{overflow-x:auto}
+.frac{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;margin:0 .15em}
+.frac>span:first-child{border-bottom:1px solid currentColor;padding:0 .2em}
+.frac>span{line-height:1.25}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}
+@media(max-width:760px){.two{grid-template-columns:1fr}}
+table{width:100%;border-collapse:collapse;font-size:16px}
+th,td{padding:9px 10px;border-bottom:1px solid var(--grid);text-align:left;vertical-align:middle}
+th{color:var(--blue);font-weight:600}
+td.arrow{color:var(--gold);text-align:center;width:40px}
+td.lab{color:var(--muted);font-size:13px}
+.banner{border-radius:12px;padding:10px 14px;margin-top:10px;display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.banner.lh{background:#1b2a48}.banner.sc{background:#2a2a1c;border:1px solid var(--gold);color:var(--gold)}
+.banner .tag{color:var(--muted);min-width:110px}.banner.sc .tag{color:var(--gold)}
+.card{border-radius:12px;padding:12px 16px;margin:10px 0;background:#13203a}
+.card.g{border:1.5px solid var(--gold)}.card.b{border:1.5px solid var(--blue)}
+.card h3{margin:0 0 6px;font-size:17px}.card.g h3{color:var(--gold)}.card.b h3{color:var(--blue)}
+.check{list-style:none;padding:0;margin:8px 0}
+.check li{padding:7px 0;border-bottom:1px dashed var(--grid)}
+.check .ok{color:var(--green);font-weight:700}.check .no{color:var(--red);font-weight:700}
+.fig{width:100%;height:auto;display:block;background:#0f1a2e;border-radius:12px;border:1px solid var(--grid)}
+.fig .ax{stroke:var(--muted);stroke-width:1.5}.fig .axl{fill:var(--muted);font:italic 14px serif}
+.fig .path{fill:none;stroke:#9fb3c8;stroke-width:2.2}.fig .pt{fill:var(--fg)}
+.fig .chord{stroke:var(--gold);stroke-width:2;stroke-dasharray:8 6}
+.fig .seg{stroke:var(--teal);stroke-width:5;stroke-linecap:round}
+.fig .db{stroke:var(--blue);stroke-width:1.8;stroke-dasharray:4 4}.fig .da{stroke:var(--red);stroke-width:1.8;stroke-dasharray:4 4}
+.fig .tda{fill:var(--red);font:italic 13px serif}.fig .tdb{fill:var(--blue);font:italic 13px serif}
+.fig .tpt{fill:var(--fg);font:italic 13px serif}.fig .tch{fill:var(--gold);font:italic 13px serif}
+.fig .band{fill:rgba(242,193,78,.18);stroke:var(--gold);stroke-dasharray:5 4}
+.fig .head{fill:var(--red);opacity:.88}.fig .tail{fill:var(--teal);opacity:.88}
+.fig .avg{stroke:var(--fg);stroke-width:2.5}.fig .tavg{fill:var(--fg);font:italic 13px serif}
+.fig .tband{fill:var(--gold);font:italic 12px serif}.fig .thead{fill:var(--red);font:12px sans-serif;font-weight:700}
+.eq{margin:8px 0;padding:8px 12px;background:#101b31;border-radius:10px;overflow-x:auto}
+.eq .lab{color:var(--muted);font-size:13px;margin-right:10px}
+.box{border:1.5px solid var(--gold);background:#2a2a1c;color:var(--gold);border-radius:10px;padding:8px 12px;margin-top:8px}
+.ok{color:var(--green)}.no{color:var(--red)}
+.mis td:nth-child(3){color:#ffb3ae}
+.quiz .q{border:1px solid var(--grid);border-radius:12px;padding:12px 14px;margin:10px 0;background:#13203a}
+.quiz .qt{font-weight:600;margin-bottom:8px}
+.quiz .opts{display:flex;flex-wrap:wrap;gap:8px}
+.quiz .opt{text-align:left;max-width:100%;border:1px solid var(--grid);border-radius:999px;padding:4px 12px;background:#0f1a2e;color:var(--fg);cursor:pointer;font:inherit}
+.quiz .opt.sel{border-color:var(--blue);color:var(--blue)}
+.quiz .opt.right{border-color:var(--green);background:rgba(111,211,138,.15);color:var(--green)}
+.quiz .opt.wrong{border-color:var(--red);color:var(--red)}
+.quiz .rv{margin-top:10px;background:transparent;border:1px solid var(--gold);color:var(--gold);border-radius:8px;padding:4px 12px;cursor:pointer;font:inherit}
+.quiz .ex{display:none;margin-top:8px;color:var(--fg);background:#101b31;border-left:3px solid var(--green);padding:8px 10px;border-radius:6px}
+.quiz .ex.show{display:block}
+footer{color:var(--muted);font-size:13px;text-align:center;margin-top:26px}
+</style></head><body><main>
+<div class="kicker">Mathematical Analysis · 07-05</div><h1>Stolz–Cesàro Theorem</h1><p class="sub">The discrete twin of L'Hôpital's rule: the ratio of increments decides the ratio of totals.</p>
+
+<section><h2><span class="n">1</span>The dictionary</h2>
+<div class="two"><div><svg viewBox="0 0 480 360" class="fig" role="img" aria-label="path">
+ <line x1="40" y1="330" x2="465" y2="330" class="ax"/><line x1="40" y1="330" x2="40" y2="15" class="ax"/>
+ <text x="468" y="345" class="axl">b</text><text x="26" y="20" class="axl">a</text><text x="24" y="346" class="axl">O</text>
+ <line x1="40.0" y1="330.0" x2="333.3" y2="71.6" class="chord"/>
+ <polyline points="72.0,258.4 101.3,222.6 140.0,197.4 188.0,156.5 222.0,137.4 265.3,108.6 294.7,93.6 333.3,71.6" class="path"/><circle cx="72.0" cy="258.4" r="4" class="pt"/><circle cx="101.3" cy="222.6" r="4" class="pt"/><circle cx="140.0" cy="197.4" r="4" class="pt"/><circle cx="188.0" cy="156.5" r="4" class="pt"/><circle cx="222.0" cy="137.4" r="4" class="pt"/><circle cx="265.3" cy="108.6" r="4" class="pt"/><circle cx="294.7" cy="93.6" r="4" class="pt"/><circle cx="333.3" cy="71.6" r="4" class="pt"/>
+ <line x1="294.7" y1="93.6" x2="333.3" y2="71.6" class="seg"/>
+ <line x1="294.7" y1="93.6" x2="333.3" y2="93.6" class="db"/>
+ <line x1="333.3" y1="93.6" x2="333.3" y2="71.6" class="da"/>
+ <text x="341.3" y="87.6" class="tda">Δa<tspan baseline-shift="sub" font-size="10">n</tspan></text>
+ <text x="304.0" y="111.6" class="tdb">Δb<tspan baseline-shift="sub" font-size="10">n</tspan></text>
+ <text x="303.3" y="57.6" class="tpt">(b<tspan baseline-shift="sub" font-size="10">n</tspan>, a<tspan baseline-shift="sub" font-size="10">n</tspan>)</text>
+ <text x="223.3" y="213.9" class="tch">slope a<tspan baseline-shift="sub" font-size="10">n</tspan>/b<tspan baseline-shift="sub" font-size="10">n</tspan></text>
+</svg></div><div><p>Join the points (b<sub>n</sub>, a<sub>n</sub>). The slope from the origin is the <b>ratio of totals</b> <span class="m"><span class="frac"><span>a<sub>n</sub></span><span>b<sub>n</sub></span></span></span>; the slope of the newest segment is the <b>ratio of increments</b> <span class="m"><span class="frac"><span>Δa<sub>n</sub></span><span>Δb<sub>n</sub></span></span></span>, where <span class="m">Δa<sub>n</sub> = a<sub>n+1</sub> − a<sub>n</sub></span>.</p></div></div>
+<div class="scroll"><table style="margin-top:14px"><tr><th>Sequences (discrete)</th><th></th><th>Functions (continuous)</th><th></th></tr><tr><td><span class="m">Δa<sub>n</sub></span></td><td class="arrow">⟷</td><td><span class="m">f′(x)</span></td><td class="lab">increment ↔ derivative</td></tr><tr><td><span class="m">Σ<sub>k≤n</sub> Δa<sub>k</sub></span></td><td class="arrow">⟷</td><td><span class="m">∫ f′</span></td><td class="lab">sum ↔ integral</td></tr><tr><td><span class="m"><span class="frac"><span>a<sub>n</sub></span><span>b<sub>n</sub></span></span></span></td><td class="arrow">⟷</td><td><span class="m"><span class="frac"><span>f(x)</span><span>g(x)</span></span></span></td><td class="lab">ratio of totals ↔ ratio of functions</td></tr><tr><td><span class="m"><span class="frac"><span>Δa<sub>n</sub></span><span>Δb<sub>n</sub></span></span></span></td><td class="arrow">⟷</td><td><span class="m"><span class="frac"><span>f′(x)</span><span>g′(x)</span></span></span></td><td class="lab">ratio of increments ↔ ratio of derivatives</td></tr></table></div>
+<div class="banner lh"><span class="tag">L'Hôpital</span><span class="m">lim <span class="frac"><span>f′(x)</span><span>g′(x)</span></span> = L ⟹ lim <span class="frac"><span>f(x)</span><span>g(x)</span></span> = L</span></div>
+<div class="banner sc"><span class="tag">Stolz–Cesàro</span><span class="m">lim <span class="frac"><span>Δa<sub>n</sub></span><span>Δb<sub>n</sub></span></span> = L ⟹ lim <span class="frac"><span>a<sub>n</sub></span><span>b<sub>n</sub></span></span> = L</span></div>
+</section>
+
+<section><h2><span class="n">2</span>The statement</h2>
+<div class="card g"><h3>∞/∞ type</h3><p><span class="m">{b<sub>n</sub>}</span> strictly increasing, <span class="m">b<sub>n</sub> → +∞</span></p><p>If <span class="m"><span class="limw">lim<span class="limsub">n→∞</span></span> <span class="frac"><span>a<sub>n+1</sub> − a<sub>n</sub></span><span>b<sub>n+1</sub> − b<sub>n</sub></span></span> = L</span> (finite, or ±∞), then <span class="m"><span class="limw">lim<span class="limsub">n→∞</span></span> <span class="frac"><span>a<sub>n</sub></span><span>b<sub>n</sub></span></span> = L</span>.</p></div>
+<div class="card b"><h3>0/0 type</h3><p><span class="m">a<sub>n</sub> → 0, b<sub>n</sub> → 0</span>, <span class="m">{b<sub>n</sub>}</span> strictly decreasing (from some index, <span class="m">b<sub>n</sub> > 0</span>)</p><p>If <span class="m"><span class="limw">lim<span class="limsub">n→∞</span></span> <span class="frac"><span>a<sub>n+1</sub> − a<sub>n</sub></span><span>b<sub>n+1</sub> − b<sub>n</sub></span></span> = L</span>, then <span class="m"><span class="limw">lim<span class="limsub">n→∞</span></span> <span class="frac"><span>a<sub>n</sub></span><span>b<sub>n</sub></span></span> = L</span>.</p></div>
+</section>
+
+<section><h2><span class="n">3</span>The conditions are load-bearing</h2>
+<p>With <span class="m">b<sub>n</sub> = 2 − 1/n</span>, <span class="m">a<sub>n</sub> = 3 − 1/n</span>: every increment ratio equals 1, yet <span class="m"><span class="frac"><span>a<sub>n</sub></span><span>b<sub>n</sub></span></span> → 3/2</span>. The denominator is bounded, so the windows stop opening and the head is never washed out.</p>
+<div class="card"><h3 style="color:var(--gold)">Checklist — run it first (marks: the example above)</h3><ul class="check"><li>1. Is <span class="m">{b<sub>n</sub>}</span> strictly increasing? <span class="ok">✓</span></li><li>2. Does <span class="m">b<sub>n</sub></span> → +∞? <span class="no">✗</span></li><li>3. Does the increment ratio have a limit? <span class="ok">✓</span></li></ul></div>
+</section>
+
+<section><h2><span class="n">4</span>Proof skeleton: clamping</h2>
+<p>Fix ε &gt; 0 and pick m so that every increment ratio beyond m lies in (L − ε, L + ε). The red head is the founding stock <span class="m">a<sub>m</sub>, b<sub>m</sub></span>; every tail vote is priced inside the gold band.</p><svg viewBox="0 0 620 270" class="fig" role="img" aria-label="head and tail"><rect x="50" y="165.0" width="510" height="34.0" class="band"/><rect x="50" y="46.0" width="39.5" height="204.0" class="head"/><rect x="89.5" y="167.7" width="14.6" height="82.3" class="tail"/><rect x="105.3" y="186.5" width="19.5" height="63.5" class="tail"/><rect x="126.0" y="193.0" width="16.5" height="57.0" class="tail"/><rect x="143.6" y="170.6" width="21.3" height="79.4" class="tail"/><rect x="166.2" y="178.6" width="18.3" height="71.4" class="tail"/><rect x="185.7" y="195.2" width="15.3" height="54.8" class="tail"/><rect x="202.2" y="176.9" width="20.2" height="73.1" class="tail"/><rect x="223.6" y="172.5" width="17.2" height="77.5" class="tail"/><rect x="242.0" y="193.1" width="22.1" height="56.9" class="tail"/><rect x="265.2" y="184.2" width="19.0" height="65.8" class="tail"/><rect x="285.5" y="169.9" width="16.0" height="80.1" class="tail"/><rect x="302.7" y="187.6" width="20.9" height="62.4" class="tail"/><rect x="324.8" y="190.2" width="17.9" height="59.8" class="tail"/><rect x="343.9" y="171.3" width="14.9" height="78.7" class="tail"/><rect x="359.9" y="180.8" width="19.7" height="69.2" class="tail"/><rect x="380.9" y="193.1" width="16.7" height="56.9" class="tail"/><rect x="398.8" y="176.1" width="21.6" height="73.9" class="tail"/><rect x="421.6" y="175.0" width="18.6" height="75.0" class="tail"/><rect x="441.4" y="192.2" width="15.6" height="57.8" class="tail"/><rect x="458.2" y="182.3" width="20.5" height="67.7" class="tail"/><rect x="479.8" y="171.9" width="17.4" height="78.1" class="tail"/><rect x="498.5" y="188.1" width="22.3" height="61.9" class="tail"/><rect x="522.0" y="187.9" width="19.3" height="62.1" class="tail"/><rect x="542.5" y="172.3" width="16.3" height="77.7" class="tail"/><line x1="50" y1="171.2" x2="560" y2="171.2" class="avg"/><text x="566" y="176.2" class="tavg">a<tspan baseline-shift="sub" font-size="10">n</tspan>/b<tspan baseline-shift="sub" font-size="10">n</tspan></text><text x="42" y="169.0" class="tband" text-anchor="end">L+ε</text><text x="42" y="207.0" class="tband" text-anchor="end">L−ε</text><text x="54" y="38.0" class="thead">HEAD a<tspan baseline-shift="sub" font-size="10">m</tspan>, b<tspan baseline-shift="sub" font-size="10">m</tspan></text><line x1="50" y1="250" x2="570" y2="250" class="ax"/><line x1="50" y1="250" x2="50" y2="20" class="ax"/><text x="574" y="255" class="axl">b</text></svg>
+<div class="eq"><span class="lab">Telescope</span><span class="m">a<sub>n</sub> = a<sub>m</sub> + Σ<sub>k=m</sub><sup>n−1</sup> Δa<sub>k</sub></span>, &nbsp; <span class="m">b<sub>n</sub> = b<sub>m</sub> + Σ<sub>k=m</sub><sup>n−1</sup> Δb<sub>k</sub></span></div>
+<div class="eq"><span class="lab">Squeeze each tail term</span><span class="m">(L − ε) Δb<sub>k</sub> &lt; Δa<sub>k</sub> &lt; (L + ε) Δb<sub>k</sub>, &nbsp; k ≥ m</span></div>
+<div class="eq"><span class="lab">Divide by <span class="m">b<sub>n</sub></span></span><span class="m"><span class="frac"><span>a<sub>m</sub> + (L − ε)(b<sub>n</sub> − b<sub>m</sub>)</span><span>b<sub>n</sub></span></span></span> ≤ <span class="m"><span class="frac"><span>a<sub>n</sub></span><span>b<sub>n</sub></span></span></span> ≤ <span class="m"><span class="frac"><span>a<sub>m</sub> + (L + ε)(b<sub>n</sub> − b<sub>m</sub>)</span><span>b<sub>n</sub></span></span></span></div>
+<p>Let n → ∞: the head is divided by <span class="m">b<sub>n</sub> → +∞</span> and vanishes; both bounds tend to L ± ε.</p>
+<div class="eq"><span class="lab">upper limit</span><span class="m">limsup <span class="frac"><span>a<sub>n</sub></span><span>b<sub>n</sub></span></span> ≤ L + ε</span> &nbsp;&nbsp; <span class="lab">lower limit</span><span class="m">liminf <span class="frac"><span>a<sub>n</sub></span><span>b<sub>n</sub></span></span> ≥ L − ε</span></div>
+<div class="box">ε is arbitrary, so the limit exists and equals L. <b>The tail outvotes the head.</b></div>
+</section>
+
+<section><h2><span class="n">5</span>Worked examples</h2>
+<div class="two"><div><h3 style="color:var(--blue);margin:0 0 6px">(i) Cesàro means</h3><p>If <span class="m">a<sub>n</sub> → a</span>, take <span class="m">A<sub>n</sub> = a<sub>1</sub> + … + a<sub>n</sub></span>, <span class="m">b<sub>n</sub> = n</span> (strictly increasing, → +∞). Then</p>
+<div class="eq"><span class="m"><span class="frac"><span>A<sub>n+1</sub> − A<sub>n</sub></span><span>b<sub>n+1</sub> − b<sub>n</sub></span></span> = <span class="frac"><span>a<sub>n+1</sub></span><span>1</span></span> → a</span></div>
+<div class="box"><span class="m">⟹ <span class="frac"><span>a<sub>1</sub> + … + a<sub>n</sub></span><span>n</span></span> → a</span></div></div>
+<div><h3 style="color:var(--blue);margin:0 0 6px">(ii) A sum over a square</h3><p>Numerator grows by <span class="m">n + 1</span>, denominator <span class="m">n²</span> grows by <span class="m">2n + 1</span> (strictly increasing, → +∞). Then</p>
+<div class="eq"><span class="m"><span class="frac"><span>n + 1</span><span>2n + 1</span></span> → <span class="frac"><span>1</span><span>2</span></span></span></div>
+<div class="box"><span class="m">⟹ <span class="frac"><span>1 + 2 + … + n</span><span>n²</span></span> → <span class="frac"><span>1</span><span>2</span></span></span></div></div></div>
+</section>
+
+<section class="mis"><h2><span class="n">6</span>Misuse and scope</h2>
+<div class="scroll"><table><tr><th></th><th class="ok">✓ Legal use</th><th class="no">✗ Violation</th></tr><tr><th>Direction</th><td><span class="ok">✓</span> <span class="m"><span class="frac"><span>Δa<sub>n</sub></span><span>Δb<sub>n</sub></span></span> → L ⟹ <span class="frac"><span>a<sub>n</sub></span><span>b<sub>n</sub></span></span> → L</span></td><td><span class="no">✗</span> <span class="m">a<sub>n</sub> = (−1)<sup>n</sup>, b<sub>n</sub> = n</span>: <span class="m"><span class="frac"><span>a<sub>n</sub></span><span>b<sub>n</sub></span></span> → 0</span>, but <span class="m"><span class="frac"><span>Δa<sub>n</sub></span><span>Δb<sub>n</sub></span></span> = 2(−1)<sup>n+1</sup></span> oscillates</td></tr><tr><th>∞/∞ type</th><td><span class="ok">✓</span> <span class="m">{b<sub>n</sub>}</span> strictly increasing, <span class="m">b<sub>n</sub> → +∞</span></td><td><span class="no">✗</span> <span class="m">b<sub>n</sub> = 2 − 1/n</span> bounded: increment ratio 1, but <span class="m"><span class="frac"><span>a<sub>n</sub></span><span>b<sub>n</sub></span></span> → 3/2</span></td></tr><tr><th>0/0 type</th><td><span class="ok">✓</span> <span class="m">a<sub>n</sub> → 0, b<sub>n</sub> → 0</span>, <span class="m">{b<sub>n</sub>}</span> strictly decreasing</td><td><span class="no">✗</span> <span class="m">a<sub>n</sub> = 1 + 1/n</span> ↛ 0, <span class="m">b<sub>n</sub> = 1/n</span>: increment ratio 1, but <span class="m"><span class="frac"><span>a<sub>n</sub></span><span>b<sub>n</sub></span></span> = n + 1 → +∞</span></td></tr></table></div>
+</section>
+
+<section class="quiz"><h2><span class="n">?</span>Self-check</h2><p style="color:var(--muted)">Pick an answer, then reveal.</p><div class="q"><div class="qt">1. In the dictionary, the increment <span class="m">Δa<sub>n</sub> = a<sub>n+1</sub> − a<sub>n</sub></span> plays the role of …</div><div class="opts"><button class="opt" type="button" data-c="0">A. <span class="m">f(x)/g(x)</span></button><button class="opt" type="button" data-c="1">B. <span class="m">f′(x)</span></button><button class="opt" type="button" data-c="0">C. <span class="m">∫ f′</span></button></div><button class="rv" type="button" data-reveal="Reveal answer" data-hide="Hide answer">Reveal answer</button><div class="ex"><b>Answer: B.</b> A single step is the discrete derivative; summing steps is the discrete integral.</div></div><div class="q"><div class="qt">2. For <span class="m">b<sub>n</sub> = 2 − 1/n</span>, <span class="m">a<sub>n</sub> = 3 − 1/n</span>, which checklist item fails?</div><div class="opts"><button class="opt" type="button" data-c="0">A. strictly increasing</button><button class="opt" type="button" data-c="1">B. <span class="m">b<sub>n</sub> → +∞</span></button><button class="opt" type="button" data-c="0">C. the increment ratio has a limit</button></div><button class="rv" type="button" data-reveal="Reveal answer" data-hide="Hide answer">Reveal answer</button><div class="ex"><b>Answer: B.</b> <span class="m">b<sub>n</sub></span> increases but stays below 2, so the head is never washed out and <span class="m"><span class="frac"><span>a<sub>n</sub></span><span>b<sub>n</sub></span></span></span> → 3/2, not 1.</div></div><div class="q"><div class="qt">3. In the proof, why does the founding stock aₘ, bₘ stop mattering?</div><div class="opts"><button class="opt" type="button" data-c="1">A. it is divided by <span class="m">b<sub>n</sub> → +∞</span></button><button class="opt" type="button" data-c="0">B. we may choose aₘ = 0</button><button class="opt" type="button" data-c="0">C. because ε → 0</button></div><button class="rv" type="button" data-reveal="Reveal answer" data-hide="Hide answer">Reveal answer</button><div class="ex"><b>Answer: A.</b> The head enters as <span class="m">(a<sub>m</sub> − (L ± ε)b<sub>m</sub>)/b<sub>n</sub></span>, which tends to 0 because <span class="m">b<sub>n</sub> → +∞</span>.</div></div><div class="q"><div class="qt">4. What does the clamping step give directly, for each fixed ε?</div><div class="opts"><button class="opt" type="button" data-c="0">A. <span class="m">lim aₙ/bₙ = L + ε</span></button><button class="opt" type="button" data-c="1">B. <span class="m">limsup aₙ/bₙ ≤ L + ε</span> and <span class="m">liminf aₙ/bₙ ≥ L − ε</span></button><button class="opt" type="button" data-c="0">C. the increments become monotone</button></div><button class="rv" type="button" data-reveal="Reveal answer" data-hide="Hide answer">Reveal answer</button><div class="ex"><b>Answer: B.</b> Upper and lower limits are trapped within ε of L; since ε is arbitrary they coincide at L.</div></div><div class="q"><div class="qt">5. What is <span class="m">lim (1 + 2 + … + n)/n²</span>?</div><div class="opts"><button class="opt" type="button" data-c="0">A. 1</button><button class="opt" type="button" data-c="1">B. 1/2</button><button class="opt" type="button" data-c="0">C. 0</button></div><button class="rv" type="button" data-reveal="Reveal answer" data-hide="Hide answer">Reveal answer</button><div class="ex"><b>Answer: B.</b> The increments are n + 1 and 2n + 1, whose ratio tends to 1/2, and n² is strictly increasing to +∞.</div></div><div class="q"><div class="qt">6. <span class="m">a<sub>n</sub> = (−1)<sup>n</sup></span>, <span class="m">b<sub>n</sub> = n</span> shows that …</div><div class="opts"><button class="opt" type="button" data-c="1">A. the converse of the theorem fails</button><button class="opt" type="button" data-c="0">B. <span class="m">b<sub>n</sub></span> must be bounded</button><button class="opt" type="button" data-c="0">C. the 0/0 type is needed</button></div><button class="rv" type="button" data-reveal="Reveal answer" data-hide="Hide answer">Reveal answer</button><div class="ex"><b>Answer: A.</b> <span class="m"><span class="frac"><span>a<sub>n</sub></span><span>b<sub>n</sub></span></span></span> → 0, yet the increment ratio 2(−1)<sup>n+1</sup> has no limit: the theorem runs one way only.</div></div></section>
+<footer>Video: 07-05-stolz-theorem.mp4 · Subtitles: 07-05-stolz-theorem.srt</footer>
+</main><script>
+document.querySelectorAll('.quiz .q').forEach(function(q){
+  var opts=q.querySelectorAll('.opt'), ex=q.querySelector('.ex'), btn=q.querySelector('.rv');
+  opts.forEach(function(o){o.addEventListener('click',function(){
+    if(ex.classList.contains('show'))return;
+    opts.forEach(function(x){x.classList.remove('sel')}); o.classList.add('sel');});});
+  btn.addEventListener('click',function(){
+    var show=!ex.classList.contains('show'); ex.classList.toggle('show',show);
+    opts.forEach(function(o){
+      o.classList.remove('right','wrong');
+      if(show){ if(o.dataset.c==='1')o.classList.add('right'); else if(o.classList.contains('sel'))o.classList.add('wrong'); }
+    });
+    btn.textContent=show?btn.dataset.hide:btn.dataset.reveal;
+  });
+});
+</script></body></html>

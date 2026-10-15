@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>子列与致密性定理 · 自测</title>
+<style>
+:root{--bg:#10151f;--panel:#1a2230;--ink:#e9eef5;--muted:#7d8899;--grid:#2a3445;--teal:#4fd1c5;--amber:#f6ad55;--red:#f56565;--blue:#7f9cf5;--green:#68d391}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 "Noto Sans CJK SC","Noto Sans SC","PingFang SC","Segoe UI",system-ui,sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 16px 80px}
+header .ep{color:var(--muted);font-size:14px;letter-spacing:.04em}
+h1{font-size:clamp(26px,4vw,38px);margin:.2em 0 .8em;line-height:1.25}
+h2{font-size:21px;color:var(--muted);margin:2.2em 0 .6em;padding-bottom:6px;border-bottom:3px solid var(--teal);display:inline-block}
+.card{background:var(--panel);border:1px solid var(--grid);border-radius:14px;padding:18px 22px;margin:14px 0}
+.card.teal{border:2px solid var(--teal)} .card.amber{border:2px solid var(--amber);background:#2a2416}
+.card.blue{border:2px solid var(--blue)}
+.card h3{margin:0 0 6px;font-size:17px;color:var(--teal)}
+.card.amber h3{color:var(--amber)} .card.blue h3{color:var(--blue)}
+.m{font-family:"Latin Modern Roman","Cambria Math","STIX Two Math","Times New Roman",serif;font-size:1.12em;white-space:nowrap}
+.m i{font-style:italic} .m .rm{font-style:normal} .m sub,.m sup{font-size:.7em;line-height:0}
+.formula{font-size:1.3em;text-align:center;margin:10px 0}
+svg{width:100%;height:auto;display:block;margin:8px 0}
+svg .tick{font:12px sans-serif;text-anchor:middle}
+.bad{color:var(--red)} .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media (max-width:640px){.grid2{grid-template-columns:1fr}}
+ul{padding-left:1.2em;margin:.4em 0}
+.quiz ol{padding-left:1.3em} .quiz li.q{margin:0 0 18px}
+.opts{list-style:none;padding:0;margin:6px 0;display:flex;flex-wrap:wrap;gap:8px}
+.opts li{border:1px solid var(--grid);border-radius:10px;padding:4px 12px;background:#141b27}
+.opts li.ok{border-color:var(--green);background:#16301f}
+button{font:inherit;font-size:14px;background:#243042;color:var(--teal);border:1px solid var(--teal);border-radius:8px;padding:4px 12px;cursor:pointer}
+button:hover{background:#2c3a50}
+.ans{display:none;color:var(--ink);margin-top:6px;padding-left:10px;border-left:3px solid var(--green)}
+.ans.show{display:block}
+footer{color:var(--muted);font-size:13px;margin-top:40px}
+
+/* ---- 手机自测单页覆盖层 ---- */
+html,body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC","Source Han Sans SC",system-ui,-apple-system,sans-serif}
+/* 中和原幻灯片容器的隐藏/定位，让 section 直接作为文档流内容 */
+section.slide{display:block!important;position:static!important;width:auto!important;height:auto!important;
+  padding:0!important;background:none!important;box-shadow:none!important;transform:none!important}
+.page{max-width:720px;margin:0 auto;padding:18px 16px 60px}
+.topbar{border-bottom:2px solid var(--rule);padding-bottom:10px;margin-bottom:6px}
+.topbar h1{font-size:20px;margin:0}
+.lead{color:var(--muted);font-size:15px;margin:12px 0 2px;line-height:1.6}
+/* 表格 → 竖屏卡片 */
+table.t{display:block;width:auto;border:0}
+table.t tbody,table.t tr,table.t td,table.t th{display:block;border:0;width:auto}
+table.t thead{display:none}
+table.t tr{background:var(--card);border:1.5px solid var(--rule);border-radius:14px;
+  padding:14px 16px;margin:14px 0;font-size:19px;line-height:1.7}
+table.t td{padding:6px 0}
+table.t td:last-child{border-top:1.5px dashed var(--rule);margin-top:6px;padding-top:10px}
+.q{display:block;text-align:center}
+.reveal{cursor:pointer;border:2px dashed var(--rule);border-radius:10px;
+  padding:6px 22px;color:var(--muted);font-size:16px;background:none;font-family:inherit}
+.ans{display:none;line-height:1.8}
+.shown .ans{display:block} .shown .reveal{display:none}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="topbar">
+    <h1>子列与致密性定理 · 自测</h1>
+  </div>
+  
+  <ol><li class="q"><div>下列哪一个是 <span class="m">(<i>a</i><sub><i>n</i></sub>)</span> 的子列？</div><ul class="opts"><li><b>A.</b> <span class="m">(<i>a</i><sub>2</sub>, <i>a</i><sub>2</sub>, <i>a</i><sub>5</sub>, …)</span></li><li data-ok><b>B.</b> <span class="m">(<i>a</i><sub>4</sub>, <i>a</i><sub>9</sub>, <i>a</i><sub>16</sub>, …)</span></li><li><b>C.</b> <span class="m">(<i>a</i><sub>5</sub>, <i>a</i><sub>3</sub>, <i>a</i><sub>8</sub>, …)</span></li></ul><button type="button" data-show="显示答案" data-hide="隐藏答案" aria-expanded="false">显示答案</button><div class="ans"><b>正确答案: B.</b> 只有 <span class="m">4 &lt; 9 &lt; 16</span> 严格递增；其余两个分别重播、倒带了下标。</div></li><li class="q"><div>对任意子列 <span class="m">(<i>a</i><sub><i>n</i><sub><i>k</i></sub></sub>)</span>，哪个不等式总成立？</div><ul class="opts"><li><b>A.</b> <span class="m"><i>n</i><sub><i>k</i></sub> ≤ <i>k</i></span></li><li data-ok><b>B.</b> <span class="m"><i>n</i><sub><i>k</i></sub> ≥ <i>k</i></span></li><li><b>C.</b> <span class="m"><i>n</i><sub><i>k</i></sub> = <i>k</i></span></li></ul><button type="button" data-show="显示答案" data-hide="隐藏答案" aria-expanded="false">显示答案</button><div class="ans"><b>正确答案: B.</b> <span class="m"><i>k</i></span> 个严格递增的正整数中，第 <span class="m"><i>k</i></span> 个至少是 <span class="m"><i>k</i></span>。</div></li><li class="q"><div>构造中为什么要求 <span class="m"><i>n</i><sub><i>k</i>+1</sub> &gt; <span class="rm">max</span>(<i>n</i><sub>1</sub>, …, <i>n</i><sub><i>k</i></sub>)</span>？</div><ul class="opts"><li><b>A.</b> 收敛性在这一步得证</li><li data-ok><b>B.</b> 只是保证下标严格递增</li><li><b>C.</b> 为了缩小这个带</li></ul><button type="button" data-show="显示答案" data-hide="隐藏答案" aria-expanded="false">显示答案</button><div class="ans"><b>正确答案: B.</b> 这纯粹是记账：指针只向前走，别无其他。</div></li><li class="q"><div><span class="m"><i>a</i><sub><i>m</i></sub></span> 何时是峰点？</div><ul class="opts"><li data-ok><b>A.</b> 对一切 <span class="m"><i>n</i> &gt; <i>m</i></span>，<span class="m"><i>a</i><sub><i>m</i></sub> ≥ <i>a</i><sub><i>n</i></sub></span></li><li><b>B.</b> 对一切 <span class="m"><i>n</i> &lt; <i>m</i></span>，<span class="m"><i>a</i><sub><i>m</i></sub> ≥ <i>a</i><sub><i>n</i></sub></span></li><li><b>C.</b> 只需 <span class="m"><i>a</i><sub><i>m</i></sub> &gt; <i>a</i><sub><i>m</i>+1</sub></span></li></ul><button type="button" data-show="显示答案" data-hide="隐藏答案" aria-expanded="false">显示答案</button><div class="ans"><b>正确答案: A.</b> 峰点不低于它后面的每一项。</div></li><li class="q"><div>若数列只有有限个峰点，最后一个峰点之后能构造出什么？</div><ul class="opts"><li><b>A.</b> 由峰点组成的单调不增子列</li><li data-ok><b>B.</b> 一个递增子列</li><li><b>C.</b> 一般什么也得不到</li></ul><button type="button" data-show="显示答案" data-hide="隐藏答案" aria-expanded="false">显示答案</button><div class="ans"><b>正确答案: B.</b> 此后每一项都会被后面某项超过，一路向前跳就得到递增子列。</div></li><li class="q"><div>关于 <span class="m"><i>a</i><sub><i>n</i></sub> = (−1)<sup><i>n</i></sup></span>，哪一项正确？</div><ul class="opts"><li><b>A.</b> 它收敛到 0</li><li data-ok><b>B.</b> 它发散，但有收敛子列</li><li><b>C.</b> 它没有收敛子列</li></ul><button type="button" data-show="显示答案" data-hide="隐藏答案" aria-expanded="false">显示答案</button><div class="ans"><b>正确答案: B.</b> 偶数项和奇数项分别构成常数子列 <span class="m">1</span> 与 <span class="m">−1</span>。</div></li></ol></section>
+<footer>02-06 · 子列与致密性定理</footer>
+
+</div>
+<script>
+document.querySelectorAll('.reveal').forEach(function(b){
+  b.addEventListener('click',function(){this.closest('.q').classList.add('shown')});
+});
+/* h2 锚点式回件（.opt 选择题 + 展开按钮）的原生交互 */
+document.querySelectorAll('.q button').forEach(function(b){
+  b.addEventListener('click',function(){
+    var q=b.closest('.q'), open=q.classList.toggle('open');
+    q.querySelectorAll('.opt').forEach(function(o){ if(o.dataset.c==='1') o.classList.toggle('correct',open); });
+    if(b.dataset.hide&&b.dataset.show) b.textContent=open?b.dataset.hide:b.dataset.show;
+  });
+});
+</script>
+</body>
+</html>

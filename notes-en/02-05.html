@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Monotone Bounded Convergence</title><style>
+:root{--bg:#0e1522;--pan:#16213a;--grid:#25324a;--fg:#e8edf5;--dim:#8a97ab;--amb:#f5b544;--blu:#5ab0ff;--grn:#52d17c;--red:#ff6b6b}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.6 system-ui,-apple-system,"Segoe UI","Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:28px 16px 60px}
+h1{font-size:1.9rem;margin:.2em 0 .1em}
+.sub{color:var(--dim);margin:0 0 1.2em}
+h2{color:var(--amb);font-size:1.15rem;border-bottom:1px solid var(--grid);padding-bottom:.35em;margin:2em 0 .8em}
+.card{background:var(--pan);border:1px solid var(--grid);border-radius:12px;padding:16px 18px;margin:12px 0}
+.thm{border-color:var(--amb)}
+.thm b{color:var(--amb)}
+.m{font-family:Georgia,"Times New Roman","Noto Serif",serif;font-style:normal;font-size:1.05em;white-space:nowrap}
+.m.long{white-space:normal}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}}
+svg{width:100%;height:auto;display:block}
+svg .ax{font:11px system-ui,"Noto Sans SC",sans-serif;fill:var(--dim)}
+svg .cap{font:13px Georgia,"Times New Roman",serif;fill:var(--fg)}
+ol.steps{padding-left:1.3em;margin:.4em 0} ol.steps li{margin:.35em 0}
+.bad{border-color:var(--red)} .bad h3{color:var(--red)}
+.good{border-color:var(--grn)} .good h3{color:var(--grn)}
+h3{margin:.1em 0 .5em;font-size:1.02rem}
+.strike{text-decoration:line-through;text-decoration-color:var(--red);text-decoration-thickness:2px}
+.note{color:var(--dim);font-size:.93em}
+.hl{color:var(--amb)} .ok{color:var(--grn)} .no{color:var(--red)}
+table{border-collapse:collapse;width:100%;font-size:.95em}
+td,th{padding:5px 8px;border-bottom:1px solid var(--grid);text-align:left}
+th{color:var(--dim);font-weight:500}
+tr.last td{color:var(--grn);font-weight:600}
+.quiz .q{background:var(--pan);border:1px solid var(--grid);border-radius:12px;padding:12px 16px;margin:10px 0}
+.quiz .qt{margin:0 0 .4em;font-weight:600}
+.quiz .opts{display:flex;min-width:0;flex-wrap:wrap;gap:6px 18px;margin:.2em 0 .6em}
+.quiz .opt{padding:2px 8px;border-radius:6px;border:1px solid transparent}
+.quiz .opt.correct{border-color:var(--grn);background:rgba(82,209,124,.12);color:var(--grn)}
+.quiz button{background:transparent;color:var(--amb);border:1px solid var(--amb);border-radius:8px;padding:4px 12px;font:inherit;font-size:.9em;cursor:pointer}
+.quiz button:hover{background:rgba(245,181,68,.12)}
+.quiz .exp{display:none;margin:.6em 0 0;color:var(--fg)}
+.quiz .q.open .exp{display:block}
+footer{color:var(--dim);font-size:.85em;margin-top:2.5em}
+</style></head><body><main>
+<h1>Monotone + Bounded ⇒ Convergent</h1><p class="sub">Recurrences, fixed points, and the number e · Mathematical Analysis 2.5</p>
+<div class="card thm"><b>Theorem (monotone convergence).</b> A monotone bounded sequence converges: if <span class="m">(aₙ)</span> is increasing and bounded above, or decreasing and bounded below, then <span class="m">(aₙ)</span> converges.</div>
+<h2>1 · Bounded is not enough</h2><p><span class="m">aₙ = (−1)ⁿ</span> stays between −1 and 1, yet it jumps forever: <span class='ok'>bounded ✓</span> <span class='no'>convergent ✗</span>. What is missing is a <b>direction</b>. Climbing a building that has a roof: you only go up and you cannot pass the roof, so your height must settle — perhaps below the roof, at <span class="m">sup aₙ</span>, but it settles.</p>
+<div class="grid2"><div class="card"><svg viewBox="0 0 300 170" role="img" aria-label="(−1)ⁿ">
+<rect x="20" y="35" width="270" height="100" fill="var(--blu)" opacity=".12"/>
+<line x1="20" y1="35" x2="290" y2="35" stroke="var(--blu)" stroke-dasharray="5 4"/>
+<line x1="20" y1="135" x2="290" y2="135" stroke="var(--blu)" stroke-dasharray="5 4"/>
+<text x="6" y="39" class="ax">1</text><text x="2" y="139" class="ax">−1</text>
+<polyline points="38,135 56,35 74,135 92,35 110,135 128,35 146,135 164,35 182,135 200,35 218,135 236,35 254,135 272,35" fill="none" stroke="var(--fg)" stroke-opacity=".3"/><circle cx="38" cy="135" r="3.5" fill="var(--amb)"/><circle cx="56" cy="35" r="3.5" fill="var(--amb)"/><circle cx="74" cy="135" r="3.5" fill="var(--amb)"/><circle cx="92" cy="35" r="3.5" fill="var(--amb)"/><circle cx="110" cy="135" r="3.5" fill="var(--amb)"/><circle cx="128" cy="35" r="3.5" fill="var(--amb)"/><circle cx="146" cy="135" r="3.5" fill="var(--amb)"/><circle cx="164" cy="35" r="3.5" fill="var(--amb)"/><circle cx="182" cy="135" r="3.5" fill="var(--amb)"/><circle cx="200" cy="35" r="3.5" fill="var(--amb)"/><circle cx="218" cy="135" r="3.5" fill="var(--amb)"/><circle cx="236" cy="35" r="3.5" fill="var(--amb)"/><circle cx="254" cy="135" r="3.5" fill="var(--amb)"/><circle cx="272" cy="35" r="3.5" fill="var(--amb)"/>
+<text x="150" y="160" class="cap" text-anchor="middle">aₙ = (−1)ⁿ</text></svg></div><div class="card"><svg viewBox="0 0 300 170" role="img" aria-label="staircase">
+<rect x="20" y="10" width="270" height="22" fill="var(--red)" opacity=".15"/>
+<line x1="20" y1="32" x2="290" y2="32" stroke="var(--red)" stroke-width="3"/>
+<text x="286" y="25" class="ax" text-anchor="end" fill="var(--red)">ROOF</text>
+<line x1="20" y1="51" x2="290" y2="51" stroke="var(--grn)" stroke-dasharray="5 4"/>
+<text x="24" y="47" class="ax" fill="var(--grn)">sup aₙ</text>
+<path d="M20,150 V136.8 H42 V93.9 H64 V79.6 H86 V72.5 H108 V68.2 H130 V65.3 H152 V63.3 H174 V61.7 H196 V60.5 H218 V59.6 H240 V58.8 H262 V58.2 H284" fill="none" stroke="var(--amb)" stroke-width="2.5"/>
+<line x1="20" y1="150" x2="290" y2="150" stroke="var(--dim)"/></svg></div></div>
+<h2>2 · The three-step recipe for aₙ₊₁ = f(aₙ)</h2><ol class="steps"><li><b>Estimate.</b> If a limit <span class="m">L</span> exists, it satisfies <span class="m">L = f(L)</span>. This is only a guess.</li><li><b>Prove monotone + bounded</b>, typically by induction. Now the theorem guarantees the limit exists.</li><li><b>Pass to the limit</b> in <span class="m">aₙ₊₁ = f(aₙ)</span> and solve for <span class="m">L</span>.</li></ol>
+<div class="grid2"><div class="card"><h3 class="hl">Worked example: <span class="m long">a₁ = √2,  aₙ₊₁ = √(2 + aₙ)</span></h3><p>① <span class="m">L = √(2 + L)</span> ⇒ <span class="m">L² = 2 + L</span> ⇒ <span class="m">(L − 2)(L + 1) = 0</span>, and <span class="m">L ≥ 0</span>, so the guess is <span class="m">L = 2</span>.</p><p>② Bounded: <span class="m">a₁ = √2 < 2</span>; if <span class="m">aₙ < 2</span> then <span class="m long">aₙ₊₁ = √(2 + aₙ) < √4 = 2</span>. Increasing: <span class="m">a₂ = √(2 + √2) > √2 = a₁</span>; since <span class="m">√(2 + x)</span> is increasing, <span class="m">aₙ > aₙ₋₁</span> gives <span class="m">aₙ₊₁ > aₙ</span>.</p><p>③ Let <span class="m">n → ∞</span>: <span class="m">L = √(2 + L)</span>, so <span class="m">L = 2</span> — now earned, not assumed.</p></div>
+<div class="card"><svg viewBox="0 0 320 175" role="img" aria-label="a_n = sqrt(2 + a_n)">
+<rect x="27.0" y="36.3" width="6" height="95.2" fill="var(--amb)" opacity=".25"/><rect x="59.0" y="36.3" width="6" height="24.7" fill="var(--amb)" opacity=".25"/><rect x="91.0" y="36.3" width="6" height="6.2" fill="var(--amb)" opacity=".25"/><rect x="123.0" y="36.3" width="6" height="1.6" fill="var(--amb)" opacity=".25"/><rect x="155.0" y="36.3" width="6" height="0.4" fill="var(--amb)" opacity=".25"/><line x1="20" y1="36.3" x2="310" y2="36.3" stroke="var(--amb)" stroke-dasharray="5 4"/>
+<text x="306" y="31.3" class="ax" text-anchor="end" fill="var(--amb)">L = 2</text>
+<polyline points="30.0,131.4 62.0,61.0 94.0,42.5 126.0,37.8 158.0,36.6 190.0,36.3 222.0,36.3 254.0,36.3 286.0,36.3" fill="none" stroke="var(--blu)" stroke-opacity=".6"/><circle cx="30.0" cy="131.4" r="3.5" fill="var(--blu)"/><circle cx="62.0" cy="61.0" r="3.5" fill="var(--blu)"/><circle cx="94.0" cy="42.5" r="3.5" fill="var(--blu)"/><circle cx="126.0" cy="37.8" r="3.5" fill="var(--blu)"/><circle cx="158.0" cy="36.6" r="3.5" fill="var(--blu)"/><circle cx="190.0" cy="36.3" r="3.5" fill="var(--blu)"/><circle cx="222.0" cy="36.3" r="3.5" fill="var(--blu)"/><circle cx="254.0" cy="36.3" r="3.5" fill="var(--blu)"/><circle cx="286.0" cy="36.3" r="3.5" fill="var(--blu)"/>
+<line x1="20" y1="155" x2="310" y2="155" stroke="var(--dim)"/>
+<text x="30" y="170" class="ax" text-anchor="middle">1</text><text x="158" y="170" class="ax" text-anchor="middle">5</text><text x="286" y="170" class="ax" text-anchor="middle">9</text>
+<text x="40" y="134.5" class="ax">a₁ = √2</text></svg><p class="note">The shaded band between aₙ and 2 shrinks at every step.</p></div></div>
+<h2>3 · The circular-logic trap</h2><div class="grid2">
+<div class="card bad"><h3>✗ Circular</h3><p>Take <span class="m">a₁ = 1,  aₙ₊₁ = 2aₙ</span>.</p><p>Solve <span class="m">L = 2L</span> ⇒ <span class="m">L = 0</span>.</p><p><span class='strike'>“So the limit is 0.”</span></p><p>In fact <span class="m">aₙ = 2ⁿ⁻¹ → ∞</span>: there is no limit.</p></div>
+<div class="card good"><h3>✓ Correct order</h3><p>① Estimate: solve L = f(L) (a guess)</p><p>② Monotone + bounded ⇒ the limit exists</p><p>③ Pass to the limit and solve for L</p></div></div>
+<p class="note"><span class="m">L = f(L)</span> only says where a limit could be, not whether one exists. The estimate is a guide; the theorem is the license.</p>
+<h2>4 · Two fixed points, two fates</h2><div class="grid2"><div><p><span class="m">aₙ₊₁ = aₙ²</span>: <span class="m">L = L²</span> gives the fixed points <span class="m">0</span> and <span class="m">1</span>. Start inside <span class="m">(0, 1)</span>: the sequence decreases to 0 (0.9 → 0.81 → 0.66 → 0.43 → …). Start above 1: it increases without bound (1.1 → 1.21 → 1.46 → 2.14 → …). Same rule, two fates — the starting point decides.</p></div><div class="card"><svg viewBox="0 0 340 175" role="img" aria-label="basins">
+<rect x="75.1" y="30" width="122.4" height="135" fill="var(--blu)" opacity=".12"/>
+<rect x="197.6" y="30" width="122.4" height="135" fill="var(--red)" opacity=".12"/>
+<path d="M20.0,64.1 L22.5,66.3 L25.0,68.4 L27.5,70.4 L30.0,72.3 L32.5,74.0 L35.0,75.6 L37.5,77.1 L40.0,78.4 L42.5,79.7 L45.0,80.8 L47.5,81.9 L50.0,82.8 L52.5,83.6 L55.0,84.4 L57.5,85.0 L60.0,85.5 L62.5,86.0 L65.0,86.3 L67.5,86.6 L70.0,86.8 L72.5,86.9 L75.0,87.0 L77.5,86.9 L80.0,86.8 L82.5,86.7 L85.0,86.4 L87.5,86.1 L90.0,85.8 L92.5,85.4 L95.0,84.9 L97.5,84.4 L100.0,83.8 L102.5,83.3 L105.0,82.6 L107.5,81.9 L110.0,81.2 L112.5,80.5 L115.0,79.7 L117.5,78.9 L120.0,78.1 L122.5,77.3 L125.0,76.4 L127.5,75.6 L130.0,74.7 L132.5,73.8 L135.0,72.9 L137.5,72.0 L140.0,71.2 L142.5,70.3 L145.0,69.4 L147.5,68.5 L150.0,67.7 L152.5,66.9 L155.0,66.0 L157.5,65.2 L160.0,64.5 L162.5,63.7 L165.0,63.0 L167.5,62.4 L170.0,61.7 L172.5,61.1 L175.0,60.6 L177.5,60.0 L180.0,59.6 L182.5,59.2 L185.0,58.8 L187.5,58.5 L190.0,58.3 L192.5,58.1 L195.0,58.0 L197.5,58.0 L200.0,58.0 L202.5,58.1 L205.0,58.3 L207.5,58.6 L210.0,58.9 L212.5,59.4 L215.0,59.9 L217.5,60.5 L220.0,61.3 L222.5,62.1 L225.0,63.0 L227.5,64.0 L230.0,65.2 L232.5,66.4 L235.0,67.8 L237.5,69.2 L240.0,70.8 L242.5,72.6 L245.0,74.4 L247.5,76.4 L250.0,78.5 L252.5,80.7 L255.0,83.1 L257.5,85.6 L260.0,88.3 L262.5,91.1 L265.0,94.0 L267.5,97.2 L270.0,100.4 L272.5,103.8 L275.0,107.4 L277.5,111.2 L280.0,115.1 L282.5,119.2 L285.0,123.4 L287.5,127.9 L290.0,132.5 L292.5,137.3 L295.0,142.3 L297.5,147.4 L300.0,152.8 L302.5,158.3 L305.0,164.1" fill="none" stroke="var(--grn)" stroke-width="2.5"/>
+<circle cx="75.1" cy="81.0" r="6" fill="var(--amb)"/>
+<text x="75.1" y="103.0" class="ax" text-anchor="middle" fill="var(--blu)">pit 0</text>
+<text x="197.6" y="50.0" class="ax" text-anchor="middle" fill="var(--red)">ridge 1</text>
+<text x="136.3" y="24" class="ax" text-anchor="middle" fill="var(--blu)">(0, 1) → 0</text>
+<text x="258.8" y="24" class="ax" text-anchor="middle" fill="var(--red)">(1, ∞) → ∞</text>
+<text x="322" y="165" class="ax" text-anchor="end" fill="var(--red)">→ ∞</text></svg></div></div>
+<h2>5 · The number e via compounding</h2><p>Deposit 1 at 100% interest per year, paid <span class="m">n</span> times a year: you end with <span class="m">(1 + 1/n)ⁿ</span>.</p>
+<div class="grid2"><div class="card"><table><tr><th>paid</th><th>n</th><th class="m">(1 + 1/n)ⁿ</th></tr><tr class=""><td>yearly</td><td>1</td><td class="m">2</td></tr><tr class=""><td>half-yearly</td><td>2</td><td class="m">2.25</td></tr><tr class=""><td>quarterly</td><td>4</td><td class="m">2.4414</td></tr><tr class=""><td>monthly</td><td>12</td><td class="m">2.6130</td></tr><tr class=""><td>daily</td><td>365</td><td class="m">2.7146</td></tr><tr class="last"><td>continuously</td><td>∞</td><td class="m">e ≈ 2.71828</td></tr></table></div>
+<div class="card"><svg viewBox="0 0 320 180" role="img" aria-label="(1+1/n)^n">
+<line x1="30" y1="41.5" x2="305" y2="41.5" stroke="var(--red)" stroke-width="2.5"/>
+<text x="34" y="36.5" class="ax" fill="var(--red)">3</text>
+<line x1="30" y1="71.9" x2="305" y2="71.9" stroke="var(--grn)" stroke-dasharray="5 4"/>
+<text x="34" y="66.9" class="ax" fill="var(--grn)">e ≈ 2.71828</text><circle cx="30.0" cy="149.2" r="2.6" fill="var(--blu)"/><circle cx="57.1" cy="122.3" r="2.6" fill="var(--blu)"/><circle cx="72.9" cy="109.3" r="2.6" fill="var(--blu)"/><circle cx="84.2" cy="101.7" r="2.6" fill="var(--blu)"/><circle cx="92.9" cy="96.6" r="2.6" fill="var(--blu)"/><circle cx="100.0" cy="93.1" r="2.6" fill="var(--blu)"/><circle cx="106.1" cy="90.4" r="2.6" fill="var(--blu)"/><circle cx="111.3" cy="88.3" r="2.6" fill="var(--blu)"/><circle cx="115.9" cy="86.6" r="2.6" fill="var(--blu)"/><circle cx="123.7" cy="84.2" r="2.6" fill="var(--blu)"/><circle cx="130.3" cy="82.4" r="2.6" fill="var(--blu)"/><circle cx="138.4" cy="80.5" r="2.6" fill="var(--blu)"/><circle cx="145.1" cy="79.2" r="2.6" fill="var(--blu)"/><circle cx="150.8" cy="78.3" r="2.6" fill="var(--blu)"/><circle cx="158.8" cy="77.1" r="2.6" fill="var(--blu)"/><circle cx="165.5" cy="76.3" r="2.6" fill="var(--blu)"/><circle cx="172.2" cy="75.6" r="2.6" fill="var(--blu)"/><circle cx="178.8" cy="75.1" r="2.6" fill="var(--blu)"/><circle cx="185.2" cy="74.6" r="2.6" fill="var(--blu)"/><circle cx="191.9" cy="74.2" r="2.6" fill="var(--blu)"/><circle cx="198.8" cy="73.8" r="2.6" fill="var(--blu)"/><circle cx="205.4" cy="73.5" r="2.6" fill="var(--blu)"/><circle cx="212.3" cy="73.2" r="2.6" fill="var(--blu)"/><circle cx="219.0" cy="73.0" r="2.6" fill="var(--blu)"/><circle cx="225.8" cy="72.8" r="2.6" fill="var(--blu)"/><circle cx="232.5" cy="72.7" r="2.6" fill="var(--blu)"/><circle cx="239.2" cy="72.6" r="2.6" fill="var(--blu)"/><circle cx="246.0" cy="72.5" r="2.6" fill="var(--blu)"/><circle cx="252.8" cy="72.4" r="2.6" fill="var(--blu)"/><circle cx="259.5" cy="72.3" r="2.6" fill="var(--blu)"/><circle cx="266.3" cy="72.2" r="2.6" fill="var(--blu)"/><circle cx="273.0" cy="72.2" r="2.6" fill="var(--blu)"/><circle cx="279.8" cy="72.1" r="2.6" fill="var(--blu)"/><circle cx="286.5" cy="72.1" r="2.6" fill="var(--blu)"/><circle cx="293.2" cy="72.1" r="2.6" fill="var(--blu)"/><circle cx="300.0" cy="72.0" r="2.6" fill="var(--blu)"/>
+<line x1="30" y1="165" x2="305" y2="165" stroke="var(--dim)"/>
+<text x="30.0" y="177" class="ax" text-anchor="middle">1</text><text x="120.0" y="177" class="ax" text-anchor="middle">10</text>
+<text x="210.0" y="177" class="ax" text-anchor="middle">100</text><text x="300.0" y="177" class="ax" text-anchor="middle">1000</text>
+<text x="300" y="149.2" class="ax" text-anchor="end">n (log scale)</text></svg></div></div>
+<div class="card"><p>Binomial picture: <span class="m long">(1 + 1/n)ⁿ = Σₖ₌₀ⁿ (1/k!)·(1 − 1/n)(1 − 2/n)⋯(1 − (k−1)/n)</span>. Each factor is below 1 and grows with <span class="m">n</span>, and more terms appear as <span class="m">n</span> grows ⇒ <b>increasing</b>. Also <span class="m long">(1 + 1/n)ⁿ ≤ Σₖ₌₀ⁿ 1/k! < 1 + 1 + 1/2 + 1/4 + ⋯ = 3</span> ⇒ <b>bounded above</b>. Hence the limit exists: <span class="m">e = lim (1 + 1/n)ⁿ</span>.</p><p><b class='hl'>The 1^∞ pattern.</b> The base <span class="m">1 + 1/n → 1</span> while the exponent <span class="m">n → ∞</span>. “1 to any power is 1” does not apply: the limit is <span class="m">e</span>, not 1. This disguised indeterminate form is resolved in a later episode.</p></div>
+<h2>Self-check</h2><section class="quiz"><div class="q"><p class="qt">1. Which sequence is bounded but divergent?</p><div class="opts"><span class="opt" data-ok="0">A. aₙ = 1/n</span><span class="opt" data-ok="1">B. aₙ = (−1)ⁿ</span><span class="opt" data-ok="0">C. aₙ = 2 − 1/n</span></div><button type="button" data-show="Show answer" data-hide="Hide answer">Show answer</button><p class="exp"><b class="ok">Answer: B. </b>(−1)ⁿ stays in [−1, 1] but alternates forever, so it has no limit; the other two are monotone and bounded.</p></div><div class="q"><p class="qt">2. In the recipe for aₙ₊₁ = f(aₙ), when may you trust the root of L = f(L) as the limit?</p><div class="opts"><span class="opt" data-ok="0">A. As soon as you solve L = f(L)</span><span class="opt" data-ok="1">B. After proving the sequence is monotone and bounded</span><span class="opt" data-ok="0">C. After computing the first three terms</span></div><button type="button" data-show="Show answer" data-hide="Hide answer">Show answer</button><p class="exp"><b class="ok">Answer: B. </b>Only monotone + bounded guarantees a limit exists; then passing to the limit shows it solves L = f(L).</p></div><div class="q"><p class="qt">3. For a₁ = √2, aₙ₊₁ = √(2 + aₙ), what does the induction step show?</p><div class="opts"><span class="opt" data-ok="1">A. aₙ &lt; 2 ⇒ aₙ₊₁ &lt; 2</span><span class="opt" data-ok="0">B. aₙ &gt; 2 ⇒ aₙ₊₁ &gt; 2</span><span class="opt" data-ok="0">C. aₙ = 2 for all n</span></div><button type="button" data-show="Show answer" data-hide="Hide answer">Show answer</button><p class="exp"><b class="ok">Answer: A. </b>If aₙ &lt; 2 then aₙ₊₁ = √(2 + aₙ) &lt; √4 = 2, and a₁ = √2 &lt; 2 starts the induction.</p></div><div class="q"><p class="qt">4. a₁ = 1, aₙ₊₁ = 2aₙ. Solving L = 2L gives L = 0. What is true?</p><div class="opts"><span class="opt" data-ok="0">A. aₙ → 0</span><span class="opt" data-ok="1">B. aₙ → ∞, so L = 0 is not a limit</span><span class="opt" data-ok="0">C. aₙ → 1</span></div><button type="button" data-show="Show answer" data-hide="Hide answer">Show answer</button><p class="exp"><b class="ok">Answer: B. </b>aₙ = 2ⁿ⁻¹ → ∞; L = f(L) says nothing about existence, so using it first is circular.</p></div><div class="q"><p class="qt">5. For aₙ₊₁ = aₙ² with a₁ = 0.5, the sequence…</p><div class="opts"><span class="opt" data-ok="1">A. decreases to 0</span><span class="opt" data-ok="0">B. converges to 1</span><span class="opt" data-ok="0">C. increases to ∞</span></div><button type="button" data-show="Show answer" data-hide="Hide answer">Show answer</button><p class="exp"><b class="ok">Answer: A. </b>Starting inside (0, 1), squaring makes each term smaller, and the decreasing sequence is bounded below by 0, so it tends to 0.</p></div><div class="q"><p class="qt">6. Why is lim (1 + 1/n)ⁿ called a 1^∞ form?</p><div class="opts"><span class="opt" data-ok="1">A. The base tends to 1 while the exponent tends to ∞</span><span class="opt" data-ok="0">B. Because the limit equals 1</span><span class="opt" data-ok="0">C. Because the sequence is decreasing</span></div><button type="button" data-show="Show answer" data-hide="Hide answer">Show answer</button><p class="exp"><b class="ok">Answer: A. </b>Base → 1 and exponent → ∞ compete, so the value isn&#x27;t settled by &#x27;1 to any power is 1&#x27;; here the limit is e.</p></div></section>
+<footer>Episode 2.5 · Monotone-bounded convergence and the number e</footer>
+</main><script>
+document.querySelectorAll('.quiz .q').forEach(function(q){
+  var b=q.querySelector('button');
+  b.addEventListener('click',function(){
+    var open=q.classList.toggle('open');
+    q.querySelectorAll('.opt').forEach(function(o){o.classList.toggle('correct',open&&o.dataset.ok==='1')});
+    b.textContent=open?b.dataset.hide:b.dataset.show;
+  });
+});
+</script></body></html>
