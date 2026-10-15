@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>实数的完备性初识 · 自测</title>
+<style>
+:root{--bg:#0f1424;--card:#1a2138;--fg:#e6eaf4;--muted:#8c99b3;--teal:#3ddbd9;--amber:#ffb54d;--gold:#ffd166;--red:#ff6b6b;--line:#c9d1e0;--bd:#2a3352}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--fg)}
+body{font-family:Inter,"Segoe UI",system-ui,-apple-system,"PingFang SC","Noto Sans CJK SC","Microsoft YaHei",sans-serif;line-height:1.6;font-size:17px}
+main{max-width:980px;margin:0 auto;padding:40px 20px 80px}
+header{text-align:center;margin-bottom:28px}
+.kicker{color:var(--muted);font-size:14px;letter-spacing:.04em}
+h1{font-size:clamp(28px,5vw,44px);margin:.2em 0 .1em}
+h1 .sub{display:block;color:var(--gold);font-size:.55em;font-weight:500}
+.note{border-left:3px solid var(--gold);background:rgba(255,209,102,.07);padding:10px 16px;border-radius:0 10px 10px 0;color:#d8dcea}
+section{margin-top:44px}
+h2{font-size:24px;margin:0 0 12px;border-bottom:1px solid var(--bd);padding-bottom:6px}
+.math{font-family:"STIX Two Math","Cambria Math","DejaVu Sans","Noto Sans",serif;white-space:nowrap}
+.display{text-align:center;font-size:clamp(20px,3.4vw,28px);margin:16px 0}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:16px 18px}
+.card h3{margin:0 0 6px;font-size:18px}
+.card p{margin:0;color:#c3cadb;font-size:15.5px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media (max-width:640px){.two{grid-template-columns:1fr}}
+table{border-collapse:collapse;width:100%;font-size:15px}
+td,th{padding:4px 8px;border-bottom:1px solid var(--bd);text-align:left}
+th{color:var(--muted);font-weight:500}
+figure{margin:14px 0;background:#121a2e;border:1px solid var(--bd);border-radius:14px;padding:10px}
+svg{width:100%;height:auto;display:block}
+svg text{font-family:inherit;font-size:20px;fill:var(--fg);text-anchor:middle}
+svg .sm{font-size:16px}svg .b{font-weight:600}
+.teal{fill:var(--teal);color:var(--teal)}.amber{fill:var(--amber);color:var(--amber)}.gold{fill:var(--gold);color:var(--gold)}.red{fill:var(--red);color:var(--red)}.muted{fill:var(--muted);color:var(--muted)}
+.fteal{fill:var(--teal)}.famber{fill:var(--amber)}.fgold{fill:var(--gold)}
+.qline{stroke:var(--line);stroke-width:3;stroke-dasharray:1.5 6;stroke-linecap:round}
+.rline,.lstroke{stroke:var(--line);stroke-width:2.5;fill:none}
+.tick{stroke:var(--line);stroke-width:1.5}
+.band{fill:rgba(61,219,217,.22)}.cell{fill:rgba(255,209,102,.4)}.funnel{fill:rgba(255,209,102,.07);stroke:rgba(255,209,102,.4);stroke-width:1}
+.ghost{fill:rgba(255,107,107,.1);stroke:var(--red);stroke-width:2.5;stroke-dasharray:6 5}
+.arr{stroke-width:2.5;fill:none}.teal-s{stroke:var(--teal)}.amber-s{stroke:var(--amber)}.gold-s{stroke:var(--gold)}
+.w3{stroke-width:3}.w4{stroke-width:4}.dash{stroke:var(--fg);stroke-width:1.5;stroke-dasharray:5 4}
+.curve{fill:none;stroke:var(--teal);stroke-width:3}
+.seed{background:var(--card);border:1px solid var(--gold);border-radius:14px;padding:16px 20px;text-align:center}
+.seed b{color:var(--gold)}
+.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px}
+.tile{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:12px;display:flex;flex-direction:column}
+.tile .n{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--gold);color:var(--bg);font-weight:700;font-size:13px}
+.tile h3{font-size:16px;margin:6px 0 4px}.tile p{font-size:14px;color:#c3cadb;margin:0 0 10px;flex:1}
+.badge{font-size:12px;color:var(--amber);background:rgba(255,181,77,.14);border-radius:99px;padding:3px 10px;align-self:flex-start}
+.pill{display:inline-block;background:rgba(255,209,102,.15);color:var(--gold);border-radius:99px;padding:2px 12px;font-weight:600}
+.quiz{counter-reset:q}
+.qitem{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:14px 18px;margin:12px 0}
+.qitem .qq{font-weight:600;margin-bottom:8px}
+.qitem .qq::before{counter-increment:q;content:counter(q) ". ";color:var(--gold)}
+.qitem ol{list-style:none;padding:0;margin:0 0 10px}
+.qitem li{padding:6px 10px;border:1px solid transparent;border-radius:9px;margin:3px 0}
+.qitem li .l{display:inline-block;width:1.6em;color:var(--muted);font-weight:600}
+.qitem.open li.ok{border-color:var(--teal);background:rgba(61,219,217,.1)}
+.qitem.open li.ok .l{color:var(--teal)}
+.qitem button{font:inherit;font-size:14px;background:transparent;color:var(--gold);border:1px solid var(--gold);border-radius:99px;padding:4px 14px;cursor:pointer}
+.qitem button:hover{background:rgba(255,209,102,.12)}
+.qitem .ex{display:none;margin-top:10px;color:#c3cadb;font-size:15px}
+.qitem.open .ex{display:block}
+footer{margin-top:40px;text-align:center;color:var(--muted);font-size:13px}
+
+/* ---- 手机自测单页覆盖层（深浅主题自适应：浅色文件有 --paper，深色有 --bg/--fg） ---- */
+html,body{margin:0;background:var(--bg,var(--paper));color:var(--fg,var(--ink));
+  font-family:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC","Source Han Sans SC",system-ui,-apple-system,sans-serif}
+/* 中和原幻灯片容器的隐藏/定位，让 section 直接作为文档流内容 */
+section.slide{display:block!important;position:static!important;width:auto!important;height:auto!important;
+  padding:0!important;background:none!important;box-shadow:none!important;transform:none!important}
+.page{max-width:720px;margin:0 auto;padding:18px 16px 60px}
+.topbar{display:flex;justify-content:space-between;align-items:baseline;gap:8px;
+  border-bottom:2px solid var(--grid,var(--line,var(--rule,#e3e0d6)));padding-bottom:10px;margin-bottom:6px}
+.topbar h1{font-size:20px;margin:0}
+.topbar a{color:var(--blue,#1f72b0);font-size:14px;text-decoration:none;white-space:nowrap}
+.lead{color:var(--muted);font-size:15px;margin:12px 0 2px;line-height:1.6}
+/* 表格 → 竖屏卡片（仅 slide 式页面有表格） */
+table.t{display:block;width:auto;border:0}
+table.t tbody,table.t tr,table.t td,table.t th{display:block;border:0;width:auto}
+table.t thead{display:none}
+table.t tr{background:var(--card);border:1.5px solid var(--rule);border-radius:14px;
+  padding:14px 16px;margin:14px 0;font-size:19px;line-height:1.7}
+table.t td{padding:6px 0}
+table.t td:last-child{border-top:1.5px dashed var(--rule);margin-top:6px;padding-top:10px}
+.q{display:block;text-align:center}
+.reveal{cursor:pointer;border:2px dashed var(--rule);border-radius:10px;
+  padding:6px 22px;color:var(--muted);font-size:16px;background:none;font-family:inherit}
+.ans{display:none;line-height:1.8}
+.shown .ans{display:block} .shown .reveal{display:none}
+/* quiz-section 式页面：原 section 自带卡片样式，仅收窄内边距 */
+section.quiz{padding:6px 2px;margin:8px 0;background:none;border:0}
+section.quiz .q{margin:12px 0;text-align:left}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="topbar">
+    <h1>实数的完备性初识 · 自测</h1> <a href="../notes/01-03.html">查看讲稿 →</a>
+  </div>
+  
+  <div class="quiz">
+  <section class="quiz"><p class="muted">先在心里选定答案，再点击查看。</p><div class="qitem" id="q0"><div class="qq">下列哪个有界有理数集在 ℚ 中没有上确界？</div><ol><li><span class="l">A</span>{x ∈ ℚ : x ≤ 2}</li><li class=ok><span class="l">B</span>{x ∈ ℚ : x² &lt; 2}</li><li><span class="l">C</span>{x ∈ ℚ : 0 &lt; x &lt; 1}</li></ol><button type="button" aria-expanded="false">查看答案</button><div class="ex"><b class="teal">答案: B.</b> 它的最小上界本应是 √2，而 √2 不是有理数；另两个的上确界 2 和 1 都在 ℚ 中。</div></div><div class="qitem" id="q1"><div class="qq">哪一条承诺属于完备性，而不是稠密性？</div><ol><li><span class="l">A</span>每个窗口 (a, b)（a &lt; b）都含有理数。</li><li class=ok><span class="l">B</span>长度 → 0 的闭区间套收拢于一个实数。</li><li><span class="l">C</span>两个有理数之间总有另一个有理数。</li></ol><button type="button" aria-expanded="false">查看答案</button><div class="ex"><b class="teal">答案: B.</b> A 与 C 是稠密性的承诺（ℚ 也满足，却仍有洞）；只有 B 说每场正当的追捕都有终点。</div></div><div class="qitem" id="q2"><div class="qq">若有理数 q &gt; 0 且 q² &gt; 2，对 S = {x ∈ ℚ : x² &lt; 2} 可得什么？</div><ol><li><span class="l">A</span>q 是 S 的最小上界。</li><li class=ok><span class="l">B</span>存在更小的有理数仍是 S 的上界。</li><li><span class="l">C</span>q 属于 S。</li></ol><button type="button" aria-expanded="false">查看答案</button><div class="ex"><b class="teal">答案: B.</b> 上方猎手总能再缩小一点而仍是上界，所以 ℚ 中没有最小上界。</div></div><div class="qitem" id="q3"><div class="qq">本课程接受的“种子”是什么？</div><ol><li class=ok><span class="l">A</span>每个无限小数都是实数，每个实数也都是无限小数。</li><li><span class="l">B</span>每个实数都是有理数。</li><li><span class="l">C</span>每个有理柯西列都有有理极限。</li></ol><button type="button" aria-expanded="false">查看答案</button><div class="ex"><b class="teal">答案: A.</b> 种子就是用无限小数刻画 ℝ；它本身已是一条乔装的完备性命题。</div></div><div class="qitem" id="q4"><div class="qq">下列哪一条不在本集列出的五种完备性说法之中？</div><ol><li><span class="l">A</span>单调有界数列必收敛。</li><li class=ok><span class="l">B</span>每个有界数列都是单调的。</li><li><span class="l">C</span>柯西列必收敛。</li></ol><button type="button" aria-expanded="false">查看答案</button><div class="ex"><b class="teal">答案: B.</b> 该命题本身就是错的（如 (−1)ⁿ）；五种说法是戴德金分割、闭区间套、单调有界、柯西列与确界原理。</div></div><div class="qitem" id="q5"><div class="qq">对 f(x) = x² − 2 在 [1, 2] 上二分，完备性保证了什么？</div><ol><li><span class="l">A</span>算法在有限步后停止。</li><li class=ok><span class="l">B</span>区间套收拢于一个真实的实数 √2。</li><li><span class="l">C</span>中点的极限是有理数。</li></ol><button type="button" aria-expanded="false">查看答案</button><div class="ex"><b class="teal">答案: B.</b> 追捕永不停止，但终点是 ℝ 中的一个点：零点 √2 存在，二分法逐位算出它的小数。</div></div></section>
+  </div>
+</div>
+<script>
+document.querySelectorAll('.reveal').forEach(function(b){
+  b.addEventListener('click',function(){var t=this.closest('.q,.qt-item');if(t)t.classList.add('shown')});
+});
+/* 按页面 DOM 特征自适配各批次回件的交互（逻辑均照搬原版） */
+if (document.querySelector('.qt3')) {
+  /* .qt3 式（02-03）：按钮点击后父卡 shown、按钮隐藏 */
+  document.querySelectorAll('.qt3 button').forEach(function(b){
+    b.addEventListener('click',function(){b.parentNode.classList.add('shown');b.style.display='none';});});
+} else if (document.querySelector('.quiz li.q')) {
+  /* ol/li 式（02-06）：.ans 切换 + data-ok 选项高亮 */
+  document.querySelectorAll('.quiz li.q').forEach(function(q){
+    var b=q.querySelector('button'),a=q.querySelector('.ans'),ok=q.querySelector('.opts li[data-ok]');
+    b.addEventListener('click',function(){var on=a.classList.toggle('show');ok.classList.toggle('ok',on);
+      b.textContent=on?b.dataset.hide:b.dataset.show;b.setAttribute('aria-expanded',on);});});
+  } else if (document.querySelector('.q .rv') && document.querySelector('.q .opts')) {
+    /* rv + opts li[data-ok] + hidden 属性式（03-05）：ex.hidden 切换，命中项标 hit */
+    document.querySelectorAll('.q').forEach(function(q){
+      var b=q.querySelector('.rv'), ex=q.querySelector('.ex');
+      if(!b||!ex) return;
+      b.addEventListener('click',function(){
+        var open=ex.hidden; ex.hidden=!open;
+        q.querySelectorAll('.opts li').forEach(function(li){
+          if(li.dataset.ok==='1') li.classList.toggle('hit',open);
+        });
+        b.textContent=open?'隐藏答案':'显示答案';
+      });
+    });
+  } else if (document.querySelector('.quiz .q .rv')) {
+  /* opt/rv/ex 式（07-05）：选项标记 sel，展开按钮标出对错 */
+  document.querySelectorAll('.quiz .q').forEach(function(q){
+    var opts=q.querySelectorAll('.opt'), ex=q.querySelector('.ex'), btn=q.querySelector('.rv');
+    opts.forEach(function(o){o.addEventListener('click',function(){
+      if(ex.classList.contains('show'))return;
+      opts.forEach(function(x){x.classList.remove('sel')}); o.classList.add('sel');});});
+    btn.addEventListener('click',function(){
+      var show=!ex.classList.contains('show'); ex.classList.toggle('show',show);
+      opts.forEach(function(o){
+        o.classList.remove('right','wrong');
+        if(show){ if(o.dataset.c==='1')o.classList.add('right'); else if(o.classList.contains('sel'))o.classList.add('wrong'); }
+      });
+      btn.textContent=show?btn.dataset.hide:btn.dataset.reveal;
+    });
+  });
+} else if (document.querySelector('.quiz .q[data-ok]')) {
+  /* data-ok 式（02-07）：点击后展开 .ans 并高亮正确选项 */
+  document.querySelectorAll('.quiz .q').forEach(function(q){
+    var btn=q.querySelector('button');
+    btn.addEventListener('click',function(){
+      q.classList.add('open');
+      var k=parseInt(q.getAttribute('data-ok'),10);
+      q.querySelectorAll('.opts span')[k].classList.add('ok');
+      btn.disabled=true; btn.style.opacity=.5; });
+  });
+  } else if (document.querySelector('.qitem')) {
+    /* qitem 式（01-03 第一章）：按钮 toggle 父级 open，文字切换（原页 JS 照搬） */
+    document.querySelectorAll('.qitem button').forEach(function(b){
+      b.addEventListener('click',function(){
+        var q=b.parentNode, on=q.classList.toggle('open');
+        b.setAttribute('aria-expanded',on);
+        b.textContent=on?'隐藏答案':'查看答案';
+      });
+    });
+  } else if (document.querySelector('.q button[data-ans]')) {
+    /* data-ans + hidden 属性式（03-03）：ex.hidden 切换，正确项标 ok */
+    document.querySelectorAll('.q button').forEach(function(b){
+      var q=b.parentNode, ex=q.querySelector('.ex'), li=q.querySelector('li[data-k="'+b.dataset.ans+'"]');
+      b.addEventListener('click',function(){
+        var show=ex.hidden; ex.hidden=!show;
+        if(li) li.classList.toggle('ok',show);
+        b.textContent=show?'隐藏答案':'显示答案';
+      });
+    });
+  } else if (document.querySelector('.quiz .q .rev')) {
+    /* rev/exp + data-ans 式（01-05 第一章）：点 rev 切换 exp.show，正确项标 right */
+    document.querySelectorAll('.quiz .q').forEach(function(q){
+      var b=q.querySelector('.rev'), ex=q.querySelector('.exp'), ans=q.getAttribute('data-ans');
+      if(!b||!ex) return;
+      var right = ans!=null ? q.querySelector('.opt[data-k="'+ans+'"]') : null;
+      b.addEventListener('click',function(){
+        var on=ex.classList.toggle('show');
+        if(right) right.classList.toggle('right',on);
+        b.textContent=on?'隐藏答案':'显示答案';
+      });
+    });
+  } else {
+    /* .q button 通用兜底（01-01/01-02/01-04/01-06/03-01/02/04/06…）：
+       open 与 shown 双开（各家 CSS 用哪个都命中）；正确项按 data-c/data-ok/ok 标 correct */
+    document.querySelectorAll('.q button').forEach(function(b){
+      b.addEventListener('click',function(){
+        var q=b.closest('.q'), on=!q.classList.contains('open');
+        q.classList.toggle('open',on); q.classList.toggle('shown',on);
+        q.querySelectorAll('.opt[data-c="1"], li[data-ok="1"], li.ok').forEach(function(o){
+          o.classList.toggle('correct',on);
+        });
+        if(b.dataset.hide&&b.dataset.show) b.textContent=on?b.dataset.hide:b.dataset.show;
+        else b.textContent=on?'隐藏答案':'显示答案';
+      });
+    });
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>稠密性：有理数与无理数无处不在 · 自测</title>
+<style>
+:root{--bg0:#0e1320;--bg1:#161c2b;--card:#1f2638;--fg:#edf1f7;--muted:#8c97ac;--line:#c7d0de;
+--amber:#f5ba42;--teal:#40d1c9;--pink:#ff6b8c;--red:#ff5c5c;--green:#73d973;--border:#4c5b7a}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+html{background:var(--bg0)}
+body{background:linear-gradient(180deg,var(--bg1) 0,var(--bg0) 900px);min-height:100vh;color:var(--fg);
+font-family:Inter,"Segoe UI",system-ui,-apple-system,"PingFang SC","Noto Sans CJK SC","Microsoft YaHei",sans-serif;
+line-height:1.6;font-size:17px}
+main{max-width:980px;margin:0 auto;padding:40px 16px 80px}
+.ep{color:var(--muted);font-weight:700;letter-spacing:.02em;font-size:14px}
+.ep::after{content:"";display:block;width:64px;height:3px;background:var(--pink);margin-top:6px}
+h1{font-size:clamp(26px,4.5vw,40px);line-height:1.2;margin:18px 0 10px}
+.lead{color:#c9d2e2;font-size:18px;margin:0 0 28px}
+h2{font-size:22px;margin:44px 0 14px;display:flex;gap:10px;align-items:center}
+h2 .n{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;background:rgba(255,107,140,.18);color:var(--pink);font-size:15px}
+.card{background:rgba(31,38,56,.92);border:1.5px solid var(--border);border-radius:16px;padding:18px 22px;margin:14px 0}
+.card.pink{border-color:var(--pink)}.card.amber{border-color:var(--amber)}.card.teal{border-color:var(--teal)}.card.red{border-color:var(--red)}
+.card h3{margin:0 0 6px;font-size:16px;letter-spacing:.03em}
+.pink h3{color:var(--pink)}.amber h3{color:var(--amber)}.teal h3{color:var(--teal)}
+.math{font-family:"DejaVu Serif","Cambria Math","STIX Two Math","Times New Roman",serif;white-space:nowrap}
+.big{font-size:20px}
+.muted{color:var(--muted)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media (max-width:720px){.grid2{grid-template-columns:1fr}}
+svg{width:100%;height:auto;display:block}
+svg text{font-family:Inter,"Noto Sans CJK SC","PingFang SC",sans-serif;fill:var(--muted);font-size:13px}
+svg .m{font-family:"DejaVu Serif","Times New Roman",serif}
+ol.steps{margin:8px 0 0;padding-left:22px}ol.steps li{margin:6px 0}
+ul.recap{list-style:none;padding:0;margin:0}
+ul.recap li{background:rgba(31,38,56,.92);border:1.5px solid var(--border);border-radius:12px;padding:12px 16px 12px 44px;margin:10px 0;position:relative}
+ul.recap li::before{content:"";position:absolute;left:18px;top:50%;width:12px;height:12px;margin-top:-6px;border-radius:50%;background:var(--c,var(--amber))}
+.quiz{counter-reset:q}
+.q{background:rgba(31,38,56,.92);border:1.5px solid var(--border);border-radius:14px;padding:14px 18px;margin:12px 0}
+.q .qt{font-weight:600}
+.q .qt::before{counter-increment:q;content:counter(q) ". ";color:var(--pink)}
+.opts{display:flex;flex-wrap:wrap;gap:8px 18px;margin:8px 0 10px;padding:0;list-style:none}
+.opts li{padding:3px 10px;border-radius:8px;border:1px solid transparent}
+.opts li b{color:var(--muted);margin-right:6px}
+.q.shown .opts li.ok{border-color:var(--green);background:rgba(115,217,115,.12)}
+.q.shown .opts li.ok b{color:var(--green)}
+.q button{background:rgba(255,107,140,.16);color:var(--fg);border:1px solid var(--pink);border-radius:999px;padding:5px 14px;font:inherit;font-size:14px;cursor:pointer}
+.q button:hover{background:rgba(255,107,140,.3)}
+.q .ex{display:none;margin-top:10px;color:#c9d2e2;font-size:15px}
+.q.shown .ex{display:block}
+.legend{display:flex;gap:18px;flex-wrap:wrap;font-size:14px;color:var(--muted);margin-top:6px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:middle}
+footer{margin-top:50px;color:var(--muted);font-size:13px;text-align:center}
+
+/* ---- 手机自测单页覆盖层（深浅主题自适应：浅色文件有 --paper，深色有 --bg/--fg） ---- */
+html,body{margin:0;background:var(--bg,var(--paper));color:var(--fg,var(--ink));
+  font-family:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC","Source Han Sans SC",system-ui,-apple-system,sans-serif}
+/* 中和原幻灯片容器的隐藏/定位，让 section 直接作为文档流内容 */
+section.slide{display:block!important;position:static!important;width:auto!important;height:auto!important;
+  padding:0!important;background:none!important;box-shadow:none!important;transform:none!important}
+.page{max-width:720px;margin:0 auto;padding:18px 16px 60px}
+.topbar{display:flex;justify-content:space-between;align-items:baseline;gap:8px;
+  border-bottom:2px solid var(--grid,var(--line,var(--rule,#e3e0d6)));padding-bottom:10px;margin-bottom:6px}
+.topbar h1{font-size:20px;margin:0}
+.topbar a{color:var(--blue,#1f72b0);font-size:14px;text-decoration:none;white-space:nowrap}
+.lead{color:var(--muted);font-size:15px;margin:12px 0 2px;line-height:1.6}
+/* 表格 → 竖屏卡片（仅 slide 式页面有表格） */
+table.t{display:block;width:auto;border:0}
+table.t tbody,table.t tr,table.t td,table.t th{display:block;border:0;width:auto}
+table.t thead{display:none}
+table.t tr{background:var(--card);border:1.5px solid var(--rule);border-radius:14px;
+  padding:14px 16px;margin:14px 0;font-size:19px;line-height:1.7}
+table.t td{padding:6px 0}
+table.t td:last-child{border-top:1.5px dashed var(--rule);margin-top:6px;padding-top:10px}
+.q{display:block;text-align:center}
+.reveal{cursor:pointer;border:2px dashed var(--rule);border-radius:10px;
+  padding:6px 22px;color:var(--muted);font-size:16px;background:none;font-family:inherit}
+.ans{display:none;line-height:1.8}
+.shown .ans{display:block} .shown .reveal{display:none}
+/* quiz-section 式页面：原 section 自带卡片样式，仅收窄内边距 */
+section.quiz{padding:6px 2px;margin:8px 0;background:none;border:0}
+section.quiz .q{margin:12px 0;text-align:left}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="topbar">
+    <h1>稠密性：有理数与无理数无处不在 · 自测</h1> <a href="../notes/01-02.html">查看讲稿 →</a>
+  </div>
+  
+  <div class="quiz">
+  
+<div class="quiz"><div class="q" id="q0"><div class="qt">“S 在 ℝ 中稠密”的意思是：</div><ul class="opts"><li class=""><b>A</b>S 包含所有实数</li><li class="ok"><b>B</b>每个开区间 (a, b) 都含有 S 中的点</li><li class=""><b>C</b>S 有最小的正元素</li></ul><button type="button" aria-expanded="false">显示答案</button><div class="ex"><b style="color:var(--green)">B.</b> 稠密性是关于窗口的命题：再小的开区间也不会错过 S。</div></div><div class="q" id="q1"><div class="qt">判断：若 S 在 ℝ 中稠密，则 S 没有空隙。</div><ul class="opts"><li class=""><b>A</b>正确</li><li class="ok"><b>B</b>错误</li><li class=""><b>C</b>仅当 S 可数时正确</li></ul><button type="button" aria-expanded="false">显示答案</button><div class="ex"><b style="color:var(--green)">B.</b> ℚ 稠密，但 √2 ∉ ℚ：稠密并不意味着填满数轴（稠密 ≠ 完备）。</div></div><div class="q" id="q2"><div class="qt">当 1/n &lt; b − a 时，为什么必有某个 m/n 落在 (a, b) 内？</div><ul class="opts"><li class="ok"><b>A</b>刻度间距比窗口窄，不可能整个跳过</li><li class=""><b>B</b>因为 a、b 必须是有理数</li><li class=""><b>C</b>因为 ℚ 是完备的</li></ul><button type="button" aria-expanded="false">显示答案</button><div class="ex"><b style="color:var(--green)">A.</b> a 右边第一个刻度不超过 a + 1/n，而 a + 1/n 仍小于 b。</div></div><div class="q" id="q3"><div class="qt">若有理数 r ≠ 0 且 r ∈ (a/√2, b/√2)，则 √2·r：</div><ul class="opts"><li class=""><b>A</b>是有理数且在 (a, b) 内</li><li class="ok"><b>B</b>是无理数且在 (a, b) 内</li><li class=""><b>C</b>是无理数但可能不在 (a, b) 内</li></ul><button type="button" aria-expanded="false">显示答案</button><div class="ex"><b style="color:var(--green)">B.</b> 乘以 √2 把窗口映回 (a, b)；若 √2·r = q ∈ ℚ，则 √2 = q/r ∈ ℚ，矛盾。</div></div><div class="q" id="q4"><div class="qt">两个不同实数 a &lt; b 之间有多少个有理数？</div><ul class="opts"><li class=""><b>A</b>恰好一个</li><li class=""><b>B</b>有限个</li><li class="ok"><b>C</b>无穷多个</li></ul><button type="button" aria-expanded="false">显示答案</button><div class="ex"><b style="color:var(--green)">C.</b> 找到一个后，缩小窗口把它排除，又能找到新的，永无止境。</div></div><div class="q" id="q5"><div class="qt">下列哪个承诺属于完备性，而非稠密性？</div><ul class="opts"><li class=""><b>A</b>每个窗口都被击中</li><li class="ok"><b>B</b>收敛的追寻总能找到目标</li><li class=""><b>C</b>每个区间都含无理数</li></ul><button type="button" aria-expanded="false">显示答案</button><div class="ex"><b style="color:var(--green)">B.</b> 稠密性关乎窗口；完备性关乎极限是否真的存在。</div></div></div>
+<footer>数学分析 · 第 1.2 集 · ℚ 与 ℝ∖ℚ 的稠密性</footer>
+
+  </div>
+</div>
+<script>
+document.querySelectorAll('.reveal').forEach(function(b){
+  b.addEventListener('click',function(){var t=this.closest('.q,.qt-item');if(t)t.classList.add('shown')});
+});
+/* 按页面 DOM 特征自适配各批次回件的交互（逻辑均照搬原版） */
+if (document.querySelector('.qt3')) {
+  /* .qt3 式（02-03）：按钮点击后父卡 shown、按钮隐藏 */
+  document.querySelectorAll('.qt3 button').forEach(function(b){
+    b.addEventListener('click',function(){b.parentNode.classList.add('shown');b.style.display='none';});});
+} else if (document.querySelector('.quiz li.q')) {
+  /* ol/li 式（02-06）：.ans 切换 + data-ok 选项高亮 */
+  document.querySelectorAll('.quiz li.q').forEach(function(q){
+    var b=q.querySelector('button'),a=q.querySelector('.ans'),ok=q.querySelector('.opts li[data-ok]');
+    b.addEventListener('click',function(){var on=a.classList.toggle('show');ok.classList.toggle('ok',on);
+      b.textContent=on?b.dataset.hide:b.dataset.show;b.setAttribute('aria-expanded',on);});});
+  } else if (document.querySelector('.q .rv') && document.querySelector('.q .opts')) {
+    /* rv + opts li[data-ok] + hidden 属性式（03-05）：ex.hidden 切换，命中项标 hit */
+    document.querySelectorAll('.q').forEach(function(q){
+      var b=q.querySelector('.rv'), ex=q.querySelector('.ex');
+      if(!b||!ex) return;
+      b.addEventListener('click',function(){
+        var open=ex.hidden; ex.hidden=!open;
+        q.querySelectorAll('.opts li').forEach(function(li){
+          if(li.dataset.ok==='1') li.classList.toggle('hit',open);
+        });
+        b.textContent=open?'隐藏答案':'显示答案';
+      });
+    });
+  } else if (document.querySelector('.quiz .q .rv')) {
+  /* opt/rv/ex 式（07-05）：选项标记 sel，展开按钮标出对错 */
+  document.querySelectorAll('.quiz .q').forEach(function(q){
+    var opts=q.querySelectorAll('.opt'), ex=q.querySelector('.ex'), btn=q.querySelector('.rv');
+    opts.forEach(function(o){o.addEventListener('click',function(){
+      if(ex.classList.contains('show'))return;
+      opts.forEach(function(x){x.classList.remove('sel')}); o.classList.add('sel');});});
+    btn.addEventListener('click',function(){
+      var show=!ex.classList.contains('show'); ex.classList.toggle('show',show);
+      opts.forEach(function(o){
+        o.classList.remove('right','wrong');
+        if(show){ if(o.dataset.c==='1')o.classList.add('right'); else if(o.classList.contains('sel'))o.classList.add('wrong'); }
+      });
+      btn.textContent=show?btn.dataset.hide:btn.dataset.reveal;
+    });
+  });
+} else if (document.querySelector('.quiz .q[data-ok]')) {
+  /* data-ok 式（02-07）：点击后展开 .ans 并高亮正确选项 */
+  document.querySelectorAll('.quiz .q').forEach(function(q){
+    var btn=q.querySelector('button');
+    btn.addEventListener('click',function(){
+      q.classList.add('open');
+      var k=parseInt(q.getAttribute('data-ok'),10);
+      q.querySelectorAll('.opts span')[k].classList.add('ok');
+      btn.disabled=true; btn.style.opacity=.5; });
+  });
+  } else if (document.querySelector('.qitem')) {
+    /* qitem 式（01-03 第一章）：按钮 toggle 父级 open，文字切换（原页 JS 照搬） */
+    document.querySelectorAll('.qitem button').forEach(function(b){
+      b.addEventListener('click',function(){
+        var q=b.parentNode, on=q.classList.toggle('open');
+        b.setAttribute('aria-expanded',on);
+        b.textContent=on?'隐藏答案':'查看答案';
+      });
+    });
+  } else if (document.querySelector('.q button[data-ans]')) {
+    /* data-ans + hidden 属性式（03-03）：ex.hidden 切换，正确项标 ok */
+    document.querySelectorAll('.q button').forEach(function(b){
+      var q=b.parentNode, ex=q.querySelector('.ex'), li=q.querySelector('li[data-k="'+b.dataset.ans+'"]');
+      b.addEventListener('click',function(){
+        var show=ex.hidden; ex.hidden=!show;
+        if(li) li.classList.toggle('ok',show);
+        b.textContent=show?'隐藏答案':'显示答案';
+      });
+    });
+  } else if (document.querySelector('.quiz .q .rev')) {
+    /* rev/exp + data-ans 式（01-05 第一章）：点 rev 切换 exp.show，正确项标 right */
+    document.querySelectorAll('.quiz .q').forEach(function(q){
+      var b=q.querySelector('.rev'), ex=q.querySelector('.exp'), ans=q.getAttribute('data-ans');
+      if(!b||!ex) return;
+      var right = ans!=null ? q.querySelector('.opt[data-k="'+ans+'"]') : null;
+      b.addEventListener('click',function(){
+        var on=ex.classList.toggle('show');
+        if(right) right.classList.toggle('right',on);
+        b.textContent=on?'隐藏答案':'显示答案';
+      });
+    });
+  } else {
+    /* .q button 通用兜底（01-01/01-02/01-04/01-06/03-01/02/04/06…）：
+       open 与 shown 双开（各家 CSS 用哪个都命中）；正确项按 data-c/data-ok/ok 标 correct */
+    document.querySelectorAll('.q button').forEach(function(b){
+      b.addEventListener('click',function(){
+        var q=b.closest('.q'), on=!q.classList.contains('open');
+        q.classList.toggle('open',on); q.classList.toggle('shown',on);
+        q.querySelectorAll('.opt[data-c="1"], li[data-ok="1"], li.ok').forEach(function(o){
+          o.classList.toggle('correct',on);
+        });
+        if(b.dataset.hide&&b.dataset.show) b.textContent=on?b.dataset.hide:b.dataset.show;
+        else b.textContent=on?'隐藏答案':'显示答案';
+      });
+    });
+  }
+</script>
+</body>
+</html>

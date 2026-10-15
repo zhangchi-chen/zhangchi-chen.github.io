@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>极限过程与单侧极限 · 自测</title>
+<style>
+:root{--bg:#0f1626;--card:#182238;--fg:#e8ecf3;--dim:#7685a0;--faint:#2a3754;--teal:#4fd1c5;--amber:#f0c45c;--rose:#fa7878;--blue:#63b3ed;--orange:#f79646;--green:#68d391;--violet:#b794f4}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 system-ui,-apple-system,"Segoe UI","Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:1000px;margin:0 auto;padding:32px 16px 64px}
+header{border-bottom:1px solid var(--faint);margin-bottom:28px;padding-bottom:16px}
+.ep{color:var(--dim);font-size:14px;letter-spacing:.04em}
+h1{margin:6px 0 6px;font-size:30px;color:var(--teal)}
+h2{color:var(--teal);font-size:21px;margin:40px 0 10px}
+.lead{color:var(--dim);margin:0}
+.m{font-family:"STIX Two Math","Cambria Math","Times New Roman",serif;font-style:normal;white-space:nowrap}
+.lim{display:inline-flex;align-items:baseline;gap:.25em}
+.lw{display:inline-flex;flex-direction:column;align-items:center;line-height:1}
+.ls{font-size:.62em;margin-top:.15em}
+.card{background:var(--card);border:1px solid var(--faint);border-radius:14px;padding:16px 18px;margin:12px 0}
+.skel{font-size:22px;text-align:center;overflow-x:auto;padding:18px 8px}
+.slot{display:inline-block;border:2px solid var(--amber);border-radius:8px;padding:0 10px;color:var(--amber)}
+.knob{display:inline-block;border:2px solid var(--violet);border-radius:8px;padding:0 8px;color:var(--violet)}
+table{border-collapse:collapse;width:100%;min-width:620px}
+.tw{overflow-x:auto}
+th{color:var(--dim);font-weight:500;text-align:left;font-size:14px;padding:6px 8px;border-bottom:1px solid var(--faint)}
+td{padding:6px 8px;border-bottom:1px solid var(--faint);vertical-align:middle}
+td .m{font-size:19px}
+.nl{width:220px;height:40px;display:block}
+.nl .tk,.gr .tk{fill:var(--dim);font:11px serif;text-anchor:middle}
+.gr{width:100%;max-width:320px;height:auto;display:block;margin:auto}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.row3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media (max-width:720px){.row2,.row3{grid-template-columns:1fr}}
+.bad{color:var(--rose)} .good{color:var(--green)} .amb{color:var(--amber)} .tl{color:var(--teal)} .bl{color:var(--blue)} .or{color:var(--orange)} .vi{color:var(--violet)} .dm{color:var(--dim)}
+.tag{display:inline-block;font-size:13px;border:1px solid var(--amber);color:var(--amber);border-radius:20px;padding:1px 10px;margin-left:6px}
+.flow{display:grid;gap:10px}
+.fb{border-radius:12px;padding:10px 14px;border:2px solid var(--faint);background:var(--card)}
+.fb b{display:block}
+.punch{border-left:4px solid var(--amber);padding:10px 14px;background:#1b2440;border-radius:0 10px 10px 0}
+ol.recap li{margin:6px 0}
+.q{margin:14px 0;padding:14px 16px;background:var(--card);border:1px solid var(--faint);border-radius:12px}
+.q .opts{display:flex;flex-wrap:wrap;gap:8px 18px;margin:8px 0}
+.q .opt{border:1px solid var(--faint);border-radius:8px;padding:2px 10px}
+.q .opt.ok{border-color:var(--green);color:var(--green);font-weight:600}
+.q button{background:transparent;color:var(--teal);border:1px solid var(--teal);border-radius:8px;padding:4px 12px;font:inherit;font-size:14px;cursor:pointer}
+.q button:hover{background:rgba(79,209,197,.12)}
+.q .ex{display:none;margin-top:8px;color:var(--fg)}
+.q.open .ex{display:block}
+footer{color:var(--dim);font-size:13px;margin-top:40px;text-align:center}
+
+/* ---- 手机自测单页覆盖层（深浅主题自适应：浅色文件有 --paper，深色有 --bg/--fg） ---- */
+html,body{margin:0;background:var(--bg,var(--paper));color:var(--fg,var(--ink));
+  font-family:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC","Source Han Sans SC",system-ui,-apple-system,sans-serif}
+/* 中和原幻灯片容器的隐藏/定位，让 section 直接作为文档流内容 */
+section.slide{display:block!important;position:static!important;width:auto!important;height:auto!important;
+  padding:0!important;background:none!important;box-shadow:none!important;transform:none!important}
+.page{max-width:720px;margin:0 auto;padding:18px 16px 60px}
+.topbar{display:flex;justify-content:space-between;align-items:baseline;gap:8px;
+  border-bottom:2px solid var(--grid,var(--line,var(--rule,#e3e0d6)));padding-bottom:10px;margin-bottom:6px}
+.topbar h1{font-size:20px;margin:0}
+.topbar a{color:var(--blue,#1f72b0);font-size:14px;text-decoration:none;white-space:nowrap}
+.lead{color:var(--muted);font-size:15px;margin:12px 0 2px;line-height:1.6}
+/* 表格 → 竖屏卡片（仅 slide 式页面有表格） */
+table.t{display:block;width:auto;border:0}
+table.t tbody,table.t tr,table.t td,table.t th{display:block;border:0;width:auto}
+table.t thead{display:none}
+table.t tr{background:var(--card);border:1.5px solid var(--rule);border-radius:14px;
+  padding:14px 16px;margin:14px 0;font-size:19px;line-height:1.7}
+table.t td{padding:6px 0}
+table.t td:last-child{border-top:1.5px dashed var(--rule);margin-top:6px;padding-top:10px}
+.q{display:block;text-align:center}
+.reveal{cursor:pointer;border:2px dashed var(--rule);border-radius:10px;
+  padding:6px 22px;color:var(--muted);font-size:16px;background:none;font-family:inherit}
+.ans{display:none;line-height:1.8}
+.shown .ans{display:block} .shown .reveal{display:none}
+/* quiz-section 式页面：原 section 自带卡片样式，仅收窄内边距 */
+section.quiz{padding:6px 2px;margin:8px 0;background:none;border:0}
+section.quiz .q{margin:12px 0;text-align:left}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="topbar">
+    <h1>极限过程与单侧极限 · 自测</h1> <a href="../notes/03-02.html">查看讲稿 →</a>
+  </div>
+  
+  <div class="quiz">
+  <p class="lead">先选答案，再揭晓。</p>
+<div class="q"><div><b>1.</b> <span>lim(x→0⁺) e<sup>1/x</sup> = ?</span></div><div class="opts">
+<span class="opt" data-ok="0">A. <span class="m">0</span></span>
+<span class="opt" data-ok="0">B. <span class="m">1</span></span>
+<span class="opt" data-ok="1">C. <span class="m">+∞</span></span>
+</div><button type="button" data-show="显示答案" data-hide="隐藏答案">显示答案</button><div class="ex"><b class="good">答案: C.</b> x → 0⁺ 时 1/x → +∞，所以 e<sup>1/x</sup> → +∞。</div></div>
+<div class="q"><div><b>2.</b> <span>lim(x→0⁻) arctan(1/x) = ?</span></div><div class="opts">
+<span class="opt" data-ok="0">A. <span class="m">π/2</span></span>
+<span class="opt" data-ok="1">B. <span class="m">−π/2</span></span>
+<span class="opt" data-ok="0">C. <span class="m">0</span></span>
+</div><button type="button" data-show="显示答案" data-hide="隐藏答案">显示答案</button><div class="ex"><b class="good">答案: B.</b> x → 0⁻ 时 1/x → −∞，arctan 沉向主值区间 (−π/2, π/2) 的下端。</div></div>
+<div class="q"><div><b>3.</b> <span>lim(x→0⁻) |x|/x = ?</span></div><div class="opts">
+<span class="opt" data-ok="0">A. <span class="m">1</span></span>
+<span class="opt" data-ok="1">B. <span class="m">−1</span></span>
+<span class="opt" data-ok="0">C. <span class="m">不存在</span></span>
+</div><button type="button" data-show="显示答案" data-hide="隐藏答案">显示答案</button><div class="ex"><b class="good">答案: B.</b> x &lt; 0 时 |x| = −x，故 |x|/x 恒等于 −1。</div></div>
+<div class="q"><div><b>4.</b> <span>lim(x→0) 1/x² = +∞ 说明该极限……</span></div><div class="opts">
+<span class="opt" data-ok="0">A. <span class="m">存在且等于 +∞</span></span>
+<span class="opt" data-ok="1">B. <span class="m">不存在：f 发散到 +∞</span></span>
+<span class="opt" data-ok="0">C. <span class="m">存在，因为两侧一致</span></span>
+</div><button type="button" data-show="显示答案" data-hide="隐藏答案">显示答案</button><div class="ex"><b class="good">答案: B.</b> 定义要求 A 是实数，+∞ 不是实数：这是有头衔的发散。</div></div>
+<div class="q"><div><b>5.</b> <span>x → ∞（不带符号）对应哪个空格？</span></div><div class="opts">
+<span class="opt" data-ok="0">A. <span class="m">x &gt; M</span></span>
+<span class="opt" data-ok="1">B. <span class="m">|x| &gt; M</span></span>
+<span class="opt" data-ok="0">C. <span class="m">0 &lt; |x − x₀| &lt; δ</span></span>
+</div><button type="button" data-show="显示答案" data-hide="隐藏答案">显示答案</button><div class="ex"><b class="good">答案: B.</b> 光秃秃的 ∞ 没有方向，两条射线都要：|x| &gt; M。</div></div>
+<div class="q"><div><b>6.</b> <span>左极限为 2，右极限为 2，f(x₀) = 5，则 lim(x→x₀) f(x)……</span></div><div class="opts">
+<span class="opt" data-ok="1">A. <span class="m">等于 2</span></span>
+<span class="opt" data-ok="0">B. <span class="m">等于 5</span></span>
+<span class="opt" data-ok="0">C. <span class="m">不存在</span></span>
+</div><button type="button" data-show="显示答案" data-hide="隐藏答案">显示答案</button><div class="ex"><b class="good">答案: A.</b> 两侧极限存在且相等；该点的函数值从来不问。</div></div>
+<footer>数学分析 · 第 03-02 集</footer>
+  </div>
+</div>
+<script>
+document.querySelectorAll('.reveal').forEach(function(b){
+  b.addEventListener('click',function(){var t=this.closest('.q,.qt-item');if(t)t.classList.add('shown')});
+});
+/* 按页面 DOM 特征自适配各批次回件的交互（逻辑均照搬原版） */
+if (document.querySelector('.qt3')) {
+  /* .qt3 式（02-03）：按钮点击后父卡 shown、按钮隐藏 */
+  document.querySelectorAll('.qt3 button').forEach(function(b){
+    b.addEventListener('click',function(){b.parentNode.classList.add('shown');b.style.display='none';});});
+} else if (document.querySelector('.quiz li.q')) {
+  /* ol/li 式（02-06）：.ans 切换 + data-ok 选项高亮 */
+  document.querySelectorAll('.quiz li.q').forEach(function(q){
+    var b=q.querySelector('button'),a=q.querySelector('.ans'),ok=q.querySelector('.opts li[data-ok]');
+    b.addEventListener('click',function(){var on=a.classList.toggle('show');ok.classList.toggle('ok',on);
+      b.textContent=on?b.dataset.hide:b.dataset.show;b.setAttribute('aria-expanded',on);});});
+  } else if (document.querySelector('.q .rv') && document.querySelector('.q .opts')) {
+    /* rv + opts li[data-ok] + hidden 属性式（03-05）：ex.hidden 切换，命中项标 hit */
+    document.querySelectorAll('.q').forEach(function(q){
+      var b=q.querySelector('.rv'), ex=q.querySelector('.ex');
+      if(!b||!ex) return;
+      b.addEventListener('click',function(){
+        var open=ex.hidden; ex.hidden=!open;
+        q.querySelectorAll('.opts li').forEach(function(li){
+          if(li.dataset.ok==='1') li.classList.toggle('hit',open);
+        });
+        b.textContent=open?'隐藏答案':'显示答案';
+      });
+    });
+  } else if (document.querySelector('.quiz .q .rv')) {
+  /* opt/rv/ex 式（07-05）：选项标记 sel，展开按钮标出对错 */
+  document.querySelectorAll('.quiz .q').forEach(function(q){
+    var opts=q.querySelectorAll('.opt'), ex=q.querySelector('.ex'), btn=q.querySelector('.rv');
+    opts.forEach(function(o){o.addEventListener('click',function(){
+      if(ex.classList.contains('show'))return;
+      opts.forEach(function(x){x.classList.remove('sel')}); o.classList.add('sel');});});
+    btn.addEventListener('click',function(){
+      var show=!ex.classList.contains('show'); ex.classList.toggle('show',show);
+      opts.forEach(function(o){
+        o.classList.remove('right','wrong');
+        if(show){ if(o.dataset.c==='1')o.classList.add('right'); else if(o.classList.contains('sel'))o.classList.add('wrong'); }
+      });
+      btn.textContent=show?btn.dataset.hide:btn.dataset.reveal;
+    });
+  });
+} else if (document.querySelector('.quiz .q[data-ok]')) {
+  /* data-ok 式（02-07）：点击后展开 .ans 并高亮正确选项 */
+  document.querySelectorAll('.quiz .q').forEach(function(q){
+    var btn=q.querySelector('button');
+    btn.addEventListener('click',function(){
+      q.classList.add('open');
+      var k=parseInt(q.getAttribute('data-ok'),10);
+      q.querySelectorAll('.opts span')[k].classList.add('ok');
+      btn.disabled=true; btn.style.opacity=.5; });
+  });
+  } else if (document.querySelector('.qitem')) {
+    /* qitem 式（01-03 第一章）：按钮 toggle 父级 open，文字切换（原页 JS 照搬） */
+    document.querySelectorAll('.qitem button').forEach(function(b){
+      b.addEventListener('click',function(){
+        var q=b.parentNode, on=q.classList.toggle('open');
+        b.setAttribute('aria-expanded',on);
+        b.textContent=on?'隐藏答案':'查看答案';
+      });
+    });
+  } else if (document.querySelector('.q button[data-ans]')) {
+    /* data-ans + hidden 属性式（03-03）：ex.hidden 切换，正确项标 ok */
+    document.querySelectorAll('.q button').forEach(function(b){
+      var q=b.parentNode, ex=q.querySelector('.ex'), li=q.querySelector('li[data-k="'+b.dataset.ans+'"]');
+      b.addEventListener('click',function(){
+        var show=ex.hidden; ex.hidden=!show;
+        if(li) li.classList.toggle('ok',show);
+        b.textContent=show?'隐藏答案':'显示答案';
+      });
+    });
+  } else if (document.querySelector('.quiz .q .rev')) {
+    /* rev/exp + data-ans 式（01-05 第一章）：点 rev 切换 exp.show，正确项标 right */
+    document.querySelectorAll('.quiz .q').forEach(function(q){
+      var b=q.querySelector('.rev'), ex=q.querySelector('.exp'), ans=q.getAttribute('data-ans');
+      if(!b||!ex) return;
+      var right = ans!=null ? q.querySelector('.opt[data-k="'+ans+'"]') : null;
+      b.addEventListener('click',function(){
+        var on=ex.classList.toggle('show');
+        if(right) right.classList.toggle('right',on);
+        b.textContent=on?'隐藏答案':'显示答案';
+      });
+    });
+  } else {
+    /* .q button 通用兜底（01-01/01-02/01-04/01-06/03-01/02/04/06…）：
+       open 与 shown 双开（各家 CSS 用哪个都命中）；正确项按 data-c/data-ok/ok 标 correct */
+    document.querySelectorAll('.q button').forEach(function(b){
+      b.addEventListener('click',function(){
+        var q=b.closest('.q'), on=!q.classList.contains('open');
+        q.classList.toggle('open',on); q.classList.toggle('shown',on);
+        q.querySelectorAll('.opt[data-c="1"], li[data-ok="1"], li.ok').forEach(function(o){
+          o.classList.toggle('correct',on);
+        });
+        if(b.dataset.hide&&b.dataset.show) b.textContent=on?b.dataset.hide:b.dataset.show;
+        else b.textContent=on?'隐藏答案':'显示答案';
+      });
+    });
+  }
+</script>
+</body>
+</html>

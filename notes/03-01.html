@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>函数极限 —— ε–δ 定义</title><style>
+:root{--bg:#FBF8F1;--ink:#1E2A3A;--muted:#6B7280;--eps:#E8590C;--del:#2563EB;--ok:#16A34A;--bad:#DC2626;--card:#fff;--line:#E4DED0;--hl:#FFF1BF}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:960px;margin:0 auto;padding:28px 16px 64px}
+.kicker{color:var(--muted);font-weight:700;letter-spacing:.04em;font-size:14px;text-transform:uppercase}
+h1{font-size:34px;line-height:1.2;margin:6px 0 4px}
+.sub{color:var(--muted);margin:0 0 22px}
+section{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin:18px 0}
+h2{font-size:21px;margin:0 0 10px}
+h2 .n{display:inline-block;min-width:28px;height:28px;border-radius:50%;background:var(--ink);color:#fff;text-align:center;line-height:28px;font-size:15px;margin-right:8px}
+.m{font-family:"DejaVu Sans","Cambria Math","STIX Two Math","Times New Roman",serif;white-space:nowrap}
+.eps{color:var(--eps)}.del{color:var(--del)}.ok{color:var(--ok)}.bad{color:var(--bad)}
+.def{border-left:5px solid var(--del);background:#F3F7FF;border-radius:8px;padding:12px 16px;font-size:19px}
+.def b{color:var(--del)}
+.remark{border-left:5px solid var(--eps);background:#FFF8E7;border-radius:8px;padding:10px 16px}
+table{width:100%;border-collapse:collapse;font-size:16px}
+th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{color:var(--muted);font-size:14px}
+td.hl{background:var(--hl);font-weight:600}
+.fig{width:100%;height:auto;display:block;margin:10px 0}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media (max-width:680px){.two{grid-template-columns:1fr}h1{font-size:27px}.m{white-space:normal}table{font-size:14px}th,td{padding:6px}}
+.disp{overflow-x:auto}
+section{overflow-wrap:anywhere}
+.proof{background:#FAFAF7;border:1px dashed #B9B3A5;border-radius:10px;padding:12px 16px}
+.disp{display:block;text-align:center;margin:8px 0;font-size:18px;color:var(--del)}
+ul{padding-left:20px;margin:6px 0}
+.quiz .q{border-top:1px solid var(--line);padding:12px 0}
+.quiz .q:first-of-type{border-top:none}
+.quiz .qt{font-weight:600;margin-bottom:6px}
+.quiz ol{list-style:none;padding:0;margin:0 0 8px}
+.quiz li{padding:4px 10px;border-radius:8px;margin:2px 0;border:1px solid transparent}
+.quiz li.correct{background:#E8F7EE;border-color:var(--ok);font-weight:600}
+.quiz button{font:inherit;font-size:14px;border:1px solid var(--del);color:var(--del);background:#fff;border-radius:999px;padding:4px 14px;cursor:pointer}
+.quiz button:hover{background:#EEF4FF}
+.quiz .ex{display:none;margin-top:8px;color:#14532D;background:#F0FAF4;border-radius:8px;padding:6px 10px;font-size:15px}
+.quiz .q.open .ex{display:block}
+footer{color:var(--muted);font-size:13px;text-align:center;margin-top:24px}
+</style><style>
+#mv-bar{position:fixed;left:0;right:0;top:0;z-index:99;display:flex;align-items:center;
+  gap:12px;padding:9px 14px;font-size:14px;
+  background:color-mix(in srgb,var(--bg,var(--paper,#fbfaf6)) 84%,transparent);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--grid,var(--line,var(--rule,#e3e0d6)))}
+#mv-bar .mv-home{color:var(--blue,#1f72b0);text-decoration:none;white-space:nowrap}
+#mv-bar .mv-title{flex:1;text-align:center;font-weight:600;overflow:hidden;
+  text-overflow:ellipsis;white-space:nowrap;opacity:.85}
+#mv-bar .mv-quiz{color:#fff;background:#1f72b0;text-decoration:none;border-radius:8px;
+  padding:4px 12px;white-space:nowrap;font-size:13.5px}
+@media (max-width:480px){#mv-bar .mv-title{font-size:12.5px}}
+#mv-rotate{display:none}
+@media (orientation:portrait){
+  #mv-rotate{display:block;position:fixed;bottom:14px;left:50%;transform:translateX(-50%);
+    z-index:99;font-size:12.5px;padding:6px 14px;border-radius:999px;
+    background:color-mix(in srgb,var(--bg,var(--paper,#fbfaf6)) 88%,transparent);
+    backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);opacity:.92;
+    border:1px solid var(--grid,var(--line,var(--rule,#e3e0d6)))}
+}
+</style></head><body><div id="mv-bar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span class="mv-title">03-01 ε–δ 定义</span><a class="mv-quiz" href="../quiz/03-01.html">去自测 →</a></div><main>
+<div class="kicker">第 3.1 集 · 数学分析</div><h1>函数极限：ε–δ 定义</h1><p class="sub">同一个检查员，新的岗位：为什么 x₀ 的邻域要去心。</p>
+<section><h2><span class="n">1</span>检查员换岗</h2><p>数列沿整数一步步前进，所以“趋近”就是 <span class="m">n > N</span>。函数的自变量连续变化，可以从两侧逼近任意一点 <span class="m">x₀</span>。检查员的关卡从“N 之后”搬到了“x₀ 附近”。</p></section>
+<section><h2><span class="n">2</span>翻译对照表</h2>
+<table><tr><th>ε–N（数列 aₙ → A）</th><th class="del">ε–δ（函数 f(x) → A，x → x₀）</th></tr><tr><td>任给 ε > 0</td><td>任给 ε > 0</td></tr><tr><td>存在 N，使得当</td><td>存在 δ > 0，使得当</td></tr><tr><td>n > N 时（尾部）</td><td class="hl">0 < |x − x₀| < δ 时（去心邻域）</td></tr><tr><td>有 |aₙ − A| < ε</td><td>有 |f(x) − A| < ε</td></tr></table>
+<p>图像从 A 周围的水平 ε 带升级为一个窗口：宽 x₀ ± δ，高 A ± ε。在 x₀ 附近，图像必须待在窗口内。</p><svg class="fig" viewBox="0 0 640 300" role="img" aria-label="图像在 x₀−δ 到 x₀+δ、A−ε 到 A+ε 的窗口内；点 x₀ 本身是一扇关着的门。">
+<rect width="640" height="300" fill="#FBF8F1" rx="10"/>
+<line x1="60" y1="260" x2="600" y2="260" stroke="#1E2A3A" stroke-width="1.5"/>
+<line x1="60" y1="20" x2="60" y2="260" stroke="#1E2A3A" stroke-width="1.5"/>
+<rect x="60" y="110" width="540" height="70" fill="#E8590C" opacity=".13"/>
+<line x1="60" y1="110" x2="600" y2="110" stroke="#E8590C" stroke-dasharray="6 4"/>
+<line x1="60" y1="180" x2="600" y2="180" stroke="#E8590C" stroke-dasharray="6 4"/>
+<rect x="270" y="110" width="110" height="70" fill="#2563EB" fill-opacity=".10" stroke="#1E2A3A" stroke-width="2.5"/>
+<line x1="270" y1="20" x2="270" y2="260" stroke="#2563EB" stroke-width="2"/>
+<line x1="380" y1="20" x2="380" y2="260" stroke="#2563EB" stroke-width="2"/>
+<path d="M70 245 C150 230 200 190 250 165 S300 150 325 145 S360 125 400 110 S520 70 590 40" fill="none" stroke="#8A93A0" stroke-width="2.5"/>
+<path d="M270 160 C285 154 300 150 325 145 S355 128 380 117" fill="none" stroke="#16A34A" stroke-width="4"/>
+<rect x="318" y="118" width="14" height="54" fill="#A0703C" stroke="#5C3D1E" opacity=".9"/>
+<circle cx="325" cy="145" r="6" fill="#FBF8F1" stroke="#1E2A3A" stroke-width="2"/>
+<text x="40" y="150" font-size="16" fill="#E8590C" text-anchor="end">A</text>
+<text x="40" y="115" font-size="13" fill="#E8590C" text-anchor="end">A+ε</text>
+<text x="40" y="185" font-size="13" fill="#E8590C" text-anchor="end">A−ε</text>
+<text x="325" y="282" font-size="15" fill="#DC2626" text-anchor="middle">x₀</text>
+<text x="262" y="282" font-size="13" fill="#2563EB" text-anchor="end">x₀−δ</text>
+<text x="388" y="282" font-size="13" fill="#2563EB">x₀+δ</text>
+<text x="420" y="205" font-size="14" fill="#1E2A3A">靠近 x₀ ⟹ 落在窗口内</text>
+</svg>
+<div class="def"><b>定义</b> <span class="m">lim<sub>x→x₀</sub> f(x) = A</span> 是指：任给 <span class="m">ε > 0</span>，存在 <span class="m">δ > 0</span>，使得当 <span class="m">0 < |x − x₀| < δ</span> 时，有 <span class="m">|f(x) − A| < ε</span>。</div></section>
+<section><h2><span class="n">3</span>为什么要去心？</h2><p>极限描述的是逼近，而不是到达。该点本身可以是个洞（如 0 处的 <span class="m">sin x / x</span>），可以取一个不等于 A 的值，也可以根本不在定义域内。</p>
+<div class="remark"><b>注：</b>函数值 <span class="m">f(x₀)</span>——无论是否有定义——在定义中不起任何作用。</div>
+<p><b>两个推论</b></p><ol><li><span class="m">f</span> 在 <span class="m">x₀</span> 处可以无定义，极限照样可以存在。</li><li>只改动 <span class="m">x₀</span> 处的函数值，永远不会改变极限。</li></ol>
+<p>为什么 ε–N 定义从不需要这一条？因为 ∞ 不是下标：没有哪一项会坐在终点上，尾部天然就是去心的。而这里 x <i>可以</i>恰好落在 <span class="m">x₀</span> 上，所以排除必须亲手写上——这正是 <span class="m">0 &lt;</span> 的作用。</p><svg class="fig" viewBox="0 0 640 170" role="img" aria-label="左：下标永远到不了无穷。右：x 可以落在 x₀ 上，所以要亲手划掉。">
+<rect width="640" height="170" fill="#FBF8F1" rx="10"/>
+<text x="150" y="24" font-size="15" font-weight="700" fill="#6B7280" text-anchor="middle">ε–N : n → ∞</text>
+<line x1="20" y1="70" x2="250" y2="70" stroke="#1E2A3A"/><circle cx="30" cy="70" r="4.5" fill="#8A93A0"/><circle cx="52" cy="70" r="4.5" fill="#8A93A0"/><circle cx="74" cy="70" r="4.5" fill="#8A93A0"/><circle cx="96" cy="70" r="4.5" fill="#8A93A0"/><circle cx="118" cy="70" r="4.5" fill="#16A34A"/><circle cx="140" cy="70" r="4.5" fill="#16A34A"/><circle cx="162" cy="70" r="4.5" fill="#16A34A"/><circle cx="184" cy="70" r="4.5" fill="#16A34A"/><circle cx="206" cy="70" r="4.5" fill="#16A34A"/>
+<text x="226" y="75" font-size="16">…</text>
+<circle cx="275" cy="70" r="13" fill="none" stroke="#E8590C" stroke-width="2" stroke-dasharray="4 3"/>
+<text x="275" y="76" font-size="17" fill="#E8590C" text-anchor="middle">∞</text>
+<text x="275" y="104" font-size="12" fill="#E8590C" text-anchor="middle">不是下标</text>
+<text x="150" y="140" font-size="14" font-weight="700" fill="#16A34A" text-anchor="middle">尾部：天然去心</text>
+<line x1="320" y1="10" x2="320" y2="160" stroke="#E4DED0"/>
+<text x="480" y="24" font-size="15" font-weight="700" fill="#2563EB" text-anchor="middle">ε–δ : x → x₀</text>
+<line x1="350" y1="70" x2="620" y2="70" stroke="#1E2A3A"/>
+<line x1="410" y1="70" x2="550" y2="70" stroke="#2563EB" stroke-width="5"/>
+<rect x="472" y="30" width="16" height="40" fill="#A0703C" stroke="#5C3D1E"/>
+<circle cx="480" cy="70" r="6" fill="#DC2626"/>
+<path d="M472 62 L488 78 M472 78 L488 62" stroke="#DC2626" stroke-width="3"/>
+<text x="480" y="92" font-size="13" fill="#DC2626" text-anchor="middle">x₀</text>
+<text x="480" y="140" font-size="16" text-anchor="middle"><tspan fill="#DC2626" font-weight="700">0 &lt;</tspan> |x − x₀| &lt; δ</text>
+<text x="480" y="116" font-size="12" fill="#DC2626" font-style="italic" text-anchor="middle">排除要亲手写上</text>
+</svg></section>
+<section><h2><span class="n">4</span>δ 是一种选择，不是函数</h2><p>若对给定的 <span class="m">ε</span> 某个 <span class="m">δ</span> 可行，则任何更小的 <span class="m">δ</span> 也可行：窗口更窄只会放进更少的点。所以 <span class="m">δ</span> 不必最优。它依赖于 <span class="m">ε</span>，也悄悄依赖于点 <span class="m">x₀</span>。</p></section>
+<section><h2><span class="n">5</span>示范验证</h2><p>命题：<span class="m">lim<sub>x→1</sub> (2x + 1) = 3</span>。</p><p class="muted">草稿：<span class="m">|(2x + 1) − 3| = 2|x − 1|</span>，而 <span class="m">2|x − 1| < ε</span> ⟺ <span class="m">|x − 1| < ε/2</span>。于是试取 <span class="m">δ = ε/2</span>。</p>
+<div class="proof"><p style="margin:0"><b>验证。</b>任给 <span class="m">ε > 0</span>，取 <span class="m">δ = ε/2 > 0</span>。则对一切满足 <span class="m">0 < |x − 1| < δ</span> 的 x，有 <span class="m">|(2x + 1) − 3| = 2|x − 1| < 2δ = ε</span>，故 <span class="m">lim<sub>x→1</sub> (2x + 1) = 3</span>。∎</p><span class="m disp">0 < |x − 1| < δ &nbsp;⟹&nbsp; |(2x + 1) − 3| = 2|x − 1| < ε</span></div></section>
+<section><h2><span class="n">6</span>小结</h2><ul><li>同一个检查员，新的岗位：ε 定 A 周围的容差，δ 划 x₀ 的邻域。</li><li>门——点 x₀ 本身——始终关着。</li><li>邻域发言，那个点保持沉默。</li></ul></section>
+<section class="quiz"><h2><span class="n">?</span>自测</h2><div class="q"><div class="qt">1. 在 lim(x→x₀) f(x) = A 的 ε–δ 定义中，函数值 f(x₀) 起什么作用？</div><ol><li data-ok="0"><b>A.</b> 必须等于 A。</li><li data-ok="0"><b>B.</b> 至少必须有定义。</li><li data-ok="1"><b>C.</b> 不起任何作用。</li></ol><button type="button" data-show="显示答案" data-hide="隐藏答案">显示答案</button><div class="ex"><b>答案： C.</b> 条件 0 < |x − x₀| < δ 排除了 x = x₀，所以 f(x₀) 从不被检查。</div></div><div class="q"><div class="qt">2. 为什么 ε–N 定义从不需要“0 <”这一条？</div><ol><li data-ok="0"><b>A.</b> 因为数列总是单调的。</li><li data-ok="1"><b>B.</b> 因为 ∞ 不是下标，没有哪一项会坐在终点上。</li><li data-ok="0"><b>C.</b> 因为 N 是整数。</li></ol><button type="button" data-show="显示答案" data-hide="隐藏答案">显示答案</button><div class="ex"><b>答案： B.</b> 尾部 n > N 里永远没有“n = ∞”，天然去心；而 x 却可以等于 x₀。</div></div><div class="q"><div class="qt">3. 设 lim(x→2) f(x) = 5，只把 f(2) 从 5 改成 9，则极限……</div><ol><li data-ok="0"><b>A.</b> 变成 9。</li><li data-ok="1"><b>B.</b> 仍是 5。</li><li data-ok="0"><b>C.</b> 不再存在。</li></ol><button type="button" data-show="显示答案" data-hide="隐藏答案">显示答案</button><div class="ex"><b>答案： B.</b> 只改动 x₀ 处的值永远不会改变极限：去心邻域从不看 x₀。</div></div><div class="q"><div class="qt">4. ε–δ 定义中哪一部分对应 ε–N 中的“n > N”？</div><ol><li data-ok="0"><b>A.</b> 任给 ε > 0</li><li data-ok="1"><b>B.</b> 0 < |x − x₀| < δ</li><li data-ok="0"><b>C.</b> |f(x) − A| < ε</li></ol><button type="button" data-show="显示答案" data-hide="隐藏答案">显示答案</button><div class="ex"><b>答案： B.</b> 两者都描述检查员在哪里检查：数列看尾部，函数看去心邻域。</div></div><div class="q"><div class="qt">5. 对 lim(x→1) (2x + 1) = 3，取 ε = 0.1，下列哪个 δ 一定可行？</div><ol><li data-ok="1"><b>A.</b> δ = 0.05</li><li data-ok="0"><b>B.</b> δ = 0.1</li><li data-ok="0"><b>C.</b> δ = 0.2</li></ol><button type="button" data-show="显示答案" data-hide="隐藏答案">显示答案</button><div class="ex"><b>答案： A.</b> 需要 2|x − 1| < 0.1，即 |x − 1| < 0.05；δ = ε/2 = 0.05 可行（更小的也行），而 δ = 0.1 不行，例如 x = 1.08。</div></div><div class="q"><div class="qt">6. 若对给定的 ε，δ = 0.3 可行，则 δ = 0.1……</div><ol><li data-ok="1"><b>A.</b> 也可行。</li><li data-ok="0"><b>B.</b> 可能不行。</li><li data-ok="0"><b>C.</b> 只有当 0.3 是最大可行 δ 时才行。</li></ol><button type="button" data-show="显示答案" data-hide="隐藏答案">显示答案</button><div class="ex"><b>答案： A.</b> 窗口更窄只会放进更少的点，而这些点本来就满足 |f(x) − A| < ε。</div></div></section>
+<footer>第 3.1 集 · 配套讲义</footer></main><script>
+document.querySelectorAll('.quiz .q').forEach(function(q){
+  var b=q.querySelector('button');
+  b.addEventListener('click',function(){
+    var open=q.classList.toggle('open');
+    q.querySelectorAll('li').forEach(function(li){ if(li.dataset.ok==='1'){ li.classList.toggle('correct',open);} });
+    b.textContent=open?b.dataset.hide:b.dataset.show;
+  });
+});
+</script><script>
+(function(){
+  var deck=document.getElementById('deck');
+  if(deck){
+    deck.style.top='44px';
+    function fit(){
+      var s=Math.min(window.innerWidth/1280,(window.innerHeight-44)/720,1.5);
+      deck.style.transform='scale('+s+')';
+    }
+    window.addEventListener('resize',fit);fit();
+  }else{
+    document.body.style.paddingTop='44px';
+  }
+})();
+</script></body></html>

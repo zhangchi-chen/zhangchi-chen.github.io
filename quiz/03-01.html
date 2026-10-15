@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>函数极限：ε–δ 定义 · 自测</title>
+<style>
+:root{--bg:#FBF8F1;--ink:#1E2A3A;--muted:#6B7280;--eps:#E8590C;--del:#2563EB;--ok:#16A34A;--bad:#DC2626;--card:#fff;--line:#E4DED0;--hl:#FFF1BF}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:960px;margin:0 auto;padding:28px 16px 64px}
+.kicker{color:var(--muted);font-weight:700;letter-spacing:.04em;font-size:14px;text-transform:uppercase}
+h1{font-size:34px;line-height:1.2;margin:6px 0 4px}
+.sub{color:var(--muted);margin:0 0 22px}
+section{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin:18px 0}
+h2{font-size:21px;margin:0 0 10px}
+h2 .n{display:inline-block;min-width:28px;height:28px;border-radius:50%;background:var(--ink);color:#fff;text-align:center;line-height:28px;font-size:15px;margin-right:8px}
+.m{font-family:"DejaVu Sans","Cambria Math","STIX Two Math","Times New Roman",serif;white-space:nowrap}
+.eps{color:var(--eps)}.del{color:var(--del)}.ok{color:var(--ok)}.bad{color:var(--bad)}
+.def{border-left:5px solid var(--del);background:#F3F7FF;border-radius:8px;padding:12px 16px;font-size:19px}
+.def b{color:var(--del)}
+.remark{border-left:5px solid var(--eps);background:#FFF8E7;border-radius:8px;padding:10px 16px}
+table{width:100%;border-collapse:collapse;font-size:16px}
+th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{color:var(--muted);font-size:14px}
+td.hl{background:var(--hl);font-weight:600}
+.fig{width:100%;height:auto;display:block;margin:10px 0}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media (max-width:680px){.two{grid-template-columns:1fr}h1{font-size:27px}.m{white-space:normal}table{font-size:14px}th,td{padding:6px}}
+.disp{overflow-x:auto}
+section{overflow-wrap:anywhere}
+.proof{background:#FAFAF7;border:1px dashed #B9B3A5;border-radius:10px;padding:12px 16px}
+.disp{display:block;text-align:center;margin:8px 0;font-size:18px;color:var(--del)}
+ul{padding-left:20px;margin:6px 0}
+.quiz .q{border-top:1px solid var(--line);padding:12px 0}
+.quiz .q:first-of-type{border-top:none}
+.quiz .qt{font-weight:600;margin-bottom:6px}
+.quiz ol{list-style:none;padding:0;margin:0 0 8px}
+.quiz li{padding:4px 10px;border-radius:8px;margin:2px 0;border:1px solid transparent}
+.quiz li.correct{background:#E8F7EE;border-color:var(--ok);font-weight:600}
+.quiz button{font:inherit;font-size:14px;border:1px solid var(--del);color:var(--del);background:#fff;border-radius:999px;padding:4px 14px;cursor:pointer}
+.quiz button:hover{background:#EEF4FF}
+.quiz .ex{display:none;margin-top:8px;color:#14532D;background:#F0FAF4;border-radius:8px;padding:6px 10px;font-size:15px}
+.quiz .q.open .ex{display:block}
+footer{color:var(--muted);font-size:13px;text-align:center;margin-top:24px}
+
+/* ---- 手机自测单页覆盖层（深浅主题自适应：浅色文件有 --paper，深色有 --bg/--fg） ---- */
+html,body{margin:0;background:var(--bg,var(--paper));color:var(--fg,var(--ink));
+  font-family:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC","Source Han Sans SC",system-ui,-apple-system,sans-serif}
+/* 中和原幻灯片容器的隐藏/定位，让 section 直接作为文档流内容 */
+section.slide{display:block!important;position:static!important;width:auto!important;height:auto!important;
+  padding:0!important;background:none!important;box-shadow:none!important;transform:none!important}
+.page{max-width:720px;margin:0 auto;padding:18px 16px 60px}
+.topbar{display:flex;justify-content:space-between;align-items:baseline;gap:8px;
+  border-bottom:2px solid var(--grid,var(--line,var(--rule,#e3e0d6)));padding-bottom:10px;margin-bottom:6px}
+.topbar h1{font-size:20px;margin:0}
+.topbar a{color:var(--blue,#1f72b0);font-size:14px;text-decoration:none;white-space:nowrap}
+.lead{color:var(--muted);font-size:15px;margin:12px 0 2px;line-height:1.6}
+/* 表格 → 竖屏卡片（仅 slide 式页面有表格） */
+table.t{display:block;width:auto;border:0}
+table.t tbody,table.t tr,table.t td,table.t th{display:block;border:0;width:auto}
+table.t thead{display:none}
+table.t tr{background:var(--card);border:1.5px solid var(--rule);border-radius:14px;
+  padding:14px 16px;margin:14px 0;font-size:19px;line-height:1.7}
+table.t td{padding:6px 0}
+table.t td:last-child{border-top:1.5px dashed var(--rule);margin-top:6px;padding-top:10px}
+.q{display:block;text-align:center}
+.reveal{cursor:pointer;border:2px dashed var(--rule);border-radius:10px;
+  padding:6px 22px;color:var(--muted);font-size:16px;background:none;font-family:inherit}
+.ans{display:none;line-height:1.8}
+.shown .ans{display:block} .shown .reveal{display:none}
+/* quiz-section 式页面：原 section 自带卡片样式，仅收窄内边距 */
+section.quiz{padding:6px 2px;margin:8px 0;background:none;border:0}
+section.quiz .q{margin:12px 0;text-align:left}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="topbar">
+    <h1>函数极限：ε–δ 定义 · 自测</h1> <a href="../notes/03-01.html">查看讲稿 →</a>
+  </div>
+  
+  <div class="quiz">
+  <section class="quiz"><div class="q"><div class="qt">1. 在 lim(x→x₀) f(x) = A 的 ε–δ 定义中，函数值 f(x₀) 起什么作用？</div><ol><li data-ok="0"><b>A.</b> 必须等于 A。</li><li data-ok="0"><b>B.</b> 至少必须有定义。</li><li data-ok="1"><b>C.</b> 不起任何作用。</li></ol><button type="button" data-show="显示答案" data-hide="隐藏答案">显示答案</button><div class="ex"><b>答案： C.</b> 条件 0 < |x − x₀| < δ 排除了 x = x₀，所以 f(x₀) 从不被检查。</div></div><div class="q"><div class="qt">2. 为什么 ε–N 定义从不需要“0 <”这一条？</div><ol><li data-ok="0"><b>A.</b> 因为数列总是单调的。</li><li data-ok="1"><b>B.</b> 因为 ∞ 不是下标，没有哪一项会坐在终点上。</li><li data-ok="0"><b>C.</b> 因为 N 是整数。</li></ol><button type="button" data-show="显示答案" data-hide="隐藏答案">显示答案</button><div class="ex"><b>答案： B.</b> 尾部 n > N 里永远没有“n = ∞”，天然去心；而 x 却可以等于 x₀。</div></div><div class="q"><div class="qt">3. 设 lim(x→2) f(x) = 5，只把 f(2) 从 5 改成 9，则极限……</div><ol><li data-ok="0"><b>A.</b> 变成 9。</li><li data-ok="1"><b>B.</b> 仍是 5。</li><li data-ok="0"><b>C.</b> 不再存在。</li></ol><button type="button" data-show="显示答案" data-hide="隐藏答案">显示答案</button><div class="ex"><b>答案： B.</b> 只改动 x₀ 处的值永远不会改变极限：去心邻域从不看 x₀。</div></div><div class="q"><div class="qt">4. ε–δ 定义中哪一部分对应 ε–N 中的“n > N”？</div><ol><li data-ok="0"><b>A.</b> 任给 ε > 0</li><li data-ok="1"><b>B.</b> 0 < |x − x₀| < δ</li><li data-ok="0"><b>C.</b> |f(x) − A| < ε</li></ol><button type="button" data-show="显示答案" data-hide="隐藏答案">显示答案</button><div class="ex"><b>答案： B.</b> 两者都描述检查员在哪里检查：数列看尾部，函数看去心邻域。</div></div><div class="q"><div class="qt">5. 对 lim(x→1) (2x + 1) = 3，取 ε = 0.1，下列哪个 δ 一定可行？</div><ol><li data-ok="1"><b>A.</b> δ = 0.05</li><li data-ok="0"><b>B.</b> δ = 0.1</li><li data-ok="0"><b>C.</b> δ = 0.2</li></ol><button type="button" data-show="显示答案" data-hide="隐藏答案">显示答案</button><div class="ex"><b>答案： A.</b> 需要 2|x − 1| < 0.1，即 |x − 1| < 0.05；δ = ε/2 = 0.05 可行（更小的也行），而 δ = 0.1 不行，例如 x = 1.08。</div></div><div class="q"><div class="qt">6. 若对给定的 ε，δ = 0.3 可行，则 δ = 0.1……</div><ol><li data-ok="1"><b>A.</b> 也可行。</li><li data-ok="0"><b>B.</b> 可能不行。</li><li data-ok="0"><b>C.</b> 只有当 0.3 是最大可行 δ 时才行。</li></ol><button type="button" data-show="显示答案" data-hide="隐藏答案">显示答案</button><div class="ex"><b>答案： A.</b> 窗口更窄只会放进更少的点，而这些点本来就满足 |f(x) − A| < ε。</div></div></section>
+  </div>
+</div>
+<script>
+document.querySelectorAll('.reveal').forEach(function(b){
+  b.addEventListener('click',function(){var t=this.closest('.q,.qt-item');if(t)t.classList.add('shown')});
+});
+/* 按页面 DOM 特征自适配各批次回件的交互（逻辑均照搬原版） */
+if (document.querySelector('.qt3')) {
+  /* .qt3 式（02-03）：按钮点击后父卡 shown、按钮隐藏 */
+  document.querySelectorAll('.qt3 button').forEach(function(b){
+    b.addEventListener('click',function(){b.parentNode.classList.add('shown');b.style.display='none';});});
+} else if (document.querySelector('.quiz li.q')) {
+  /* ol/li 式（02-06）：.ans 切换 + data-ok 选项高亮 */
+  document.querySelectorAll('.quiz li.q').forEach(function(q){
+    var b=q.querySelector('button'),a=q.querySelector('.ans'),ok=q.querySelector('.opts li[data-ok]');
+    b.addEventListener('click',function(){var on=a.classList.toggle('show');ok.classList.toggle('ok',on);
+      b.textContent=on?b.dataset.hide:b.dataset.show;b.setAttribute('aria-expanded',on);});});
+  } else if (document.querySelector('.q .rv') && document.querySelector('.q .opts')) {
+    /* rv + opts li[data-ok] + hidden 属性式（03-05）：ex.hidden 切换，命中项标 hit */
+    document.querySelectorAll('.q').forEach(function(q){
+      var b=q.querySelector('.rv'), ex=q.querySelector('.ex');
+      if(!b||!ex) return;
+      b.addEventListener('click',function(){
+        var open=ex.hidden; ex.hidden=!open;
+        q.querySelectorAll('.opts li').forEach(function(li){
+          if(li.dataset.ok==='1') li.classList.toggle('hit',open);
+        });
+        b.textContent=open?'隐藏答案':'显示答案';
+      });
+    });
+  } else if (document.querySelector('.quiz .q .rv')) {
+  /* opt/rv/ex 式（07-05）：选项标记 sel，展开按钮标出对错 */
+  document.querySelectorAll('.quiz .q').forEach(function(q){
+    var opts=q.querySelectorAll('.opt'), ex=q.querySelector('.ex'), btn=q.querySelector('.rv');
+    opts.forEach(function(o){o.addEventListener('click',function(){
+      if(ex.classList.contains('show'))return;
+      opts.forEach(function(x){x.classList.remove('sel')}); o.classList.add('sel');});});
+    btn.addEventListener('click',function(){
+      var show=!ex.classList.contains('show'); ex.classList.toggle('show',show);
+      opts.forEach(function(o){
+        o.classList.remove('right','wrong');
+        if(show){ if(o.dataset.c==='1')o.classList.add('right'); else if(o.classList.contains('sel'))o.classList.add('wrong'); }
+      });
+      btn.textContent=show?btn.dataset.hide:btn.dataset.reveal;
+    });
+  });
+} else if (document.querySelector('.quiz .q[data-ok]')) {
+  /* data-ok 式（02-07）：点击后展开 .ans 并高亮正确选项 */
+  document.querySelectorAll('.quiz .q').forEach(function(q){
+    var btn=q.querySelector('button');
+    btn.addEventListener('click',function(){
+      q.classList.add('open');
+      var k=parseInt(q.getAttribute('data-ok'),10);
+      q.querySelectorAll('.opts span')[k].classList.add('ok');
+      btn.disabled=true; btn.style.opacity=.5; });
+  });
+  } else if (document.querySelector('.qitem')) {
+    /* qitem 式（01-03 第一章）：按钮 toggle 父级 open，文字切换（原页 JS 照搬） */
+    document.querySelectorAll('.qitem button').forEach(function(b){
+      b.addEventListener('click',function(){
+        var q=b.parentNode, on=q.classList.toggle('open');
+        b.setAttribute('aria-expanded',on);
+        b.textContent=on?'隐藏答案':'查看答案';
+      });
+    });
+  } else if (document.querySelector('.q button[data-ans]')) {
+    /* data-ans + hidden 属性式（03-03）：ex.hidden 切换，正确项标 ok */
+    document.querySelectorAll('.q button').forEach(function(b){
+      var q=b.parentNode, ex=q.querySelector('.ex'), li=q.querySelector('li[data-k="'+b.dataset.ans+'"]');
+      b.addEventListener('click',function(){
+        var show=ex.hidden; ex.hidden=!show;
+        if(li) li.classList.toggle('ok',show);
+        b.textContent=show?'隐藏答案':'显示答案';
+      });
+    });
+  } else if (document.querySelector('.quiz .q .rev')) {
+    /* rev/exp + data-ans 式（01-05 第一章）：点 rev 切换 exp.show，正确项标 right */
+    document.querySelectorAll('.quiz .q').forEach(function(q){
+      var b=q.querySelector('.rev'), ex=q.querySelector('.exp'), ans=q.getAttribute('data-ans');
+      if(!b||!ex) return;
+      var right = ans!=null ? q.querySelector('.opt[data-k="'+ans+'"]') : null;
+      b.addEventListener('click',function(){
+        var on=ex.classList.toggle('show');
+        if(right) right.classList.toggle('right',on);
+        b.textContent=on?'隐藏答案':'显示答案';
+      });
+    });
+  } else {
+    /* .q button 通用兜底（01-01/01-02/01-04/01-06/03-01/02/04/06…）：
+       open 与 shown 双开（各家 CSS 用哪个都命中）；正确项按 data-c/data-ok/ok 标 correct */
+    document.querySelectorAll('.q button').forEach(function(b){
+      b.addEventListener('click',function(){
+        var q=b.closest('.q'), on=!q.classList.contains('open');
+        q.classList.toggle('open',on); q.classList.toggle('shown',on);
+        q.querySelectorAll('.opt[data-c="1"], li[data-ok="1"], li.ok').forEach(function(o){
+          o.classList.toggle('correct',on);
+        });
+        if(b.dataset.hide&&b.dataset.show) b.textContent=on?b.dataset.hide:b.dataset.show;
+        else b.textContent=on?'隐藏答案':'显示答案';
+      });
+    });
+  }
+</script>
+</body>
+</html>

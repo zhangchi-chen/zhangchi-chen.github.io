@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>确界原理的证明</title>
+<style>
+:root{--bg:#0e1624;--panel:#18233a;--panel2:#202e48;--fg:#e8edf5;--muted:#8a96a8;--coral:#ff7a6b;--teal:#3ad1b5;--amber:#ffc145;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Inter","DejaVu Sans","Segoe UI","Noto Sans CJK SC","PingFang SC","Microsoft YaHei",system-ui,sans-serif;}
+.wrap{max-width:980px;margin:0 auto;padding:40px 20px 60px}
+.kicker{color:var(--amber);font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:14px}
+h1{font-size:40px;line-height:1.15;margin:8px 0 6px}
+.sub{color:var(--muted);margin:0 0 28px}
+h2{font-size:22px;margin:34px 0 12px;color:var(--fg)}
+h2 .n{color:var(--amber);margin-right:8px}
+.card{background:var(--panel);border:1px solid var(--panel2);border-radius:16px;padding:20px 24px;margin:14px 0}
+.statement{border-color:var(--amber)}
+.statement .h{color:var(--amber);font-weight:700;font-size:20px}
+.statement .s{font-size:21px;margin:8px 0 14px}
+.facts{display:flex;gap:12px;flex-wrap:wrap}
+.fact{flex:1 1 260px;border-radius:12px;padding:10px 14px;font-weight:700}
+.fact.no{background:rgba(255,122,107,.12);color:var(--coral);border:1px solid rgba(255,122,107,.4)}
+.fact.yes{background:rgba(58,209,181,.10);color:var(--teal);border:1px solid rgba(58,209,181,.4)}
+.small{color:var(--muted);font-size:15px}
+p{margin:8px 0}
+table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums;margin-top:10px}
+th,td{padding:8px 10px;border-bottom:1px solid var(--panel2);text-align:left}
+th{color:var(--muted);font-weight:600;font-size:14px}
+td.no{color:var(--coral)} td.yes{color:var(--teal)} td.win{color:var(--amber)}
+.addr{font-family:"DejaVu Sans Mono",ui-monospace,monospace;font-size:44px;font-weight:700;text-align:center;letter-spacing:.04em;margin:6px 0}
+.addr .new{color:var(--amber)}
+svg{width:100%;height:auto;display:block}
+.cap{text-align:center;color:var(--muted);font-size:15px;margin-top:4px}
+.trap{text-align:center;font-weight:700;color:var(--amber);font-size:19px}
+.proof{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media (max-width:760px){.proof{grid-template-columns:1fr} h1{font-size:30px}}
+.proof .card{margin:0}
+.proof h3{margin:0 0 8px;font-size:18px}
+.proof .i h3{color:var(--teal)} .proof .ii h3{color:var(--coral)}
+.concl{text-align:center;font-size:22px;font-weight:700;color:var(--amber);background:rgba(255,193,69,.10);border:1px solid var(--amber);border-radius:12px;padding:10px;margin-top:14px}
+.eq{font-family:"DejaVu Sans Mono",ui-monospace,monospace;color:var(--amber);font-weight:700}
+.quiz .q{border-top:1px solid var(--panel2);padding:14px 0}
+.quiz .q:first-of-type{border-top:0}
+.qt{font-weight:600;margin-bottom:6px}
+.opts{display:flex;flex-wrap:wrap;gap:8px 18px;margin:4px 0 8px}
+.opt{padding:4px 10px;border-radius:8px;border:1px solid var(--panel2)}
+.opt b{color:var(--muted);margin-right:6px}
+.opt.right{border-color:var(--teal);background:rgba(58,209,181,.12);color:var(--teal)}
+.opt.right b{color:var(--teal)}
+button{font:inherit;font-size:14px;background:var(--panel2);color:var(--fg);border:1px solid #33456a;border-radius:8px;padding:5px 12px;cursor:pointer}
+button:hover{border-color:var(--amber)}
+.exp{display:none;margin-top:8px;color:var(--fg);font-size:15px;border-left:3px solid var(--teal);padding-left:10px}
+.exp.show{display:block}
+footer{color:var(--muted);font-size:13px;margin-top:40px;text-align:center}
+</style>
+<style>
+#mv-bar{position:fixed;left:0;right:0;top:0;z-index:99;display:flex;align-items:center;
+  gap:12px;padding:9px 14px;font-size:14px;
+  background:color-mix(in srgb,var(--bg,var(--paper,#fbfaf6)) 84%,transparent);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--grid,var(--line,var(--rule,#e3e0d6)))}
+#mv-bar .mv-home{color:var(--blue,#1f72b0);text-decoration:none;white-space:nowrap}
+#mv-bar .mv-title{flex:1;text-align:center;font-weight:600;overflow:hidden;
+  text-overflow:ellipsis;white-space:nowrap;opacity:.85}
+#mv-bar .mv-quiz{color:#fff;background:#1f72b0;text-decoration:none;border-radius:8px;
+  padding:4px 12px;white-space:nowrap;font-size:13.5px}
+@media (max-width:480px){#mv-bar .mv-title{font-size:12.5px}}
+#mv-rotate{display:none}
+@media (orientation:portrait){
+  #mv-rotate{display:block;position:fixed;bottom:14px;left:50%;transform:translateX(-50%);
+    z-index:99;font-size:12.5px;padding:6px 14px;border-radius:999px;
+    background:color-mix(in srgb,var(--bg,var(--paper,#fbfaf6)) 88%,transparent);
+    backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);opacity:.92;
+    border:1px solid var(--grid,var(--line,var(--rule,#e3e0d6)))}
+}
+</style></head>
+<body><div id="mv-bar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span class="mv-title">01-05 确界原理的证明</span><a class="mv-quiz" href="../quiz/01-05.html">去自测 →</a></div>
+<div class="wrap">
+<div class="kicker">拓展篇 · 第 01-05 集</div>
+<h1>确界原理的证明</h1>
+<p class="sub">逐位搜寻 sup S，看清完备性究竟在哪里登场。</p>
+
+<div class="card statement">
+<div class="h">确界原理</div>
+<div class="s">若 S ⊆ ℝ 非空且有上界，则 S 在 ℝ 中有上确界 sup S。</div>
+<div class="small" style="margin-bottom:8px">构造中用到的两个事实（每一步 n）</div>
+<div class="facts"><div class="fact no">✗ aₙ 不是 S 的上界</div><div class="fact yes">✓ aₙ + 10⁻ⁿ 是 S 的上界</div></div>
+</div>
+
+<h2><span class="n">1</span>要造出什么</h2>
+<div class="card"><p>一个数 α，身兼两职：(i) α 是 S 的上界；(ii) 任何 b < α 都不是上界。策略：逐位找出它的地址——街道（整数部分）、楼（十分位）、门（百分位）……</p></div>
+
+<h2><span class="n">2–3</span>构造</h2>
+<div class="card"><p><b>整数部分。</b>S 非空，故有整数不是上界；S 有上界，故有整数是上界。设 m 为最大的非上界整数，则 m + 1 是上界，目标在 [m, m + 1] 中。</p><p><b>加细。</b>把当前窗口十等分，令 aₙ 为最大的、不是上界的 n 位小数分点。则 aₙ + 10⁻ⁿ 是上界，目标在长度为 10⁻ⁿ 的嵌套窗口 [aₙ, aₙ + 10⁻ⁿ] 中。</p><p><b>地址。</b>依次读出 a₁, a₂, a₃, … 的数字，得到一个无限小数 α = m + 0.d₁d₂d₃…，它的前 n 位截断正是 aₙ。</p></div>
+
+<div class="card">
+<div style="font-weight:700">例：S = {q ∈ ℚ : q² < 2}</div>
+<p class="small">对 c > 0：若 c² < 2，则 S 中有元素超过 c；若 c² ≥ 2，则 c 是上界。 &nbsp; m = 1.</p>
+<svg viewBox="0 0 920 420" role="img" aria-label="digit hunt">
+<rect x="60" y="50" width="331.4" height="10" fill="#ff7a6b" opacity=".55"/>
+<rect x="391.4" y="78" width="468.6" height="9" fill="#3ad1b5" opacity=".5"/>
+<line x1="40" y1="70" x2="880" y2="70" stroke="#e8edf5" stroke-width="2"/>
+<line x1="60.0" y1="58" x2="60.0" y2="82" stroke="#e8edf5" stroke-width="1.5"/>
+<text x="60.0" y="104" fill="#8a96a8" font-size="13" text-anchor="middle">1.0</text>
+<line x1="140.0" y1="58" x2="140.0" y2="82" stroke="#e8edf5" stroke-width="1.5"/>
+<text x="140.0" y="104" fill="#8a96a8" font-size="13" text-anchor="middle">1.1</text>
+<line x1="220.0" y1="58" x2="220.0" y2="82" stroke="#e8edf5" stroke-width="1.5"/>
+<text x="220.0" y="104" fill="#8a96a8" font-size="13" text-anchor="middle">1.2</text>
+<line x1="300.0" y1="58" x2="300.0" y2="82" stroke="#e8edf5" stroke-width="1.5"/>
+<text x="300.0" y="104" fill="#8a96a8" font-size="13" text-anchor="middle">1.3</text>
+<line x1="380.0" y1="58" x2="380.0" y2="82" stroke="#e8edf5" stroke-width="1.5"/>
+<text x="380.0" y="104" fill="#8a96a8" font-size="13" text-anchor="middle">1.4</text>
+<line x1="460.0" y1="58" x2="460.0" y2="82" stroke="#e8edf5" stroke-width="1.5"/>
+<text x="460.0" y="104" fill="#8a96a8" font-size="13" text-anchor="middle">1.5</text>
+<line x1="540.0" y1="58" x2="540.0" y2="82" stroke="#e8edf5" stroke-width="1.5"/>
+<text x="540.0" y="104" fill="#8a96a8" font-size="13" text-anchor="middle">1.6</text>
+<line x1="620.0" y1="58" x2="620.0" y2="82" stroke="#e8edf5" stroke-width="1.5"/>
+<text x="620.0" y="104" fill="#8a96a8" font-size="13" text-anchor="middle">1.7</text>
+<line x1="700.0" y1="58" x2="700.0" y2="82" stroke="#e8edf5" stroke-width="1.5"/>
+<text x="700.0" y="104" fill="#8a96a8" font-size="13" text-anchor="middle">1.8</text>
+<line x1="780.0" y1="58" x2="780.0" y2="82" stroke="#e8edf5" stroke-width="1.5"/>
+<text x="780.0" y="104" fill="#8a96a8" font-size="13" text-anchor="middle">1.9</text>
+<line x1="860.0" y1="58" x2="860.0" y2="82" stroke="#e8edf5" stroke-width="1.5"/>
+<text x="860.0" y="104" fill="#8a96a8" font-size="13" text-anchor="middle">2.0</text>
+<rect x="380.0" y="36" width="80.0" height="50" fill="#ffc145" fill-opacity=".10" stroke="#ffc145" stroke-width="2.5"/>
+<circle cx="380.0" cy="24" r="9" fill="#ff7a6b"/><text x="380.0" y="28" font-size="12" text-anchor="middle" fill="#0e1624" font-weight="700">✗</text>
+<circle cx="460.0" cy="24" r="9" fill="#3ad1b5"/><text x="460.0" y="28" font-size="12" text-anchor="middle" fill="#0e1624" font-weight="700">✓</text>
+<text x="870" y="30" fill="#ffc145" font-size="15" font-weight="700" text-anchor="end">a₁ = 1.4</text>
+<path d="M380.0,86 L60,162 M460.0,86 L860,162" stroke="#ffc145" stroke-opacity=".35" stroke-dasharray="4 4" fill="none"/>
+<rect x="60" y="180" width="113.7" height="10" fill="#ff7a6b" opacity=".55"/>
+<rect x="173.7" y="208" width="686.3" height="9" fill="#3ad1b5" opacity=".5"/>
+<line x1="40" y1="200" x2="880" y2="200" stroke="#e8edf5" stroke-width="2"/>
+<line x1="60.0" y1="188" x2="60.0" y2="212" stroke="#e8edf5" stroke-width="1.5"/>
+<text x="60.0" y="234" fill="#8a96a8" font-size="13" text-anchor="middle">1.40</text>
+<line x1="140.0" y1="188" x2="140.0" y2="212" stroke="#e8edf5" stroke-width="1.5"/>
+<text x="140.0" y="234" fill="#8a96a8" font-size="13" text-anchor="middle">1.41</text>
+<line x1="220.0" y1="188" x2="220.0" y2="212" stroke="#e8edf5" stroke-width="1.5"/>
+<text x="220.0" y="234" fill="#8a96a8" font-size="13" text-anchor="middle">1.42</text>
+<line x1="300.0" y1="188" x2="300.0" y2="212" stroke="#e8edf5" stroke-width="1.5"/>
+<text x="300.0" y="234" fill="#8a96a8" font-size="13" text-anchor="middle">1.43</text>
+<line x1="380.0" y1="188" x2="380.0" y2="212" stroke="#e8edf5" stroke-width="1.5"/>
+<text x="380.0" y="234" fill="#8a96a8" font-size="13" text-anchor="middle">1.44</text>
+<line x1="460.0" y1="188" x2="460.0" y2="212" stroke="#e8edf5" stroke-width="1.5"/>
+<text x="460.0" y="234" fill="#8a96a8" font-size="13" text-anchor="middle">1.45</text>
+<line x1="540.0" y1="188" x2="540.0" y2="212" stroke="#e8edf5" stroke-width="1.5"/>
+<text x="540.0" y="234" fill="#8a96a8" font-size="13" text-anchor="middle">1.46</text>
+<line x1="620.0" y1="188" x2="620.0" y2="212" stroke="#e8edf5" stroke-width="1.5"/>
+<text x="620.0" y="234" fill="#8a96a8" font-size="13" text-anchor="middle">1.47</text>
+<line x1="700.0" y1="188" x2="700.0" y2="212" stroke="#e8edf5" stroke-width="1.5"/>
+<text x="700.0" y="234" fill="#8a96a8" font-size="13" text-anchor="middle">1.48</text>
+<line x1="780.0" y1="188" x2="780.0" y2="212" stroke="#e8edf5" stroke-width="1.5"/>
+<text x="780.0" y="234" fill="#8a96a8" font-size="13" text-anchor="middle">1.49</text>
+<line x1="860.0" y1="188" x2="860.0" y2="212" stroke="#e8edf5" stroke-width="1.5"/>
+<text x="860.0" y="234" fill="#8a96a8" font-size="13" text-anchor="middle">1.50</text>
+<rect x="140.0" y="166" width="80.0" height="50" fill="#ffc145" fill-opacity=".10" stroke="#ffc145" stroke-width="2.5"/>
+<circle cx="140.0" cy="154" r="9" fill="#ff7a6b"/><text x="140.0" y="158" font-size="12" text-anchor="middle" fill="#0e1624" font-weight="700">✗</text>
+<circle cx="220.0" cy="154" r="9" fill="#3ad1b5"/><text x="220.0" y="158" font-size="12" text-anchor="middle" fill="#0e1624" font-weight="700">✓</text>
+<text x="870" y="160" fill="#ffc145" font-size="15" font-weight="700" text-anchor="end">a₂ = 1.41</text>
+<path d="M140.0,216 L60,292 M220.0,216 L860,292" stroke="#ffc145" stroke-opacity=".35" stroke-dasharray="4 4" fill="none"/>
+<rect x="60" y="310" width="337.1" height="10" fill="#ff7a6b" opacity=".55"/>
+<rect x="397.1" y="338" width="462.9" height="9" fill="#3ad1b5" opacity=".5"/>
+<line x1="40" y1="330" x2="880" y2="330" stroke="#e8edf5" stroke-width="2"/>
+<line x1="60.0" y1="318" x2="60.0" y2="342" stroke="#e8edf5" stroke-width="1.5"/>
+<text x="60.0" y="364" fill="#8a96a8" font-size="13" text-anchor="middle">1.410</text>
+<line x1="140.0" y1="318" x2="140.0" y2="342" stroke="#e8edf5" stroke-width="1.5"/>
+<text x="140.0" y="364" fill="#8a96a8" font-size="13" text-anchor="middle">1.411</text>
+<line x1="220.0" y1="318" x2="220.0" y2="342" stroke="#e8edf5" stroke-width="1.5"/>
+<text x="220.0" y="364" fill="#8a96a8" font-size="13" text-anchor="middle">1.412</text>
+<line x1="300.0" y1="318" x2="300.0" y2="342" stroke="#e8edf5" stroke-width="1.5"/>
+<text x="300.0" y="364" fill="#8a96a8" font-size="13" text-anchor="middle">1.413</text>
+<line x1="380.0" y1="318" x2="380.0" y2="342" stroke="#e8edf5" stroke-width="1.5"/>
+<text x="380.0" y="364" fill="#8a96a8" font-size="13" text-anchor="middle">1.414</text>
+<line x1="460.0" y1="318" x2="460.0" y2="342" stroke="#e8edf5" stroke-width="1.5"/>
+<text x="460.0" y="364" fill="#8a96a8" font-size="13" text-anchor="middle">1.415</text>
+<line x1="540.0" y1="318" x2="540.0" y2="342" stroke="#e8edf5" stroke-width="1.5"/>
+<text x="540.0" y="364" fill="#8a96a8" font-size="13" text-anchor="middle">1.416</text>
+<line x1="620.0" y1="318" x2="620.0" y2="342" stroke="#e8edf5" stroke-width="1.5"/>
+<text x="620.0" y="364" fill="#8a96a8" font-size="13" text-anchor="middle">1.417</text>
+<line x1="700.0" y1="318" x2="700.0" y2="342" stroke="#e8edf5" stroke-width="1.5"/>
+<text x="700.0" y="364" fill="#8a96a8" font-size="13" text-anchor="middle">1.418</text>
+<line x1="780.0" y1="318" x2="780.0" y2="342" stroke="#e8edf5" stroke-width="1.5"/>
+<text x="780.0" y="364" fill="#8a96a8" font-size="13" text-anchor="middle">1.419</text>
+<line x1="860.0" y1="318" x2="860.0" y2="342" stroke="#e8edf5" stroke-width="1.5"/>
+<text x="860.0" y="364" fill="#8a96a8" font-size="13" text-anchor="middle">1.420</text>
+<rect x="380.0" y="296" width="80.0" height="50" fill="#ffc145" fill-opacity=".10" stroke="#ffc145" stroke-width="2.5"/>
+<circle cx="380.0" cy="284" r="9" fill="#ff7a6b"/><text x="380.0" y="288" font-size="12" text-anchor="middle" fill="#0e1624" font-weight="700">✗</text>
+<circle cx="460.0" cy="284" r="9" fill="#3ad1b5"/><text x="460.0" y="288" font-size="12" text-anchor="middle" fill="#0e1624" font-weight="700">✓</text>
+<text x="870" y="290" fill="#ffc145" font-size="15" font-weight="700" text-anchor="end">a₃ = 1.414</text>
+<rect x="60" y="400" width="14" height="8" fill="#ff7a6b" opacity=".6"/><text x="80" y="408" fill="#ff7a6b" font-size="13">S</text>
+<rect x="120" y="400" width="14" height="8" fill="#3ad1b5" opacity=".6"/><text x="140" y="408" fill="#3ad1b5" font-size="13">上界</text>
+</svg>
+<p class="cap">每一位数字都是一个承诺：目标就在这个更小的窗口里。</p>
+<table><thead><tr><th>步</th><th>aₙ（非上界）</th><th>aₙ + 10⁻ⁿ（上界）</th><th>窗口</th></tr></thead><tbody><tr><td>1</td><td class="no">1.4</td><td class="yes">1.5</td><td class="win">[1.4, 1.5]</td></tr>
+<tr><td>2</td><td class="no">1.41</td><td class="yes">1.42</td><td class="win">[1.41, 1.42]</td></tr>
+<tr><td>3</td><td class="no">1.414</td><td class="yes">1.415</td><td class="win">[1.414, 1.415]</td></tr>
+<tr><td>4</td><td class="no">1.4142</td><td class="yes">1.4143</td><td class="win">[1.4142, 1.4143]</td></tr>
+<tr><td>5</td><td class="no">1.41421</td><td class="yes">1.41422</td><td class="win">[1.41421, 1.41422]</td></tr></tbody></table>
+<div class="addr">1.<span>4</span><span>1</span><span>4</span><span>2</span><span class="new">1</span>…</div>
+<p class="cap">α = 1.41421…</p>
+</div>
+
+<h2><span class="n">4</span>验证两点</h2>
+<div class="card"><svg viewBox="0 0 920 120" role="img" aria-label="trap">
+<line x1="40" y1="60" x2="880" y2="60" stroke="#e8edf5" stroke-width="2"/>
+<rect x="250" y="34" width="420" height="40" fill="#ffc145" fill-opacity=".10" stroke="#ffc145" stroke-width="2.5"/>
+<line x1="250" y1="46" x2="250" y2="74" stroke="#e8edf5" stroke-width="2"/><line x1="670" y1="46" x2="670" y2="74" stroke="#3ad1b5" stroke-width="3"/>
+<circle cx="470" cy="60" r="7" fill="#ffc145"/>
+<text x="250" y="100" fill="#e8edf5" font-size="16" text-anchor="middle" font-weight="700">aₙ</text>
+<text x="470" y="100" fill="#ffc145" font-size="16" text-anchor="middle" font-weight="700">α</text>
+<text x="670" y="100" fill="#3ad1b5" font-size="16" text-anchor="middle" font-weight="700">aₙ + 10⁻ⁿ</text>
+<path d="M250,22 L250,14 L670,14 L670,22" stroke="#8a96a8" fill="none" stroke-width="1.5"/>
+<text x="460" y="10" fill="#8a96a8" font-size="13" text-anchor="middle">10⁻ⁿ</text>
+</svg><p class="trap">对每个 n：aₙ ≤ α ≤ aₙ + 10⁻ⁿ（α 与 aₙ 前 n 位相同；其余各位贡献介于 0 与 10⁻ⁿ 之间）。</p></div>
+<div class="proof">
+<div class="card i"><h3>(i) α 是上界。</h3><p>假设某个 s ∈ S 满足 s > α。取 n 充分大，使 10⁻ⁿ < s − α。则 aₙ + 10⁻ⁿ ≤ α + 10⁻ⁿ < s，从而 aₙ + 10⁻ⁿ 不是 S 的上界，与构造矛盾。故对一切 s ∈ S，有 s ≤ α。</p></div>
+<div class="card ii"><h3>(ii) 比 α 小的数都不是上界。</h3><p>设 b < α。取 n 充分大，使 10⁻ⁿ < α − b。则 aₙ ≥ α − 10⁻ⁿ > b。而 aₙ 不是 S 的上界，故存在 s ∈ S，使 s > aₙ > b。所以 b 不是上界。</p></div>
+</div>
+<div class="concl">所以 α = sup S。∎</div>
+
+<h2><span class="n">5</span>约定悄悄救了证明</h2>
+<div class="card"><p>取 S = [0, 0.42)，则 sup S = 0.42。由于 0.42 是上界，搜寻从不选它：a₁ = 0.4，a₂ = 0.41，a₃ = 0.419，a₄ = 0.4199，……各位数字拼出 α = 0.41999…，而循环 9 约定规定 0.41999… = 0.42。没有这个约定，地址系统会在每个有限小数处出故障。</p><p class="eq" style="text-align:center;font-size:26px">0.41999… = 0.42</p></div>
+
+<h2><span class="n">6</span>寓意</h2>
+<div class="card"><p>完备性只在一处登场：逐位搜寻产出一个无限小数，而 ℝ 接纳每个无限小数为数。若只在 ℚ 中，对 S = {q ∈ ℚ : q² < 2} 的同样搜寻会逼近 1.41421…，它不是有理数。这招嵌套区间日后会成为关于嵌套闭区间的定理——而在这里，它已真正出力。</p></div>
+
+<h2><span class="n">✓</span>自测</h2>
+<div class="card quiz">
+<div class="q" data-ans="0">
+<div class="qt">1. S = {q ∈ ℚ : q² &lt; 3} 的 m = 1。做第 1 步：a₁ 是多少？</div>
+<div class="opts"><span class="opt" data-k="0"><b>A</b>1.7</span><span class="opt" data-k="1"><b>B</b>1.8</span><span class="opt" data-k="2"><b>C</b>1.73</span></div>
+<button type="button" class="rev">显示答案</button>
+<div class="exp"><b>正确答案： A.</b> 1.7² = 2.89 &lt; 3，故 1.7 不是上界；1.8² = 3.24 ≥ 3，故 1.8 是上界；所以 a₁ = 1.7，目标在 [1.7, 1.8] 中。</div>
+</div><div class="q" data-ans="0">
+<div class="qt">2. 对 S = [−2.5, −0.3)，最大的非上界整数 m 是多少？</div>
+<div class="opts"><span class="opt" data-k="0"><b>A</b>−1</span><span class="opt" data-k="1"><b>B</b>0</span><span class="opt" data-k="2"><b>C</b>−3</span></div>
+<button type="button" class="rev">显示答案</button>
+<div class="exp"><b>正确答案： A.</b> −1 被 −0.5 ∈ S 超过，而 0 是上界，所以 m = −1，目标在 [−1, 0] 中。</div>
+</div><div class="q" data-ans="1">
+<div class="qt">3. 对 S = [0, 0.42)，循环 9 约定为何重要？</div>
+<div class="opts"><span class="opt" data-k="0"><b>A</b>搜寻拼出 0.42000…，约定无关紧要</span><span class="opt" data-k="1"><b>B</b>搜寻拼出 0.41999…，它等于 sup S = 0.42 全靠约定</span><span class="opt" data-k="2"><b>C</b>搜寻永不结束，所以 α 不存在</span></div>
+<button type="button" class="rev">显示答案</button>
+<div class="exp"><b>正确答案： B.</b> 0.42 始终是上界、从不被选，所以各位数字是 0.41999…，约定把这个小数认定为 0.42。</div>
+</div><div class="q" data-ans="1">
+<div class="qt">4. 第 (i) 点中，被推出矛盾的是哪个构造事实？</div>
+<div class="opts"><span class="opt" data-k="0"><b>A</b>aₙ 不是上界</span><span class="opt" data-k="1"><b>B</b>aₙ + 10⁻ⁿ 是上界</span><span class="opt" data-k="2"><b>C</b>α ∈ S</span></div>
+<button type="button" class="rev">显示答案</button>
+<div class="exp"><b>正确答案： B.</b> 由 s &gt; α 可知 n 充分大时 s &gt; aₙ + 10⁻ⁿ，于是 aₙ + 10⁻ⁿ 就不是上界了。</div>
+</div><div class="q" data-ans="1">
+<div class="qt">5. 哪个不等式对每个 n 都成立？</div>
+<div class="opts"><span class="opt" data-k="0"><b>A</b>aₙ &lt; α &lt; aₙ + 10⁻ⁿ</span><span class="opt" data-k="1"><b>B</b>aₙ ≤ α ≤ aₙ + 10⁻ⁿ</span><span class="opt" data-k="2"><b>C</b>α ≤ aₙ</span></div>
+<button type="button" class="rev">显示答案</button>
+<div class="exp"><b>正确答案： B.</b> aₙ 是 α 的前 n 位截断，其余各位贡献介于 0 与 10⁻ⁿ 之间（可以取等号，如 0.41999… = 0.42）。</div>
+</div><div class="q" data-ans="1">
+<div class="qt">6. 完备性究竟在证明的哪一步用到？</div>
+<div class="opts"><span class="opt" data-k="0"><b>A</b>选取整数 m 时</span><span class="opt" data-k="1"><b>B</b>承认无限小数 α 是一个实数时</span><span class="opt" data-k="2"><b>C</b>第 (i) 点的反证中</span></div>
+<button type="button" class="rev">显示答案</button>
+<div class="exp"><b>正确答案： B.</b> 其余各步都是有限的检验；只有“无限小数 α 是 ℝ 中的数”这一步用到完备性。</div>
+</div>
+</div>
+
+<footer>第 01-05 集 · 前置：无限小数与循环 9 约定；上确界的两点验证模板。</footer>
+</div>
+<script>
+document.querySelectorAll('.quiz .q').forEach(function(q){
+  var b=q.querySelector('.rev'), ex=q.querySelector('.exp'), ans=q.getAttribute('data-ans');
+  var right=q.querySelector('.opt[data-k="'+ans+'"]');
+  b.addEventListener('click',function(){
+    var on=ex.classList.toggle('show');
+    right.classList.toggle('right',on);
+    b.textContent=on?'隐藏答案':'显示答案';
+  });
+});
+</script>
+<script>
+(function(){
+  var deck=document.getElementById('deck');
+  if(deck){
+    deck.style.top='44px';
+    function fit(){
+      var s=Math.min(window.innerWidth/1280,(window.innerHeight-44)/720,1.5);
+      deck.style.transform='scale('+s+')';
+    }
+    window.addEventListener('resize',fit);fit();
+  }else{
+    document.body.style.paddingTop='44px';
+  }
+})();
+</script></body>
+</html>

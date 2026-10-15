@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Heine Principle · Self-Quiz</title>
+<style>
+:root{--bg:#0e1a2b;--card:#15263d;--ink:#eef2f7;--muted:#9fb0c6;--blue:#5ab0ff;--teal:#4fd1b5;--green:#6bd38a;--line:#26405f}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(1200px 700px at 20% 0%,#16304f 0%,var(--bg) 60%);
+background-color:var(--bg);color:var(--ink);
+font:17px/1.65 "Noto Sans","Noto Sans SC",system-ui,-apple-system,"Segoe UI",sans-serif}
+.page{max-width:720px;margin:0 auto;padding:18px 16px 60px}
+.topbar{display:flex;justify-content:space-between;align-items:baseline;gap:8px;
+border-bottom:2px solid var(--line);padding-bottom:10px;margin-bottom:6px}
+.topbar h1{font-size:20px;margin:0}
+.topbar a{color:var(--blue);font-size:14px;text-decoration:none;white-space:nowrap}
+.lead{color:var(--muted);font-size:14.5px;margin:12px 0 2px}
+.qt{display:grid;gap:14px;margin-top:14px}
+.qt-item{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 18px}
+.qt-q{color:var(--ink);font-size:16.5px;margin:0 0 8px}
+.qt-opts{color:var(--muted);font-size:15px;line-height:1.9;margin:0 0 10px}
+.qt-opts span{display:block}
+button.reveal{background:transparent;border:1px solid var(--teal);color:var(--teal);
+border-radius:8px;padding:5px 14px;font-size:14px;cursor:pointer}
+.ans{display:none;margin-top:10px;padding:10px 14px;border-left:3px solid var(--green);
+background:rgba(107,211,138,.08);color:var(--ink);font-size:15px;line-height:1.8;border-radius:0 8px 8px 0}
+.ans b{color:var(--green)}
+.qt-item.shown .ans{display:block}
+.qt-item.shown button.reveal{display:none}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="topbar">
+    <h1>The Heine Principle · Self-Quiz</h1>
+    <a href="../notes-en/03-04.html">Notes (EN) →</a>
+  </div>
+  <p class="lead">Pick your answer, then click to reveal. · <a href="03-04.html" style="color:var(--blue);text-decoration:none">中文版 →</a></p>
+  <div class="qt">
+<div class="qt-item">
+<p class="qt-q">To prove that lim(x→0) sin(1/x) does not exist, which pair of probes works?</p>
+<p class="qt-opts"><span>A. xₙ = 1/(2nπ + π/2) and xₙ = 1/(2nπ)</span><span>B. xₙ = 1/n and xₙ = 2/n</span><span>C. xₙ = 1/(2nπ) and xₙ = 1/(4nπ)</span></p>
+<button class="reveal">Reveal answer</button>
+<div class="ans"><b>A.</b> The first makes sin(1/xₙ) = 1 → 1, the second gives 0 → 0: the two reports differ, so no limit exists.</div>
+</div>
+<div class="qt-item">
+<p class="qt-q">For the Dirichlet function, at any point x₀, which team of witnesses overturns the claim of a limit?</p>
+<p class="qt-opts"><span>A. two irrational sequences tending to x₀</span><span>B. one rational and one irrational sequence, both tending to x₀</span><span>C. the constant sequence xₙ = x₀</span></p>
+<button class="reveal">Reveal answer</button>
+<div class="ans"><b>B.</b> Rational probes report 1, irrational ones report 0; the constant sequence is inadmissible because xₙ ≠ x₀ is required.</div>
+</div>
+<div class="qt-item">
+<p class="qt-q">f(x) = 1 for x > 0 and f(x) = −1 for x < 0. Which pair of witnesses shows it has no limit at 0?</p>
+<p class="qt-opts"><span>A. xₙ = 1/n and xₙ = 1/n²</span><span>B. xₙ = −1/n and xₙ = −1/n²</span><span>C. xₙ = 1/n and xₙ = −1/n</span></p>
+<button class="reveal">Reveal answer</button>
+<div class="ans"><b>C.</b> The right-hand probes report 1, the left-hand ones −1; differing limits mean no limit.</div>
+</div>
+<div class="qt-item">
+<p class="qt-q">You checked one sequence xₙ → x₀ and found f(xₙ) → A. What can you conclude?</p>
+<p class="qt-opts"><span>A. lim(x→x₀) f(x) = A</span><span>B. nothing yet: other sequences may report differently</span><span>C. the limit exists, but possibly differs from A</span></p>
+<button class="reveal">Reveal answer</button>
+<div class="ans"><b>B.</b> Proving a limit requires every sequence; the Dirichlet function passes all irrational probes yet still has no limit.</div>
+</div>
+<div class="qt-item">
+<p class="qt-q">The probe xₙ = n reports eⁿ → +∞. What does it contribute to lim(x→+∞) eˣ?</p>
+<p class="qt-opts"><span>A. It rules out every finite limit; the full conclusion needs all probes (guaranteed by monotonicity)</span><span>B. By itself it proves the full conclusion</span><span>C. It shows the limit is 0</span></p>
+<button class="reveal">Reveal answer</button>
+<div class="ans"><b>A.</b> One unbounded report vetoes all finite candidates, but confirming +∞ still requires every sequence tending to +∞.</div>
+</div>
+  </div>
+</div>
+<script>
+document.querySelectorAll('button.reveal').forEach(function(b){
+  b.addEventListener('click',function(){this.closest('.qt-item').classList.add('shown')});
+});
+</script>
+</body>
+</html>

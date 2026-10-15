@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The ε–δ Definition · Self-Quiz</title>
+<style>
+:root{--bg:#0e1a2b;--card:#15263d;--ink:#eef2f7;--muted:#9fb0c6;--blue:#5ab0ff;--teal:#4fd1b5;--green:#6bd38a;--line:#26405f}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(1200px 700px at 20% 0%,#16304f 0%,var(--bg) 60%);
+background-color:var(--bg);color:var(--ink);
+font:17px/1.65 "Noto Sans","Noto Sans SC",system-ui,-apple-system,"Segoe UI",sans-serif}
+.page{max-width:720px;margin:0 auto;padding:18px 16px 60px}
+.topbar{display:flex;justify-content:space-between;align-items:baseline;gap:8px;
+border-bottom:2px solid var(--line);padding-bottom:10px;margin-bottom:6px}
+.topbar h1{font-size:20px;margin:0}
+.topbar a{color:var(--blue);font-size:14px;text-decoration:none;white-space:nowrap}
+.lead{color:var(--muted);font-size:14.5px;margin:12px 0 2px}
+.qt{display:grid;gap:14px;margin-top:14px}
+.qt-item{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 18px}
+.qt-q{color:var(--ink);font-size:16.5px;margin:0 0 8px}
+.qt-opts{color:var(--muted);font-size:15px;line-height:1.9;margin:0 0 10px}
+.qt-opts span{display:block}
+button.reveal{background:transparent;border:1px solid var(--teal);color:var(--teal);
+border-radius:8px;padding:5px 14px;font-size:14px;cursor:pointer}
+.ans{display:none;margin-top:10px;padding:10px 14px;border-left:3px solid var(--green);
+background:rgba(107,211,138,.08);color:var(--ink);font-size:15px;line-height:1.8;border-radius:0 8px 8px 0}
+.ans b{color:var(--green)}
+.qt-item.shown .ans{display:block}
+.qt-item.shown button.reveal{display:none}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="topbar">
+    <h1>The ε–δ Definition · Self-Quiz</h1>
+    <a href="../notes-en/03-01.html">Notes (EN) →</a>
+  </div>
+  <p class="lead">Pick your answer, then click to reveal. · <a href="03-01.html" style="color:var(--blue);text-decoration:none">中文版 →</a></p>
+  <div class="qt">
+<div class="qt-item">
+<p class="qt-q">In the ε–δ definition of lim(x→x₀) f(x) = A, what role does the value f(x₀) play?</p>
+<p class="qt-opts"><span>A. It must equal A.</span><span>B. It must at least be defined.</span><span>C. It plays no role at all.</span></p>
+<button class="reveal">Reveal answer</button>
+<div class="ans"><b>C.</b> The condition 0 < |x − x₀| < δ excludes x = x₀, so f(x₀) is never checked.</div>
+</div>
+<div class="qt-item">
+<p class="qt-q">Why does the ε–N definition never need the “0 <” clause?</p>
+<p class="qt-opts"><span>A. Because sequences are always monotone.</span><span>B. Because ∞ is not an index: no term sits at the destination.</span><span>C. Because N is an integer.</span></p>
+<button class="reveal">Reveal answer</button>
+<div class="ans"><b>B.</b> The tail n > N never contains “n = ∞” — naturally punctured; but x can equal x₀.</div>
+</div>
+<div class="qt-item">
+<p class="qt-q">Suppose lim(x→2) f(x) = 5 and only f(2) is changed from 5 to 9. The limit…</p>
+<p class="qt-opts"><span>A. becomes 9</span><span>B. stays 5</span><span>C. no longer exists</span></p>
+<button class="reveal">Reveal answer</button>
+<div class="ans"><b>B.</b> Changing the value at x₀ alone never changes the limit: the punctured neighborhood never looks at x₀.</div>
+</div>
+<div class="qt-item">
+<p class="qt-q">Which part of the ε–δ definition corresponds to “n > N” in ε–N?</p>
+<p class="qt-opts"><span>A. for every ε > 0</span><span>B. 0 < |x − x₀| < δ</span><span>C. |f(x) − A| < ε</span></p>
+<button class="reveal">Reveal answer</button>
+<div class="ans"><b>B.</b> Both specify where the inspector checks: sequences check the tail, functions check the punctured neighborhood.</div>
+</div>
+<div class="qt-item">
+<p class="qt-q">For lim(x→1) (2x + 1) = 3 with ε = 0.1, which δ certainly works?</p>
+<p class="qt-opts"><span>A. δ = 0.05</span><span>B. δ = 0.1</span><span>C. δ = 0.2</span></p>
+<button class="reveal">Reveal answer</button>
+<div class="ans"><b>A.</b> One needs 2|x − 1| < 0.1, i.e. |x − 1| < 0.05; δ = ε/2 = 0.05 works (anything smaller also works), while δ = 0.1 fails, e.g. at x = 1.08.</div>
+</div>
+<div class="qt-item">
+<p class="qt-q">If δ = 0.3 works for a given ε, then δ = 0.1…</p>
+<p class="qt-opts"><span>A. also works</span><span>B. may fail</span><span>C. works only if 0.3 is the largest workable δ</span></p>
+<button class="reveal">Reveal answer</button>
+<div class="ans"><b>A.</b> A narrower window only admits fewer points, and those already satisfy |f(x) − A| < ε.</div>
+</div>
+  </div>
+</div>
+<script>
+document.querySelectorAll('button.reveal').forEach(function(b){
+  b.addEventListener('click',function(){this.closest('.qt-item').classList.add('shown')});
+});
+</script>
+</body>
+</html>

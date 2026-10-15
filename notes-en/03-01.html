@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Limit of a Function — the ε–δ Definition</title><style>
+:root{--bg:#FBF8F1;--ink:#1E2A3A;--muted:#6B7280;--eps:#E8590C;--del:#2563EB;--ok:#16A34A;--bad:#DC2626;--card:#fff;--line:#E4DED0;--hl:#FFF1BF}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:960px;margin:0 auto;padding:28px 16px 64px}
+.kicker{color:var(--muted);font-weight:700;letter-spacing:.04em;font-size:14px;text-transform:uppercase}
+h1{font-size:34px;line-height:1.2;margin:6px 0 4px}
+.sub{color:var(--muted);margin:0 0 22px}
+section{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin:18px 0}
+h2{font-size:21px;margin:0 0 10px}
+h2 .n{display:inline-block;min-width:28px;height:28px;border-radius:50%;background:var(--ink);color:#fff;text-align:center;line-height:28px;font-size:15px;margin-right:8px}
+.m{font-family:"DejaVu Sans","Cambria Math","STIX Two Math","Times New Roman",serif;white-space:nowrap}
+.eps{color:var(--eps)}.del{color:var(--del)}.ok{color:var(--ok)}.bad{color:var(--bad)}
+.def{border-left:5px solid var(--del);background:#F3F7FF;border-radius:8px;padding:12px 16px;font-size:19px}
+.def b{color:var(--del)}
+.remark{border-left:5px solid var(--eps);background:#FFF8E7;border-radius:8px;padding:10px 16px}
+table{width:100%;border-collapse:collapse;font-size:16px}
+th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{color:var(--muted);font-size:14px}
+td.hl{background:var(--hl);font-weight:600}
+.fig{width:100%;height:auto;display:block;margin:10px 0}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media (max-width:680px){.two{grid-template-columns:1fr}h1{font-size:27px}.m{white-space:normal}table{font-size:14px}th,td{padding:6px}}
+.disp{overflow-x:auto}
+section{overflow-wrap:anywhere}
+.proof{background:#FAFAF7;border:1px dashed #B9B3A5;border-radius:10px;padding:12px 16px}
+.disp{display:block;text-align:center;margin:8px 0;font-size:18px;color:var(--del)}
+ul{padding-left:20px;margin:6px 0}
+.quiz .q{border-top:1px solid var(--line);padding:12px 0}
+.quiz .q:first-of-type{border-top:none}
+.quiz .qt{font-weight:600;margin-bottom:6px}
+.quiz ol{list-style:none;padding:0;margin:0 0 8px}
+.quiz li{padding:4px 10px;border-radius:8px;margin:2px 0;border:1px solid transparent}
+.quiz li.correct{background:#E8F7EE;border-color:var(--ok);font-weight:600}
+.quiz button{font:inherit;font-size:14px;border:1px solid var(--del);color:var(--del);background:#fff;border-radius:999px;padding:4px 14px;cursor:pointer}
+.quiz button:hover{background:#EEF4FF}
+.quiz .ex{display:none;margin-top:8px;color:#14532D;background:#F0FAF4;border-radius:8px;padding:6px 10px;font-size:15px}
+.quiz .q.open .ex{display:block}
+footer{color:var(--muted);font-size:13px;text-align:center;margin-top:24px}
+</style></head><body><main>
+<div class="kicker">Episode 3.1 · Mathematical analysis</div><h1>The limit of a function: the ε–δ definition</h1><p class="sub">Same inspector, new post: why the neighborhood of x₀ is punctured.</p>
+<section><h2><span class="n">1</span>The inspector changes posts</h2><p>A sequence marches on integer steps, so “approaching” meant <span class="m">n > N</span>. A function lives on a continuum: x can creep toward any point <span class="m">x₀</span> from either side. The inspector moves from “beyond N” to “near x₀”.</p></section>
+<section><h2><span class="n">2</span>The translation table</h2>
+<table><tr><th>ε–N (sequence aₙ → A)</th><th class="del">ε–δ (function f(x) → A as x → x₀)</th></tr><tr><td>for every ε > 0</td><td>for every ε > 0</td></tr><tr><td>there exists N such that</td><td>there exists δ > 0 such that</td></tr><tr><td>n > N  (a tail)</td><td class="hl">0 < |x − x₀| < δ  (a punctured neighborhood)</td></tr><tr><td>implies |aₙ − A| < ε</td><td>implies |f(x) − A| < ε</td></tr></table>
+<p>The picture upgrades from a horizontal ε-band around A to a window: x₀ ± δ wide, A ± ε tall. Near x₀, the graph must stay inside.</p><svg class="fig" viewBox="0 0 640 300" role="img" aria-label="Graph inside the window from x₀−δ to x₀+δ and A−ε to A+ε; the point x₀ itself is a closed door.">
+<rect width="640" height="300" fill="#FBF8F1" rx="10"/>
+<line x1="60" y1="260" x2="600" y2="260" stroke="#1E2A3A" stroke-width="1.5"/>
+<line x1="60" y1="20" x2="60" y2="260" stroke="#1E2A3A" stroke-width="1.5"/>
+<rect x="60" y="110" width="540" height="70" fill="#E8590C" opacity=".13"/>
+<line x1="60" y1="110" x2="600" y2="110" stroke="#E8590C" stroke-dasharray="6 4"/>
+<line x1="60" y1="180" x2="600" y2="180" stroke="#E8590C" stroke-dasharray="6 4"/>
+<rect x="270" y="110" width="110" height="70" fill="#2563EB" fill-opacity=".10" stroke="#1E2A3A" stroke-width="2.5"/>
+<line x1="270" y1="20" x2="270" y2="260" stroke="#2563EB" stroke-width="2"/>
+<line x1="380" y1="20" x2="380" y2="260" stroke="#2563EB" stroke-width="2"/>
+<path d="M70 245 C150 230 200 190 250 165 S300 150 325 145 S360 125 400 110 S520 70 590 40" fill="none" stroke="#8A93A0" stroke-width="2.5"/>
+<path d="M270 160 C285 154 300 150 325 145 S355 128 380 117" fill="none" stroke="#16A34A" stroke-width="4"/>
+<rect x="318" y="118" width="14" height="54" fill="#A0703C" stroke="#5C3D1E" opacity=".9"/>
+<circle cx="325" cy="145" r="6" fill="#FBF8F1" stroke="#1E2A3A" stroke-width="2"/>
+<text x="40" y="150" font-size="16" fill="#E8590C" text-anchor="end">A</text>
+<text x="40" y="115" font-size="13" fill="#E8590C" text-anchor="end">A+ε</text>
+<text x="40" y="185" font-size="13" fill="#E8590C" text-anchor="end">A−ε</text>
+<text x="325" y="282" font-size="15" fill="#DC2626" text-anchor="middle">x₀</text>
+<text x="262" y="282" font-size="13" fill="#2563EB" text-anchor="end">x₀−δ</text>
+<text x="388" y="282" font-size="13" fill="#2563EB">x₀+δ</text>
+<text x="420" y="205" font-size="14" fill="#1E2A3A">near x₀ ⟹ inside the window</text>
+</svg>
+<div class="def"><b>Definition.</b> <span class="m">lim<sub>x→x₀</sub> f(x) = A</span> means: for every <span class="m">ε > 0</span> there exists <span class="m">δ > 0</span> such that <span class="m">0 < |x − x₀| < δ</span> implies <span class="m">|f(x) − A| < ε</span>.</div></section>
+<section><h2><span class="n">3</span>Why punctured?</h2><p>A limit describes the approach, never the arrival. The point itself may be a hole (<span class="m">sin x / x</span> at 0), may carry a value different from A, or may lie outside the domain.</p>
+<div class="remark"><b>Remark.</b> The value <span class="m">f(x₀)</span> — defined or not — plays no role in the definition.</div>
+<p><b>Two consequences</b></p><ol><li><span class="m">f</span> may be undefined at <span class="m">x₀</span> and still have a limit there.</li><li>Changing <span class="m">f</span> at <span class="m">x₀</span> alone never changes the limit.</li></ol>
+<p>Why did ε–N never need such a clause? Because ∞ is not an index: no term ever sits at the destination, so a tail is punctured for free. Here x <i>can</i> land exactly on <span class="m">x₀</span>, so the exclusion must be written by hand — that is the job of <span class="m">0 &lt;</span>.</p><svg class="fig" viewBox="0 0 640 170" role="img" aria-label="Left: indices never reach infinity. Right: x can land on x₀, so it is crossed out by hand.">
+<rect width="640" height="170" fill="#FBF8F1" rx="10"/>
+<text x="150" y="24" font-size="15" font-weight="700" fill="#6B7280" text-anchor="middle">ε–N : n → ∞</text>
+<line x1="20" y1="70" x2="250" y2="70" stroke="#1E2A3A"/><circle cx="30" cy="70" r="4.5" fill="#8A93A0"/><circle cx="52" cy="70" r="4.5" fill="#8A93A0"/><circle cx="74" cy="70" r="4.5" fill="#8A93A0"/><circle cx="96" cy="70" r="4.5" fill="#8A93A0"/><circle cx="118" cy="70" r="4.5" fill="#16A34A"/><circle cx="140" cy="70" r="4.5" fill="#16A34A"/><circle cx="162" cy="70" r="4.5" fill="#16A34A"/><circle cx="184" cy="70" r="4.5" fill="#16A34A"/><circle cx="206" cy="70" r="4.5" fill="#16A34A"/>
+<text x="226" y="75" font-size="16">…</text>
+<circle cx="275" cy="70" r="13" fill="none" stroke="#E8590C" stroke-width="2" stroke-dasharray="4 3"/>
+<text x="275" y="76" font-size="17" fill="#E8590C" text-anchor="middle">∞</text>
+<text x="275" y="104" font-size="12" fill="#E8590C" text-anchor="middle">not an index</text>
+<text x="150" y="140" font-size="14" font-weight="700" fill="#16A34A" text-anchor="middle">tail: punctured for free</text>
+<line x1="320" y1="10" x2="320" y2="160" stroke="#E4DED0"/>
+<text x="480" y="24" font-size="15" font-weight="700" fill="#2563EB" text-anchor="middle">ε–δ : x → x₀</text>
+<line x1="350" y1="70" x2="620" y2="70" stroke="#1E2A3A"/>
+<line x1="410" y1="70" x2="550" y2="70" stroke="#2563EB" stroke-width="5"/>
+<rect x="472" y="30" width="16" height="40" fill="#A0703C" stroke="#5C3D1E"/>
+<circle cx="480" cy="70" r="6" fill="#DC2626"/>
+<path d="M472 62 L488 78 M472 78 L488 62" stroke="#DC2626" stroke-width="3"/>
+<text x="480" y="92" font-size="13" fill="#DC2626" text-anchor="middle">x₀</text>
+<text x="480" y="140" font-size="16" text-anchor="middle"><tspan fill="#DC2626" font-weight="700">0 &lt;</tspan> |x − x₀| &lt; δ</text>
+<text x="480" y="116" font-size="12" fill="#DC2626" font-style="italic" text-anchor="middle">exclusion written by hand</text>
+</svg></section>
+<section><h2><span class="n">4</span>δ is a choice, not a function</h2><p>If some <span class="m">δ</span> works for a given <span class="m">ε</span>, every smaller <span class="m">δ</span> works too: a narrower window only lets in fewer points. So <span class="m">δ</span> need not be optimal. It depends on <span class="m">ε</span> — and, silently, on the point <span class="m">x₀</span>.</p></section>
+<section><h2><span class="n">5</span>Model verification</h2><p>Claim: <span class="m">lim<sub>x→1</sub> (2x + 1) = 3</span>.</p><p class="muted">Scratch: <span class="m">|(2x + 1) − 3| = 2|x − 1|</span>, and <span class="m">2|x − 1| < ε</span> ⟺ <span class="m">|x − 1| < ε/2</span>. Try <span class="m">δ = ε/2</span>.</p>
+<div class="proof"><p style="margin:0"><b>Verification.</b> Let <span class="m">ε > 0</span> be given, and choose <span class="m">δ = ε/2 > 0</span>. Then for every x with <span class="m">0 < |x − 1| < δ</span> we have <span class="m">|(2x + 1) − 3| = 2|x − 1| < 2δ = ε</span>, so <span class="m">lim<sub>x→1</sub> (2x + 1) = 3</span>. ∎</p><span class="m disp">0 < |x − 1| < δ &nbsp;⟹&nbsp; |(2x + 1) − 3| = 2|x − 1| < ε</span></div></section>
+<section><h2><span class="n">6</span>Recap</h2><ul><li>Same inspector, new post: ε sets the tolerance around A, δ marks the neighborhood of x₀.</li><li>The door — the point x₀ itself — stays shut.</li><li>The neighborhood speaks; the point stays silent.</li></ul></section>
+<section class="quiz"><h2><span class="n">?</span>Self-check</h2><div class="q"><div class="qt">1. In the ε–δ definition of lim(x→x₀) f(x) = A, what role does the value f(x₀) play?</div><ol><li data-ok="0"><b>A.</b> It must equal A.</li><li data-ok="0"><b>B.</b> It must at least be defined.</li><li data-ok="1"><b>C.</b> None at all.</li></ol><button type="button" data-show="Show answer" data-hide="Hide answer">Show answer</button><div class="ex"><b>Answer: C.</b> The condition 0 < |x − x₀| < δ excludes x = x₀, so f(x₀) is never checked.</div></div><div class="q"><div class="qt">2. Why did the ε–N definition never need a “0 <” clause?</div><ol><li data-ok="0"><b>A.</b> Because sequences are always monotone.</li><li data-ok="1"><b>B.</b> Because ∞ is not an index, so no term ever sits at the destination.</li><li data-ok="0"><b>C.</b> Because N is an integer.</li></ol><button type="button" data-show="Show answer" data-hide="Hide answer">Show answer</button><div class="ex"><b>Answer: B.</b> A tail n > N never contains “n = ∞”, so it is punctured for free; x, by contrast, can equal x₀.</div></div><div class="q"><div class="qt">3. Suppose lim(x→2) f(x) = 5 and we change only the value f(2) from 5 to 9. The limit…</div><ol><li data-ok="0"><b>A.</b> becomes 9.</li><li data-ok="1"><b>B.</b> stays 5.</li><li data-ok="0"><b>C.</b> no longer exists.</li></ol><button type="button" data-show="Show answer" data-hide="Hide answer">Show answer</button><div class="ex"><b>Answer: B.</b> Changing f at x₀ alone never changes the limit: the punctured neighborhood never looks at x₀.</div></div><div class="q"><div class="qt">4. Which line of the ε–δ definition is the counterpart of “n > N”?</div><ol><li data-ok="0"><b>A.</b> for every ε > 0</li><li data-ok="1"><b>B.</b> 0 < |x − x₀| < δ</li><li data-ok="0"><b>C.</b> |f(x) − A| < ε</li></ol><button type="button" data-show="Show answer" data-hide="Hide answer">Show answer</button><div class="ex"><b>Answer: B.</b> Both describe where the inspector checks: a tail for sequences, a punctured neighborhood for functions.</div></div><div class="q"><div class="qt">5. For lim(x→1) (2x + 1) = 3 and ε = 0.1, which δ is guaranteed to work?</div><ol><li data-ok="1"><b>A.</b> δ = 0.05</li><li data-ok="0"><b>B.</b> δ = 0.1</li><li data-ok="0"><b>C.</b> δ = 0.2</li></ol><button type="button" data-show="Show answer" data-hide="Hide answer">Show answer</button><div class="ex"><b>Answer: A.</b> We need 2|x − 1| < 0.1, i.e. |x − 1| < 0.05; δ = ε/2 = 0.05 works (and so does any smaller δ), while δ = 0.1 fails, e.g. at x = 1.08.</div></div><div class="q"><div class="qt">6. If δ = 0.3 works for a given ε, then δ = 0.1…</div><ol><li data-ok="1"><b>A.</b> also works.</li><li data-ok="0"><b>B.</b> may fail.</li><li data-ok="0"><b>C.</b> works only if 0.3 was the largest possible δ.</li></ol><button type="button" data-show="Show answer" data-hide="Hide answer">Show answer</button><div class="ex"><b>Answer: A.</b> A narrower window only admits fewer points, all of which already satisfied |f(x) − A| < ε.</div></div></section>
+<footer>Episode 3.1 · companion slide</footer></main><script>
+document.querySelectorAll('.quiz .q').forEach(function(q){
+  var b=q.querySelector('button');
+  b.addEventListener('click',function(){
+    var open=q.classList.toggle('open');
+    q.querySelectorAll('li').forEach(function(li){ if(li.dataset.ok==='1'){ li.classList.toggle('correct',open);} });
+    b.textContent=open?b.dataset.hide:b.dataset.show;
+  });
+});
+</script></body></html>

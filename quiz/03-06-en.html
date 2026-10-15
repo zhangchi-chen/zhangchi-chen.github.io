@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Orders and Equivalents · Self-Quiz</title>
+<style>
+:root{--bg:#0e1a2b;--card:#15263d;--ink:#eef2f7;--muted:#9fb0c6;--blue:#5ab0ff;--teal:#4fd1b5;--green:#6bd38a;--line:#26405f}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(1200px 700px at 20% 0%,#16304f 0%,var(--bg) 60%);
+background-color:var(--bg);color:var(--ink);
+font:17px/1.65 "Noto Sans","Noto Sans SC",system-ui,-apple-system,"Segoe UI",sans-serif}
+.page{max-width:720px;margin:0 auto;padding:18px 16px 60px}
+.topbar{display:flex;justify-content:space-between;align-items:baseline;gap:8px;
+border-bottom:2px solid var(--line);padding-bottom:10px;margin-bottom:6px}
+.topbar h1{font-size:20px;margin:0}
+.topbar a{color:var(--blue);font-size:14px;text-decoration:none;white-space:nowrap}
+.lead{color:var(--muted);font-size:14.5px;margin:12px 0 2px}
+.qt{display:grid;gap:14px;margin-top:14px}
+.qt-item{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 18px}
+.qt-q{color:var(--ink);font-size:16.5px;margin:0 0 8px}
+.qt-opts{color:var(--muted);font-size:15px;line-height:1.9;margin:0 0 10px}
+.qt-opts span{display:block}
+button.reveal{background:transparent;border:1px solid var(--teal);color:var(--teal);
+border-radius:8px;padding:5px 14px;font-size:14px;cursor:pointer}
+.ans{display:none;margin-top:10px;padding:10px 14px;border-left:3px solid var(--green);
+background:rgba(107,211,138,.08);color:var(--ink);font-size:15px;line-height:1.8;border-radius:0 8px 8px 0}
+.ans b{color:var(--green)}
+.qt-item.shown .ans{display:block}
+.qt-item.shown button.reveal{display:none}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="topbar">
+    <h1>Orders and Equivalents · Self-Quiz</h1>
+    <a href="../notes-en/03-06.html">Notes (EN) →</a>
+  </div>
+  <p class="lead">Pick your answer, then click to reveal. · <a href="03-06.html" style="color:var(--blue);text-decoration:none">中文版 →</a></p>
+  <div class="qt">
+<div class="qt-item">
+<p class="qt-q">As x → 0, o(x²)·O(1/x) simplifies to:</p>
+<p class="qt-opts"><span>A. o(x)</span><span>B. O(x)</span><span>C. o(x³)</span></p>
+<button class="reveal">Reveal answer</button>
+<div class="ans"><b>A.</b> by o(f)·O(g) = o(fg) with f = x², g = 1/x: o(x²·1/x) = o(x).</div>
+</div>
+<div class="qt-item">
+<p class="qt-q">As x → 0, x·o(1/x²) equals:</p>
+<p class="qt-opts"><span>A. o(x)</span><span>B. o(1/x)</span><span>C. O(1/x²)</span></p>
+<button class="reveal">Reveal answer</button>
+<div class="ans"><b>B.</b> by x·o(f(x)) = o(x·f(x)): o(x·1/x²) = o(1/x).</div>
+</div>
+<div class="qt-item">
+<p class="qt-q">The equals sign in “o(f) + o(f) = o(f)” means:</p>
+<p class="qt-opts"><span>A. the two classes are mutually equal</span><span>B. the two o(f)'s are the same function</span><span>C. containment ⊆: the sum of any two members of o(f) stays in o(f)</span></p>
+<button class="reveal">Reveal answer</button>
+<div class="ans"><b>C.</b> function-class equations read left to right as membership/containment, not symmetric equality.</div>
+</div>
+<div class="qt-item">
+<p class="qt-q">In general, equivalent substitution is legitimate…</p>
+<p class="qt-opts"><span>A. inside products and quotients</span><span>B. inside sums and differences</span><span>C. anywhere in an expression</span></p>
+<button class="reveal">Reveal answer</button>
+<div class="ans"><b>A.</b> the correction factor 1 + o(1) passes through products and quotients; in differences the leading parts may cancel.</div>
+</div>
+<div class="qt-item">
+<p class="qt-q">Why does naive substitution in (tan x − sin x)/x³ give the wrong answer 0?</p>
+<p class="qt-opts"><span>A. tan x is not equivalent to x</span><span>B. the leading parts cancel, leaving o(x), and o(x)/x³ is undetermined</span><span>C. the limit does not exist</span></p>
+<button class="reveal">Reveal answer</button>
+<div class="ans"><b>B.</b> tan x − sin x is only known to lie in o(x); the remainder decides, and the true limit is 1/2.</div>
+</div>
+<div class="qt-item">
+<p class="qt-q">For u = x·sin(1/x) and v = x as x → 0, which conclusion holds?</p>
+<p class="qt-opts"><span>A. u ~ v</span><span>B. u ∈ O(v), even though lim u/v does not exist</span><span>C. u is not an infinitesimal</span></p>
+<button class="reveal">Reveal answer</button>
+<div class="ans"><b>B.</b> |u| ≤ |v| already gives u ∈ O(v) with no ratio limit needed — exactly where the function-class language is more robust.</div>
+</div>
+  </div>
+</div>
+<script>
+document.querySelectorAll('button.reveal').forEach(function(b){
+  b.addEventListener('click',function(){this.closest('.qt-item').classList.add('shown')});
+});
+</script>
+</body>
+</html>

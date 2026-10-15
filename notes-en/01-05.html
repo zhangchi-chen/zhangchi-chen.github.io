@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Proving the Supremum Principle</title>
+<style>
+:root{--bg:#0e1624;--panel:#18233a;--panel2:#202e48;--fg:#e8edf5;--muted:#8a96a8;--coral:#ff7a6b;--teal:#3ad1b5;--amber:#ffc145;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Inter","DejaVu Sans","Segoe UI","Noto Sans CJK SC","PingFang SC","Microsoft YaHei",system-ui,sans-serif;}
+.wrap{max-width:980px;margin:0 auto;padding:40px 20px 60px}
+.kicker{color:var(--amber);font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:14px}
+h1{font-size:40px;line-height:1.15;margin:8px 0 6px}
+.sub{color:var(--muted);margin:0 0 28px}
+h2{font-size:22px;margin:34px 0 12px;color:var(--fg)}
+h2 .n{color:var(--amber);margin-right:8px}
+.card{background:var(--panel);border:1px solid var(--panel2);border-radius:16px;padding:20px 24px;margin:14px 0}
+.statement{border-color:var(--amber)}
+.statement .h{color:var(--amber);font-weight:700;font-size:20px}
+.statement .s{font-size:21px;margin:8px 0 14px}
+.facts{display:flex;gap:12px;flex-wrap:wrap}
+.fact{flex:1 1 260px;border-radius:12px;padding:10px 14px;font-weight:700}
+.fact.no{background:rgba(255,122,107,.12);color:var(--coral);border:1px solid rgba(255,122,107,.4)}
+.fact.yes{background:rgba(58,209,181,.10);color:var(--teal);border:1px solid rgba(58,209,181,.4)}
+.small{color:var(--muted);font-size:15px}
+p{margin:8px 0}
+table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums;margin-top:10px}
+th,td{padding:8px 10px;border-bottom:1px solid var(--panel2);text-align:left}
+th{color:var(--muted);font-weight:600;font-size:14px}
+td.no{color:var(--coral)} td.yes{color:var(--teal)} td.win{color:var(--amber)}
+.addr{font-family:"DejaVu Sans Mono",ui-monospace,monospace;font-size:44px;font-weight:700;text-align:center;letter-spacing:.04em;margin:6px 0}
+.addr .new{color:var(--amber)}
+svg{width:100%;height:auto;display:block}
+.cap{text-align:center;color:var(--muted);font-size:15px;margin-top:4px}
+.trap{text-align:center;font-weight:700;color:var(--amber);font-size:19px}
+.proof{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media (max-width:760px){.proof{grid-template-columns:1fr} h1{font-size:30px}}
+.proof .card{margin:0}
+.proof h3{margin:0 0 8px;font-size:18px}
+.proof .i h3{color:var(--teal)} .proof .ii h3{color:var(--coral)}
+.concl{text-align:center;font-size:22px;font-weight:700;color:var(--amber);background:rgba(255,193,69,.10);border:1px solid var(--amber);border-radius:12px;padding:10px;margin-top:14px}
+.eq{font-family:"DejaVu Sans Mono",ui-monospace,monospace;color:var(--amber);font-weight:700}
+.quiz .q{border-top:1px solid var(--panel2);padding:14px 0}
+.quiz .q:first-of-type{border-top:0}
+.qt{font-weight:600;margin-bottom:6px}
+.opts{display:flex;flex-wrap:wrap;gap:8px 18px;margin:4px 0 8px}
+.opt{padding:4px 10px;border-radius:8px;border:1px solid var(--panel2)}
+.opt b{color:var(--muted);margin-right:6px}
+.opt.right{border-color:var(--teal);background:rgba(58,209,181,.12);color:var(--teal)}
+.opt.right b{color:var(--teal)}
+button{font:inherit;font-size:14px;background:var(--panel2);color:var(--fg);border:1px solid #33456a;border-radius:8px;padding:5px 12px;cursor:pointer}
+button:hover{border-color:var(--amber)}
+.exp{display:none;margin-top:8px;color:var(--fg);font-size:15px;border-left:3px solid var(--teal);padding-left:10px}
+.exp.show{display:block}
+footer{color:var(--muted);font-size:13px;margin-top:40px;text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="kicker">Enrichment · Episode 01-05</div>
+<h1>Proving the Supremum Principle</h1>
+<p class="sub">Hunting sup S digit by digit — and seeing exactly where completeness enters.</p>
+
+<div class="card statement">
+<div class="h">The supremum principle (least-upper-bound property)</div>
+<div class="s">If S ⊆ ℝ is nonempty and bounded above, then S has a least upper bound sup S in ℝ.</div>
+<div class="small" style="margin-bottom:8px">Two construction facts, at every stage n</div>
+<div class="facts"><div class="fact no">✗ aₙ is not an upper bound of S</div><div class="fact yes">✓ aₙ + 10⁻ⁿ is an upper bound of S</div></div>
+</div>
+
+<h2><span class="n">1</span>What must be built</h2>
+<div class="card"><p>One number α with two jobs: (i) α is an upper bound of S; (ii) no number b < α is an upper bound. Strategy: find its address digit by digit — street (integer part), block (tenths), door (hundredths), …</p></div>
+
+<h2><span class="n">2–3</span>The construction</h2>
+<div class="card"><p><b>Integer part.</b> S ≠ ∅, so some integer is not an upper bound; S is bounded above, so some integer is. Let m be the greatest integer that is not an upper bound; then m + 1 is an upper bound, and the target lives in [m, m + 1].</p><p><b>Refinement.</b> Split the current window into ten steps and let aₙ be the largest n-digit step that is not an upper bound. Then aₙ + 10⁻ⁿ is an upper bound, and the target lives in the nested window [aₙ, aₙ + 10⁻ⁿ] of length 10⁻ⁿ.</p><p><b>The address.</b> Reading off the digits of a₁, a₂, a₃, … gives one infinite decimal α = m + 0.d₁d₂d₃…, whose n-digit truncation is aₙ.</p></div>
+
+<div class="card">
+<div style="font-weight:700">Worked example: S = {q ∈ ℚ : q² < 2}</div>
+<p class="small">For c > 0: if c² < 2 some element of S beats c; if c² ≥ 2, c is an upper bound. &nbsp; m = 1.</p>
+<svg viewBox="0 0 920 420" role="img" aria-label="digit hunt">
+<rect x="60" y="50" width="331.4" height="10" fill="#ff7a6b" opacity=".55"/>
+<rect x="391.4" y="78" width="468.6" height="9" fill="#3ad1b5" opacity=".5"/>
+<line x1="40" y1="70" x2="880" y2="70" stroke="#e8edf5" stroke-width="2"/>
+<line x1="60.0" y1="58" x2="60.0" y2="82" stroke="#e8edf5" stroke-width="1.5"/>
+<text x="60.0" y="104" fill="#8a96a8" font-size="13" text-anchor="middle">1.0</text>
+<line x1="140.0" y1="58" x2="140.0" y2="82" stroke="#e8edf5" stroke-width="1.5"/>
+<text x="140.0" y="104" fill="#8a96a8" font-size="13" text-anchor="middle">1.1</text>
+<line x1="220.0" y1="58" x2="220.0" y2="82" stroke="#e8edf5" stroke-width="1.5"/>
+<text x="220.0" y="104" fill="#8a96a8" font-size="13" text-anchor="middle">1.2</text>
+<line x1="300.0" y1="58" x2="300.0" y2="82" stroke="#e8edf5" stroke-width="1.5"/>
+<text x="300.0" y="104" fill="#8a96a8" font-size="13" text-anchor="middle">1.3</text>
+<line x1="380.0" y1="58" x2="380.0" y2="82" stroke="#e8edf5" stroke-width="1.5"/>
+<text x="380.0" y="104" fill="#8a96a8" font-size="13" text-anchor="middle">1.4</text>
+<line x1="460.0" y1="58" x2="460.0" y2="82" stroke="#e8edf5" stroke-width="1.5"/>
+<text x="460.0" y="104" fill="#8a96a8" font-size="13" text-anchor="middle">1.5</text>
+<line x1="540.0" y1="58" x2="540.0" y2="82" stroke="#e8edf5" stroke-width="1.5"/>
+<text x="540.0" y="104" fill="#8a96a8" font-size="13" text-anchor="middle">1.6</text>
+<line x1="620.0" y1="58" x2="620.0" y2="82" stroke="#e8edf5" stroke-width="1.5"/>
+<text x="620.0" y="104" fill="#8a96a8" font-size="13" text-anchor="middle">1.7</text>
+<line x1="700.0" y1="58" x2="700.0" y2="82" stroke="#e8edf5" stroke-width="1.5"/>
+<text x="700.0" y="104" fill="#8a96a8" font-size="13" text-anchor="middle">1.8</text>
+<line x1="780.0" y1="58" x2="780.0" y2="82" stroke="#e8edf5" stroke-width="1.5"/>
+<text x="780.0" y="104" fill="#8a96a8" font-size="13" text-anchor="middle">1.9</text>
+<line x1="860.0" y1="58" x2="860.0" y2="82" stroke="#e8edf5" stroke-width="1.5"/>
+<text x="860.0" y="104" fill="#8a96a8" font-size="13" text-anchor="middle">2.0</text>
+<rect x="380.0" y="36" width="80.0" height="50" fill="#ffc145" fill-opacity=".10" stroke="#ffc145" stroke-width="2.5"/>
+<circle cx="380.0" cy="24" r="9" fill="#ff7a6b"/><text x="380.0" y="28" font-size="12" text-anchor="middle" fill="#0e1624" font-weight="700">✗</text>
+<circle cx="460.0" cy="24" r="9" fill="#3ad1b5"/><text x="460.0" y="28" font-size="12" text-anchor="middle" fill="#0e1624" font-weight="700">✓</text>
+<text x="870" y="30" fill="#ffc145" font-size="15" font-weight="700" text-anchor="end">a₁ = 1.4</text>
+<path d="M380.0,86 L60,162 M460.0,86 L860,162" stroke="#ffc145" stroke-opacity=".35" stroke-dasharray="4 4" fill="none"/>
+<rect x="60" y="180" width="113.7" height="10" fill="#ff7a6b" opacity=".55"/>
+<rect x="173.7" y="208" width="686.3" height="9" fill="#3ad1b5" opacity=".5"/>
+<line x1="40" y1="200" x2="880" y2="200" stroke="#e8edf5" stroke-width="2"/>
+<line x1="60.0" y1="188" x2="60.0" y2="212" stroke="#e8edf5" stroke-width="1.5"/>
+<text x="60.0" y="234" fill="#8a96a8" font-size="13" text-anchor="middle">1.40</text>
+<line x1="140.0" y1="188" x2="140.0" y2="212" stroke="#e8edf5" stroke-width="1.5"/>
+<text x="140.0" y="234" fill="#8a96a8" font-size="13" text-anchor="middle">1.41</text>
+<line x1="220.0" y1="188" x2="220.0" y2="212" stroke="#e8edf5" stroke-width="1.5"/>
+<text x="220.0" y="234" fill="#8a96a8" font-size="13" text-anchor="middle">1.42</text>
+<line x1="300.0" y1="188" x2="300.0" y2="212" stroke="#e8edf5" stroke-width="1.5"/>
+<text x="300.0" y="234" fill="#8a96a8" font-size="13" text-anchor="middle">1.43</text>
+<line x1="380.0" y1="188" x2="380.0" y2="212" stroke="#e8edf5" stroke-width="1.5"/>
+<text x="380.0" y="234" fill="#8a96a8" font-size="13" text-anchor="middle">1.44</text>
+<line x1="460.0" y1="188" x2="460.0" y2="212" stroke="#e8edf5" stroke-width="1.5"/>
+<text x="460.0" y="234" fill="#8a96a8" font-size="13" text-anchor="middle">1.45</text>
+<line x1="540.0" y1="188" x2="540.0" y2="212" stroke="#e8edf5" stroke-width="1.5"/>
+<text x="540.0" y="234" fill="#8a96a8" font-size="13" text-anchor="middle">1.46</text>
+<line x1="620.0" y1="188" x2="620.0" y2="212" stroke="#e8edf5" stroke-width="1.5"/>
+<text x="620.0" y="234" fill="#8a96a8" font-size="13" text-anchor="middle">1.47</text>
+<line x1="700.0" y1="188" x2="700.0" y2="212" stroke="#e8edf5" stroke-width="1.5"/>
+<text x="700.0" y="234" fill="#8a96a8" font-size="13" text-anchor="middle">1.48</text>
+<line x1="780.0" y1="188" x2="780.0" y2="212" stroke="#e8edf5" stroke-width="1.5"/>
+<text x="780.0" y="234" fill="#8a96a8" font-size="13" text-anchor="middle">1.49</text>
+<line x1="860.0" y1="188" x2="860.0" y2="212" stroke="#e8edf5" stroke-width="1.5"/>
+<text x="860.0" y="234" fill="#8a96a8" font-size="13" text-anchor="middle">1.50</text>
+<rect x="140.0" y="166" width="80.0" height="50" fill="#ffc145" fill-opacity=".10" stroke="#ffc145" stroke-width="2.5"/>
+<circle cx="140.0" cy="154" r="9" fill="#ff7a6b"/><text x="140.0" y="158" font-size="12" text-anchor="middle" fill="#0e1624" font-weight="700">✗</text>
+<circle cx="220.0" cy="154" r="9" fill="#3ad1b5"/><text x="220.0" y="158" font-size="12" text-anchor="middle" fill="#0e1624" font-weight="700">✓</text>
+<text x="870" y="160" fill="#ffc145" font-size="15" font-weight="700" text-anchor="end">a₂ = 1.41</text>
+<path d="M140.0,216 L60,292 M220.0,216 L860,292" stroke="#ffc145" stroke-opacity=".35" stroke-dasharray="4 4" fill="none"/>
+<rect x="60" y="310" width="337.1" height="10" fill="#ff7a6b" opacity=".55"/>
+<rect x="397.1" y="338" width="462.9" height="9" fill="#3ad1b5" opacity=".5"/>
+<line x1="40" y1="330" x2="880" y2="330" stroke="#e8edf5" stroke-width="2"/>
+<line x1="60.0" y1="318" x2="60.0" y2="342" stroke="#e8edf5" stroke-width="1.5"/>
+<text x="60.0" y="364" fill="#8a96a8" font-size="13" text-anchor="middle">1.410</text>
+<line x1="140.0" y1="318" x2="140.0" y2="342" stroke="#e8edf5" stroke-width="1.5"/>
+<text x="140.0" y="364" fill="#8a96a8" font-size="13" text-anchor="middle">1.411</text>
+<line x1="220.0" y1="318" x2="220.0" y2="342" stroke="#e8edf5" stroke-width="1.5"/>
+<text x="220.0" y="364" fill="#8a96a8" font-size="13" text-anchor="middle">1.412</text>
+<line x1="300.0" y1="318" x2="300.0" y2="342" stroke="#e8edf5" stroke-width="1.5"/>
+<text x="300.0" y="364" fill="#8a96a8" font-size="13" text-anchor="middle">1.413</text>
+<line x1="380.0" y1="318" x2="380.0" y2="342" stroke="#e8edf5" stroke-width="1.5"/>
+<text x="380.0" y="364" fill="#8a96a8" font-size="13" text-anchor="middle">1.414</text>
+<line x1="460.0" y1="318" x2="460.0" y2="342" stroke="#e8edf5" stroke-width="1.5"/>
+<text x="460.0" y="364" fill="#8a96a8" font-size="13" text-anchor="middle">1.415</text>
+<line x1="540.0" y1="318" x2="540.0" y2="342" stroke="#e8edf5" stroke-width="1.5"/>
+<text x="540.0" y="364" fill="#8a96a8" font-size="13" text-anchor="middle">1.416</text>
+<line x1="620.0" y1="318" x2="620.0" y2="342" stroke="#e8edf5" stroke-width="1.5"/>
+<text x="620.0" y="364" fill="#8a96a8" font-size="13" text-anchor="middle">1.417</text>
+<line x1="700.0" y1="318" x2="700.0" y2="342" stroke="#e8edf5" stroke-width="1.5"/>
+<text x="700.0" y="364" fill="#8a96a8" font-size="13" text-anchor="middle">1.418</text>
+<line x1="780.0" y1="318" x2="780.0" y2="342" stroke="#e8edf5" stroke-width="1.5"/>
+<text x="780.0" y="364" fill="#8a96a8" font-size="13" text-anchor="middle">1.419</text>
+<line x1="860.0" y1="318" x2="860.0" y2="342" stroke="#e8edf5" stroke-width="1.5"/>
+<text x="860.0" y="364" fill="#8a96a8" font-size="13" text-anchor="middle">1.420</text>
+<rect x="380.0" y="296" width="80.0" height="50" fill="#ffc145" fill-opacity=".10" stroke="#ffc145" stroke-width="2.5"/>
+<circle cx="380.0" cy="284" r="9" fill="#ff7a6b"/><text x="380.0" y="288" font-size="12" text-anchor="middle" fill="#0e1624" font-weight="700">✗</text>
+<circle cx="460.0" cy="284" r="9" fill="#3ad1b5"/><text x="460.0" y="288" font-size="12" text-anchor="middle" fill="#0e1624" font-weight="700">✓</text>
+<text x="870" y="290" fill="#ffc145" font-size="15" font-weight="700" text-anchor="end">a₃ = 1.414</text>
+<rect x="60" y="400" width="14" height="8" fill="#ff7a6b" opacity=".6"/><text x="80" y="408" fill="#ff7a6b" font-size="13">S</text>
+<rect x="120" y="400" width="14" height="8" fill="#3ad1b5" opacity=".6"/><text x="140" y="408" fill="#3ad1b5" font-size="13">upper bounds</text>
+</svg>
+<p class="cap">Each digit is a promise: the target is inside this smaller window.</p>
+<table><thead><tr><th>stage</th><th>aₙ (not an upper bound)</th><th>aₙ + 10⁻ⁿ (upper bound)</th><th>window</th></tr></thead><tbody><tr><td>1</td><td class="no">1.4</td><td class="yes">1.5</td><td class="win">[1.4, 1.5]</td></tr>
+<tr><td>2</td><td class="no">1.41</td><td class="yes">1.42</td><td class="win">[1.41, 1.42]</td></tr>
+<tr><td>3</td><td class="no">1.414</td><td class="yes">1.415</td><td class="win">[1.414, 1.415]</td></tr>
+<tr><td>4</td><td class="no">1.4142</td><td class="yes">1.4143</td><td class="win">[1.4142, 1.4143]</td></tr>
+<tr><td>5</td><td class="no">1.41421</td><td class="yes">1.41422</td><td class="win">[1.41421, 1.41422]</td></tr></tbody></table>
+<div class="addr">1.<span>4</span><span>1</span><span>4</span><span>2</span><span class="new">1</span>…</div>
+<p class="cap">α = 1.41421…</p>
+</div>
+
+<h2><span class="n">4</span>Verify the two points</h2>
+<div class="card"><svg viewBox="0 0 920 120" role="img" aria-label="trap">
+<line x1="40" y1="60" x2="880" y2="60" stroke="#e8edf5" stroke-width="2"/>
+<rect x="250" y="34" width="420" height="40" fill="#ffc145" fill-opacity=".10" stroke="#ffc145" stroke-width="2.5"/>
+<line x1="250" y1="46" x2="250" y2="74" stroke="#e8edf5" stroke-width="2"/><line x1="670" y1="46" x2="670" y2="74" stroke="#3ad1b5" stroke-width="3"/>
+<circle cx="470" cy="60" r="7" fill="#ffc145"/>
+<text x="250" y="100" fill="#e8edf5" font-size="16" text-anchor="middle" font-weight="700">aₙ</text>
+<text x="470" y="100" fill="#ffc145" font-size="16" text-anchor="middle" font-weight="700">α</text>
+<text x="670" y="100" fill="#3ad1b5" font-size="16" text-anchor="middle" font-weight="700">aₙ + 10⁻ⁿ</text>
+<path d="M250,22 L250,14 L670,14 L670,22" stroke="#8a96a8" fill="none" stroke-width="1.5"/>
+<text x="460" y="10" fill="#8a96a8" font-size="13" text-anchor="middle">10⁻ⁿ</text>
+</svg><p class="trap">For every n: aₙ ≤ α ≤ aₙ + 10⁻ⁿ (α and aₙ share their first n digits; the rest adds between 0 and 10⁻ⁿ).</p></div>
+<div class="proof">
+<div class="card i"><h3>(i) α is an upper bound.</h3><p>Suppose some s ∈ S had s > α. Choose n so large that 10⁻ⁿ < s − α. Then aₙ + 10⁻ⁿ ≤ α + 10⁻ⁿ < s, so aₙ + 10⁻ⁿ is not an upper bound of S, contradicting the construction. Hence s ≤ α for every s ∈ S.</p></div>
+<div class="card ii"><h3>(ii) Nothing smaller is an upper bound.</h3><p>Let b < α. Choose n so large that 10⁻ⁿ < α − b. Then aₙ ≥ α − 10⁻ⁿ > b. But aₙ is not an upper bound of S, so some s ∈ S has s > aₙ > b. Hence b is not an upper bound.</p></div>
+</div>
+<div class="concl">Therefore α = sup S. ∎</div>
+
+<h2><span class="n">5</span>The convention quietly saves the proof</h2>
+<div class="card"><p>Take S = [0, 0.42), so sup S = 0.42. Since 0.42 is an upper bound, the hunt never picks it: a₁ = 0.4, a₂ = 0.41, a₃ = 0.419, a₄ = 0.4199, … The digits spell α = 0.41999…, and the recurring-9s convention declares 0.41999… = 0.42. Without it, the address system would glitch at every terminating decimal.</p><p class="eq" style="text-align:center;font-size:26px">0.41999… = 0.42</p></div>
+
+<h2><span class="n">6</span>The moral</h2>
+<div class="card"><p>Completeness enters at exactly one place: the hunt produces an infinite decimal, and ℝ accepts every infinite decimal as a number. Inside ℚ alone the same hunt for S = {q ∈ ℚ : q² < 2} closes in on 1.41421…, which is not rational. The nested-interval move returns later as a named theorem about nested closed intervals — here it already did real work.</p></div>
+
+<h2><span class="n">✓</span>Self-check</h2>
+<div class="card quiz">
+<div class="q" data-ans="0">
+<div class="qt">1. S = {q ∈ ℚ : q² &lt; 3} has m = 1. Run stage 1: what is a₁?</div>
+<div class="opts"><span class="opt" data-k="0"><b>A</b>1.7</span><span class="opt" data-k="1"><b>B</b>1.8</span><span class="opt" data-k="2"><b>C</b>1.73</span></div>
+<button type="button" class="rev">Show answer</button>
+<div class="exp"><b>Correct: A.</b> 1.7² = 2.89 &lt; 3, so 1.7 is not an upper bound, while 1.8² = 3.24 ≥ 3 makes 1.8 an upper bound; hence a₁ = 1.7 and the target lives in [1.7, 1.8].</div>
+</div><div class="q" data-ans="0">
+<div class="qt">2. For S = [−2.5, −0.3), what is m, the greatest integer that is not an upper bound?</div>
+<div class="opts"><span class="opt" data-k="0"><b>A</b>−1</span><span class="opt" data-k="1"><b>B</b>0</span><span class="opt" data-k="2"><b>C</b>−3</span></div>
+<button type="button" class="rev">Show answer</button>
+<div class="exp"><b>Correct: A.</b> −1 is beaten by −0.5 ∈ S, while 0 is an upper bound, so m = −1 and the target lives in [−1, 0].</div>
+</div><div class="q" data-ans="1">
+<div class="qt">3. For S = [0, 0.42), why does the recurring-9s convention matter?</div>
+<div class="opts"><span class="opt" data-k="0"><b>A</b>The hunt spells 0.42000…, so it does not matter</span><span class="opt" data-k="1"><b>B</b>The hunt spells 0.41999…, which equals sup S = 0.42 only by the convention</span><span class="opt" data-k="2"><b>C</b>The hunt never ends, so α does not exist</span></div>
+<button type="button" class="rev">Show answer</button>
+<div class="exp"><b>Correct: B.</b> 0.42 is always an upper bound and is never picked, so the digits are 0.41999…, and the convention identifies this decimal with 0.42.</div>
+</div><div class="q" data-ans="1">
+<div class="qt">4. In point (i), which construction fact is contradicted?</div>
+<div class="opts"><span class="opt" data-k="0"><b>A</b>aₙ is not an upper bound</span><span class="opt" data-k="1"><b>B</b>aₙ + 10⁻ⁿ is an upper bound</span><span class="opt" data-k="2"><b>C</b>α ∈ S</span></div>
+<button type="button" class="rev">Show answer</button>
+<div class="exp"><b>Correct: B.</b> From s &gt; α we get s &gt; aₙ + 10⁻ⁿ for large n, so aₙ + 10⁻ⁿ would not be an upper bound.</div>
+</div><div class="q" data-ans="1">
+<div class="qt">5. Which inequality holds for every n?</div>
+<div class="opts"><span class="opt" data-k="0"><b>A</b>aₙ &lt; α &lt; aₙ + 10⁻ⁿ</span><span class="opt" data-k="1"><b>B</b>aₙ ≤ α ≤ aₙ + 10⁻ⁿ</span><span class="opt" data-k="2"><b>C</b>α ≤ aₙ</span></div>
+<button type="button" class="rev">Show answer</button>
+<div class="exp"><b>Correct: B.</b> aₙ is the n-digit truncation of α, and the remaining digits add between 0 and 10⁻ⁿ (equality is possible, as with 0.41999… = 0.42).</div>
+</div><div class="q" data-ans="1">
+<div class="qt">6. Where exactly did completeness enter the proof?</div>
+<div class="opts"><span class="opt" data-k="0"><b>A</b>In choosing the integer m</span><span class="opt" data-k="1"><b>B</b>In accepting the infinite decimal α as a real number</span><span class="opt" data-k="2"><b>C</b>In the contradiction of point (i)</span></div>
+<button type="button" class="rev">Show answer</button>
+<div class="exp"><b>Correct: B.</b> Every other step is finite bookkeeping; only the claim that the infinite decimal α is a number in ℝ uses completeness.</div>
+</div>
+</div>
+
+<footer>Episode 01-05 · prerequisite episodes: infinite decimals and the recurring-9s convention; the two-point template for suprema.</footer>
+</div>
+<script>
+document.querySelectorAll('.quiz .q').forEach(function(q){
+  var b=q.querySelector('.rev'), ex=q.querySelector('.exp'), ans=q.getAttribute('data-ans');
+  var right=q.querySelector('.opt[data-k="'+ans+'"]');
+  b.addEventListener('click',function(){
+    var on=ex.classList.toggle('show');
+    right.classList.toggle('right',on);
+    b.textContent=on?'Hide answer':'Show answer';
+  });
+});
+</script>
+</body>
+</html>

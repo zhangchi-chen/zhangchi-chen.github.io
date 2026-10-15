@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Two Fundamental Limits · Self-Quiz</title>
+<style>
+:root{--bg:#0e1a2b;--card:#15263d;--ink:#eef2f7;--muted:#9fb0c6;--blue:#5ab0ff;--teal:#4fd1b5;--green:#6bd38a;--line:#26405f}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(1200px 700px at 20% 0%,#16304f 0%,var(--bg) 60%);
+background-color:var(--bg);color:var(--ink);
+font:17px/1.65 "Noto Sans","Noto Sans SC",system-ui,-apple-system,"Segoe UI",sans-serif}
+.page{max-width:720px;margin:0 auto;padding:18px 16px 60px}
+.topbar{display:flex;justify-content:space-between;align-items:baseline;gap:8px;
+border-bottom:2px solid var(--line);padding-bottom:10px;margin-bottom:6px}
+.topbar h1{font-size:20px;margin:0}
+.topbar a{color:var(--blue);font-size:14px;text-decoration:none;white-space:nowrap}
+.lead{color:var(--muted);font-size:14.5px;margin:12px 0 2px}
+.qt{display:grid;gap:14px;margin-top:14px}
+.qt-item{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 18px}
+.qt-q{color:var(--ink);font-size:16.5px;margin:0 0 8px}
+.qt-opts{color:var(--muted);font-size:15px;line-height:1.9;margin:0 0 10px}
+.qt-opts span{display:block}
+button.reveal{background:transparent;border:1px solid var(--teal);color:var(--teal);
+border-radius:8px;padding:5px 14px;font-size:14px;cursor:pointer}
+.ans{display:none;margin-top:10px;padding:10px 14px;border-left:3px solid var(--green);
+background:rgba(107,211,138,.08);color:var(--ink);font-size:15px;line-height:1.8;border-radius:0 8px 8px 0}
+.ans b{color:var(--green)}
+.qt-item.shown .ans{display:block}
+.qt-item.shown button.reveal{display:none}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="topbar">
+    <h1>Two Fundamental Limits · Self-Quiz</h1>
+    <a href="../notes-en/03-05.html">Notes (EN) →</a>
+  </div>
+  <p class="lead">Pick your answer, then click to reveal. · <a href="03-05.html" style="color:var(--blue);text-decoration:none">中文版 →</a></p>
+  <div class="qt">
+<div class="qt-item">
+<p class="qt-q">Find lim(x→∞) (1 + 3/x)²ˣ.</p>
+<p class="qt-opts"><span>A. e^(3/2)</span><span>B. e⁶</span><span>C. e⁵</span></p>
+<button class="reveal">Reveal answer</button>
+<div class="ans"><b>B.</b> Rewrite as [(1 + 3/x)ˣ]²: the bracket is the k = 3 costume, tending to e³, so the limit is (e³)² = e⁶.</div>
+</div>
+<div class="qt-item">
+<p class="qt-q">Find lim(x→0) (cos x)^(1/x²).</p>
+<p class="qt-opts"><span>A. 1</span><span>B. e^(−1/2)</span><span>C. e⁻²</span></p>
+<button class="reveal">Reveal answer</button>
+<div class="ans"><b>B.</b> A 1^∞ form with α = cos x − 1 = −2sin²(x/2): αg = −½·(sin(x/2)/(x/2))² → −½, so the limit is e^(−1/2).</div>
+</div>
+<div class="qt-item">
+<p class="qt-q">lim(x→∞) (1 − 1/x)ˣ is a family member in disguise; its value is:</p>
+<p class="qt-opts"><span>A. e</span><span>B. e⁻¹</span><span>C. 1</span></p>
+<button class="reveal">Reveal answer</button>
+<div class="ans"><b>B.</b> It is (1 + k/x)ˣ with k = −1, tending to e⁻¹; for k < 0 one uses the ancestor's x → −∞ version.</div>
+</div>
+<div class="qt-item">
+<p class="qt-q">Why does the proof that sin x / x → 1 compare areas rather than lengths?</p>
+<p class="qt-opts"><span>A. Areas are larger, so the inequality is easier to see.</span><span>B. Comparing arc with chord would require a theory of arc length first — circular reasoning.</span><span>C. Lengths cannot satisfy strict inequalities.</span></p>
+<button class="reveal">Reveal answer</button>
+<div class="ans"><b>B.</b> Arc length itself is built from this very limit; areas need only elementary geometry — one figure containing another.</div>
+</div>
+<div class="qt-item">
+<p class="qt-q">Setting u = 1/x, (1 + u)^(1/u) → e (two-sided u → 0) needs which ancestor processes?</p>
+<p class="qt-opts"><span>A. only x → +∞</span><span>B. both x → +∞ and x → −∞</span><span>C. only x → 0</span></p>
+<button class="reveal">Reveal answer</button>
+<div class="ans"><b>B.</b> x → +∞ corresponds to u → 0⁺ and x → −∞ to u → 0⁻; forgetting one process loses half the answer.</div>
+</div>
+<div class="qt-item">
+<p class="qt-q">lim(x→∞) sin x / x = ?</p>
+<p class="qt-opts"><span>A. 1</span><span>B. 0</span><span>C. does not exist</span></p>
+<button class="reveal">Reveal answer</button>
+<div class="ans"><b>B.</b> |sin x / x| ≤ 1/|x| → 0: the first ruler only rules near 0; far away the graph oscillates while decaying.</div>
+</div>
+  </div>
+</div>
+<script>
+document.querySelectorAll('button.reveal').forEach(function(b){
+  b.addEventListener('click',function(){this.closest('.qt-item').classList.add('shown')});
+});
+</script>
+</body>
+</html>

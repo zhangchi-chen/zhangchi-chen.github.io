@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Properties of Function Limits · Self-Quiz</title>
+<style>
+:root{--bg:#0e1a2b;--card:#15263d;--ink:#eef2f7;--muted:#9fb0c6;--blue:#5ab0ff;--teal:#4fd1b5;--green:#6bd38a;--line:#26405f}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(1200px 700px at 20% 0%,#16304f 0%,var(--bg) 60%);
+background-color:var(--bg);color:var(--ink);
+font:17px/1.65 "Noto Sans","Noto Sans SC",system-ui,-apple-system,"Segoe UI",sans-serif}
+.page{max-width:720px;margin:0 auto;padding:18px 16px 60px}
+.topbar{display:flex;justify-content:space-between;align-items:baseline;gap:8px;
+border-bottom:2px solid var(--line);padding-bottom:10px;margin-bottom:6px}
+.topbar h1{font-size:20px;margin:0}
+.topbar a{color:var(--blue);font-size:14px;text-decoration:none;white-space:nowrap}
+.lead{color:var(--muted);font-size:14.5px;margin:12px 0 2px}
+.qt{display:grid;gap:14px;margin-top:14px}
+.qt-item{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 18px}
+.qt-q{color:var(--ink);font-size:16.5px;margin:0 0 8px}
+.qt-opts{color:var(--muted);font-size:15px;line-height:1.9;margin:0 0 10px}
+.qt-opts span{display:block}
+button.reveal{background:transparent;border:1px solid var(--teal);color:var(--teal);
+border-radius:8px;padding:5px 14px;font-size:14px;cursor:pointer}
+.ans{display:none;margin-top:10px;padding:10px 14px;border-left:3px solid var(--green);
+background:rgba(107,211,138,.08);color:var(--ink);font-size:15px;line-height:1.8;border-radius:0 8px 8px 0}
+.ans b{color:var(--green)}
+.qt-item.shown .ans{display:block}
+.qt-item.shown button.reveal{display:none}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="topbar">
+    <h1>Properties of Function Limits · Self-Quiz</h1>
+    <a href="../notes-en/03-03.html">Notes (EN) →</a>
+  </div>
+  <p class="lead">Pick your answer, then click to reveal. · <a href="03-03.html" style="color:var(--blue);text-decoration:none">中文版 →</a></p>
+  <div class="qt">
+<div class="qt-item">
+<p class="qt-q">If lim(x→0) f(x) = 2, what can be concluded about f(0)?</p>
+<p class="qt-opts"><span>A. f(0) > 1</span><span>B. f(0) > 0</span><span>C. Nothing — f(0) may be anything, or even undefined</span></p>
+<button class="reveal">Reveal answer</button>
+<div class="ans"><b>C.</b> Local sign preservation governs only a punctured neighborhood and never touches x₀ itself.</div>
+</div>
+<div class="qt-item">
+<p class="qt-q">If lim(x→x₀) f(x) = A > 0, the handy form guarantees, in some punctured neighborhood:</p>
+<p class="qt-opts"><span>A. f(x) > A</span><span>B. f(x) > A/2</span><span>C. f(x) = A</span></p>
+<button class="reveal">Reveal answer</button>
+<div class="ans"><b>B.</b> Near x₀, f(x) > A/2 — the sign survives at half strength, leaving usable room.</div>
+</div>
+<div class="qt-item">
+<p class="qt-q">If f → A and g → B, concluding lim f/g = A/B requires:</p>
+<p class="qt-opts"><span>A. A ≠ 0</span><span>B. B ≠ 0</span><span>C. both A ≠ 0 and B ≠ 0</span></p>
+<button class="reveal">Reveal answer</button>
+<div class="ans"><b>B.</b> Only the denominator's limit must be nonzero; A = 0 is perfectly fine.</div>
+</div>
+<div class="qt-item">
+<p class="qt-q">As x → 0, f → 0 and g → 0. Then lim f/g:</p>
+<p class="qt-opts"><span>A. equals 1</span><span>B. equals 0</span><span>C. cannot be decided by the quotient rule</span></p>
+<button class="reveal">Reveal answer</button>
+<div class="ans"><b>C.</b> The gate is closed: x²/x → 0, x/x → 1, and x/x² has no finite limit.</div>
+</div>
+<div class="qt-item">
+<p class="qt-q">Why is the boundedness of functions only local?</p>
+<p class="qt-opts"><span>A. because limits need not be unique</span><span>B. there are no “first finitely many terms” to absorb; f may be unbounded far from x₀</span><span>C. because f must be continuous</span></p>
+<button class="reveal">Reveal answer</button>
+<div class="ans"><b>B.</b> For example, 1/x has limit 1 at x₀ = 1 yet is unbounded near 0.</div>
+</div>
+<div class="qt-item">
+<p class="qt-q">The tail n > N of a sequence translates to:</p>
+<p class="qt-opts"><span>A. the whole domain of f</span><span>B. a punctured neighborhood 0 < |x − x₀| < δ</span><span>C. the single point x₀</span></p>
+<button class="reveal">Reveal answer</button>
+<div class="ans"><b>B.</b> The mechanism is unchanged, the address changes: the tail becomes a punctured neighborhood.</div>
+</div>
+  </div>
+</div>
+<script>
+document.querySelectorAll('button.reveal').forEach(function(b){
+  b.addEventListener('click',function(){this.closest('.qt-item').classList.add('shown')});
+});
+</script>
+</body>
+</html>

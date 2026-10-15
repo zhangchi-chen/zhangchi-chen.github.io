@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Inverse Trigonometric Functions · Self-Quiz</title>
+<style>
+:root{--bg:#0e1a2b;--card:#15263d;--ink:#eef2f7;--muted:#9fb0c6;--blue:#5ab0ff;--teal:#4fd1b5;--green:#6bd38a;--line:#26405f}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(1200px 700px at 20% 0%,#16304f 0%,var(--bg) 60%);
+background-color:var(--bg);color:var(--ink);
+font:17px/1.65 "Noto Sans","Noto Sans SC",system-ui,-apple-system,"Segoe UI",sans-serif}
+.page{max-width:720px;margin:0 auto;padding:18px 16px 60px}
+.topbar{display:flex;justify-content:space-between;align-items:baseline;gap:8px;
+border-bottom:2px solid var(--line);padding-bottom:10px;margin-bottom:6px}
+.topbar h1{font-size:20px;margin:0}
+.topbar a{color:var(--blue);font-size:14px;text-decoration:none;white-space:nowrap}
+.lead{color:var(--muted);font-size:14.5px;margin:12px 0 2px}
+.qt{display:grid;gap:14px;margin-top:14px}
+.qt-item{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 18px}
+.qt-q{color:var(--ink);font-size:16.5px;margin:0 0 8px}
+.qt-opts{color:var(--muted);font-size:15px;line-height:1.9;margin:0 0 10px}
+.qt-opts span{display:block}
+button.reveal{background:transparent;border:1px solid var(--teal);color:var(--teal);
+border-radius:8px;padding:5px 14px;font-size:14px;cursor:pointer}
+.ans{display:none;margin-top:10px;padding:10px 14px;border-left:3px solid var(--green);
+background:rgba(107,211,138,.08);color:var(--ink);font-size:15px;line-height:1.8;border-radius:0 8px 8px 0}
+.ans b{color:var(--green)}
+.qt-item.shown .ans{display:block}
+.qt-item.shown button.reveal{display:none}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="topbar">
+    <h1>Inverse Trigonometric Functions · Self-Quiz</h1>
+    <a href="../notes-en/01-06.html">Notes (EN) →</a>
+  </div>
+  <p class="lead">Pick your answer, then click to reveal. · <a href="01-06.html" style="color:var(--blue);text-decoration:none">中文版 →</a></p>
+  <div class="qt">
+<div class="qt-item">
+<p class="qt-q">arctan(tan π) = ?</p>
+<p class="qt-opts"><span>A. π</span><span>B. 0</span><span>C. undefined</span></p>
+<button class="reveal">Reveal answer</button>
+<div class="ans"><b>B.</b> tan π = 0 and arctan 0 = 0; π lies outside (−π/2, π/2), so the answer is its representative 0.</div>
+</div>
+<div class="qt-item">
+<p class="qt-q">arcsin(sin 2π/3) = ?</p>
+<p class="qt-opts"><span>A. 2π/3</span><span>B. −π/3</span><span>C. π/3</span></p>
+<button class="reveal">Reveal answer</button>
+<div class="ans"><b>C.</b> sin 2π/3 = √3/2; the unique x in [−π/2, π/2] with sin x = √3/2 is π/3.</div>
+</div>
+<div class="qt-item">
+<p class="qt-q">arccos(cos 7π/6) = ?</p>
+<p class="qt-opts"><span>A. 7π/6</span><span>B. 5π/6</span><span>C. π/6</span></p>
+<button class="reveal">Reveal answer</button>
+<div class="ans"><b>B.</b> cos 7π/6 = −√3/2; the unique x in [0, π] with cos x = −√3/2 is 5π/6.</div>
+</div>
+<div class="qt-item">
+<p class="qt-q">arctan(tan x) = x holds exactly when</p>
+<p class="qt-opts"><span>A. x ∈ ℝ</span><span>B. x ∈ [−π/2, π/2]</span><span>C. x ∈ (−π/2, π/2)</span></p>
+<button class="reveal">Reveal answer</button>
+<div class="ans"><b>C.</b> tan is undefined at ±π/2, so the identity holds exactly on the open principal interval (−π/2, π/2).</div>
+</div>
+<div class="qt-item">
+<p class="qt-q">Why is the principal interval of arctan open while that of arcsin is closed?</p>
+<p class="qt-opts"><span>A. It is merely a convention</span><span>B. tan is undefined at ±π/2, while sin attains ±1 there</span><span>C. Because ℝ is an open set</span></p>
+<button class="reveal">Reveal answer</button>
+<div class="ans"><b>B.</b> open or closed is dictated by the original function: sin reaches its endpoint values, while ±π/2 are not even in the domain of tan.</div>
+</div>
+<div class="qt-item">
+<p class="qt-q">sin(arcsin x) = x holds for</p>
+<p class="qt-opts"><span>A. every x ∈ ℝ</span><span>B. every x ∈ [−1, 1]</span><span>C. every x ∈ [−π/2, π/2]</span></p>
+<button class="reveal">Reveal answer</button>
+<div class="ans"><b>B.</b> arcsin is defined only on [−1, 1]; outside it the composition does not even exist.</div>
+</div>
+  </div>
+</div>
+<script>
+document.querySelectorAll('button.reveal').forEach(function(b){
+  b.addEventListener('click',function(){this.closest('.qt-item').classList.add('shown')});
+});
+</script>
+</body>
+</html>

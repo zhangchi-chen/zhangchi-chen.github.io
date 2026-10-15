@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>反三角函数：arcsin、arccos、arctan · 自测</title>
+<style>:root{--bg:#0e1621;--panel:#152232;--fg:#e6edf3;--mut:#7d8b99;--ax:#3a4a5c;--sin:#f5a524;--cos:#2ec4a0;--tan:#5b9cff;--hl:#ffd84d;--bad:#ff5d5d;--good:#6ee07a}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.6 "DejaVu Sans","Segoe UI","PingFang SC","Noto Sans CJK SC","Microsoft YaHei",system-ui,sans-serif}
+main{max-width:900px;margin:0 auto;padding:40px 16px 80px}
+h1{font-size:1.9rem;line-height:1.25;margin:0 0 6px}.sub{color:var(--mut);margin:0 0 28px}
+.kick{font-size:1rem;letter-spacing:.02em;color:var(--mut)}
+.s{color:var(--sin)}.c{color:var(--cos)}.t{color:var(--tan)}.h{color:var(--hl)}
+section{background:var(--panel);border:1px solid #22344a;border-radius:14px;padding:20px 22px;margin:18px 0}
+h2{font-size:1.2rem;margin:0 0 10px;color:var(--hl)}
+.m{font-family:"DejaVu Sans","Cambria Math",serif}span.m{white-space:nowrap}
+.def{font-family:"DejaVu Sans","Cambria Math",serif;padding:8px 12px;border-left:3px solid;margin:8px 0;background:#0f1b29;border-radius:0 8px 8px 0;overflow-x:auto}
+.fig{width:100%;height:auto;display:block;margin:10px auto}.tk{fill:#7d8b99;font-size:12px}.lb{font-size:14px}
+.row3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.row2{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.cap{text-align:center;font-size:.92rem;color:var(--mut)}
+table{width:100%;border-collapse:collapse;font-family:"DejaVu Sans",serif}th{color:var(--mut);font-weight:normal;text-align:left;border-bottom:1px solid var(--ax);padding:6px 8px;font-size:.9rem}
+td{padding:9px 8px;border-bottom:1px solid #1d2b3b}.op{color:var(--bad);font-weight:bold}.cl{color:var(--good);font-weight:bold}
+.box{border:1.5px solid var(--hl);border-radius:10px;padding:10px 14px;background:#2b2614;margin:10px 0}
+.q{border-top:1px solid #22344a;padding:14px 0}.q:first-of-type{border-top:0}.qq{margin:0 0 8px;font-weight:bold}
+.opts{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 8px}.opt{border:1px solid var(--ax);border-radius:8px;padding:4px 12px;font-family:"DejaVu Sans",serif}
+.opt.right{border-color:var(--good);background:#16301f;color:var(--good)}
+button{background:#1d2c3f;color:var(--hl);border:1px solid var(--hl);border-radius:8px;padding:5px 14px;font:inherit;cursor:pointer}
+button:hover{background:#2b2614}.exp{display:none;margin:8px 0 0;color:var(--fg)}.q.open .exp{display:block}
+@media (max-width:640px){.row3,.row2{grid-template-columns:1fr}h1{font-size:1.5rem}section{padding:16px 14px}}
+/* ---- 手机自测单页覆盖层（深浅主题自适应：浅色文件有 --paper，深色有 --bg/--fg） ---- */
+html,body{margin:0;background:var(--bg,var(--paper));color:var(--fg,var(--ink));
+  font-family:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC","Source Han Sans SC",system-ui,-apple-system,sans-serif}
+/* 中和原幻灯片容器的隐藏/定位，让 section 直接作为文档流内容 */
+section.slide{display:block!important;position:static!important;width:auto!important;height:auto!important;
+  padding:0!important;background:none!important;box-shadow:none!important;transform:none!important}
+.page{max-width:720px;margin:0 auto;padding:18px 16px 60px}
+.topbar{display:flex;justify-content:space-between;align-items:baseline;gap:8px;
+  border-bottom:2px solid var(--grid,var(--line,var(--rule,#e3e0d6)));padding-bottom:10px;margin-bottom:6px}
+.topbar h1{font-size:20px;margin:0}
+.topbar a{color:var(--blue,#1f72b0);font-size:14px;text-decoration:none;white-space:nowrap}
+.lead{color:var(--muted);font-size:15px;margin:12px 0 2px;line-height:1.6}
+/* 表格 → 竖屏卡片（仅 slide 式页面有表格） */
+table.t{display:block;width:auto;border:0}
+table.t tbody,table.t tr,table.t td,table.t th{display:block;border:0;width:auto}
+table.t thead{display:none}
+table.t tr{background:var(--card);border:1.5px solid var(--rule);border-radius:14px;
+  padding:14px 16px;margin:14px 0;font-size:19px;line-height:1.7}
+table.t td{padding:6px 0}
+table.t td:last-child{border-top:1.5px dashed var(--rule);margin-top:6px;padding-top:10px}
+.q{display:block;text-align:center}
+.reveal{cursor:pointer;border:2px dashed var(--rule);border-radius:10px;
+  padding:6px 22px;color:var(--muted);font-size:16px;background:none;font-family:inherit}
+.ans{display:none;line-height:1.8}
+.shown .ans{display:block} .shown .reveal{display:none}
+/* quiz-section 式页面：原 section 自带卡片样式，仅收窄内边距 */
+section.quiz{padding:6px 2px;margin:8px 0;background:none;border:0}
+section.quiz .q{margin:12px 0;text-align:left}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="topbar">
+    <h1>反三角函数：arcsin、arccos、arctan · 自测</h1> <a href="../notes/01-06.html">查看讲稿 →</a>
+  </div>
+  
+  <div class="quiz">
+  <div class="q"><p class="qq">1. arctan(tan π) = ？</p><div class="opts"><span class="opt">A. π</span><span class="opt" data-ok>B. 0</span><span class="opt">C. 无定义</span></div><button type="button" data-show="显示答案" data-hide="隐藏答案">显示答案</button><p class="exp"><b class="h">B</b> — tan π = 0，arctan 0 = 0；π 不在 (−π/2, π/2) 内，所以返回它的代表 0。</p></div><div class="q"><p class="qq">2. arcsin(sin 2π/3) = ？</p><div class="opts"><span class="opt">A. 2π/3</span><span class="opt">B. −π/3</span><span class="opt" data-ok>C. π/3</span></div><button type="button" data-show="显示答案" data-hide="隐藏答案">显示答案</button><p class="exp"><b class="h">C</b> — sin 2π/3 = √3/2，[−π/2, π/2] 中满足 sin x = √3/2 的唯一 x 是 π/3。</p></div><div class="q"><p class="qq">3. arccos(cos 7π/6) = ？</p><div class="opts"><span class="opt">A. 7π/6</span><span class="opt" data-ok>B. 5π/6</span><span class="opt">C. π/6</span></div><button type="button" data-show="显示答案" data-hide="隐藏答案">显示答案</button><p class="exp"><b class="h">B</b> — cos 7π/6 = −√3/2，[0, π] 中满足 cos x = −√3/2 的唯一 x 是 5π/6。</p></div><div class="q"><p class="qq">4. arctan(tan x) = x 恰在何时成立？</p><div class="opts"><span class="opt">A. x ∈ ℝ</span><span class="opt">B. x ∈ [−π/2, π/2]</span><span class="opt" data-ok>C. x ∈ (−π/2, π/2)</span></div><button type="button" data-show="显示答案" data-hide="隐藏答案">显示答案</button><p class="exp"><b class="h">C</b> — tan 在 ±π/2 无定义，所以等式恰在开的主值区间 (−π/2, π/2) 上成立。</p></div><div class="q"><p class="qq">5. 为什么反正切函数的主值区间是开的，而反正弦函数的是闭的？</p><div class="opts"><span class="opt">A. 这只是个人喜好</span><span class="opt" data-ok>B. tan 在 ±π/2 无定义，而 sin 在 ±π/2 取到 ±1</span><span class="opt">C. 因为 ℝ 是开集</span></div><button type="button" data-show="显示答案" data-hide="隐藏答案">显示答案</button><p class="exp"><b class="h">B</b> — 开或闭由原函数决定：sin 取得到端点值，而 ±π/2 根本不在 tan 的定义域内。</p></div><div class="q"><p class="qq">6. sin(arcsin x) = x 对哪些 x 成立？</p><div class="opts"><span class="opt">A. 每个 x ∈ ℝ</span><span class="opt" data-ok>B. 每个 x ∈ [−1, 1]</span><span class="opt">C. 每个 x ∈ [−π/2, π/2]</span></div><button type="button" data-show="显示答案" data-hide="隐藏答案">显示答案</button><p class="exp"><b class="h">B</b> — 反正弦函数只在 [−1, 1] 上有定义；区间外这个复合根本不存在。</p></div></section>
+
+  </div>
+</div>
+<script>
+document.querySelectorAll('.reveal').forEach(function(b){
+  b.addEventListener('click',function(){var t=this.closest('.q,.qt-item');if(t)t.classList.add('shown')});
+});
+/* 按页面 DOM 特征自适配各批次回件的交互（逻辑均照搬原版） */
+if (document.querySelector('.qt3')) {
+  /* .qt3 式（02-03）：按钮点击后父卡 shown、按钮隐藏 */
+  document.querySelectorAll('.qt3 button').forEach(function(b){
+    b.addEventListener('click',function(){b.parentNode.classList.add('shown');b.style.display='none';});});
+} else if (document.querySelector('.quiz li.q')) {
+  /* ol/li 式（02-06）：.ans 切换 + data-ok 选项高亮 */
+  document.querySelectorAll('.quiz li.q').forEach(function(q){
+    var b=q.querySelector('button'),a=q.querySelector('.ans'),ok=q.querySelector('.opts li[data-ok]');
+    b.addEventListener('click',function(){var on=a.classList.toggle('show');ok.classList.toggle('ok',on);
+      b.textContent=on?b.dataset.hide:b.dataset.show;b.setAttribute('aria-expanded',on);});});
+  } else if (document.querySelector('.q .rv') && document.querySelector('.q .opts')) {
+    /* rv + opts li[data-ok] + hidden 属性式（03-05）：ex.hidden 切换，命中项标 hit */
+    document.querySelectorAll('.q').forEach(function(q){
+      var b=q.querySelector('.rv'), ex=q.querySelector('.ex');
+      if(!b||!ex) return;
+      b.addEventListener('click',function(){
+        var open=ex.hidden; ex.hidden=!open;
+        q.querySelectorAll('.opts li').forEach(function(li){
+          if(li.dataset.ok==='1') li.classList.toggle('hit',open);
+        });
+        b.textContent=open?'隐藏答案':'显示答案';
+      });
+    });
+  } else if (document.querySelector('.quiz .q .rv')) {
+  /* opt/rv/ex 式（07-05）：选项标记 sel，展开按钮标出对错 */
+  document.querySelectorAll('.quiz .q').forEach(function(q){
+    var opts=q.querySelectorAll('.opt'), ex=q.querySelector('.ex'), btn=q.querySelector('.rv');
+    opts.forEach(function(o){o.addEventListener('click',function(){
+      if(ex.classList.contains('show'))return;
+      opts.forEach(function(x){x.classList.remove('sel')}); o.classList.add('sel');});});
+    btn.addEventListener('click',function(){
+      var show=!ex.classList.contains('show'); ex.classList.toggle('show',show);
+      opts.forEach(function(o){
+        o.classList.remove('right','wrong');
+        if(show){ if(o.dataset.c==='1')o.classList.add('right'); else if(o.classList.contains('sel'))o.classList.add('wrong'); }
+      });
+      btn.textContent=show?btn.dataset.hide:btn.dataset.reveal;
+    });
+  });
+} else if (document.querySelector('.quiz .q[data-ok]')) {
+  /* data-ok 式（02-07）：点击后展开 .ans 并高亮正确选项 */
+  document.querySelectorAll('.quiz .q').forEach(function(q){
+    var btn=q.querySelector('button');
+    btn.addEventListener('click',function(){
+      q.classList.add('open');
+      var k=parseInt(q.getAttribute('data-ok'),10);
+      q.querySelectorAll('.opts span')[k].classList.add('ok');
+      btn.disabled=true; btn.style.opacity=.5; });
+  });
+  } else if (document.querySelector('.qitem')) {
+    /* qitem 式（01-03 第一章）：按钮 toggle 父级 open，文字切换（原页 JS 照搬） */
+    document.querySelectorAll('.qitem button').forEach(function(b){
+      b.addEventListener('click',function(){
+        var q=b.parentNode, on=q.classList.toggle('open');
+        b.setAttribute('aria-expanded',on);
+        b.textContent=on?'隐藏答案':'查看答案';
+      });
+    });
+  } else if (document.querySelector('.q button[data-ans]')) {
+    /* data-ans + hidden 属性式（03-03）：ex.hidden 切换，正确项标 ok */
+    document.querySelectorAll('.q button').forEach(function(b){
+      var q=b.parentNode, ex=q.querySelector('.ex'), li=q.querySelector('li[data-k="'+b.dataset.ans+'"]');
+      b.addEventListener('click',function(){
+        var show=ex.hidden; ex.hidden=!show;
+        if(li) li.classList.toggle('ok',show);
+        b.textContent=show?'隐藏答案':'显示答案';
+      });
+    });
+  } else if (document.querySelector('.quiz .q .rev')) {
+    /* rev/exp + data-ans 式（01-05 第一章）：点 rev 切换 exp.show，正确项标 right */
+    document.querySelectorAll('.quiz .q').forEach(function(q){
+      var b=q.querySelector('.rev'), ex=q.querySelector('.exp'), ans=q.getAttribute('data-ans');
+      if(!b||!ex) return;
+      var right = ans!=null ? q.querySelector('.opt[data-k="'+ans+'"]') : null;
+      b.addEventListener('click',function(){
+        var on=ex.classList.toggle('show');
+        if(right) right.classList.toggle('right',on);
+        b.textContent=on?'隐藏答案':'显示答案';
+      });
+    });
+  } else {
+    /* .q button 通用兜底（01-01/01-02/01-04/01-06/03-01/02/04/06…）：
+       open 与 shown 双开（各家 CSS 用哪个都命中）；正确项按 data-c/data-ok/ok 标 correct */
+    document.querySelectorAll('.q button').forEach(function(b){
+      b.addEventListener('click',function(){
+        var q=b.closest('.q'), on=!q.classList.contains('open');
+        q.classList.toggle('open',on); q.classList.toggle('shown',on);
+        q.querySelectorAll('.opt[data-c="1"], li[data-ok="1"], li.ok').forEach(function(o){
+          o.classList.toggle('correct',on);
+        });
+        if(b.dataset.hide&&b.dataset.show) b.textContent=on?b.dataset.hide:b.dataset.show;
+        else b.textContent=on?'隐藏答案':'显示答案';
+      });
+    });
+  }
+</script>
+</body>
+</html>

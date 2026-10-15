@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>确界原理的证明 · 自测</title>
+<style>
+:root{--bg:#0e1624;--panel:#18233a;--panel2:#202e48;--fg:#e8edf5;--muted:#8a96a8;--coral:#ff7a6b;--teal:#3ad1b5;--amber:#ffc145;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Inter","DejaVu Sans","Segoe UI","Noto Sans CJK SC","PingFang SC","Microsoft YaHei",system-ui,sans-serif;}
+.wrap{max-width:980px;margin:0 auto;padding:40px 20px 60px}
+.kicker{color:var(--amber);font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:14px}
+h1{font-size:40px;line-height:1.15;margin:8px 0 6px}
+.sub{color:var(--muted);margin:0 0 28px}
+h2{font-size:22px;margin:34px 0 12px;color:var(--fg)}
+h2 .n{color:var(--amber);margin-right:8px}
+.card{background:var(--panel);border:1px solid var(--panel2);border-radius:16px;padding:20px 24px;margin:14px 0}
+.statement{border-color:var(--amber)}
+.statement .h{color:var(--amber);font-weight:700;font-size:20px}
+.statement .s{font-size:21px;margin:8px 0 14px}
+.facts{display:flex;gap:12px;flex-wrap:wrap}
+.fact{flex:1 1 260px;border-radius:12px;padding:10px 14px;font-weight:700}
+.fact.no{background:rgba(255,122,107,.12);color:var(--coral);border:1px solid rgba(255,122,107,.4)}
+.fact.yes{background:rgba(58,209,181,.10);color:var(--teal);border:1px solid rgba(58,209,181,.4)}
+.small{color:var(--muted);font-size:15px}
+p{margin:8px 0}
+table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums;margin-top:10px}
+th,td{padding:8px 10px;border-bottom:1px solid var(--panel2);text-align:left}
+th{color:var(--muted);font-weight:600;font-size:14px}
+td.no{color:var(--coral)} td.yes{color:var(--teal)} td.win{color:var(--amber)}
+.addr{font-family:"DejaVu Sans Mono",ui-monospace,monospace;font-size:44px;font-weight:700;text-align:center;letter-spacing:.04em;margin:6px 0}
+.addr .new{color:var(--amber)}
+svg{width:100%;height:auto;display:block}
+.cap{text-align:center;color:var(--muted);font-size:15px;margin-top:4px}
+.trap{text-align:center;font-weight:700;color:var(--amber);font-size:19px}
+.proof{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media (max-width:760px){.proof{grid-template-columns:1fr} h1{font-size:30px}}
+.proof .card{margin:0}
+.proof h3{margin:0 0 8px;font-size:18px}
+.proof .i h3{color:var(--teal)} .proof .ii h3{color:var(--coral)}
+.concl{text-align:center;font-size:22px;font-weight:700;color:var(--amber);background:rgba(255,193,69,.10);border:1px solid var(--amber);border-radius:12px;padding:10px;margin-top:14px}
+.eq{font-family:"DejaVu Sans Mono",ui-monospace,monospace;color:var(--amber);font-weight:700}
+.quiz .q{border-top:1px solid var(--panel2);padding:14px 0}
+.quiz .q:first-of-type{border-top:0}
+.qt{font-weight:600;margin-bottom:6px}
+.opts{display:flex;flex-wrap:wrap;gap:8px 18px;margin:4px 0 8px}
+.opt{padding:4px 10px;border-radius:8px;border:1px solid var(--panel2)}
+.opt b{color:var(--muted);margin-right:6px}
+.opt.right{border-color:var(--teal);background:rgba(58,209,181,.12);color:var(--teal)}
+.opt.right b{color:var(--teal)}
+button{font:inherit;font-size:14px;background:var(--panel2);color:var(--fg);border:1px solid #33456a;border-radius:8px;padding:5px 12px;cursor:pointer}
+button:hover{border-color:var(--amber)}
+.exp{display:none;margin-top:8px;color:var(--fg);font-size:15px;border-left:3px solid var(--teal);padding-left:10px}
+.exp.show{display:block}
+footer{color:var(--muted);font-size:13px;margin-top:40px;text-align:center}
+
+/* ---- 手机自测单页覆盖层（深浅主题自适应：浅色文件有 --paper，深色有 --bg/--fg） ---- */
+html,body{margin:0;background:var(--bg,var(--paper));color:var(--fg,var(--ink));
+  font-family:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC","Source Han Sans SC",system-ui,-apple-system,sans-serif}
+/* 中和原幻灯片容器的隐藏/定位，让 section 直接作为文档流内容 */
+section.slide{display:block!important;position:static!important;width:auto!important;height:auto!important;
+  padding:0!important;background:none!important;box-shadow:none!important;transform:none!important}
+.page{max-width:720px;margin:0 auto;padding:18px 16px 60px}
+.topbar{display:flex;justify-content:space-between;align-items:baseline;gap:8px;
+  border-bottom:2px solid var(--grid,var(--line,var(--rule,#e3e0d6)));padding-bottom:10px;margin-bottom:6px}
+.topbar h1{font-size:20px;margin:0}
+.topbar a{color:var(--blue,#1f72b0);font-size:14px;text-decoration:none;white-space:nowrap}
+.lead{color:var(--muted);font-size:15px;margin:12px 0 2px;line-height:1.6}
+/* 表格 → 竖屏卡片（仅 slide 式页面有表格） */
+table.t{display:block;width:auto;border:0}
+table.t tbody,table.t tr,table.t td,table.t th{display:block;border:0;width:auto}
+table.t thead{display:none}
+table.t tr{background:var(--card);border:1.5px solid var(--rule);border-radius:14px;
+  padding:14px 16px;margin:14px 0;font-size:19px;line-height:1.7}
+table.t td{padding:6px 0}
+table.t td:last-child{border-top:1.5px dashed var(--rule);margin-top:6px;padding-top:10px}
+.q{display:block;text-align:center}
+.reveal{cursor:pointer;border:2px dashed var(--rule);border-radius:10px;
+  padding:6px 22px;color:var(--muted);font-size:16px;background:none;font-family:inherit}
+.ans{display:none;line-height:1.8}
+.shown .ans{display:block} .shown .reveal{display:none}
+/* quiz-section 式页面：原 section 自带卡片样式，仅收窄内边距 */
+section.quiz{padding:6px 2px;margin:8px 0;background:none;border:0}
+section.quiz .q{margin:12px 0;text-align:left}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="topbar">
+    <h1>确界原理的证明 · 自测</h1> <a href="../notes/01-05.html">查看讲稿 →</a>
+  </div>
+  
+  <div class="quiz">
+  
+<div class="card quiz">
+<div class="q" data-ans="0">
+<div class="qt">1. S = {q ∈ ℚ : q² &lt; 3} 的 m = 1。做第 1 步：a₁ 是多少？</div>
+<div class="opts"><span class="opt" data-k="0"><b>A</b>1.7</span><span class="opt" data-k="1"><b>B</b>1.8</span><span class="opt" data-k="2"><b>C</b>1.73</span></div>
+<button type="button" class="rev">显示答案</button>
+<div class="exp"><b>正确答案： A.</b> 1.7² = 2.89 &lt; 3，故 1.7 不是上界；1.8² = 3.24 ≥ 3，故 1.8 是上界；所以 a₁ = 1.7，目标在 [1.7, 1.8] 中。</div>
+</div><div class="q" data-ans="0">
+<div class="qt">2. 对 S = [−2.5, −0.3)，最大的非上界整数 m 是多少？</div>
+<div class="opts"><span class="opt" data-k="0"><b>A</b>−1</span><span class="opt" data-k="1"><b>B</b>0</span><span class="opt" data-k="2"><b>C</b>−3</span></div>
+<button type="button" class="rev">显示答案</button>
+<div class="exp"><b>正确答案： A.</b> −1 被 −0.5 ∈ S 超过，而 0 是上界，所以 m = −1，目标在 [−1, 0] 中。</div>
+</div><div class="q" data-ans="1">
+<div class="qt">3. 对 S = [0, 0.42)，循环 9 约定为何重要？</div>
+<div class="opts"><span class="opt" data-k="0"><b>A</b>搜寻拼出 0.42000…，约定无关紧要</span><span class="opt" data-k="1"><b>B</b>搜寻拼出 0.41999…，它等于 sup S = 0.42 全靠约定</span><span class="opt" data-k="2"><b>C</b>搜寻永不结束，所以 α 不存在</span></div>
+<button type="button" class="rev">显示答案</button>
+<div class="exp"><b>正确答案： B.</b> 0.42 始终是上界、从不被选，所以各位数字是 0.41999…，约定把这个小数认定为 0.42。</div>
+</div><div class="q" data-ans="1">
+<div class="qt">4. 第 (i) 点中，被推出矛盾的是哪个构造事实？</div>
+<div class="opts"><span class="opt" data-k="0"><b>A</b>aₙ 不是上界</span><span class="opt" data-k="1"><b>B</b>aₙ + 10⁻ⁿ 是上界</span><span class="opt" data-k="2"><b>C</b>α ∈ S</span></div>
+<button type="button" class="rev">显示答案</button>
+<div class="exp"><b>正确答案： B.</b> 由 s &gt; α 可知 n 充分大时 s &gt; aₙ + 10⁻ⁿ，于是 aₙ + 10⁻ⁿ 就不是上界了。</div>
+</div><div class="q" data-ans="1">
+<div class="qt">5. 哪个不等式对每个 n 都成立？</div>
+<div class="opts"><span class="opt" data-k="0"><b>A</b>aₙ &lt; α &lt; aₙ + 10⁻ⁿ</span><span class="opt" data-k="1"><b>B</b>aₙ ≤ α ≤ aₙ + 10⁻ⁿ</span><span class="opt" data-k="2"><b>C</b>α ≤ aₙ</span></div>
+<button type="button" class="rev">显示答案</button>
+<div class="exp"><b>正确答案： B.</b> aₙ 是 α 的前 n 位截断，其余各位贡献介于 0 与 10⁻ⁿ 之间（可以取等号，如 0.41999… = 0.42）。</div>
+</div><div class="q" data-ans="1">
+<div class="qt">6. 完备性究竟在证明的哪一步用到？</div>
+<div class="opts"><span class="opt" data-k="0"><b>A</b>选取整数 m 时</span><span class="opt" data-k="1"><b>B</b>承认无限小数 α 是一个实数时</span><span class="opt" data-k="2"><b>C</b>第 (i) 点的反证中</span></div>
+<button type="button" class="rev">显示答案</button>
+<div class="exp"><b>正确答案： B.</b> 其余各步都是有限的检验；只有“无限小数 α 是 ℝ 中的数”这一步用到完备性。</div>
+</div>
+</div>
+
+<footer>第 01-05 集 · 前置：无限小数与循环 9 约定；上确界的两点验证模板。</footer>
+</div>
+
+</body>
+</html>
+
+  </div>
+</div>
+<script>
+document.querySelectorAll('.reveal').forEach(function(b){
+  b.addEventListener('click',function(){var t=this.closest('.q,.qt-item');if(t)t.classList.add('shown')});
+});
+/* 按页面 DOM 特征自适配各批次回件的交互（逻辑均照搬原版） */
+if (document.querySelector('.qt3')) {
+  /* .qt3 式（02-03）：按钮点击后父卡 shown、按钮隐藏 */
+  document.querySelectorAll('.qt3 button').forEach(function(b){
+    b.addEventListener('click',function(){b.parentNode.classList.add('shown');b.style.display='none';});});
+} else if (document.querySelector('.quiz li.q')) {
+  /* ol/li 式（02-06）：.ans 切换 + data-ok 选项高亮 */
+  document.querySelectorAll('.quiz li.q').forEach(function(q){
+    var b=q.querySelector('button'),a=q.querySelector('.ans'),ok=q.querySelector('.opts li[data-ok]');
+    b.addEventListener('click',function(){var on=a.classList.toggle('show');ok.classList.toggle('ok',on);
+      b.textContent=on?b.dataset.hide:b.dataset.show;b.setAttribute('aria-expanded',on);});});
+  } else if (document.querySelector('.q .rv') && document.querySelector('.q .opts')) {
+    /* rv + opts li[data-ok] + hidden 属性式（03-05）：ex.hidden 切换，命中项标 hit */
+    document.querySelectorAll('.q').forEach(function(q){
+      var b=q.querySelector('.rv'), ex=q.querySelector('.ex');
+      if(!b||!ex) return;
+      b.addEventListener('click',function(){
+        var open=ex.hidden; ex.hidden=!open;
+        q.querySelectorAll('.opts li').forEach(function(li){
+          if(li.dataset.ok==='1') li.classList.toggle('hit',open);
+        });
+        b.textContent=open?'隐藏答案':'显示答案';
+      });
+    });
+  } else if (document.querySelector('.quiz .q .rv')) {
+  /* opt/rv/ex 式（07-05）：选项标记 sel，展开按钮标出对错 */
+  document.querySelectorAll('.quiz .q').forEach(function(q){
+    var opts=q.querySelectorAll('.opt'), ex=q.querySelector('.ex'), btn=q.querySelector('.rv');
+    opts.forEach(function(o){o.addEventListener('click',function(){
+      if(ex.classList.contains('show'))return;
+      opts.forEach(function(x){x.classList.remove('sel')}); o.classList.add('sel');});});
+    btn.addEventListener('click',function(){
+      var show=!ex.classList.contains('show'); ex.classList.toggle('show',show);
+      opts.forEach(function(o){
+        o.classList.remove('right','wrong');
+        if(show){ if(o.dataset.c==='1')o.classList.add('right'); else if(o.classList.contains('sel'))o.classList.add('wrong'); }
+      });
+      btn.textContent=show?btn.dataset.hide:btn.dataset.reveal;
+    });
+  });
+} else if (document.querySelector('.quiz .q[data-ok]')) {
+  /* data-ok 式（02-07）：点击后展开 .ans 并高亮正确选项 */
+  document.querySelectorAll('.quiz .q').forEach(function(q){
+    var btn=q.querySelector('button');
+    btn.addEventListener('click',function(){
+      q.classList.add('open');
+      var k=parseInt(q.getAttribute('data-ok'),10);
+      q.querySelectorAll('.opts span')[k].classList.add('ok');
+      btn.disabled=true; btn.style.opacity=.5; });
+  });
+  } else if (document.querySelector('.qitem')) {
+    /* qitem 式（01-03 第一章）：按钮 toggle 父级 open，文字切换（原页 JS 照搬） */
+    document.querySelectorAll('.qitem button').forEach(function(b){
+      b.addEventListener('click',function(){
+        var q=b.parentNode, on=q.classList.toggle('open');
+        b.setAttribute('aria-expanded',on);
+        b.textContent=on?'隐藏答案':'查看答案';
+      });
+    });
+  } else if (document.querySelector('.q button[data-ans]')) {
+    /* data-ans + hidden 属性式（03-03）：ex.hidden 切换，正确项标 ok */
+    document.querySelectorAll('.q button').forEach(function(b){
+      var q=b.parentNode, ex=q.querySelector('.ex'), li=q.querySelector('li[data-k="'+b.dataset.ans+'"]');
+      b.addEventListener('click',function(){
+        var show=ex.hidden; ex.hidden=!show;
+        if(li) li.classList.toggle('ok',show);
+        b.textContent=show?'隐藏答案':'显示答案';
+      });
+    });
+  } else if (document.querySelector('.quiz .q .rev')) {
+    /* rev/exp + data-ans 式（01-05 第一章）：点 rev 切换 exp.show，正确项标 right */
+    document.querySelectorAll('.quiz .q').forEach(function(q){
+      var b=q.querySelector('.rev'), ex=q.querySelector('.exp'), ans=q.getAttribute('data-ans');
+      if(!b||!ex) return;
+      var right = ans!=null ? q.querySelector('.opt[data-k="'+ans+'"]') : null;
+      b.addEventListener('click',function(){
+        var on=ex.classList.toggle('show');
+        if(right) right.classList.toggle('right',on);
+        b.textContent=on?'隐藏答案':'显示答案';
+      });
+    });
+  } else {
+    /* .q button 通用兜底（01-01/01-02/01-04/01-06/03-01/02/04/06…）：
+       open 与 shown 双开（各家 CSS 用哪个都命中）；正确项按 data-c/data-ok/ok 标 correct */
+    document.querySelectorAll('.q button').forEach(function(b){
+      b.addEventListener('click',function(){
+        var q=b.closest('.q'), on=!q.classList.contains('open');
+        q.classList.toggle('open',on); q.classList.toggle('shown',on);
+        q.querySelectorAll('.opt[data-c="1"], li[data-ok="1"], li.ok').forEach(function(o){
+          o.classList.toggle('correct',on);
+        });
+        if(b.dataset.hide&&b.dataset.show) b.textContent=on?b.dataset.hide:b.dataset.show;
+        else b.textContent=on?'隐藏答案':'显示答案';
+      });
+    });
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>两个重要极限 · 自测</title>
+<style>
+:root{--bg:#0f1420;--card:#161d2d;--fg:#e8ecf3;--muted:#8a94a8;--faint:#2a3347;--teal:#3cc6c0;--amber:#f2a93b;--rose:#ef6f6c;--green:#7bd389;--violet:#a78bfa;--gold:#ffd166}
+*{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--fg)}
+body{font:17px/1.55 Inter,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",system-ui,sans-serif;padding:28px 16px 60px}
+.wrap{max-width:1100px;margin:0 auto}
+header .pill{display:inline-block;border:1.5px solid var(--gold);color:var(--gold);border-radius:99px;padding:3px 14px;font-size:13px;font-weight:700;letter-spacing:.04em}
+h1{font-size:clamp(28px,5vw,44px);margin:12px 0 4px}
+.sub{color:var(--muted);margin:0 0 22px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media(max-width:820px){.grid{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--faint);border-radius:16px;padding:18px 20px}
+.card h2{margin:0 0 10px;font-size:19px}.r1 h2{color:var(--teal)}.r2 h2{color:var(--amber)}.r3 h2{color:var(--gold)}
+.r1{border-top:3px solid var(--teal)}.r2{border-top:3px solid var(--amber)}.r3{border-top:3px solid var(--gold)}
+.m{font-family:"Latin Modern Math","Cambria Math","STIX Two Math","Times New Roman",serif;font-size:1.12em;white-space:nowrap}
+.big{display:block;text-align:center;font-size:1.45em;margin:10px 0;white-space:normal}
+.fr{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;margin:0 .12em;font-size:.92em}
+.fr>.nu{border-bottom:1.2px solid currentColor;padding:0 .15em}.fr>.de{padding:0 .15em}
+.lim{display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;margin-right:.2em;line-height:1.05}
+.lim .ls{font-size:.6em}
+sup{font-size:.68em}
+.fig{width:100%;max-width:520px;display:block;margin:6px auto}
+.sv{font:italic 15px "Latin Modern Math","Times New Roman",serif;fill:var(--fg)}.sv.sm{font-size:13px;fill:var(--muted)}.sv.tl{fill:var(--teal)}.sv.am{fill:var(--amber)}.sv.gd{fill:var(--gold)}
+ul{margin:6px 0;padding-left:20px}li{margin:4px 0}
+.leg .sw{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+.iou{border:2px dashed var(--rose);border-radius:12px;padding:10px 14px;margin:10px 0;color:var(--fg);background:rgba(239,111,108,.07)}
+.iou b{color:var(--rose)}
+.fam{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:8px 0}
+.fam div{border:1.5px solid var(--amber);border-radius:10px;padding:6px 12px;background:rgba(242,169,59,.07)}
+.fam .anc{border-color:var(--gold);background:rgba(255,209,102,.1)}
+table{border-collapse:collapse;margin:6px auto}td,th{border-bottom:1px solid var(--faint);padding:5px 14px;text-align:center}th{color:var(--muted);font-weight:600}
+.trap{color:var(--rose)}.ok{color:var(--green)}
+.quiz{margin-top:22px}.quiz h2{color:var(--green)}
+.q{border-top:1px solid var(--faint);padding:12px 0}.q:first-of-type{border-top:0}
+.qt{margin:0 0 6px}.qn{display:inline-block;width:24px;height:24px;border-radius:50%;background:var(--faint);text-align:center;line-height:24px;font-size:13px;margin-right:8px}
+.opts{list-style:none;padding:0;margin:4px 0 8px 32px;display:flex;flex-wrap:wrap;gap:6px 22px}
+.opts li{padding:2px 8px;border-radius:8px;border:1px solid transparent}
+.opts li.hit{border-color:var(--green);background:rgba(123,211,137,.12)}
+.rv{margin-left:32px;background:transparent;color:var(--green);border:1.5px solid var(--green);border-radius:8px;padding:4px 12px;font:inherit;font-size:14px;cursor:pointer}
+.rv:hover{background:rgba(123,211,137,.12)}
+.ex{margin:8px 0 0 32px;color:var(--fg)}
+
+/* ---- 手机自测单页覆盖层（深浅主题自适应：浅色文件有 --paper，深色有 --bg/--fg） ---- */
+html,body{margin:0;background:var(--bg,var(--paper));color:var(--fg,var(--ink));
+  font-family:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC","Source Han Sans SC",system-ui,-apple-system,sans-serif}
+/* 中和原幻灯片容器的隐藏/定位，让 section 直接作为文档流内容 */
+section.slide{display:block!important;position:static!important;width:auto!important;height:auto!important;
+  padding:0!important;background:none!important;box-shadow:none!important;transform:none!important}
+.page{max-width:720px;margin:0 auto;padding:18px 16px 60px}
+.topbar{display:flex;justify-content:space-between;align-items:baseline;gap:8px;
+  border-bottom:2px solid var(--grid,var(--line,var(--rule,#e3e0d6)));padding-bottom:10px;margin-bottom:6px}
+.topbar h1{font-size:20px;margin:0}
+.topbar a{color:var(--blue,#1f72b0);font-size:14px;text-decoration:none;white-space:nowrap}
+.lead{color:var(--muted);font-size:15px;margin:12px 0 2px;line-height:1.6}
+/* 表格 → 竖屏卡片（仅 slide 式页面有表格） */
+table.t{display:block;width:auto;border:0}
+table.t tbody,table.t tr,table.t td,table.t th{display:block;border:0;width:auto}
+table.t thead{display:none}
+table.t tr{background:var(--card);border:1.5px solid var(--rule);border-radius:14px;
+  padding:14px 16px;margin:14px 0;font-size:19px;line-height:1.7}
+table.t td{padding:6px 0}
+table.t td:last-child{border-top:1.5px dashed var(--rule);margin-top:6px;padding-top:10px}
+.q{display:block;text-align:center}
+.reveal{cursor:pointer;border:2px dashed var(--rule);border-radius:10px;
+  padding:6px 22px;color:var(--muted);font-size:16px;background:none;font-family:inherit}
+.ans{display:none;line-height:1.8}
+.shown .ans{display:block} .shown .reveal{display:none}
+/* quiz-section 式页面：原 section 自带卡片样式，仅收窄内边距 */
+section.quiz{padding:6px 2px;margin:8px 0;background:none;border:0}
+section.quiz .q{margin:12px 0;text-align:left}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="topbar">
+    <h1>两个重要极限 · 自测</h1> <a href="../notes/03-05.html">查看讲稿 →</a>
+  </div>
+  
+  <div class="quiz">
+  
+<div class="q"><p class="qt"><span class="qn">1</span>求 <span class="lim">lim<span class="ls">x → ∞</span></span> (1 + <span class="fr"><span class="nu">3</span><span class="de"><i>x</i></span></span>)<sup>2<i>x</i></sup>.</p><ol class="opts"><li data-ok="0"><b>A.</b> <i>e</i><sup>3/2</sup></li><li data-ok="1"><b>B.</b> <i>e</i><sup>6</sup></li><li data-ok="0"><b>C.</b> <i>e</i><sup>5</sup></li></ol>
+<button type="button" class="rv" data-hide="隐藏答案">显示答案</button><p class="ex" hidden><b>答案: B.</b> 写成 [(1 + 3/<i>x</i>)<sup><i>x</i></sup>]<sup>2</sup>：方括号是 k = 3 的戏服，趋于 <i>e</i><sup>3</sup>，故极限为 (<i>e</i><sup>3</sup>)<sup>2</sup> = <i>e</i><sup>6</sup>。</p></div>
+<div class="q"><p class="qt"><span class="qn">2</span>求 <span class="lim">lim<span class="ls">x → 0</span></span> (cos <i>x</i>)<sup>1/<i>x</i>²</sup>.</p><ol class="opts"><li data-ok="0"><b>A.</b> 1</li><li data-ok="1"><b>B.</b> <i>e</i><sup>−1/2</sup></li><li data-ok="0"><b>C.</b> <i>e</i><sup>−2</sup></li></ol>
+<button type="button" class="rv" data-hide="隐藏答案">显示答案</button><p class="ex" hidden><b>答案: B.</b> 1<sup>∞</sup> 型，α = cos <i>x</i> − 1 = −2sin²(<i>x</i>/2)，αg = −½·(sin(<i>x</i>/2)/(<i>x</i>/2))² → −½，所以极限是 <i>e</i><sup>−1/2</sup>。</p></div>
+<div class="q"><p class="qt"><span class="qn">3</span><span class="lim">lim<span class="ls">x → ∞</span></span> (1 − <span class="fr"><span class="nu">1</span><span class="de"><i>x</i></span></span>)<sup><i>x</i></sup> 是家族成员的伪装，其值为：</p><ol class="opts"><li data-ok="0"><b>A.</b> <i>e</i></li><li data-ok="1"><b>B.</b> <i>e</i><sup>−1</sup></li><li data-ok="0"><b>C.</b> 1</li></ol>
+<button type="button" class="rv" data-hide="隐藏答案">显示答案</button><p class="ex" hidden><b>答案: B.</b> 这是 k = −1 的 (1 + k/<i>x</i>)<sup><i>x</i></sup>，趋于 <i>e</i><sup>−1</sup>；k &lt; 0 时 x/k → −∞，用到祖先的 x → −∞ 版本。</p></div>
+<div class="q"><p class="qt"><span class="qn">4</span>为什么 sin x / x → 1 的证明比较面积而不是长度？</p><ol class="opts"><li data-ok="0"><b>A.</b> 面积更大，不等式更容易看出。</li><li data-ok="1"><b>B.</b> 比较弧与弦要先有弧长理论——此刻会陷入循环论证。</li><li data-ok="0"><b>C.</b> 长度不能满足严格不等式。</li></ol>
+<button type="button" class="rv" data-hide="隐藏答案">显示答案</button><p class="ex" hidden><b>答案: B.</b> 弧长本身要靠这类极限建立；面积只需初等几何——一个图形包含另一个。</p></div>
+<div class="q"><p class="qt"><span class="qn">5</span>令 u = 1/<i>x</i>，(1 + <i>u</i>)<sup>1/<i>u</i></sup> → <i>e</i>（<i>u</i> → 0 双侧）需要祖先的哪些过程？</p><ol class="opts"><li data-ok="0"><b>A.</b> 只要 <i>x</i> → +∞</li><li data-ok="1"><b>B.</b> <i>x</i> → +∞ 与 <i>x</i> → −∞ 都要</li><li data-ok="0"><b>C.</b> 只要 <i>x</i> → 0</li></ol>
+<button type="button" class="rv" data-hide="隐藏答案">显示答案</button><p class="ex" hidden><b>答案: B.</b> <i>x</i> → +∞ 对应 <i>u</i> → 0⁺，<i>x</i> → −∞ 对应 <i>u</i> → 0⁻；忘了过程就丢一半答案。</p></div>
+<div class="q"><p class="qt"><span class="qn">6</span><span class="lim">lim<span class="ls">x → ∞</span></span> <span class="fr"><span class="nu">sin <i>x</i></span><span class="de"><i>x</i></span></span> = ?</p><ol class="opts"><li data-ok="0"><b>A.</b> 1</li><li data-ok="1"><b>B.</b> 0</li><li data-ok="0"><b>C.</b> 不存在</li></ol>
+<button type="button" class="rv" data-hide="隐藏答案">显示答案</button><p class="ex" hidden><b>答案: B.</b> |sin <i>x</i>/<i>x</i>| ≤ 1/|<i>x</i>| → 0：第一把尺只在 <i>x</i> → 0 时管用，远处图像振荡衰减。</p></div>
+</section></div></body></html>
+  </div>
+</div>
+<script>
+document.querySelectorAll('.reveal').forEach(function(b){
+  b.addEventListener('click',function(){var t=this.closest('.q,.qt-item');if(t)t.classList.add('shown')});
+});
+/* 按页面 DOM 特征自适配各批次回件的交互（逻辑均照搬原版） */
+if (document.querySelector('.qt3')) {
+  /* .qt3 式（02-03）：按钮点击后父卡 shown、按钮隐藏 */
+  document.querySelectorAll('.qt3 button').forEach(function(b){
+    b.addEventListener('click',function(){b.parentNode.classList.add('shown');b.style.display='none';});});
+} else if (document.querySelector('.quiz li.q')) {
+  /* ol/li 式（02-06）：.ans 切换 + data-ok 选项高亮 */
+  document.querySelectorAll('.quiz li.q').forEach(function(q){
+    var b=q.querySelector('button'),a=q.querySelector('.ans'),ok=q.querySelector('.opts li[data-ok]');
+    b.addEventListener('click',function(){var on=a.classList.toggle('show');ok.classList.toggle('ok',on);
+      b.textContent=on?b.dataset.hide:b.dataset.show;b.setAttribute('aria-expanded',on);});});
+  } else if (document.querySelector('.q .rv') && document.querySelector('.q .opts')) {
+    /* rv + opts li[data-ok] + hidden 属性式（03-05）：ex.hidden 切换，命中项标 hit */
+    document.querySelectorAll('.q').forEach(function(q){
+      var b=q.querySelector('.rv'), ex=q.querySelector('.ex');
+      if(!b||!ex) return;
+      b.addEventListener('click',function(){
+        var open=ex.hidden; ex.hidden=!open;
+        q.querySelectorAll('.opts li').forEach(function(li){
+          if(li.dataset.ok==='1') li.classList.toggle('hit',open);
+        });
+        b.textContent=open?'隐藏答案':'显示答案';
+      });
+    });
+  } else if (document.querySelector('.quiz .q .rv')) {
+  /* opt/rv/ex 式（07-05）：选项标记 sel，展开按钮标出对错 */
+  document.querySelectorAll('.quiz .q').forEach(function(q){
+    var opts=q.querySelectorAll('.opt'), ex=q.querySelector('.ex'), btn=q.querySelector('.rv');
+    opts.forEach(function(o){o.addEventListener('click',function(){
+      if(ex.classList.contains('show'))return;
+      opts.forEach(function(x){x.classList.remove('sel')}); o.classList.add('sel');});});
+    btn.addEventListener('click',function(){
+      var show=!ex.classList.contains('show'); ex.classList.toggle('show',show);
+      opts.forEach(function(o){
+        o.classList.remove('right','wrong');
+        if(show){ if(o.dataset.c==='1')o.classList.add('right'); else if(o.classList.contains('sel'))o.classList.add('wrong'); }
+      });
+      btn.textContent=show?btn.dataset.hide:btn.dataset.reveal;
+    });
+  });
+} else if (document.querySelector('.quiz .q[data-ok]')) {
+  /* data-ok 式（02-07）：点击后展开 .ans 并高亮正确选项 */
+  document.querySelectorAll('.quiz .q').forEach(function(q){
+    var btn=q.querySelector('button');
+    btn.addEventListener('click',function(){
+      q.classList.add('open');
+      var k=parseInt(q.getAttribute('data-ok'),10);
+      q.querySelectorAll('.opts span')[k].classList.add('ok');
+      btn.disabled=true; btn.style.opacity=.5; });
+  });
+  } else if (document.querySelector('.qitem')) {
+    /* qitem 式（01-03 第一章）：按钮 toggle 父级 open，文字切换（原页 JS 照搬） */
+    document.querySelectorAll('.qitem button').forEach(function(b){
+      b.addEventListener('click',function(){
+        var q=b.parentNode, on=q.classList.toggle('open');
+        b.setAttribute('aria-expanded',on);
+        b.textContent=on?'隐藏答案':'查看答案';
+      });
+    });
+  } else if (document.querySelector('.q button[data-ans]')) {
+    /* data-ans + hidden 属性式（03-03）：ex.hidden 切换，正确项标 ok */
+    document.querySelectorAll('.q button').forEach(function(b){
+      var q=b.parentNode, ex=q.querySelector('.ex'), li=q.querySelector('li[data-k="'+b.dataset.ans+'"]');
+      b.addEventListener('click',function(){
+        var show=ex.hidden; ex.hidden=!show;
+        if(li) li.classList.toggle('ok',show);
+        b.textContent=show?'隐藏答案':'显示答案';
+      });
+    });
+  } else if (document.querySelector('.quiz .q .rev')) {
+    /* rev/exp + data-ans 式（01-05 第一章）：点 rev 切换 exp.show，正确项标 right */
+    document.querySelectorAll('.quiz .q').forEach(function(q){
+      var b=q.querySelector('.rev'), ex=q.querySelector('.exp'), ans=q.getAttribute('data-ans');
+      if(!b||!ex) return;
+      var right = ans!=null ? q.querySelector('.opt[data-k="'+ans+'"]') : null;
+      b.addEventListener('click',function(){
+        var on=ex.classList.toggle('show');
+        if(right) right.classList.toggle('right',on);
+        b.textContent=on?'隐藏答案':'显示答案';
+      });
+    });
+  } else {
+    /* .q button 通用兜底（01-01/01-02/01-04/01-06/03-01/02/04/06…）：
+       open 与 shown 双开（各家 CSS 用哪个都命中）；正确项按 data-c/data-ok/ok 标 correct */
+    document.querySelectorAll('.q button').forEach(function(b){
+      b.addEventListener('click',function(){
+        var q=b.closest('.q'), on=!q.classList.contains('open');
+        q.classList.toggle('open',on); q.classList.toggle('shown',on);
+        q.querySelectorAll('.opt[data-c="1"], li[data-ok="1"], li.ok').forEach(function(o){
+          o.classList.toggle('correct',on);
+        });
+        if(b.dataset.hide&&b.dataset.show) b.textContent=on?b.dataset.hide:b.dataset.show;
+        else b.textContent=on?'隐藏答案':'显示答案';
+      });
+    });
+  }
+</script>
+</body>
+</html>
