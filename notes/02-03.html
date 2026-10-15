@@ -149,6 +149,10 @@ footer{margin-top:14px}
 </div></section>
 <footer>第 02-03 集 · 大一数学分析</footer>
 </div></section>
+<script>
+Array.prototype.forEach.call(document.querySelectorAll('.qt3 button'),function(b){
+ b.addEventListener('click',function(){b.parentNode.classList.add('shown');b.style.display='none';});});
+</script>
 <div class="hint">使用 ← → 键或滚动浏览</div>
 <script>
 (function(){var s=[].slice.call(document.querySelectorAll('section.slide'));
