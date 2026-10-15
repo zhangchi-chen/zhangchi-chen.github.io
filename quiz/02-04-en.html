@@ -1,108 +1,84 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>迫敛法（夹逼） · 自测</title>
+<title>The Squeeze Theorem · Self-Quiz</title>
 <style>
-:root{--bg:#0f1626;--panel:#16213a;--panel2:#141d31;--fg:#e8ecf3;--muted:#8b97ad;--grid:#243049;
---low:#4aa3ff;--up:#ff9f43;--mid:#f4f4f4;--ok:#5be37d;--bad:#ff5c5c;--gold:#ffd84a}
+:root{--bg:#0e1a2b;--card:#15263d;--ink:#eef2f7;--muted:#9fb0c6;--blue:#5ab0ff;--teal:#4fd1b5;--green:#6bd38a;--line:#26405f}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--fg);font-family:"DejaVu Sans","Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif;line-height:1.6}
-main{max-width:960px;margin:0 auto;padding:32px 16px 64px}
-h1{color:var(--gold);font-size:2.2rem;margin:0}
-.sub{color:var(--muted);margin:4px 0 20px}
-h2{color:var(--gold);font-size:1.3rem;border-bottom:1px solid var(--grid);padding-bottom:6px;margin:36px 0 12px}
-.m{font-family:"Cambria Math","STIX Two Math","DejaVu Serif","Times New Roman",serif;font-style:italic;white-space:nowrap}
-.frac{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;font-size:.85em;margin:0 2px}
-.frac>span:first-child{border-bottom:1px solid currentColor;padding:0 3px}
-.frac>span:last-child{padding:0 3px}
-.thm{background:var(--panel);border:1.5px solid var(--gold);border-radius:12px;padding:14px 20px;margin:16px 0}
-.thm b{color:var(--gold)}
-.intu{color:var(--muted);font-style:italic}
-.row{display:flex;gap:16px;flex-wrap:wrap}
-.card{flex:1 1 280px;background:var(--panel2);border:1px solid var(--grid);border-radius:12px;padding:12px 14px}
-.card h3{margin:0 0 6px;font-size:1.05rem}
-.okc{color:var(--ok)} .badc{color:var(--bad)}
-.fig{width:100%;height:auto;display:block}
-.axis{stroke:var(--muted);stroke-width:1}
-.tick{fill:var(--muted);font-size:10px}
-.lim{stroke:var(--ok);stroke-dasharray:5 4;stroke-width:1.2}
-.limt{fill:var(--ok);font-size:12px}
-.band{fill:var(--gold);opacity:.12}
-.band-bad{fill:var(--bad);opacity:.12}
-.l-up{fill:none;stroke:var(--up);stroke-width:2}
-.l-lo{fill:none;stroke:var(--low);stroke-width:2}
-.d-up{fill:var(--up)} .d-lo{fill:var(--low)} .d-mid{fill:var(--mid)}
-.bar{fill:#9fb0cc} .bar-up{fill:var(--up)} .bar-lo{fill:var(--low)}
-.dash-up{stroke:var(--up);stroke-dasharray:5 4;stroke-width:1.4}
-.dash-lo{stroke:var(--low);stroke-dasharray:5 4;stroke-width:1.4}
-.formula{background:var(--panel);border-radius:10px;padding:10px 14px;margin:10px 0;font-size:1.1rem;overflow-x:auto}
-.cap{color:var(--muted);font-size:.9rem;margin-top:4px}
-.key{border-left:3px solid var(--gold);padding-left:10px;color:var(--fg)}
-table{width:100%;border-collapse:separate;border-spacing:12px 0;table-layout:fixed}
-th{padding:10px;border-radius:10px 10px 0 0;text-align:left}
-td{vertical-align:top;background:var(--panel2);padding:10px 14px;border-radius:0 0 10px 10px}
-td ul{margin:0;padding-left:18px} td li{margin:6px 0}
-th.a{color:var(--ok);border:1.5px solid var(--ok);border-bottom:none} td.a{border:1.5px solid var(--ok);border-top:none}
-th.s{color:var(--up);border:1.5px solid var(--up);border-bottom:none} td.s{border:1.5px solid var(--up);border-top:none}
-.rule{color:var(--gold);font-weight:bold;text-align:center;margin-top:12px}
-.q{background:var(--panel2);border:1px solid var(--grid);border-radius:10px;padding:10px 14px;margin:10px 0}
-.q p{margin:0 0 6px}
-.opt{display:inline-block;margin:2px 14px 2px 0;padding:2px 8px;border-radius:6px;border:1px solid transparent}
-.opt.correct{border-color:var(--ok);color:var(--ok);background:rgba(91,227,125,.08)}
-.q button{background:var(--panel);color:var(--gold);border:1px solid var(--gold);border-radius:6px;padding:3px 12px;cursor:pointer;font:inherit;font-size:.9rem;margin-top:6px}
-.q button:hover{background:#1d2b4a}
-.exp{display:none;color:var(--muted);margin-top:6px}
-.q.open .exp{display:block}
-@media (max-width:640px){table{border-spacing:0 12px}th,td{display:block;border-radius:10px}th{border-radius:10px 10px 0 0}}
-
-/* ---- 手机自测单页覆盖层 ---- */
-html,body{margin:0;background:var(--paper);color:var(--ink);
-  font-family:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC","Source Han Sans SC",system-ui,-apple-system,sans-serif}
-/* 中和原幻灯片容器的隐藏/定位，让 section 直接作为文档流内容 */
-section.slide{display:block!important;position:static!important;width:auto!important;height:auto!important;
-  padding:0!important;background:none!important;box-shadow:none!important;transform:none!important}
+body{margin:0;background:radial-gradient(1200px 700px at 20% 0%,#16304f 0%,var(--bg) 60%);
+background-color:var(--bg);color:var(--ink);
+font:17px/1.65 "Noto Sans","Noto Sans SC",system-ui,-apple-system,"Segoe UI",sans-serif}
 .page{max-width:720px;margin:0 auto;padding:18px 16px 60px}
-.topbar{border-bottom:2px solid var(--rule);padding-bottom:10px;margin-bottom:6px}
+.topbar{display:flex;justify-content:space-between;align-items:baseline;gap:8px;
+border-bottom:2px solid var(--line);padding-bottom:10px;margin-bottom:6px}
 .topbar h1{font-size:20px;margin:0}
-.lead{color:var(--muted);font-size:15px;margin:12px 0 2px;line-height:1.6}
-/* 表格 → 竖屏卡片 */
-table.t{display:block;width:auto;border:0}
-table.t tbody,table.t tr,table.t td,table.t th{display:block;border:0;width:auto}
-table.t thead{display:none}
-table.t tr{background:var(--card);border:1.5px solid var(--rule);border-radius:14px;
-  padding:14px 16px;margin:14px 0;font-size:19px;line-height:1.7}
-table.t td{padding:6px 0}
-table.t td:last-child{border-top:1.5px dashed var(--rule);margin-top:6px;padding-top:10px}
-.q{display:block;text-align:center}
-.reveal{cursor:pointer;border:2px dashed var(--rule);border-radius:10px;
-  padding:6px 22px;color:var(--muted);font-size:16px;background:none;font-family:inherit}
-.ans{display:none;line-height:1.8}
-.shown .ans{display:block} .shown .reveal{display:none}
+.topbar a{color:var(--blue);font-size:14px;text-decoration:none;white-space:nowrap}
+.lead{color:var(--muted);font-size:14.5px;margin:12px 0 2px}
+.qt{display:grid;gap:14px;margin-top:14px}
+.qt-item{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 18px}
+.qt-q{color:var(--ink);font-size:16.5px;margin:0 0 8px}
+.qt-opts{color:var(--muted);font-size:15px;line-height:1.9;margin:0 0 10px}
+.qt-opts span{display:block}
+button.reveal{background:transparent;border:1px solid var(--teal);color:var(--teal);
+border-radius:8px;padding:5px 14px;font-size:14px;cursor:pointer}
+.ans{display:none;margin-top:10px;padding:10px 14px;border-left:3px solid var(--green);
+background:rgba(107,211,138,.08);color:var(--ink);font-size:15px;line-height:1.8;border-radius:0 8px 8px 0}
+.ans b{color:var(--green)}
+.qt-item.shown .ans{display:block}
+.qt-item.shown button.reveal{display:none}
 </style>
 </head>
 <body>
 <div class="page">
   <div class="topbar">
-    <h1>迫敛法（夹逼） · 自测</h1>
+    <h1>The Squeeze Theorem · Self-Quiz</h1>
+    <a href="../notes-en/02-04.html">Notes (EN) →</a>
   </div>
-  
-  
-<div class="q"><p><b>1.</b> 不等式 0 ≤ cₙ ≤ 1 + 3/n 成立，能推出 cₙ 的什么？</p><div><span class="opt" data-c="0">A. cₙ → 1</span><span class="opt" data-c="1">B. 推不出极限</span><span class="opt" data-c="0">C. cₙ → 0</span></div><button type="button" data-show="显示答案" data-hide="隐藏答案">显示答案</button><div class="exp"><b class="okc">B</b> — 两界分别趋于 0 和 1，极限不同，迫敛法推不出任何结论。</div></div><div class="q"><p><b>2.</b> 配合下界 1 − 1/n² ≤ cₙ，上界 1 + 3/n 够用吗？</p><div><span class="opt" data-c="1">A. 够用：两界都趋于 1</span><span class="opt" data-c="0">B. 不够：它比下界粗糙得多</span><span class="opt" data-c="0">C. 须把 3/n 换成 3/n²</span></div><button type="button" data-show="显示答案" data-hide="隐藏答案">显示答案</button><div class="exp"><b class="okc">A</b> — 两个界的精度可以不同，只要求它们的极限相同。</div></div><div class="q"><p><b>3.</b> 为什么乘积法则不能给出 (−1)ⁿ · n/(n²+1) → 0？</p><div><span class="opt" data-c="0">A. n/(n²+1) 没有极限</span><span class="opt" data-c="0">B. 乘积无界</span><span class="opt" data-c="1">C. (−1)ⁿ 没有极限</span></div><button type="button" data-show="显示答案" data-hide="隐藏答案">显示答案</button><div class="exp"><b class="okc">C</b> — 乘积法则要求两个因子都收敛；(−1)ⁿ 振荡，所以改用 |cₙ| ≤ 1/n 迫敛。</div></div><div class="q"><p><b>4.</b> 用哪两个界来迫敛 xₙ = Σᵢ₌₁ⁿ 1/√(n²+i)？</p><div><span class="opt" data-c="1">A. n/√(n²+n) 与 n/√(n²+1)</span><span class="opt" data-c="0">B. 1/√(n²+n) 与 1/√(n²+1)</span><span class="opt" data-c="0">C. 0 与 1</span></div><button type="button" data-show="显示答案" data-hide="隐藏答案">显示答案</button><div class="exp"><b class="okc">A</b> — 把 n 项全换成最小项、再全换成最大项，两界都趋于 1。</div></div><div class="q"><p><b>5.</b> 推出 [nα]/n → α 的关键不等式是？</p><div><span class="opt" data-c="0">A. [nα] ≥ nα</span><span class="opt" data-c="1">B. nα − 1 &lt; [nα] ≤ nα</span><span class="opt" data-c="0">C. [nα] ≤ nα − 1</span></div><button type="button" data-show="显示答案" data-hide="隐藏答案">显示答案</button><div class="exp"><b class="okc">B</b> — 将 nα − 1 &lt; [nα] ≤ nα 同除以 n，得到两个都趋于 α 的界。</div></div><div class="q"><p><b>6.</b> 下列哪个极限真正需要迫敛法？</p><div><span class="opt" data-c="0">A. (2n+1)/(n+3)</span><span class="opt" data-c="0">B. (n+1)/n</span><span class="opt" data-c="1">C. sin n / n</span></div><button type="button" data-show="显示答案" data-hide="隐藏答案">显示答案</button><div class="exp"><b class="okc">C</b> — sin n 没有极限，四则运算失效；由 |sin n / n| ≤ 1/n 迫敛到 0。</div></div>
-
+  <p class="lead">Pick your answer, then click to reveal. · <a href="02-04.html" style="color:var(--blue);text-decoration:none">中文版 →</a></p>
+  <div class="qt">
+<div class="qt-item">
+<p class="qt-q">Given 0 ≤ cₙ ≤ 1 + 3/n, what can you conclude about cₙ?</p>
+<p class="qt-opts"><span>A. cₙ → 1</span><span>B. nothing about the limit</span><span>C. cₙ → 0</span></p>
+<button class="reveal">Reveal answer</button>
+<div class="ans"><b>B.</b> The two bounds tend to 0 and 1 respectively; different limits, so squeezing yields no conclusion.</div>
+</div>
+<div class="qt-item">
+<p class="qt-q">Together with the lower bound 1 − 1/n² ≤ cₙ, is the upper bound 1 + 3/n good enough?</p>
+<p class="qt-opts"><span>A. yes: both bounds tend to 1</span><span>B. no: it is far cruder than the lower bound</span><span>C. one must replace 3/n by 3/n²</span></p>
+<button class="reveal">Reveal answer</button>
+<div class="ans"><b>A.</b> The two bounds may differ in precision; only their limits must agree.</div>
+</div>
+<div class="qt-item">
+<p class="qt-q">Why can't the product rule give (−1)ⁿ · n/(n²+1) → 0?</p>
+<p class="qt-opts"><span>A. n/(n²+1) has no limit</span><span>B. the product is unbounded</span><span>C. (−1)ⁿ has no limit</span></p>
+<button class="reveal">Reveal answer</button>
+<div class="ans"><b>C.</b> The product rule needs both factors convergent; (−1)ⁿ oscillates. Squeeze instead with |cₙ| ≤ 1/n.</div>
+</div>
+<div class="qt-item">
+<p class="qt-q">Which two bounds squeeze xₙ = Σᵢ₌₁ⁿ 1/√(n²+i)?</p>
+<p class="qt-opts"><span>A. n/√(n²+n) and n/√(n²+1)</span><span>B. 1/√(n²+n) and 1/√(n²+1)</span><span>C. 0 and 1</span></p>
+<button class="reveal">Reveal answer</button>
+<div class="ans"><b>A.</b> Replace every term by the smallest one, then by the largest; both bounds tend to 1.</div>
+</div>
+<div class="qt-item">
+<p class="qt-q">The key inequality behind [nα]/n → α is?</p>
+<p class="qt-opts"><span>A. [nα] ≥ nα</span><span>B. nα − 1 < [nα] ≤ nα</span><span>C. [nα] ≤ nα − 1</span></p>
+<button class="reveal">Reveal answer</button>
+<div class="ans"><b>B.</b> Divide nα − 1 < [nα] ≤ nα by n; the two resulting bounds both tend to α.</div>
+</div>
+<div class="qt-item">
+<p class="qt-q">Which of these limits genuinely requires squeezing?</p>
+<p class="qt-opts"><span>A. (2n+1)/(n+3)</span><span>B. (n+1)/n</span><span>C. sin n / n</span></p>
+<button class="reveal">Reveal answer</button>
+<div class="ans"><b>C.</b> sin n has no limit, so the arithmetic rules fail; |sin n / n| ≤ 1/n squeezes it to 0.</div>
+</div>
+  </div>
 </div>
 <script>
-document.querySelectorAll('.reveal').forEach(function(b){
-  b.addEventListener('click',function(){this.closest('.q').classList.add('shown')});
-});
-/* h2 锚点式回件（.opt 选择题 + 展开按钮）的原生交互 */
-document.querySelectorAll('.q button').forEach(function(b){
-  b.addEventListener('click',function(){
-    var q=b.closest('.q'), open=q.classList.toggle('open');
-    q.querySelectorAll('.opt').forEach(function(o){ if(o.dataset.c==='1') o.classList.toggle('correct',open); });
-    if(b.dataset.hide&&b.dataset.show) b.textContent=open?b.dataset.hide:b.dataset.show;
-  });
+document.querySelectorAll('button.reveal').forEach(function(b){
+  b.addEventListener('click',function(){this.closest('.qt-item').classList.add('shown')});
 });
 </script>
 </body>

@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Stolz Theorem · Self-Quiz</title>
+<style>
+:root{--bg:#0e1a2b;--card:#15263d;--ink:#eef2f7;--muted:#9fb0c6;--blue:#5ab0ff;--teal:#4fd1b5;--green:#6bd38a;--line:#26405f}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(1200px 700px at 20% 0%,#16304f 0%,var(--bg) 60%);
+background-color:var(--bg);color:var(--ink);
+font:17px/1.65 "Noto Sans","Noto Sans SC",system-ui,-apple-system,"Segoe UI",sans-serif}
+.page{max-width:720px;margin:0 auto;padding:18px 16px 60px}
+.topbar{display:flex;justify-content:space-between;align-items:baseline;gap:8px;
+border-bottom:2px solid var(--line);padding-bottom:10px;margin-bottom:6px}
+.topbar h1{font-size:20px;margin:0}
+.topbar a{color:var(--blue);font-size:14px;text-decoration:none;white-space:nowrap}
+.lead{color:var(--muted);font-size:14.5px;margin:12px 0 2px}
+.qt{display:grid;gap:14px;margin-top:14px}
+.qt-item{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 18px}
+.qt-q{color:var(--ink);font-size:16.5px;margin:0 0 8px}
+.qt-opts{color:var(--muted);font-size:15px;line-height:1.9;margin:0 0 10px}
+.qt-opts span{display:block}
+button.reveal{background:transparent;border:1px solid var(--teal);color:var(--teal);
+border-radius:8px;padding:5px 14px;font-size:14px;cursor:pointer}
+.ans{display:none;margin-top:10px;padding:10px 14px;border-left:3px solid var(--green);
+background:rgba(107,211,138,.08);color:var(--ink);font-size:15px;line-height:1.8;border-radius:0 8px 8px 0}
+.ans b{color:var(--green)}
+.qt-item.shown .ans{display:block}
+.qt-item.shown button.reveal{display:none}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="topbar">
+    <h1>The Stolz Theorem · Self-Quiz</h1>
+    <a href="../notes-en/07-05.html">Notes (EN) →</a>
+  </div>
+  <p class="lead">Pick your answer, then click to reveal. · <a href="07-05.html" style="color:var(--blue);text-decoration:none">中文版 →</a></p>
+  <div class="qt">
+<div class="qt-item">
+<p class="qt-q">In the dictionary, the increment Δaₙ = aₙ₊₁ − aₙ corresponds to…</p>
+<p class="qt-opts"><span>A. f(x)/g(x)</span><span>B. f′(x)</span><span>C. ∫ f′</span></p>
+<button class="reveal">Reveal answer</button>
+<div class="ans"><b>B.</b> A one-step increment is a discrete derivative; summed increments are a discrete integral.</div>
+</div>
+<div class="qt-item">
+<p class="qt-q">For bₙ = 2 − 1/n and aₙ = 3 − 1/n, which checklist item fails?</p>
+<p class="qt-opts"><span>A. strictly increasing</span><span>B. bₙ → +∞</span><span>C. the ratio of increments has a limit</span></p>
+<button class="reveal">Reveal answer</button>
+<div class="ans"><b>B.</b> bₙ increases but stays below 2; the head never washes out, so aₙ/bₙ → 3/2 instead of 1.</div>
+</div>
+<div class="qt-item">
+<p class="qt-q">In the proof, why do the initial stocks aₘ, bₘ eventually not matter?</p>
+<p class="qt-opts"><span>A. they are divided away by bₙ → +∞</span><span>B. one may take aₘ = 0</span><span>C. because ε → 0</span></p>
+<button class="reveal">Reveal answer</button>
+<div class="ans"><b>A.</b> The head appears as (aₘ − (L ± ε)bₘ)/bₙ, which tends to 0 since bₙ → +∞.</div>
+</div>
+<div class="qt-item">
+<p class="qt-q">For each fixed ε, what does the squeeze give directly?</p>
+<p class="qt-opts"><span>A. lim aₙ/bₙ = L + ε</span><span>B. limsup ≤ L + ε and liminf ≥ L − ε</span><span>C. the increments become monotone</span></p>
+<button class="reveal">Reveal answer</button>
+<div class="ans"><b>B.</b> Both limsup and liminf are trapped in the ε-neighborhood of L; since ε is arbitrary, they can only meet at L.</div>
+</div>
+<div class="qt-item">
+<p class="qt-q">lim (1 + 2 + … + n)/n² equals</p>
+<p class="qt-opts"><span>A. 1</span><span>B. 1/2</span><span>C. 0</span></p>
+<button class="reveal">Reveal answer</button>
+<div class="ans"><b>B.</b> The increments are n + 1 and 2n + 1; their ratio tends to 1/2, and n² is strictly increasing to +∞.</div>
+</div>
+<div class="qt-item">
+<p class="qt-q">The example aₙ = (−1)ⁿ, bₙ = n shows…</p>
+<p class="qt-opts"><span>A. the converse of the theorem fails</span><span>B. bₙ must decrease</span><span>C. one must use the 0/0 form</span></p>
+<button class="reveal">Reveal answer</button>
+<div class="ans"><b>A.</b> aₙ/bₙ → 0, but the ratio of increments 2(−1)ⁿ⁺¹ has no limit: the theorem is one-directional.</div>
+</div>
+  </div>
+</div>
+<script>
+document.querySelectorAll('button.reveal').forEach(function(b){
+  b.addEventListener('click',function(){this.closest('.qt-item').classList.add('shown')});
+});
+</script>
+</body>
+</html>
