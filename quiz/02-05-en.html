@@ -39,22 +39,28 @@ background:rgba(107,211,138,.08);color:var(--ink);font-size:15px;line-height:1.8
   <p class="lead">Pick your answer, then click to reveal. · <a href="02-05.html" style="color:var(--blue);text-decoration:none">中文版 →</a></p>
   <div class="qt">
 <div class="qt-item">
-<p class="qt-q">Which sequence is bounded but divergent?</p>
-<p class="qt-opts"><span>A. aₙ = 1/n</span><span>B. aₙ = (−1)ⁿ</span><span>C. aₙ = 2 − 1/n</span></p>
+<p class="qt-q">In the proof (increasing case, s = sup aₙ), why does some term satisfy aₘ > s − ε?</p>
+<p class="qt-opts"><span>A. s − ε is smaller than the least upper bound, so it is not an upper bound</span><span>B. because aₙ → s is already known</span><span>C. because the sequence has a lower bound</span></p>
 <button class="reveal">Reveal answer</button>
-<div class="ans"><b>B.</b> (−1)ⁿ stays inside [−1, 1] yet alternates forever, so it has no limit; the other two are monotone and bounded.</div>
+<div class="ans"><b>A.</b> s is the least upper bound and s − ε < s, so s − ε cannot block every term — some aₘ slips above it.</div>
+</div>
+<div class="qt-item">
+<p class="qt-q">For 1, 1.4, 1.414, 1.4142, …, why can the proof not even start inside the rationals?</p>
+<p class="qt-opts"><span>A. these terms have no least upper bound in ℚ</span><span>B. the sequence has no upper bound at all in ℚ</span><span>C. the terms are not rational</span></p>
+<button class="reveal">Reveal answer</button>
+<div class="ans"><b>A.</b> 2 is a rational upper bound, but every rational upper bound lies above √2 and a smaller rational can always be squeezed in between — there is no least one, and the proof needs exactly s = sup aₙ.</div>
+</div>
+<div class="qt-item">
+<p class="qt-q">What makes (1 + 1/n)ⁿ converge, so that e is well defined?</p>
+<p class="qt-opts"><span>A. it increases (binomial picture) and is bounded above by 3</span><span>B. its base tends to 1</span><span>C. it decreases and is bounded below by 2</span></p>
+<button class="reveal">Reveal answer</button>
+<div class="ans"><b>A.</b> Monotone + bounded: each binomial term grows with n and there are more and more of them, while the total stays below 1 + 1 + 1/2 + 1/4 + ⋯ = 3.</div>
 </div>
 <div class="qt-item">
 <p class="qt-q">In the three-step method for aₙ₊₁ = f(aₙ), when can you trust that a root of L = f(L) is the limit?</p>
 <p class="qt-opts"><span>A. as soon as you solve L = f(L)</span><span>B. only after proving the sequence monotone and bounded</span><span>C. after computing three terms</span></p>
 <button class="reveal">Reveal answer</button>
 <div class="ans"><b>B.</b> Only monotone + bounded guarantees the limit exists; taking limits afterwards then shows it satisfies L = f(L).</div>
-</div>
-<div class="qt-item">
-<p class="qt-q">For a₁ = √2, aₙ₊₁ = √(2 + aₙ), what does the induction step prove?</p>
-<p class="qt-opts"><span>A. aₙ < 2 ⇒ aₙ₊₁ < 2</span><span>B. aₙ > 2 ⇒ aₙ₊₁ > 2</span><span>C. aₙ = 2 for all n</span></p>
-<button class="reveal">Reveal answer</button>
-<div class="ans"><b>A.</b> If aₙ < 2, then aₙ₊₁ = √(2 + aₙ) < √4 = 2; the starting point a₁ = √2 < 2.</div>
 </div>
 <div class="qt-item">
 <p class="qt-q">a₁ = 1, aₙ₊₁ = 2aₙ. Solving L = 2L gives L = 0. Which statement is correct?</p>
@@ -67,12 +73,6 @@ background:rgba(107,211,138,.08);color:var(--ink);font-size:15px;line-height:1.8
 <p class="qt-opts"><span>A. decrease to 0</span><span>B. converge to 1</span><span>C. increase to ∞</span></p>
 <button class="reveal">Reveal answer</button>
 <div class="ans"><b>A.</b> Starting inside (0, 1), squaring shrinks every term; decreasing with lower bound 0, it tends to 0.</div>
-</div>
-<div class="qt-item">
-<p class="qt-q">Why is lim (1 + 1/n)ⁿ a 1^∞ form?</p>
-<p class="qt-opts"><span>A. the base tends to 1 while the exponent tends to ∞</span><span>B. because the limit equals 1</span><span>C. because the sequence decreases</span></p>
-<button class="reveal">Reveal answer</button>
-<div class="ans"><b>A.</b> The base → 1 races against the exponent → ∞; “1 to any power is 1” does not apply. The limit here is e.</div>
 </div>
   </div>
 </div>

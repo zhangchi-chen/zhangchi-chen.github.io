@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>子列与致密性定理 · 自测</title>
+<title>子列与致密性定理</title>
 <style>
 :root{--bg:#10151f;--panel:#1a2230;--ink:#e9eef5;--muted:#7d8899;--grid:#2a3445;--teal:#4fd1c5;--amber:#f6ad55;--red:#f56565;--blue:#7f9cf5;--green:#68d391}
 *{box-sizing:border-box}
@@ -34,7 +34,7 @@ button:hover{background:#2c3a50}
 .ans{display:none;color:var(--ink);margin-top:6px;padding-left:10px;border-left:3px solid var(--green)}
 .ans.show{display:block}
 footer{color:var(--muted);font-size:13px;margin-top:40px}
-
+@media (max-width:640px){.m{white-space:normal}.formula{overflow-x:auto}}
 /* ---- 手机自测单页覆盖层（深浅主题自适应：浅色文件有 --paper，深色有 --bg/--fg） ---- */
 html,body{margin:0;background:var(--bg,var(--paper));color:var(--fg,var(--ink));
   font-family:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC","Source Han Sans SC",system-ui,-apple-system,sans-serif}
@@ -68,16 +68,16 @@ section.quiz .q{margin:12px 0;text-align:left}
 <body>
 <div class="page">
   <div class="topbar">
-    <h1>子列与致密性定理 · 自测</h1> <a href="../notes/02-06.html">查看讲稿 →</a>
+    <h1>子列与致密性定理</h1>
   </div>
   
   <div class="quiz">
-  <section class="quiz"><ol><li class="q"><div>下列哪一个是 <span class="m">(<i>a</i><sub><i>n</i></sub>)</span> 的子列？</div><ul class="opts"><li><b>A.</b> <span class="m">(<i>a</i><sub>2</sub>, <i>a</i><sub>2</sub>, <i>a</i><sub>5</sub>, …)</span></li><li data-ok><b>B.</b> <span class="m">(<i>a</i><sub>4</sub>, <i>a</i><sub>9</sub>, <i>a</i><sub>16</sub>, …)</span></li><li><b>C.</b> <span class="m">(<i>a</i><sub>5</sub>, <i>a</i><sub>3</sub>, <i>a</i><sub>8</sub>, …)</span></li></ul><button type="button" data-show="显示答案" data-hide="隐藏答案" aria-expanded="false">显示答案</button><div class="ans"><b>正确答案: B.</b> 只有 <span class="m">4 &lt; 9 &lt; 16</span> 严格递增；其余两个分别重播、倒带了下标。</div></li><li class="q"><div>对任意子列 <span class="m">(<i>a</i><sub><i>n</i><sub><i>k</i></sub></sub>)</span>，哪个不等式总成立？</div><ul class="opts"><li><b>A.</b> <span class="m"><i>n</i><sub><i>k</i></sub> ≤ <i>k</i></span></li><li data-ok><b>B.</b> <span class="m"><i>n</i><sub><i>k</i></sub> ≥ <i>k</i></span></li><li><b>C.</b> <span class="m"><i>n</i><sub><i>k</i></sub> = <i>k</i></span></li></ul><button type="button" data-show="显示答案" data-hide="隐藏答案" aria-expanded="false">显示答案</button><div class="ans"><b>正确答案: B.</b> <span class="m"><i>k</i></span> 个严格递增的正整数中，第 <span class="m"><i>k</i></span> 个至少是 <span class="m"><i>k</i></span>。</div></li><li class="q"><div>构造中为什么要求 <span class="m"><i>n</i><sub><i>k</i>+1</sub> &gt; <span class="rm">max</span>(<i>n</i><sub>1</sub>, …, <i>n</i><sub><i>k</i></sub>)</span>？</div><ul class="opts"><li><b>A.</b> 收敛性在这一步得证</li><li data-ok><b>B.</b> 只是保证下标严格递增</li><li><b>C.</b> 为了缩小这个带</li></ul><button type="button" data-show="显示答案" data-hide="隐藏答案" aria-expanded="false">显示答案</button><div class="ans"><b>正确答案: B.</b> 这纯粹是记账：指针只向前走，别无其他。</div></li><li class="q"><div><span class="m"><i>a</i><sub><i>m</i></sub></span> 何时是峰点？</div><ul class="opts"><li data-ok><b>A.</b> 对一切 <span class="m"><i>n</i> &gt; <i>m</i></span>，<span class="m"><i>a</i><sub><i>m</i></sub> ≥ <i>a</i><sub><i>n</i></sub></span></li><li><b>B.</b> 对一切 <span class="m"><i>n</i> &lt; <i>m</i></span>，<span class="m"><i>a</i><sub><i>m</i></sub> ≥ <i>a</i><sub><i>n</i></sub></span></li><li><b>C.</b> 只需 <span class="m"><i>a</i><sub><i>m</i></sub> &gt; <i>a</i><sub><i>m</i>+1</sub></span></li></ul><button type="button" data-show="显示答案" data-hide="隐藏答案" aria-expanded="false">显示答案</button><div class="ans"><b>正确答案: A.</b> 峰点不低于它后面的每一项。</div></li><li class="q"><div>若数列只有有限个峰点，最后一个峰点之后能构造出什么？</div><ul class="opts"><li><b>A.</b> 由峰点组成的单调不增子列</li><li data-ok><b>B.</b> 一个递增子列</li><li><b>C.</b> 一般什么也得不到</li></ul><button type="button" data-show="显示答案" data-hide="隐藏答案" aria-expanded="false">显示答案</button><div class="ans"><b>正确答案: B.</b> 此后每一项都会被后面某项超过，一路向前跳就得到递增子列。</div></li><li class="q"><div>关于 <span class="m"><i>a</i><sub><i>n</i></sub> = (−1)<sup><i>n</i></sup></span>，哪一项正确？</div><ul class="opts"><li><b>A.</b> 它收敛到 0</li><li data-ok><b>B.</b> 它发散，但有收敛子列</li><li><b>C.</b> 它没有收敛子列</li></ul><button type="button" data-show="显示答案" data-hide="隐藏答案" aria-expanded="false">显示答案</button><div class="ans"><b>正确答案: B.</b> 偶数项和奇数项分别构成常数子列 <span class="m">1</span> 与 <span class="m">−1</span>。</div></li></ol></section>
+  <section class="quiz"><ol><li class="q"><div>下列哪一个是 <span class="m">(<i>a</i><sub><i>n</i></sub>)</span> 的子列？</div><ul class="opts"><li><b>A.</b> <span class="m">(<i>a</i><sub>2</sub>, <i>a</i><sub>2</sub>, <i>a</i><sub>5</sub>, …)</span></li><li data-ok><b>B.</b> <span class="m">(<i>a</i><sub>4</sub>, <i>a</i><sub>9</sub>, <i>a</i><sub>16</sub>, …)</span></li><li><b>C.</b> <span class="m">(<i>a</i><sub>5</sub>, <i>a</i><sub>3</sub>, <i>a</i><sub>8</sub>, …)</span></li></ul><button type="button" data-show="显示答案" data-hide="隐藏答案" aria-expanded="false">显示答案</button><div class="ans"><b>正确答案: B.</b> 只有 <span class="m">4 &lt; 9 &lt; 16</span> 严格递增；其余两个分别重播、倒带了下标。</div></li><li class="q"><div>对任意子列 <span class="m">(<i>a</i><sub><i>n</i><sub><i>k</i></sub></sub>)</span>，哪个不等式总成立？</div><ul class="opts"><li><b>A.</b> <span class="m"><i>n</i><sub><i>k</i></sub> ≤ <i>k</i></span></li><li data-ok><b>B.</b> <span class="m"><i>n</i><sub><i>k</i></sub> ≥ <i>k</i></span></li><li><b>C.</b> <span class="m"><i>n</i><sub><i>k</i></sub> = <i>k</i></span></li></ul><button type="button" data-show="显示答案" data-hide="隐藏答案" aria-expanded="false">显示答案</button><div class="ans"><b>正确答案: B.</b> <span class="m"><i>k</i></span> 个严格递增的正整数中，第 <span class="m"><i>k</i></span> 个至少是 <span class="m"><i>k</i></span>。</div></li><li class="q"><div>构造中为什么要求 <span class="m"><i>n</i><sub><i>k</i>+1</sub> &gt; <span class="rm">max</span>(<i>n</i><sub>1</sub>, …, <i>n</i><sub><i>k</i></sub>)</span>？</div><ul class="opts"><li><b>A.</b> 收敛性在这一步得证</li><li data-ok><b>B.</b> 只是保证下标严格递增</li><li><b>C.</b> 为了缩小这个带</li></ul><button type="button" data-show="显示答案" data-hide="隐藏答案" aria-expanded="false">显示答案</button><div class="ans"><b>正确答案: B.</b> 它只是把下标理顺：指针只向前走，别无其他。</div></li><li class="q"><div><span class="m"><i>a</i><sub><i>m</i></sub></span> 何时是峰点？</div><ul class="opts"><li data-ok><b>A.</b> 对一切 <span class="m"><i>n</i> &gt; <i>m</i></span>，<span class="m"><i>a</i><sub><i>m</i></sub> ≥ <i>a</i><sub><i>n</i></sub></span></li><li><b>B.</b> 对一切 <span class="m"><i>n</i> &lt; <i>m</i></span>，<span class="m"><i>a</i><sub><i>m</i></sub> ≥ <i>a</i><sub><i>n</i></sub></span></li><li><b>C.</b> 只需 <span class="m"><i>a</i><sub><i>m</i></sub> &gt; <i>a</i><sub><i>m</i>+1</sub></span></li></ul><button type="button" data-show="显示答案" data-hide="隐藏答案" aria-expanded="false">显示答案</button><div class="ans"><b>正确答案: A.</b> 峰点不低于它后面的每一项。</div></li><li class="q"><div>若数列只有有限个峰点，最后一个峰点之后能构造出什么？</div><ul class="opts"><li><b>A.</b> 由峰点组成的单调不增子列</li><li data-ok><b>B.</b> 一个递增子列</li><li><b>C.</b> 一般什么也得不到</li></ul><button type="button" data-show="显示答案" data-hide="隐藏答案" aria-expanded="false">显示答案</button><div class="ans"><b>正确答案: B.</b> 此后每一项都会被后面某项超过，一路向前跳就得到递增子列。</div></li><li class="q"><div>关于 <span class="m"><i>a</i><sub><i>n</i></sub> = (−1)<sup><i>n</i></sup></span>，哪一项正确？</div><ul class="opts"><li><b>A.</b> 它收敛到 0</li><li data-ok><b>B.</b> 它发散，但有收敛子列</li><li><b>C.</b> 它没有收敛子列</li></ul><button type="button" data-show="显示答案" data-hide="隐藏答案" aria-expanded="false">显示答案</button><div class="ans"><b>正确答案: B.</b> 偶数项和奇数项分别构成常数子列 <span class="m">1</span> 与 <span class="m">−1</span>。</div></li></ol></section>
   </div>
 </div>
 <script>
 document.querySelectorAll('.reveal').forEach(function(b){
-  b.addEventListener('click',function(){this.closest('.q').classList.add('shown')});
+  b.addEventListener('click',function(){var t=this.closest('.q,.qt-item');if(t)t.classList.add('shown')});
 });
 /* 按页面 DOM 特征自适配各批次回件的交互（逻辑均照搬原版） */
 if (document.querySelector('.qt3')) {
@@ -90,7 +90,20 @@ if (document.querySelector('.qt3')) {
     var b=q.querySelector('button'),a=q.querySelector('.ans'),ok=q.querySelector('.opts li[data-ok]');
     b.addEventListener('click',function(){var on=a.classList.toggle('show');ok.classList.toggle('ok',on);
       b.textContent=on?b.dataset.hide:b.dataset.show;b.setAttribute('aria-expanded',on);});});
-} else if (document.querySelector('.quiz .q .rv')) {
+  } else if (document.querySelector('.q .rv') && document.querySelector('.q .opts')) {
+    /* rv + opts li[data-ok] + hidden 属性式（03-05）：ex.hidden 切换，命中项标 hit */
+    document.querySelectorAll('.q').forEach(function(q){
+      var b=q.querySelector('.rv'), ex=q.querySelector('.ex');
+      if(!b||!ex) return;
+      b.addEventListener('click',function(){
+        var open=ex.hidden; ex.hidden=!open;
+        q.querySelectorAll('.opts li').forEach(function(li){
+          if(li.dataset.ok==='1') li.classList.toggle('hit',open);
+        });
+        b.textContent=open?'隐藏答案':'显示答案';
+      });
+    });
+  } else if (document.querySelector('.quiz .q .rv')) {
   /* opt/rv/ex 式（07-05）：选项标记 sel，展开按钮标出对错 */
   document.querySelectorAll('.quiz .q').forEach(function(q){
     var opts=q.querySelectorAll('.opt'), ex=q.querySelector('.ex'), btn=q.querySelector('.rv');
@@ -116,16 +129,52 @@ if (document.querySelector('.qt3')) {
       q.querySelectorAll('.opts span')[k].classList.add('ok');
       btn.disabled=true; btn.style.opacity=.5; });
   });
-} else {
-  /* .opt 选择题 + 展开按钮式（02-04） */
-  document.querySelectorAll('.q button').forEach(function(b){
-    b.addEventListener('click',function(){
-      var q=b.closest('.q'), open=q.classList.toggle('open');
-      q.querySelectorAll('.opt').forEach(function(o){ if(o.dataset.c==='1') o.classList.toggle('correct',open); });
-      if(b.dataset.hide&&b.dataset.show) b.textContent=open?b.dataset.hide:b.dataset.show;
+  } else if (document.querySelector('.qitem')) {
+    /* qitem 式（01-03 第一章）：按钮 toggle 父级 open，文字切换（原页 JS 照搬） */
+    document.querySelectorAll('.qitem button').forEach(function(b){
+      b.addEventListener('click',function(){
+        var q=b.parentNode, on=q.classList.toggle('open');
+        b.setAttribute('aria-expanded',on);
+        b.textContent=on?'隐藏答案':'查看答案';
+      });
     });
-  });
-}
+  } else if (document.querySelector('.q button[data-ans]')) {
+    /* data-ans + hidden 属性式（03-03）：ex.hidden 切换，正确项标 ok */
+    document.querySelectorAll('.q button').forEach(function(b){
+      var q=b.parentNode, ex=q.querySelector('.ex'), li=q.querySelector('li[data-k="'+b.dataset.ans+'"]');
+      b.addEventListener('click',function(){
+        var show=ex.hidden; ex.hidden=!show;
+        if(li) li.classList.toggle('ok',show);
+        b.textContent=show?'隐藏答案':'显示答案';
+      });
+    });
+  } else if (document.querySelector('.quiz .q .rev')) {
+    /* rev/exp + data-ans 式（01-05 第一章）：点 rev 切换 exp.show，正确项标 right */
+    document.querySelectorAll('.quiz .q').forEach(function(q){
+      var b=q.querySelector('.rev'), ex=q.querySelector('.exp'), ans=q.getAttribute('data-ans');
+      if(!b||!ex) return;
+      var right = ans!=null ? q.querySelector('.opt[data-k="'+ans+'"]') : null;
+      b.addEventListener('click',function(){
+        var on=ex.classList.toggle('show');
+        if(right) right.classList.toggle('right',on);
+        b.textContent=on?'隐藏答案':'显示答案';
+      });
+    });
+  } else {
+    /* .q button 通用兜底（01-01/01-02/01-04/01-06/03-01/02/04/06…）：
+       open 与 shown 双开（各家 CSS 用哪个都命中）；正确项按 data-c/data-ok/ok 标 correct */
+    document.querySelectorAll('.q button').forEach(function(b){
+      b.addEventListener('click',function(){
+        var q=b.closest('.q'), on=!q.classList.contains('open');
+        q.classList.toggle('open',on); q.classList.toggle('shown',on);
+        q.querySelectorAll('.opt[data-c="1"], li[data-ok="1"], li.ok').forEach(function(o){
+          o.classList.toggle('correct',on);
+        });
+        if(b.dataset.hide&&b.dataset.show) b.textContent=on?b.dataset.hide:b.dataset.show;
+        else b.textContent=on?'隐藏答案':'显示答案';
+      });
+    });
+  }
 </script>
 </body>
 </html>

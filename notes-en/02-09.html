@@ -71,7 +71,8 @@ footer{color:var(--txt2);font-size:.85rem;border-top:1px solid var(--edge);margi
 
 <section>
 <h2>1 · Why exact size matters</h2>
-<p>The growth ladder ln n ≪ n<sup>k</sup> ≪ a<sup>n</sup> ≪ n! ≪ n<sup>n</sup> only ranks. To know by <em>how much</em> n! outruns a<sup>n</sup>, we need the exact shape of n! — which is what Stirling's formula provides, in three factors.</p>
+<p>The growth ladder ln n ≪ n<sup>k</sup> ≪ a<sup>n</sup> ≪ n! ≪ n<sup>n</sup> only ranks: it says who wins, not by <em>how much</em>. Feel the gap: 100! written out has 158 digits — hopeless by hand — while its logarithm is a three-digit number, ln 100! ≈ 363.7. That is the size we can estimate, and it needs the exact shape of n!, not just its rank — which is what Stirling's formula provides, in three factors.</p>
+<p class="c-green">Check on 100!: ln 100! ≈ 100·ln 100 − 100 + ½·ln(200π) ≈ 363.74, against the true value 363.739… (100! ≈ 9.33 × 10<sup>157</sup>).</p>
 </section>
 
 <section>
@@ -320,7 +321,7 @@ footer{color:var(--txt2);font-size:.85rem;border-top:1px solid var(--edge);margi
 <h2>5 · Payoff — aⁿ versus n!, with numbers</h2>
 <p>Take logs once more: ln n! ≈ n ln n − n + ½·ln(2πn); the leading term is n ln n − n. Revisit the contest between a<sup>n</sup> and n!:</p>
 <div class="formula small"><span class="frac"><span>a<sup>n</sup></span><span>n!</span></span> ≈ <span class="frac"><span>(ae/n)<sup>n</sup></span><span>√(2πn)</span></span> → 0 &nbsp;(n → ∞)</div>
-<p>Once n outruns a·e the base ae/n is below 1, and the n-th power crushes the ratio to 0 — the growth ladder, now with numbers attached. The same asymptotics drive the ratio test for series such as Σ xⁿ/n! (convergent for every x) and the large-count approximations of probability, e.g. C(2n, n) ≈ 4ⁿ/√(πn).</p>
+<p>Once n outruns a·e the base ae/n is below 1, and the n-th power crushes the ratio to 0 — the growth ladder, now with numbers attached.</p>
 <figure class="wide"><svg viewBox="0 0 640 330" width="100%" role="img" aria-label="The ratio a^n / n! for a = 10" xmlns="http://www.w3.org/2000/svg" font-family="system-ui, -apple-system, Segoe UI, Roboto, Noto Sans, Noto Sans CJK SC, sans-serif"><line x1="56" y1="274.8" x2="622" y2="274.8" stroke="#2e3854" stroke-width="1"/>
 <text x="48" y="279.8" text-anchor="end" fill="#94a3b8" font-size="13">10⁻¹²</text>
 <line x1="56" y1="213.9" x2="622" y2="213.9" stroke="#2e3854" stroke-width="1"/>
@@ -407,6 +408,63 @@ footer{color:var(--txt2);font-size:.85rem;border-top:1px solid var(--edge);margi
 <text x="80.6" y="236.7" text-anchor="start" fill="#f5b942" font-size="14" font-weight="600">aⁿ/n! (exact)</text>
 <text x="80.6" y="262.6" text-anchor="start" fill="#4cc3f0" font-size="14" font-weight="600">(ae/n)ⁿ / √(2πn)</text>
 <text x="597.4" y="37.3" text-anchor="end" fill="#94a3b8" font-size="14" font-weight="normal">a = 10</text></svg><figcaption>Figure 5 · a<sup>n</sup>/n! for a = 10 (dots: exact; line: (ae/n)ⁿ/√(2πn)); beyond n = a·e ≈ 27 the ratio collapses.</figcaption></figure>
+</section>
+
+<section>
+<h2>6 · Spending the formula — applications</h2>
+<p><b>First purchase: the central binomial coefficient.</b> C(2n, n) = (2n)!/(n!)²; feeding in Stirling, the powers of n and e cancel again and</p>
+<div class="formula small">C(2n, n) = <span class="frac"><span>(2n)!</span><span>(n!)²</span></span> ≈ <span class="frac"><span>√(4πn) · (2n/e)<sup>2n</sup></span><span>2πn · (n/e)<sup>2n</sup></span></span> = <span class="frac"><span>4<sup>n</sup></span><span>√(πn)</span></span></div>
+<p>So the chance that n fair coin flips land exactly half heads is C(n, n/2)/2ⁿ ≈ √(2/(πn)) — a number everyone can feel:</p>
+<div class="grid2">
+<div><table><thead><tr><th>flips n</th><th>exact P(exactly n/2 heads)</th><th>√(2/(πn))</th><th>relative error</th></tr></thead><tbody><tr><td>10</td><td class="c-amber">24.61 %</td><td class="c-blue">25.23 %</td><td class="c-rose">2.53 %</td></tr><tr><td>100</td><td class="c-amber">7.96 %</td><td class="c-blue">7.98 %</td><td class="c-rose">0.25 %</td></tr><tr><td>1000</td><td class="c-amber">2.52 %</td><td class="c-blue">2.52 %</td><td class="c-rose">0.025 %</td></tr></tbody></table><p>Exactly 50 heads in 100 flips happens only about 8 % of the time, and the estimate is already within 0.3 %.</p></div>
+<figure><svg viewBox="0 0 640 300" width="100%" role="img" aria-label="Probability of exactly half heads against the Stirling estimate" xmlns="http://www.w3.org/2000/svg" font-family="system-ui, -apple-system, Segoe UI, Roboto, Noto Sans, Noto Sans CJK SC, sans-serif"><line x1="60" y1="229.5" x2="622" y2="229.5" stroke="#2e3854" stroke-width="1"/>
+<text x="52" y="234.5" text-anchor="end" fill="#94a3b8" font-size="13">1 %</text>
+<line x1="60" y1="127.8" x2="622" y2="127.8" stroke="#2e3854" stroke-width="1"/>
+<text x="52" y="132.8" text-anchor="end" fill="#94a3b8" font-size="13">10 %</text>
+<line x1="60" y1="26.2" x2="622" y2="26.2" stroke="#2e3854" stroke-width="1"/>
+<text x="52" y="31.2" text-anchor="end" fill="#94a3b8" font-size="13">100 %</text>
+<line x1="60" y1="16" x2="60" y2="260" stroke="#64748b" stroke-width="1.5"/>
+<line x1="60" y1="260" x2="622" y2="260" stroke="#64748b" stroke-width="1.5"/>
+<line x1="60.2" y1="16" x2="60.2" y2="260" stroke="#2e3854" stroke-width="1"/>
+<text x="60.2" y="278" text-anchor="middle" fill="#94a3b8" font-size="13">2</text>
+<line x1="182.9" y1="16" x2="182.9" y2="260" stroke="#2e3854" stroke-width="1"/>
+<text x="182.9" y="278" text-anchor="middle" fill="#94a3b8" font-size="13">10</text>
+<line x1="358.6" y1="16" x2="358.6" y2="260" stroke="#2e3854" stroke-width="1"/>
+<text x="358.6" y="278" text-anchor="middle" fill="#94a3b8" font-size="13">100</text>
+<line x1="534.2" y1="16" x2="534.2" y2="260" stroke="#2e3854" stroke-width="1"/>
+<text x="534.2" y="278" text-anchor="middle" fill="#94a3b8" font-size="13">1000</text>
+<text x="622" y="294" text-anchor="end" fill="#94a3b8" font-size="13">flips n</text>
+<path d="M60.0,51.4 L65.4,53.0 L70.9,54.5 L76.3,56.1 L81.8,57.7 L87.2,59.3 L92.7,60.8 L98.1,62.4 L103.6,64.0 L109.0,65.6 L114.4,67.1 L119.9,68.7 L125.3,70.3 L130.8,71.9 L136.2,73.4 L141.7,75.0 L147.1,76.6 L152.6,78.2 L158.0,79.8 L163.4,81.3 L168.9,82.9 L174.3,84.5 L179.8,86.1 L185.2,87.6 L190.7,89.2 L196.1,90.8 L201.6,92.4 L207.0,93.9 L212.4,95.5 L217.9,97.1 L223.3,98.7 L228.8,100.2 L234.2,101.8 L239.7,103.4 L245.1,105.0 L250.6,106.5 L256.0,108.1 L261.4,109.7 L266.9,111.3 L272.3,112.8 L277.8,114.4 L283.2,116.0 L288.7,117.6 L294.1,119.1 L299.6,120.7 L305.0,122.3 L310.4,123.9 L315.9,125.5 L321.3,127.0 L326.8,128.6 L332.2,130.2 L337.7,131.8 L343.1,133.3 L348.6,134.9 L354.0,136.5 L359.4,138.1 L364.9,139.6 L370.3,141.2 L375.8,142.8 L381.2,144.4 L386.7,145.9 L392.1,147.5 L397.6,149.1 L403.0,150.7 L408.4,152.2 L413.9,153.8 L419.3,155.4 L424.8,157.0 L430.2,158.5 L435.7,160.1 L441.1,161.7 L446.6,163.3 L452.0,164.8 L457.4,166.4 L462.9,168.0 L468.3,169.6 L473.8,171.1 L479.2,172.7 L484.7,174.3 L490.1,175.9 L495.5,177.5 L501.0,179.0 L506.4,180.6 L511.9,182.2 L517.3,183.8 L522.8,185.3 L528.2,186.9 L533.7,188.5 L539.1,190.1 L544.5,191.6 L550.0,193.2 L555.4,194.8 L560.9,196.4 L566.3,197.9 L571.8,199.5 L577.2,201.1 L582.7,202.7 L588.1,204.2 L593.5,205.8 L599.0,207.4 L604.4,209.0" fill="none" stroke="#4cc3f0" stroke-width="2.5" stroke-linejoin="round"/>
+<circle cx="60.2" cy="56.8" r="4" fill="#f5b942"/>
+<circle cx="113.0" cy="69.5" r="4" fill="#f5b942"/>
+<circle cx="144.0" cy="77.5" r="4" fill="#f5b942"/>
+<circle cx="165.9" cy="83.4" r="4" fill="#f5b942"/>
+<circle cx="182.9" cy="88.1" r="4" fill="#f5b942"/>
+<circle cx="208.6" cy="95.2" r="4" fill="#f5b942"/>
+<circle cx="235.8" cy="102.8" r="4" fill="#f5b942"/>
+<circle cx="266.7" cy="111.6" r="4" fill="#f5b942"/>
+<circle cx="305.7" cy="122.7" r="4" fill="#f5b942"/>
+<circle cx="331.4" cy="130.1" r="4" fill="#f5b942"/>
+<circle cx="358.6" cy="137.9" r="4" fill="#f5b942"/>
+<circle cx="389.5" cy="146.8" r="4" fill="#f5b942"/>
+<circle cx="411.4" cy="153.2" r="4" fill="#f5b942"/>
+<circle cx="442.4" cy="162.1" r="4" fill="#f5b942"/>
+<circle cx="481.3" cy="173.4" r="4" fill="#f5b942"/>
+<circle cx="507.0" cy="180.8" r="4" fill="#f5b942"/>
+<circle cx="534.2" cy="188.6" r="4" fill="#f5b942"/>
+<circle cx="565.1" cy="197.6" r="4" fill="#f5b942"/>
+<circle cx="587.1" cy="203.9" r="4" fill="#f5b942"/>
+<text x="428.8" y="56.7" text-anchor="start" fill="#4cc3f0" font-size="15" font-weight="600">√(2/(πn))</text>
+<text x="428.8" y="89.2" text-anchor="start" fill="#f5b942" font-size="15" font-weight="600">exact</text></svg><figcaption>Figure 6 · P(exactly n/2 heads in n flips): exact values (dots) and √(2/(πn)) (line), log–log scale.</figcaption></figure>
+</div>
+<p><b>Second purchase: ln n! as a counting cost.</b> There are n! orderings of n items, so specifying one costs log<sub>2</sub> n! ≈ n·log<sub>2</sub> n − 1.44·n bits — the floor under every comparison sort: 1000 items need at least ⌈log<sub>2</sub> 1000!⌉ = 8530 comparisons. In statistical counting, the W = C(N, m) arrangements of m heads among N coins have ln W ≈ N·H(m/N) with H(p) = −p ln p − (1−p) ln(1−p) the entropy function; Boltzmann's entropy S = k·ln W is Stirling at work in physics.</p>
+<div class="formula small">log<sub>2</sub> n! ≈ n·log<sub>2</sub> n − 1.44·n, &nbsp;&nbsp; ln C(N, m) ≈ N·H(m/N), &nbsp;&nbsp; S = k·ln W</div>
+</section>
+
+<section>
+<h2>7 · Outlook — factorial series in one line</h2>
+<p>With Stirling in hand, series tests involving factorials become one-liners: for Σ n!/nⁿ the root test gives (n!/nⁿ)<sup>1/n</sup> = (n!)<sup>1/n</sup>/n → 1/e &lt; 1, so the series converges; and since C(2n, n)<sup>1/n</sup> → 4, the power series Σ C(2n, n)·xⁿ has radius of convergence exactly 1/4.</p>
+<div class="formula small">(n!/n<sup>n</sup>)<sup>1/n</sup> → 1/e &lt; 1 &nbsp;⇒&nbsp; Σ n!/n<sup>n</sup> converges; &nbsp;&nbsp; C(2n, n)<sup>1/n</sup> → 4 &nbsp;⇒&nbsp; R = 1/4</div>
 </section>
 
 <section>

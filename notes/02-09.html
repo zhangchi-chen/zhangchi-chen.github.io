@@ -67,8 +67,16 @@ footer{color:var(--txt2);font-size:.85rem;border-top:1px solid var(--edge);margi
 #mv-bar .mv-quiz{color:#fff;background:#1f72b0;text-decoration:none;border-radius:8px;
   padding:4px 12px;white-space:nowrap;font-size:13.5px}
 @media (max-width:480px){#mv-bar .mv-title{font-size:12.5px}}
+#mv-rotate{display:none}
+@media (orientation:portrait){
+  #mv-rotate{display:block;position:fixed;bottom:14px;left:50%;transform:translateX(-50%);
+    z-index:99;font-size:12.5px;padding:6px 14px;border-radius:999px;
+    background:color-mix(in srgb,var(--bg,var(--paper,#fbfaf6)) 88%,transparent);
+    backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);opacity:.92;
+    border:1px solid var(--grid,var(--line,var(--rule,#e3e0d6)))}
+}
 </style></head>
-<body><div id="mv-bar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span class="mv-title">02-09 Stirling 公式</span><a class="mv-quiz" href="../quiz/02-09.html">去自测 →</a></div>
+<body><div id="mv-bar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span class="mv-title">02-09 2.9 · Stirling 公式</span><a class="mv-quiz" href="../quiz/02-09.html">去自测 →</a></div>
 <main>
 <header><h1>2.9 · Stirling 公式</h1><span class="pill">选修深度</span></header>
 <p class="sub">n! 究竟有多大？——用光滑曲线丈量锯齿阶梯</p>
@@ -83,7 +91,8 @@ footer{color:var(--txt2);font-size:.85rem;border-top:1px solid var(--edge);margi
 
 <section>
 <h2>1 · 为什么精确大小很重要</h2>
-<p>增长阶梯 ln n ≪ n<sup>k</sup> ≪ a<sup>n</sup> ≪ n! ≪ n<sup>n</sup> 只给出排序。要知道 n! 究竟比 a<sup>n</sup> 领先<em>多少</em>，就需要 n! 的精确形状——这正是 Stirling 公式用三个因子给出的。</p>
+<p>增长阶梯 ln n ≪ n<sup>k</sup> ≪ a<sup>n</sup> ≪ n! ≪ n<sup>n</sup> 只给出排序：它只说谁赢，不说赢<em>多少</em>。感受一下这个差距：100! 写出来有 158 位数字——手算毫无希望——而它的对数只是一个三位数，ln 100! ≈ 363.7。这才是可以估计的大小，它需要 n! 的精确形状，而不只是名次——这正是 Stirling 公式用三个因子给出的。</p>
+<p class="c-green">验算 100!：ln 100! ≈ 100·ln 100 − 100 + ½·ln(200π) ≈ 363.74，真值为 363.739…（100! ≈ 9.33 × 10<sup>157</sup>）。</p>
 </section>
 
 <section>
@@ -332,7 +341,7 @@ footer{color:var(--txt2);font-size:.85rem;border-top:1px solid var(--edge);margi
 <h2>5 · 收获——带数字的 aⁿ 与 n! 之争</h2>
 <p>再取一次对数：ln n! ≈ n ln n − n + ½·ln(2πn)，主项为 n ln n − n。回到 a<sup>n</sup> 与 n! 的较量：</p>
 <div class="formula small"><span class="frac"><span>a<sup>n</sup></span><span>n!</span></span> ≈ <span class="frac"><span>(ae/n)<sup>n</sup></span><span>√(2πn)</span></span> → 0 &nbsp;(n → ∞)</div>
-<p>一旦 n 超过 a·e，底数 ae/n 就小于 1，n 次幂把比值压向 0——这就是带上数字的增长阶梯。同样的渐近式驱动着 Σ xⁿ/n! 这类级数的比值判别法（对所有 x 收敛），以及概率论中的大 n 近似，例如 C(2n, n) ≈ 4ⁿ/√(πn)。</p>
+<p>一旦 n 超过 a·e，底数 ae/n 就小于 1，n 次幂把比值压向 0——这就是带上数字的增长阶梯。</p>
 <figure class="wide"><svg viewBox="0 0 640 330" width="100%" role="img" aria-label="a = 10 时的比值 a^n / n!" xmlns="http://www.w3.org/2000/svg" font-family="system-ui, -apple-system, Segoe UI, Roboto, Noto Sans, Noto Sans CJK SC, sans-serif"><line x1="56" y1="274.8" x2="622" y2="274.8" stroke="#2e3854" stroke-width="1"/>
 <text x="48" y="279.8" text-anchor="end" fill="#94a3b8" font-size="13">10⁻¹²</text>
 <line x1="56" y1="213.9" x2="622" y2="213.9" stroke="#2e3854" stroke-width="1"/>
@@ -419,6 +428,63 @@ footer{color:var(--txt2);font-size:.85rem;border-top:1px solid var(--edge);margi
 <text x="80.6" y="236.7" text-anchor="start" fill="#f5b942" font-size="14" font-weight="600">aⁿ/n!（精确值）</text>
 <text x="80.6" y="262.6" text-anchor="start" fill="#4cc3f0" font-size="14" font-weight="600">(ae/n)ⁿ / √(2πn)</text>
 <text x="597.4" y="37.3" text-anchor="end" fill="#94a3b8" font-size="14" font-weight="normal">a = 10</text></svg><figcaption>图 5 · a = 10 时的 a<sup>n</sup>/n!（点：精确值；线：(ae/n)ⁿ/√(2πn)）；越过 n = a·e ≈ 27 后比值迅速坍缩。</figcaption></figure>
+</section>
+
+<section>
+<h2>6 · 花掉这笔钱——应用</h2>
+<p><b>第一笔：中心二项系数。</b> C(2n, n) = (2n)!/(n!)²；代入 Stirling 公式，n 与 e 的幂再次约掉，得到</p>
+<div class="formula small">C(2n, n) = <span class="frac"><span>(2n)!</span><span>(n!)²</span></span> ≈ <span class="frac"><span>√(4πn) · (2n/e)<sup>2n</sup></span><span>2πn · (n/e)<sup>2n</sup></span></span> = <span class="frac"><span>4<sup>n</sup></span><span>√(πn)</span></span></div>
+<p>于是 n 次抛公平硬币恰好一半正面的概率为 C(n, n/2)/2ⁿ ≈ √(2/(πn))——一个人人都能感受的数：</p>
+<div class="grid2">
+<div><table><thead><tr><th>抛掷次数 n</th><th>精确值 P(恰好 n/2 次正面)</th><th>√(2/(πn))</th><th>相对误差</th></tr></thead><tbody><tr><td>10</td><td class="c-amber">24.61 %</td><td class="c-blue">25.23 %</td><td class="c-rose">2.53 %</td></tr><tr><td>100</td><td class="c-amber">7.96 %</td><td class="c-blue">7.98 %</td><td class="c-rose">0.25 %</td></tr><tr><td>1000</td><td class="c-amber">2.52 %</td><td class="c-blue">2.52 %</td><td class="c-rose">0.025 %</td></tr></tbody></table><p>100 次里恰好 50 次正面只有约 8% 的机会，而估计值的误差已不到 0.3%。</p></div>
+<figure><svg viewBox="0 0 640 300" width="100%" role="img" aria-label="恰好一半正面的概率与 Stirling 估计" xmlns="http://www.w3.org/2000/svg" font-family="system-ui, -apple-system, Segoe UI, Roboto, Noto Sans, Noto Sans CJK SC, sans-serif"><line x1="60" y1="229.5" x2="622" y2="229.5" stroke="#2e3854" stroke-width="1"/>
+<text x="52" y="234.5" text-anchor="end" fill="#94a3b8" font-size="13">1 %</text>
+<line x1="60" y1="127.8" x2="622" y2="127.8" stroke="#2e3854" stroke-width="1"/>
+<text x="52" y="132.8" text-anchor="end" fill="#94a3b8" font-size="13">10 %</text>
+<line x1="60" y1="26.2" x2="622" y2="26.2" stroke="#2e3854" stroke-width="1"/>
+<text x="52" y="31.2" text-anchor="end" fill="#94a3b8" font-size="13">100 %</text>
+<line x1="60" y1="16" x2="60" y2="260" stroke="#64748b" stroke-width="1.5"/>
+<line x1="60" y1="260" x2="622" y2="260" stroke="#64748b" stroke-width="1.5"/>
+<line x1="60.2" y1="16" x2="60.2" y2="260" stroke="#2e3854" stroke-width="1"/>
+<text x="60.2" y="278" text-anchor="middle" fill="#94a3b8" font-size="13">2</text>
+<line x1="182.9" y1="16" x2="182.9" y2="260" stroke="#2e3854" stroke-width="1"/>
+<text x="182.9" y="278" text-anchor="middle" fill="#94a3b8" font-size="13">10</text>
+<line x1="358.6" y1="16" x2="358.6" y2="260" stroke="#2e3854" stroke-width="1"/>
+<text x="358.6" y="278" text-anchor="middle" fill="#94a3b8" font-size="13">100</text>
+<line x1="534.2" y1="16" x2="534.2" y2="260" stroke="#2e3854" stroke-width="1"/>
+<text x="534.2" y="278" text-anchor="middle" fill="#94a3b8" font-size="13">1000</text>
+<text x="622" y="294" text-anchor="end" fill="#94a3b8" font-size="13">抛掷次数 n</text>
+<path d="M60.0,51.4 L65.4,53.0 L70.9,54.5 L76.3,56.1 L81.8,57.7 L87.2,59.3 L92.7,60.8 L98.1,62.4 L103.6,64.0 L109.0,65.6 L114.4,67.1 L119.9,68.7 L125.3,70.3 L130.8,71.9 L136.2,73.4 L141.7,75.0 L147.1,76.6 L152.6,78.2 L158.0,79.8 L163.4,81.3 L168.9,82.9 L174.3,84.5 L179.8,86.1 L185.2,87.6 L190.7,89.2 L196.1,90.8 L201.6,92.4 L207.0,93.9 L212.4,95.5 L217.9,97.1 L223.3,98.7 L228.8,100.2 L234.2,101.8 L239.7,103.4 L245.1,105.0 L250.6,106.5 L256.0,108.1 L261.4,109.7 L266.9,111.3 L272.3,112.8 L277.8,114.4 L283.2,116.0 L288.7,117.6 L294.1,119.1 L299.6,120.7 L305.0,122.3 L310.4,123.9 L315.9,125.5 L321.3,127.0 L326.8,128.6 L332.2,130.2 L337.7,131.8 L343.1,133.3 L348.6,134.9 L354.0,136.5 L359.4,138.1 L364.9,139.6 L370.3,141.2 L375.8,142.8 L381.2,144.4 L386.7,145.9 L392.1,147.5 L397.6,149.1 L403.0,150.7 L408.4,152.2 L413.9,153.8 L419.3,155.4 L424.8,157.0 L430.2,158.5 L435.7,160.1 L441.1,161.7 L446.6,163.3 L452.0,164.8 L457.4,166.4 L462.9,168.0 L468.3,169.6 L473.8,171.1 L479.2,172.7 L484.7,174.3 L490.1,175.9 L495.5,177.5 L501.0,179.0 L506.4,180.6 L511.9,182.2 L517.3,183.8 L522.8,185.3 L528.2,186.9 L533.7,188.5 L539.1,190.1 L544.5,191.6 L550.0,193.2 L555.4,194.8 L560.9,196.4 L566.3,197.9 L571.8,199.5 L577.2,201.1 L582.7,202.7 L588.1,204.2 L593.5,205.8 L599.0,207.4 L604.4,209.0" fill="none" stroke="#4cc3f0" stroke-width="2.5" stroke-linejoin="round"/>
+<circle cx="60.2" cy="56.8" r="4" fill="#f5b942"/>
+<circle cx="113.0" cy="69.5" r="4" fill="#f5b942"/>
+<circle cx="144.0" cy="77.5" r="4" fill="#f5b942"/>
+<circle cx="165.9" cy="83.4" r="4" fill="#f5b942"/>
+<circle cx="182.9" cy="88.1" r="4" fill="#f5b942"/>
+<circle cx="208.6" cy="95.2" r="4" fill="#f5b942"/>
+<circle cx="235.8" cy="102.8" r="4" fill="#f5b942"/>
+<circle cx="266.7" cy="111.6" r="4" fill="#f5b942"/>
+<circle cx="305.7" cy="122.7" r="4" fill="#f5b942"/>
+<circle cx="331.4" cy="130.1" r="4" fill="#f5b942"/>
+<circle cx="358.6" cy="137.9" r="4" fill="#f5b942"/>
+<circle cx="389.5" cy="146.8" r="4" fill="#f5b942"/>
+<circle cx="411.4" cy="153.2" r="4" fill="#f5b942"/>
+<circle cx="442.4" cy="162.1" r="4" fill="#f5b942"/>
+<circle cx="481.3" cy="173.4" r="4" fill="#f5b942"/>
+<circle cx="507.0" cy="180.8" r="4" fill="#f5b942"/>
+<circle cx="534.2" cy="188.6" r="4" fill="#f5b942"/>
+<circle cx="565.1" cy="197.6" r="4" fill="#f5b942"/>
+<circle cx="587.1" cy="203.9" r="4" fill="#f5b942"/>
+<text x="428.8" y="56.7" text-anchor="start" fill="#4cc3f0" font-size="15" font-weight="600">√(2/(πn))</text>
+<text x="428.8" y="89.2" text-anchor="start" fill="#f5b942" font-size="15" font-weight="600">精确值</text></svg><figcaption>图 6 · n 次抛硬币恰好 n/2 次正面的概率：精确值（点）与 √(2/(πn))（线），双对数坐标。</figcaption></figure>
+</div>
+<p><b>第二笔：ln n! 是一种计数成本。</b> n 个物件有 n! 种排列，指定其中一种要花 log<sub>2</sub> n! ≈ n·log<sub>2</sub> n − 1.44·n 比特——这是所有比较排序的下界：排 1000 个元素至少要比较 ⌈log<sub>2</sub> 1000!⌉ = 8530 次。在统计计数中，N 枚硬币里放 m 个正面共有 W = C(N, m) 种方式，ln W ≈ N·H(m/N)，其中 H(p) = −p ln p − (1−p) ln(1−p) 是熵函数；玻尔兹曼熵 S = k·ln W 正是物理学中的 Stirling 公式。</p>
+<div class="formula small">log<sub>2</sub> n! ≈ n·log<sub>2</sub> n − 1.44·n, &nbsp;&nbsp; ln C(N, m) ≈ N·H(m/N), &nbsp;&nbsp; S = k·ln W</div>
+</section>
+
+<section>
+<h2>7 · 展望——含阶乘的级数一行搞定</h2>
+<p>手握 Stirling 公式，含阶乘的级数判别就成了一行字：对 Σ n!/nⁿ，根值判别法给出 (n!/nⁿ)<sup>1/n</sup> = (n!)<sup>1/n</sup>/n → 1/e &lt; 1，级数收敛；又因 C(2n, n)<sup>1/n</sup> → 4，幂级数 Σ C(2n, n)·xⁿ 的收敛半径恰为 1/4。</p>
+<div class="formula small">(n!/n<sup>n</sup>)<sup>1/n</sup> → 1/e &lt; 1 &nbsp;⇒&nbsp; Σ n!/n<sup>n</sup> 收敛; &nbsp;&nbsp; C(2n, n)<sup>1/n</sup> → 4 &nbsp;⇒&nbsp; R = 1/4</div>
 </section>
 
 <section>

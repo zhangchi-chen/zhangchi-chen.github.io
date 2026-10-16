@@ -24,20 +24,7 @@ footer{color:var(--dim);font-size:12px;margin-top:12px;text-align:right}
 math{font-size:1.08em}
 math[display=block]{margin:6px 0;font-size:1.12em}
 @media (max-width:980px){.grid{grid-template-columns:1fr}.c1,.c2,.c3,.c4,.c5{grid-column:auto}.slide{padding:16px}h1{font-size:26px}}
-</style>
-<style>
-/* ---- 翻页改造（2026-10-15）：全屏页 + 滚动吸附 + 方向键 ---- */
-html{scroll-snap-type:y proximity}
-section.slide{min-height:100vh;display:flex;align-items:center;justify-content:center;
-  scroll-snap-align:start;padding:56px 20px 30px;max-width:none;margin:0}
-.frame{width:min(1180px,100%);background:var(--card);border:1px solid var(--line);
-  border-radius:14px;padding:clamp(18px,3vw,38px);box-shadow:0 10px 34px rgba(27,34,53,.07)}
-.frame .card{grid-column:auto;width:100%;max-width:1020px;margin:0 auto}
-.hint{position:fixed;right:16px;bottom:12px;color:var(--dim);font-size:.8rem;opacity:.75}
-footer{margin-top:14px}
-@media print{section.slide{min-height:auto;page-break-after:always}.hint{display:none}}
-</style>
-<style>
+</style><style>
 #mv-bar{position:fixed;left:0;right:0;top:0;z-index:99;display:flex;align-items:center;
   gap:12px;padding:9px 14px;font-size:14px;
   background:color-mix(in srgb,var(--bg,var(--paper,#fbfaf6)) 84%,transparent);
@@ -57,7 +44,20 @@ footer{margin-top:14px}
     backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);opacity:.92;
     border:1px solid var(--grid,var(--line,var(--rule,#e3e0d6)))}
 }
-</style></head><body><div id="mv-bar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span class="mv-title">02-03 极限的四则运算</span><a class="mv-quiz" href="../quiz/02-03.html">去自测 →</a></div>
+</style>
+<style>
+/* ---- 翻页改造（2026-10-15）：全屏页 + 滚动吸附 + 方向键 ---- */
+html{scroll-snap-type:y proximity}
+section.slide{min-height:100vh;display:flex;align-items:center;justify-content:center;
+  scroll-snap-align:start;padding:56px 20px 30px;max-width:none;margin:0}
+.frame{width:min(1180px,100%);background:var(--card);border:1px solid var(--line);
+  border-radius:14px;padding:clamp(18px,3vw,38px);box-shadow:0 10px 34px rgba(27,34,53,.07)}
+.frame .card{grid-column:auto;width:100%;max-width:1020px;margin:0 auto}
+.hint{position:fixed;right:16px;bottom:12px;color:var(--dim);font-size:.8rem;opacity:.75}
+footer{margin-top:14px}
+@media print{section.slide{min-height:auto;page-break-after:always}.hint{display:none}}
+</style>
+</head><body>
 <section class="slide"><div class="frame">
 <header><h1>极限的四则运算</h1><span class="sub">数列极限 · 和、差、积、商</span></header>
 <section class="thm"><b>定理</b>若 <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><msub><mi>a</mi><mi>n</mi></msub><mo>&#x02192;</mo><mi>a</mi></mrow></math>，<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><msub><mi>b</mi><mi>n</mi></msub><mo>&#x02192;</mo><mi>b</mi></mrow></math>，则 <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><msub><mi>a</mi><mi>n</mi></msub><mi>&#x000B1;</mi><msub><mi>b</mi><mi>n</mi></msub><mo>&#x02192;</mo><mi>a</mi><mi>&#x000B1;</mi><mi>b</mi></mrow></math>，<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><msub><mi>a</mi><mi>n</mi></msub><msub><mi>b</mi><mi>n</mi></msub><mo>&#x02192;</mo><mi>a</mi><mi>b</mi></mrow></math>；当 <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mi>b</mi><mo>&#x02260;</mo><mn>0</mn></mrow></math> 时，<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mstyle displaystyle="true" scriptlevel="0"><mfrac><mrow><msub><mi>a</mi><mi>n</mi></msub></mrow><mrow><msub><mi>b</mi><mi>n</mi></msub></mrow></mfrac></mstyle><mo>&#x02192;</mo><mstyle displaystyle="true" scriptlevel="0"><mfrac><mrow><mi>a</mi></mrow><mrow><mi>b</mi></mrow></mfrac></mstyle></mrow></math>。</section>
@@ -108,7 +108,7 @@ footer{margin-top:14px}
 <text x="150" y="56" font-size="11" text-anchor="middle" fill="#2a6cc0">来源 2 &lt; ε/3</text>
 <text x="250" y="56" font-size="11" text-anchor="middle" fill="#c23a68">来源 3 &lt; ε/3</text>
 <text x="308" y="36" class="m" font-size="14">ε</text>
-</svg><p style="margin:2px 0 0">每个误差来源分得 <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mi>&#x003B5;</mi><mo lspace="0" rspace="0">/</mo><mn>3</mn></mrow></math>；每个要求在各自的 <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><msub><mi>N</mi><mi>i</mi></msub></mrow></math> 之后成立；取 <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mi>N</mi><mo>&#x0003D;</mo><mo>max</mo><mo stretchy="false">&#x00028;</mo><msub><mi>N</mi><mn>1</mn></msub><mo>&#x0002C;</mo><msub><mi>N</mi><mn>2</mn></msub><mo>&#x0002C;</mo><msub><mi>N</mi><mn>3</mn></msub><mo stretchy="false">&#x00029;</mo></mrow></math>。<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mo stretchy="false" lspace="0" rspace="0">|</mo><mi>b</mi><mo stretchy="false" lspace="0" rspace="0">|</mo><mo>&#x0002B;</mo><mn>1</mn></mrow></math> 之类的常数只为记账整洁：<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mstyle displaystyle="true" scriptlevel="0"><mfrac><mrow><mi>&#x003B5;</mi></mrow><mrow><mn>2</mn><mo stretchy="false">&#x00028;</mo><mo stretchy="false" lspace="0" rspace="0">|</mo><mi>b</mi><mo stretchy="false" lspace="0" rspace="0">|</mo><mo>&#x0002B;</mo><mn>1</mn><mo stretchy="false">&#x00029;</mo></mrow></mfrac></mstyle></mrow></math> 是记账，不是魔法。</p></section>
+</svg><p style="margin:2px 0 0">每个误差来源分得 <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mi>&#x003B5;</mi><mo lspace="0" rspace="0">/</mo><mn>3</mn></mrow></math>；每个要求在各自的 <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><msub><mi>N</mi><mi>i</mi></msub></mrow></math> 之后成立；取 <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mi>N</mi><mo>&#x0003D;</mo><mo>max</mo><mo stretchy="false">&#x00028;</mo><msub><mi>N</mi><mn>1</mn></msub><mo>&#x0002C;</mo><msub><mi>N</mi><mn>2</mn></msub><mo>&#x0002C;</mo><msub><mi>N</mi><mn>3</mn></msub><mo stretchy="false">&#x00029;</mo></mrow></math>。<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mo stretchy="false" lspace="0" rspace="0">|</mo><mi>b</mi><mo stretchy="false" lspace="0" rspace="0">|</mo><mo>&#x0002B;</mo><mn>1</mn></mrow></math> 之类的常数只为式子整洁：<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mstyle displaystyle="true" scriptlevel="0"><mfrac><mrow><mi>&#x003B5;</mi></mrow><mrow><mn>2</mn><mo stretchy="false">&#x00028;</mo><mo stretchy="false" lspace="0" rspace="0">|</mo><mi>b</mi><mo stretchy="false" lspace="0" rspace="0">|</mo><mo>&#x0002B;</mo><mn>1</mn><mo stretchy="false">&#x00029;</mo></mrow></mfrac></mstyle></mrow></math> 是个小技巧，不是魔法。</p></section>
 </div></section>
 <section class="slide"><div class="frame">
 <section class="card c5"><h2>⑤ 只限有限次运算</h2><p style="margin:0">对任意多项式 <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mi>P</mi></mrow></math>：<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mi>P</mi><mo stretchy="false">&#x00028;</mo><msub><mi>a</mi><mi>n</mi></msub><mo stretchy="false">&#x00029;</mo><mo>&#x02192;</mo><mi>P</mi><mo stretchy="false">&#x00028;</mo><mi>a</mi><mo stretchy="false">&#x00029;</mo></mrow></math>。无穷多次运算是另一个世界：<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mstyle displaystyle="false" scriptlevel="0"><mfrac><mn>1</mn><mi>n</mi></mfrac></mstyle><mo>&#x0002B;</mo><mstyle displaystyle="false" scriptlevel="0"><mfrac><mn>1</mn><mi>n</mi></mfrac></mstyle><mo>&#x0002B;</mo><mo>&#x022EF;</mo><mo>&#x0002B;</mo><mstyle displaystyle="false" scriptlevel="0"><mfrac><mn>1</mn><mi>n</mi></mfrac></mstyle><mo>&#x0003D;</mo><mn>1</mn></mrow></math>（共 <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mi>n</mi></mrow></math> 项），而不是 <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mn>0</mn></mrow></math>，尽管每项都 <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mo>&#x02192;</mo><mn>0</mn></mrow></math>。</p><svg viewBox="0 0 330 104" role="img" aria-label="n slices of 1/n"><rect x="140" y="8" width="44" height="9" fill="#9cc3f5" stroke="#fff" stroke-width=".6"/><rect x="140" y="17" width="44" height="9" fill="#4f93e6" stroke="#fff" stroke-width=".6"/><rect x="140" y="26" width="44" height="9" fill="#9cc3f5" stroke="#fff" stroke-width=".6"/><rect x="140" y="35" width="44" height="9" fill="#4f93e6" stroke="#fff" stroke-width=".6"/><rect x="140" y="44" width="44" height="9" fill="#9cc3f5" stroke="#fff" stroke-width=".6"/><rect x="140" y="53" width="44" height="9" fill="#4f93e6" stroke="#fff" stroke-width=".6"/><rect x="140" y="62" width="44" height="9" fill="#9cc3f5" stroke="#fff" stroke-width=".6"/><rect x="140" y="71" width="44" height="9" fill="#4f93e6" stroke="#fff" stroke-width=".6"/><rect x="140" y="80" width="44" height="9" fill="#9cc3f5" stroke="#fff" stroke-width=".6"/><rect x="140" y="89" width="44" height="9" fill="#4f93e6" stroke="#fff" stroke-width=".6"/><text x="192" y="14" class="m">1</text><text x="132" y="100" class="m" text-anchor="end">n = 10</text></svg><p class="good" style="margin:8px 0 0">0/0、∞ − ∞ 需要新工具——夹逼（下集）。</p></section>
@@ -145,22 +145,13 @@ footer{margin-top:14px}
 <div class="qi"><p class="qq">5. 误差预算 |aₙbₙ − ab| ≤ |a||βₙ| + |b||αₙ| + |αₙ||βₙ| 中按 ε/3 分配，是为了（　）</p>
 <p class="qo">A. 每个误差源各自领额度　　B. 让 N 更小　　C. 消掉交叉项</p>
 <button>查看答案</button>
-<div class="ans"><b>A。</b>三个误差源各分一份 ε，各自找到自己的 N，最后取最大——证明是记账，不是魔法。</div></div>
+<div class="ans"><b>A。</b>三个误差源各分一份 ε，各自找到自己的 N，最后取最大——证明靠的是小技巧，不是魔法。</div></div>
 </div></section>
 <footer>第 02-03 集 · 大一数学分析</footer>
 </div></section>
 <script>
 Array.prototype.forEach.call(document.querySelectorAll('.qt3 button'),function(b){
  b.addEventListener('click',function(){b.parentNode.classList.add('shown');b.style.display='none';});});
-</script>
-<div class="hint">使用 ← → 键或滚动浏览</div>
-<script>
-(function(){var s=[].slice.call(document.querySelectorAll('section.slide'));
-document.addEventListener('keydown',function(e){
- if(['ArrowRight','ArrowLeft','PageDown','PageUp'].indexOf(e.key)<0)return;
- var y=window.scrollY+10,i=0;for(var k=0;k<s.length;k++)if(s[k].offsetTop<=y)i=k;
- i+= (e.key==='ArrowRight'||e.key==='PageDown')?1:-1; i=Math.max(0,Math.min(s.length-1,i));
- s[i].scrollIntoView({behavior:'smooth'});e.preventDefault();});})();
 </script>
 <script>
 (function(){
@@ -176,4 +167,14 @@ document.addEventListener('keydown',function(e){
     document.body.style.paddingTop='44px';
   }
 })();
-</script></body></html>
+</script>
+<div class="hint">使用 ← → 键或滚动浏览</div>
+<script>
+(function(){var s=[].slice.call(document.querySelectorAll('section.slide'));
+document.addEventListener('keydown',function(e){
+ if(['ArrowRight','ArrowLeft','PageDown','PageUp'].indexOf(e.key)<0)return;
+ var y=window.scrollY+10,i=0;for(var k=0;k<s.length;k++)if(s[k].offsetTop<=y)i=k;
+ i+= (e.key==='ArrowRight'||e.key==='PageDown')?1:-1; i=Math.max(0,Math.min(s.length-1,i));
+ s[i].scrollIntoView({behavior:'smooth'});e.preventDefault();});})();
+</script>
+</body></html>

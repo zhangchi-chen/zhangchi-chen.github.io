@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>数列的柯西收敛准则 · 自测</title>
+<title>数列的柯西收敛准则</title>
 <style>
 :root{--bg:#0b1020;--card:rgba(255,255,255,0.045);--line:rgba(255,255,255,0.10);--txt:#e9edf7;--dim:#8fa0c7;--blue:#4cc9f0;--or:#f7a23b;--gr:#5ee6a0;--red:#ff6b6b;--pu:#c39bff}
 *{box-sizing:border-box}
@@ -56,6 +56,21 @@ h2 b{color:var(--or);margin-right:8px}
 .quiz .q.open .ans{display:block}
 footer{text-align:center;color:var(--dim);font-size:13px;margin-top:40px}
 
+.act{margin-top:46px;padding-top:18px;border-top:1.5px solid rgba(255,255,255,0.10)}
+.act h2{color:var(--or);font-size:22px;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px}
+.act h2.zh{text-transform:none;letter-spacing:1px}
+.act .sub{color:var(--dim);font-size:16px;margin:0 0 18px}
+.calc{display:inline-block;font-family:"DejaVu Sans Mono",monospace;background:#0a0f1e;border:1.5px solid #2a3558;border-radius:10px;padding:6px 14px;color:var(--gr);font-size:26px}
+.tbl{border-collapse:collapse;font-family:"DejaVu Sans Mono",monospace;font-size:15px;width:100%;margin-top:8px}
+.tbl th{color:var(--dim);font-weight:normal;text-align:left;padding:4px 8px;border-bottom:1px solid rgba(255,255,255,0.15)}
+.tbl td{padding:3px 8px;color:#cfd8ef}
+.tbl tr.stop td{background:rgba(94,230,160,0.14);color:var(--gr)}
+.code{font-family:"DejaVu Sans Mono",monospace;background:#0a0f1e;border:1.5px solid #2a3558;border-radius:10px;padding:10px 16px;color:var(--gr);font-size:15px;line-height:1.5;margin-top:12px}
+.steps li{margin:8px 0;color:#cfd8ef;font-size:16px;line-height:1.5}
+.chips span{display:inline-block;padding:4px 12px;border-radius:16px;border:1.5px solid rgba(255,255,255,0.2);background:rgba(255,255,255,0.06);margin-right:8px;font-size:16px}
+.recap{grid-template-columns:repeat(4,1fr)}
+@media(max-width:1000px){.recap{grid-template-columns:repeat(2,1fr)}}
+
 /* ---- 手机自测单页覆盖层（深浅主题自适应：浅色文件有 --paper，深色有 --bg/--fg） ---- */
 html,body{margin:0;background:var(--bg,var(--paper));color:var(--fg,var(--ink));
   font-family:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC","Source Han Sans SC",system-ui,-apple-system,sans-serif}
@@ -89,16 +104,16 @@ section.quiz .q{margin:12px 0;text-align:left}
 <body>
 <div class="page">
   <div class="topbar">
-    <h1>数列的柯西收敛准则 · 自测</h1> <a href="../notes/02-07.html">查看讲稿 →</a>
+    <h1>数列的柯西收敛准则</h1>
   </div>
   
   <div class="quiz">
-  <section class="quiz"><div class="q" data-ok="1"><p>1. 柯西收敛准则比较的是什么？</p><div class="opts"><span>A. 每一项 aₙ 与候选极限 A</span><span>B. 尾部内的项对 aₙ, aₘ（m, n > N）</span><span>C. 每一项 aₙ 与 0</span></div><button type="button">显示答案</button><div class="ans">正确答案： <b>B. 尾部内的项对 aₙ, aₘ（m, n > N）</b> — 准则是一次内部自查：不需要目标值，只需要尾部内的两两距离。</div></div><div class="q" data-ok="0"><p>2. 对 sₙ = 1 + 1/2 + … + 1/2ⁿ 及 n > m，尾部 |sₙ − sₘ| 等于</p><div class="opts"><span>A. 1/2ᵐ − 1/2ⁿ</span><span>B. 1/2ⁿ − 1/2ᵐ</span><span>C. 1/2ᵐ⁺¹</span></div><button type="button">显示答案</button><div class="ans">正确答案： <b>A. 1/2ᵐ − 1/2ⁿ</b> — 各块 1/2ᵏ = 1/2ᵏ⁻¹ − 1/2ᵏ 从 k = m+1 到 n 裂项相消，剩下 1/2ᵐ − 1/2ⁿ。</div></div><div class="q" data-ok="2"><p>3. 设 |aₙ₊₁ − aₙ| → 0，下列哪个说法正确？</p><div class="opts"><span>A. {aₙ} 一定是柯西列</span><span>B. {aₙ} 一定收敛</span><span>C. 都推不出——例如调和级数的部分和</span></div><button type="button">显示答案</button><div class="ans">正确答案： <b>C. 都推不出——例如调和级数的部分和</b> — 每步 1/n → 0，但 |s₂ₙ − sₙ| ≥ 1/2：只控制了相邻项，没有控制尾部所有项对。</div></div><div class="q" data-ok="1"><p>4. 哪个式子表示"{aₙ} 不是柯西列"？</p><div class="opts"><span>A. ∀ε₀ > 0 ∃N ∀m, n > N : |aₙ − aₘ| ≥ ε₀</span><span>B. ∃ε₀ > 0 ∀N ∃m, n > N : |aₙ − aₘ| ≥ ε₀</span><span>C. ∃ε₀ > 0 ∃N ∀m, n > N : |aₙ − aₘ| ≥ ε₀</span></div><button type="button">显示答案</button><div class="ans">正确答案： <b>B. ∃ε₀ > 0 ∀N ∃m, n > N : |aₙ − aₘ| ≥ ε₀</b> — 否定要逐个交换量词：有一个坏的 ε₀，并且对每个 N 都仍有一对远处的项相差至少 ε₀。</div></div><div class="q" data-ok="1"><p>5. 柯西列有一个子列收敛到 L，那么</p><div class="opts"><span>A. 整个数列仍可能发散</span><span>B. 整个数列收敛到 L</span><span>C. 只有那个子列收敛</span></div><button type="button">显示答案</button><div class="ans">正确答案： <b>B. 整个数列收敛到 L</b> — 三角不等式：当 n 充分大时 |aₙ − L| ≤ |aₙ − aₙₖ| + |aₙₖ − L| < 2ε。</div></div><div class="q" data-ok="1"><p>6. 取 ε₀ = 1/2 时，哪一对能证明调和级数部分和发散？</p><div class="opts"><span>A. sₙ 与 sₙ₊₁</span><span>B. sₙ 与 s₂ₙ</span><span>C. s₁ 与 sₙ</span></div><button type="button">显示答案</button><div class="ans">正确答案： <b>B. sₙ 与 s₂ₙ</b> — sₙ 与 s₂ₙ 之间有 n 项，每项 ≥ 1/(2n)，所以对每个 n 差距至少为 1/2。</div></div></section>
+  <section class="quiz"><div class="q" data-ok="1"><p>1. 柯西收敛准则比较的是什么？</p><div class="opts"><span>A. 每一项 aₙ 与候选极限 A</span><span>B. 尾部内的项对 aₙ, aₘ（m, n > N）</span><span>C. 每一项 aₙ 与 0</span></div><button type="button">显示答案</button><div class="ans">正确答案： <b>B. 尾部内的项对 aₙ, aₘ（m, n > N）</b> — 准则是一次内部自查：不需要目标值，只需要尾部内的两两距离。</div></div><div class="q" data-ok="0"><p>2. 对 sₙ = 1 + 1/4 + … + 1/n² 及 n > m ≥ 1，由 1/k² < 1/(k−1) − 1/k（k ≥ 2）可得哪个尾部估计？</p><div class="opts"><span>A. |sₙ − sₘ| < 1/m</span><span>B. |sₙ − sₘ| < 1/m²</span><span>C. |sₙ − sₘ| < 1/n</span></div><button type="button">显示答案</button><div class="ans">正确答案： <b>A. |sₙ − sₘ| < 1/m</b> — 从 k = m+1 到 n 求和，裂项相消得 1/m − 1/n，它小于 1/m；另外两个界在 n 很大时都会失效。</div></div><div class="q" data-ok="2"><p>3. 设 |aₙ₊₁ − aₙ| → 0，下列哪个说法正确？</p><div class="opts"><span>A. {aₙ} 一定是柯西列</span><span>B. {aₙ} 一定收敛</span><span>C. 都推不出——例如调和级数的部分和</span></div><button type="button">显示答案</button><div class="ans">正确答案： <b>C. 都推不出——例如调和级数的部分和</b> — 每步 1/n → 0，但 |s₂ₙ − sₙ| ≥ 1/2：只控制了相邻项，没有控制尾部所有项对。</div></div><div class="q" data-ok="1"><p>4. 哪个式子表示"{aₙ} 不是柯西列"？</p><div class="opts"><span>A. ∀ε₀ > 0 ∃N ∀m, n > N : |aₙ − aₘ| ≥ ε₀</span><span>B. ∃ε₀ > 0 ∀N ∃m, n > N : |aₙ − aₘ| ≥ ε₀</span><span>C. ∃ε₀ > 0 ∃N ∀m, n > N : |aₙ − aₘ| ≥ ε₀</span></div><button type="button">显示答案</button><div class="ans">正确答案： <b>B. ∃ε₀ > 0 ∀N ∃m, n > N : |aₙ − aₘ| ≥ ε₀</b> — 否定要逐个交换量词：有一个坏的 ε₀，并且对每个 N 都仍有一对远处的项相差至少 ε₀。</div></div><div class="q" data-ok="1"><p>5. 柯西列有一个子列收敛到 L，那么</p><div class="opts"><span>A. 整个数列仍可能发散</span><span>B. 整个数列收敛到 L</span><span>C. 只有那个子列收敛</span></div><button type="button">显示答案</button><div class="ans">正确答案： <b>B. 整个数列收敛到 L</b> — 三角不等式：当 n 充分大时 |aₙ − L| ≤ |aₙ − aₙₖ| + |aₙₖ − L| < 2ε。</div></div><div class="q" data-ok="1"><p>6. 对 Hₙ = 1 + 1/2 + … + 1/n，哪个估计对每个 n ≥ 1 都成立？</p><div class="opts"><span>A. H₂ₙ − Hₙ ≥ 1</span><span>B. H₂ₙ − Hₙ ≥ 1/2</span><span>C. H₂ₙ − Hₙ ≤ 1/(2n)</span></div><button type="button">显示答案</button><div class="ans">正确答案： <b>B. H₂ₙ − Hₙ ≥ 1/2</b> — H₂ₙ − Hₙ 是 n 项之和，每项至少 1/(2n)，所以至少为 1/2（n = 1 时取等号，因此“≥ 1”不成立）。</div></div></section>
   </div>
 </div>
 <script>
 document.querySelectorAll('.reveal').forEach(function(b){
-  b.addEventListener('click',function(){this.closest('.q').classList.add('shown')});
+  b.addEventListener('click',function(){var t=this.closest('.q,.qt-item');if(t)t.classList.add('shown')});
 });
 /* 按页面 DOM 特征自适配各批次回件的交互（逻辑均照搬原版） */
 if (document.querySelector('.qt3')) {
@@ -111,7 +126,20 @@ if (document.querySelector('.qt3')) {
     var b=q.querySelector('button'),a=q.querySelector('.ans'),ok=q.querySelector('.opts li[data-ok]');
     b.addEventListener('click',function(){var on=a.classList.toggle('show');ok.classList.toggle('ok',on);
       b.textContent=on?b.dataset.hide:b.dataset.show;b.setAttribute('aria-expanded',on);});});
-} else if (document.querySelector('.quiz .q .rv')) {
+  } else if (document.querySelector('.q .rv') && document.querySelector('.q .opts')) {
+    /* rv + opts li[data-ok] + hidden 属性式（03-05）：ex.hidden 切换，命中项标 hit */
+    document.querySelectorAll('.q').forEach(function(q){
+      var b=q.querySelector('.rv'), ex=q.querySelector('.ex');
+      if(!b||!ex) return;
+      b.addEventListener('click',function(){
+        var open=ex.hidden; ex.hidden=!open;
+        q.querySelectorAll('.opts li').forEach(function(li){
+          if(li.dataset.ok==='1') li.classList.toggle('hit',open);
+        });
+        b.textContent=open?'隐藏答案':'显示答案';
+      });
+    });
+  } else if (document.querySelector('.quiz .q .rv')) {
   /* opt/rv/ex 式（07-05）：选项标记 sel，展开按钮标出对错 */
   document.querySelectorAll('.quiz .q').forEach(function(q){
     var opts=q.querySelectorAll('.opt'), ex=q.querySelector('.ex'), btn=q.querySelector('.rv');
@@ -137,16 +165,52 @@ if (document.querySelector('.qt3')) {
       q.querySelectorAll('.opts span')[k].classList.add('ok');
       btn.disabled=true; btn.style.opacity=.5; });
   });
-} else {
-  /* .opt 选择题 + 展开按钮式（02-04） */
-  document.querySelectorAll('.q button').forEach(function(b){
-    b.addEventListener('click',function(){
-      var q=b.closest('.q'), open=q.classList.toggle('open');
-      q.querySelectorAll('.opt').forEach(function(o){ if(o.dataset.c==='1') o.classList.toggle('correct',open); });
-      if(b.dataset.hide&&b.dataset.show) b.textContent=open?b.dataset.hide:b.dataset.show;
+  } else if (document.querySelector('.qitem')) {
+    /* qitem 式（01-03 第一章）：按钮 toggle 父级 open，文字切换（原页 JS 照搬） */
+    document.querySelectorAll('.qitem button').forEach(function(b){
+      b.addEventListener('click',function(){
+        var q=b.parentNode, on=q.classList.toggle('open');
+        b.setAttribute('aria-expanded',on);
+        b.textContent=on?'隐藏答案':'查看答案';
+      });
     });
-  });
-}
+  } else if (document.querySelector('.q button[data-ans]')) {
+    /* data-ans + hidden 属性式（03-03）：ex.hidden 切换，正确项标 ok */
+    document.querySelectorAll('.q button').forEach(function(b){
+      var q=b.parentNode, ex=q.querySelector('.ex'), li=q.querySelector('li[data-k="'+b.dataset.ans+'"]');
+      b.addEventListener('click',function(){
+        var show=ex.hidden; ex.hidden=!show;
+        if(li) li.classList.toggle('ok',show);
+        b.textContent=show?'隐藏答案':'显示答案';
+      });
+    });
+  } else if (document.querySelector('.quiz .q .rev')) {
+    /* rev/exp + data-ans 式（01-05 第一章）：点 rev 切换 exp.show，正确项标 right */
+    document.querySelectorAll('.quiz .q').forEach(function(q){
+      var b=q.querySelector('.rev'), ex=q.querySelector('.exp'), ans=q.getAttribute('data-ans');
+      if(!b||!ex) return;
+      var right = ans!=null ? q.querySelector('.opt[data-k="'+ans+'"]') : null;
+      b.addEventListener('click',function(){
+        var on=ex.classList.toggle('show');
+        if(right) right.classList.toggle('right',on);
+        b.textContent=on?'隐藏答案':'显示答案';
+      });
+    });
+  } else {
+    /* .q button 通用兜底（01-01/01-02/01-04/01-06/03-01/02/04/06…）：
+       open 与 shown 双开（各家 CSS 用哪个都命中）；正确项按 data-c/data-ok/ok 标 correct */
+    document.querySelectorAll('.q button').forEach(function(b){
+      b.addEventListener('click',function(){
+        var q=b.closest('.q'), on=!q.classList.contains('open');
+        q.classList.toggle('open',on); q.classList.toggle('shown',on);
+        q.querySelectorAll('.opt[data-c="1"], li[data-ok="1"], li.ok').forEach(function(o){
+          o.classList.toggle('correct',on);
+        });
+        if(b.dataset.hide&&b.dataset.show) b.textContent=on?b.dataset.hide:b.dataset.show;
+        else b.textContent=on?'隐藏答案':'显示答案';
+      });
+    });
+  }
 </script>
 </body>
 </html>

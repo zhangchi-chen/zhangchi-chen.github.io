@@ -45,10 +45,10 @@ background:rgba(107,211,138,.08);color:var(--ink);font-size:15px;line-height:1.8
 <div class="ans"><b>B.</b> The criterion is an internal check: no target value needed, only pairwise distances within the tail.</div>
 </div>
 <div class="qt-item">
-<p class="qt-q">For sₙ = 1 + 1/2 + … + 1/2ⁿ and n > m, the tail |sₙ − sₘ| equals</p>
-<p class="qt-opts"><span>A. 1/2ᵐ − 1/2ⁿ</span><span>B. 1/2ⁿ − 1/2ᵐ</span><span>C. 1/2ᵐ⁺¹</span></p>
+<p class="qt-q">For sₙ = 1 + 1/4 + … + 1/n² with n > m ≥ 1, the bound 1/k² < 1/(k−1) − 1/k (k ≥ 2) yields which tail estimate?</p>
+<p class="qt-opts"><span>A. |sₙ − sₘ| < 1/m</span><span>B. |sₙ − sₘ| < 1/m²</span><span>C. |sₙ − sₘ| < 1/n</span></p>
 <button class="reveal">Reveal answer</button>
-<div class="ans"><b>A.</b> Each block 1/2ᵏ = 1/2ᵏ⁻¹ − 1/2ᵏ telescopes from k = m+1 to n, leaving 1/2ᵐ − 1/2ⁿ.</div>
+<div class="ans"><b>A.</b> Summing from k = m+1 to n, the comparison telescopes to 1/m − 1/n, which is below 1/m; the other two bounds fail for large n.</div>
 </div>
 <div class="qt-item">
 <p class="qt-q">Suppose |aₙ₊₁ − aₙ| → 0. Which statement is correct?</p>
@@ -69,10 +69,10 @@ background:rgba(107,211,138,.08);color:var(--ink);font-size:15px;line-height:1.8
 <div class="ans"><b>B.</b> Triangle inequality: for large n, |aₙ − L| ≤ |aₙ − aₙₖ| + |aₙₖ − L| < 2ε.</div>
 </div>
 <div class="qt-item">
-<p class="qt-q">With ε₀ = 1/2, which pair proves the harmonic partial sums diverge?</p>
-<p class="qt-opts"><span>A. sₙ and sₙ₊₁</span><span>B. sₙ and s₂ₙ</span><span>C. s₁ and sₙ</span></p>
+<p class="qt-q">For Hₙ = 1 + 1/2 + … + 1/n, which estimate holds for every n ≥ 1?</p>
+<p class="qt-opts"><span>A. H₂ₙ − Hₙ ≥ 1</span><span>B. H₂ₙ − Hₙ ≥ 1/2</span><span>C. H₂ₙ − Hₙ ≤ 1/(2n)</span></p>
 <button class="reveal">Reveal answer</button>
-<div class="ans"><b>B.</b> Between sₙ and s₂ₙ lie n terms, each ≥ 1/(2n), so the gap is at least 1/2 for every n.</div>
+<div class="ans"><b>B.</b> H₂ₙ − Hₙ is a sum of n terms, each at least 1/(2n), so it is at least 1/2 (equality at n = 1, which is why “≥ 1” fails).</div>
 </div>
   </div>
 </div>

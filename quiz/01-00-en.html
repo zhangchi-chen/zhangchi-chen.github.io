@@ -42,37 +42,37 @@ background:rgba(107,211,138,.08);color:var(--ink);font-size:15px;line-height:1.8
 <p class="qt-q">To compare aₙ = 1 + (−1)ⁿ/n with bₙ = 1, why does “comparing sizes” fail?</p>
 <p class="qt-opts"><span>A. Every term of aₙ is greater than 1.</span><span>B. Term by term, the inequality flips back and forth.</span><span>C. aₙ has no limit.</span></p>
 <button class="reveal">Reveal answer</button>
-<div class="ans"><b>B.</b> a₁ < 1, a₂ > 1, a₃ < 1 … so instead one compares the distance |aₙ − 1| = 1/n and the long-run trend.</div>
+<div class="ans"><b>B.</b> a₁ = 0 < 1, a₂ = 1.5 > 1, a₃ = 2/3 < 1 … so instead one compares the distance |aₙ − 1| = 1/n and the long-run trend.</div>
 </div>
 <div class="qt-item">
-<p class="qt-q">“x near x₀ forces f(x) near f(x₀)” names which concept?</p>
+<p class="qt-q">“Approximate inputs give approximate outputs” names which concept?</p>
 <p class="qt-opts"><span>A. Continuity</span><span>B. The derivative</span><span>C. Completeness</span></p>
 <button class="reveal">Reveal answer</button>
-<div class="ans"><b>A.</b> Continuity is the hope that limits pass through functions: f(lim xₙ) = lim f(xₙ).</div>
+<div class="ans"><b>A.</b> Continuity is the hope that limits pass through functions: under x², the inputs 2.9, 2.99, 2.999 give 8.41, 8.9401, 8.994001.</div>
 </div>
 <div class="qt-item">
 <p class="qt-q">f(t) = 100 + t versus g(t) = t²: in the long run, who leads is decided by…</p>
-<p class="qt-opts"><span>A. their values at t = 0.</span><span>B. which formula is shorter.</span><span>C. their growth rates, i.e. the derivatives.</span></p>
+<p class="qt-opts"><span>A. their values at t = 10.</span><span>B. which formula is shorter.</span><span>C. their growth rates, i.e. the derivatives.</span></p>
 <button class="reveal">Reveal answer</button>
-<div class="ans"><b>C.</b> f′(t) = 1 while g′(t) = 2t keeps growing, so g overtakes permanently around t ≈ 10.5.</div>
+<div class="ans"><b>C.</b> At t = 10, f still leads (110 versus 100); but from 10 to 11, g gains 21 while f gains only 1 — from t = 11 on, g leads (121 versus 111).</div>
 </div>
 <div class="qt-item">
-<p class="qt-q">What does a Taylor expansion do?</p>
-<p class="qt-opts"><span>A. Approximates good functions locally by polynomials, with a remainder.</span><span>B. Proves that every sequence converges.</span><span>C. Finds a function's maximum.</span></p>
+<p class="qt-q">At x = 0.1, what does the fit 1 + x + x² give for 1/(1 − x) = 1.1111…?</p>
+<p class="qt-opts"><span>A. 1.11, with remainder 0.00111…</span><span>B. 1.1, with no remainder</span><span>C. 1.111, exact equality</span></p>
 <button class="reveal">Reveal answer</button>
-<div class="ans"><b>A.</b> For example near 0, sin x ≈ x − x³/6 + x⁵/120; controlling the remainder is the real skill.</div>
+<div class="ans"><b>A.</b> 1 + 0.1 + 0.01 = 1.11; the gap 1.1111… − 1.11 = 0.00111… is exactly the remainder.</div>
 </div>
 <div class="qt-item">
 <p class="qt-q">Why does the sequence 1.4, 1.41, 1.414, … need the completeness of the reals?</p>
 <p class="qt-opts"><span>A. Every term is irrational.</span><span>B. Its limit √2 is not rational and has nowhere to land in ℚ.</span><span>C. It diverges to ∞.</span></p>
 <button class="reveal">Reveal answer</button>
-<div class="ans"><b>B.</b> Completeness guarantees that this limit exists as a real number — ℝ has no holes.</div>
+<div class="ans"><b>B.</b> Every term is a finite decimal, hence rational, but the target √2 is not; completeness guarantees that ℝ has no such hole.</div>
 </div>
 <div class="qt-item">
-<p class="qt-q">For aₙ = (−1)ⁿ(1 + 1/n), the upper limit is</p>
-<p class="qt-opts"><span>A. 0</span><span>B. 2</span><span>C. 1</span></p>
+<p class="qt-q">For aₙ = (−1)ⁿ·n/(n + 1), the upper limit is</p>
+<p class="qt-opts"><span>A. 0</span><span>B. 4/5</span><span>C. 1</span></p>
 <button class="reveal">Reveal answer</button>
-<div class="ans"><b>C.</b> The even terms 1 + 1/n tend to 1 from above and the odd terms tend to −1, so limsup = 1 and liminf = −1.</div>
+<div class="ans"><b>C.</b> The even terms 2/3, 4/5, 6/7, … tend to 1 (never exceeding it), while the odd terms tend to −1; so limsup = 1 and liminf = −1.</div>
 </div>
   </div>
 </div>

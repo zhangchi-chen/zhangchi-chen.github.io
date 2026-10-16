@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>无穷大的比阶：增长阶梯 · 自测</title>
+<title>无穷大的比阶：增长阶梯</title>
 <style>
 :root{--bg:#0c1424;--panel:rgba(255,255,255,0.04);--line:rgba(255,255,255,0.1);--txt:#eef2f8;--muted:#93a0b8;--acc:#ffd166;--ok:#7ee0a3;
  --ln:#5fd4c9;--n:#86d36f;--pw:#f4d35e;--ex:#f59e4c;--fa:#f26b7c;--nn:#c48cf7}
@@ -19,7 +19,7 @@ section h2{margin:0 0 14px;font-size:26px}section h2 .tag{display:inline-block;f
 p{margin:10px 0}sup,sub{font-size:0.72em;line-height:0}b{font-weight:700}
 .row{display:flex;gap:24px;flex-wrap:wrap;align-items:flex-start}.row>*{flex:1 1 300px;min-width:0}
 .fig{width:100%;height:auto;display:block;background:rgba(0,0,0,0.18);border-radius:12px;padding:8px;font-family:inherit}
-.fig .tick{fill:#93a0b8;font-size:15px}.fig.small{max-width:300px}.fig.stairs{max-width:600px;margin:0 auto}
+.fig .tick{fill:#93a0b8;font-size:15px}.fig.small{max-width:300px}.fig.time{max-width:760px;margin:0 auto}.fig.stairs{max-width:600px;margin:0 auto}
 .caption{color:var(--muted);font-size:14px;margin-top:6px}
 .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:14px 0}
 .step{border-radius:12px;padding:10px 12px;border:1px solid var(--line);background:rgba(255,255,255,0.03)}.step .k{font-size:13px;color:var(--muted)}.step .v{font-size:22px;font-weight:700}
@@ -66,7 +66,7 @@ section.quiz .q{margin:12px 0;text-align:left}
 <body>
 <div class="page">
   <div class="topbar">
-    <h1>无穷大的比阶：增长阶梯 · 自测</h1> <a href="../notes/02-08.html">查看讲稿 →</a>
+    <h1>无穷大的比阶：增长阶梯</h1>
   </div>
   
   <div class="quiz">
@@ -75,7 +75,7 @@ section.quiz .q{margin:12px 0;text-align:left}
 </div>
 <script>
 document.querySelectorAll('.reveal').forEach(function(b){
-  b.addEventListener('click',function(){this.closest('.q').classList.add('shown')});
+  b.addEventListener('click',function(){var t=this.closest('.q,.qt-item');if(t)t.classList.add('shown')});
 });
 /* 按页面 DOM 特征自适配各批次回件的交互（逻辑均照搬原版） */
 if (document.querySelector('.qt3')) {
@@ -88,7 +88,20 @@ if (document.querySelector('.qt3')) {
     var b=q.querySelector('button'),a=q.querySelector('.ans'),ok=q.querySelector('.opts li[data-ok]');
     b.addEventListener('click',function(){var on=a.classList.toggle('show');ok.classList.toggle('ok',on);
       b.textContent=on?b.dataset.hide:b.dataset.show;b.setAttribute('aria-expanded',on);});});
-} else if (document.querySelector('.quiz .q .rv')) {
+  } else if (document.querySelector('.q .rv') && document.querySelector('.q .opts')) {
+    /* rv + opts li[data-ok] + hidden 属性式（03-05）：ex.hidden 切换，命中项标 hit */
+    document.querySelectorAll('.q').forEach(function(q){
+      var b=q.querySelector('.rv'), ex=q.querySelector('.ex');
+      if(!b||!ex) return;
+      b.addEventListener('click',function(){
+        var open=ex.hidden; ex.hidden=!open;
+        q.querySelectorAll('.opts li').forEach(function(li){
+          if(li.dataset.ok==='1') li.classList.toggle('hit',open);
+        });
+        b.textContent=open?'隐藏答案':'显示答案';
+      });
+    });
+  } else if (document.querySelector('.quiz .q .rv')) {
   /* opt/rv/ex 式（07-05）：选项标记 sel，展开按钮标出对错 */
   document.querySelectorAll('.quiz .q').forEach(function(q){
     var opts=q.querySelectorAll('.opt'), ex=q.querySelector('.ex'), btn=q.querySelector('.rv');
@@ -114,16 +127,52 @@ if (document.querySelector('.qt3')) {
       q.querySelectorAll('.opts span')[k].classList.add('ok');
       btn.disabled=true; btn.style.opacity=.5; });
   });
-} else {
-  /* .opt 选择题 + 展开按钮式（02-04） */
-  document.querySelectorAll('.q button').forEach(function(b){
-    b.addEventListener('click',function(){
-      var q=b.closest('.q'), open=q.classList.toggle('open');
-      q.querySelectorAll('.opt').forEach(function(o){ if(o.dataset.c==='1') o.classList.toggle('correct',open); });
-      if(b.dataset.hide&&b.dataset.show) b.textContent=open?b.dataset.hide:b.dataset.show;
+  } else if (document.querySelector('.qitem')) {
+    /* qitem 式（01-03 第一章）：按钮 toggle 父级 open，文字切换（原页 JS 照搬） */
+    document.querySelectorAll('.qitem button').forEach(function(b){
+      b.addEventListener('click',function(){
+        var q=b.parentNode, on=q.classList.toggle('open');
+        b.setAttribute('aria-expanded',on);
+        b.textContent=on?'隐藏答案':'查看答案';
+      });
     });
-  });
-}
+  } else if (document.querySelector('.q button[data-ans]')) {
+    /* data-ans + hidden 属性式（03-03）：ex.hidden 切换，正确项标 ok */
+    document.querySelectorAll('.q button').forEach(function(b){
+      var q=b.parentNode, ex=q.querySelector('.ex'), li=q.querySelector('li[data-k="'+b.dataset.ans+'"]');
+      b.addEventListener('click',function(){
+        var show=ex.hidden; ex.hidden=!show;
+        if(li) li.classList.toggle('ok',show);
+        b.textContent=show?'隐藏答案':'显示答案';
+      });
+    });
+  } else if (document.querySelector('.quiz .q .rev')) {
+    /* rev/exp + data-ans 式（01-05 第一章）：点 rev 切换 exp.show，正确项标 right */
+    document.querySelectorAll('.quiz .q').forEach(function(q){
+      var b=q.querySelector('.rev'), ex=q.querySelector('.exp'), ans=q.getAttribute('data-ans');
+      if(!b||!ex) return;
+      var right = ans!=null ? q.querySelector('.opt[data-k="'+ans+'"]') : null;
+      b.addEventListener('click',function(){
+        var on=ex.classList.toggle('show');
+        if(right) right.classList.toggle('right',on);
+        b.textContent=on?'隐藏答案':'显示答案';
+      });
+    });
+  } else {
+    /* .q button 通用兜底（01-01/01-02/01-04/01-06/03-01/02/04/06…）：
+       open 与 shown 双开（各家 CSS 用哪个都命中）；正确项按 data-c/data-ok/ok 标 correct */
+    document.querySelectorAll('.q button').forEach(function(b){
+      b.addEventListener('click',function(){
+        var q=b.closest('.q'), on=!q.classList.contains('open');
+        q.classList.toggle('open',on); q.classList.toggle('shown',on);
+        q.querySelectorAll('.opt[data-c="1"], li[data-ok="1"], li.ok').forEach(function(o){
+          o.classList.toggle('correct',on);
+        });
+        if(b.dataset.hide&&b.dataset.show) b.textContent=on?b.dataset.hide:b.dataset.show;
+        else b.textContent=on?'隐藏答案':'显示答案';
+      });
+    });
+  }
 </script>
 </body>
 </html>
