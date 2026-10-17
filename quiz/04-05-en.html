@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Uniform Continuity · Self-test</title>
+<style>
+:root{--bg:#0f1726;--card:#16213a;--fg:#e5e7eb;--muted:#94a3b8;--line:#2b3a52;
+  --sky:#7dd3fc;--amb:#fbbf24;--grn:#4ade80;--blue:#1f72b0}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);
+  font:17px/1.7 "Segoe UI",system-ui,-apple-system,"PingFang SC","Noto Sans CJK SC","Microsoft YaHei",sans-serif}
+main{max-width:760px;margin:0 auto;padding:56px 16px 80px}
+.kicker{color:var(--muted);letter-spacing:.08em;font-size:13px}
+h1{font-size:clamp(24px,4.6vw,34px);margin:6px 0 8px;line-height:1.25}
+.lead{color:var(--sky);font-size:15.5px;margin:0 0 26px}
+.q{background:var(--card);border:1px solid var(--line);border-radius:14px;
+  padding:18px 20px;margin:0 0 16px}
+.q p.qt{margin:0 0 10px;font-weight:600}
+.opts{display:flex;flex-direction:column;gap:7px;margin:0 0 12px}
+.opts span{color:var(--fg)}
+.opts span b{color:var(--sky);margin-right:6px}
+button.rv{background:transparent;color:var(--amb);border:1.5px solid var(--amb);
+  border-radius:8px;padding:5px 14px;font:inherit;font-size:14.5px;cursor:pointer}
+button.rv:hover{background:var(--amb);color:var(--bg)}
+.reveal{display:none;margin-top:10px;padding:10px 12px;border-left:3px solid var(--grn);
+  background:#0f2a22;border-radius:6px}
+.reveal.shown{display:block}
+#mv-bar{position:fixed;left:0;right:0;top:0;z-index:99;display:flex;align-items:center;
+  gap:12px;padding:9px 14px;font-size:14px;
+  background:rgba(15,23,38,.86);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line)}
+#mv-bar .mv-home{color:var(--sky);text-decoration:none;white-space:nowrap}
+#mv-bar .mv-title{flex:1;text-align:center;font-weight:600;overflow:hidden;
+  text-overflow:ellipsis;white-space:nowrap;opacity:.85}
+#mv-bar .mv-notes{color:#fff;background:var(--blue);text-decoration:none;border-radius:8px;
+  padding:4px 12px;white-space:nowrap;font-size:13.5px}
+@media (max-width:480px){#mv-bar .mv-title{font-size:12.5px}}
+</style></head>
+<body>
+<nav id="mv-bar"><a class="mv-home" href="/">Home</a>
+<span class="mv-title">04-05 · Uniform Continuity</span>
+<a class="mv-notes" href="../notes/04-05.html">Notes</a></nav>
+<main>
+<p class="kicker">Mathematical Analysis · 04-05 · Self-test</p>
+<h1>Uniform Continuity</h1>
+<p class="lead">Click the button under each item to reveal the answer.</p>
+<div class="q"><p class="qt">1. Which statement is the definition of “f is uniformly continuous on I”?</p><div class="opts"><span><b>A.</b><span class="m">∀ε > 0 ∃δ > 0 ∀x′, x″ ∈ I: |x′ − x″| < δ ⇒ |f(x′) − f(x″)| < ε</span></span><span><b>B.</b><span class="m">∀ε > 0 ∀x″ ∈ I ∃δ > 0 ∀x′ ∈ I: |x′ − x″| < δ ⇒ |f(x′) − f(x″)| < ε</span></span><span><b>C.</b><span class="m">∃δ > 0 ∀ε > 0 ∀x′, x″ ∈ I: |x′ − x″| < δ ⇒ |f(x′) − f(x″)| < ε</span></span></div><button class="rv" data-r="r0">Reveal answer</button><div class="reveal" id="r0"><b>Answer: A.</b> In A, δ is chosen before the points, so δ = δ(ε) serves all of I: one ruler for the whole road. B lets δ depend on the point x″ — that is ordinary continuity. C puts δ before ε, so f(x′) = f(x″) whenever |x′ − x″| &lt; δ, which forces f to be constant on I.</div></div>
+<div class="q"><p class="qt">2. For f(x) = x² on [0, +∞), the pointwise recipe δ = ε/(2x + 1) works for 0 &lt; ε ≤ 1. What is δ at x = 100?</p><div class="opts"><span><b>A.</b><span class="m">ε/201</span></span><span><b>B.</b><span class="m">ε/101</span></span><span><b>C.</b><span class="m">ε/200</span></span></div><button class="rv" data-r="r1">Reveal answer</button><div class="reveal" id="r1"><b>Answer: A.</b> 2·100 + 1 = 201. As x grows, δ shrinks: ε/3 at x = 1, ε/201 at x = 100, ε/2000001 at x = 10⁶. No single δ > 0 works for every x.</div></div>
+<div class="q"><p class="qt">3. Which statement says that f is NOT uniformly continuous on I?</p><div class="opts"><span><b>A.</b><span class="m">∃ε₀ > 0 ∀δ > 0 ∃x′, x″ ∈ I: |x′ − x″| < δ and |f(x′) − f(x″)| ≥ ε₀</span></span><span><b>B.</b><span class="m">∀ε > 0 ∃δ > 0 ∃x′, x″ ∈ I: |x′ − x″| < δ and |f(x′) − f(x″)| ≥ ε</span></span><span><b>C.</b><span class="m">∃ε₀ > 0 ∃δ > 0 ∀x′, x″ ∈ I: |x′ − x″| < δ ⇒ |f(x′) − f(x″)| ≥ ε₀</span></span></div><button class="rv" data-r="r2">Reveal answer</button><div class="reveal" id="r2"><b>Answer: A.</b> Negate one quantifier at a time: ∀ε becomes ∃ε₀, ∃δ becomes ∀δ, and “every pair behaves” becomes “some pair misbehaves”. The hostile king can defeat every δ with a devil pair.</div></div>
+<div class="q"><p class="qt">4. Which pair of sequences in (0, 1) shows, by the sequence criterion, that sin(1/x) is not uniformly continuous there?</p><div class="opts"><span><b>A.</b><span class="m">x′ₙ = 1/(2nπ),  x″ₙ = 1/(2nπ + π/2)</span></span><span><b>B.</b><span class="m">x′ₙ = 1/(2nπ),  x″ₙ = 1/(2nπ + 2π)</span></span><span><b>C.</b><span class="m">x′ₙ = 1/n,  x″ₙ = 1/(n + 1)</span></span></div><button class="rv" data-r="r3">Reveal answer</button><div class="reveal" id="r3"><b>Answer: A.</b> In A, x′ₙ − x″ₙ → 0 while sin(2nπ) = 0 and sin(2nπ + π/2) = 1, so the value gap stays 1. In B both values are 0, so the gap is 0 and proves nothing. In C the values sin n and sin(n + 1) are never shown to stay apart.</div></div>
+<div class="q"><p class="qt">5. When the hostile king is fed δ = 1, 1/2, 1/3, …, what does the negation hand back?</p><div class="opts"><span><b>A.</b>Pairs with <span class="m">|x′ₙ − x″ₙ| < 1/n</span> and <span class="m">|f(x′ₙ) − f(x″ₙ)| ≥ ε₀</span></span><span><b>B.</b>Pairs with <span class="m">|x′ₙ − x″ₙ| ≥ 1/n</span> and <span class="m">|f(x′ₙ) − f(x″ₙ)| < ε₀</span></span><span><b>C.</b>One fixed pair that works for every δ</span></div><button class="rv" data-r="r4">Reveal answer</button><div class="reveal" id="r4"><b>Answer: A.</b> Each δ = 1/n gets its own devil pair, so x′ₙ − x″ₙ → 0 while f(x′ₙ) − f(x″ₙ) does not tend to 0. That is the sufficiency half of the sequence criterion: the pairs are extracted from the negation, not guessed.</div></div>
+<div class="q"><p class="qt">6. Is f(x) = √x uniformly continuous on [0, +∞)?</p><div class="opts"><span><b>A.</b>Yes: <span class="m">|√x′ − √x″| ≤ √|x′ − x″|</span>, so δ = ε² works</span><span><b>B.</b>No: its graph is vertical at 0</span><span><b>C.</b>No: it is unbounded on [0, +∞)</span></div><button class="rv" data-r="r5">Reveal answer</button><div class="reveal" id="r5"><b>Answer: A.</b> Steepness and unboundedness are not the enemy. A δ that is the same everywhere exists: if |x′ − x″| &lt; ε², then |√x′ − √x″| &lt; ε. (Compare ax + b, where δ = ε/(|a| + 1) works.)</div></div>
+</main>
+<script>
+document.querySelectorAll("button.rv").forEach(function(b){
+  b.addEventListener("click", function(){
+    var r = document.getElementById(b.dataset.r);
+    r.classList.toggle("shown");
+    b.textContent = r.classList.contains("shown") ? "Hide" : "Reveal answer";
+  });
+});
+</script>
+</body></html>

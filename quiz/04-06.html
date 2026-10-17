@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cantor 定理 · 自测</title>
+<style>
+:root{--bg:#0f1726;--card:#16213a;--fg:#e5e7eb;--muted:#94a3b8;--line:#2b3a52;
+  --sky:#7dd3fc;--amb:#fbbf24;--grn:#4ade80;--blue:#1f72b0}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);
+  font:17px/1.7 "Segoe UI",system-ui,-apple-system,"PingFang SC","Noto Sans CJK SC","Microsoft YaHei",sans-serif}
+main{max-width:760px;margin:0 auto;padding:56px 16px 80px}
+.kicker{color:var(--muted);letter-spacing:.08em;font-size:13px}
+h1{font-size:clamp(24px,4.6vw,34px);margin:6px 0 8px;line-height:1.25}
+.lead{color:var(--sky);font-size:15.5px;margin:0 0 26px}
+.q{background:var(--card);border:1px solid var(--line);border-radius:14px;
+  padding:18px 20px;margin:0 0 16px}
+.q p.qt{margin:0 0 10px;font-weight:600}
+.opts{display:flex;flex-direction:column;gap:7px;margin:0 0 12px}
+.opts span{color:var(--fg)}
+.opts span b{color:var(--sky);margin-right:6px}
+button.rv{background:transparent;color:var(--amb);border:1.5px solid var(--amb);
+  border-radius:8px;padding:5px 14px;font:inherit;font-size:14.5px;cursor:pointer}
+button.rv:hover{background:var(--amb);color:var(--bg)}
+.reveal{display:none;margin-top:10px;padding:10px 12px;border-left:3px solid var(--grn);
+  background:#0f2a22;border-radius:6px}
+.reveal.shown{display:block}
+#mv-bar{position:fixed;left:0;right:0;top:0;z-index:99;display:flex;align-items:center;
+  gap:12px;padding:9px 14px;font-size:14px;
+  background:rgba(15,23,38,.86);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line)}
+#mv-bar .mv-home{color:var(--sky);text-decoration:none;white-space:nowrap}
+#mv-bar .mv-title{flex:1;text-align:center;font-weight:600;overflow:hidden;
+  text-overflow:ellipsis;white-space:nowrap;opacity:.85}
+#mv-bar .mv-notes{color:#fff;background:var(--blue);text-decoration:none;border-radius:8px;
+  padding:4px 12px;white-space:nowrap;font-size:13.5px}
+@media (max-width:480px){#mv-bar .mv-title{font-size:12.5px}}
+</style></head>
+<body>
+<nav id="mv-bar"><a class="mv-home" href="/">目录</a>
+<span class="mv-title">04-06 · Cantor 定理</span>
+<a class="mv-notes" href="../notes/04-06.html">去讲稿</a></nav>
+<main>
+<p class="kicker">数学分析 · 04-06 · 自测</p>
+<h1>Cantor 定理</h1>
+<p class="lead">点击选项下方按钮查看答案与解析。</p>
+<div class="q"><p class="qt">1. “把 [a, b] 上每个点的 δ(x) 都收集起来取最小”，为什么算不上证明？</p><div class="opts"><span><b>A.</b>δ(x) 有无穷多个，下确界可能是 0，最小值未必存在。</span><span><b>B.</b>δ(x) 可能是负数，取最小没有意义。</span><span><b>C.</b>闭区间只有有限个点，所以这个论证多余。</span></div><button class="rv" data-r="r0">显示答案</button><div class="reveal" id="r0"><b>答案: A.</b> 1, 1/2, 1/3, … 个个为正，下确界却是 0。而且这个论证根本没用到围墙：照搬到 (0, 1] 上，它会“证明”1/x 一致连续，这是错的。</div></div>
+<div class="q"><p class="qt">2. 证明的第一拍里，闭区间的“闭”究竟用在哪里？</p><div class="opts"><span><b>A.</b>用来保证数列 xₙ 有界。</span><span><b>B.</b>保证子列极限 x₀ 留在 [a, b] 内：由 a ≤ xₙₖ ≤ b 得 a ≤ x₀ ≤ b。</span><span><b>C.</b>用来保证 f 连续。</span></div><button class="rv" data-r="r1">显示答案</button><div class="reveal" id="r1"><b>答案: B.</b> 有界性是致密性定理需要的条件；“闭”让 x₀ 留在院内，于是第三拍才能用 x₀ 处的连续性。</div></div>
+<div class="q"><p class="qt">3. 对 (0, 1] 上的 f(x) = 1/x，取 xₙ = 1/n，yₙ = 1/(n+1) 走一遍三拍，哪里出了问题？</p><div class="opts"><span><b>A.</b>第二拍：yₙ 跟丢了 xₙ。</span><span><b>B.</b>哪里都没问题，1/x 在 (0, 1] 上一致连续。</span><span><b>C.</b>第三拍：极限 x₀ = 0 落在 (0, 1] 之外，x₀ 处的连续性无从使用。</span></div><button class="rv" data-r="r2">显示答案</button><div class="reveal" id="r2"><b>答案: C.</b> |xₙ − yₙ| = 1/(n(n+1)) → 0，两列都趋于 0，可 |f(xₙ) − f(yₙ)| 恒为 1。检查站从缺失的围墙处逃走了。</div></div>
+<div class="q"><p class="qt">4. 拼接引理中，跨境点对 x′ ∈ I₁，x″ ∈ I₂ 怎么处理？</p><div class="opts"><span><b>A.</b>绕道边境小镇 c：因为 x′ ≤ c ≤ x″，两点到 c 的距离都小于 δ₃，函数值到 f(c) 的距离都小于 ε/2。</span><span><b>B.</b>取 δ = δ₁ + δ₂。</span><span><b>C.</b>处理不了，引理要求 f 在两段上是同一个公式。</span></div><button class="rv" data-r="r3">显示答案</button><div class="reveal" id="r3"><b>答案: A.</b> |f(x′) − f(x″)| ≤ |f(x′) − f(c)| + |f(c) − f(x″)| &lt; ε/2 + ε/2 = ε，取 δ = min{δ₁, δ₂, δ₃}。</div></div>
+<div class="q"><p class="qt">5. 在 [1, ∞) 上 |cos √x′ − cos √x″| ≤ |x′ − x″|/2。给定 ε > 0，哪个 δ 可用？</p><div class="opts"><span><b>A.</b>δ = ε/2</span><span><b>B.</b>δ = 2ε</span><span><b>C.</b>δ = ε²</span></div><button class="rv" data-r="r4">显示答案</button><div class="reveal" id="r4"><b>答案: B.</b> L = 1/2，所以 δ = ε/L = 2ε：此时 |cos √x′ − cos √x″| ≤ |x′ − x″|/2 &lt; 2ε/2 = ε。</div></div>
+<div class="q"><p class="qt">6. 关于 √x，哪个说法正确？</p><div class="opts"><span><b>A.</b>√x 在 [0, ∞) 上满足利普希茨条件。</span><span><b>B.</b>√x 在 [0, ∞) 上一致连续，但在 [0, 1] 上找不到利普希茨常数。</span><span><b>C.</b>√x 在 0 附近并非一致连续。</span></div><button class="rv" data-r="r5">显示答案</button><div class="reveal" id="r5"><b>答案: B.</b> t → 0 时 |√t − √0|/|t − 0| = 1/√t → ∞，所以 [0, 1] 上找不到 L；[0, 1] 交给康托尔，[1, ∞) 上 L = 1/2，在 1 处拼接即得。利普希茨只是充分条件，并非必要。</div></div>
+</main>
+<script>
+document.querySelectorAll("button.rv").forEach(function(b){
+  b.addEventListener("click", function(){
+    var r = document.getElementById(b.dataset.r);
+    r.classList.toggle("shown");
+    b.textContent = r.classList.contains("shown") ? "收起答案" : "显示答案";
+  });
+});
+</script>
+</body></html>

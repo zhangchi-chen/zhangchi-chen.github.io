@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cantor's Theorem · Notes</title>
+<style>
+:root{--bg:#0f1726;--card:#16213a;--fg:#e5e7eb;--muted:#94a3b8;--line:#2b3a52;
+  --sky:#7dd3fc;--amb:#fbbf24;--blue:#1f72b0}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);
+  font:17px/1.85 "Segoe UI",system-ui,-apple-system,"PingFang SC","Noto Sans CJK SC","Microsoft YaHei",sans-serif}
+main{max-width:820px;margin:0 auto;padding:52px 18px 80px}
+.kicker{color:var(--muted);letter-spacing:.08em;font-size:13px}
+h1{font-size:clamp(24px,4.6vw,36px);margin:6px 0 6px;line-height:1.25}
+.lead{color:var(--sky);font-size:16px;margin:0 0 30px}
+p{margin:0 0 18px}
+p.mark{border-left:3px solid var(--amb);padding-left:14px;margin-top:28px;
+  color:var(--amb);font-weight:600}
+#mv-bar{position:fixed;left:0;right:0;top:0;z-index:99;display:flex;align-items:center;
+  gap:12px;padding:9px 14px;font-size:14px;
+  background:rgba(15,23,38,.86);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line)}
+#mv-bar .mv-home{color:var(--sky);text-decoration:none;white-space:nowrap}
+#mv-bar .mv-title{flex:1;text-align:center;font-weight:600;overflow:hidden;
+  text-overflow:ellipsis;white-space:nowrap;opacity:.85}
+#mv-bar .mv-quiz{color:#fff;background:var(--blue);text-decoration:none;border-radius:8px;
+  padding:4px 12px;white-space:nowrap;font-size:13.5px}
+p b{color:var(--amb)}
+@media (max-width:480px){#mv-bar .mv-title{font-size:12.5px}}
+</style></head>
+<body>
+<nav id="mv-bar"><a class="mv-home" href="/">Home</a>
+<span class="mv-title">04-06 · Cantor's Theorem</span>
+<a class="mv-quiz" href="../quiz/04-06.html">Self-test</a></nav>
+<main>
+<p class="kicker">Mathematical Analysis · Episode {ep} · Narration transcript</p>
+<h1>Cantor's Theorem</h1>
+<p class="lead">Full narration transcript; watch {ep}.mp4 for formulas and figures, self-test via the top-right link.</p>
+<p class="mark">Hello, everyone.Today we hunt for one ruler that serves a whole interval.Last time, x² on [0, ∞) had a runaway δ.Uniform continuity demands one δ for every pair of points.Pointwise continuity lets δ change from point to point.</p>
+<p>Now picture [a, b] as a walled courtyard.Every point x carries its own local δ(x).Tempting idea: collect them all and take the smallest.The walls keep everything finite, right?Pause and ask: how many points live in the courtyard?Infinitely many, so infinitely many δ's.Look at 1, 1/2, 1/3, …: every one is positive.</p>
+<p>Yet their infimum is 0.Infinitely many numbers need not have a minimum.And δ = 0 is no ruler at all.Let's stress-test the idea on (0, 1] with f(x) = 1/x.The same story goes through word for word.But 1/x is not uniformly continuous there.Take neighbours 1/n and 1/(n+1).</p>
+<p>Their distance shrinks to 0, yet the values stay 1 apart.So the intuition never used the walls!It points somewhere true, but it is not a proof.Rigor must make the walls do real work.Cantor: continuous on [a, b] means uniformly continuous on [a, b].Proof by contradiction: suppose the conclusion fails.Then a hostile ε₀ defeats every δ.</p>
+<p>Taking δ = 1/n, we get a bad pair (xₙ, yₙ).The points close in, yet their values stay ≥ ε₀ apart.Three beats will turn this into a contradiction.Beat one: the sequence xₙ is bounded.Bolzano–Weierstrass extracts xₙₖ → x₀.Question: where does x₀ live?Passing to the limit: a ≤ x₀ ≤ b.</p>
+<p>The interval is closed, so x₀ stays inside.Here the wall does its job, legally.On (0, 1], the limit could escape to 0.Beat two: look at the partners yₙₖ.Each yₙₖ sits within 1/nₖ of its xₙₖ.Triangle inequality: yₙₖ is dragged to x₀.Both sequences meet at one checkpoint, x₀.</p>
+<p class="mark">Beat three: f is continuous at x₀.So f(xₙₖ) → f(x₀).Likewise f(yₙₖ) → f(x₀).Their gap is squeezed to 0.But every gap was ≥ ε₀: contradiction!So f is uniformly continuous. ∎</p>
+<p>Recap: trap, converge, collide.The closed interval compresses infinitely many demands into one checkpoint.Closedness and continuity are both essential.Gluing lemma: uniform on each piece means uniform on the union.Two territories, each with its own ruler δ₁, δ₂.They meet at the border town c.Same side: δ₁ or δ₂ already works.</p>
+<p>Cross-border pairs are the danger.The town c sits between x′ and x″.Continuity at c gives δ₃ for ε/2.Each side lands within ε/2 of f(c).Add them: the gap is less than ε.So δ = min{δ₁, δ₂, δ₃} rules the union.Note: the border town belongs to both territories.</p>
+<p>Lipschitz condition: a bounded stretching factor L gives uniform continuity.L is a bounded stretching factor.Given ε, take δ = ε/L.Then distance below δ forces the value gap below ε.No limits, no subsequences: one line.Try x²: factor the difference.The stretching factor is exactly |x′ + x″|.</p>
+<p class="mark">On [0, M] it is at most 2M, so L = 2M.On [0, ∞) it grows without bound.Gap 1/n, yet the values differ by more than 2.That is last episode's runaway δ in new clothes.</p>
+<p>Now look at √x, territory by territory.Rationalize the numerator.On [1, ∞) the denominator is at least 2.So L = 1/2 there.Near 0, though, the factor blows up.On [0, 1], √x has no Lipschitz constant.Yet Cantor still makes it uniformly continuous there.</p>
+<p>Glue at 1: uniformly continuous on all of [0, ∞).Lipschitz is sufficient, not necessary.Showcase: cos(√x) on the whole half-line.Territory [0, 1]: hand it to Cantor.Territory [1, ∞): find a Lipschitz bound.Sum-to-product first.Then |sin t| ≤ |t| and |sin s| ≤ 1.</p>
+<p>So cosine stretches by a factor of at most 1.Chain it with the √x bound.So L = 1/2, and δ = 2ε works.Glue at the seam x = 1.So cos(√x) is uniformly continuous on [0, ∞).No derivatives, only inequalities.The closed interval grants the upgrade for free.</p>
+<p>But the whole real line ℝ has no walls.When does a function on ℝ still earn the guarantee?That exam favorite is next: limits at infinity.Today's idea: compressing the infinite into the finite.See you next episode.</p>
+</main></body></html>

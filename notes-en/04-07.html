@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Limits at Infinity · Notes</title>
+<style>
+:root{--bg:#0f1726;--card:#16213a;--fg:#e5e7eb;--muted:#94a3b8;--line:#2b3a52;
+  --sky:#7dd3fc;--amb:#fbbf24;--blue:#1f72b0}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);
+  font:17px/1.85 "Segoe UI",system-ui,-apple-system,"PingFang SC","Noto Sans CJK SC","Microsoft YaHei",sans-serif}
+main{max-width:820px;margin:0 auto;padding:52px 18px 80px}
+.kicker{color:var(--muted);letter-spacing:.08em;font-size:13px}
+h1{font-size:clamp(24px,4.6vw,36px);margin:6px 0 6px;line-height:1.25}
+.lead{color:var(--sky);font-size:16px;margin:0 0 30px}
+p{margin:0 0 18px}
+p.mark{border-left:3px solid var(--amb);padding-left:14px;margin-top:28px;
+  color:var(--amb);font-weight:600}
+#mv-bar{position:fixed;left:0;right:0;top:0;z-index:99;display:flex;align-items:center;
+  gap:12px;padding:9px 14px;font-size:14px;
+  background:rgba(15,23,38,.86);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line)}
+#mv-bar .mv-home{color:var(--sky);text-decoration:none;white-space:nowrap}
+#mv-bar .mv-title{flex:1;text-align:center;font-weight:600;overflow:hidden;
+  text-overflow:ellipsis;white-space:nowrap;opacity:.85}
+#mv-bar .mv-quiz{color:#fff;background:var(--blue);text-decoration:none;border-radius:8px;
+  padding:4px 12px;white-space:nowrap;font-size:13.5px}
+p b{color:var(--amb)}
+@media (max-width:480px){#mv-bar .mv-title{font-size:12.5px}}
+</style></head>
+<body>
+<nav id="mv-bar"><a class="mv-home" href="/">Home</a>
+<span class="mv-title">04-07 · Limits at Infinity</span>
+<a class="mv-quiz" href="../quiz/04-07.html">Self-test</a></nav>
+<main>
+<p class="kicker">Mathematical Analysis · Episode {ep} · Narration transcript</p>
+<h1>Limits at Infinity</h1>
+<p class="lead">Full narration transcript; watch {ep}.mp4 for formulas and figures, self-test via the top-right link.</p>
+<p>Hello, everyone.Today: two exam favourites about continuity at infinity.Throughout this episode, f is continuous on the whole line ℝ.Result 1: if both limits L₊ and L₋ at ±∞ exist, f is uniformly continuous on ℝ.Result 2: if moreover L₊ = L₋ = A, f attains its maximum or its minimum.Each result will be solved twice: by a substitution, and by contradiction.On a closed interval [a, b], a continuous function gets two big guarantees.</p>
+<p>The max-min theorem: the maximum and the minimum are attained.The Cantor theorem: continuity on [a, b] is automatically uniform.But both theorems live inside the walls a and b.On ℝ there are no walls, and both guarantees can fail.x² is not uniformly continuous: (n + 1/n)² − n² = 2 + 1/n² > 2.And arctan x attains neither its supremum π/2 nor its infimum −π/2.So examiners ask: when does the open line ℝ still earn the guarantees?</p>
+<p>Answer to test: when f settles down at both horizons.The door is a dictionary.arctan maps ℝ one-to-one onto the bounded interval (−π/2, π/2).And tan carries every point back: tan(arctan y) = y.So f on ℝ is secretly g = f∘tan on a finite interval.As y runs to +∞, arctan y creeps up to the end π/2.The two horizons ±∞ become the two ends ±π/2.</p>
+<p>Whatever happens at the horizons becomes behaviour at two ordinary endpoints.Route one: the tangent dictionary.Define g on the closed interval [−π/2, π/2].Inside, g(x) = f(tan x).At the ends, g(π/2) = L₊ and g(−π/2) = L₋.Question: is g continuous at the new endpoint π/2?As x → π/2⁻, we have tan x → +∞.</p>
+<p>So f(tan x) → L₊ = g(π/2): yes, continuous.The left end works the same way: the horizons are honorary endpoints now.Inside, g is a composition of continuous functions.So g is continuous on a closed interval: the walls are back.The max-min theorem gives g a maximum M and a minimum m.Every value of f is a value of g: f(y) = g(arctan y).If M = m, then f is constant, and both extrema are attained.</p>
+<p class="mark">Otherwise m &lt; M, so A equals at most one of them.Say M ≠ A. The two endpoints carry only the value A.So the maximum M is reached at an interior point x₀.Pull back through tan: f(tan x₀) = M ≥ f(y) for every y.So f attains its maximum; if instead m ≠ A, the minimum, the same way.Careful: if L₊ ≠ L₋, only an extremum beyond both limits is guaranteed.Example: arctan x, whose g is g(x) = x, keeps both extrema on the ends.</p>
+<p class="mark">Now Result 1, uniform continuity, with the same g.</p>
+<p>First, write the definition out in full, once: exams ask exactly this.f is uniformly continuous on ℝ when: for every ε > 0 there is δ > 0,such that for all x′, x″ ∈ ℝ,if |x′ − x″| &lt; δ,then |f(x′) − f(x″)| &lt; ε.The order matters: δ is chosen before the points, and serves them all.The Cantor theorem: g is uniformly continuous on [−π/2, π/2].</p>
+<p class="mark">And f = g∘arctan on all of ℝ.arctan is Lipschitz with L = 1: |arctan y′ − arctan y″| ≤ |y′ − y″|.Given ε, take the δ that g provides for this ε.If |y′ − y″| &lt; δ, the angles are even closer: within δ.So |f(y′) − f(y″)| = |g(arctan y′) − g(arctan y″)| &lt; ε.One substitution, two theorems, zero epsilons wasted.Route two: stay on ℝ and argue by contradiction.</p>
+<p class="mark">First question: is f bounded?Take ε = 1 in the two limit definitions.For x > X₊ we get |f(x) − L₊| &lt; 1.For x &lt; X₋ we get |f(x) − L₋| &lt; 1.The middle block [X₋, X₊] is closed, so the max-min theorem bounds f there.So f is bounded on ℝ, and M = sup f and m = inf f exist.</p>
+<p>Now let both limits equal A. If M = m, f is constant, and we are done.Otherwise say M ≠ A; since m ≤ A ≤ M, this means M > A.Draw the halfway level h = (A + M)/2.Far out, f is within (M − A)/2 of A, so f(x) &lt; h when |x| > X.The tails stay below h, and h &lt; M: they cannot get near M.So the supremum over ℝ equals the supremum over the block [−X, X].On that closed block, the max-min theorem attains it.</p>
+<p class="mark">If instead m ≠ A, just flip the picture upside down.</p>
+<p>Now Result 1 by contradiction: negate the definition carefully.Suppose f is not uniformly continuous on ℝ.Then some ε₀ > 0 defeats every δ, in particular every δ = 1/n.So there are xₙ, yₙ with |xₙ − yₙ| &lt; 1/n,but |f(xₙ) − f(yₙ)| ≥ ε₀.Where can the sequence xₙ go? Only two exits.Exit one: (xₙ) is bounded.</p>
+<p>Bolzano–Weierstrass: a subsequence xₙₖ → c ∈ ℝ.Since the gap shrinks, yₙₖ → c as well.Continuity at c: f(xₙₖ) and f(yₙₖ) both tend to f(c).So the gap of images tends to 0, which contradicts ε₀: exit one is welded shut.Exit two: (xₙ) is unbounded.Then a subsequence escapes: xₙₖ → +∞, or xₙₖ → −∞.Say xₙₖ → +∞; yₙₖ follows, since |xₙₖ − yₙₖ| → 0.</p>
+<p>At that horizon both f(xₙₖ) and f(yₙₖ) tend to L₊.The gap tends to 0 again: contradiction, and both exits are welded shut.So f is uniformly continuous; the second walk was the easier one.Last question: why does Result 2 promise only "at least one"?On the closed strip, both endpoints carry the value A.They are two copies of the same cape.g has both extrema, but one of them may sit right on a cape.</p>
+<p>Then the other one must be a genuine extremum of f.Stage f(x) = 1/(1 + x²): both limits are 0.Its highest point, 1, is attained at the origin, since 1 + x² ≥ 1.On the strip, g(x) = 1/(1 + tan²x) = cos²x.The lowest value of g, namely 0, lives only on the capes.And f itself never reaches 0, since 1/(1 + x²) > 0.Its mirror x²/(1 + x²) = 1 − 1/(1 + x²) has limit 1 at both ends.</p>
+<p>There the minimum 0 is attained at the origin, and the supremum 1 stays on the cape.And x/(1 + x²) attains both extrema: ±1/2 at x = ±1.So "at least one" is exactly right: sometimes one, sometimes both.Today's toolkit: one dictionary, two theorems, two exits.The idea behind it: adjoin endpoints at infinity, and the line behaves like a closed interval.Later courses will give this viewpoint its technical name.So far we asked where functions settle; next we ask how fast they move.</p>
+<p>That is the derivative, our next chapter.See you next episode.</p>
+</main></body></html>

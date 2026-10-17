@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Extreme Value Theorem · Notes</title>
+<style>
+:root{--bg:#0f1726;--card:#16213a;--fg:#e5e7eb;--muted:#94a3b8;--line:#2b3a52;
+  --sky:#7dd3fc;--amb:#fbbf24;--blue:#1f72b0}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);
+  font:17px/1.85 "Segoe UI",system-ui,-apple-system,"PingFang SC","Noto Sans CJK SC","Microsoft YaHei",sans-serif}
+main{max-width:820px;margin:0 auto;padding:52px 18px 80px}
+.kicker{color:var(--muted);letter-spacing:.08em;font-size:13px}
+h1{font-size:clamp(24px,4.6vw,36px);margin:6px 0 6px;line-height:1.25}
+.lead{color:var(--sky);font-size:16px;margin:0 0 30px}
+p{margin:0 0 18px}
+p.mark{border-left:3px solid var(--amb);padding-left:14px;margin-top:28px;
+  color:var(--amb);font-weight:600}
+#mv-bar{position:fixed;left:0;right:0;top:0;z-index:99;display:flex;align-items:center;
+  gap:12px;padding:9px 14px;font-size:14px;
+  background:rgba(15,23,38,.86);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line)}
+#mv-bar .mv-home{color:var(--sky);text-decoration:none;white-space:nowrap}
+#mv-bar .mv-title{flex:1;text-align:center;font-weight:600;overflow:hidden;
+  text-overflow:ellipsis;white-space:nowrap;opacity:.85}
+#mv-bar .mv-quiz{color:#fff;background:var(--blue);text-decoration:none;border-radius:8px;
+  padding:4px 12px;white-space:nowrap;font-size:13.5px}
+p b{color:var(--amb)}
+@media (max-width:480px){#mv-bar .mv-title{font-size:12.5px}}
+</style></head>
+<body>
+<nav id="mv-bar"><a class="mv-home" href="/">Home</a>
+<span class="mv-title">04-03 · The Extreme Value Theorem</span>
+<a class="mv-quiz" href="../quiz/04-03.html">Self-test</a></nav>
+<main>
+<p class="kicker">Mathematical Analysis · Episode {ep} · Narration transcript</p>
+<h1>The Extreme Value Theorem</h1>
+<p class="lead">Full narration transcript; watch {ep}.mp4 for formulas and figures, self-test via the top-right link.</p>
+<p>Hello, everyone.Today: two guarantees on a closed interval.Your weather app says today's high came at 14:00.Say the high was 23 °C.But why must a highest temperature exist at all?Temperature changes continuously through the day.Yet a curve could climb forever toward a level.</p>
+<p>Here x/(1+x) creeps toward 1 and stays below it.Its supremum is 1, yet no point reaches it.Two hypotheses block both escape routes.Continuity, and a closed bounded interval [a, b].The boundedness lemma comes first.If f is continuous on [a, b], then f is bounded on [a, b].The maximum-minimum theorem goes further.</p>
+<p class="mark">If f is continuous on [a, b], it attains a max and a min.There exist points ξ and η in [a, b].For every x in [a, b]: f(η) ≤ f(x) ≤ f(ξ).Boundedness is the lemma; attainment is the theorem.Bounded: a ceiling exists. Attained: the curve touches it.</p>
+<p>Now read the hypotheses one clause at a time.Closed: the endpoints a and b belong to the interval.Picture two walls that lock the exits.Bounded interval: the walls stand at finite places.Continuous: the graph is drawn without lifting the pen.No teleporting from one height to another.The lemma's picture: a net below the curve, a lid above.</p>
+<p class="mark">The curve can neither fall through nor fly off.The theorem says more: the curve touches both lid and net.Is every hypothesis needed? Let's remove each one.</p>
+<p class="mark">First, open the walls: f(x) = x on (0, 1).Its values lie between 0 and 1, so it is bounded.But sup = 1 and inf = 0, and neither is touched.The values escape through the open ends.</p>
+<p class="mark">Second, keep the walls but break continuity.Inside (0, 1), let f(x) = x.Patch the endpoints wildly: f(0) = f(1) = 1/2.The interval is closed, yet sup = 1 is never reached.The minimum is missing too: inf = 0, never reached.The jump at each endpoint is the teleport.</p>
+<p class="mark">Third, let the interval run forever: f(x) = x on [0, ∞).Continuous, closed at 0, yet it drifts to infinity.No upper bound, so no maximum.Every hypothesis is doing work.Closedness stops escapes through the endpoints.Continuity stops teleporting.A bounded interval stops drifting to infinity.</p>
+<p>Now the proof, in two honest steps.Step one: suppose f is unbounded.Say f has no upper bound; below is the same.Then each n has a point xₙ with f(xₙ) > n.These runaway points all live inside [a, b].Bolzano–Weierstrass gives a convergent subsequence yₖ → c.Each yₖ is some xₙ with n ≥ k, so f(yₖ) > k.</p>
+<p>Where is c? The walls drag it back: a ≤ c ≤ b.That is exactly where closedness is used.By continuity at c, f(yₖ) → f(c).But f(c) is just a finite number.Yet f(yₖ) > k marches off to infinity.Collision! So f is bounded above; likewise below.Step two: attainment.</p>
+<p>By step one and the supremum principle, M = sup f exists.Suppose M is never reached: f(x) &lt; M for every x.Here comes the signature move: build a helper.Let g(x) = 1/(M − f(x)).The denominator is always positive, so g is continuous and positive.By step one, g is bounded: g(x) ≤ K for some K > 0.Flip it: M − f(x) ≥ 1/K.</p>
+<p>So f(x) ≤ M − 1/K for every x.Then M − 1/K is a smaller upper bound.That contradicts M being the least upper bound.So some ξ in [a, b] has f(ξ) = M.For the minimum, apply the same to −f.Test the engine on f(x) = x over [0, 1).Here M = 1, so g(x) = 1/(1 − x).</p>
+<p>At x = 0.9, g(x) = 10.At x = 0.99, g(x) = 100.At x = 0.999, g(x) = 1000.g is unbounded, exactly as the logic demands.No contradiction: [0, 1) is not closed, so the lemma is silent.On [a, b], the lemma forbids that blow-up.Never reached ⇒ helper unbounded ⇒ contradiction.</p>
+<p class="mark">Step one: a runaway sequence, dragged back by a subsequence.Step two: never reached becomes an unbounded helper.Where does this go next?A later exam episode asks: does a function on the whole line attain its maximum?Today's attainment theorem is the key tool there.These theorems also join the chapter-7 equivalence ring.There they sit beside the supremum principle and Bolzano–Weierstrass.</p>
+<p class="mark">Next episode: the intermediate value theorem.</p>
+<p class="mark">Recap: continuous on [a, b] gives bounded, with max and min attained.See you next episode.</p>
+</main></body></html>

@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Limits at Infinity · Self-test</title>
+<style>
+:root{--bg:#0f1726;--card:#16213a;--fg:#e5e7eb;--muted:#94a3b8;--line:#2b3a52;
+  --sky:#7dd3fc;--amb:#fbbf24;--grn:#4ade80;--blue:#1f72b0}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);
+  font:17px/1.7 "Segoe UI",system-ui,-apple-system,"PingFang SC","Noto Sans CJK SC","Microsoft YaHei",sans-serif}
+main{max-width:760px;margin:0 auto;padding:56px 16px 80px}
+.kicker{color:var(--muted);letter-spacing:.08em;font-size:13px}
+h1{font-size:clamp(24px,4.6vw,34px);margin:6px 0 8px;line-height:1.25}
+.lead{color:var(--sky);font-size:15.5px;margin:0 0 26px}
+.q{background:var(--card);border:1px solid var(--line);border-radius:14px;
+  padding:18px 20px;margin:0 0 16px}
+.q p.qt{margin:0 0 10px;font-weight:600}
+.opts{display:flex;flex-direction:column;gap:7px;margin:0 0 12px}
+.opts span{color:var(--fg)}
+.opts span b{color:var(--sky);margin-right:6px}
+button.rv{background:transparent;color:var(--amb);border:1.5px solid var(--amb);
+  border-radius:8px;padding:5px 14px;font:inherit;font-size:14.5px;cursor:pointer}
+button.rv:hover{background:var(--amb);color:var(--bg)}
+.reveal{display:none;margin-top:10px;padding:10px 12px;border-left:3px solid var(--grn);
+  background:#0f2a22;border-radius:6px}
+.reveal.shown{display:block}
+#mv-bar{position:fixed;left:0;right:0;top:0;z-index:99;display:flex;align-items:center;
+  gap:12px;padding:9px 14px;font-size:14px;
+  background:rgba(15,23,38,.86);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line)}
+#mv-bar .mv-home{color:var(--sky);text-decoration:none;white-space:nowrap}
+#mv-bar .mv-title{flex:1;text-align:center;font-weight:600;overflow:hidden;
+  text-overflow:ellipsis;white-space:nowrap;opacity:.85}
+#mv-bar .mv-notes{color:#fff;background:var(--blue);text-decoration:none;border-radius:8px;
+  padding:4px 12px;white-space:nowrap;font-size:13.5px}
+@media (max-width:480px){#mv-bar .mv-title{font-size:12.5px}}
+</style></head>
+<body>
+<nav id="mv-bar"><a class="mv-home" href="/">Home</a>
+<span class="mv-title">04-07 · Limits at Infinity</span>
+<a class="mv-notes" href="../notes/04-07.html">Notes</a></nav>
+<main>
+<p class="kicker">Mathematical Analysis · 04-07 · Self-test</p>
+<h1>Limits at Infinity</h1>
+<p class="lead">Click the button under each item to reveal the answer.</p>
+<div class="q"><p class="qt">1. In route one, how is g defined at the right endpoint π/2?</p><div class="opts"><span><b>A.</b>g(π/2) = f(π/2)</span><span><b>B.</b>g(π/2) = L₊ = lim(x→+∞) f(x)</span><span><b>C.</b>g(π/2) = tan(π/2)</span></div><button class="rv" data-r="r0">Reveal answer</button><div class="reveal" id="r0"><b>Answer: B.</b> tan x → +∞ as x → π/2⁻, so setting g(π/2) = L₊ is exactly what makes g continuous there.</div></div>
+<div class="q"><p class="qt">2. Which theorem turns 'g continuous on [−π/2, π/2]' into 'g uniformly continuous'?</p><div class="opts"><span><b>A.</b>The Cantor theorem</span><span><b>B.</b>The max-min theorem</span><span><b>C.</b>The Bolzano–Weierstrass theorem</span></div><button class="rv" data-r="r1">Reveal answer</button><div class="reveal" id="r1"><b>Answer: A.</b> Cantor: continuous on a closed interval ⇒ uniformly continuous. Then f = g∘arctan, and |arctan y′ − arctan y″| ≤ |y′ − y″| carries the same δ over to f.</div></div>
+<div class="q"><p class="qt">3. Which is the definition of 'f uniformly continuous on ℝ'?</p><div class="opts"><span><b>A.</b>∀x′ ∈ ℝ ∀ε > 0 ∃δ > 0 ∀x″: |x′ − x″| < δ ⇒ |f(x′) − f(x″)| < ε</span><span><b>B.</b>∀ε > 0 ∃δ > 0 ∀x′, x″ ∈ ℝ: |x′ − x″| < δ ⇒ |f(x′) − f(x″)| < ε</span><span><b>C.</b>∃δ > 0 ∀ε > 0 ∀x′, x″ ∈ ℝ: |x′ − x″| < δ ⇒ |f(x′) − f(x″)| < ε</span></div><button class="rv" data-r="r2">Reveal answer</button><div class="reveal" id="r2"><b>Answer: B.</b> δ depends only on ε, and must serve all pairs of points. The first option lets δ depend on x′ (that is plain continuity); the third forces f to be constant.</div></div>
+<div class="q"><p class="qt">4. Contradiction route, exit two: (xₙ) is unbounded. Why does |f(xₙₖ) − f(yₙₖ)| → 0?</p><div class="opts"><span><b>A.</b>Because f is bounded on ℝ</span><span><b>B.</b>Because f is monotone far out</span><span><b>C.</b>Because xₙₖ → +∞ and yₙₖ → +∞ (or both → −∞), so both images tend to the same limit L₊ (or L₋)</span></div><button class="rv" data-r="r3">Reveal answer</button><div class="reveal" id="r3"><b>Answer: C.</b> |xₙ − yₙ| &lt; 1/n drags yₙₖ to the same horizon, and the limit at that horizon is one number, so the gap tends to 0, contradicting ≥ ε₀.</div></div>
+<div class="q"><p class="qt">5. For f(x) = 1/(1 + x²), which statement is true?</p><div class="opts"><span><b>A.</b>Maximum 1 is attained at 0; the infimum 0 is not attained</span><span><b>B.</b>Both the maximum and the minimum are attained</span><span><b>C.</b>Neither extremum is attained</span></div><button class="rv" data-r="r4">Reveal answer</button><div class="reveal" id="r4"><b>Answer: A.</b> 1 + x² ≥ 1 gives f ≤ 1 = f(0); f > 0 everywhere but f → 0 at ±∞. On the strip g(x) = cos²x, and its minimum 0 sits only on the capes ±π/2.</div></div>
+<div class="q"><p class="qt">6. f(x) = arctan x has limits π/2 and −π/2. What do Results 1 and 2 say about it?</p><div class="opts"><span><b>A.</b>Result 2 applies, so arctan attains its maximum</span><span><b>B.</b>It is uniformly continuous (Result 1), but Result 2 does not apply and indeed neither extremum is attained</span><span><b>C.</b>It is not uniformly continuous, since its range is bounded</span></div><button class="rv" data-r="r5">Reveal answer</button><div class="reveal" id="r5"><b>Answer: B.</b> Result 1 needs only that both limits exist. Result 2 needs them equal: here g(x) = x on [−π/2, π/2], whose extrema sit only on the two endpoints.</div></div>
+</main>
+<script>
+document.querySelectorAll("button.rv").forEach(function(b){
+  b.addEventListener("click", function(){
+    var r = document.getElementById(b.dataset.r);
+    r.classList.toggle("shown");
+    b.textContent = r.classList.contains("shown") ? "Hide" : "Reveal answer";
+  });
+});
+</script>
+</body></html>

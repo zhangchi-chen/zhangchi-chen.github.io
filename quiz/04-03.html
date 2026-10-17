@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>最值定理 · 自测</title>
+<style>
+:root{--bg:#0f1726;--card:#16213a;--fg:#e5e7eb;--muted:#94a3b8;--line:#2b3a52;
+  --sky:#7dd3fc;--amb:#fbbf24;--grn:#4ade80;--blue:#1f72b0}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);
+  font:17px/1.7 "Segoe UI",system-ui,-apple-system,"PingFang SC","Noto Sans CJK SC","Microsoft YaHei",sans-serif}
+main{max-width:760px;margin:0 auto;padding:56px 16px 80px}
+.kicker{color:var(--muted);letter-spacing:.08em;font-size:13px}
+h1{font-size:clamp(24px,4.6vw,34px);margin:6px 0 8px;line-height:1.25}
+.lead{color:var(--sky);font-size:15.5px;margin:0 0 26px}
+.q{background:var(--card);border:1px solid var(--line);border-radius:14px;
+  padding:18px 20px;margin:0 0 16px}
+.q p.qt{margin:0 0 10px;font-weight:600}
+.opts{display:flex;flex-direction:column;gap:7px;margin:0 0 12px}
+.opts span{color:var(--fg)}
+.opts span b{color:var(--sky);margin-right:6px}
+button.rv{background:transparent;color:var(--amb);border:1.5px solid var(--amb);
+  border-radius:8px;padding:5px 14px;font:inherit;font-size:14.5px;cursor:pointer}
+button.rv:hover{background:var(--amb);color:var(--bg)}
+.reveal{display:none;margin-top:10px;padding:10px 12px;border-left:3px solid var(--grn);
+  background:#0f2a22;border-radius:6px}
+.reveal.shown{display:block}
+#mv-bar{position:fixed;left:0;right:0;top:0;z-index:99;display:flex;align-items:center;
+  gap:12px;padding:9px 14px;font-size:14px;
+  background:rgba(15,23,38,.86);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line)}
+#mv-bar .mv-home{color:var(--sky);text-decoration:none;white-space:nowrap}
+#mv-bar .mv-title{flex:1;text-align:center;font-weight:600;overflow:hidden;
+  text-overflow:ellipsis;white-space:nowrap;opacity:.85}
+#mv-bar .mv-notes{color:#fff;background:var(--blue);text-decoration:none;border-radius:8px;
+  padding:4px 12px;white-space:nowrap;font-size:13.5px}
+@media (max-width:480px){#mv-bar .mv-title{font-size:12.5px}}
+</style></head>
+<body>
+<nav id="mv-bar"><a class="mv-home" href="/">目录</a>
+<span class="mv-title">04-03 · 最值定理</span>
+<a class="mv-notes" href="../notes/04-03.html">去讲稿</a></nav>
+<main>
+<p class="kicker">数学分析 · 04-03 · 自测</p>
+<h1>最值定理</h1>
+<p class="lead">点击选项下方按钮查看答案与解析。</p>
+<div class="q"><p class="qt">1. 下面哪种分工是对的？</p><div class="opts"><span><b>A.</b>引理：f在[a, b]上有界。定理：f在[a, b]上取到最大值和最小值。</span><span><b>B.</b>引理：f在[a, b]上取到最大值。定理：f在[a, b]上有界。</span><span><b>C.</b>两者说的是一回事，其中一个多余。</span></div><button class="rv" data-r="r0">显示答案</button><div class="reveal" id="r0"><b>答案: A.</b> 有界是铺垫（天花板存在），取到才是主角（天花板被碰到）。第二步还要用到第一步。</div></div>
+<div class="q"><p class="qt">2. 开区间(0, 1)上的f(x) = x，哪句话对？</p><div class="opts"><span><b>A.</b>f的最大值是1。</span><span><b>B.</b>f有界，但最大值、最小值都取不到。</span><span><b>C.</b>f无界。</span></div><button class="rv" data-r="r1">显示答案</button><div class="reveal" id="r1"><b>答案: B.</b> 0 &lt; f(x) &lt; 1，所以有界；上确界是1，下确界是0，可是(0, 1)里找不到x使f(x) = 1或f(x) = 0。函数值从开口处溜走了。</div></div>
+<div class="q"><p class="qt">3. 在[0, 1]上，0 &lt; x &lt; 1时f(x) = x，并且f(0) = f(1) = 1/2。哪里出了问题？</p><div class="opts"><span><b>A.</b>闭区间这个条件失效，最大值是1。</span><span><b>B.</b>连续性失效，上确界1始终碰不到。</span><span><b>C.</b>连续性失效，可是端点处取到最大值1/2。</span></div><button class="rv" data-r="r2">显示答案</button><div class="reveal" id="r2"><b>答案: B.</b> 区间是闭的；端点的跳跃破坏了连续性。所有函数值都小于1（内部f(x) = x &lt; 1，端点1/2 &lt; 1），但能任意接近1，所以上确界1碰不到。1/2也算不上最大值：f(0.9) = 0.9 > 1/2。</div></div>
+<div class="q"><p class="qt">4. 第一步（有界性）里，闭区间到底用在哪？</p><div class="opts"><span><b>A.</b>用来造出满足f(xₙ) > n的点xₙ。</span><span><b>B.</b>保证子列的极限c仍在[a, b]里。</span><span><b>C.</b>保证M = sup f存在。</span></div><button class="rv" data-r="r3">显示答案</button><div class="reveal" id="r3"><b>答案: B.</b> 由a ≤ yₖ ≤ b和yₖ → c，得到a ≤ c ≤ b，于是f在c处有定义且连续。点xₙ来自“假设无界”；M = sup f属于第二步，靠的是确界原理。</div></div>
+<div class="q"><p class="qt">5. 设处处f(x) &lt; M，辅助函数g(x) = 1/(M − f(x))满足g(x) ≤ K，其中K > 0。能推出什么？</p><div class="opts"><span><b>A.</b>处处f(x) ≤ M − 1/K。</span><span><b>B.</b>处处f(x) ≥ M − 1/K。</span><span><b>C.</b>处处f(x) ≤ M − K。</span></div><button class="rv" data-r="r4">显示答案</button><div class="reveal" id="r4"><b>答案: A.</b> 两边都是正数，所以由1/(M − f(x)) ≤ K得M − f(x) ≥ 1/K，也就是f(x) ≤ M − 1/K。这是比M更小的上界，和M = sup f矛盾。</div></div>
+<div class="q"><p class="qt">6. [0, 1)上的f(x) = x：M = 1，g(x) = 1/(1 − x)。g(0.99)等于多少？说明了什么？</p><div class="opts"><span><b>A.</b>g(0.99) = 100；g无界，而且没有矛盾，因为[0, 1)非闭。</span><span><b>B.</b>g(0.99) = 99；g始终有界。</span><span><b>C.</b>g(0.99) = 100；这是矛盾，所以f一定取到1。</span></div><button class="rv" data-r="r5">显示答案</button><div class="reveal" id="r5"><b>答案: A.</b> 1 − 0.99 = 0.01，1/0.01 = 100；同样g(0.999) = 1000。g冲向无穷，正如“碰不到”所预言。引理要求闭区间，这里引理管不着，所以没有矛盾，f也确实碰不到1。</div></div>
+</main>
+<script>
+document.querySelectorAll("button.rv").forEach(function(b){
+  b.addEventListener("click", function(){
+    var r = document.getElementById(b.dataset.r);
+    r.classList.toggle("shown");
+    b.textContent = r.classList.contains("shown") ? "收起答案" : "显示答案";
+  });
+});
+</script>
+</body></html>

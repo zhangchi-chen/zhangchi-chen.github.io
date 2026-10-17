@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Uniform Continuity · Notes</title>
+<style>
+:root{--bg:#0f1726;--card:#16213a;--fg:#e5e7eb;--muted:#94a3b8;--line:#2b3a52;
+  --sky:#7dd3fc;--amb:#fbbf24;--blue:#1f72b0}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);
+  font:17px/1.85 "Segoe UI",system-ui,-apple-system,"PingFang SC","Noto Sans CJK SC","Microsoft YaHei",sans-serif}
+main{max-width:820px;margin:0 auto;padding:52px 18px 80px}
+.kicker{color:var(--muted);letter-spacing:.08em;font-size:13px}
+h1{font-size:clamp(24px,4.6vw,36px);margin:6px 0 6px;line-height:1.25}
+.lead{color:var(--sky);font-size:16px;margin:0 0 30px}
+p{margin:0 0 18px}
+p.mark{border-left:3px solid var(--amb);padding-left:14px;margin-top:28px;
+  color:var(--amb);font-weight:600}
+#mv-bar{position:fixed;left:0;right:0;top:0;z-index:99;display:flex;align-items:center;
+  gap:12px;padding:9px 14px;font-size:14px;
+  background:rgba(15,23,38,.86);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line)}
+#mv-bar .mv-home{color:var(--sky);text-decoration:none;white-space:nowrap}
+#mv-bar .mv-title{flex:1;text-align:center;font-weight:600;overflow:hidden;
+  text-overflow:ellipsis;white-space:nowrap;opacity:.85}
+#mv-bar .mv-quiz{color:#fff;background:var(--blue);text-decoration:none;border-radius:8px;
+  padding:4px 12px;white-space:nowrap;font-size:13.5px}
+p b{color:var(--amb)}
+@media (max-width:480px){#mv-bar .mv-title{font-size:12.5px}}
+</style></head>
+<body>
+<nav id="mv-bar"><a class="mv-home" href="/">Home</a>
+<span class="mv-title">04-05 · Uniform Continuity</span>
+<a class="mv-quiz" href="../quiz/04-05.html">Self-test</a></nav>
+<main>
+<p class="kicker">Mathematical Analysis · Episode {ep} · Narration transcript</p>
+<h1>Uniform Continuity</h1>
+<p class="lead">Full narration transcript; watch {ep}.mp4 for formulas and figures, self-test via the top-right link.</p>
+<p class="mark">Hello, everyone.Today: uniform continuity.Meet Lin, a first-year student with a complaint.“These two definitions differ by one word.”“Continuous, uniformly continuous… so what?”“Why would anyone care about one word?”Fair question. Let's earn the answer together.</p>
+<p>First try: walking a dog on an endless path.Rule: the dog may stray at most ε from where it was.So you pick a leash tolerance δ for your own steps.On calm ground, a generous δ is fine.Where the path turns wild, δ must shrink.At every spot, you retune δ.That is continuity: δ may depend on the spot.</p>
+<p>Lin frowns: “Nice story. So where does it break?”Honest answer: this metaphor has limits.One walker never compares two arbitrary spots at once.And nobody here demands one tolerance for the whole path.“I need a story with a judge in it,” says Lin.Better story: a king hires a court painter.The painter must paint every landmark of the kingdom.</p>
+<p class="mark">A landmark sits at position x; its painting is f(x).Nearby landmarks should get nearly identical paintings.Test one: the king inspects each tree separately.At tree x₀, he names a tolerance ε.The painter answers with a steadiness δ for this tree.Within δ of x₀, paintings differ by less than ε.</p>
+<p>Next tree, a different δ. Next tree, another.He passes — but only point by point.That's continuity: ∀x₀ ∀ε ∃δ.Test two: the king changes the rules.He names ε and demands ONE national standard δ.Any two landmarks closer than δ must get paintings within ε.Both points roam free; there is no home tree.</p>
+<p class="mark">Passing pointwise, versus one ruler for the whole road.Watch a painter fail test two: f(x) = x².Pointwise he passes, with the recipe δ = ε/(2x + 1).Here x ≥ 0 and 0 &lt; ε ≤ 1.Because |x + y| &lt; 2x + 1 once |y − x| &lt; δ ≤ 1.</p>
+<p>Now read the table.At x = 1: δ = ε/3.At x = 100: δ = ε/201.And at x = 10⁶?δ = ε/2000001 — about ε over two million.The δ runs away.Lin: “Maybe a cleverer recipe would fix it?”</p>
+<p class="mark">No. Any single δ gets beaten far down the road.Take x = 1/δ and y = 1/δ + δ/2.Their squares differ by 1 + δ²/4.Points δ/2 apart; paintings at least 1 apart.So on [0, +∞), x² is continuous, but not uniformly.</p>
+<p>Now read the two definitions side by side.Continuity: for every x, there exists δ.Uniform: there exists δ, for every x.∀x ∃δ  versus  ∃δ ∀x.In the first, x comes first, so δ may follow x.In the second, δ comes first: one ruler for the whole road.Swap the order, and δ may depend on ε alone.</p>
+<p class="mark">So uniform continuity implies continuity — not the reverse.The official definition, once:Every ε > 0 gets one δ = δ(ε) > 0, valid on all of I.Take any two points with |x′ − x″| &lt; δ.Then |f(x′) − f(x″)| &lt; ε, guaranteed.</p>
+<p>Now the king turns hostile.His goal: prove there is NO national standard.Negate the definition, one quantifier at a time.∀ε becomes ∃ε₀; ∃δ becomes ∀δ.And “every pair behaves” becomes “some pair misbehaves.”There is ε₀ > 0 that defeats every δ > 0.For each δ, the king produces a devil pair x′, x″.</p>
+<p>Closer than δ, yet painted at least ε₀ apart.Lin: “How do I find devil pairs? Pure inspiration?”No. They can be pulled out of the negation mechanically.Feed the hostile king δ = 1.He must hand back a pair x′₁, x″₁.Then δ = 1/2, then 1/3, …, then 1/n.Out come two sequences.</p>
+<p>They satisfy |x′ₙ − x″ₙ| &lt; 1/n.Yet their values always differ by at least ε₀.The points close in; the values stay apart.This is the sequence criterion — the master key.f is uniformly continuous on I if and only if this holds:Take any two sequences in I with x′ₙ − x″ₙ → 0.Then f(x′ₙ) − f(x″ₙ) → 0 must follow.</p>
+<p class="mark">Necessity: given ε, take the δ it promises.For large n, |x′ₙ − x″ₙ| &lt; δ.So the value gaps fall below ε — they tend to 0.Sufficiency: exactly the extraction we just did, with δ = 1/n.If uniformity fails, devil sequences appear and break the condition.</p>
+<p>Now, the master key at work: three classic failures.One: 1/x on (0, 1).Take x′ₙ = 1/n, with n ≥ 2.And x″ₙ = 1/(2n).Gap: 1/(2n) → 0.Values: 2n − n = n, which blows up.Escape through the open end at 0.</p>
+<p>In δ language: ε₀ = 1, the pair δ and δ/2, with δ &lt; 1.Their values differ by 1/δ > 1 = ε₀.Two: x² on [0, +∞).Take x′ₙ = n + 1/n and x″ₙ = n.Gap: 1/n → 0.Value gap: 2 + 1/n² ≥ 2.Collapse at infinity: the graph climbs ever faster.</p>
+<p>Three: sin(1/x) on (0, 1).Take x′ₙ = 1/(2nπ).And x″ₙ = 1/(2nπ + π/2).Both tend to 0, so their gap does too.Yet sin(2nπ) = 0.While sin(2nπ + π/2) = 1.The value gap stays 1, forever.</p>
+<p>Oscillation frequency out of control.Lin: “Pairs that close in, values that stay apart!”The key also proves success.Take f(x) = ax + b.The value gap is a(x′ₙ − x″ₙ) → 0.So it is uniformly continuous on any interval.In δ language: δ = ε/(|a| + 1).</p>
+<p>Since |a|·δ &lt; ε, and x never enters.Surprise: √x on [0, +∞) is uniformly continuous too.Since |√x′ − √x″| ≤ √|x′ − x″|, δ = ε² works.Steep is not the enemy; uncontrolled is.Lin sums up: continuity passes tree by tree.Uniform continuity: one ruler for the whole road.The difference is the quantifier order: ∀x ∃δ versus ∃δ ∀x.</p>
+<p>To refute it, manufacture devil pairs or devil sequences.All three failures lived on roads with an open or endless end.On a closed interval, pointwise passing upgrades to one ruler automatically.Why? That is next episode.Try the self-test to lock it in.See you next episode.</p>
+</main></body></html>

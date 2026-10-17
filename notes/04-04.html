@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>介值定理 · 讲稿</title>
+<style>
+:root{--bg:#0f1726;--card:#16213a;--fg:#e5e7eb;--muted:#94a3b8;--line:#2b3a52;
+  --sky:#7dd3fc;--amb:#fbbf24;--blue:#1f72b0}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);
+  font:17px/1.85 "Segoe UI",system-ui,-apple-system,"PingFang SC","Noto Sans CJK SC","Microsoft YaHei",sans-serif}
+main{max-width:820px;margin:0 auto;padding:52px 18px 80px}
+.kicker{color:var(--muted);letter-spacing:.08em;font-size:13px}
+h1{font-size:clamp(24px,4.6vw,36px);margin:6px 0 6px;line-height:1.25}
+.lead{color:var(--sky);font-size:16px;margin:0 0 30px}
+p{margin:0 0 18px}
+p.mark{border-left:3px solid var(--amb);padding-left:14px;margin-top:28px;
+  color:var(--amb);font-weight:600}
+#mv-bar{position:fixed;left:0;right:0;top:0;z-index:99;display:flex;align-items:center;
+  gap:12px;padding:9px 14px;font-size:14px;
+  background:rgba(15,23,38,.86);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line)}
+#mv-bar .mv-home{color:var(--sky);text-decoration:none;white-space:nowrap}
+#mv-bar .mv-title{flex:1;text-align:center;font-weight:600;overflow:hidden;
+  text-overflow:ellipsis;white-space:nowrap;opacity:.85}
+#mv-bar .mv-quiz{color:#fff;background:var(--blue);text-decoration:none;border-radius:8px;
+  padding:4px 12px;white-space:nowrap;font-size:13.5px}
+@media (max-width:480px){#mv-bar .mv-title{font-size:12.5px}}
+</style></head>
+<body>
+<nav id="mv-bar"><a class="mv-home" href="/">目录</a>
+<span class="mv-title">04-04 · 介值定理</span>
+<a class="mv-quiz" href="../quiz/04-04.html">去自测</a></nav>
+<main>
+<p class="kicker">数学分析 · 第 04-04 集 · 讲稿（字幕全文）</p>
+<h1>介值定理</h1>
+<p class="lead">本页为旁白讲稿全文；公式与图示请配合视频 04-04.mp4 观看，自测见右上角。</p>
+<p>同学们好。今天讲介值定理。还有它的推论：零点存在定理。气温穿过20°C时，手表会振动。早上8°C，下午32°C。升温是连续的，中间没有跳跃。一定有恰好20°C的时刻吗？</p>
+<p>直觉说有，但能证明吗？设想读数从15°C跳到25°C。那么20°C被跳过，手表一直安静。所以这个承诺需要连续性。连续性把图像焊成一根绳。绳子从一岸连到另一岸。绳子越过水平线，必会碰到它。</p>
+<p>但图像只是信念，还算不上证明。介值定理：f在[a, b]上连续。并且f(a) ≠ f(b)。设μ严格位于f(a)、f(b)之间。那么(a, b)内至少有一点x₀，使得f(x₀) = μ。推论：零点存在定理。</p>
+<p>f连续且f(a)·f(b) &lt; 0，那么(a, b)内至少有一个零点。零点存在定理就是μ = 0的情形。乘积为负：两端异号。所以0夹在f(a)、f(b)之间。变号，就是伪装的μ = 0。画出水平线y = μ。</p>
+<p>绳子从线下出发，到线上结束。它必定在某处碰到这条线。交点可能有好几个：至少一个。端点取值异于μ，x₀在(a, b)内再加上上集的最值定理。于是f([a,b])=[m,M]。为什么成立？我们去巡逻边界。</p>
+<p>设f(a) &lt; μ &lt; f(b)。另一种情形，换成−f和−μ。E收集f(x) &lt; μ的点。a ∈ E，所以E非空。并且b是E的一个上界。所以E有上确界x₀ = sup E。x₀是线下与线上的分界点。</p>
+<p>断言：边界点恰好落在μ上。假设f(x₀) &lt; μ。f(b) > μ，所以x₀ &lt; b。由连续性，附近一整段都低于μ。x₀右侧的点也加入了E。这与上确界矛盾。假设f(x₀) > μ。</p>
+<p class="mark">f(a) &lt; μ，所以x₀ > a。x₀附近一整段都高于μ。于是E整个落在x₀ − δ左侧。出现更小的上界，又矛盾。两路都走不通：f(x₀) = μ。追踪边界，边界落在μ上。上确界加连续性，合力完成证明。</p>
+<p>应用：x³−2x+2=0有实根。试±1、±2，都不是根。p(−2) = −2 &lt; 0。而p(−1) = 3 > 0。所以(−2, −1)内有实根。二分法：对半切，保留变号的一半。中点−1.5处为正，留左半。</p>
+<p>中点−1.75处仍为正，留左半。中点−1.875处为负，留右半。笼子越缩越小，根始终在里面。根约为−1.769。二分法：零点存在定理的计算版。奇次实系数多项式必有实根。首项系数化为1，n为奇数。</p>
+<p>取R=1+|a₀|+⋯+|aₙ₋₁||x| ≥ R时，xⁿ压过其余项。那么p(R)>0，p(−R)&lt;0。在[−R, R]上用零点存在定理。a>0时，xⁿ=a有唯一正根。存在性：g(x) = xⁿ − a。考察区间[0, 1 + a]。</p>
+<p>g(0) = −a &lt; 0。g(1+a)=(1+a)ⁿ−a≥1因为(1+a)ⁿ ≥ 1+a。所以(0, 1 + a)内有一个根。唯一性：设0 &lt; x &lt; y，分解。两个因子都为正，所以yⁿ > xⁿ。所以xⁿ严格递增，正根唯一。</p>
+<p>f连续，f([a,b])⊆[a,b]断言：有x₀使f(x₀) = x₀。图像困在正方形里，必碰对角线。令F(x) = f(x) − x。F(a)≥0，F(b)≤0。若有一个等于0，端点就是不动点。其余情形F变号，定理给出x₀。</p>
+<p>例：cos x的不动点约0.739。最值能取到，中间值能穿过。还剩一问：抖动能否统一控制？这就是一致连续性，分两集讲。下集：一致连续性（一）。下集见。</p>
+</main></body></html>

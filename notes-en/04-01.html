@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Continuity and Discontinuities</title><style>
+:root{--bg:#0f1726;--card:#16213a;--fg:#e5e7eb;--muted:#94a3b8;--line:#2b3a52;--sky:#7dd3fc;--amb:#fbbf24;--vio:#c4b5fd;--grn:#4ade80;--red:#f87171}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.65 "Segoe UI",system-ui,-apple-system,"PingFang SC","Noto Sans CJK SC","Microsoft YaHei",sans-serif}
+main{max-width:920px;margin:0 auto;padding:40px 16px 72px}
+.kicker{color:var(--muted);letter-spacing:.08em;text-transform:uppercase;font-size:13px}
+h1{font-size:clamp(28px,5vw,42px);margin:6px 0 10px;line-height:1.2}
+h2{color:var(--amb);font-size:21px;margin:0 0 10px}
+.lead{color:var(--sky);font-size:18px;margin:0 0 28px}
+section{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px 24px;margin:0 0 20px}
+.formula{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-style:italic;font-size:22px;text-align:center;margin:12px 0;color:var(--fg);overflow-x:auto}
+.formula sub{font-size:.62em}
+.up{font-style:normal}
+table{width:100%;border-collapse:collapse;font-size:15.5px}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--muted);font-weight:600}
+td:first-child{color:var(--sky)}
+.tbl{overflow-x:auto}
+.flow{display:grid;gap:8px;margin:10px 0}
+.node{border:2px solid var(--sky);border-radius:10px;padding:8px 12px}
+.out{border-radius:10px;padding:8px 12px;font-weight:600;color:var(--bg)}
+.second{background:var(--red)}.jump{background:var(--amb)}.rem{background:var(--grn)}
+.fk{color:var(--vio);margin-top:6px}
+.cls-j{color:var(--amb)}.cls-r{color:var(--grn)}.cls-s{color:var(--red)}.cls-c{color:var(--sky)}
+ul{padding-left:20px;margin:0}li{margin:6px 0}
+.next{border-color:var(--vio)}.next p{margin:0;color:var(--vio);font-weight:600}
+.q{border-top:1px solid var(--line);padding:14px 0}
+.q:first-of-type{border-top:none}
+.q p{margin:0 0 8px;font-weight:600}
+.opts{display:flex;flex-wrap:wrap;gap:8px 18px;margin:0 0 10px;color:var(--fg)}
+.opts span b{color:var(--sky);margin-right:4px}
+button{background:transparent;color:var(--amb);border:1.5px solid var(--amb);border-radius:8px;padding:5px 14px;font:inherit;font-size:15px;cursor:pointer}
+button:hover{background:var(--amb);color:var(--bg)}
+.reveal{display:none;margin-top:10px;padding:10px 12px;border-left:3px solid var(--grn);background:#0f2a22;border-radius:6px}
+.reveal.on{display:block}
+.reveal b{color:var(--grn)}
+</style></head>
+<body><main>
+<div class="kicker">Mathematical Analysis · Episode 04-01</div>
+<h1>Continuity and Discontinuities</h1>
+<p class="lead">Continuity is a local, pointwise contract: at one point x₀, three numbers must agree — the left limit, the right limit, and the value f(x₀).</p>
+<section><h2>1 · The three-way handshake</h2><p>f is continuous at x₀ when</p><div class="formula"><span class='up'>lim</span><sub>x→x₀</sub> f(x) = f(x₀)</div><p>Three promises: f(x₀) is defined, the limit exists, and the two agree. Equivalently:</p><div class="formula"><span class='up'>lim</span><sub>x→x₀⁻</sub> f(x) = f(x₀) = <span class='up'>lim</span><sub>x→x₀⁺</sub> f(x)</div></section>
+<section><h2>2 · Three dialects, one statement</h2><div class="tbl"><table><tr><td>Increment</td><td>Δy = f(x₀ + Δx) − f(x₀) → 0 as Δx → 0</td></tr><tr><td>Limit</td><td><span class='up'>lim</span><sub>x→x₀</sub> f(x) = f(x₀)</td></tr><tr><td>ε–δ</td><td>for every ε &gt; 0 there is δ &gt; 0 such that |x − x₀| &lt; δ ⇒ |f(x) − f(x₀)| &lt; ε</td></tr></table></div><p>Why they agree: put x = x₀ + Δx, so Δx → 0 exactly when x → x₀ and Δy → 0 says f(x) → f(x₀). Writing that limit in ε–δ form gives 0 &lt; |Δx| &lt; δ ⇒ |Δy| &lt; ε; at Δx = 0 we have Δy = 0 &lt; ε anyway, so the condition 0 &lt; |Δx| can be dropped. Compared with last chapter's limit inspector, the target is now f(x₀) itself and the point x₀ is on duty.</p><p>Worked check: f(x) = 3x + 1 at x₀ = 2 gives |f(x) − f(2)| = 3|x − 2|, so δ = ε/3 works; for ε = 0.3, δ = 0.1.</p></section>
+<section><h2>3 · One-sided continuity</h2><p>Right-continuous at x₀: <span class='up'>lim</span><sub>x→x₀⁺</sub> f(x) = f(x₀); left-continuous is the mirror image. f is continuous at x₀ if and only if it is both. On an interval, continuity at an endpoint means the matching one-sided kind — e.g. √x is right-continuous at 0, hence continuous on [0, +∞).</p></section>
+<section><h2>4 · The classifier: two questions</h2>
+<div class="flow"><div class="node">Q1 · Do both one-sided limits exist (as finite numbers)?</div><div class="out second">No → second kind</div>
+<div class="node">Q2 · Are they equal?</div><div class="out jump">No → jump</div><div class="out rem">Equal, but f(x₀) is missing or different → removable</div></div>
+<p class="fk">Removable + jump = discontinuities of the first kind.</p>
+<div class="tbl"><table><tr><th>Function at x₀</th><th>Diagnosis</th><th>Class</th></tr><tr><td>x + 1 (x &lt; 1), 4 − x (x ≥ 1) at 1</td><td>left 2, right 3 = f(1)</td><td class="cls-j">jump, right-continuous</td></tr><tr><td>|sgn x| at 0</td><td>both limits 1, value 0</td><td class="cls-r">removable</td></tr><tr><td>sgn x at 0</td><td>left −1, right 1</td><td class="cls-j">jump</td></tr><tr><td>x·sin(1/x) at 0 (undefined)</td><td>|x·sin(1/x)| ≤ |x| → 0</td><td class="cls-r">removable</td></tr><tr><td>sin(1/x) at 0</td><td>hits ±1 arbitrarily close to 0</td><td class="cls-s">second kind</td></tr><tr><td>1/x² at 0</td><td>→ +∞ on both sides</td><td class="cls-s">second kind</td></tr><tr><td>Dirichlet D(x) at any point</td><td>rationals and irrationals in every interval</td><td class="cls-s">second kind</td></tr><tr><td>x·D(x)</td><td>|x·D(x)| ≤ |x|</td><td class="cls-c">continuous at 0 only</td></tr><tr><td>n on (1/(n+1), 1/n] at 1/n, n ≥ 2</td><td>left n = f(1/n), right n − 1</td><td class="cls-j">jump, left-continuous</td></tr></table></div></section>
+<section><h2>5 · Why classify first</h2><ul><li><b>Patch</b> removable points: sin x / x is undefined at 0, its limit is 1; define the value 1 and it is continuous.</li><li><b>Read step functions</b>: a parcel tariff of 8 for 0 &lt; w ≤ 1 kg and 12 for 1 &lt; w ≤ 2 kg jumps at 1 kg and is left-continuous there — the filled dot sets the boundary price.</li><li><b>Diagnose data</b>: a lone outlier is removable (replace it by the neighbours' limit), a level shift is a jump (investigate, do not smooth), endless wobbling hints at a sampling problem.</li></ul></section>
+<section class="next"><p>Next episode: arithmetic of continuous functions, and continuity on intervals. This episode owes nothing.</p></section>
+<section><h2>Self-test</h2><div class="q"><p>1. Continuity of f at x₀ requires which values to be equal?</p><div class="opts"><span><b>A.</b>left limit, right limit and f(x₀)</span><span><b>B.</b>left limit and right limit only</span><span><b>C.</b>f(x₀) and f(x₀ + 1)</span></div><button data-i="0">Show answer</button><div class="reveal" id="r0"><b>Answer: A.</b> Continuity is the three-way handshake: both one-sided limits must exist and equal f(x₀).</div></div><div class="q"><p>2. f(x) = x + 1 for x &lt; 1 and 4 − x for x ≥ 1. At x = 1 the point is …</p><div class="opts"><span><b>A.</b>removable</span><span><b>B.</b>a jump, and f is right-continuous</span><span><b>C.</b>of the second kind</span></div><button data-i="1">Show answer</button><div class="reveal" id="r1"><b>Answer: B.</b> f(1⁻) = 2 and f(1⁺) = 3 both exist but differ; f(1) = 3 matches the right limit.</div></div><div class="q"><p>3. x·sin(1/x), undefined at 0, has at 0 a discontinuity that is …</p><div class="opts"><span><b>A.</b>removable</span><span><b>B.</b>a jump</span><span><b>C.</b>of the second kind</span></div><button data-i="2">Show answer</button><div class="reveal" id="r2"><b>Answer: A.</b> |x·sin(1/x)| ≤ |x| → 0, so the limit 0 exists; defining the value 0 repairs it.</div></div><div class="q"><p>4. f(x) = 3x + 1, x₀ = 2, ε = 0.3. Which δ works?</p><div class="opts"><span><b>A.</b>δ = 0.1</span><span><b>B.</b>δ = 0.2</span><span><b>C.</b>δ = 0.3</span></div><button data-i="3">Show answer</button><div class="reveal" id="r3"><b>Answer: A.</b> |f(x) − 7| = 3|x − 2| &lt; 3δ, so we need 3δ ≤ 0.3; with δ = 0.2, x = 2.15 gives 0.45 &gt; 0.3.</div></div><div class="q"><p>5. Which of these is a discontinuity of the first kind?</p><div class="opts"><span><b>A.</b>sin(1/x) at 0</span><span><b>B.</b>1/x² at 0</span><span><b>C.</b>sgn x at 0</span></div><button data-i="4">Show answer</button><div class="reveal" id="r4"><b>Answer: C.</b> sgn x has one-sided limits −1 and 1: both exist and differ, a jump, hence first kind.</div></div><div class="q"><p>6. g equals f on (x₀ − 0.01, x₀ + 0.01) and f is continuous at x₀. Then g at x₀ is …</p><div class="opts"><span><b>A.</b>continuous</span><span><b>B.</b>possibly discontinuous</span><span><b>C.</b>always discontinuous</span></div><button data-i="5">Show answer</button><div class="reveal" id="r5"><b>Answer: A.</b> Continuity is local: only values near x₀ (including x₀) matter, and there g and f coincide.</div></div></section>
+</main>
+<script>
+document.querySelectorAll('button[data-i]').forEach(function(b){
+  b.addEventListener('click',function(){
+    var r=document.getElementById('r'+b.dataset.i), on=r.classList.toggle('on');
+    b.textContent=on?'Hide answer':'Show answer';
+  });
+});
+</script>
+</body></html>

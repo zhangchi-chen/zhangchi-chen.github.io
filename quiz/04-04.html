@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>介值定理 · 自测</title>
+<style>
+:root{--bg:#0f1726;--card:#16213a;--fg:#e5e7eb;--muted:#94a3b8;--line:#2b3a52;
+  --sky:#7dd3fc;--amb:#fbbf24;--grn:#4ade80;--blue:#1f72b0}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);
+  font:17px/1.7 "Segoe UI",system-ui,-apple-system,"PingFang SC","Noto Sans CJK SC","Microsoft YaHei",sans-serif}
+main{max-width:760px;margin:0 auto;padding:56px 16px 80px}
+.kicker{color:var(--muted);letter-spacing:.08em;font-size:13px}
+h1{font-size:clamp(24px,4.6vw,34px);margin:6px 0 8px;line-height:1.25}
+.lead{color:var(--sky);font-size:15.5px;margin:0 0 26px}
+.q{background:var(--card);border:1px solid var(--line);border-radius:14px;
+  padding:18px 20px;margin:0 0 16px}
+.q p.qt{margin:0 0 10px;font-weight:600}
+.opts{display:flex;flex-direction:column;gap:7px;margin:0 0 12px}
+.opts span{color:var(--fg)}
+.opts span b{color:var(--sky);margin-right:6px}
+button.rv{background:transparent;color:var(--amb);border:1.5px solid var(--amb);
+  border-radius:8px;padding:5px 14px;font:inherit;font-size:14.5px;cursor:pointer}
+button.rv:hover{background:var(--amb);color:var(--bg)}
+.reveal{display:none;margin-top:10px;padding:10px 12px;border-left:3px solid var(--grn);
+  background:#0f2a22;border-radius:6px}
+.reveal.shown{display:block}
+#mv-bar{position:fixed;left:0;right:0;top:0;z-index:99;display:flex;align-items:center;
+  gap:12px;padding:9px 14px;font-size:14px;
+  background:rgba(15,23,38,.86);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line)}
+#mv-bar .mv-home{color:var(--sky);text-decoration:none;white-space:nowrap}
+#mv-bar .mv-title{flex:1;text-align:center;font-weight:600;overflow:hidden;
+  text-overflow:ellipsis;white-space:nowrap;opacity:.85}
+#mv-bar .mv-notes{color:#fff;background:var(--blue);text-decoration:none;border-radius:8px;
+  padding:4px 12px;white-space:nowrap;font-size:13.5px}
+@media (max-width:480px){#mv-bar .mv-title{font-size:12.5px}}
+</style></head>
+<body>
+<nav id="mv-bar"><a class="mv-home" href="/">目录</a>
+<span class="mv-title">04-04 · 介值定理</span>
+<a class="mv-notes" href="../notes/04-04.html">去讲稿</a></nav>
+<main>
+<p class="kicker">数学分析 · 04-04 · 自测</p>
+<h1>介值定理</h1>
+<p class="lead">点击选项下方按钮查看答案与解析。</p>
+<div class="q"><p class="qt">1. 哪个条件让零点存在定理成为介值定理中 μ = 0 的情形？</p><div class="opts"><span><b>A.</b>f(a)·f(b) > 0</span><span><b>B.</b>f(a)·f(b) < 0</span><span><b>C.</b>f(a) = f(b)</span></div><button class="rv" data-r="r0">显示答案</button><div class="reveal" id="r0"><b>答案: B.</b> f(a)·f(b) &lt; 0 说明两端异号，所以 0 严格介于 f(a) 与 f(b) 之间，取 μ = 0 即可。</div></div>
+<div class="q"><p class="qt">2. 证明中（设 f(a) &lt; μ &lt; f(b)），点 x₀ 的定义是：</p><div class="opts"><span><b>A.</b>sup E，其中 E = {x ∈ [a, b] : f(x) < μ}</span><span><b>B.</b>第一个满足 f(x) = μ 的 x</span><span><b>C.</b>中点 (a + b)/2</span></div><button class="rv" data-r="r1">显示答案</button><div class="reveal" id="r1"><b>答案: A.</b> E 含有 a，且以 b 为上界，所以 x₀ = sup E 存在；连续性迫使 f(x₀) = μ。</div></div>
+<div class="q"><p class="qt">3. 若 x₀ = sup E 且 f(x₀) &lt; μ，为什么矛盾？</p><div class="opts"><span><b>A.</b>函数在 x₀ 处会间断</span><span><b>B.</b>E 会是空集</span><span><b>C.</b>x₀ 右侧附近的点也属于 E，x₀ 就不再是上界</span></div><button class="rv" data-r="r2">显示答案</button><div class="reveal" id="r2"><b>答案: C.</b> 由连续性，x₀ 附近一整段都满足 f &lt; μ（且因 f(b) > μ 有 x₀ &lt; b），所以 E 越过了 x₀。</div></div>
+<div class="q"><p class="qt">4. 对 p(x) = x³ − 2x + 2，零点存在定理保证哪个区间内有根？</p><div class="opts"><span><b>A.</b>(−1, 0)</span><span><b>B.</b>(0, 1)</span><span><b>C.</b>(−2, −1)</span></div><button class="rv" data-r="r3">显示答案</button><div class="reveal" id="r3"><b>答案: C.</b> p(−2) = −2 &lt; 0，p(−1) = 3 > 0。另外两个区间的端点值同号。</div></div>
+<div class="q"><p class="qt">5. 对此 p 在 [−2, −1] 上二分：p(−1.5) = 1.625 > 0。应保留哪一半？</p><div class="opts"><span><b>A.</b>两半都行</span><span><b>B.</b>[−2, −1.5]</span><span><b>C.</b>[−1.5, −1]</span></div><button class="rv" data-r="r4">显示答案</button><div class="reveal" id="r4"><b>答案: B.</b> p(−2) &lt; 0 &lt; p(−1.5)，变号——也就是根——被关在 [−2, −1.5] 里。</div></div>
+<div class="q"><p class="qt">6. 设 f 连续且 f([a, b]) ⊆ [a, b]。用哪个辅助函数证明存在不动点？</p><div class="opts"><span><b>A.</b>F(x) = f(x) − x</span><span><b>B.</b>F(x) = f(x) + x</span><span><b>C.</b>F(x) = x·f(x)</span></div><button class="rv" data-r="r5">显示答案</button><div class="reveal" id="r5"><b>答案: A.</b> F(a) = f(a) − a ≥ 0，F(b) = f(b) − b ≤ 0；要么端点就是不动点，要么由零点存在定理得到 x₀，使 f(x₀) = x₀。</div></div>
+</main>
+<script>
+document.querySelectorAll("button.rv").forEach(function(b){
+  b.addEventListener("click", function(){
+    var r = document.getElementById(b.dataset.r);
+    r.classList.toggle("shown");
+    b.textContent = r.classList.contains("shown") ? "收起答案" : "显示答案";
+  });
+});
+</script>
+</body></html>

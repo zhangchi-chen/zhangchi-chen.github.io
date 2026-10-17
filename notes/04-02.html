@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>连续的运算 · 讲稿</title>
+<style>
+:root{--bg:#0f1726;--card:#16213a;--fg:#e5e7eb;--muted:#94a3b8;--line:#2b3a52;
+  --sky:#7dd3fc;--amb:#fbbf24;--blue:#1f72b0}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);
+  font:17px/1.85 "Segoe UI",system-ui,-apple-system,"PingFang SC","Noto Sans CJK SC","Microsoft YaHei",sans-serif}
+main{max-width:820px;margin:0 auto;padding:52px 18px 80px}
+.kicker{color:var(--muted);letter-spacing:.08em;font-size:13px}
+h1{font-size:clamp(24px,4.6vw,36px);margin:6px 0 6px;line-height:1.25}
+.lead{color:var(--sky);font-size:16px;margin:0 0 30px}
+p{margin:0 0 18px}
+p.mark{border-left:3px solid var(--amb);padding-left:14px;margin-top:28px;
+  color:var(--amb);font-weight:600}
+#mv-bar{position:fixed;left:0;right:0;top:0;z-index:99;display:flex;align-items:center;
+  gap:12px;padding:9px 14px;font-size:14px;
+  background:rgba(15,23,38,.86);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line)}
+#mv-bar .mv-home{color:var(--sky);text-decoration:none;white-space:nowrap}
+#mv-bar .mv-title{flex:1;text-align:center;font-weight:600;overflow:hidden;
+  text-overflow:ellipsis;white-space:nowrap;opacity:.85}
+#mv-bar .mv-quiz{color:#fff;background:var(--blue);text-decoration:none;border-radius:8px;
+  padding:4px 12px;white-space:nowrap;font-size:13.5px}
+@media (max-width:480px){#mv-bar .mv-title{font-size:12.5px}}
+</style></head>
+<body>
+<nav id="mv-bar"><a class="mv-home" href="/">目录</a>
+<span class="mv-title">04-02 · 连续的运算</span>
+<a class="mv-quiz" href="../quiz/04-02.html">去自测</a></nav>
+<main>
+<p class="kicker">数学分析 · 第 04-02 集 · 讲稿（字幕全文）</p>
+<h1>连续的运算</h1>
+<p class="lead">本页为旁白讲稿全文；公式与图示请配合视频 04-02.mp4 观看，自测见右上角。</p>
+<p>同学们好。今天讲连续函数的运算。还有：初等函数为什么都连续？一位同学按下计算器： sin(1 − 0.999²)屏幕立刻显示：约 0.001999。把 0.999 推向 1， 输出就逼近 0。看起来， x→1 时 sin(1−x²)→0。</p>
+<p>可是，凭什么直接代入 x = 1？极限只看附近的点， 并非那个点本身。把极限推进函数里， 需要一张“许可证”。今天我们就来拿到它。先看连续性的局部面貌。在连续点附近， 函数有界。如果 f(x₀) > 0， 那么 x₀ 附近 f 也为正。</p>
+<p>例如 cos 0 = 1 > 0。在 (−π/2, π/2) 上， cos x 始终为正。两句话：连续是局部许可证。再接上第三章的极限运算法则。把 x₀ 处的连续想成握手。你给出 ε，函数回应 δ。f 在 x₀ 握手，g 也握手。</p>
+<p>两次握手合成一次： f ± g、f·g 在 x₀ 连续。f/g 也连续， 只要 g(x₀) ≠ 0。保号性保证 g 在附近 恒非零，f/g 才有定义。复合，就是管道串联焊接。x 进 g，出来 u = g(x)。u 再流进 f， 流出 f(g(x))。g 在 x₀ 处连续， f 在 g(x₀) 处连续。</p>
+<p>那么焊好的 f∘g 在 x₀ 处连续。每个接口都密封， 整条管道就密封。反函数：沿镜子 y = x 反射。设 f 在 [a, b] 上 严格递增且连续。图像没有断口， 也从不回头。镜像同样没有断口。f⁻¹ 在 [f(a), f(b)] 上连续。</p>
+<p>如果 f 严格递减， 定义域为 [f(b), f(a)]。下面一次性写出定理。四则运算：和、差、积、商 （分母非零）都连续。复合函数的连续性： 内外层连续，复合也连续。反函数的连续性： 严格单调且连续，反函数连续。所以，初等函数在其 定义区间上都连续。我们老老实实证明一条：和。</p>
+<p class="mark">任给 ε > 0。由 f 连续，存在 δ₁ > 0， 只要 |x − x₀| &lt; δ₁，就有 |f(x)−f(x₀)| &lt; ε/2同理有 δ₂ > 0，使 |g(x)−g(x₀)| &lt; ε/2取 δ = min(δ₁, δ₂)。</p>
+<p>接下来交给三角不等式。总误差小于 ε/2 + ε/2 = ε。证毕：f + g 在 x₀ 连续。差 f − g：论证完全一样。其余法则，是第三章 极限法则的翻译。x₀ 处连续，就是 x→x₀时 f(x)→f(x₀)。积的极限等于极限的积， 恰好是 f(x₀)·g(x₀)。</p>
+<p class="mark">商也一样， 只需 g(x₀) ≠ 0。复合：f 用 ε 换来 η， g 再用 η 换来 δ。反函数：镜像论证， 这里直接采用定理。</p>
+<p>现在来种一棵家族树。五条根：常数、幂函数 xᵅ、三角函数与反三角函数、指数函数 aˣ、 对数函数 logₐ x。每条根都连续。 sin 靠一个估计：正弦之差， 不超过自变量之差。指数函数， 沿用第一章的定义：</p>
+<p>aˣ 定义为 sup{aʳ : r∈ℚ, r≤x}它的连续性，直接拿来用。三种嫁接：四则运算、 复合、取反函数。对数恰好是指数的镜像。x > 0 时幂函数是复合： xᵅ = exp(α ln x)收获：初等函数在其 定义区间上处处连续。例如 h(x)=√(4−x²)/(x−1)</p>
+<p class="mark">它的定义域是 [−2, 1) ∪ (1, 2]在那里处处连续。</p>
+<p>应用一：代入求极限。sin 与 1 − x² 都连续，所以 x→1 时 sin(1−x²)→sin 0=0计算器是对的， 现在我们知道原因了。复合的脚注： 内层函数有个“洞”呢？sin x/x 在 0 处无定义， 极限却是 1：可去间断。如果 f(x)→A， 且 g 在 A 处连续，</p>
+<p class="mark">那么极限能穿过 g： g(f(x)) → g(A)x→0 时： √(2 − sin x/x) → 1x→∞ 时 sin x/x → 0， 所以极限是 √2。两种情形都成立： 外层的根号连续。</p>
+<p>应用二：幂指函数的极限。如果 u→a > 0，v→b， 那么 u^v → a^b。原因：u^v=exp(v ln u)ln 在 a 处连续， exp 在 b ln a 处连续。所以 exp(v ln u) →exp(b ln a) = a^b例：x→∞ 时， 底数 (2x+1)/(x+5)→2指数 3x/(x+1) → 3。</p>
+<p class="mark">所以整个幂趋于 2³ = 8。</p>
+<p class="mark">注意：a > 0，且 b 有限。</p>
+<p>应用三：反三角函数家族。正弦在 [−π/2, π/2] 上 严格递增且连续。反函数定理给出： arcsin 在 [−1,1] 连续余弦在 [0, π] 上严格递减， arccos 在 [−1,1] 连续正切在每个 [−c, c] 上 严格递增，0 &lt; c &lt; π/2，所以 arctan 在各段连续， 各段合起来就是 ℝ。例：x→2 时， arcsin(x/4) → π/6。</p>
+<p>这张许可证有一条警告。出了定义域，许可证就作废。√x 在 x = −1 附近？ 那里根本无定义。分母为零处同样作废： sin x/x 代入 0 得 0/0代入失效， 这个极限要靠第三章的工具。代入之前先看标签： 定义域、分母。到目前为止， 所有结论都是局部的。</p>
+<p>在整个闭区间 [a, b] 上， 连续能换来什么？下一集：闭区间上的 最大值最小值定理。那是另一个更深的故事。下集见。</p>
+</main></body></html>

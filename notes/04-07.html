@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>无穷远的极限 · 讲稿</title>
+<style>
+:root{--bg:#0f1726;--card:#16213a;--fg:#e5e7eb;--muted:#94a3b8;--line:#2b3a52;
+  --sky:#7dd3fc;--amb:#fbbf24;--blue:#1f72b0}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);
+  font:17px/1.85 "Segoe UI",system-ui,-apple-system,"PingFang SC","Noto Sans CJK SC","Microsoft YaHei",sans-serif}
+main{max-width:820px;margin:0 auto;padding:52px 18px 80px}
+.kicker{color:var(--muted);letter-spacing:.08em;font-size:13px}
+h1{font-size:clamp(24px,4.6vw,36px);margin:6px 0 6px;line-height:1.25}
+.lead{color:var(--sky);font-size:16px;margin:0 0 30px}
+p{margin:0 0 18px}
+p.mark{border-left:3px solid var(--amb);padding-left:14px;margin-top:28px;
+  color:var(--amb);font-weight:600}
+#mv-bar{position:fixed;left:0;right:0;top:0;z-index:99;display:flex;align-items:center;
+  gap:12px;padding:9px 14px;font-size:14px;
+  background:rgba(15,23,38,.86);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line)}
+#mv-bar .mv-home{color:var(--sky);text-decoration:none;white-space:nowrap}
+#mv-bar .mv-title{flex:1;text-align:center;font-weight:600;overflow:hidden;
+  text-overflow:ellipsis;white-space:nowrap;opacity:.85}
+#mv-bar .mv-quiz{color:#fff;background:var(--blue);text-decoration:none;border-radius:8px;
+  padding:4px 12px;white-space:nowrap;font-size:13.5px}
+@media (max-width:480px){#mv-bar .mv-title{font-size:12.5px}}
+</style></head>
+<body>
+<nav id="mv-bar"><a class="mv-home" href="/">目录</a>
+<span class="mv-title">04-07 · 无穷远的极限</span>
+<a class="mv-quiz" href="../quiz/04-07.html">去自测</a></nav>
+<main>
+<p class="kicker">数学分析 · 第 04-07 集 · 讲稿（字幕全文）</p>
+<h1>无穷远的极限</h1>
+<p class="lead">本页为旁白讲稿全文；公式与图示请配合视频 04-07.mp4 观看，自测见右上角。</p>
+<p>同学们好！今天讲两道无穷远处连续性的考题。本集全程设 f 在 ℝ 上连续。结论一：两端极限存在，f一致连续。结论二：两极限相等，必取到一个最值。每题走两遍：一遍换元，一遍反证。闭区间[a,b]上，连续函数很强。</p>
+<p>最大值最小值定理：最值都能取到。康托尔定理：连续自动升级为一致连续。可是这两个定理都住在两堵墙之内。ℝ 上没有墙，两个保证都会失效。x²在ℝ上并非一致连续。arctan x的两个确界都取不到。考官就问：ℝ 何时仍有这些保证？</p>
+<p>要检验的答案：f在两端收敛。钥匙是一本词典。arctan把ℝ一一映成有界区间。tan再把每个点送回原处。于是f暗中就是有限区间上的g。y→+∞时，角度逼近π/2。地平线±∞变成端点±π/2。</p>
+<p>地平线上的事，变成普通端点上的事。第一条路：正切词典。闭区间[−π/2,π/2]上定义g。内部令 g(x)=f(tan x)。端点处令g取两端的极限值。问：g 在新端点 π/2 处连续吗？x→π/2⁻时，tan x→+∞。</p>
+<p>所以g在π/2处连续。左端同理：地平线成了荣誉端点。内部的 g 是连续函数的复合。所以 g 在闭区间上连续，墙回来了。由最大值最小值定理，g有最值M、m。f的值都是g的值。若 M=m，f 是常数，最值都取到。</p>
+<p class="mark">不然m&lt;M，A至多等于其中一个。设 M≠A，而两个端点的值只有 A。所以 M 只能在内点 x₀ 处取到。拉回：f(tan x₀)=M。于是f取到最大值；m≠A时同理。</p>
+<p class="mark">注意：若 L₊≠L₋，结论可能失效。例：arctan x的确界都在端点。</p>
+<p>再看结论一：一致连续，还用这个 g。先把定义完整写一遍，考试就考这个。一致连续：任给ε>0，存在δ>0，使得对一切x′,x″∈ℝ，只要|x′−x″|&lt;δ，就有|f(x′)−f(x″)|&lt;ε。顺序要紧：δ 先选，再对所有点成立。</p>
+<p>康托尔定理：g 在闭区间上一致连续。而在ℝ上，f=g∘arctan。arctan是利普希茨的，L=1。给定ε，取g对应于ε的δ。若 |y′−y″|&lt;δ，两个角更近。所以|f(y′)−f(y″)|&lt;ε。一次换元，两个定理，一个ε都没浪费。</p>
+<p>第二条路：留在 ℝ 上，用反证法。第一问：f 有界吗？在两个极限定义里取 ε=1。x>X₊时，|f(x)−L₊|&lt;1。x&lt;X₋时，|f(x)−L₋|&lt;1。闭区间[X₋,X₊]上f有界。所以f有界，上下确界M、m存在。</p>
+<p>设两端极限都是A；M=m时f为常数。不然设M≠A；由m≤A≤M得M>A。画出中线 h=(A+M)/2。远处：|x|>X时f(x)&lt;h。尾巴低于h，而h&lt;M，够不着M。于是sup只需在[−X,X]上找。在这个闭区间上，最值定理取到它。</p>
+<p>若是 m≠A，把图上下翻转即可。再用反证法证结论一：小心取否定。假设 f 在 ℝ 上并非一致连续。那么有ε₀>0击败每个δ=1/n。得到|xₙ−yₙ|&lt;1/n，但|f(xₙ)−f(yₙ)|≥ε₀。数列 xₙ 能去哪？只有两个出口。</p>
+<p>出口一：(xₙ) 有界。致密性定理：子列xₙₖ→c∈ℝ。间距趋于零，所以 yₙₖ→c。f在c连续，两列像都趋于f(c)。像差趋零，与ε₀矛盾：出口一焊死。出口二：(xₙ) 无界。于是有子列 xₙₖ→+∞ 或 −∞。</p>
+<p>设xₙₖ→+∞，yₙₖ也跟过去。在地平线处，两列像都趋于 L₊。间距又趋于零：两个出口都焊死了。所以f一致连续，第二遍更轻松。结论二为何只说“至少一个”？在闭区间上，两个端点的值都是 A。它们像同一个海角的两份拷贝。</p>
+<p>g的两个最值都在，一个可能在海角。那么另一个必是f取到的最值。来看f(x)=1/(1+x²)。1+x²≥1，所以f(0)=1最大。在条带上，g(x)=cos²x。g 的最小值 0 只在海角上。而1/(1+x²)>0，f取不到0。</p>
+<p>镜像x²/(1+x²)两端趋于1。它在原点取到最小值0，1留在海角。而x/(1+x²)两个最值都取到。所以“至少一个”恰如其分。工具：一本词典，两个定理，两个出口。背后的想法：给 ℝ 补上无穷远端点。后续课程会给这个观点正式的名字。</p>
+<p>我们问过函数去哪；下面问它变得多快。那就是导数，下一章的主角。下集见！</p>
+</main></body></html>

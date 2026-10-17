@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>最值定理 · 讲稿</title>
+<style>
+:root{--bg:#0f1726;--card:#16213a;--fg:#e5e7eb;--muted:#94a3b8;--line:#2b3a52;
+  --sky:#7dd3fc;--amb:#fbbf24;--blue:#1f72b0}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);
+  font:17px/1.85 "Segoe UI",system-ui,-apple-system,"PingFang SC","Noto Sans CJK SC","Microsoft YaHei",sans-serif}
+main{max-width:820px;margin:0 auto;padding:52px 18px 80px}
+.kicker{color:var(--muted);letter-spacing:.08em;font-size:13px}
+h1{font-size:clamp(24px,4.6vw,36px);margin:6px 0 6px;line-height:1.25}
+.lead{color:var(--sky);font-size:16px;margin:0 0 30px}
+p{margin:0 0 18px}
+p.mark{border-left:3px solid var(--amb);padding-left:14px;margin-top:28px;
+  color:var(--amb);font-weight:600}
+#mv-bar{position:fixed;left:0;right:0;top:0;z-index:99;display:flex;align-items:center;
+  gap:12px;padding:9px 14px;font-size:14px;
+  background:rgba(15,23,38,.86);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line)}
+#mv-bar .mv-home{color:var(--sky);text-decoration:none;white-space:nowrap}
+#mv-bar .mv-title{flex:1;text-align:center;font-weight:600;overflow:hidden;
+  text-overflow:ellipsis;white-space:nowrap;opacity:.85}
+#mv-bar .mv-quiz{color:#fff;background:var(--blue);text-decoration:none;border-radius:8px;
+  padding:4px 12px;white-space:nowrap;font-size:13.5px}
+@media (max-width:480px){#mv-bar .mv-title{font-size:12.5px}}
+</style></head>
+<body>
+<nav id="mv-bar"><a class="mv-home" href="/">目录</a>
+<span class="mv-title">04-03 · 最值定理</span>
+<a class="mv-quiz" href="../quiz/04-03.html">去自测</a></nav>
+<main>
+<p class="kicker">数学分析 · 第 04-03 集 · 讲稿（字幕全文）</p>
+<h1>最值定理</h1>
+<p class="lead">本页为旁白讲稿全文；公式与图示请配合视频 04-03.mp4 观看，自测见右上角。</p>
+<p>同学们好！今天讲闭区间上的两个保证。天气软件说：今天最高温在14:00。假设最高温是23 °C。可是，为什么一定有最高温？气温在一天里连续变化。可是曲线可能一直往上爬。</p>
+<p>比如x/(1+x)永远小于1。上确界是1，却从未达到。两个条件堵住两条逃路。连续性，加上闭区间[a, b]。先看有界性定理。f在[a, b]上连续，就有界。最大值最小值定理更进一步。</p>
+<p class="mark">f在[a, b]上连续，就取到最值。存在两点ξ, η∈[a, b]。任意x：f(η)≤f(x)≤f(ξ)有界是铺垫，取到才是主角。有界是有天花板；取到是碰到它。</p>
+<p class="mark">现在逐条读条件。闭：端点a和b属于区间。想象两堵墙，锁住出口。有界区间：墙站在有限处。连续：画图时笔尖始终贴着纸。函数值没法瞬间跳走。</p>
+<p class="mark">引理的画面：曲线下有网，上有盖。曲线掉不下去，也飞不出去。</p>
+<p class="mark">定理更强：曲线碰到盖子和网。每个条件都必要吗？逐个拿掉看看。先拆墙：(0,1)上的f(x)=x。值都在0和1之间，所以有界。可是上确界1、下确界0都碰不到。函数值从开口处溜走了。</p>
+<p>第二步：留着墙，弄断连续性。在(0,1)内部，令f(x)=x。端点乱补：f(0)=f(1)=1/2区间是闭的，上确界1仍然碰不到。下确界0也碰不到。端点处的跳跃，就是瞬移。第三：[0,∞)上的f(x)=x。</p>
+<p class="mark">连续，在0处闭合，却漂向无穷。上方无界，所以没有最大值。每个条件都在干活。闭：堵住端点处的逃跑。连续：禁止瞬移。有界区间：禁止漂向无穷。</p>
+<p class="mark">现在证明，分两步，老老实实。</p>
+<p>第一步：假设f无界。设f无上界；无下界同理。于是每个n都有xₙ：f(xₙ)>n这些逃跑点都在[a, b]里。致密性定理给出收敛子列yₖ→c。yₖ取自xₙ，所以f(yₖ)>k。c在哪？墙把它拉回：a≤c≤b。</p>
+<p class="mark">这里正好用到了闭区间。由连续性，f(yₖ)→f(c)。而f(c)只是一个有限的数。可是f(yₖ)>k，冲向无穷。矛盾！所以f有上界，同理有下界。</p>
+<p>第二步：取到最大值。确界原理给出M=sup f。假设处处f(x)&lt;M。招牌动作来了：造一个辅助函数。令g(x)=1/(M−f(x))。分母恒正，所以g连续且为正。用第一步：g有界，g(x)≤K。</p>
+<p>倒过来：M−f(x)≥1/K。所以处处f(x)≤M−1/K。M−1/K是更小的上界！这和M是最小上界矛盾。所以存在ξ，f(ξ)=M。对−f重复一遍，得到最小值。回看[0,1)上的f(x)=x。</p>
+<p>M=1，g(x)=1/(1−x)。x=0.9时g(x)=10。x=0.99时g(x)=100。x=0.999时g(x)=1000。g冲向无穷，正如推理所料。[0,1)非闭，引理管不着。在[a, b]上，引理禁止这种爆炸。</p>
+<p class="mark">“碰不到”⇒g无界⇒矛盾。</p>
+<p class="mark">第一步：逃跑的序列被子列拽回。</p>
+<p class="mark">第二步：碰不到变成辅助函数无界。</p>
+<p class="mark">接下来它用在哪？考试专题问：全直线上能取到最大值吗？关键工具就是今天的最值定理。它们还会加入第7章的等价环。和确界原理、致密性定理并列。下一集：介值定理。</p>
+<p class="mark">总结：闭区间上连续⇒有界且有最值。下集见！</p>
+</main></body></html>

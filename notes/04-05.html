@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>一致连续 · 讲稿</title>
+<style>
+:root{--bg:#0f1726;--card:#16213a;--fg:#e5e7eb;--muted:#94a3b8;--line:#2b3a52;
+  --sky:#7dd3fc;--amb:#fbbf24;--blue:#1f72b0}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);
+  font:17px/1.85 "Segoe UI",system-ui,-apple-system,"PingFang SC","Noto Sans CJK SC","Microsoft YaHei",sans-serif}
+main{max-width:820px;margin:0 auto;padding:52px 18px 80px}
+.kicker{color:var(--muted);letter-spacing:.08em;font-size:13px}
+h1{font-size:clamp(24px,4.6vw,36px);margin:6px 0 6px;line-height:1.25}
+.lead{color:var(--sky);font-size:16px;margin:0 0 30px}
+p{margin:0 0 18px}
+p.mark{border-left:3px solid var(--amb);padding-left:14px;margin-top:28px;
+  color:var(--amb);font-weight:600}
+#mv-bar{position:fixed;left:0;right:0;top:0;z-index:99;display:flex;align-items:center;
+  gap:12px;padding:9px 14px;font-size:14px;
+  background:rgba(15,23,38,.86);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line)}
+#mv-bar .mv-home{color:var(--sky);text-decoration:none;white-space:nowrap}
+#mv-bar .mv-title{flex:1;text-align:center;font-weight:600;overflow:hidden;
+  text-overflow:ellipsis;white-space:nowrap;opacity:.85}
+#mv-bar .mv-quiz{color:#fff;background:var(--blue);text-decoration:none;border-radius:8px;
+  padding:4px 12px;white-space:nowrap;font-size:13.5px}
+@media (max-width:480px){#mv-bar .mv-title{font-size:12.5px}}
+</style></head>
+<body>
+<nav id="mv-bar"><a class="mv-home" href="/">目录</a>
+<span class="mv-title">04-05 · 一致连续</span>
+<a class="mv-quiz" href="../quiz/04-05.html">去自测</a></nav>
+<main>
+<p class="kicker">数学分析 · 第 04-05 集 · 讲稿（字幕全文）</p>
+<h1>一致连续</h1>
+<p class="lead">本页为旁白讲稿全文；公式与图示请配合视频 04-05.mp4 观看，自测见右上角。</p>
+<p>同学们好！今天我们聊一致连续。这是大一新生小林，他很困惑。“两个定义只差一个词。”“连续和一致连续，有啥区别？”“一个词而已，何必在意？”好问题。答案我们一起挣来。</p>
+<p>先试个比喻：在无尽小路上遛狗。规矩：狗的位置最多偏离ε。于是你给脚步定一个容差δ。平坦的地方，δ可以放宽些。路面剧烈起伏处，δ必须收紧。每到一处，就重新调一次δ。这就是连续：δ可以随地点变化。</p>
+<p>小林皱眉：“那问题出在哪？”老实说，这个比喻有局限。一个人没法同时比较两个任意点。也没人要求全程只用一个容差。小林说：“我想要个带裁判的比喻。”换个比喻：国王雇了宫廷画师。画师要画遍王国的每处风景。</p>
+<p>地点记作x，画作记作f(x)。相近的地点，画作也应相近。第一关：国王逐棵树单独检查。在树x₀处，他给出容差ε。画师报上此处的稳定度δ。离x₀小于δ，画差小于ε。换一棵树，就换一个δ。</p>
+<p>他通过了，但只是逐点通过。这就是连续：∀x₀ ∀ε ∃δ。第二关：国王改了规矩。他给出ε，要一个全国统一的δ。任意两地相距小于δ，画差须小于ε。两点都能随意挑，哪里都算数。逐点过关，还是一把尺量全程？</p>
+<p class="mark">看个过不了第二关的：f(x)=x²。逐点能过：δ=ε/(2x+1)。这里x≥0，并且0&lt;ε≤1。因为此时|x+y|&lt;2x+1。</p>
+<p>现在来看这张表。x=1时，δ=ε/3。x=100时，δ=ε/201。x=10⁶时呢？δ=ε/2000001，太小了！δ一路缩小，逃跑了！小林：“换个更聪明的配方呢？”</p>
+<p>没用。任何固定的δ，走远都会输。取x=1/δ，y=1/δ+δ/2。两者平方差为1+δ²/4。两点相距δ/2，画差却至少是1。所以x²在[0,+∞)上只是连续。把两个定义并排读一读。连续：先任取x，再找δ。</p>
+<p>一致连续：先定δ，再管所有x。∀x ∃δ 与 ∃δ ∀x。前者x先选，δ可以跟着x变。后者δ先定，一把尺量全程。顺序一换，δ就只依赖ε了。所以一致连续必定连续，反之未必。正式定义，我们念一遍：</p>
+<p class="mark">任给ε>0，有统一的δ(ε)>0。两点满足|x′−x″|&lt;δ。必有|f(x′)−f(x″)|&lt;ε。</p>
+<p>现在，国王变成了对手。他要证明：统一标准根本找不到。把定义逐个量词取否定。∀ε变∃ε₀，∃δ变∀δ。“所有点对都好”变成“有一对捣乱”。存在ε₀>0，能击败每个δ>0。每给一个δ，国王就找来一对恶魔点。</p>
+<p>两点相距小于δ，画差却≥ε₀。小林：“恶魔点对，全靠灵感吗？”不用。它们能从否定里机械地抽出来。先喂给国王δ=1。他必须交出一对x′₁, x″₁。再喂δ=1/2，1/3，…，1/n。于是得到两个数列。</p>
+<p>它们满足|x′ₙ−x″ₙ|&lt;1/n。而函数值之差始终至少为ε₀。点在靠拢，函数值却始终分开。这就是数列判别法，一把万能钥匙。f在I上一致连续，当且仅当：设I中数列满足x′ₙ−x″ₙ→0。必有f(x′ₙ)−f(x″ₙ)→0。</p>
+<p class="mark">必要性：给定ε，取对应的δ。n充分大时，|x′ₙ−x″ₙ|&lt;δ。于是函数值之差小于ε，即趋于0。充分性：正是刚才δ=1/n的抽取。一致连续一旦失败，恶魔数列就出现。来试试钥匙：三个经典反例。</p>
+<p>第一个：(0,1)上的1/x。取x′ₙ=1/n，n≥2。再取x″ₙ=1/(2n)。点差1/(2n)→0。函数值差2n−n=n，越来越大。败因：从开口端0处逃逸。用δ说：ε₀=1，点对取δ与δ/2。</p>
+<p class="mark">函数值相差1/δ>1。</p>
+<p>第二个：[0,+∞)上的x²。取x′ₙ=n+1/n，x″ₙ=n。点差1/n→0。函数值差2+1/n²≥2。败因：在无穷远处崩塌。(0,1)上的sin(1/x)。取x′ₙ=1/(2nπ)。</p>
+<p>再取x″ₙ=1/(2nπ+π/2)。两者都趋于0，点差也趋于0。可是sin(2nπ)=0。而sin(2nπ+π/2)=1。函数值差永远是1。败因：振荡频率失控。小林：“点要靠拢，值要分开！”</p>
+<p>这把钥匙也能证明成立。看f(x)=ax+b。值差为a(x′ₙ−x″ₙ)→0。所以在任何区间上一致连续。用δ说：δ=ε/(|a|+1)。因为|a|δ&lt;ε，与位置无关。√x在[0,+∞)上也一致连续！</p>
+<p>取δ=ε²就够，依据见屏幕。陡峭无妨，失控才是敌人。小林总结：连续是逐棵树过关。一致连续：一把尺量全程。区别就在量词顺序。要否定它，就造恶魔点对或数列。三个反例的路，都有开口或无尽头。</p>
+<p>闭区间上，逐点过关会自动升级。为什么？下集揭晓。做做自测题，巩固一下。下集见！</p>
+</main></body></html>

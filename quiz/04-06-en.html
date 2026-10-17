@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cantor's Theorem · Self-test</title>
+<style>
+:root{--bg:#0f1726;--card:#16213a;--fg:#e5e7eb;--muted:#94a3b8;--line:#2b3a52;
+  --sky:#7dd3fc;--amb:#fbbf24;--grn:#4ade80;--blue:#1f72b0}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);
+  font:17px/1.7 "Segoe UI",system-ui,-apple-system,"PingFang SC","Noto Sans CJK SC","Microsoft YaHei",sans-serif}
+main{max-width:760px;margin:0 auto;padding:56px 16px 80px}
+.kicker{color:var(--muted);letter-spacing:.08em;font-size:13px}
+h1{font-size:clamp(24px,4.6vw,34px);margin:6px 0 8px;line-height:1.25}
+.lead{color:var(--sky);font-size:15.5px;margin:0 0 26px}
+.q{background:var(--card);border:1px solid var(--line);border-radius:14px;
+  padding:18px 20px;margin:0 0 16px}
+.q p.qt{margin:0 0 10px;font-weight:600}
+.opts{display:flex;flex-direction:column;gap:7px;margin:0 0 12px}
+.opts span{color:var(--fg)}
+.opts span b{color:var(--sky);margin-right:6px}
+button.rv{background:transparent;color:var(--amb);border:1.5px solid var(--amb);
+  border-radius:8px;padding:5px 14px;font:inherit;font-size:14.5px;cursor:pointer}
+button.rv:hover{background:var(--amb);color:var(--bg)}
+.reveal{display:none;margin-top:10px;padding:10px 12px;border-left:3px solid var(--grn);
+  background:#0f2a22;border-radius:6px}
+.reveal.shown{display:block}
+#mv-bar{position:fixed;left:0;right:0;top:0;z-index:99;display:flex;align-items:center;
+  gap:12px;padding:9px 14px;font-size:14px;
+  background:rgba(15,23,38,.86);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line)}
+#mv-bar .mv-home{color:var(--sky);text-decoration:none;white-space:nowrap}
+#mv-bar .mv-title{flex:1;text-align:center;font-weight:600;overflow:hidden;
+  text-overflow:ellipsis;white-space:nowrap;opacity:.85}
+#mv-bar .mv-notes{color:#fff;background:var(--blue);text-decoration:none;border-radius:8px;
+  padding:4px 12px;white-space:nowrap;font-size:13.5px}
+@media (max-width:480px){#mv-bar .mv-title{font-size:12.5px}}
+</style></head>
+<body>
+<nav id="mv-bar"><a class="mv-home" href="/">Home</a>
+<span class="mv-title">04-06 · Cantor's Theorem</span>
+<a class="mv-notes" href="../notes/04-06.html">Notes</a></nav>
+<main>
+<p class="kicker">Mathematical Analysis · 04-06 · Self-test</p>
+<h1>Cantor's Theorem</h1>
+<p class="lead">Click the button under each item to reveal the answer.</p>
+<div class="q"><p class="qt">1. Why does “collect every local δ(x) on [a, b] and take the smallest” fail as a proof?</p><div class="opts"><span><b>A.</b>There are infinitely many δ(x), and their infimum may be 0, so a smallest one need not exist.</span><span><b>B.</b>Local δ(x) can be negative, so the minimum is meaningless.</span><span><b>C.</b>A closed interval contains only finitely many points, so the argument is unnecessary.</span></div><button class="rv" data-r="r0">Reveal answer</button><div class="reveal" id="r0"><b>Answer: A.</b> 1, 1/2, 1/3, … are all positive, yet inf = 0. The argument also never uses the walls: word for word it would “prove” that 1/x is uniformly continuous on (0, 1], which is false.</div></div>
+<div class="q"><p class="qt">2. In Beat one of the proof, where exactly is closedness of [a, b] used?</p><div class="opts"><span><b>A.</b>To make the sequence xₙ bounded.</span><span><b>B.</b>To guarantee the limit x₀ of xₙₖ stays in [a, b], since a ≤ xₙₖ ≤ b gives a ≤ x₀ ≤ b.</span><span><b>C.</b>To make f continuous.</span></div><button class="rv" data-r="r1">Reveal answer</button><div class="reveal" id="r1"><b>Answer: B.</b> Boundedness is what Bolzano–Weierstrass needs; closedness keeps x₀ inside the courtyard, so continuity at x₀ is available in Beat three.</div></div>
+<div class="q"><p class="qt">3. Run the three beats for f(x) = 1/x on (0, 1] with xₙ = 1/n, yₙ = 1/(n+1). What breaks?</p><div class="opts"><span><b>A.</b>Beat two: yₙ no longer follows xₙ.</span><span><b>B.</b>Nothing breaks, because 1/x is uniformly continuous on (0, 1].</span><span><b>C.</b>Beat three: the limit x₀ = 0 is outside (0, 1], so there is no continuity at x₀ to use.</span></div><button class="rv" data-r="r2">Reveal answer</button><div class="reveal" id="r2"><b>Answer: C.</b> |xₙ − yₙ| = 1/(n(n+1)) → 0 and both tend to 0, but |f(xₙ) − f(yₙ)| = 1 for every n. The checkpoint escaped through the missing wall.</div></div>
+<div class="q"><p class="qt">4. In the gluing lemma, how is a cross-border pair x′ ∈ I₁, x″ ∈ I₂ handled?</p><div class="opts"><span><b>A.</b>Route through c: since x′ ≤ c ≤ x″, each point is within δ₃ of c, so each value is within ε/2 of f(c).</span><span><b>B.</b>Take δ = δ₁ + δ₂.</span><span><b>C.</b>It cannot be handled; the lemma needs one formula for f on both pieces.</span></div><button class="rv" data-r="r3">Reveal answer</button><div class="reveal" id="r3"><b>Answer: A.</b> |f(x′) − f(x″)| ≤ |f(x′) − f(c)| + |f(c) − f(x″)| &lt; ε/2 + ε/2 = ε, with δ = min{δ₁, δ₂, δ₃}.</div></div>
+<div class="q"><p class="qt">5. On [1, ∞), |cos √x′ − cos √x″| ≤ |x′ − x″|/2. Given ε > 0, which δ works?</p><div class="opts"><span><b>A.</b>δ = ε/2</span><span><b>B.</b>δ = 2ε</span><span><b>C.</b>δ = ε²</span></div><button class="rv" data-r="r4">Reveal answer</button><div class="reveal" id="r4"><b>Answer: B.</b> L = 1/2, so δ = ε/L = 2ε: then |cos √x′ − cos √x″| ≤ |x′ − x″|/2 &lt; 2ε/2 = ε.</div></div>
+<div class="q"><p class="qt">6. Which statement about √x is true?</p><div class="opts"><span><b>A.</b>√x satisfies a Lipschitz condition on [0, ∞).</span><span><b>B.</b>√x is uniformly continuous on [0, ∞), yet has no Lipschitz constant on [0, 1].</span><span><b>C.</b>√x is not uniformly continuous near 0.</span></div><button class="rv" data-r="r5">Reveal answer</button><div class="reveal" id="r5"><b>Answer: B.</b> |√t − √0|/|t − 0| = 1/√t → ∞ as t → 0, so no L works on [0, 1]; Cantor covers [0, 1], L = 1/2 covers [1, ∞), and gluing at 1 finishes. Lipschitz is sufficient, not necessary.</div></div>
+</main>
+<script>
+document.querySelectorAll("button.rv").forEach(function(b){
+  b.addEventListener("click", function(){
+    var r = document.getElementById(b.dataset.r);
+    r.classList.toggle("shown");
+    b.textContent = r.classList.contains("shown") ? "Hide" : "Reveal answer";
+  });
+});
+</script>
+</body></html>
