@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>归结原则 · 自测</title>
+<title>归结原则</title>
 <style>
 :root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
 *{box-sizing:border-box}
@@ -28,7 +28,7 @@ i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
 .c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
 .r{border-color:var(--coral)} .r .t{color:var(--coral)}
 .vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
-.verdict{color:var(--red);font-weight:700;margin-top:10px}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
 svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
 svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
 svg .ax{fill:var(--dim);font-size:16px}
@@ -82,19 +82,19 @@ section.quiz .q{margin:12px 0;text-align:left}
 <body>
 <div class="page">
   <div class="topbar">
-    <h1>归结原则 · 自测</h1> <a href="../notes/03-04.html">查看讲稿 →</a>
+    <h1>归结原则</h1>
   </div>
   
   <div class="quiz">
-  <section class="quiz"><div class="q"><div class="qt">1. 要证明 lim<sub>x→0</sub> sin(1/<i>x</i>) 不存在，哪一对探针可行？</div><ol><li data-ok="1"><span class="l">A</span><i>x</i><sub>n</sub> = 1/(2<i>n</i>π + π/2) 与 <i>x</i><sub>n</sub> = 1/(2<i>n</i>π)</li><li data-ok="0"><span class="l">B</span><i>x</i><sub>n</sub> = 1/<i>n</i> 与 <i>x</i><sub>n</sub> = 2/<i>n</i></li><li data-ok="0"><span class="l">C</span><i>x</i><sub>n</sub> = 1/(2<i>n</i>π) 与 <i>x</i><sub>n</sub> = 1/(4<i>n</i>π)</li></ol>
+  <section class="quiz"><div class="q"><div class="qt">1. 要证明 lim<sub>x→0</sub> sin(1/<i>x</i>) 不存在，哪一对路线可行？</div><ol><li data-ok="1"><span class="l">A</span><i>x</i><sub>n</sub> = 1/(2<i>n</i>π + π/2) 与 <i>x</i><sub>n</sub> = 1/(2<i>n</i>π)</li><li data-ok="0"><span class="l">B</span><i>x</i><sub>n</sub> = 1/<i>n</i> 与 <i>x</i><sub>n</sub> = 2/<i>n</i></li><li data-ok="0"><span class="l">C</span><i>x</i><sub>n</sub> = 1/(2<i>n</i>π) 与 <i>x</i><sub>n</sub> = 1/(4<i>n</i>π)</li></ol>
 <button type="button" data-show="显示答案" data-hide="隐藏答案">显示答案</button>
-<div class="ex"><b>正确答案： A.</b> 前者使 sin(1/<i>x</i><sub>n</sub>) = 1 → 1，后者给出 0 → 0：两份报告不同，故极限不存在。</div></div><div class="q"><div class="qt">2. 对狄利克雷函数，在任一点 <i>x</i>₀ 处，哪组证人能推翻极限断言？</div><ol><li data-ok="0"><span class="l">A</span>两个趋于 <i>x</i>₀ 的无理数列</li><li data-ok="1"><span class="l">B</span>一个有理数列和一个无理数列，都趋于 <i>x</i>₀</li><li data-ok="0"><span class="l">C</span>常数列 <i>x</i><sub>n</sub> = <i>x</i>₀</li></ol>
+<div class="ex"><b>正确答案： A.</b> 前者使 sin(1/<i>x</i><sub>n</sub>) = 1 → 1，后者给出 0 → 0：两份报告不同，故极限不存在。</div></div><div class="q"><div class="qt">2. 对狄利克雷函数，在任一点 <i>x</i>₀ 处，哪组路线能否决极限断言？</div><ol><li data-ok="0"><span class="l">A</span>两个趋于 <i>x</i>₀ 的无理数列</li><li data-ok="1"><span class="l">B</span>一个有理数列和一个无理数列，都趋于 <i>x</i>₀</li><li data-ok="0"><span class="l">C</span>常数列 <i>x</i><sub>n</sub> = <i>x</i>₀</li></ol>
 <button type="button" data-show="显示答案" data-hide="隐藏答案">显示答案</button>
-<div class="ex"><b>正确答案： B.</b> 有理探针报告 1，无理探针报告 0；常数列不合要求，因为必须 <i>x</i><sub>n</sub> ≠ <i>x</i>₀。</div></div><div class="q"><div class="qt">3. <i>f</i>(<i>x</i>) = 1（<i>x</i> &gt; 0），<i>f</i>(<i>x</i>) = −1（<i>x</i> &lt; 0）。哪对证人说明它在 0 处无极限？</div><ol><li data-ok="0"><span class="l">A</span><i>x</i><sub>n</sub> = 1/<i>n</i> 与 <i>x</i><sub>n</sub> = 1/<i>n</i>²</li><li data-ok="0"><span class="l">B</span><i>x</i><sub>n</sub> = −1/<i>n</i> 与 <i>x</i><sub>n</sub> = −1/<i>n</i>²</li><li data-ok="1"><span class="l">C</span><i>x</i><sub>n</sub> = 1/<i>n</i> 与 <i>x</i><sub>n</sub> = −1/<i>n</i></li></ol>
+<div class="ex"><b>正确答案： B.</b> 有理路线报告 1，无理路线报告 0；常数列不合要求，因为必须 <i>x</i><sub>n</sub> ≠ <i>x</i>₀。</div></div><div class="q"><div class="qt">3. <i>f</i>(<i>x</i>) = 1（<i>x</i> &gt; 0），<i>f</i>(<i>x</i>) = −1（<i>x</i> &lt; 0）。哪对路线说明它在 0 处无极限？</div><ol><li data-ok="0"><span class="l">A</span><i>x</i><sub>n</sub> = 1/<i>n</i> 与 <i>x</i><sub>n</sub> = 1/<i>n</i>²</li><li data-ok="0"><span class="l">B</span><i>x</i><sub>n</sub> = −1/<i>n</i> 与 <i>x</i><sub>n</sub> = −1/<i>n</i>²</li><li data-ok="1"><span class="l">C</span><i>x</i><sub>n</sub> = 1/<i>n</i> 与 <i>x</i><sub>n</sub> = −1/<i>n</i></li></ol>
 <button type="button" data-show="显示答案" data-hide="隐藏答案">显示答案</button>
-<div class="ex"><b>正确答案： C.</b> 右侧探针报告 1，左侧探针报告 −1；极限不同即无极限。</div></div><div class="q"><div class="qt">4. 你只检查了一个数列 <i>x</i><sub>n</sub> → <i>x</i>₀，发现 <i>f</i>(<i>x</i><sub>n</sub>) → <i>A</i>。能得出什么？</div><ol><li data-ok="0"><span class="l">A</span>lim<sub>x→x₀</sub> <i>f</i>(<i>x</i>) = <i>A</i></li><li data-ok="1"><span class="l">B</span>还不能断言极限为 <i>A</i>：别的数列可能给出不同报告</li><li data-ok="0"><span class="l">C</span>极限存在，但可能不等于 <i>A</i></li></ol>
+<div class="ex"><b>正确答案： C.</b> 右侧路线报告 1，左侧路线报告 −1；极限不同即无极限。</div></div><div class="q"><div class="qt">4. 你只检查了一个数列 <i>x</i><sub>n</sub> → <i>x</i>₀，发现 <i>f</i>(<i>x</i><sub>n</sub>) → <i>A</i>。能得出什么？</div><ol><li data-ok="0"><span class="l">A</span>lim<sub>x→x₀</sub> <i>f</i>(<i>x</i>) = <i>A</i></li><li data-ok="1"><span class="l">B</span>还不能断言极限为 <i>A</i>：别的数列可能给出不同报告</li><li data-ok="0"><span class="l">C</span>极限存在，但可能不等于 <i>A</i></li></ol>
 <button type="button" data-show="显示答案" data-hide="隐藏答案">显示答案</button>
-<div class="ex"><b>正确答案： B.</b> 证明极限需要每一个数列；狄利克雷函数通过了所有无理探针，却仍无极限。</div></div><div class="q"><div class="qt">5. 探针 <i>x</i><sub>n</sub> = <i>n</i> 给出 <i>e<sup>n</sup></i> → +∞，它对 lim<sub>x→+∞</sub> <i>e<sup>x</sup></i> 有什么作用？</div><ol><li data-ok="1"><span class="l">A</span>排除了所有有限极限；完整结论需要所有探针（由单调性保证）</li><li data-ok="0"><span class="l">B</span>单独就能证明完整结论</li><li data-ok="0"><span class="l">C</span>说明极限为 0</li></ol>
+<div class="ex"><b>正确答案： B.</b> 证明极限需要每一个数列；狄利克雷函数通过了所有无理路线，却仍无极限。</div></div><div class="q"><div class="qt">5. 探针 <i>x</i><sub>n</sub> = <i>n</i> 给出 <i>e<sup>n</sup></i> → +∞，它对 lim<sub>x→+∞</sub> <i>e<sup>x</sup></i> 有什么作用？</div><ol><li data-ok="1"><span class="l">A</span>排除了所有有限极限；完整结论需要所有探针（由单调性保证）</li><li data-ok="0"><span class="l">B</span>单独就能证明完整结论</li><li data-ok="0"><span class="l">C</span>说明极限为 0</li></ol>
 <button type="button" data-show="显示答案" data-hide="隐藏答案">显示答案</button>
 <div class="ex"><b>正确答案： A.</b> 一份无界的报告就能否决所有有限候选值，但确认 +∞ 仍需每一个趋于 +∞ 的数列。</div></div></section>
   </div>
