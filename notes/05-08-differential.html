@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>微分：线性替身，以及公式为何经得起换元</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#fbfaf6;color:#1d2230;font-family:"PingFang SC","Noto Sans CJK SC",system-ui,sans-serif;line-height:1.75}
+main{max-width:760px;margin:0 auto;padding:30px 18px 64px}
+header{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;margin-bottom:8px}
+h1{font-size:1.5rem;margin:0}
+header a{color:#1f72b0;text-decoration:none;font-size:14px}
+.sub{color:#5d6475;font-size:14px;margin:0 0 18px}
+h2{font-size:15px;color:#5d6475;margin:28px 0 8px;border-bottom:1px solid #e3e0d6;padding-bottom:6px}
+ol{padding-left:24px;margin:6px 0}
+li{margin:5px 0}
+.f{font-family:"DejaVu Sans","Times New Roman",serif}
+</style></head>
+<body><main>
+<header><h1>05-08-differential · 微分：线性替身，以及公式为何经得起换元</h1><a href="../quiz/05-08-differential.html">自测 →</a><a href="../quiz/index.html">目录</a></header>
+<p class="sub">视频配套讲稿（逐条字幕） · MATH SELF-CHECK: 52 claims re-derived, 2 fixed.</p>
+<h2>动机</h2><ol><li>微分：一个经得起换元的线性替身</li><li>笔记里有两句话在打架。</li><li>第一句：dy/dx是一个整体记号</li><li>第二句：参数公式像在约掉dt</li><li>既然不是分数，约分为何从不出错？</li><li>今天：dy、dx各自是一个数</li><li>宿舍墙上的方形照片，边长x₀</li><li>面积是边长的平方：S=x²</li><li>放大一点：边长增加Δx=1cm</li><li>多出的面积：两条长条加一个小角</li><li>每条是x₀乘Δx，合起来2x₀Δx</li><li>小角是Δx乘Δx：(Δx)²</li><li>代入：长条20cm²，小角1cm²</li><li>Δx减半：长条减半，小角剩四分之一</li><li>小角除以Δx，得Δx，趋于零</li><li>小角是比Δx高阶的无穷小</li><li>线性的长条部分，就是微分dS</li></ol><h2>定理说了什么</h2><ol><li>先看课本上的定义</li><li>给x₀一个增量Δx，看Δy</li><li>假如Δy能写成A·Δx</li><li>再加一个o(Δx)的余项</li><li>o(Δx)：除以Δx仍趋于零</li><li>那么就称f在x₀可微</li><li>A·Δx叫作Δy的线性主部</li><li>它就是微分，记作dy|ₓ₌ₓ₀</li><li>固定x₀，dy只随Δx变化</li><li>把真实的Δy画成Δx的函数</li><li>过原点的直线都线性，哪条最贴？</li><li>斜率选1.5，误差约是Δx的一半</li><li>斜率取2，误差正是(Δx)²</li><li>线性替身如果存在，就唯一</li><li>像在手机地图上，双指放大x₀处</li><li>放大十倍，曲线已经快直了</li><li>放大百倍，曲线和切线分不开了</li><li>放大后剩下切线的升高：dy</li><li>Δy−dy=(Δx)²，缩得比Δx快</li><li>定理5.9：可微当且仅当可导</li><li>而且常数A就是f′(x₀)</li></ol><h2>方法与证明核心</h2><ol><li>一元时，这条定理为何几乎白送？</li><li>可微⇒可导：两边除以Δx</li><li>Δx→0，商趋于A：f′(x₀)=A</li><li>可导⇒可微：看余下的部分</li><li>除以Δx：差商减极限，趋于零</li><li>一元线性函数，就是乘一个常数</li><li>一个数就定下它：只能是导数</li><li>二元时，有斜率未必有线性替身</li><li>所以二元的可微，直接这样定义</li><li>看最简单的函数：y=x</li><li>导数是1，所以dx=Δx</li><li>自变量的微分，就是增量本身</li><li>于是dy=f′(x)dx</li><li>每一点上，dy和dx都是普通的数</li><li>dy/dx=f′(x)是真正的商</li><li>所以导数也叫微商</li><li>笔记第一句升级了：斜杠是真除法</li><li>求导公式乘上dx，就成了微分公式</li><li>例如d(uv)=v du+u dv</li><li>复合：dy=f′(u)g′(x)dx</li><li>而g′(x)dx恰好就是du</li><li>于是dy=f′(u)du，形式不变</li><li>这就是一阶微分形式不变性</li><li>像小组作业：谁执笔，结果都一样</li><li>演示一：圆x²+y²=1</li><li>两边同时取微分，不挑自变量</li><li>得2x dx+2y dy=0</li><li>一种读法：dy/dx=−x/y</li><li>另一种读法：dx/dy=−y/x</li><li>在(1,0)切线竖直：dx/dy=0</li><li>一个等式，两种读法，谁也没被指定</li><li>演示二：还上一集的债</li><li>还是上一集的那条摆线</li><li>dx=(1−cos t)dt</li><li>dy=sin t dt</li><li>两个都是数，相除时dt正当约掉</li><li>t=π/2时斜率为1，和上一集一致</li><li>上一集的公式，原来是微分之商</li><li>演示三：三层复合的指数函数</li><li>剥外层：指数函数照抄</li><li>剥中层：sin变成cos</li><li>剥内层：d(ax+b)=a dx</li><li>dx前面的系数，就是导数</li><li>每一步都是dy=f′(u)du</li></ol><h2>应用与展望</h2><ol><li>应用一：线性近似</li><li>1元换1.02外币，1外币值几元？</li><li>取f(x)=1/x，f′(1)=−1</li><li>线性估计：1−0.02=0.98</li><li>真值是0.98039…，略大一点</li><li>1/x在切线上方，估计偏小</li><li>应用二：误差怎样传播</li><li>手裁边长10cm，误差≤0.1cm</li><li>面积误差≈2x₀Δx=2cm²</li><li>正是开头的长条，小角只有0.01</li><li>边长差1%，面积约差2%</li><li>提醒：不变性只属于一阶微分</li><li>二阶微分会失去它，下一集讲原因</li><li>第八章的换元积分，正是它倒着用</li><li>二元时：dz=A dx+B dy</li><li>平面上的线性映射，余项o(ρ)</li><li>再往后是矩阵，泛函里是线性算子</li><li>核心不变：凑近看，变化近乎线性</li></ol>
+</main></body></html>

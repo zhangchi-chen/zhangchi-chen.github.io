@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The differential: a linear stand-in, and why the formula survives a change of variable · Quiz</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#0e1522;color:#e9eef6;font-family:"DejaVu Sans","Segoe UI","Noto Sans CJK SC","PingFang SC",system-ui,sans-serif;line-height:1.6}
+main{max-width:860px;margin:0 auto;padding:32px 16px 64px}
+header{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;margin-bottom:20px}
+h1{font-size:1.6rem;margin:0}
+header a{color:#56c8ff;text-decoration:none;font-size:14px}
+.q{border-top:1px solid #2b3c5c;padding:14px 0}
+.q:first-of-type{border-top:none}
+.q p{margin:0 0 8px;font-weight:600}
+.q ol{list-style:none;padding:0;margin:0 0 8px}
+.q li{padding:4px 12px;border-radius:6px;margin:3px 0}
+.q li.ok{background:rgba(111,224,138,.15);outline:1.5px solid #6fe08a}
+.q button{background:transparent;color:#56c8ff;border:1.5px solid #56c8ff;border-radius:8px;padding:4px 14px;font:inherit;cursor:pointer}
+.ex{display:none;color:#6fe08a;margin-top:6px}
+.q.open .ex{display:block}
+</style></head>
+<body><main>
+<header><h1>The differential: a linear stand-in, and why the formula survives a change of variable · Quiz</h1><a href="../notes-en/05-08-differential.html">Notes →</a></header>
+<div class="quiz"><div class="q"><p>1. 1. For f(x) = x² at x₀ = 3, the differential dy sends the step Δx to:</p><ol><li data-ok>A. A. 6·Δx</li><li>B. B. 6·Δx + (Δx)²</li><li>C. C. 9 + 6·Δx</li></ol><button type="button" data-show="Show answer" data-hide="Hide answer">Show answer</button><div class="ex">A — dy = f′(3)·Δx = 6Δx; B is the whole increment Δy, and C is the height of the tangent line.</div></div><div class="q"><p>2. 2. Which sentence is Theorem 5.9 (one variable)?</p><ol><li>A. A. If f is continuous at x₀, then f is differentiable at x₀.</li><li data-ok>B. B. f is differentiable at x₀ if and only if f′(x₀) exists, and then A = f′(x₀).</li><li>C. C. If f′(x₀) exists, f is differentiable at x₀, but A can differ from f′(x₀).</li></ol><button type="button" data-show="Show answer" data-hide="Hide answer">Show answer</button><div class="ex">B — both directions hold, and the constant is forced: A is the limit of Δy/Δx. A fails for |x| at 0.</div></div><div class="q"><p>3. 3. y = sin(x³). Using dy = f′(u) du with u = x³:</p><ol><li>A. A. dy = cos(x³) dx</li><li data-ok>B. B. dy = 3x²·cos(x³) dx</li><li>C. C. dy = cos(3x²) dx</li></ol><button type="button" data-show="Show answer" data-hide="Hide answer">Show answer</button><div class="ex">B — dy = cos u du and du = 3x² dx; A forgets to peel the inner layer.</div></div><div class="q"><p>4. 4. On the circle x² + y² = 25 at the point (3, 4):</p><ol><li data-ok>A. A. dy/dx = −3/4, dx/dy = −4/3</li><li>B. B. dy/dx = 3/4, dx/dy = 4/3</li><li>C. C. dy/dx = −4/3, dx/dy = −3/4</li></ol><button type="button" data-show="Show answer" data-hide="Hide answer">Show answer</button><div class="ex">A — 2x dx + 2y dy = 0 gives dy/dx = −x/y = −3/4 and dx/dy = −y/x = −4/3, with no choice of independent variable.</div></div><div class="q"><p>5. 5. On x = t², y = t³, the slope dy/dx at t = 1 is:</p><ol><li data-ok>A. A. 3/2</li><li>B. B. 2/3</li><li>C. C. 3</li></ol><button type="button" data-show="Show answer" data-hide="Hide answer">Show answer</button><div class="ex">A — dx = 2t dt and dy = 3t² dt, so dy/dx = 3t/2 = 3/2: a true quotient of differentials.</div></div><div class="q"><p>6. 6. Trap: “dy equals Δy.” Check it on f(x) = x² at x₀ = 1 with Δx = 0.1.</p><ol><li>A. A. True: dy = Δy = 0.21</li><li data-ok>B. B. False: dy = 0.2 but Δy = 0.21</li><li>C. C. False: dy = 0.21 but Δy = 0.2</li></ol><button type="button" data-show="Show answer" data-hide="Hide answer">Show answer</button><div class="ex">B — dy = 2·0.1 = 0.2, Δy = 1.1² − 1 = 0.21; the gap 0.01 is the corner (Δx)². They agree only for linear f.</div></div></div>
+</main>
+<script>
+document.querySelectorAll('.q button').forEach(function(b){
+  b.addEventListener('click',function(){
+    var q=this.closest('.q'); q.classList.add('open');
+    this.textContent=this.getAttribute('data-hide');
+    this.onclick=function(){q.classList.remove('open');this.textContent=this.getAttribute('data-show');wire(this)};
+  });
+});
+</script></body></html>

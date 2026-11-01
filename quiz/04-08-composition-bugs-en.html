@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Composition: one bad point, two patches · Quiz</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#0e1522;color:#e9eef6;font-family:"DejaVu Sans","Segoe UI","Noto Sans CJK SC","PingFang SC",system-ui,sans-serif;line-height:1.6}
+main{max-width:860px;margin:0 auto;padding:32px 16px 64px}
+header{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;margin-bottom:20px}
+h1{font-size:1.6rem;margin:0}
+header a{color:#56c8ff;text-decoration:none;font-size:14px}
+.q{border-top:1px solid #2b3c5c;padding:14px 0}
+.q:first-of-type{border-top:none}
+.q p{margin:0 0 8px;font-weight:600}
+.q ol{list-style:none;padding:0;margin:0 0 8px}
+.q li{padding:4px 12px;border-radius:6px;margin:3px 0}
+.q li.ok{background:rgba(111,224,138,.15);outline:1.5px solid #6fe08a}
+.q button{background:transparent;color:#56c8ff;border:1.5px solid #56c8ff;border-radius:8px;padding:4px 14px;font:inherit;cursor:pointer}
+.ex{display:none;color:#6fe08a;margin-top:6px}
+.q.open .ex{display:block}
+</style></head>
+<body><main>
+<header><h1>Composition: one bad point, two patches · Quiz</h1><a href="../notes-en/04-08-composition-bugs.html">Notes →</a></header>
+<div class="quiz"><div class="q"><p>1. 1. Which inner function satisfies the third hypothesis of Theorem 3.8 at x₀ = 0, with u₀ = 0?</p><ol><li>A. A. x sin(1/x)</li><li data-ok>B. B. x²</li><li>C. C. the constant f(x) ≡ 0</li></ol><button type="button" data-show="Show answer" data-hide="Hide answer">Show answer</button><div class="ex">B — x² &gt; 0 for every x ≠ 0, so it avoids 0 on every hollow neighbourhood of 0; the other two take the value 0 arbitrarily close to 0.</div></div><div class="q"><p>2. 2. Classify lim cos(x sin(1/x)) as x → 0 in the 2×2 safety table.</p><ol><li>A. A. inner avoids 0; outer not continuous at 0</li><li data-ok>B. B. inner keeps hitting 0; outer continuous at 0: safe, limit 1</li><li>C. C. neither patch: no limit</li></ol><button type="button" data-show="Show answer" data-hide="Hide answer">Show answer</button><div class="ex">B — x sin(1/x) is 0 at every 1/(nπ), so Patch A fails; but cos is continuous at 0, so Patch B gives cos 0 = 1.</div></div><div class="q"><p>3. 3. Which sequence xₙ → 0 shows that f(x) = x sin(1/x) keeps hitting 0?</p><ol><li>A. A. xₙ = 1/n</li><li data-ok>B. B. xₙ = 1/(nπ)</li><li>C. C. xₙ = 2/((2n+1)π)</li></ol><button type="button" data-show="Show answer" data-hide="Hide answer">Show answer</button><div class="ex">B — f(1/(nπ)) = sin(nπ)/(nπ) = 0. For A, sin n ≠ 0 because π is irrational; for C, sin((2n+1)π/2) = ±1.</div></div><div class="q"><p>4. 4. Let f(x) ≡ 0, g(u) = 1 for u ≠ 0 and g(0) = 2. What is lim g(f(x)) as x → 0?</p><ol><li>A. A. 1</li><li data-ok>B. B. 2</li><li>C. C. it does not exist</li></ol><button type="button" data-show="Show answer" data-hide="Hide answer">Show answer</button><div class="ex">B — g(f(x)) = g(0) = 2 for every x, a constant; the limit of g at 0 (which is 1) never enters.</div></div><div class="q"><p>5. 5. True or false: lim g(f(x)) always equals g(lim f(x)).</p><ol><li>A. A. true</li><li>B. B. true as soon as the inner function avoids its limit value</li><li data-ok>C. C. false in general; it is guaranteed when g is continuous at lim f(x)</li></ol><button type="button" data-show="Show answer" data-hide="Hide answer">Show answer</button><div class="ex">C — take f(x) = x, g(u) = 1 for u ≠ 0, g(0) = 2: f avoids 0, yet the limit is 1 while g(lim f(x)) = g(0) = 2. Patch A gives the limit of g, not g(u₀).</div></div></div>
+</main>
+<script>
+document.querySelectorAll('.q button').forEach(function(b){
+  b.addEventListener('click',function(){
+    var q=this.closest('.q'); q.classList.add('open');
+    this.textContent=this.getAttribute('data-hide');
+    this.onclick=function(){q.classList.remove('open');this.textContent=this.getAttribute('data-show');wire(this)};
+  });
+});
+</script></body></html>
