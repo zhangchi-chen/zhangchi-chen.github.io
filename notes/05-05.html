@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>05-05 基本初等函数的导数公式：三条起点公式生出整张表</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+</style></head><body><div class="topbar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span>05-05</span><a class="mv-quiz" href="../quiz/05-05.html">去自测 →</a></div><main><header><div class="tag">视频配套讲稿（朗读原文） · MATH SELF-CHECK: 38 claims re-derived, 3 fixed.</div><h1>05-05 基本初等函数的导数公式</h1><p class="sub">三条起点公式生出整张表</p></header><h2>1 · 动机</h2><p>今天，整张导数表，由三条公式生出来。 考前深夜，两张公式纸给出了不同的答案。 一张乘以 a 的自然对数，另一张却除以它。 光靠记忆分不出对错，需要能自己推出来。</p><p>关键一步：把它改写成 e 的若干次方。 外层原样照抄，内层贡献出 a 的自然对数。 所以你那张是对的：乘上 a 的自然对数。</p><p>拿二的 x 次方验算，零点的陡度应约为 0.69。 室友的数值约 1.44，直线穿过图像，没有贴着它。 整张表，能不能也这样推出来？</p><h2>2 · 定理与定义</h2><div class="card gold stmt">先看课本的五条求导法则<br>每条法则：已知导数进，新导数出<br>再看基本公式：常数、幂与三角<br>反三角、指数与对数补全列表<br>常数不动，变化率为零<br>α 任取实数，x=1 处斜率=α<br>sin 的斜率记录下来就是 cos<br>sec²x≥1：tan 每段都在上升<br>sin 变平处，arcsin 变陡<br>eˣ 越高越陡：斜率等于自身<br>ln|x| 斜率 1/x，越远越平<br>十四条公式加五条法则，几乎全能推</div><p>先看课本里的五条求导法则。 每条法则：吃进已知的导数，产出新的导数。 再看基本公式：常数、幂函数和三角函数。 反三角、指数和对数函数，把列表补全。</p><p>不动的数，变化快慢为零。 指数任取实数；在一这一点，陡度正好等于指数。 沿着正弦图像记下陡度，画出来的正是余弦。 这个平方从不小于一，所以正切每一段全在上升。 正弦变平的地方，反正弦就变得陡直。 指数函数越高越陡，陡度等于它自己的高度。 对数的陡度是 x 分之一：靠近零很陡，越远越平。 十四条公式加五条法则，几乎全部能推出来。</p><h2>3 · 方法与证明</h2><p>整张表，来自最上面的三条起点公式。 第一条，指数函数：求导之后等于它自己。 第二条，正弦：导数是余弦。 第三条，幂函数：指数拿下来，次数降一。 五条法则，就是往下生出新公式的箭头。 上一集的承诺：链式法则和反函数法则，造出整张表。</p><p>底数为 a 的指数，开头已见过：靠链式法则。 对数是指数的反函数：把关系反过来读。 把指数函数的导数上下翻转，得到 x 分之一。 负半轴结果一样，所以两侧全部成立。 换底：底数为 a 的对数，等于自然对数乘一个常数。 这里 a 的自然对数跑到分母，和指数那条相反。 常数那一条不需要来源：函数不变，导数为零。</p><p>三角这一支：先把余弦写成正弦的复合函数。 外层给出正弦，内层贡献一个负号。 所以余弦的导数，等于负的正弦。 正切是正弦除以余弦，交给商的求导法则。 分子合并成一，剩下正割的平方。 余切同理，得到负的余割平方。 反正弦反过来读：角度在正负九十度之间。 正弦导数上下翻转；那一段上，余弦是正的平方根。 反正弦上了表，反余弦用和差法则跟着得出。 反正切：翻转正切那条，再用一个恒等式化成 x。 反正切、反余切也到齐，三角函数全部推出。</p><p>幂这一支：这个分式，其实是指数为负一的幂。 先用幂公式，再乘上内层的导数。 换成任何次方，也是一步完成。 三条公式加五条法则，整张表全部齐了。</p><p>现在反过来：拿到一个复合函数，从哪里下手？ 就像选课前看先修关系图：先读最上面那一格。 规矩是：动笔之前，先认出最外层的运算。 第一个例子：外层是指数，内层是负的平方。 照抄外层，再乘内层的导数。 漏掉内层因子，在一这点上，连正负号也错了。 第二个例子：外层是正弦，内层贡献因子二。 漏掉这个因子，零点的切线只有一半陡。 第三个例子：外层是十次方，内层是二次式。 幂公式乘内层导数：十次方降成九次方。 先展开要算十一项；从外往内，就全部省掉了。</p><p>注意：法则只管每一段的内部，管不到接头那一点。 问题：选好这条直线，让两段在一这一点光滑地接上。 诱人的捷径：两段各自求导，再让它们相等。 这样只定下了斜度，对高度毫无约束。 高度取错：斜度一样，图像却在接头那里跳了一下。 不连续，就一定不可导。 所以回到定义，用前面讲过的左右导数。 第一步，连续：右边那段必须正好接到高度一。 第二步，陡度：左边得二，右边也必须是二。 所以斜度为二，截距负一，正好是切线。 比较陡度只定下一个数，另一个只有连续才能定。</p><p>一个好习惯：每条公式，全按复合的样子来记。 每条末尾带着内层导数，查表和求导一步完成。 例子：余弦外面套着对数，外层直接查对数那条。 内层导数除以内层本身，得到负的正切。 顺带一句：双曲正弦和余弦由指数构成，互为导数。</p><h2>4 · 展望与衔接</h2><p>应用一：坐得越靠后，黑板在视野里占多大角度？ 先认最外层：反正切，里面是一个分式。 查表和链式法则一起完成，变化的快慢是负的。 坐在前排，视角缩得很快；坐到后面，几乎不变。</p><p>应用二：消息在寝室扩散，图像呈 S 形。 幂公式取负一次方，再走一遍链式法则。 整理之后，速度只看有多少人知道：一半时最快。 机器学习偏爱它：导数直接用上它自己的值。</p><p>链式法则那一集许下的承诺，今天全部兑现。 第六章的导数极限定理，能帮忙检查一部分接头。 但接头那里是否连续，仍要亲手验证。</p><p>初等函数求导已经是机械活，考试的难点只好搬家。 分段点、待定的数，以及关于导数的证明。 接下来的两集，就是这种转移最先出现的地方。 三条公式，五条法则，任何一条随时能推出来。</p></main></body></html>

@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>05-06 高阶导数：求完导，再排一次队</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+</style></head><body><div class="topbar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span>05-06</span><a class="mv-quiz" href="../quiz/05-06.html">去自测 →</a></div><main><header><div class="tag">视频配套讲稿（朗读原文） · MATH SELF-CHECK: 56 claims re-derived, 4 fixed.</div><h1>05-06 高阶导数</h1><p class="sub">求完导，再排一次队</p></header><h2>1 · 动机</h2><p>高阶导数：求完一次导，再去排一次队。</p><p>作业要一个小小乘积的第一百阶导数。 手算的话，要用一百次乘积法则。 第一轮：指数因子原样留下。 再算两轮，括号里越变越复杂。 竖着看下去，好像藏着规律。 可是硬猜第一百个结果，太冒险。</p><p>谜题二：一条越靠近零越被压平的波纹。 处处可导，偏偏在零点没有二阶导数。 谜题三：看上去光光滑滑的一条S形线。 一阶导数好好的，零点的二阶导数却找不到。 今天的问题：怎样才能一导再导？</p><h2>2 · 定理与定义</h2><div class="card gold stmt">把d/dx想成食堂的一个窗口。<br>函数端进去，导数端出来。<br>二阶导数：端出来的再排一次队。<br>每一次只处理上一次端出来的。<br>f⁽ⁿ⁾就是这个窗口过n次。<br>课本中二阶导数的定义：<br>n阶导数由n−1阶导函数定义。<br>第一层：f′本身要在x₀可导。<br>拿sin举例：斜率连成cos。<br>f″(x₀)就是f′图像的切线斜率。<br>斜率的斜率：这里等于−sin x₀。<br>第二层：还是那个差商，换成f′。<br>隐含要求：f′要在x₀附近都存在。<br>第三层：每一阶由前一阶来定义。<br>记号dⁿy/dxⁿ：d/dx做n次。<br>它是一个整体记号，不是分数。<br>d²y另有含义，留到05-09再讲。<br>让三个经典函数排队过窗口。<br>x³依次变成3x²、6x、6、0。<br>每次落下一个指数：3·2·1=6。<br>xⁿ过n次得n!，再过一次就是0。<br>sin x每过一次，转四分之一圈。<br>四次之后，正好转回sin x。<br>因为cos x=sin(x+π/2)<br>sin⁽ⁿ⁾x：转n个四分之一圈。<br>cos x在同一个转盘上，领先一格。<br>eˣ是不动点：过多少次都不变。<br>课本把这三条写成了公式。</div><p>把求导想成食堂的一个窗口。 函数端进去，导数端出来。 二阶导数：把端出来的再拿去排一次队。 每过一次，只处理上一次端出来的东西。 所以高阶导数，就是同一个窗口连着过好几次。</p><p>课本是这样定义二阶导数的。 更高一阶，由前一阶的导函数来定义。</p><p>第一层意思：导函数本身，要在这一点可导。 拿正弦举例：各点坡度连起来，就是余弦。 二阶导数，就是下面这条线的坡度。 坡度的坡度：这里正好是负的正弦。 第二层：仍是那个比值，只是换成导函数。 隐含的要求：导函数在这点周围必须处处存在。</p><p>第三层：每一阶，由前一阶来定义。 这个记号的意思：求导，做 n 次。 它是一个整体记号，并非分数。 二阶微分是另一回事，留到本章第九集。</p><p>让三个经典函数，排队过窗口。 立方一次次变短，变成常数，再变成零。 每过一次，落下一个指数，乘起来是六。 一般地，次数用完时得到阶乘，再过一次就是零。 正弦每过一次，转动四分之一圈。 转过四次，正好回到正弦。 为什么是四分之一圈？余弦就是正弦左移四分之一周期。 所以正弦求导几次，就转几个四分之一圈。 余弦在同一个转盘上，领先一格。 指数函数是不动点：过多少次全不变。 课本把这三条，各写成一个公式。</p><h2>3 · 方法与证明</h2><p>回到乘积：一个乘积连过好几次，会怎样？ 过一次：每一项只对一个因子求导。 过两次：四条路径，每次挑一个因子来求导。 两条混合路径落到同一项，所以算两次。 过三次：八条路径，合并成一三三一。 想得到某一项，就挑出哪几次打中第二个因子。 这样的选法有多少种，系数就是多少。</p><p>把二项式定理，放到上面对照一下。 形状一模一样：幂次换成了求导的阶数。 展开乘方时，每个括号里挑一个字母。 连续求导时，每一次挑一个因子。 数法一样，系数就一样。 这就是莱布尼茨公式。 注意：零次求导留下函数本身，并非一。 验算四次：系数是一四六四一。</p><p>回到作业里的那个乘积，求任意阶。 平方放在第二个位置：第三次起就是零。 指数函数放在第一个位置，永远不变。 整个和式里，只剩下前三项。 三项一合并，结果就是这一个式子。 验证：前三阶正好对上开头那三轮。 第一百阶，一个式子写完。 诀窍：让多项式占那个会消失的位置，和式就很短。</p><p>现在偿付本章第二集的欠账：谜题二。 在零点补上函数值零。 图像被夹在两条抛物线之间。 零点的比值被夹到零，所以那里的导数是零。 离开零点，用乘积和链式法则求导。 第一项慢慢消失，第二项却一直来回摆。 离零无论多近，它仍会碰到一，也会碰到负一。 所以导数在零点没有极限，在那里断开了。 要是二阶导数存在，导数在零点就必须连续。 可它偏偏断开了：零点没有二阶导数。 两个室友：一个总是安静，一个只在午夜发疯。 安静的那位，只压得住一次求导，压不住两次。</p><p>谜题三：右边是抛物线，左边是倒过来的抛物线。 一阶直接按定义：零点的导数是零。 合起来，导数图像是个V形，零点处左、右导数不等。 二阶：再回到定义，这次用导函数。 右边比值是二，左边比值是负二。 左右两边不一样，零点没有二阶导数。 错误捷径：把右边的公式求两次导，得到二。 这个二，只是右边那一半。 规矩：在接缝处，每一阶全要回到定义。 每一步，用的是前一阶导数的比值。</p><h2>4 · 展望与衔接</h2><p>用在哪里？宿舍电梯刚刚起步。 一阶导数是速度，二阶导数是加速度。 胃里感到的，是二阶导数，并非速度。 回到转盘：转两格，正负就翻过来。 最基本的振子正好满足这条规律，正弦就是解。 下一章的泰勒公式，靠的正是这些导数值。</p><p>能过几次窗口，就给函数分出等级。 谜题三在第一级里，进不了第二级。 谜题二可导，却连第一级也进不去。 以后学函数项级数：无穷和能不能一次次求导？</p><p>一个窗口，反复排队，这就是高阶导数。 莱布尼茨的系数：数一数每次打中谁。 到了接缝处，每一阶全要回到定义。</p></main></body></html>

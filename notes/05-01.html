@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>05-01 导数：此刻的速度，此点的斜率</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+</style></head><body><div class="topbar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span>05-01</span><a class="mv-quiz" href="../quiz/05-01.html">去自测 →</a></div><main><header><div class="tag">视频配套讲稿（朗读原文） · MATH SELF-CHECK: 55 claims re-derived, 4 fixed.</div><h1>05-01 导数</h1><p class="sub">此刻的速度，此点的斜率</p></header><h2>1 · 动机</h2><p>此刻多快？此点多陡？同一个答案。 晚饭在路上，App上能看到骑手此刻的速度。 全程的平均速度很好算，路程除以时间。 可此刻的读数更大，它按哪段时间算的？ 在一瞬间，走过的路是零，用的时间也是零。 零除以零，什么也没告诉我们。 那就把时间窗缩小：一分钟，十秒，一秒。 平均值越来越稳，停在一个数上，这就是此刻的速度。 所以此刻的速度，背后藏了一个极限。</p><p>再来第二个问题：切线究竟是什么？ 中学的说法：和图像恰好碰一次的直线。 可是一条竖直的线也只碰一次，它显然不是切线。 而三次函数在原点，直接穿过了自己的切线。 看碰几次的办法两头失灵，要换个思路。 思路是：在旁边取一个点，把两点连成一条割线。 让第二个点滑过来，割线慢慢转向一个位置。 那个最终位置就是切线。又是一个极限。</p><h2>2 · 定理与定义</h2><div class="card gold stmt">教材把速度这件事说精确了<br>路程—时间图上：平均速度=割线斜率<br>让t从两侧逼近t₀：平均速度收拢<br>若极限存在，就是t₀时刻的瞬时速度<br>切线的定义，也是同一个套路<br>P固定不动，Q沿曲线跑向P<br>割线PQ转动，极限位置PT是切线<br>切线斜率=割线斜率的极限<br>把两个公式并排放好<br>把t换成x，s换成f：完全一样<br>两扇门，一间屋：增量比，再取极限<br>剥掉两个情境，剩下的就是定义<br>第一句：f在x₀的某邻域内有定义<br>x可从两侧任意靠近x₀<br>第二句：增量比的极限要存在<br>称f在x₀可导，记作f′(x₀)<br>换成增量：Δx=x−x₀，Δy跟着变<br>导数就是Δy/Δx的极限<br>Δy/Δx叫平均变化率（差商）<br>导数是f在x₀处的变化率<br>记住一句：增量比，再取极限</div><p>教材这样精确地说出此刻的速度。 把路程画成时间的函数，平均速度就是割线的坡度。 让另一个时刻从两边靠拢，平均速度也一起收拢。 如果这个极限存在，它就是瞬时速度。</p><p>切线的定义，走的是同一个套路。 一个点不动，另一个点沿图像跑过去。 割线不停转动，最后停下的位置就是切线。 切线有多陡，就看割线坡度的极限。</p><p>两个公式，并排摆好。 换一下字母，两个公式就一模一样。 两扇门通向同一间屋：增量相除，再取极限。</p><p>剥掉两个情境，剩下的就是定义。 第一，函数在这一点周围一整段上有定义。 动点可以从两边来，想多近就多近。 第二，增量之比的极限要存在。 那么函数在这里可导，这个极限就叫导数。 用增量来说：输入走一步，输出随之变化。 步子缩向零时，这个比的极限就是导数。 这个比，就是平均的变化快慢。 导数，是这一点上的变化快慢。 记住一句话：增量相除，再取极限。</p><h2>3 · 方法与证明</h2><p>亲手算一个：平方函数，在一这个点上。 迈出一小步，落到图像上的另一个点。 写出增量之比：升高了多少，除以步子。 展开后约掉步子，它从来不是零，结果很干净。 看割线：点滑过来，坡度一路逼近二。 所以导数是二，是算出来的，不是猜的。 过这个点、坡度为二的直线，就是切线。 检验：抛物线一直在切线上方。</p><p>把增量之比本身当成函数，画出来。 它是一条直线，恰好在那一点上缺个洞。 在那一点上，这个比没有意义，也不需要它。 极限只看附近，洞的位置恰好在二。 这正是第三章的函数极限，老本领照样好用。</p><p>有个诱人的捷径：左右各迈出同样一步。 这个对称的比，除以两点之间的整个宽度。 导数存在的时候，这条捷径确实能到达它。 陷阱在反方向：捷径有极限，导数却可能没有。</p><p>看教材例二：绝对值函数在零这一点。 右边这个比总是一，左边总是负一。 两个值不一样，凑不成一个极限，导数并不存在。 再看捷径：两边一样高，分子总是零。 所以它的极限是零，一切看起来很平静。 可例二说导数不存在。捷径骗了我们。 对称的割线从拐角上方跳过去，根本不看它。 像个同学只平均第一、第三次小测，漏了没交的第二次。 真正的导数把一端钉在这一点，两边分别检查。 教训：对称的比有极限，并不等于可导。</p><p>可导，是一个点一个点去判断的。 来个怪例子：平方函数乘上狄利克雷函数。 有理点上它贴住抛物线，无理点上它待在零。 在零这一点，增量之比被夹在一个收窄的楔形里。 楔形收拢，极限是零，导数存在，就是零。 换到别的点，函数在两层之间来回乱跳。 分子不肯变小，分母却在缩小，这个比就失控了。 所以导数只在一个点上存在，别的地方没有。 导数作为一个函数，只住在极限存在的地方。</p><p>最容易的情形：一个从不变化的函数。 分子永远是零，所以每一点的导数全是零。 把它记下，作为日后那张表的第一条。 同一个导数，有三种写法。 最后这个先当作一个整体，后面的一集才把它拆开。</p><h2>4 · 展望与衔接</h2><p>同一个比，换身衣服又来了。 一根细杆：某点的密度，同样是增量相除再取极限。 印讲义：成本图像的坡度，就是边际成本。 印到五百份时，再多印一份，大约两块钱。 电流，反应的快慢，全是这同一句话。 到了后面的课程，对象会变成向量和矩阵。 但那句话不会变：增量相除，再取极限。</p><p>有两个问题，留给下一集来回答。 函数在一点可导，在那里一定连续吗？ 在拐角那里，如果只看一边，会怎样？ 此刻多快，此点多陡，全是同一个极限。</p></main></body></html>

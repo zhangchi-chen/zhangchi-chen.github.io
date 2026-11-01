@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>05-03 和、积、商：多出来的那一小块面积</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+</style></head><body><div class="topbar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span>05-03</span><a class="mv-quiz" href="../quiz/05-03.html">去自测 →</a></div><main><header><div class="tag">视频配套讲稿（朗读原文） · MATH SELF-CHECK: 73 claims re-derived, 2 fixed.</div><h1>05-03 和、积、商</h1><p class="sub">多出来的那一小块面积</p></header><h2>1 · 动机</h2><p>和、积、商，以及多出来的那一小块面积 今晚的作业，是给一个乘积求导 诱人的做法：各自求导，再乘起来 在一这个点，捷径给出的是二</p><p>可是图像不同意：在那里，切线是平的 要是答案真的是二，线会陡得多 稳妥的路慢一些：先把它全部乘开 逐项求导，在一这个点，答案是零 是零，而不是二。那个做法就是错的</p><p>而像这样的乘积，根本没法乘开 我们需要一条真正对付乘积的规则 想象一间宿舍，房租按地板面积来分 再量一遍，每条边各自多出一点点 随手一猜：把两个多出来的小量乘一下 真相是猜测的九十一倍 那么多出来的面积藏在哪里？这就是我们的问题</p><h2>2 · 定理与定义</h2><div class="card gold stmt">定理5.4：和差的导数等于导数的和差<br>白话：和的变化量等于变化量的和<br>定理5.5：两个因子轮流求导<br>一项只让u变，另一项只让v变<br>定理5.6商法则：要求v(x₀)≠0<br>减号和v²看似随意，稍后推出来<br>课本上的四条法则，一次列全<br>里面藏着两个特例：常数倍与倒数<br>每条法则只谈 x₀ 这一个点<br>前提：u、v 在这一点可导<br>商法则多一个条件：分母在此非零</div><p>定理5.4说：相加相减的函数，导数也跟着相加相减 说白了：两部分一起变，总量就变两份之和 定理5.5，乘积法则：两个因子，轮流求导 一项只动第一个因子，另一项只动第二个</p><p>定理5.6，商法则：分母在这一点不能是零 减号和底下的平方看似随意，稍后亲手推出来 课本把这几条法则，并排列在一起 里面藏着两个特例：常数倍，和倒数</p><p>每一条法则，只谈一个点上的事 唯一的前提：两个函数在这一点可导 商法则多要一个条件：分母在那里不能是零</p><h2>3 · 方法与证明</h2><p>加减的法则是白送的：把分式拆开，极限运算就够了 加法只是热身，乘积才是正戏 一开始，面积就是一条边乘另一条边 x稍稍挪一点，两条边各自多出一截 多出来的面积，全在这一圈 L 形里</p><p>第一条：右边一条细细的窄条 然后，顶上又一条窄条 最后，角落里剩下一小块 所以多出来的面积，是两条窄条，加一个角 除以这一步，窄条就变成变化快慢</p><p>危险的一步来了：那一小块真会消失吗？ 上一集的结论立功了：可导必连续，多出的高度缩到零 所以角块可以忽略：它比这一步缩得更快 步子缩到零，只剩两条窄条：乘积法则 所以多交的房租，就是两条窄条，角上那块只是零钱 公式忘了也没关系：画个矩形，直接读出来</p><p>现在说那个经典错误：各自求导再相乘 就像室友只付角上一小块，就走了 测试一：两个因子全是 x，正确答案是二 错误公式说是一，答案少了一半 少掉的那部分，就在正方形的两条窄条里</p><p>第二个测试，带上正弦：乘积法则给出负派 错误公式说负一，又错了 图像说了算：在派附近，这条线往下掉得快多了 那种直觉漏掉了两条窄条，可答案恰恰就在那里</p><p>接下来是商，不用死记：把它改写成一个乘积 那么只缺一块新零件：倒数 分母变大，倒数就变小：负号就是这么来的 一通分，负号自己就冒出来了 连续性把分母拉到一个安全的、不为零的值 这就是倒数法则，负号自带 拿最朴素的分母验证：和幂函数的公式完全一致</p><p>现在，乘积法则把两块缝在一起 再通一次分，整条商法则就掉出来了 分子上那个减号，是倒数带来的，不是魔法 所以减号永远跟着分母的导数那一项 两步，一个新想法，一条也不用背两遍</p><p>回到今晚的作业，这次带上乘积法则 两项，一条窄条一项，不用展开到五次 代入一：两项正好抵消成零，和稳妥的路一致</p><p>第二件展品：正切，谁也没法把它展开 商法则给出的分子，是一个老朋友 老朋友就是一，三步搞定 图像也吻合：在零附近平缓，越往两边越陡</p><p>开头那个没法展开的乘积，现在一步解决 常数只搭便车：不变的边，不出窄条 养成习惯：先把常数提出来，每次省一步</p><h2>4 · 展望与衔接</h2><p>第一个应用：班服订购，有一笔制版费，外加每件的价钱 每件的平均成本，是一个商 商法则告诉我们：平均成本只会往下走 均价就是那条弦的斜度，越订越平 多一件的花费低于平均，平均就往下降</p><p>第二个应用：用外币付钱，花费是标价乘以汇价 两样一起变：一条窄条来自标价，一条来自汇价 标价涨百分之二，汇价涨百分之一，花费约涨百分之三 精确算，会多出一丝丝，那一丝就是角上那一小块</p><p>别忘了：角块能消失，全靠上一集的连续性 下一集补上链式法则和反函数，工具箱就齐了 再往后，导数表只需要翻一翻 乘积法则一遍遍做下去，会变成莱布尼茨公式</p><p>好好看这幅图：以后的法则很难这么直观 从链式法则开始，图就变成了齿轮和树 将来学偏导数时，乘积法则原封不动 因为沿着任何一个方向，它依旧是同一个矩形 记住这个房间：两条窄条要算，角上那块会消失</p></main></body></html>

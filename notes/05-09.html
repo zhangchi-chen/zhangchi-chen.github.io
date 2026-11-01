@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>05-09 高阶微分：从二阶起，换元多出一项</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+</style></head><body><div class="topbar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span>05-09</span><a class="mv-quiz" href="../quiz/05-09.html">去自测 →</a></div><main><header><div class="tag">视频配套讲稿（朗读原文） · MATH SELF-CHECK: 44 claims re-derived, 3 fixed.</div><h1>05-09 高阶微分</h1><p class="sub">从二阶起，换元多出一项</p></header><h2>1 · 动机</h2><p>高阶微分：从二阶开始，换元会多出一项。 两位同学做同一道题，却得到两个答案。 一个正弦，它的输入本身又是一个平方。 任务是求出它的二阶微分。</p><p>小林把它当作自变量来算。 他微分两次，那一小步始终固定。 小林的答案简洁干净。 两步搞定，小林合上了本子。</p><p>小周先代入，只剩下一个变量。 连续求导两次，乘积法则把结果分成两块。 小周的答案有两块，不是一块。</p><p>为了比较，把小林的答案也翻译过来。 把两份答案逐项对齐。 一块对上了，另一块在小林那里消失了。 同一道题，到底谁错了？ 漏了一步，像出门前没勾上的那一项。</p><h2>2 · 定理与定义</h2><div class="card gold stmt">先看：x是自变量时，d²y是什么<br>教材里的定义原文<br>关键：x与dx互相独立<br>dy=f′(x)dx只随x变化<br>再微分一次：f″(x)dx·dx<br>二阶微分：d²y=f″(x)dx²<br>小心：三个长得很像的记号<br>教材里的提醒原文<br>dx²是(dx)²：小步的平方<br>d²x：x的小步不变，所以为0<br>d(x²)：上一集的L形条带<br>平方、零、条带：各不相同<br>注意：d²x=0只因x是自变量<br>继续：dⁿy=f⁽ⁿ⁾(x)dxⁿ<br>n≥2阶的微分叫高阶微分<br>除以dxⁿ：熟悉的dⁿy/dxⁿ<br>这个商成立，前提是x为自变量<br>小林用的正是这条规则<br>可是题里x=t²，它并非自变量</div><p>先看最简单的情形，二阶微分是什么。 这是教材里的定义原文。 关键在于：位置和小步各选各的。 所以一阶微分只随位置而变。 再微分一次，小步作为因子跟了出来。 这就是二阶微分。</p><p>小心，有三个记号看起来几乎一样。 这是教材自己的提醒。 第一个，就是一小步的平方。 第二个是零，因为小步本身从来不变。 第三个，是上一集那条L形的边。 一个平方，一个零，一条边，全然不同。 但要记住，这个零只属于自变量。</p><p>继续下去，每升一阶，就多乘一个小步。 二阶及以上，统称高阶微分。 把小步除掉，熟悉的导数记号就出现了。 这个商没问题，但有一个前提。 小林用的，正是这条规则。 可是题目里，它从来不自由，它依赖另一个变量。</p><h2>3 · 方法与证明</h2><p>看机制：外层变量取等距小步。 把每一点送进平方这台机器。 现在小步不再相等，一步比一步大。 每个间隔，比前一个多出零点五。 小步自己在变大，这就是它的二阶微分。 这里它是两倍的小步平方，根本不是零。 只有小步一开始就相等，增量才会是零。 小林默认小步相等，可题目里的小步在变大。</p><p>现在再算一遍，这次让小步也动起来。 一阶微分是一个乘积，两个因子全在变。 乘积法则交回两块，而不是一块。 第一块，正是小林的全部答案。 第二块，就是小林漏勾的那一项。 如果小步从不变化，这一块就是零，悄悄消失。</p><p>回到作业，两样材料已经备齐。 两者相乘，正好就是那块失踪的项。 补回小林的本子，两份答案就一致了。 小林的计算没问题，只是公式用错了地方。 小周的答案，才是外层变量下的二阶微分。</p><p>这是教材里的一般结论。 一阶的时候，公式换元后依然成立。 到了二阶，同样的形式失效了，少了一块。 这回应了上一集的伏笔，不变性只到一阶为止。</p><p>用途一：轨迹的二阶导数。 回顾一下：一阶导数是两个变化速度之比。 诱人的猜法：把分母平方就好。 它把记号当成分式，忘了藏着的那块。 正确读法：把一阶导数再求一次导。 先用商的法则，再除一次横向速度。 结果：分母是三次方，分子有两块。 分子里多出的那块，又是那个漏勾的项。 在圆上检验，取四十五度那一点。 正确公式给出负二根号二，猜测只有负根号二。 直接对上半圆求导，正确公式胜出。 这就回应了两集之前留下的问题。</p><h2>4 · 展望与衔接</h2><p>用途二：更好的近似。 在线性近似后面，再加上半个二阶微分。 拿根号一点一试一试。 切线给出一点零五。 抛物线略作修正，得一点零四八七五。 真值是一点零四八八一，偏离缩小了约二十倍。 第六章的泰勒公式，会给出精确的余项。</p><p>用途三：看二阶微分的正负。 小步的平方是正的，符号全由二阶导数决定。 为正，图像就在切线的上方。 在平坦的点，为正是极小，为负是极大。 额外的好处：在平坦点，那块麻烦的项本来就是零。 所以在平坦点，小林的简式不论换元与否全对。 如果它在那里为零，这个判别就不说话了。 证明留到第六章，分别讲极值与凸性。</p><p>最后一条：分式读法只对自变量安全。 否则就老老实实，一步一步求导。 小林漏掉的那一项，终于勾上了。</p><p>展望：两个变量时，二阶微分有三块。 线性代数里，这个形状叫二次型。 它恒正或恒负，将决定二元的极值。 今天的教训会延续：从二阶开始，每一块全要算上。 两条路，一个答案，只要一项不漏。</p></main></body></html>

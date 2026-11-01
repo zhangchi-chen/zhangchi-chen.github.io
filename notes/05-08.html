@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>05-08 微分：线性替身，以及公式为何经得起换元</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+</style></head><body><div class="topbar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span>05-08</span><a class="mv-quiz" href="../quiz/05-08.html">去自测 →</a></div><main><header><div class="tag">视频配套讲稿（朗读原文） · MATH SELF-CHECK: 52 claims re-derived, 2 fixed.</div><h1>05-08 微分</h1><p class="sub">线性替身，以及公式为何经得起换元</p></header><h2>1 · 动机</h2><p>这一集讲微分，一个换元也不走样的线性替身。 笔记里有两句话在打架。 第一句：导数记号是一个整体，不是分数。 第二句：参数公式却像在约掉时间那一小段。 既然不是分数，约分为什么从不出错？ 今天，上下两个微分都会变成真正的数。</p><p>宿舍墙上一张正方形照片，边长十厘米。 面积是边长的平方，一百平方厘米。 放大一点，边长多出一小段，比如一厘米。 多出的面积：两条长条，加一个小角。 两条长条合起来，是两倍边长乘这一小段。 小角是这一小段的平方。 代入：长条二十平方厘米，小角只有一。 这一小段减半：长条减半，小角只剩四分之一。 小角除以这一小段，还是这一小段，趋于零。 所以小角是高阶无穷小。 和增量成正比的长条，就是面积的微分。</p><h2>2 · 定理与定义</h2><div class="card gold stmt">先看课本上的定义<br>给x₀一个增量Δx，看Δy<br>假如Δy能写成A·Δx<br>再加一个o(Δx)的余项<br>o(Δx)：除以Δx仍趋于零<br>那么就称f在x₀可微<br>A·Δx叫作Δy的线性主部<br>它就是微分，记作dy|ₓ₌ₓ₀<br>固定x₀，dy只随Δx变化<br>把真实的Δy画成Δx的函数<br>过原点的直线都线性，哪条最贴？<br>斜率选1.5，误差约是Δx的一半<br>斜率取2，误差正是(Δx)²<br>线性替身如果存在，就唯一<br>像在手机地图上，双指放大x₀处<br>放大十倍，曲线已经快直了<br>放大百倍，曲线和切线分不开了<br>放大后剩下切线的升高：dy<br>Δy−dy=(Δx)²，缩得比Δx快<br>定理5.9：可微当且仅当可导<br>而且常数A就是f′(x₀)</div><p>先看课本上的定义。 给这个点一个增量，看函数值变了多少。 假如改变量能写成常数乘增量， 再加一个比增量高阶的无穷小， 也就是除以增量以后，照样趋于零。 就说函数在这一点可微。 常数乘增量这一项，叫线性主部。 它就是函数在这一点的微分。</p><p>把点固定，微分就只随增量变化。 把真实的改变量，画成增量的函数。 过原点的直线都是线性的，哪条最贴？ 斜率选1.5，误差总在增量的一半左右。 斜率取2，误差正好是增量的平方。 所以线性替身只要存在，就是唯一的。</p><p>像看手机地图那样，双指把这一点放大。 放大十倍，曲线快变直了。 放大一百倍，曲线和切线分不清了。 留下的是切线在这一步的升高，它就是微分。 两者之差是增量的平方，缩得快得多。</p><p>定理五点九：一点处可微，当且仅当可导。 而且那个常数，就是这一点的导数。</p><h2>3 · 方法与证明</h2><p>为什么在一元里，这条定理几乎白送？ 从可微出发，两边除以增量。 增量趋于零，差商趋于常数，导数就等于它。 反过来，导数存在时，看剩下的那部分。 它除以增量，是差商减极限，趋于零。 一元线性函数，就是乘一个常数。 一个数定下它，这个数只能是导数。 二元时，有斜率也未必有线性替身。 所以二元的可微，直接用线性替身定义。</p><p>看最简单的函数：函数值等于自变量。 它的导数是1，微分正好等于增量。 自变量的微分，就是增量本身。 于是，函数的微分等于导数乘自变量的微分。 每一点上，这两个微分都是普通的数。 相除，导数就是两个微分真正的商。 所以导数也叫微商。 笔记第一句升级了：分数线是真除法。</p><p>求导公式乘上自变量的微分，就是微分公式。 比如乘积：每个因子乘另一个的微分，再相加。 复合函数：外层导数乘内层导数，再乘自变量的微分。 后两项合起来，正是中间变量的微分。 于是公式的样子，和它是自变量时一模一样。 这就是一阶微分形式不变性。 像小组作业，不管谁执笔，结果都一样。</p><p>演示一：单位圆。 两边同时取微分，先不挑自变量。 两倍坐标乘各自的微分，加起来是零。 一种读法：纵坐标不为零时，斜率是负的横比纵。 反过来读：横坐标不为零时，是负的纵比横。 最右边那点切线竖直：第一种失效，第二种得零。 一个等式，两种读法，没人被指定成自变量。</p><p>演示二，还上一集的债：参数方程。 还是那条摆线，车轮上一点滚出来的。 横坐标的微分，是一减余弦，乘参数的微分。 纵坐标的微分，是正弦乘参数的微分。 两个都是数，相除时参数的微分正当约掉。 车轮转过四分之一圈，斜率是1，和上一集一样。 上一集的速率之比，原来就是微分之商。</p><p>演示三：指数套正弦，再套一次函数，三层。 剥外层：指数照抄，再乘正弦部分的微分。 剥中层：正弦变余弦，再乘一次函数的微分。 剥内层：得到斜率乘自变量的微分。 自变量微分前面那一串，就是导数。 每一步都用同一个公式，换个中间变量而已。</p><h2>4 · 展望与衔接</h2><p>应用一：线性近似，新值约等于旧值加导数乘增量。 一元能换1.02外币，一个外币值多少元？ 用倒数函数，在1附近，导数是负1。 线性估计：1减0.02，得0.98。 真实值约0.98039，略大一点。 倒数曲线在切线上方，所以估计偏小。</p><p>应用二：测量误差怎样传播。 手裁的照片，边长十厘米，误差不超过一毫米。 面积误差约是两倍边长乘边长误差，两平方厘米。 正是开头的长条；小角只多百分之一平方厘米。 边长差百分之一，面积约差百分之二。</p><p>提醒：形式不变，只是一阶微分的特权。 二阶微分会失去它，原因下一集讲。 第八章的换元积分，就是把它倒过来用。 二元时，微分是两个自变量微分的组合。 平面上的线性映射，余项比距离高阶，就是可微。 再往后是矩阵，泛函分析里是线性算子。 核心不变：凑近看，变化几乎是线性的。</p></main></body></html>

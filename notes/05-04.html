@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>05-04 链式法则与反函数：由外向内拆套娃</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+</style></head><body><div class="topbar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span>05-04</span><a class="mv-quiz" href="../quiz/05-04.html">去自测 →</a></div><main><header><div class="tag">视频配套讲稿（朗读原文） · MATH SELF-CHECK: 35 claims re-derived, 3 fixed.</div><h1>05-04 链式法则与反函数</h1><p class="sub">由外向内拆套娃</p></header><h2>1 · 动机</h2><p>链式法则与反函数，套娃要从外往里拆。 深夜赶作业，题目是一个套着平方的正弦。 同学甲说，正弦变余弦，就这么简单。 同学乙也写了余弦，可前面多了一个因子。 同一个函数，两个答案，最多只有一个是对的。</p><p>让图像说话：这条线，和线上的一个点。 按甲的答案，坡度约0.54，直线横穿过去。 按乙的答案，坡度约1.08，直线紧紧贴住。 乙是对的。那个多出来的因子从哪来？</p><p>这是一个套娃，正弦里面藏着一个平方。 每层各有快慢，这些快慢要相乘。 今天讲两件事：为什么相乘，直觉证明错在哪。 外加彩蛋：函数倒着走，坡度上下颠倒。</p><h2>2 · 定理与定义</h2><div class="card gold stmt">注意：课本里内层叫φ，外层叫f<br>04-08里正相反：f在内，g在外<br>定理5.8（链式法则）原文如下<br>条件一：内层在x₀处可导<br>条件二：f在u₀=φ(x₀)处可导<br>外层看不到x₀，只看到u₀<br>结论：外层导数乘内层导数<br>x₀=1：平方把小段拉长约2倍<br>正弦再缩放约cos 1≈0.54倍<br>合计约1.08：正是乙的斜率<br>换个画面：把变化率想成齿轮<br>大轮一圈，小轮两圈：du/dx=2<br>再加第三个：dy/du=1.5<br>脚踏一圈，末轮转2×1.5=3圈<br>变化率一复合就相乘：这就是链式法则</div><p>提醒一下，这一章课本把内层叫作phi。 在讲复合与极限的那一集，字母正好反过来。 这是链式法则，课本原话。</p><p>第一条：内层在起点必须有确定的快慢。 第二条：外层要在内层落脚的地方有确定的快慢。 外层根本看不到起点，只看得到落脚点。 结论：外层的导数，乘上内层的导数。</p><p>代入数字：平方把一小段放大，大约两倍。 接着正弦再缩放一次，大约0.54倍。 合起来约1.08，正是乙的答案。</p><p>换个画面：把快慢想成一组齿轮。 大齿轮转一圈，小齿轮转两圈。 再加第三个齿轮，又快了一半。 脚踏转一圈，最后那个齿轮转三圈。 快慢一复合就相乘，这就是链式法则的全部。</p><h2>3 · 方法与证明</h2><p>先看那个很诱人的简短证明。 步子缩小，两个因子各自趋向导数。完事了？ 盯住那个新冒出来的分母，它要是零呢？</p><p>只要内层回到原来的值，这个分母就是零。 这种回头可以无数次，离那个点要多近有多近。 步子再小也躲不开，这个证明在除以零。</p><p>最极端的情形：内层是常数，分母永远是零。 可复合函数也是常数，法则给出零，完全正确。 定理本身没问题，坏掉的是证明。 又是复合极限那一集的老坑：内层停在一个值上。</p><p>老实的修法：只乘，绝不除。 看外层的割线坡度，它在那个点上有个洞。 用导数把洞补上，补好的坡度就连续了。 于是外层的变化，等于补好的坡度乘上输入的变化。 正好在那个点，两边也是零，用不着除法。</p><p>内层也照样打补丁，换成它自己的坡度。 把内层代进外层，两块补丁直接相乘。 连续性可以穿过复合，这是复合极限那一集的好消息。 在那个点上，这个因子正是外层坡度乘内层坡度。 全程不除以内层的变化，常数内层也就不怕了。</p><p>来一个三层的套娃。 先开最外层：指数，导数是它自己。 第二层：正弦，导数是余弦。 最里层：平方，导数是两倍的x。 然后沿着链条相乘，三个因子一个不少。 少拆一层，最后那个因子就弄丢了。 这正是开头同学甲犯的错。 几层娃，就该有几个因子。</p><p>课本用莱布尼茨记号写下这两条法则。 两个du好像约掉了，像分数一样。 能约，但不是因为算术，是定理让它成立。 每个记号是一个导数，并非相除；约掉只是帮你记。 接头的字母对不上，就约不掉。 字母一环扣一环，整条链子才能收成一个。</p><p>最后一件工具：反函数，相当于把齿轮倒过来转。 这是反函数的求导定理，课本原话。 例子：正弦在它上升的那一段，倒过来就是反正弦。 正着走，切线坡度大约是0.87。 倒着走，坡度大约1.15，上下颠倒了。 横竖一交换，上升和前进就换了位置。 为什么正向坡度必须非零？看最高点，切线是平的。 照镜子后，平的变成竖的，坡度要除以零。</p><p>为什么要一路只升或只降？这样回头路只有一条。 所以两个增量同时非零，又一起缩到零。 回到反正弦：坡度是一除以余弦。 在这一段余弦是正的，所以开方取正根。 代入二分之一，约1.15，和镜像切线吻合。</p><h2>4 · 展望与衔接</h2><p>食堂里咖啡洒了，半径每秒增加0.5厘米。 面积随半径变，半径随时间变，快慢相乘。 半径四厘米时，面积每秒大约增加12.6平方厘米。</p><p>用处二：三个母公式，生出整张导数表。 比如对数是指数的反函数，坡度就是x分之一。 留个伏笔：第七集会一起用这两条法则，不靠约分。</p><p>再往后，隐函数求导，就是把方程两边一起送进链式法则。 到了多元，它变成一棵树，每条路径贡献一项。 记住：由外向内，一层一个因子，绝不除以内层的变化。 正着走相乘，倒着走就颠倒。</p></main></body></html>

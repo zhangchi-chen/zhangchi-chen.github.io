@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>04-08 复合函数：一个坏点，两种补丁</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+</style></head><body><div class="topbar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span>04-08</span><a class="mv-quiz" href="../quiz/04-08.html">去自测 →</a></div><main><header><div class="tag">视频配套讲稿（朗读原文） · MATH SELF-CHECK: 55 claims re-derived, 7 fixed.</div><h1>04-08 复合函数</h1><p class="sub">一个坏点，两种补丁</p></header><h2>1 · 动机</h2><p>极限何时能穿过复合函数？ 外函数一个坏点，扩散成一整片。 一道作业题，屏幕上这个极限。</p><p>里层整体换元，记成新变量。 换元后正是著名极限的样子。 它跟着趋于1，答案就是1吗？ 小林的手机一算，答案是1。 小周的新版本却直接报错。 一样的题，两台手机吵起来了。</p><p>里层图像，越近原点抖得越凶。 别看它抖，整条被夹着压向0。 麻烦的是，它隔一阵子就归一次零。 零点堆向原点，邻域里总有无数个。 坏在这儿，零点上式子没定义。 一个坏点，就这样扩散成一整片。</p><p>想成一层套一层的链条，先里层再外层。 外层只在坏点这个输入上崩溃。 可里层偏偏一次次送来坏输入。 小林的版本悄悄把坏点补成1。 极限要求0附近除0外都有定义。 偏偏这里做不到，极限无从谈起。 这里不能说两边都对。小林算的是打补丁之后的函数，这个补丁数学上叫连续延拓。不打补丁，原函数的复合极限根本不存在。</p><p>为了看清机制，换一个更小的例子：里层干脆取常数0。注意它和开头的例子结局不一样。 外函数很简单，坏点以外都给1。 偏偏在坏点上，它给的是2。 代入法预测答案是1，听着合理。 结果出乎意料，复合处处是2，极限存在，就是2。它和开头的例子不同：开头那个极限根本不存在，这个只是不等于代入的1。 教训是，里层一再踩中坏点时， 复合读到坏点的值，不是极限。</p><h2>2 · 定理与定义</h2><div class="card gold stmt">课本给这个bug准备了两种补丁。<br>补丁A是定理3.8：复合函数的极限。<br>前两条：f趋于u₀，g趋于A。<br>g的极限只看u₀附近，不看u₀本身。<br>空心邻域（去心邻域）：挖去中心x₀。<br>第三条：某空心邻域内f(x)≠u₀。<br>补丁A就是拦住坏输入：不送u₀。<br>结论：极限是A，g(u₀)无关紧要。<br>补丁B源于定理4.5：复合保持连续。<br>这里极限可以直接穿进g。<br>§4.2例1后的注把它推广了。<br>内函数只需在x₀有极限a。<br>f(x₀)≠a或无定义：可去间断点。<br>关键在外函数：g在u = a处连续。<br>那么极限就等于g(a)。<br>补丁B让g稳健：f反复取a也行。<br>安全表的行：内函数避开u₀吗？<br>列：外函数在u₀处连续吗？<br>都有：安全，答案A = g(u₀)。<br>只有A：安全，答案是g的极限A。<br>只有B：安全，答案是g(u₀)。<br>都没有：bug格，代入失效。<br>四格中三格安全：一个补丁就够。<br>前面两个bug都在第四格。</div><p>好消息是，课本备了两种补丁。 补丁A就是那条复合极限定理。 前两条，正是里外两层的极限。 外层极限只看附近，不看坏点本身。 空心邻域，就是把中心挖掉。 第三条新招，空心邻域内别碰坏点。 补丁A的思路，别送坏输入进去。 极限放心穿过，坏点值无关紧要。</p><p>补丁B来自连续复合那条定理。 这条路上，极限能直接穿进外层。 课本的注记把这条路推广得更宽。 推广后更松，里层有极限就够。 取错值或没定义，只是可去间断点。 关键在外层，得在那个值处连续。 外层连续，极限就能直接代值。 补丁B让外层稳健，随便踩都不怕。</p><p>安全表每一行问，里层避开坏点了吗？ 每列再问，外层在坏点连续吗？ 两条都有就安全，答案是坏点的值。 只有补丁A也安全，取外层的极限。 只有补丁B也安全，取坏点的值。 都没有就进bug格，代入法失效。 四格里三格安全，一个补丁就够。 开头那两个bug，全在第四格。</p><h2>3 · 方法与证明</h2><p>证明留作习题，这里只走骨架。 先从输出端定一个误差标准。 第一环，外层的极限先接住误差。 第二环，里层极限收窄输入范围。 最危险的一步，第一环还要求不踩坏点！ 第三环补缺口，靠的是假设三。 三环相扣，链条闭合，误差达标。 抽掉第三环，常数反例从缺口溜走。</p><p>只有补丁A时，里层取恒等函数。 外层还是那个跳跃函数，坏点取2。 里层绕开坏点，补丁A成立。外层跳跃，补丁B失效。 复合在坏点外恒为1，取的是极限。</p><p>只有补丁B时，里层请回抖动大师。 外层换成连续的平方函数。 复合结果被夹着，乖乖趋于0。</p><p>第三格最刺激，里层还用抖动大师。 外层只在坏点改取0，别处照旧1。 坏点可去，外层在它附近极限存在。 复合像花布，一串点取0，其余取1。 两列点涌向原点，值分两派，没极限。 两个补丁互不蕴含，各救各的。</p><p>怎么查出里层在反复踩坏点呢？ 把前面讲过的数列法当探测器。 找一列逼近的点，让里层踩中坏点。 开头那串零点正好，里层每点送0。 找到一条，第一种补丁作废。 一条也找不到，补丁A就成立。</p><p>极限里换元前，先问两个问题。 第一问，里层会反复取到极限值吗？ 第二问，外层在那个值连续吗？ 开头那题，第一问答的是会。 第二问出事，外层在坏点没定义。 像小林那样补值，补丁B给出1。 再测一题，带根号的，套路一样。 里层趋向1，外层在1处连续，稳了。 补丁B适用，代进去答案就是1。</p><h2>4 · 展望与衔接</h2><p>第一个应用，屏幕上这道对数题。 套路是先变形，凑成复合的样子。 里层趋向自然常数，对数连续，答案1。 第二个应用，屏幕上这道指数题。 把指数式设成新变量，再反解。 化完是上一题的倒数，极限同为1。 新变量不踩零，补丁A给出1。</p><p>预告一下，可积性有同一个问题。 里层可积外层连续，复合仍可积。 证明要用更强的工具，一致连续性。 闭区间上，康托尔定理给了保证。 外层还是跳跃函数，里层是黎曼函数，都可积。 黎曼函数在有理点为正，无理点为0。 复合出来，正好就是狄利克雷函数。 它不可积，因为坏点铺满了区间。 一句口号，外层连续是万能补丁。</p><p>程序员最懂这种连环相套的bug。 往上一层传来的，正是让程序崩溃的输入。 补丁A是局部修复，别传坏输入。 补丁B是稳健封装，下一层扛得住。 你看，极限和代码，同样两种补丁。</p></main></body></html>

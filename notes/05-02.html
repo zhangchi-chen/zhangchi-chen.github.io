@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>05-02 可导与连续：连上了，但未必光滑</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+</style></head><body><div class="topbar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span>05-02</span><a class="mv-quiz" href="../quiz/05-02.html">去自测 →</a></div><main><header><div class="tag">视频配套讲稿（朗读原文） · MATH SELF-CHECK: 27 claims re-derived, 2 fixed.</div><h1>05-02 可导与连续</h1><p class="sub">连上了，但未必光滑</p></header><h2>1 · 动机</h2><p>可导与连续：连上了，却未必光滑。 作业题：这个拼起来的函数，在零处可导吗？ 两段在原点稳稳接上，没有缺口。 一位同学这样写：在零处连续，所以可导。 细看：左边斜着爬上来，右边却平着离开。 接上了，没错。可接得光滑吗？这才是关键。</p><p>这两个词之间，有两个方向的箭头。 上一集留了个问题：可导，是否一定连续？ 那位同学靠的，正是反方向那支箭头。 先剧透：第一支箭头成立，证明短得只要一句话。 反方向的箭头会断，而且断法有三类。 新工具是左右导数，它会点出每一类失败。</p><h2>2 · 定理与定义</h2><div class="card gold stmt">先看课本里的有限增量公式<br>把它读成一张小票：Δy分项列出<br>第一项f′(x₀)Δx：切线给的部分<br>第二项o(Δx)：比Δx还小的零头<br>Δx=0时小票照样平账：0=0+0<br>它只是定义换了个写法：再乘上Δx<br>定理5.1：在x₀可导，就在x₀连续<br>在x₀连续，就是Δx→0时Δy→0<br>可导要求更多：Δy/Δx要有极限<br>所以可导更强：它包含在连续之中<br>课本注：可导只是连续的充分条件<br>反例是|x|：在0处连续，却有尖角<br>定义2把极限拆成右、左两个版本<br>右导数f′₊(x₀)：Δx只取正值<br>左导数f′₋(x₀)：Δx只取负值<br>定理5.2把这两半重新拼起来<br>导数存在，当且仅当两侧都存在且相等</div><p>先从课本里的有限增量公式说起。 把它当成一张购物小票，逐项列出这次的变化。 第一项，是切线预报的那部分。 第二项是零头，跟步子比起来也微不足道。 哪怕一步也没走，这张小票照样对得上。 它只是定义换了身衣服，再乘上步子而已。</p><p>定理五点一：在一点可导，那里就一定连续。 连续只说一件事：步子缩小，变化就跟着消失。 可导要的更多：那个比值必须落在一个确定的数上。 所以可导是更强的承诺，它落在连续里面。 课本补了一句：可导只是连续的充分条件。 反例就是绝对值函数：在零处连续，却折出一个尖角。</p><p>定义二把这个极限，拆成右边和左边两个版本。 右导数：步子只从右边往回缩。 左导数也一样，只从左边靠近。 定理五点二，把这两半拼回一个整体。 导数存在的充要条件，是左右两边存在而且相等。</p><h2>3 · 方法与证明</h2><p>来看一句话的证明：拿出小票，让步子缩向零。 两项全会消失，零头消失得更快。 所以变化也跟着消失，这正是连续。 额外收获：变化被夹在一个楔形里消失。</p><p>连续只保证变化会消失，却不管消失得多快。 变化可能消失得太慢，慢过任何一条直线。 或者消失得太剧烈，在两条线之间来回猛摆。 或者左右两边的坡度不一样，就像绝对值。 所以，连续却不可导，一共有三类情形。</p><p>第一类失败是角点，就是绝对值在零处。 像宿舍走廊的急转弯，进出朝向不同。 从右边看，每条割线的坡度全是一。 从左边看，坡度永远是负一。 两边各有一个值，却对不上，所以导数不存在。</p><p>第二类失败是垂直切线：根号函数在零处。 它在零处连续：步子缩小，根号也跟着缩小。 可那个比值没有上限，割线一根根竖了起来。 像楼梯间那架陡得没法走的梯子：有切线，却没有坡度。 注意零在这里是端点，只有右边能谈。</p><p>第三类失败是振荡：越靠近零，图像摆得越快。 它在零处仍然连续：两条直线把它夹住了。 它的那个比值，化简后只剩一个正弦。 像脱水的洗衣机，抖个不停。 它反复碰到正一和负一，所以没有导数。 三幅画像：对不上，爆掉，停不下来。 三个全连续，可光有连续不够。</p><p>回到作业题，分段接头正是它的用武之地。 第一步，查连续：两段奔向同一个值。 为何先查？要是不连续，就一定不可导了。 第二步看右边：比值缩向零，右导数就是零。 第三步看左边：比值始终是一。 第四步，比一比：两个值不同，所以连续却不可导。 所以那位同学丢分了，零处藏着一个角点。 记住这个套路：连续，右边，左边，再比较。 注意：右导数和导数的右极限，是两回事。</p><h2>4 · 展望与衔接</h2><p>用法一：倒过来读，不连续就一定不可导。 上一集那个狄利克雷的例子，离开零点后，靠的就是它。 上一集的问题有答案：可导推出连续，反之不然。 用法二：手机流量套餐的每月费用。 到了封顶点，费用连着，坡度却从零跳到五。 左导数是零，右导数是五，正是两个边际价格。</p><p>第六章的导数极限定理，会给这类接头开一条捷径。 但第一步，接头处的连续，省不掉。 再乘上一个自变量，振荡被驯服，零处的导数就是零。 它的导函数却在零处断开，留到第五章第六集。 第六章会讲：导函数不会乖乖跳，要么连续，要么乱摆。</p><p>往后看一眼：到了两个变量，这一集会拆成两个故事。 沿着两条坐标轴，坡度全部存在，图像却在原点撕开。 正因如此，多元的课会从头建立可微的概念。 连续，是接上了；可导，是接得光滑。</p></main></body></html>
