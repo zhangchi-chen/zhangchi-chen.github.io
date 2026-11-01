@@ -31,7 +31,10 @@ a.btn.solid:hover{background:#1a5f96}
   <h1>数学分析 · 讲稿与自测</h1>
   <p class="sub">Calculus (Mathematical Analysis) · Notes &amp; self-quizzes for the video series (videos on Bilibili)</p>
 
-  <h2>第 1 章 实数（引言与准备）</h2>
+  <div class="ctrl"><button type="button" id="all-open">全部展开</button><button type="button" id="all-close">全部收起</button><span class="hint">点击章节标题折叠/展开</span></div>
+<details class="chap" open>
+  <summary><span class="chev">▸</span> 第 1 章 实数（引言与准备）</summary>
+
   <div class="ep">
     <div class="t">01-00 数学分析在做什么（引言）</div>
     <div class="links"><a class="btn solid" href="../notes/01-00.html">讲稿</a><a class="btn" href="01-00.html">自测 6 题</a><a class="btn" href="01-00-en.html">Quiz EN</a><a class="btn" href="../notes-en/01-00.html">Notes EN</a></div>
@@ -61,7 +64,10 @@ a.btn.solid:hover{background:#1a5f96}
     <div class="links"><a class="btn solid" href="../notes/01-06.html">讲稿</a><a class="btn" href="01-06.html">自测 6 题</a><a class="btn" href="01-06-en.html">Quiz EN</a><a class="btn" href="../notes-en/01-06.html">Notes EN</a></div>
   </div>
 
-  <h2>第 2 章 数列极限</h2>
+  </details>
+<details class="chap" open>
+  <summary><span class="chev">▸</span> 第 2 章 数列极限</summary>
+
   <div class="ep">
     <div class="t">02-01 数列的收敛（ε–N 定义）</div>
     <div class="links">
@@ -103,7 +109,10 @@ a.btn.solid:hover{background:#1a5f96}
     <div class="links"><a class="btn solid" href="../notes/02-09.html">讲稿</a><a class="btn" href="02-09.html">自测 6 题</a><a class="btn" href="02-09-en.html">Quiz EN</a><a class="btn" href="../notes-en/02-09.html">Notes EN</a></div>
   </div>
 
-  <h2>第 3 章 函数极限</h2>
+  </details>
+<details class="chap" open>
+  <summary><span class="chev">▸</span> 第 3 章 函数极限</summary>
+
   <div class="ep">
     <div class="t">03-01 ε–δ 定义：检查员守在门口</div>
     <div class="links"><a class="btn solid" href="../notes/03-01.html">讲稿</a><a class="btn" href="03-01.html">自测 6 题</a><a class="btn" href="03-01-en.html">Quiz EN</a><a class="btn" href="../notes-en/03-01.html">Notes EN</a></div>
@@ -129,7 +138,10 @@ a.btn.solid:hover{background:#1a5f96}
     <div class="links"><a class="btn solid" href="../notes/03-06.html">讲稿</a><a class="btn" href="03-06.html">自测 6 题</a><a class="btn" href="03-06-en.html">Quiz EN</a><a class="btn" href="../notes-en/03-06.html">Notes EN</a></div>
   </div>
 
-  <h2>第 4 章 连续函数</h2>
+  </details>
+<details class="chap" open>
+  <summary><span class="chev">▸</span> 第 4 章 连续函数</summary>
+
   <div class="ep">
     <div class="t">04-01 连续与间断：三路握手，缺一即断</div>
     <div class="links"><a class="btn solid" href="../notes/04-01.html">讲稿</a><a class="btn" href="04-01.html">自测 6 题</a><a class="btn" href="04-01-en.html">Quiz EN</a><a class="btn" href="../notes-en/04-01.html">Notes EN</a></div>
@@ -163,19 +175,45 @@ a.btn.solid:hover{background:#1a5f96}
     <div class="links"><a class="btn solid" href="../notes/04-08-composition-bugs.html">讲稿</a><a class="btn" href="04-08-composition-bugs.html">自测 5 题</a><a class="btn" href="04-08-composition-bugs-en.html">Quiz EN</a><a class="btn" href="../notes-en/04-08-composition-bugs.html">Notes EN</a></div>
   </div>
 
-  <h2>第 5 章 导数与微分</h2>
+  </details>
+<details class="chap" open>
+  <summary><span class="chev">▸</span> 第 5 章 导数与微分</summary>
+
   <div class="ep">
     <div class="t">05-08 微分：线性替身，以及公式为何经得起换元</div>
     <div class="links"><a class="btn solid" href="../notes/05-08-differential.html">讲稿</a><a class="btn" href="05-08-differential.html">自测 6 题</a><a class="btn" href="05-08-differential-en.html">Quiz EN</a><a class="btn" href="../notes-en/05-08-differential.html">Notes EN</a></div>
   </div>
 
-  <h2>第 7 章 实数的完备性</h2>
+  </details>
+<details class="chap" open>
+  <summary><span class="chev">▸</span> 第 7 章 实数的完备性</summary>
+
   <div class="ep">
     <div class="t">07-05 Stolz 定理</div>
     <div class="links"><a class="btn solid" href="../notes/07-05.html">讲稿</a><a class="btn" href="07-05.html">自测 6 题</a><a class="btn" href="07-05-en.html">Quiz EN</a><a class="btn" href="../notes-en/07-05.html">Notes EN</a></div>
   </div>
 
-  <p class="note">
+  </details>
+<style>
+details.chap{margin:0}
+details.chap summary{list-style:none;cursor:pointer;font-size:15px;color:#5d6475;
+  font-weight:600;margin:26px 0 8px;border-bottom:1px solid #e3e0d6;padding:6px 0;
+  display:flex;align-items:center;gap:8px;user-select:none}
+details.chap summary::-webkit-details-marker{display:none}
+details.chap summary .chev{display:inline-block;transition:transform .15s;color:#1f72b0}
+details.chap[open] summary .chev{transform:rotate(90deg)}
+.ctrl{display:flex;gap:10px;align-items:center;margin:0 0 6px}
+.ctrl button{font:inherit;font-size:13px;color:#1f72b0;background:#fff;border:1.5px solid #1f72b0;
+  border-radius:9px;padding:3px 12px;cursor:pointer}
+.ctrl button:hover{background:#eef5fb}
+.ctrl .hint{color:#5d6475;font-size:12.5px}
+</style>
+<script>
+document.getElementById('all-open').onclick=function(){document.querySelectorAll('details.chap').forEach(function(d){d.open=true})};
+document.getElementById('all-close').onclick=function(){document.querySelectorAll('details.chap').forEach(function(d){d.open=false})};
+</script>
+
+<p class="note">
     先在 B 站看讲解视频，再打开讲稿复习、做几道自测题；讲稿与自测页内可互相跳转。<br>
     Watch the video first, then review the notes and take the quiz —
     each notes page and quiz page link to each other.<br>
