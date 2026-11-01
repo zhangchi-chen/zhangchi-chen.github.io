@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>参数方程的导数：dy/dx是两个变化率之比</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#fbfaf6;color:#1d2230;font-family:"PingFang SC","Noto Sans CJK SC",system-ui,sans-serif;line-height:1.75}
+main{max-width:760px;margin:0 auto;padding:30px 18px 64px}
+header{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;margin-bottom:8px}
+h1{font-size:1.5rem;margin:0}
+header a{color:#1f72b0;text-decoration:none;font-size:14px}
+.sub{color:#5d6475;font-size:14px;margin:0 0 18px}
+h2{font-size:15px;color:#5d6475;margin:28px 0 8px;border-bottom:1px solid #e3e0d6;padding-bottom:6px}
+ol{padding-left:24px;margin:6px 0}
+li{margin:5px 0}
+.f{font-family:"DejaVu Sans","Times New Roman",serif}
+</style></head>
+<body><main>
+<header><h1>05-07-parametric-derivatives · 参数方程的导数：dy/dx是两个变化率之比</h1><a href="../quiz/05-07-parametric-derivatives.html">自测 →</a><a href="../quiz/index.html">目录</a></header>
+<p class="sub">视频配套讲稿（逐条字幕） · MATH SELF-CHECK: 47 claims re-derived, 3 fixed.</p>
+<h2>动机</h2><ol><li>参数方程的导数：两个变化率之比</li><li>朋友的定位点在校园地图上移动</li><li>软件知道它向东的速度</li><li>也另外知道它向北的速度</li><li>可眼睛只想知道：箭头指向哪？</li><li>方向就是斜率：北移量除以东移量</li><li>东向2，北向1，斜率就是1/2</li><li>作业版：x=t+eᵗ，y=sin t</li><li>求曲线在t=0处的切线斜率</li><li>第一反应：从x解出t，代入y</li><li>可惜t写不成x的初等函数</li><li>切线明明在那里，却够不着</li><li>另一招：约掉dt。快，可有道理吗？</li><li>今天讲清楚：这个比凭什么成立</li></ol><h2>定理说了什么</h2><ol><li>教材的设定是这样的：</li><li>时刻t，动点在(φ(t),ψ(t))</li><li>t叫参数：它是时钟，不是坐标</li><li>时钟拨动Δt，点跳到附近</li><li>连起两点，就是一条割线</li><li>割线斜率＝ψ的增量÷φ的增量</li><li>上下同除以Δt，完全正当</li><li>Δt→0：分子分母趋于两个导数</li><li>分母极限非零，割线斜率趋于切线斜率</li><li>切线斜率＝ψ′(t)÷φ′(t)</li><li>为何要φ′(t₀)≠0？分母不能为零</li><li>东向速度为0：箭头竖直，没有斜率</li><li>公式(2)：每个t处同样成立</li><li>隐藏的函数：y=ψ(φ⁻¹(x))</li><li>先由x回到t，再交给ψ</li><li>性质好的曲线，叫光滑曲线</li><li>条件一：φ′、ψ′连续（导函数连续）</li><li>φ′²+ψ′²≠0：两速度不同时为0</li><li>点从不停下，所以永远有方向</li><li>处处有切线，切线倾角α(t)连续变化</li><li>反例：x=t³，y=|t|³</li><li>两函数导数连续，曲线却是个V字</li><li>t=0时两个速度全为0，点停在顶点</li><li>停下来才能急转；一直动就不能</li></ol><h2>方法与证明核心</h2><ol><li>真正的理由，来自05-04的两件工具</li><li>第一步：y经由t成为x的函数</li><li>链式法则：先对t求导，再乘dt/dx</li><li>dt/dx从哪来？t并没有用x写出</li><li>反函数求导法则：把它倒过来</li><li>能倒过来，靠的正是dx/dt≠0</li><li>两个齿轮一咬合，公式就出来了</li><li>每一步全是05-04的定理，没有约分</li><li>所以“约掉dt”只是记法，不是理由</li><li>dt眼下并非一个数，05-08会补上</li><li>教材例题：上半椭圆</li><li>先求两个速度</li><li>相除得：−(b/a)cot t</li><li>t=π/2时斜率为0：顶点切线水平</li><li>t→0⁺，斜率→−∞：切线趋于竖直</li><li>正合椭圆形状：顶上平，两端陡</li><li>端点处dx/dt=0：公式用不了</li><li>可切线仍在：dy/dt≠0，切线竖直</li><li>t=π/4处：斜率是−1/2</li><li>切线：y=√2−x/2</li><li>下一个：摆线，车胎上小石子的轨迹</li><li>它的参数方程，a是轮子半径</li><li>照样先求两个速度</li><li>相除并化简：得cot(t/2)</li><li>t=π/2时斜率为1：45°爬升</li><li>t=π时斜率为0：拱顶，切线水平</li><li>t=2π：石子着地，瞬间停住</li><li>那里出现尖点，正是刚才说的停顿</li><li>方向从竖直向下翻成竖直向上</li><li>极坐标曲线也一样：θ当时钟</li><li>例如心形线：r=a(1+cos θ)</li><li>教材公式给出切线与向径的夹角</li><li>最后一个诱惑：二阶导数</li><li>二阶也照搬成ψ″/φ″？</li><li>拿摆线试：a=1，t=π/2</li><li>甲按猜想算：得0</li><li>乙老老实实地算：得−1</li><li>一阶读数一致，二阶却是0对−1</li><li>一阶公式靠定理挣来，二阶只是照抄</li><li>为什么会失效？留给05-09</li></ol><h2>应用与展望</h2><ol><li>回到作业题：t=0处</li><li>两个速度：2和1</li><li>斜率1/2，切线y=(x−1)/2</li><li>和地图上朋友的点一样：东2北1</li><li>用处一：机械臂末端随时间运动</li><li>前进方向就是y′(t)/x′(t)</li><li>用处二：投篮的弧线</li><li>t=0.4时斜率为0：球到最高点</li><li>回看05-04：两条法则联手</li><li>05-08会让这个“相除”说得通</li><li>二阶的谜底，05-09揭晓</li><li>按时间记录的运动，天然是参数形式</li><li>两个速度之比，就是你真正的朝向</li><li>两速度之比：地图上的那支箭头</li></ol>
+</main></body></html>

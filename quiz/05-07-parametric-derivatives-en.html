@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Self-test 05-07: parametric curves / 自测：参数方程求导</title>
+<style>
+:root{--bg:#0e1116;--panel:#141922;--ink:#e6edf3;--dim:#8b949e;--rule:#283040;--blue:#58a6ff;--yel:#f2cc60;--grn:#56d364;--red:#ff7b72;color-scheme:dark}
+@media (prefers-color-scheme: light){:root{--bg:#f7f8fa;--panel:#ffffff;--ink:#16191d;--dim:#5b636d;--rule:#d5dbe2;--blue:#0a5fc2;--yel:#8a5d00;--grn:#17783a;--red:#c0362c;color-scheme:light}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 "PingFang SC","Hiragino Sans GB","Noto Sans CJK SC","Microsoft YaHei",system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:46rem;margin:0 auto;padding:2.5rem 1.25rem 4rem}
+header{display:flex;gap:1.5rem;align-items:center;margin-bottom:2.5rem}
+header svg{flex:0 0 auto;width:7.5rem;height:auto}
+h1{font-size:1.65rem;line-height:1.25;margin:0 0 .35rem;font-weight:600}
+.sub{color:var(--dim);margin:0;font-size:.95rem}
+.m{font-family:"STIX Two Math","Cambria Math","Latin Modern Math","Times New Roman",serif;font-size:1.08em;white-space:nowrap}
+ol{list-style:none;margin:0;padding:0;counter-reset:q}
+li.q{counter-increment:q;background:var(--panel);border:1px solid var(--rule);border-radius:14px;padding:1.4rem 1.4rem 1.2rem;margin:0 0 1.25rem;position:relative}
+li.q::before{content:counter(q);position:absolute;left:-.6rem;top:1.15rem;width:1.9rem;height:1.9rem;border-radius:50%;background:var(--bg);border:2px solid var(--blue);color:var(--blue);font-weight:600;font-size:.95rem;display:grid;place-items:center}
+.en{margin:0 0 .2rem;font-weight:600}
+.zh{margin:0 0 1rem;color:var(--dim)}
+.opts{display:grid;gap:.55rem;margin:0 0 .9rem}
+.opt{display:flex;gap:.75rem;align-items:baseline;text-align:left;width:100%;font:inherit;color:inherit;background:transparent;border:1.5px solid var(--rule);border-radius:10px;padding:.6rem .8rem;cursor:pointer}
+.opt:hover{border-color:var(--blue)}
+.opt b{color:var(--blue);min-width:1.1rem}
+.opt[data-state="right"]{border-color:var(--grn);background:color-mix(in srgb,var(--grn) 12%,transparent)}
+.opt[data-state="right"] b{color:var(--grn)}
+.opt[data-state="wrong"]{border-color:var(--red);background:color-mix(in srgb,var(--red) 10%,transparent)}
+.opt[data-state="wrong"] b{color:var(--red)}
+.opt small{display:block;color:var(--dim);font-size:.9em}
+.reveal{font:inherit;font-size:.92rem;color:var(--yel);background:none;border:1.5px solid var(--yel);border-radius:999px;padding:.3rem .95rem;cursor:pointer}
+.ans{margin-top:1rem;padding-top:.9rem;border-top:1px dashed var(--rule)}
+.ans[hidden]{display:none}
+.ans p{margin:.25rem 0}
+.ans .k{color:var(--grn);font-weight:600}
+.verdict{font-weight:600;margin:0 0 .4rem}
+.verdict.ok{color:var(--grn)}.verdict.no{color:var(--red)}
+button:focus-visible{outline:3px solid var(--yel);outline-offset:2px}
+footer{color:var(--dim);font-size:.85rem;margin-top:2rem}
+@media (max-width:520px){header{flex-direction:column;align-items:flex-start}li.q{padding:1.2rem 1rem 1rem}}
+</style>
+</head>
+<body><div style="max-width:860px;margin:18px auto 0;font-family:sans-serif;"><a href="../notes-en/05-07-parametric-derivatives.html" style="color:#1f72b0;text-decoration:none;font-size:14px;">Notes →</a> &nbsp;·&nbsp; <a href="../quiz/index.html" style="color:#1f72b0;text-decoration:none;font-size:14px;">目录</a></div>
+<main>
+<header>
+<svg viewBox="0 0 150 90" role="img" aria-label="Two speed arrows and their resultant">
+<defs><marker id="hb" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="#58a6ff"/></marker>
+<marker id="hy" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="#f2cc60"/></marker></defs>
+<line x1="15" y1="75" x2="125" y2="75" stroke="#58a6ff" stroke-width="4" marker-end="url(#hb)"/>
+<line x1="130" y1="75" x2="130" y2="22" stroke="#58a6ff" stroke-width="4" marker-end="url(#hb)"/>
+<line x1="15" y1="75" x2="124" y2="22" stroke="#f2cc60" stroke-width="4" marker-end="url(#hy)"/>
+<circle cx="15" cy="75" r="5" fill="currentColor"/>
+<text x="62" y="89" font-size="11" fill="#58a6ff" font-family="serif">dx/dt</text>
+<text x="134" y="55" font-size="11" fill="#58a6ff" font-family="serif">dy/dt</text>
+</svg>
+<div>
+<h1>Parametric curves: a ratio of two rates<br>参数方程求导：两个速率之比</h1>
+<p class="sub">Episode 05-07 self-test, six questions. Pick an option or reveal the answer.<br>第05-07集自测，共六题：点选项，或直接看答案。</p>
+</div>
+</header>
+
+<ol>
+<li class="q" data-answer="a">
+<p class="en">A curve is given by <span class="m">x = t² + 2t</span>, <span class="m">y = t³ + 4t²</span>. What is <span class="m">dy/dx</span> at <span class="m">t = 1</span>?</p>
+<p class="zh">曲线 <span class="m">x = t² + 2t</span>，<span class="m">y = t³ + 4t²</span>。<span class="m">t = 1</span> 处 <span class="m">dy/dx</span> 等于多少？</p>
+<div class="opts">
+<button class="opt" data-k="a"><b>A</b><span class="m">11/4</span></button>
+<button class="opt" data-k="b"><b>B</b><span class="m">4/11</span></button>
+<button class="opt" data-k="c"><b>C</b><span class="m">7</span></button>
+</div>
+<button class="reveal" aria-expanded="false">Show answer / 显示答案</button>
+<div class="ans" hidden>
+<p class="verdict"></p>
+<p><span class="k">A.</span> <span class="m">dx/dt = 2t + 2 = 4</span>, <span class="m">dy/dt = 3t² + 8t = 11</span>, so <span class="m">dy/dx = 11/4</span>. B flips the ratio; C is <span class="m">ψ″/φ″ = (6t + 8)/2</span>, which is not the slope.</p>
+<p><span class="m">dx/dt = 4</span>，<span class="m">dy/dt = 11</span>，所以 <span class="m">dy/dx = 11/4</span>。B 把比倒过来了；C 是二阶导数之比，不是斜率。</p>
+</div>
+</li>
+
+<li class="q" data-answer="a">
+<p class="en">Cycloid <span class="m">x = t − sin t</span>, <span class="m">y = 1 − cos t</span> (a = 1). Which line is the tangent at <span class="m">t = π/2</span>?</p>
+<p class="zh">摆线 <span class="m">x = t − sin t</span>，<span class="m">y = 1 − cos t</span>（a = 1）。<span class="m">t = π/2</span> 处的切线是哪一条？</p>
+<div class="opts">
+<button class="opt" data-k="a"><b>A</b><span class="m">y = x + 2 − π/2</span></button>
+<button class="opt" data-k="b"><b>B</b><span class="m">y = x + 1 − π/2</span></button>
+<button class="opt" data-k="c"><b>C</b><span class="m">y = 1</span></button>
+</div>
+<button class="reveal" aria-expanded="false">Show answer / 显示答案</button>
+<div class="ans" hidden>
+<p class="verdict"></p>
+<p><span class="k">A.</span> The point is <span class="m">(π/2 − 1, 1)</span> and the slope is <span class="m">cot(π/4) = 1</span>, so <span class="m">y − 1 = x − (π/2 − 1)</span>. B takes the point as <span class="m">(π/2, 1)</span>, forgetting <span class="m">− sin t</span>; C uses slope 0, which belongs to <span class="m">t = π</span>.</p>
+<p>切点 <span class="m">(π/2 − 1, 1)</span>，斜率 <span class="m">cot(π/4) = 1</span>。B 把切点横坐标算错了；C 的斜率 0 属于 <span class="m">t = π</span>（拱顶）。</p>
+</div>
+</li>
+
+<li class="q" data-answer="b">
+<p class="en">Which is the honest justification of <span class="m">dy/dx = (dy/dt)/(dx/dt)</span>?</p>
+<p class="zh">下面哪一个才是 <span class="m">dy/dx = (dy/dt)/(dx/dt)</span> 的真正理由？</p>
+<div class="opts">
+<button class="opt" data-k="a"><b>A</b><span>Cancel the dt in numerator and denominator.<small>分子分母把 dt 约掉。</small></span></button>
+<button class="opt" data-k="b"><b>B</b><span>Chain rule on <span class="m">y = ψ(φ⁻¹(x))</span>, then the inverse rule <span class="m">dt/dx = 1/(dx/dt)</span>, which needs <span class="m">φ′(t) ≠ 0</span>.<small>对 <span class="m">y = ψ(φ⁻¹(x))</span> 用链式法则，再用反函数求导法则（要求 <span class="m">φ′(t) ≠ 0</span>）。</small></span></button>
+<button class="opt" data-k="c"><b>C</b><span>Eliminate t first; the formula only works when y can be written in x.<small>先消去 t；只有能把 y 写成 x 的式子时公式才成立。</small></span></button>
+</div>
+<button class="reveal" aria-expanded="false">Show answer / 显示答案</button>
+<div class="ans" hidden>
+<p class="verdict"></p>
+<p><span class="k">B.</span> Every step is a theorem from 05-04. In this episode dt alone is not yet a number, so cancelling is only a memory aid. C is wrong: the whole point is that t never has to be eliminated (try <span class="m">x = t + eᵗ</span>).</p>
+<p>每一步都是第五章第四集的定理；dt 单独还不是一个数，约分只是记法。C 不对：公式的价值正在于不必消去 t。</p>
+</div>
+</li>
+
+<li class="q" data-answer="a">
+<p class="en">For <span class="m">x = t³ − 3t</span>, <span class="m">y = t²</span>, where is the formula <span class="m">dy/dx = ψ′(t)/φ′(t)</span> unavailable?</p>
+<p class="zh">对 <span class="m">x = t³ − 3t</span>，<span class="m">y = t²</span>，公式 <span class="m">dy/dx = ψ′(t)/φ′(t)</span> 在哪里用不了？</p>
+<div class="opts">
+<button class="opt" data-k="a"><b>A</b><span class="m">t = ±1</span></button>
+<button class="opt" data-k="b"><b>B</b><span class="m">t = 0</span></button>
+<button class="opt" data-k="c"><b>C</b><span class="m">t = ±√3</span></button>
+</div>
+<button class="reveal" aria-expanded="false">Show answer / 显示答案</button>
+<div class="ans" hidden>
+<p class="verdict"></p>
+<p><span class="k">A.</span> <span class="m">φ′(t) = 3t² − 3 = 0</span> at <span class="m">t = ±1</span>. There <span class="m">ψ′ = 2t = ±2 ≠ 0</span>, so the tangent exists and is vertical. At <span class="m">t = 0</span>, <span class="m">φ′ = −3</span> and the formula gives slope 0. At <span class="m">t = ±√3</span>, <span class="m">φ′ = 6</span>; the curve passes <span class="m">(0, 3)</span> twice there, and the formula works at each value.</p>
+<p><span class="m">t = ±1</span> 时 <span class="m">φ′ = 0</span>，但 <span class="m">ψ′ ≠ 0</span>，切线竖直。<span class="m">t = 0</span> 时斜率为 0；<span class="m">t = ±√3</span> 时曲线两次经过 <span class="m">(0, 3)</span>，公式照常可用。</p>
+</div>
+</li>
+
+<li class="q" data-answer="b">
+<p class="en">True or false: <span class="m">d²y/dx² = ψ″(t)/φ″(t)</span>.</p>
+<p class="zh">判断：<span class="m">d²y/dx² = ψ″(t)/φ″(t)</span>。</p>
+<div class="opts">
+<button class="opt" data-k="a"><b>A</b><span>True: it is the first-order pattern, one order up.<small>对：一阶的规律往上推一阶。</small></span></button>
+<button class="opt" data-k="b"><b>B</b><span>False: on the cycloid (a = 1) at <span class="m">t = π/2</span>, the guess gives 0 but the honest computation gives −1.<small>错：摆线（a = 1）在 <span class="m">t = π/2</span> 处，猜想得 0，老实算得 −1。</small></span></button>
+<button class="opt" data-k="c"><b>C</b><span>True whenever <span class="m">φ″(t) ≠ 0</span>.<small>只要 <span class="m">φ″(t) ≠ 0</span> 就对。</small></span></button>
+</div>
+<button class="reveal" aria-expanded="false">Show answer / 显示答案</button>
+<div class="ans" hidden>
+<p class="verdict"></p>
+<p><span class="k">B.</span> Guess: <span class="m">cos t/sin t = 0</span> at <span class="m">π/2</span>. Honest: <span class="m">d/dt cot(t/2) = −1</span> there, divided by <span class="m">dx/dt = 1</span>, gives −1. Since <span class="m">φ″(π/2) = 1 ≠ 0</span>, C fails at the same point. Why the pattern breaks is the business of 05-09.</p>
+<p>猜想得 0，老实计算得 −1，同一点两个答案，所以猜想靠不住；而此处 <span class="m">φ″ = 1 ≠ 0</span>，C 也被推翻。原因留给第五章第九集。</p>
+</div>
+</li>
+
+<li class="q" data-answer="a">
+<p class="en">Which curve is <em>not</em> smooth on <span class="m">[−1, 1]</span>?</p>
+<p class="zh">哪条曲线在 <span class="m">[−1, 1]</span> 上不是光滑曲线？</p>
+<div class="opts">
+<button class="opt" data-k="a"><b>A</b><span class="m">x = t³, y = |t|³</span></button>
+<button class="opt" data-k="b"><b>B</b><span class="m">x = t + eᵗ, y = sin t</span></button>
+<button class="opt" data-k="c"><b>C</b><span class="m">x = 2 cos t, y = sin t</span></button>
+</div>
+<button class="reveal" aria-expanded="false">Show answer / 显示答案</button>
+<div class="ans" hidden>
+<p class="verdict"></p>
+<p><span class="k">A.</span> <span class="m">x′ = 3t²</span> and <span class="m">y′ = 3t|t|</span> are continuous, but both vanish at <span class="m">t = 0</span>; the curve is <span class="m">y = |x|</span>, with a corner and no tangent at the origin. B: <span class="m">x′ = 1 + eᵗ &gt; 0</span>. C: <span class="m">x′ = −2 sin t</span> and <span class="m">y′ = cos t</span> are never both 0.</p>
+<p>A 的两个导数在 <span class="m">t = 0</span> 同时为 0，轨迹是 <span class="m">y = |x|</span>，原点处是拐角，没有切线。B、C 的两个导数从不同时为 0。</p>
+</div>
+</li>
+</ol>
+<footer>Answers re-derived in 05-07-parametric-derivatives.notes.md (C41–C46). 答案推导见 notes 文件。</footer>
+</main>
+<script>
+document.querySelectorAll("li.q").forEach(function (q) {
+  var ans = q.querySelector(".ans"), btn = q.querySelector(".reveal"), verdict = q.querySelector(".verdict");
+  function show(open) { ans.hidden = !open; btn.setAttribute("aria-expanded", open ? "true" : "false"); }
+  btn.addEventListener("click", function () { show(ans.hidden); });
+  q.querySelectorAll(".opt").forEach(function (o) {
+    o.addEventListener("click", function () {
+      var right = o.dataset.k === q.dataset.answer;
+      q.querySelectorAll(".opt").forEach(function (x) {
+        x.removeAttribute("data-state"); x.setAttribute("aria-pressed", "false");
+        if (x.dataset.k === q.dataset.answer) x.dataset.state = "right";
+      });
+      if (!right) o.dataset.state = "wrong";
+      o.setAttribute("aria-pressed", "true");
+      verdict.textContent = right ? "Correct / 正确" : "Not quite / 再想想";
+      verdict.className = "verdict " + (right ? "ok" : "no");
+      show(true);
+    });
+  });
+});
+</script>
+</body>
+</html>
