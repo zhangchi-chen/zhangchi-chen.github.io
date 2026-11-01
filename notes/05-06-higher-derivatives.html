@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>高阶导数：求完导，再排一次队</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#fbfaf6;color:#1d2230;font-family:"PingFang SC","Noto Sans CJK SC",system-ui,sans-serif;line-height:1.75}
+main{max-width:760px;margin:0 auto;padding:30px 18px 64px}
+header{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;margin-bottom:8px}
+h1{font-size:1.5rem;margin:0}
+header a{color:#1f72b0;text-decoration:none;font-size:14px}
+.sub{color:#5d6475;font-size:14px;margin:0 0 18px}
+h2{font-size:15px;color:#5d6475;margin:28px 0 8px;border-bottom:1px solid #e3e0d6;padding-bottom:6px}
+ol{padding-left:24px;margin:6px 0}
+li{margin:5px 0}
+.f{font-family:"DejaVu Sans","Times New Roman",serif}
+</style></head>
+<body><main>
+<header><h1>05-06-higher-derivatives · 高阶导数：求完导，再排一次队</h1><a href="../quiz/05-06-higher-derivatives.html">自测 →</a><a href="../quiz/index.html">目录</a></header>
+<p class="sub">视频配套讲稿（逐条字幕） · MATH SELF-CHECK: 56 claims re-derived, 4 fixed.</p>
+<h2>动机</h2><ol><li>高阶导数：求完导，再排一次队。</li><li>作业要求x²eˣ的第100阶导数。</li><li>手算的话，要用一百次乘积法则。</li><li>第一轮得到eˣ(x²+2x)。</li><li>再算两轮，括号里越来越复杂。</li><li>竖着看：2、4、6和0、2、6。</li><li>但硬猜第100行，太冒险。</li><li>谜题二：x²sin(1/x)。</li><li>处处可导，却在0处没有二阶导数。</li><li>谜题三：x|x|，看上去很光滑。</li><li>一阶导数没问题，0处二阶导数却没有。</li><li>今天的问题：能不能一导再导？</li></ol><h2>定理说了什么</h2><ol><li>把d/dx想成食堂的一个窗口。</li><li>函数端进去，导数端出来。</li><li>二阶导数：端出来的再排一次队。</li><li>每一次只处理上一次端出来的。</li><li>f⁽ⁿ⁾就是这个窗口过n次。</li><li>课本中二阶导数的定义：</li><li>n阶导数由n−1阶导函数定义。</li><li>第一层：f′本身要在x₀可导。</li><li>拿sin举例：斜率连成cos。</li><li>f″(x₀)就是f′图像的切线斜率。</li><li>斜率的斜率：这里等于−sin x₀。</li><li>第二层：还是那个差商，换成f′。</li><li>隐含要求：f′要在x₀附近都存在。</li><li>第三层：每一阶由前一阶来定义。</li><li>记号dⁿy/dxⁿ：d/dx做n次。</li><li>它是一个整体记号，不是分数。</li><li>d²y另有含义，留到05-09再讲。</li><li>让三个经典函数排队过窗口。</li><li>x³依次变成3x²、6x、6、0。</li><li>每次落下一个指数：3·2·1=6。</li><li>xⁿ过n次得n!，再过一次就是0。</li><li>sin x每过一次，转四分之一圈。</li><li>四次之后，正好转回sin x。</li><li>因为cos x=sin(x+π/2)</li><li>sin⁽ⁿ⁾x：转n个四分之一圈。</li><li>cos x在同一个转盘上，领先一格。</li><li>eˣ是不动点：过多少次都不变。</li><li>课本把这三条写成了公式。</li></ol><h2>方法与证明核心</h2><ol><li>回到乘积：uv连过n次会怎样？</li><li>过一次：每项只求导一个因子。</li><li>过两次：四条路径，每次挑一个因子。</li><li>两条混合路径落到同一项2u′v′。</li><li>三次：八条路径并成1、3、3、1</li><li>打中v恰好k次：从n次里选k次。</li><li>选法有C(n,k)种，这就是系数。</li><li>把二项式定理放在上面对照。</li><li>形状一样：幂次换成了求导阶数。</li><li>展开(u+v)ⁿ：每个括号选u或v。</li><li>求导n次：每一次选u或v。</li><li>计数方式一样，系数就一样。</li><li>这就是莱布尼茨公式。</li><li>注意：u⁽⁰⁾是u本身，不是1。</li><li>验算n=4：系数1、4、6、4、1。</li><li>回到作业：(x²eˣ)⁽ⁿ⁾。</li><li>x²放在v位：第三次起就是0。</li><li>eˣ放在u位：永远不变。</li><li>整个和式里，只剩k=0、1、2。</li><li>三项合并：结果就是这一行。</li><li>验证：n=1、2、3正好对上前三轮。</li><li>第100阶：一行写完。</li><li>诀窍：多项式放v位，和式就很短。</li><li>现在偿还05-02的欠账：谜题二。</li><li>在0处补充定义f(0)=0。</li><li>图像被夹在x²与−x²之间。</li><li>差商夹向0，所以f′(0)=0。</li><li>x≠0时，用乘积和链式法则求f′。</li><li>第一项趋于0，第二项来回摆动。</li><li>离0任意近处，f′既取1也取−1。</li><li>所以f′在0处没有极限，不连续。</li><li>要是f″(0)存在，f′就会连续。</li><li>可它偏偏不连续：二阶导数不存在。</li><li>两个室友：一个总安静，一个午夜发疯。</li><li>安静的那位只压得住一次求导。</li><li>谜题三：右边是x²，左边是−x²。</li><li>按定义算出f′(0)=0。</li><li>所以f′(x)=2|x|，是个V形。</li><li>二阶：再回到定义，这次用f′。</li><li>差商右边是2，左边是−2。</li><li>左右极限不同：二阶导数在0处不存在。</li><li>错误捷径：对右段公式求两次导得2。</li><li>这个2只是右侧的那一半。</li><li>规矩：在接缝处，每一阶都回到定义。</li><li>每一步都用上一阶导数的差商。</li></ol><h2>应用与展望</h2><ol><li>宿舍电梯起步：h=t²/2米。</li><li>h′=t是速度，h″=1是加速度。</li><li>胃里感到的是二阶导数，不是速度。</li><li>转两格就变号：sin″=−sin。</li><li>最简单的弹簧满足y″=−y。</li><li>泰勒公式（06-07）就靠这些值。</li><li>能过几次窗口，就给函数分了等级。</li><li>x|x|在C¹里，却进不了C²。</li><li>x²sin(1/x)连C¹都进不了。</li><li>函数项级数：求导能否反复穿过无穷和？</li><li>一个窗口，反复排队，就是高阶导数。</li><li>莱布尼茨系数：数一数打中谁。</li><li>到了接缝处，每一阶都回到定义。</li></ol>
+</main></body></html>

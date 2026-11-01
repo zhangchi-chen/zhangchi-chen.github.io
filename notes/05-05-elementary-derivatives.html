@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>基本初等函数的导数公式：三条起点公式生出整张表</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#fbfaf6;color:#1d2230;font-family:"PingFang SC","Noto Sans CJK SC",system-ui,sans-serif;line-height:1.75}
+main{max-width:760px;margin:0 auto;padding:30px 18px 64px}
+header{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;margin-bottom:8px}
+h1{font-size:1.5rem;margin:0}
+header a{color:#1f72b0;text-decoration:none;font-size:14px}
+.sub{color:#5d6475;font-size:14px;margin:0 0 18px}
+h2{font-size:15px;color:#5d6475;margin:28px 0 8px;border-bottom:1px solid #e3e0d6;padding-bottom:6px}
+ol{padding-left:24px;margin:6px 0}
+li{margin:5px 0}
+.f{font-family:"DejaVu Sans","Times New Roman",serif}
+</style></head>
+<body><main>
+<header><h1>05-05-elementary-derivatives · 基本初等函数的导数公式：三条起点公式生出整张表</h1><a href="../quiz/05-05-elementary-derivatives.html">自测 →</a><a href="../quiz/index.html">目录</a></header>
+<p class="sub">视频配套讲稿（逐条字幕） · MATH SELF-CHECK: 38 claims re-derived, 3 fixed.</p>
+<h2>动机</h2><ol><li>今天，整张导数表由三条公式生出</li><li>考前深夜，两张公式纸说法不一</li><li>一张乘 ln a，一张除以 ln a</li><li>光靠记忆分不出对错，得会推导</li><li>关键：aˣ=exp(x ln a)</li><li>外层 eᵘ 照抄，内层贡献 ln a</li><li>(aˣ)′=aˣ ln a，你那张对</li><li>验算 2ˣ：0 处斜率应为 ln 2</li><li>1/ln 2≈1.44：穿过而非相切</li><li>整张表能不能也这样推出来？</li></ol><h2>定理说了什么</h2><ol><li>先看课本的五条求导法则</li><li>每条法则：已知导数进，新导数出</li><li>再看基本公式：常数、幂与三角</li><li>反三角、指数与对数补全列表</li><li>常数不动，变化率为零</li><li>α 任取实数，x=1 处斜率=α</li><li>sin 的斜率记录下来就是 cos</li><li>sec²x≥1：tan 每段都在上升</li><li>sin 变平处，arcsin 变陡</li><li>eˣ 越高越陡：斜率等于自身</li><li>ln|x| 斜率 1/x，越远越平</li><li>十四条公式加五条法则，几乎全能推</li></ol><h2>方法与证明核心</h2><ol><li>整张表来自三条起点公式（母卡/家谱）</li><li>第一条：eᵘ 对 u 求导等于自身</li><li>第二条：正弦，导数为 cos u</li><li>第三条：幂 uᵅ，导数为 αuᵅ⁻¹</li><li>五条法则，就是向下的箭头</li><li>上一集的承诺：链式与反函数造出全表</li><li>aˣ 这一条：eᵘ 经链式法则得到</li><li>y=ln x 反过来是 x=eʸ</li><li>反函数法则得 1/eʸ = 1/x</li><li>两侧都成立：(ln|x|)′=1/x</li><li>换底：logₐ|x| 只差一个常数</li><li>ln a 跑到分母，和 aˣ 相反</li><li>常数这一条无需来源：差商恒为 0</li><li>先把 cos 写成 sin 的复合</li><li>外层得 sin x，内层因子 −1</li><li>所以 (cos x)′=−sin x</li><li>tan=sin/cos，用商的法则</li><li>分子是 1，所以得 sec²x</li><li>cot 同理得 −csc²x</li><li>x=sin y，其中 |y|&lt;π/2</li><li>1/cos y=1/√(1−x²)</li><li>arccos 由和差法则跟着得出</li><li>arctan：sec²y=1+x²</li><li>反正切、反余切到齐，三角全推出</li><li>幂这一支：u=1+x²，α=−1</li><li>幂公式再乘内层导数 2x</li><li>换成任意次方 n，同样一步完成</li><li>三条公式加五条法则，全表齐了</li><li>反过来：拿到复合函数，从哪下手？</li><li>像先修课程图：先读最上面那格</li><li>规矩：动笔前，先认最外层运算</li><li>外层 eᵘ，内层 u=−x²</li><li>结果：exp(−x²)·(−2x)</li><li>漏乘 −2x：x=1 处连符号都错</li><li>外层 sin，再乘内层的 2</li><li>漏掉 2：0 处切线只有一半陡</li><li>外层 u¹⁰，内层 x²+1</li><li>结果：20x(x²+1)⁹</li><li>先展开要算十一项，由外到内全省掉</li><li>注意：法则只管各段内部，接头不管</li><li>求 a,b，使 f 在 1 处可导</li><li>诱人的捷径：两段分别求导再相等</li><li>得到 a=2，却对 b 毫无约束</li><li>取 b=0：斜率一样，却跳了一下</li><li>不连续，就一定不可导</li><li>回到定义：05-02 的左右导数</li><li>第一步连续：接到 1，a+b=1</li><li>第二步：左导数 2，右导数 a</li><li>a=2，b=−1：恰好是切线</li><li>求导定 a，只有连续才能定 b</li><li>好习惯：每条公式按 u 的函数来记</li><li>每条末尾带 ·u′，查表求导一步完成</li><li>外层 ln|u|，u=cos x</li><li>结果 −tan x（cos x≠0）</li><li>双曲正弦余弦由 eˣ 构成，互为导数</li></ol><h2>应用与展望</h2><ol><li>应用一：离黑板 x 米时的视角</li><li>外层 arctan u，内层 2/x</li><li>一步得到 θ′=−2/(x²+4)</li><li>前排掉得快：0.25 对 0.05</li><li>应用二：宿舍里消息扩散的曲线</li><li>求得 σ′=e⁻ᵗ/(1+e⁻ᵗ)²</li><li>σ′=σ(1−σ)：一半人知道时最快</li><li>机器学习偏爱它：导数复用自身的值</li><li>05-04 的承诺，今天兑现了</li><li>06-02 的导数极限定理会帮忙</li><li>但接头处的连续，仍要亲手验证</li><li>初等函数求导已成机械活，难点要转移</li><li>分段点、参数，与关于 f′ 的证明</li><li>接下来两集，就是最先出现的地方</li><li>三条公式五条法则，随时推出任一条</li></ol>
+</main></body></html>

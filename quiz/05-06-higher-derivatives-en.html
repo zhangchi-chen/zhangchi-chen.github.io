@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Higher derivatives: differentiate, then queue again · Quiz</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#0e1522;color:#e9eef6;font-family:"DejaVu Sans","Segoe UI","Noto Sans CJK SC","PingFang SC",system-ui,sans-serif;line-height:1.6}
+main{max-width:860px;margin:0 auto;padding:32px 16px 64px}
+header{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;margin-bottom:20px}
+h1{font-size:1.6rem;margin:0}
+header a{color:#56c8ff;text-decoration:none;font-size:14px}
+.q{border-top:1px solid #2b3c5c;padding:14px 0}
+.q:first-of-type{border-top:none}
+.q p{margin:0 0 8px;font-weight:600}
+.q ol{list-style:none;padding:0;margin:0 0 8px}
+.q li{padding:4px 12px;border-radius:6px;margin:3px 0}
+.q li.ok{background:rgba(111,224,138,.15);outline:1.5px solid #6fe08a}
+.q button{background:transparent;color:#56c8ff;border:1.5px solid #56c8ff;border-radius:8px;padding:4px 14px;font:inherit;cursor:pointer}
+.ex{display:none;color:#6fe08a;margin-top:6px}
+.q.open .ex{display:block}
+</style></head>
+<body><main>
+<header><h1>Higher derivatives: differentiate, then queue again · Quiz</h1><a href="../notes-en/05-06-higher-derivatives.html">Notes →</a></header>
+<div class="quiz"><div class="q"><p>1. 1. (x sin x)⁽⁴⁾ equals:</p><ol><li data-ok>A. A. x sin x − 4cos x</li><li>B. B. x sin x + 4cos x</li><li>C. C. x sin x</li></ol><button type="button" data-show="Show answer" data-hide="Hide answer">Show answer</button><div class="ex">A — Leibniz with v = x: only k = 0, 1 survive, x·sin x + 4·1·(−cos x).</div></div><div class="q"><p>2. 2. The value of (x² cos x)⁽⁴⁾ at x = 0 is:</p><ol><li>A. A. 0</li><li data-ok>B. B. −12</li><li>C. C. 12</li></ol><button type="button" data-show="Show answer" data-hide="Hide answer">Show answer</button><div class="ex">B — v = x²: x²cos x + 4·2x·sin x + 6·2·(−cos x); at 0 only −12 remains.</div></div><div class="q"><p>3. 3. In (uv)⁽⁵⁾, the coefficient of u‴v″ is:</p><ol><li>A. A. 5</li><li data-ok>B. B. 10</li><li>C. C. 20</li></ol><button type="button" data-show="Show answer" data-hide="Hide answer">Show answer</button><div class="ex">B — Two of the five passes hit v: C(5,2) = 10.</div></div><div class="q"><p>4. 4. sin⁽²⁰²⁶⁾x equals:</p><ol><li>A. A. sin x</li><li data-ok>B. B. −sin x</li><li>C. C. −cos x</li></ol><button type="button" data-show="Show answer" data-hide="Hide answer">Show answer</button><div class="ex">B — 2026 = 4·506 + 2: two quarter turns, sin(x + π) = −sin x.</div></div><div class="q"><p>5. 5. For f(x) = |x|³, which is true?</p><ol><li>A. A. f″(0) does not exist</li><li data-ok>B. B. f″(0) = 0, but f‴(0) does not exist</li><li>C. C. f‴(0) = 6</li></ol><button type="button" data-show="Show answer" data-hide="Hide answer">Show answer</button><div class="ex">B — f′ = 3x|x|, f″ = 6|x| with f″(0) = 0 by the definition; then 6|h|/h = ±6 has no limit.</div></div><div class="q"><p>6. 6. Trap: “For f(x) = x|x|, f = x² when x ≥ 0, so f″(0) = 2.”</p><ol><li>A. A. Correct</li><li data-ok>B. B. Wrong: f″(0) does not exist</li><li>C. C. Wrong: f″(0) = 0</li></ol><button type="button" data-show="Show answer" data-hide="Hide answer">Show answer</button><div class="ex">B — f′ = 2|x|; its quotient at 0 is 2 from the right and −2 from the left.</div></div></div>
+</main>
+<script>
+document.querySelectorAll('.q button').forEach(function(b){
+  b.addEventListener('click',function(){
+    var q=this.closest('.q'); q.classList.add('open');
+    this.textContent=this.getAttribute('data-hide');
+    this.onclick=function(){q.classList.remove('open');this.textContent=this.getAttribute('data-show');wire(this)};
+  });
+});
+</script></body></html>
