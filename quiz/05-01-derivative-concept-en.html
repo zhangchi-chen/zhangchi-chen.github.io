@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>05-01 Self-test — The derivative</title>
+<style>
+:root {
+  color-scheme: dark;
+  --ground: #0e1116; --surface: #161b22; --ink: #e6edf3; --muted: #8b949e; --rule: #30363d;
+  --blue: #58a6ff; --yellow: #f2cc60; --green: #3fb950; --red: #ff6b6b;
+  --text: "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC", "Microsoft YaHei", system-ui, sans-serif;
+  --math: "STIX Two Math", "Cambria Math", "Latin Modern Math", "Times New Roman", serif;
+}
+@media (prefers-color-scheme: light) {
+  :root { color-scheme: light; --ground: #f6f8fa; --surface: #ffffff; --ink: #1f2328; --muted: #59636e;
+          --rule: #d0d7de; --blue: #0969da; --yellow: #9a6700; --green: #1a7f37; --red: #cf222e; }
+}
+* { box-sizing: border-box; }
+html { background: var(--ground); }
+body { margin: 0; background: var(--ground); color: var(--ink); font-family: var(--text);
+       font-size: 1.0625rem; line-height: 1.65; }
+main { max-width: 44rem; margin: 0 auto; padding: 2.5rem 1.25rem 4rem; }
+header { display: grid; grid-template-columns: auto 1fr; gap: 1.5rem; align-items: end;
+         padding-bottom: 1.5rem; border-bottom: 1px solid var(--rule); }
+.mark { display: block; height: auto; max-width: 32vw; }
+.mark .axis { stroke: var(--muted); stroke-width: 1.2; }
+.mark .curve { fill: none; stroke: var(--blue); stroke-width: 3; stroke-linejoin: round; }
+.mark .sec { stroke: var(--yellow); stroke-width: 2; }
+.mark .q { fill: var(--yellow); }
+.mark .tan { stroke: var(--green); stroke-width: 3; }
+.mark .p { fill: var(--ink); }
+.ep { margin: 0; color: var(--muted); font-size: .95rem; }
+h1 { margin: .25rem 0 .5rem; font-size: clamp(1.6rem, 4vw, 2.1rem); line-height: 1.2; font-weight: 700; }
+.how { margin: 0; color: var(--muted); }
+.langs { display: inline-flex; gap: .25rem; margin-top: .9rem; }
+.langs button { font: inherit; font-size: .9rem; color: var(--muted); background: transparent;
+                border: 1px solid var(--rule); border-radius: 999px; padding: .2rem .8rem; cursor: pointer; }
+.langs button[aria-pressed="true"] { color: var(--ink); border-color: var(--ink); }
+ol.items { list-style: none; counter-reset: q; margin: 0; padding: 0; }
+.item { counter-increment: q; position: relative; padding: 1.75rem 0 1.5rem 2.6rem;
+        border-bottom: 1px solid var(--rule); }
+.item::before { content: counter(q); position: absolute; left: 0; top: 1.75rem; font-size: 1.5rem;
+                line-height: 1.4; color: var(--muted); font-variant-numeric: tabular-nums; }
+.q { margin: 0 0 1rem; }
+i { font-family: var(--math); font-style: italic; }
+sub { font-size: .7em; }
+.frac { display: inline-flex; flex-direction: column; vertical-align: middle; text-align: center;
+        font-family: var(--math); margin: 0 .15em; line-height: 1.25; }
+.frac > span:first-child { border-bottom: 1px solid currentColor; padding: 0 .25em .05em; }
+.frac > span:last-child { padding: .05em .25em 0; }
+.lim { display: inline-flex; flex-direction: column; align-items: center; vertical-align: middle;
+       font-family: var(--math); line-height: 1.05; }
+.lim small { font-size: .65em; }
+.opts { list-style: none; margin: 0 0 .9rem; padding: 0; display: grid; gap: .5rem; }
+.opt { width: 100%; display: flex; align-items: center; gap: .9rem; text-align: left; font: inherit; color: inherit;
+       background: var(--surface); border: 1px solid var(--rule); border-radius: 10px; padding: .6rem .9rem; cursor: pointer; }
+.opt:hover { border-color: var(--muted); }
+.letter { flex: none; width: 1.7rem; height: 1.7rem; display: grid; place-items: center; border-radius: 50%;
+          border: 1px solid var(--rule); color: var(--muted); font-size: .9rem; }
+.opt.right { border-color: var(--green); }
+.opt.right .letter { background: var(--green); border-color: var(--green); color: var(--ground); }
+.opt.wrong { border-color: var(--red); }
+.opt.wrong .letter { background: var(--red); border-color: var(--red); color: var(--ground); }
+.reveal { font: inherit; font-size: .95rem; color: var(--blue); background: none; border: 0; padding: .2rem 0;
+          cursor: pointer; text-decoration: underline; text-underline-offset: .2em; }
+.answer p { margin: .6rem 0 0; padding: .75rem 1rem; border-left: 3px solid var(--green); background: var(--surface); }
+.answer strong { color: var(--green); margin-right: .4rem; }
+button:focus-visible { outline: 2px solid var(--yellow); outline-offset: 2px; }
+footer { margin-top: 2rem; color: var(--muted); font-size: .9rem; }
+body.lang-en [lang="zh"], body.lang-zh [lang="en"] { display: none; }
+@media (max-width: 34rem) { header { grid-template-columns: 1fr; } .mark { max-width: 9rem; }
+                             .item { padding-left: 0; padding-top: 3.2rem; } }
+</style>
+</head>
+<body class="lang-en">
+<main>
+<header>
+  <svg class="mark" viewBox="0 0 171 204" width="171" height="204" role="img" aria-label="Secants of y = x squared swinging into the tangent at (1, 1)">
+<line x1="14.0" y1="183.6" x2="164.1" y2="183.6" class="axis"/>
+<line x1="56.0" y1="200.4" x2="56.0" y2="12.8" class="axis"/>
+<polyline points="15.7,154.6 16.8,156.2 17.9,157.7 19.0,159.2 20.2,160.7 21.3,162.1 22.4,163.4 23.5,164.8 24.6,166.0 25.8,167.3 26.9,168.5 28.0,169.6 29.1,170.7 30.2,171.8 31.4,172.8 32.5,173.7 33.6,174.6 34.7,175.5 35.8,176.3 37.0,177.1 38.1,177.9 39.2,178.6 40.3,179.2 41.4,179.8 42.6,180.4 43.7,180.9 44.8,181.4 45.9,181.8 47.0,182.2 48.2,182.5 49.3,182.8 50.4,183.0 51.5,183.2 52.6,183.4 53.8,183.5 54.9,183.6 56.0,183.6 57.1,183.6 58.2,183.5 59.4,183.4 60.5,183.2 61.6,183.0 62.7,182.8 63.8,182.5 65.0,182.2 66.1,181.8 67.2,181.4 68.3,180.9 69.4,180.4 70.6,179.8 71.7,179.2 72.8,178.6 73.9,177.9 75.0,177.1 76.2,176.3 77.3,175.5 78.4,174.6 79.5,173.7 80.6,172.8 81.8,171.8 82.9,170.7 84.0,169.6 85.1,168.5 86.2,167.3 87.4,166.0 88.5,164.8 89.6,163.4 90.7,162.1 91.8,160.7 93.0,159.2 94.1,157.7 95.2,156.2 96.3,154.6 97.4,152.9 98.6,151.3 99.7,149.5 100.8,147.8 101.9,145.9 103.0,144.1 104.2,142.2 105.3,140.2 106.4,138.2 107.5,136.2 108.6,134.1 109.8,132.0 110.9,129.8 112.0,127.6 113.1,125.3 114.2,123.0 115.4,120.7 116.5,118.3 117.6,115.8 118.7,113.4 119.8,110.8 121.0,108.2 122.1,105.6 123.2,103.0 124.3,100.2 125.4,97.5 126.6,94.7 127.7,91.8 128.8,89.0 129.9,86.0 131.0,83.0 132.2,80.0 133.3,77.0 134.4,73.8 135.5,70.7 136.6,67.5 137.8,64.2 138.9,60.9 140.0,57.6 141.1,54.2 142.2,50.8 143.4,47.3 144.5,43.8 145.6,40.2 146.7,36.6 147.8,33.0 149.0,29.3 150.1,25.5 151.2,21.8 152.3,17.9 153.4,14.1" class="curve"/><line x1="85.4" y1="200.4" x2="153.9" y2="12.8" class="sec" style="opacity:0.22"/><circle cx="153.4" cy="14.1" r="3.2" class="q" style="opacity:0.42"/><line x1="82.9" y1="200.4" x2="157.9" y2="12.8" class="sec" style="opacity:0.38"/><circle cx="140.0" cy="57.6" r="3.2" class="q" style="opacity:0.58"/><line x1="80.3" y1="200.4" x2="161.9" y2="12.8" class="sec" style="opacity:0.54"/><circle cx="128.8" cy="89.0" r="3.2" class="q" style="opacity:0.74"/><line x1="78.0" y1="200.4" x2="162.4" y2="19.7" class="sec" style="opacity:0.70"/><circle cx="119.8" cy="110.8" r="3.2" class="q" style="opacity:0.90"/>
+<line x1="75.6" y1="200.4" x2="162.4" y2="26.8" class="tan"/>
+<circle cx="112.0" cy="127.6" r="4.2" class="p"/></svg>
+  <div>
+    <p class="ep">05-01</p>
+    <h1><span lang="en">The derivative: self-test</span><span lang="zh">导数：自测</span></h1>
+    <p class="how"><span lang="en">Six questions. Tap an option to check it, or show the answer.</span><span lang="zh">六道题。点选项即可核对，也可以直接显示答案。</span></p>
+    <div class="langs" role="group" aria-label="Language">
+      <button type="button" data-lang="en" aria-pressed="true">English</button>
+      <button type="button" data-lang="zh" aria-pressed="false">中文</button>
+    </div>
+  </div>
+</header>
+<ol class="items">
+<li class="item" id="q1">
+  <p class="q"><span lang="en">Which expression equals <i>f</i>′(<i>x</i><sub>0</sub>) = <span class="lim">lim<small><i>x</i>→<i>x</i><sub>0</sub></small></span> <span class="frac"><span><i>f</i>(<i>x</i>) − <i>f</i>(<i>x</i><sub>0</sub>)</span><span><i>x</i> − <i>x</i><sub>0</sub></span></span> ?</span><span lang="zh">下面哪一个等于 <i>f</i>′(<i>x</i><sub>0</sub>) = <span class="lim">lim<small><i>x</i>→<i>x</i><sub>0</sub></small></span> <span class="frac"><span><i>f</i>(<i>x</i>) − <i>f</i>(<i>x</i><sub>0</sub>)</span><span><i>x</i> − <i>x</i><sub>0</sub></span></span>？</span></p>
+  <ol class="opts" type="A"><li><button type="button" class="opt" data-ok="1"><span class="letter">A</span><span class="body"><span class="lim">lim<small>Δ<i>x</i>→0</small></span> <span class="frac"><span><i>f</i>(<i>x</i><sub>0</sub> + Δ<i>x</i>) − <i>f</i>(<i>x</i><sub>0</sub>)</span><span>Δ<i>x</i></span></span></span></button></li><li><button type="button" class="opt" data-ok="0"><span class="letter">B</span><span class="body"><span class="lim">lim<small>Δ<i>x</i>→0</small></span> <span class="frac"><span><i>f</i>(<i>x</i><sub>0</sub> + Δ<i>x</i>) − <i>f</i>(<i>x</i><sub>0</sub>)</span><span><i>x</i><sub>0</sub></span></span></span></button></li><li><button type="button" class="opt" data-ok="0"><span class="letter">C</span><span class="body"><span class="frac"><span><i>f</i>(<i>x</i><sub>0</sub> + Δ<i>x</i>) − <i>f</i>(<i>x</i><sub>0</sub>)</span><span>Δ<i>x</i></span></span> &nbsp;<span lang='en'>for one small fixed Δ<i>x</i></span><span lang='zh'>（取一个固定的小 Δ<i>x</i>）</span></span></button></li></ol>
+  <button type="button" class="reveal"><span lang="en">Show answer</span><span lang="zh">显示答案</span></button>
+  <div class="answer" aria-live="polite" hidden>
+    <p><strong>A</strong> <span lang="en">Put <i>x</i> = <i>x</i><sub>0</sub> + Δ<i>x</i>: then <i>x</i> − <i>x</i><sub>0</sub> = Δ<i>x</i>, and <i>x</i> → <i>x</i><sub>0</sub> exactly when Δ<i>x</i> → 0. B divides by the wrong quantity; C is one difference quotient, not its limit.</span><span lang="zh">令 <i>x</i> = <i>x</i><sub>0</sub> + Δ<i>x</i>，那么 <i>x</i> − <i>x</i><sub>0</sub> = Δ<i>x</i>，并且 <i>x</i> → <i>x</i><sub>0</sub> 恰好对应 Δ<i>x</i> → 0。B 除错了量；C 只是一个差商，没有取极限。</span></p>
+  </div>
+</li>
+<li class="item" id="q2">
+  <p class="q"><span lang="en">From the definition, <i>f</i>(<i>x</i>) = 3<i>x</i>² − <i>x</i> has <i>f</i>′(2) =</span><span lang="zh">用定义计算：<i>f</i>(<i>x</i>) = 3<i>x</i>² − <i>x</i>，<i>f</i>′(2) =</span></p>
+  <ol class="opts" type="A"><li><button type="button" class="opt" data-ok="0"><span class="letter">A</span><span class="body">10</span></button></li><li><button type="button" class="opt" data-ok="1"><span class="letter">B</span><span class="body">11</span></button></li><li><button type="button" class="opt" data-ok="0"><span class="letter">C</span><span class="body">12</span></button></li></ol>
+  <button type="button" class="reveal"><span lang="en">Show answer</span><span lang="zh">显示答案</span></button>
+  <div class="answer" aria-live="polite" hidden>
+    <p><strong>B</strong> <span lang="en"><span class="frac"><span><i>f</i>(2 + Δ<i>x</i>) − <i>f</i>(2)</span><span>Δ<i>x</i></span></span> = <span class="frac"><span>11Δ<i>x</i> + 3Δ<i>x</i>²</span><span>Δ<i>x</i></span></span> = 11 + 3Δ<i>x</i> → 11. (10 is <i>f</i>(2) itself, a value, not a rate.)</span><span lang="zh"><span class="frac"><span><i>f</i>(2 + Δ<i>x</i>) − <i>f</i>(2)</span><span>Δ<i>x</i></span></span> = <span class="frac"><span>11Δ<i>x</i> + 3Δ<i>x</i>²</span><span>Δ<i>x</i></span></span> = 11 + 3Δ<i>x</i> → 11。（10 是函数值 <i>f</i>(2)，不是变化率。）</span></p>
+  </div>
+</li>
+<li class="item" id="q3">
+  <p class="q"><span lang="en">The tangent line to <i>y</i> = <i>x</i>² at (−1, 1) is</span><span lang="zh">曲线 <i>y</i> = <i>x</i>² 在点 (−1, 1) 处的切线是</span></p>
+  <ol class="opts" type="A"><li><button type="button" class="opt" data-ok="0"><span class="letter">A</span><span class="body"><i>y</i> = 2<i>x</i> + 3</span></button></li><li><button type="button" class="opt" data-ok="0"><span class="letter">B</span><span class="body"><i>y</i> = −2<i>x</i> + 1</span></button></li><li><button type="button" class="opt" data-ok="1"><span class="letter">C</span><span class="body"><i>y</i> = −2<i>x</i> − 1</span></button></li></ol>
+  <button type="button" class="reveal"><span lang="en">Show answer</span><span lang="zh">显示答案</span></button>
+  <div class="answer" aria-live="polite" hidden>
+    <p><strong>C</strong> <span lang="en"><span class="frac"><span>(−1 + Δ<i>x</i>)² − 1</span><span>Δ<i>x</i></span></span> = −2 + Δ<i>x</i> → −2, so <i>y</i> − 1 = −2(<i>x</i> + 1). A has the wrong sign of slope; B has the right slope but misses (−1, 1).</span><span lang="zh"><span class="frac"><span>(−1 + Δ<i>x</i>)² − 1</span><span>Δ<i>x</i></span></span> = −2 + Δ<i>x</i> → −2，所以 <i>y</i> − 1 = −2(<i>x</i> + 1)。A 斜率符号错；B 斜率对，却不过点 (−1, 1)。</span></p>
+  </div>
+</li>
+<li class="item" id="q4">
+  <p class="q"><span lang="en">A ball falls <i>s</i>(<i>t</i>) = 5<i>t</i>² metres. Its instantaneous velocity at <i>t</i> = 2 s is</span><span lang="zh">小球下落的规律是 <i>s</i>(<i>t</i>) = 5<i>t</i>²（米）。<i>t</i> = 2 秒时的瞬时速度是</span></p>
+  <ol class="opts" type="A"><li><button type="button" class="opt" data-ok="0"><span class="letter">A</span><span class="body">10 m/s</span></button></li><li><button type="button" class="opt" data-ok="1"><span class="letter">B</span><span class="body">20 m/s</span></button></li><li><button type="button" class="opt" data-ok="0"><span class="letter">C</span><span class="body">40 m/s</span></button></li></ol>
+  <button type="button" class="reveal"><span lang="en">Show answer</span><span lang="zh">显示答案</span></button>
+  <div class="answer" aria-live="polite" hidden>
+    <p><strong>B</strong> <span lang="en"><span class="frac"><span>5(2 + Δ<i>t</i>)² − 20</span><span>Δ<i>t</i></span></span> = 20 + 5Δ<i>t</i> → 20. The 10 m/s option is the average over the first two seconds.</span><span lang="zh"><span class="frac"><span>5(2 + Δ<i>t</i>)² − 20</span><span>Δ<i>t</i></span></span> = 20 + 5Δ<i>t</i> → 20。10 m/s 是前两秒的平均速度。</span></p>
+  </div>
+</li>
+<li class="item" id="q5">
+  <p class="q"><span lang="en">Where is <i>f</i>(<i>x</i>) = <i>x</i>²·<i>D</i>(<i>x</i>) differentiable (<i>D</i> the Dirichlet function)?</span><span lang="zh"><i>f</i>(<i>x</i>) = <i>x</i>²·<i>D</i>(<i>x</i>)（<i>D</i> 为狄利克雷函数）在哪些点可导？</span></p>
+  <ol class="opts" type="A"><li><button type="button" class="opt" data-ok="1"><span class="letter">A</span><span class="body"><span lang='en'>only at <i>x</i> = 0</span><span lang='zh'>只在 <i>x</i> = 0</span></span></button></li><li><button type="button" class="opt" data-ok="0"><span class="letter">B</span><span class="body"><span lang='en'>at every rational <i>x</i></span><span lang='zh'>在每个有理点</span></span></button></li><li><button type="button" class="opt" data-ok="0"><span class="letter">C</span><span class="body"><span lang='en'>nowhere</span><span lang='zh'>处处不可导</span></span></button></li></ol>
+  <button type="button" class="reveal"><span lang="en">Show answer</span><span lang="zh">显示答案</span></button>
+  <div class="answer" aria-live="polite" hidden>
+    <p><strong>A</strong> <span lang="en">At 0 the quotient is <i>x</i>·<i>D</i>(<i>x</i>), squeezed by ±|<i>x</i>| → 0, so <i>f</i>′(0) = 0. At any <i>x</i><sub>0</sub> ≠ 0 the top stays about <i>x</i><sub>0</sub>² on a dense set of points while the bottom → 0: the quotient is unbounded.</span><span lang="zh">在 0 处差商为 <i>x</i>·<i>D</i>(<i>x</i>)，被 ±|<i>x</i>| 夹住趋于 0，所以 <i>f</i>′(0) = 0。在任何 <i>x</i><sub>0</sub> ≠ 0 处，分子在稠密的点上保持约 <i>x</i><sub>0</sub>² 的大小，分母却趋于 0，差商无界。</span></p>
+  </div>
+</li>
+<li class="item" id="q6">
+  <p class="q"><span lang="en">For <i>f</i>(<i>x</i>) = |<i>x</i>|, <span class="lim">lim<small><i>h</i>→0</small></span> <span class="frac"><span><i>f</i>(<i>h</i>) − <i>f</i>(−<i>h</i>)</span><span>2<i>h</i></span></span> = 0. Therefore</span><span lang="zh">对 <i>f</i>(<i>x</i>) = |<i>x</i>|，有 <span class="lim">lim<small><i>h</i>→0</small></span> <span class="frac"><span><i>f</i>(<i>h</i>) − <i>f</i>(−<i>h</i>)</span><span>2<i>h</i></span></span> = 0。由此可知</span></p>
+  <ol class="opts" type="A"><li><button type="button" class="opt" data-ok="0"><span class="letter">A</span><span class="body"><i>f</i>′(0) = 0</span></button></li><li><button type="button" class="opt" data-ok="0"><span class="letter">B</span><span class="body"><i>f</i>′(0) = 1</span></button></li><li><button type="button" class="opt" data-ok="1"><span class="letter">C</span><span class="body"><span lang='en'>nothing about <i>f</i>′(0); in fact it does not exist</span><span lang='zh'>推不出 <i>f</i>′(0)；事实上它不存在</span></span></button></li></ol>
+  <button type="button" class="reveal"><span lang="en">Show answer</span><span lang="zh">显示答案</span></button>
+  <div class="answer" aria-live="polite" hidden>
+    <p><strong>C</strong> <span lang="en">The symmetric quotient never looks at <i>f</i>(0). The true quotient |<i>x</i>|/<i>x</i> is 1 on the right and −1 on the left, so it has no limit.</span><span lang="zh">对称差商根本不看 <i>f</i>(0)。真正的差商 |<i>x</i>|/<i>x</i> 右侧是 1、左侧是 −1，没有极限。</span></p>
+  </div>
+</li>
+</ol>
+<footer><span lang="en">Derivations for every answer are in the episode notes.</span><span lang="zh">每道题的推导见本集 notes。</span></footer>
+</main>
+<script>
+(function () {
+  var body = document.body;
+  function setLang(l) {
+    l = l === "zh" ? "zh" : "en";
+    body.classList.remove("lang-en", "lang-zh"); body.classList.add("lang-" + l);
+    document.documentElement.lang = l === "zh" ? "zh-Hans" : "en";
+    document.querySelectorAll(".langs button").forEach(function (b) {
+      b.setAttribute("aria-pressed", String(b.dataset.lang === l)); });
+  }
+  var p = new URLSearchParams(location.search).get("lang");
+  setLang(p || ((navigator.language || "").toLowerCase().indexOf("zh") === 0 ? "zh" : "en"));
+  document.querySelectorAll(".langs button").forEach(function (b) {
+    b.addEventListener("click", function () { setLang(b.dataset.lang); }); });
+  function show(item) { item.querySelector(".answer").hidden = false; }
+  document.querySelectorAll(".item").forEach(function (item) {
+    item.querySelectorAll(".opt").forEach(function (o) {
+      o.addEventListener("click", function () {
+        item.querySelectorAll(".opt").forEach(function (x) { x.classList.remove("right", "wrong"); });
+        o.classList.add(o.dataset.ok === "1" ? "right" : "wrong");
+        if (o.dataset.ok !== "1") item.querySelector('.opt[data-ok="1"]').classList.add("right");
+        show(item);
+      });
+    });
+    item.querySelector(".reveal").addEventListener("click", function () {
+      item.querySelector('.opt[data-ok="1"]').classList.add("right"); show(item); });
+  });
+})();
+</script>
+</body>
+</html>

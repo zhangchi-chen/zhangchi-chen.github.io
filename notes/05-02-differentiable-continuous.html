@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>可导与连续：连上了，但未必光滑</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#fbfaf6;color:#1d2230;font-family:"PingFang SC","Noto Sans CJK SC",system-ui,sans-serif;line-height:1.75}
+main{max-width:760px;margin:0 auto;padding:30px 18px 64px}
+header{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;margin-bottom:8px}
+h1{font-size:1.5rem;margin:0}
+header a{color:#1f72b0;text-decoration:none;font-size:14px}
+.sub{color:#5d6475;font-size:14px;margin:0 0 18px}
+h2{font-size:15px;color:#5d6475;margin:28px 0 8px;border-bottom:1px solid #e3e0d6;padding-bottom:6px}
+ol{padding-left:24px;margin:6px 0}
+li{margin:5px 0}
+.f{font-family:"DejaVu Sans","Times New Roman",serif}
+</style></head>
+<body><main>
+<header><h1>05-02-differentiable-continuous · 可导与连续：连上了，但未必光滑</h1><a href="../quiz/05-02-differentiable-continuous.html">自测 →</a><a href="../quiz/index.html">目录</a></header>
+<p class="sub">视频配套讲稿（逐条字幕） · MATH SELF-CHECK: 27 claims re-derived, 2 fixed.</p>
+<h2>动机</h2><ol><li>可导与连续：连上了，未必光滑</li><li>习题第3题：这个函数在0处可导吗？</li><li>两段在原点接上，没有断开</li><li>同学写道：在0处连续，所以可导。</li><li>细看：左段斜着上来，右段平着出去</li><li>接上了，没错。接得光滑吗？这才是问题</li><li>这两个词之间，有两个方向的箭头</li><li>上一集留下的问题：可导必连续吗？</li><li>那位同学用的是反方向：连续推可导</li><li>剧透：第一支箭头成立，证明只要一行</li><li>反方向的箭头断了，而且断法有三种</li><li>单侧导数会帮我们给每种失败命名</li></ol><h2>定理说了什么</h2><ol><li>先看课本里的有限增量公式</li><li>把它读成一张小票：Δy分项列出</li><li>第一项f′(x₀)Δx：切线给的部分</li><li>第二项o(Δx)：比Δx还小的零头</li><li>Δx=0时小票照样平账：0=0+0</li><li>它只是定义换了个写法：再乘上Δx</li><li>定理5.1：在x₀可导，就在x₀连续</li><li>在x₀连续，就是Δx→0时Δy→0</li><li>可导要求更多：Δy/Δx要有极限</li><li>所以可导更强：它包含在连续之中</li><li>课本注：可导只是连续的充分条件</li><li>反例是|x|：在0处连续，却有尖角</li><li>定义2把极限拆成右、左两个版本</li><li>右导数f′₊(x₀)：Δx只取正值</li><li>左导数f′₋(x₀)：Δx只取负值</li><li>定理5.2把这两半重新拼起来</li><li>导数存在，当且仅当两侧都存在且相等</li></ol><h2>方法与证明核心</h2><ol><li>一行证明：拿出小票，让Δx→0</li><li>两项都趋于0，零头还更快</li><li>所以Δy→0，这正是在x₀连续</li><li>附赠：Δy被夹在一个楔形里消失</li><li>连续只保证Δy→0，不管消失的速度</li><li>Δy可能消失得太慢，如√Δx</li><li>或太剧烈：在±Δx之间来回猛摆</li><li>或者两侧斜率不同，比如|Δx|</li><li>连续却不可导，有三种方式</li><li>失败一：角点，f(x)=|x|在0处</li><li>像走廊急转弯：来去方向不一样</li><li>右边割线斜率恒为1：f′₊(0)=1</li><li>从左边看：f′₋(0)=−1</li><li>两侧都有，但1≠−1：导数不存在</li><li>失败二：垂直切线，√x在0处</li><li>它在0处连续：h→0⁺时√h→0</li><li>但差商1/√h→+∞：割线竖了起来</li><li>像陡得没法走的梯子：有切线，没有斜率</li><li>注意0是端点，只有右侧差商</li><li>失败三：振荡，x·sin(1/x)</li><li>在0处连续：夹在±|x|之间</li><li>它的差商恰好是sin(1/h)</li><li>像脱水的洗衣机，抖个不停</li><li>反复取到1和−1：极限不存在</li><li>三种画像：不等、爆掉、乱摆</li><li>三个都连续：光有连续不够</li><li>回到第3题：定理5.2的主场</li><li>第一步查连续：两段都趋于f(0)=0</li><li>为何先查？不连续就一定不可导</li><li>第二步，右侧：f′₊(0)=0</li><li>第三步，左侧：f′₋(0)=1</li><li>第四步比较：0≠1，连续但不可导</li><li>那位同学丢分了：0处藏着角点</li><li>套路：连续、右差商、左差商、比较</li><li>注意：右导数≠导数的右极限</li></ol><h2>应用与展望</h2><ol><li>用法一，倒着读：不连续就不可导</li><li>上一集x²D(x)那一步，靠的是它</li><li>上一集的欠账还清了：只单向成立</li><li>用法二：流量套餐的月账单</li><li>封顶处连续：C′₋=0，C′₊=5</li><li>左导数0、右导数5：两种边际价</li><li>06-02：导数极限定理是分段捷径</li><li>但第一步“连续”仍然省不掉</li><li>多乘一个x：f′(0)=0，可导了</li><li>导函数却在0处断开，详见05-06</li><li>第六章达布定理：导函数不会跳跃间断</li><li>展望：到了二元函数，这一集会一分为二</li><li>沿两条轴的偏导数都存在，曲面却撕裂</li><li>所以多元课程要从头重建可微性</li><li>连续是接上了，可导是接得光滑</li></ol>
+</main></body></html>

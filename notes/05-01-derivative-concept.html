@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>导数：此刻的速度，此点的斜率</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#fbfaf6;color:#1d2230;font-family:"PingFang SC","Noto Sans CJK SC",system-ui,sans-serif;line-height:1.75}
+main{max-width:760px;margin:0 auto;padding:30px 18px 64px}
+header{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;margin-bottom:8px}
+h1{font-size:1.5rem;margin:0}
+header a{color:#1f72b0;text-decoration:none;font-size:14px}
+.sub{color:#5d6475;font-size:14px;margin:0 0 18px}
+h2{font-size:15px;color:#5d6475;margin:28px 0 8px;border-bottom:1px solid #e3e0d6;padding-bottom:6px}
+ol{padding-left:24px;margin:6px 0}
+li{margin:5px 0}
+.f{font-family:"DejaVu Sans","Times New Roman",serif}
+</style></head>
+<body><main>
+<header><h1>05-01-derivative-concept · 导数：此刻的速度，此点的斜率</h1><a href="../quiz/05-01-derivative-concept.html">自测 →</a><a href="../quiz/index.html">目录</a></header>
+<p class="sub">视频配套讲稿（逐条字幕） · MATH SELF-CHECK: 55 claims re-derived, 4 fixed.</p>
+<h2>动机</h2><ol><li>导数：此刻的速度，此点的斜率</li><li>外卖在路上，App显示实时速度</li><li>全程平均很好算：路程÷时间</li><li>此刻显示21.6，按哪段时间？</li><li>在一瞬间：路程是0，时间也是0</li><li>0÷0：什么也没告诉我们</li><li>改为缩小时间窗：1分钟、10秒、1秒</li><li>平均值稳定在21.6：就是此刻速度</li><li>“此刻速度”其实是平均速度的极限</li><li>第二个问题：切线到底是什么？</li><li>中学说法：与曲线只有一个公共点</li><li>竖线x=1只碰一次，却不是切线</li><li>而y=x³在原点穿过它的切线</li><li>数交点的办法两头失灵，要换思路</li><li>思路：取附近一点Q，连割线PQ</li><li>让Q滑向P：割线转到一个位置</li><li>极限位置就是切线。又是极限</li></ol><h2>定理说了什么</h2><ol><li>教材把速度这件事说精确了</li><li>路程—时间图上：平均速度=割线斜率</li><li>让t从两侧逼近t₀：平均速度收拢</li><li>若极限存在，就是t₀时刻的瞬时速度</li><li>切线的定义，也是同一个套路</li><li>P固定不动，Q沿曲线跑向P</li><li>割线PQ转动，极限位置PT是切线</li><li>切线斜率=割线斜率的极限</li><li>把两个公式并排放好</li><li>把t换成x，s换成f：完全一样</li><li>两扇门，一间屋：增量比，再取极限</li><li>剥掉两个情境，剩下的就是定义</li><li>第一句：f在x₀的某邻域内有定义</li><li>x可从两侧任意靠近x₀</li><li>第二句：增量比的极限要存在</li><li>称f在x₀可导，记作f′(x₀)</li><li>换成增量：Δx=x−x₀，Δy跟着变</li><li>导数就是Δy/Δx的极限</li><li>Δy/Δx叫平均变化率（差商）</li><li>导数是f在x₀处的变化率</li><li>记住一句：增量比，再取极限</li></ol><h2>方法与证明核心</h2><ol><li>亲手算一个：f(x)=x²在x₀=1</li><li>迈出一步Δx，落到曲线上的Q</li><li>差商：[(1+Δx)²−1]/Δx</li><li>展开，约去Δx（它≠0）：得2+Δx</li><li>Q滑近P，割线斜率2+Δx逼近2</li><li>f′(1)=2：算出来的，不是猜的</li><li>过(1,1)、斜率2：y=2x−1</li><li>检验：抛物线始终在切线上方</li><li>把差商本身看成x的函数</li><li>它等于x+1，但在x=1处有个洞</li><li>x=1处是0/0：这一点本身不参与</li><li>极限只看附近，洞的高度正是2</li><li>这正是03-04讲的函数极限</li><li>诱人的捷径：同时看x₀+h和x₀−h</li><li>左右对称取点的差商，分母是2h</li><li>可导时，它的极限确实是f′(x₀)</li><li>陷阱在反方向：它存在，导数未必存在</li><li>教材例2：f(x)=|x|在x₀=0</li><li>|x|/x：右侧是1，左侧是−1</li><li>两值不同，导数f′(0)并不存在</li><li>对称取点：分子|h|−|−h|恒为0</li><li>于是它的极限是0，看似平静</li><li>可例2说导数不存在：捷径骗了人</li><li>对称割线跨过拐角，从不看它一眼</li><li>像只平均第1、3次小测，漏了第2次</li><li>导数锚定这一点，两侧分别检查</li><li>结论：对称差商存在⇏可导</li><li>可导是一点一点来判断的性质</li><li>怪例子：f(x)=x²·D(x)</li><li>有理点上是x²，无理点上是0</li><li>0处差商x·D(x)，被±|x|夹住</li><li>楔形收拢，极限为0：f′(0)=0</li><li>其他点附近，f在x₀²与0间乱跳</li><li>分子不趋于0，分母趋于0：差商无界</li><li>所以f′只在x=0这一点存在</li><li>导函数f′的定义域：极限存在的点</li><li>最简单的：常数函数f≡C</li><li>分子C−C=0，处处f′(x)=0</li><li>这是日后那张导数表的第一行</li><li>记号：f′(x₀)、y′、dy/dx</li><li>dy/dx暂当整体，05-08再拆开</li></ol><h2>应用与展望</h2><ol><li>同一个增量比，换身衣服</li><li>细杆前x厘米重x²克：1厘米处密度2</li><li>讲义印刷成本的导数=边际成本</li><li>印到500份时，每多一份约2元</li><li>电流、反应速率：都是这一句</li><li>后续课程：变量会换成向量、矩阵</li><li>但那句话不变：增量比，再取极限</li><li>留给05-02的两个问题</li><li>在一点可导，那里一定连续吗？</li><li>像|x|的拐角，只看一侧又会怎样？</li><li>此刻的速度，此点的斜率：同一个极限</li></ol>
+</main></body></html>
