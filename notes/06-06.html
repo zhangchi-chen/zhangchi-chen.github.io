@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>06-06 五种伪装：先化成 0/0 或 ∞/∞</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+</style></head><body><div class="topbar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span>06-06</span><a class="mv-quiz" href="../quiz/06-06.html">去自测 →</a></div><main><header><div class="tag">视频配套讲稿（朗读原文） · MATH SELF-CHECK: 48 claims re-derived, 3 fixed.</div><h1>06-06 五种伪装</h1><p class="sub">先化成 0/0 或 ∞/∞</p></header><h2>1 · 动机</h2><p>五个伪装的极限，而这条法则只认两个形状。 上一集的法则只认分式，这三道题一道也不是。 先看第一题：它是一个乘积，根本没有分数线可用。</p><p>再看那个著名的幂。第一个答案说：底数趋向一。 一的任何次方仍是一，所以答案是一。 第二个答案：第三章那个著名的极限说，它等于e。 图像给出了答案：它一路升向e，离一很远。 同样的形状，可以得一，可以得e，也可以发散。 这就是不定式的意思：光看形状，决定不了结果。</p><p>除了上一集的两个商，另有五个伪装。 把洛必达法则想成一个充电器，只配两个插座。 每个伪装是一个外国插头，各需要一个转换头。 今天给每个伪装配一个转换头，再各做一道例题。 然后是真本事：动笔之前，先挑最省力的工具。</p><h2>2 · 定理与定义</h2><div class="card gold stmt">引擎还是上集那台，没有变<br>我们只需交给它一个真正的分式<br>它的条件清单，每一轮仍要核对<br>课本给每种不定式配了一步改写<br>0·∞型：把一个因子倒过来放到分母<br>g取倒数得0/0，f取倒数得∞/∞<br>∞−∞型：通分，合成一个分式<br>有根式冲突时，就有理化<br>幂指函数改写成e^(g·ln f)<br>三种情形，指数都是0·∞型<br>三种幂指型不定式，合并成0·∞<br>外层的eᵘ连续，极限可直接穿过它<br>前提：底数须为正，ln f才有意义<br>整张地图：五行，第一步，落点<br>每一行最后都化为0/0或∞/∞型<br>五种不定式，都归两种基本型</div><p>引擎本身和上一集一样，没有变化。 我们要做的，只是交给它一个真正的分式。 它的条件清单，每一轮依然要逐项核对。</p><p>课本给每种不定式，只配了一步改写。 零乘无穷：把一个因子取倒数，放到分母上。 一个取倒数得零比零，另一个取倒数得无穷比无穷。 无穷减无穷：先通分，合成一个分式。 如果是根号在作怪，就做有理化。 幂指函数：借助e和对数，把幂改写一下。 三个情形逐一看，指数全是零乘无穷。 于是三种幂指型不定式，归成了一个已知的情形。 外面的指数函数是连续的，极限可以直接穿过去。 前提是底数为正，否则对数没有意义。</p><p>整张地图：五种不定式，各有第一步和落点。 每一种最后都化成零比零或无穷比无穷型。 五种不定式，两种基本型，此外不用再记什么。</p><h2>3 · 方法与证明</h2><p>第一个转换头上场，处理作业里的那个乘积。 一个因子缩向零，另一个无限下坠，谁会赢？ 把x取倒数放进分母，变成无穷比无穷。 核对清单：分母趋于正无穷，导数也处处不为零。 求导一轮，比式化简成了一项。 这一项趋于零，所以乘积也趋于零。 图像印证了这一点：缩小的因子跑赢了爆炸的那个。 不过要小心：把哪个因子取倒数，非常关键。 改取对数的倒数，一轮后反而更麻烦。 经验法则：让对数留在分子上，求一次导就驯服了。</p><p>第二个转换头，处理作业里的那个减法。 两项一起往上冲，问题只在于两者之间的距离。 通分以后，两项合成一个零比零的分式。 转换头完成了任务，接下来交给引擎。 只用洛必达，要求导两轮才得到零。 答案没错，可每一轮要再核对一次，分母也越写越多。 更省力：分母是乘积，直接等价替换。 而分子作为一个整体，有一个已知的三次等价式。 要换就换整个分子，不能只换减法里的一项。 于是整个分式等价于x的一个小倍数，极限是零。 从图上看，两项之间的距离贴着一条平缓的直线缩小。 这一题等价替换胜出：一步对上两轮求导。</p><p>第三个转换头登场，回到开头那道谜题。 借助e改写，变化全部搬进指数。 指数是零乘无穷，取一次倒数就成了零比零。 引擎对正无穷方向同样适用，可以放心求导。 求导一轮，指数稳稳地趋于一。 所以极限是e，开头的谜题解开了。 老实说，对数的导数，本身就是靠这个极限推出来的。 所以这只是对著名极限的一次验算，并不是新的证明。</p><p>接下来是零的零次方型：它的指数正是例一。 指数趋于零，所以这个幂趋于一。 图像先往下沉一点，到了左端又回升到一。 最后是无穷的零次方型，指数是无穷比无穷。 求导一轮，指数趋于零，所以这个幂也趋于一。 它最高略超一点四，然后很慢地回落，趋向一。 三个幂的伪装，一台机器，不用任何新招。</p><p>动笔之前，先问问哪件工具最便宜。 铅笔是第三章的等价替换，乘除运算里最便宜。 马克笔是洛必达：可靠但慢，每一轮要再核对一遍。 打印机是泰勒公式，下一集登场，专对付和式。 铅笔就会在这里失灵。 和式里两项各换成x，得零，错了。 真正的值是二分之一，洛必达要求导三轮才得到。 两项看起来全像x，区别藏在更深一层。 这是第三章留下的欠账，下一集由泰勒公式来补上。 泰勒公式是彻底的等价替换。 先用铅笔，必要时换马克笔，遇到会抵消的和式再租打印机。</p><p>用任何转换头之前，先确认它真的是不定式。 这一个是真的：底数趋向一，指数趋于正无穷。 指数与x等价，趋于零，所以极限是一。 再看一个冒牌货：它的底数一直是二。 这根本不是伪装：二的极高次方，直接发散到正无穷。 要是盲目求导，机器会说答案是一。 答案错了，发散被一个整齐的数掩盖了。 只有地图上那五个才是伪装，插之前先检查。</p><h2>4 · 展望与衔接</h2><p>应用一：数据科学的信息熵，正由这类乘积组成。 可能性为零的项记作零，理由正是第一个例子。 应用二：存款利息一年之内结算得越来越频繁。 同一个伪装，机器给出一个干净的指数。 年息百分之五，复利最多约百分之五点一三。</p><p>以后讲到随机与统计，这个幂的伪装随处可见。 只要底数靠近一，指数又在变大，就请出这台机器。 五个伪装，各配一个转换头，只有两个真插座。 先检查形式，再改写，最后才求导。</p></main></body></html>

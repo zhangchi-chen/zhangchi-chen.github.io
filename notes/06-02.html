@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>06-02 拉格朗日中值定理：总有一刻，你跑出平均速度</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+</style></head><body><div class="topbar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span>06-02</span><a class="mv-quiz" href="../quiz/06-02.html">去自测 →</a></div><main><header><div class="tag">视频配套讲稿（朗读原文） · MATH SELF-CHECK: 43 claims re-derived, 3 fixed.</div><h1>06-02 拉格朗日中值定理</h1><p class="sub">总有一刻，你跑出平均速度</p></header><h2>1 · 动机</h2><p>今天要讲：拉格朗日定理。 总有那么一刻，你恰好跑出平均速度。 八百米测试，跑完两圈，表停在三分二十秒。 两百秒跑八百米，平均每秒四米。 可你并不是匀速：起跑很快，后半程累了。 那么，有没有哪一刻，你恰好每秒四米？ 表上只记了每圈用时，那一刻从没出现。 直觉说有：你先是快过四，后来慢过四。 只要速度不跳变，它一定会在某处经过四。 今天的定理说：有，而且条件要得更少。</p><p>把距离对时间画出来，跑步就是一条向上的线。 平均速度，就是首尾这根弦的坡度。 某一瞬间的速度，就是切线的坡度。 问题变成：有没有一条切线，和弦方向一致？</p><h2>2 · 定理与定义</h2><div class="card gold stmt">先用话说：某一刻速度等于平均速度<br>再把这句话翻译成公式<br>左边：某个未知时刻ξ的速度<br>右边：总路程除以总时间<br>若(i)f在闭区间[a,b]上连续<br>(ii)f在开区间(a,b)内可导<br>那么(a,b)内至少有一点ξ满足上式<br>条件(i)：图像不能跳，端点也算<br>缺了(i)：终点一跳，结论落空<br>(ii)：每刻有速度，速度不必连续<br>缺(ii)：折返掉头，斜率只有±1<br>结论：至少一点，可能不止一个<br>ξ严格在内部，不在起点终点<br>几何读法：某条切线平行于弦<br>运动读法：某刻瞬时速度等于平均<br>罗尔定理是特例：两端等高，弦是平的<br>上一集欠下的：两端不等高怎么办？</div><p>先用一句话说：某一刻的速度，等于平均速度。 再把这句话，翻译成一个公式。 左边，是某个未知时刻克西的速度。 右边，是总路程除以总时间。</p><p>定理六点二。条件一：在闭区间上连续。 条件二：在开区间内可导。 那么区间内部至少有一点克西，让公式成立。</p><p>条件一：图像不能跳，两个端点也算在内。 去掉它，终点突然一跳，就找不到那条切线了。 条件二：每一刻有速度就够，速度不必连续变化。 去掉它：折返跑瞬间掉头，就对不上了。 结论只保证至少一点，也可能有好几个。 克西严格在内部，不在两个端点。</p><p>几何上看：总有一条切线，和弦方向一致。 运动上看：某一刻的瞬时速度，正好是平均速度。 罗尔定理是特例：两端一样高，弦就是平的。 上一集欠下一个问题：两端不一样高，怎么办？</p><h2>3 · 方法与证明</h2><p>写实验报告时，先减掉趋势线，才看得清波动。 这里照做：用图像减去弦。 这段距离，就是辅助函数大F。 检查两端：两头全是零。 减掉一条直线，连续和可导原样保留。 于是罗尔定理登场：内部某处，切线是水平的。 这里是平的，说明原函数的切线和弦一样倾斜。 移过去，正好就是定理的结论。 再变回原图：水平的切线，变成和弦同向的切线。 这笔账结清了：一次减法，罗尔变成拉格朗日。 这已经是第二次，把问题交给罗尔了。</p><p>第一种等价写法：两边同乘以区间的跨度。 第二种：用零到一之间的比例，表示克西的位置。 第三种：从起点向前走一步来写。 哪一端在前，公式照样成立。 西塔只说明，那一刻在全程的几成位置。 它保证克西在内部，却不告诉你具体位置。 随便换个函数，要求出克西，就要解一个难缠的方程。 好消息：这个方程，你永远不用去解。</p><p>三条推论，把定理变成趁手的工具。 推论一：在一个区间上，导数处处为零， 那么函数就是常量。 原因：任取两点，定理说两点函数值一样。 区间这个词，千万不能丢。 这个函数，导数处处为零，却取了两个值。 它的定义域在零处断开：两段，两个常数。 用一下：反正弦加反余弦，导数处处为零。 所以它是常数，代入零，得到二分之派。</p><p>推论二：两个函数，在区间上导数处处相等， 那么它们只相隔一个常数。 原因：两者相减，导数为零，推论一收尾。 例子：正弦平方，和负的余弦平方，导数相同。 推论二说：两者只隔一个常数，正好是一。 这个加常数，到第八章会再来敲门。</p><p>推论三：在一点附近连续，在它周围可导， 而且导数有极限，那么这一点的导数存在，并且等于它。 这就是导数极限定理。 原因：割线的坡度，等于夹在里面某条切线的坡度。 所以割线的极限，就是导数的极限。</p><h2>4 · 展望与衔接</h2><p>讲求导表那一集，欠下了分段函数接头这笔账。 看这个分段函数，接头在零。 第一步：在零处连续，两边全走到零。 第二步：左边的导数，趋于一。 右边的导数，也趋于一。 定理直接告诉我们，零处的导数就是一。 但要小心：反过来不成立。 老朋友来了：越靠近零，抖得越快的那个函数。 零处的导数存在，附近的导数却一直在振荡。 所以这个定理是充分条件，不是必要条件。</p><p>条件反射：一看到两个函数值相减，就想到拉格朗日。 例子：反正切涨得不比自变量多。 相减的式子一出现，克西就滑了进来。 那个因子不超过一，结论就到手了。 克西在哪？不知道，也不需要知道。</p><p>留给下一集：导数不小于零，能推出什么？ 本章后面构造辅助函数，减去弦就是模板一。 柯西用两个函数，泰勒用多阶导数，组成一家： 内部某处，平均恰好等于瞬时。 表上没标出的某一刻，你正好每秒跑四米。</p></main></body></html>
