@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>08-03 第二换元积分法：根号里藏着三角函数</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+</style></head><body><div class="topbar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span>08-03</span><a class="mv-quiz" href="../quiz/08-03.html">去自测 →</a></div><main><header><div class="tag">视频配套讲稿（朗读原文） · MATH SELF-CHECK: 44 claims re-derived, 0 fixed.</div><h1>08-03 第二换元积分法</h1><p class="sub">根号里藏着三角函数</p></header><h2>1 · 动机</h2><p>这一集，三角函数躲在根号里面。 先看一个样子很温和的积分。 它的图像，正好是上半个圆。 先试试上一集的凑微分。 凑微分要一个多余的 x，这里偏偏没有。</p><p>反过来想：上一集先读被积表达式，再设新变量。 这次先决定 x 由谁扮演，最后再倒回来。 根号是一把锁，三角恒等式是钥匙。 三类根号，三把钥匙，就像桌上贴的快捷键表。</p><h2>2 · 定理与定义</h2><div class="card gold stmt">定理8.5：第二换元积分法<br>φ把区间J恰好映成区间I<br>而且能倒回去：x=φ(t)有反函数<br>原来的积分在I上必须存在<br>改在t上算，设求得G(t)<br>用反函数回代，答案回到x<br>便捷写法，也叫代入换元法<br>和08-02同一个等式，方向相反</div><p>这是教材里的原话，定理八点五。 第一句：新区间被恰好映成整个老区间。 而且这一步能倒回去，它有反函数。 原来的积分，必须本来就存在。 然后换到新变量上去算，得到一个答案。 用反函数送回来，原积分就到手了。 代进去，积出来，再代回去。 和上一集是同一个等式，只是倒着读。</p><h2>3 · 方法与证明</h2><p>第一条：平方减平方，交给正弦。 让正弦来扮演 x，根号一下子塌缩。 所以只取正弦一路上升的那一段。 每个高度只碰到一次，反函数就是反正弦。 顺带一提，这里余弦不为负，根号很干净。</p><p>代进去，根号就这样消失了。 倍角公式一用就积完，可惜说的是另一门语言。 要翻译回去，就在草稿边画个小三角形。 勾股定理补上第三条边，余弦直接读出。 代回去，答案终于回到了 x。 求导验一下，正好回到被积函数。</p><p>第二条：减法换了方向，交给正割。 先管右边：让正割来扮演 x。 这一段正切为正，根号干干净净。 正切一约，再用上一集的凑微分收尾。 新草图：正割定下两条边，正切直接读出。 代回去，多出来的常数并进新常数里。 左边换用另一段，正切变成负的。 一番折腾之后，最终公式完全相同。</p><p>第三条：平方加平方，交给正切。 试一个平方和，正切把每个实数恰好走过一次。 一化简，又是余弦平方的积分。 画三角形：正切定下直角边，勾股给出斜边。 正弦乘余弦，根号相乘就没了。 代回去，答案回到了 x。</p><p>现在，把整张地图放在一起。 平方减平方：正弦钥匙。 平方加平方：正切钥匙。 反过来相减：正割钥匙。 要是根本没有根号，就不用钥匙。 把它贴在桌前：看形状，十秒内拿钥匙。</p><p>根号未必是二次的：平方根撞上了立方根。 取两个次数的最小公倍数，也就是 6。 对正的 x，两个根号同时消失。 剩下一个有理函数，交给后面讲部分分式的那一集。</p><p>可定理为什么非要原积分存在？ 因为证明要借来它的原函数，再用上一集的定理。 原函数只隔常数，倒回去就是它。</p><p>教材说得很直白：这个条件不能省。 教材的反例：一个在零处跳了一下的函数。 用立方来代换：光滑、可逆、正好铺满区间。 在新变量这边，一切算得很顺。 代回去，零处导数是一，可函数值是零。 任何候选只能是这个样子，原函数根本不存在。 新变量那边很顺，原变量这边却是空的。</p><p>正弦跑满一圈，同一高度碰到两次。 余弦为负的地方，根号悄悄变了号。 所以每把钥匙，只配一路上升的那一段。</p><h2>4 · 展望与衔接</h2><p>应用一：正弦钥匙解释了表里的反正弦公式。 应用二：看到平方和，立刻用正切，几秒搞定。 应用三：以后求抛物线的弧长，它又会出现。</p><p>两个换元法是一枚硬币：一面凑，一面代。 到了定积分，积分的上下限会替你翻译回去。 三角钥匙只开这三把锁，有理函数要靠系统流程。 到那时，工具箱在原则上就齐了。</p></main></body></html>

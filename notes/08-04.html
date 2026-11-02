@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>08-04 分部积分法：小组作业的分工</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+</style></head><body><div class="topbar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span>08-04</span><a class="mv-quiz" href="../quiz/08-04.html">去自测 →</a></div><main><header><div class="tag">视频配套讲稿（朗读原文） · MATH SELF-CHECK: 46 claims re-derived, 1 fixed.</div><h1>08-04 分部积分法</h1><p class="sub">小组作业的分工</p></header><h2>1 · 动机</h2><p>分部积分法，也就是小组作业怎么分工 x乘余弦的积分，前两招全失灵 两类完全不同的因子，挤在一个积分里 乘积我们会求导，能不能反过来走一遍</p><p>想象一份只有两个人的小组作业 一个人负责求导，另一个负责积分 分得好，剩下的活就比原来轻 分错了，剩下的活反而更累</p><h2>2 · 定理与定义</h2><div class="card gold stmt">从05-03的乘积求导法则出发<br>矩形变大，多出两条窄带<br>两边积分：乘积等于两个积分之和<br>移项，公式就出来了<br>和、链式、乘积：倒放的最后一条<br>定理8.6，课本原话<br>简写：这就是分部积分公式<br>条件一：u与v都可导<br>条件二：∫u′v dx存在<br>于是左边也存在，公式成立<br>左边的原函数，用右边的拼出来<br>分部积分不包办，只是换个积分<br>右边：u被求导，dv被积分<br>关键在于：谁当u，谁当dv</div><p>从第五章的乘积求导法则出发 矩形变大时，边上多出两条窄带 两边同时积分，乘积等于两个积分之和 移过一个积分，公式就出来了 加法、链式、乘积，这是最后一条反着用的法则</p><p>这是定理八点六，课本原话 简写下来，这就是分部积分公式 第一，两个函数必须可导 第二，右边那个积分必须存在 于是左边也存在，公式成立 因为左边的原函数，是用右边的拼出来的 分部积分自己做不完，只是换一个积分 右边，一个因子求了导，另一个积了分 一切就看，谁负责求导，谁负责积分</p><h2>3 · 方法与证明</h2><p>原则是，求导那一方要越求越轻 对数、反正切和幂，求导后全变轻 积分那一方积完几乎不变，比如指数和正余弦 看一个反面教材，指数站错了位置 剩下的积分更难，幂次反而升高了 两人换回来，一步就做完</p><p>回到开头那道题，让x负责求导 剩下的只是正弦的积分 检验一下，它的导数处处等于被积函数 幂降了一次，余弦几乎没受影响</p><p>只有一个因子，那就让微分本身来搭档 难搞的成员只求导，变成分式 剩下的交给第一换元法搞定 求导一次就成代数式，所以当u</p><p>两个因子争着负责求导，对数胜出 立方一步积完，对数本身也要分部积分 对数从剩下的积分里彻底消失 答案出来了，只对正的x成立</p><p>课本提醒，有时一次分部不够用 第一轮，平方降成了一次 第二轮分工照旧，一次项降成常数 每一轮降一级，直到降无可降 把各项合起来，最后加一个常数 几次多项式，就要走几轮</p><p>提醒的后半句，原来的积分会再次出现 认识一对积分，指数乘余弦，指数乘正弦 对一个分部积分，就递来另一个 两次分部，就得到这一对的方程组 像解二元一次方程组那样解出来 像两个队友把同一份活来回递</p><p>陷阱一，第二轮两人互换，结果什么也没算出来 第二轮把第一轮原样撤回了 对策是，两轮里同一类因子始终负责求导 原积分带着负号回来，移项合并 陷阱二，常数解完再加，只加一次 答案是一族图像，彼此只是上下平移</p><p>现在来一整族积分，每个幂次一个 前两个成员，用换元法就能拿下 一般情形，拆出一个x交给积分那一方 原积分在右边又出现，移过去就得到递推公式 每用一次，指标降二，落到最开头的两个 这些系数连乘，第九章会再遇到</p><p>这里硬用分部，怎么分也走不通 它本来就该用第一换元法 先看第一换元，再看第二换元，最后分部 先问能不能凑微分，能就用第一换元 再问根号下有没有二次式，有就第二换元 最后，两类因子相乘，一个求导变轻，就分部</p><h2>4 · 展望与衔接</h2><p>物理里的衰减振动，正是那一对积分 代进公式，原函数马上到手 概率里，平均等待时间就靠它 积分表里对数和反三角那几条，全靠分部</p><p>第九章，同一个公式加上上下限 第十二章，把积分换成求和，就是分部求和 这对双胞胎，撑起阿贝尔和狄利克雷判别法 回想第六章，泰勒公式的积分型余项就是这样来的 两类活挤在一起，先把工分好</p></main></body></html>

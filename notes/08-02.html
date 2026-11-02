@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>08-02 凑微分：把第一换元积分法当配对游戏</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+</style></head><body><div class="topbar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span>08-02</span><a class="mv-quiz" href="../quiz/08-02.html">去自测 →</a></div><main><header><div class="tag">视频配套讲稿（朗读原文） · MATH SELF-CHECK: 36 claims re-derived, 1 fixed.</div><h1>08-02 凑微分</h1><p class="sub">把第一换元积分法当配对游戏</p></header><h2>1 · 动机</h2><p>今天，我们把第一换元积分法当成配对游戏来玩。 作业之夜，三个积分看上去几乎没有区别。 第一个不用想，表格里现成就有。 第二个大胆猜一个，求导一验，正好对上。 手气不错，第三个也照这样猜。 这次验算失败，多了一个因子。 那就除掉它？商的求导法则又带进来一项。 那么第二个凭什么成功？盯住这个因子。 它正是内层的导数，就在旁边。 今天的游戏：动笔前先认出这一对。</p><h2>2 · 定理与定义</h2><div class="card gold stmt">定理8.4（第一换元积分法）原文<br>f只需定义在区间I上<br>φ在J上可导，值全落在I内<br>φ(t)落到哪里，f就要在哪有定义<br>前提：f的原函数F已经知道<br>结论：复合F(φ(t))就是答案<br>证明：用链式法则对复合求导<br>正好得到f(φ(t))φ′(t)<br>定理只是链式法则从右往左读<br>教材的便捷写法：一串等式<br>关键：φ′(t)dt凑成dφ(t)<br>把φ(t)看成一个整体，记作x<br>用上F，再把x换回φ(t)<br>所以它也叫凑微分法<br>做题时字母换位：u = φ(x)<br>还有教材的收尾提醒，原文如下<br>两件事：凑被积表达式，再换回x</div><p>这是定理八点四，第一换元积分法的原文。 外层函数定义在区间上。 内层函数可导，它的值全部落在区间里。 内层落到哪里，外层就要在哪里有定义。 前提是：外层函数的原函数已经到手。 结论是：把内层代入这个原函数，就是答案。 一行证明：第五章第四集的链式法则。 结果不多不少，正好是被积函数。 倒过来读，定理就是老法则。</p><p>教材也给了一个便捷写法，一串连等式。 关键一步：导数因子并进微分里。 把内层当成一个整体，起一个名字。 用上原函数，再把内层换回去。 所以教材也叫它凑微分法。 做题时字母换了位置，别被它绕晕。 最后是教材的收尾提醒，原文如下。 两件事：凑好被积表达式，最后回到原变量。</p><h2>3 · 方法与证明</h2><p>游戏开局，就像学习软件里的配对卡牌。 右边是第五章第八集的微分表，倒过来读。 规则是：左边某个因子对上右边的卡，就连一条线。 第一对：余弦配上正弦的微分。 第二对：倒数配上对数的微分。 第三对：那个因子正好凑出分母的微分。 第四对：正切的微分就藏在这里。 剩下的部分说了算：只能由内层构成。</p><p>等一下：凭什么可以这样凑？ 答案是：一阶微分形式不变性。 不管那个变量自由与否，公式形式不变。 两边是同一个微分；凑微分是记账，不是魔术。 就像每次换外币，把收据留好。 最后求一次导，账目就能对上。 第五章第八集许下的便利，今天终于派上用途。</p><p>实战一：正切，表里找不到它。 拆成正弦比余弦，胶水出现：余弦的微分带个负号。 现在的形状，就是对数公式换了件外衣。 答案是余弦绝对值的对数，再取相反数。 验算：沿着图像滑动，导数处处等于正切。 它在避开余弦零点的每个区间上成立。</p><p>实战二：分母里多了一个常数。 表里只有常数为一的版本，怎么凑过去？ 看图：同一个鼓包，只是更宽也更矮。 关键一步：提出常数，把缩放后的变量凑成微分。 结果是反正切，前面多一个缩放因子。 注意，全程没有引入新字母，内层一直看得见。 验算：两个因子补回常数，账对上了。</p><p>实战三第一回合：指数里面套着一个平方。 胶水：那个因子正好是平方微分的一半。 第一回合收工：指数的一半，加常数。 第二回合看起来很像：正弦乘以余弦的指数。 答案顺手就写出来了。小心，危险的一步。 看图：被积函数为正，候选答案却在下坡。 符号最容易出错：余弦的微分自带负号，记在收据上。 改正：负号补到答案前面。 验算：求一次导，回到被积函数，账对上了。</p><p>这个游戏有两类输法。第一类：剩下的因子不配合。 试着把平方当成新变量。 一个因子配对成功，却剩下一个多余的。 这个多余的因子不属于新变量，于是停住了。 第二类：停在新变量里，忘了回到原变量。 这个答案看似完成，其实停在辅助字母里。 答案停在新变量里，就像外币忘了换回来。 修正：把原来的表达式换回去，答案才算完成。</p><h2>4 · 展望与衔接</h2><p>用途一：内层是一次函数。 它的导数是常数，所以答案只多一个常数的倒数。 这就解决了常见的失误：不必再猜系数。 用途二：分子恰好是分母的导数。 答案是分母绝对值的对数，正切就是一例。 这里分母恒为正，绝对值可以省掉。</p><p>回头看：第五章第四集的链式法则反过来用，就是定理。 第五章第八集的一阶微分形式不变性，倒过来用，就是胶水。 往后，第九章第五集里，积分限随变量一起换。 微分表正着倒着全熟，一大类积分就变成配对游戏。 认不出配对的呢？比如这样的根式。 交给下一集的第二换元积分法，先选新变量再反解。 认出一对，凑好微分，换回原变量，再求导验算。</p></main></body></html>
