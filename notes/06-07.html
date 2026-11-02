@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>06-07 泰勒公式（上）：多项式的模仿秀</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+</style></head><body><div class="topbar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span>06-07</span><a class="mv-quiz" href="../quiz/06-07.html">去自测 →</a></div><main><header><div class="tag">视频配套讲稿（朗读原文） · MATH SELF-CHECK: 39 claims re-derived, 1 fixed.</div><h1>06-07 泰勒公式（上）</h1><p class="sub">多项式的模仿秀</p></header><h2>1 · 动机</h2><p>泰勒公式上篇：一个多项式的模仿秀。 先看第三章留下的一道旧题。 照老办法把正弦换成x，答案是零。 改用洛必达法则做三轮，得到负六分之一。 两个方法，两个答案，总有一个在骗人。</p><p>算几个数就清楚了，比值紧贴负六分之一。 替换出错了，它扔掉了决定答案的那一部分。 这个替换，就是在零点用切线冒充图像。</p><p>回想微分：切线，加上高阶无穷小。 切线学会了位置和方向，却学不会拐弯。 它的偏离只比距离小一阶，仅此而已。 一旦拐弯要紧，模仿就得更到位。</p><p>想象K歌之夜，一位同学在模仿歌手。 唱准第一个音，就像切线：位置对，方向也对。 气息和颤音，就是更高阶的导数。 在那个音附近，观众已经听不出区别。 观众能听出的那点区别，就叫余项。</p><p>要求：找一个n次多项式贴住函数。 剩下的偏离，要比距离的n次方消失得更快。 值和各阶导数全对上，条件比次数多一。 而多项式的系数，恰好也是这么多个。</p><h2>2 · 定理与定义</h2><div class="card gold stmt">把pₙ求k阶导，再令x=x₀<br>低于k次的项：求导后变成0<br>高于k次的项：在x₀处为0<br>只剩aₖ·k!，阶乘由此而来<br>所以aₖ=pₙ⁽ᵏ⁾(x₀)/k!<br>多项式由它在x₀的各阶导数确定<br>现在要求各阶导数与f对上<br>每个系数都被f的导数锁定<br>这就是泰勒多项式，至n阶导数全对上<br>第五章的高阶导数，正是这些系数<br>定理6.9：带佩亚诺型余项的泰勒公式<br>条件很轻：只要求x₀处有n阶导数<br>把o((x−x₀)ⁿ)读成精度保证<br>误差除以(x−x₀)ⁿ，比值趋于0<br>n越大，保证越强，贴得越紧<br>取x₀=0，就是麦克劳林公式<br>教材的展开表：四行常用公式<br>每行都是导数除以阶乘算出来的<br>sin在0处导数循环0,1,0,−1<br>偶次项系数为0，余项可写o(x²ᵐ)</div><p>多项式求k次导，代入这一点，看谁活下来。 次数比k低的项，求导之后直接消失。 更高次的项留着因子，在这一点为零。 只有一项活下来，它的幂求到底，留下阶乘。 所以系数就是导数除以阶乘，用不着死记。</p><p>教材的说法：多项式由它在这一点的导数确定。 现在要求：每一阶导数全和函数对上。 于是每个系数，全被函数的导数锁定。 这就是泰勒多项式，直到最高阶，导数完全一致。 第五章的承诺兑现：高阶导数正是这些系数。</p><p>定理六点九：函数等于泰勒多项式，加上佩亚诺型余项。 条件很宽松：只要这一点有n阶导数就够。 把小o项读成一份精度保证，而非模糊的尾巴。 偏离除以距离的n次方，连比值也趋于零。 阶数越高，保证越强，模仿贴得越紧。 把展开点放在零，就得到麦克劳林公式。</p><p>教材的展开表，四个公式会反复用到。 没有魔法：指数函数的导数全是一，除以阶乘。 正弦的导数在零点轮流取零一零负一，只剩奇次幂。 下一个偶次项是零，所以正弦这一行能多保证一阶。</p><h2>3 · 方法与证明</h2><p>为什么成立？盯住这个比值。 分子分母在这一点为零，低阶导数也全是零。 于是洛必达法则一轮接一轮地用。 最后一步，n阶导数只在这一点存在，不能再求导。 最后靠n阶导数的定义收尾，比值趋于零。 条件给多少，证明就用多少，一点没浪费。</p><p>回到那道旧题，看看替换扔掉了什么。 把正弦一直展开到三次项。 减去x，大头抵消，只剩下三次项。 就像聚餐分账：大额互相抵消，零头说了算。 除以三次方，极限是负六分之一，洛必达对了。 替换扔掉的，恰好是抵消后唯一留下的那一项。</p><p>规则一：乘除里面，高阶的尾巴可以丢掉。 规则二：加减里面，要展开到抵消后仍有剩余的那一阶。 等价无穷小替换只留一项，泰勒公式要多少留多少。 泰勒公式是等价无穷小替换的完整形式，旧账结清。</p><p>陷阱来了：能不能把尾巴写成五阶的？ 真正的偏离，和五次方除以一百二十等价。 除以五次方，比值停在一百二十分之一。 所以五阶的说法是错的，四阶才诚实。 余项是一句精确的话，不是随手写的尾巴。</p><p>注二：能做到这一点的n次多项式只有一个。 不管用什么办法得到，只要合格，就是泰勒展开。 倒过来读：导数等于阶乘乘以系数。 教材的例子：把复合的式子，代入指数函数的展开式。 只出现偶次幂，而且一个导数也没求。 想要零点的第九十八阶导数？读出一个系数就够。 再乘上九十八的阶乘，答案是个负数。 奇次幂不出现，奇数阶导数就全是零。</p><h2>4 · 展望与衔接</h2><p>用途一：上一集借来的等价关系，就出自这里。 用途二：一道极限，两个展开要比到四次方。 前两项抵消，四次项定胜负，极限是负十二分之一。 用途三，估算：零点一的余弦约是零点九九五。 确实很接近，可是小o项没说到底多接近。</p><p>小o项没说多小，这笔账交给拉格朗日型余项。 往后看：计算器算这些函数，靠的就是截断的多项式。 很久以后讲到幂级数，这张表会完整地再出现。 对上n阶导数，模仿就能以假乱真。</p></main></body></html>

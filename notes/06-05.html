@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>06-05 洛必达法则：好用，但非万能钥匙</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+</style></head><body><div class="topbar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span>06-05</span><a class="mv-quiz" href="../quiz/06-05.html">去自测 →</a></div><main><header><div class="tag">视频配套讲稿（朗读原文） · MATH SELF-CHECK: 46 claims re-derived, 2 fixed.</div><h1>06-05 洛必达法则</h1><p class="sub">好用，但非万能钥匙</p></header><h2>1 · 动机</h2><p>洛必达法则，人人听说过的捷径。 代入零，三个全是零比零。 可极限分别是零、一、无穷大。 这就是不定式，只看外形，得不出结论。</p><p>同学悄悄支招：分子和分母各自求导。 先试第一个：捷径给出二分之三。 因式分解也得二分之三，两边一致。 再试第二个，看零附近。 直接代入得一，捷径却得零。 一个极限，两个答案，必有一个错。</p><p>第三个例子，捷径直接原地兜圈。 它什么时候可信，什么时候走进死胡同？ 今天就看：它很强，但不是万能钥匙。</p><h2>2 · 定理与定义</h2><div class="card gold stmt">极限商法则要求分母极限非零<br>遇上0/0它无能为力<br>教材定理6.7：0/0型<br>条件(i)：分子分母都趋于0<br>条件(ii)：空心邻域内都可导<br>且在那里g′(x)≠0<br>条件(iii)：f′/g′→A<br>A可以是实数、±∞或∞<br>结论：f/g的极限也是A<br>注：单侧与无穷远处同样适用<br>像借笔记前先问的三个问题<br>一：真是0/0吗？<br>二：附近可导且g′(x)≠0<br>三：f′/g′有极限吗？<br>三个都是：极限可以照搬</div><p>第三章的商法则，要求分母极限不为零。 碰上零比零，它无能为力。 这是教材里零比零型的定理。</p><p>条件一：分子分母同时趋于零。 条件二：在空心邻域里，两个函数可导。 而且分母的导数在那里从不为零。 条件三：两个导数之比趋于A。 A可以是实数，也可以是无穷大。 那么原来的比值也趋于A。 注记：一侧逼近或趋向无穷，同样成立。</p><p>像借笔记之前先问三个问题。 第一，真的是零比零吗？ 第二，附近可导，分母导数始终不为零。 第三，导数之比有极限吗？ 三个全是，极限就能照搬。</p><h2>3 · 方法与证明</h2><p>求导为什么有用？发动机是柯西中值定理。 先补洞：让两个函数在那一点取零。 在这一小段上，柯西把比值换成导数之比。 新的点xi被夹在两者之间。 滑向那一点，夹着的点被拖着走。 证明核心在此，上集的承诺兑现了。</p><p>现在逐条拿掉条件，看法则怎样失效。 去掉条件一：第二个例子根本不是零比零。 分子分母同时趋于一，极限就是一。 盲目求导得出零，错得理直气壮。 谜底揭晓：捷径用错了地方。 去掉条件二，柯西那一步可能要除以零。 分母要是再回到零，罗尔逼出水平切线。 所以导数非零，也让分母离开零，比值才有意义。 去掉条件三，什么也推不出，稍后举例。</p><p>来看正确用法：教材例三，趋近派。 先逐项检查：在派处，分子分母同时为零。 分母导数只在派处为零，而派恰好被挖掉。 求导一次，化简成余弦立方的负一半。 余弦趋于负一，极限是二分之一。 图像也印证：在派处逼近二分之一。</p><p>下一题，要求导两轮。 按教材习惯先化简：把对数换成等价的式子。 求导一轮，依旧是零比零。 第二轮之前，把三个条件再查一遍。 第二轮，极限是二分之一。 图像确认：洞口的高度是二分之一。 如果不先化简，第一轮就乱成一团。 经验是：每一轮之前，先化简。</p><p>陷阱来了：抖动的直线除以直线，趋向无穷。 两者之比贴着高度一，最终趋于一。 可导数之比在零和二之间来回摆。 导数之比没有极限，条件三落空，法则沉默。 可原比值照样趋于一，法则只在一个方向成立。 别倒推：导数之比没极限，推不出原比值没极限。 反过来，原比值有极限，也推不出导数之比有极限。</p><p>无穷比无穷型，教材有对应的定理。 看条件二：只要求分母趋于无穷。 分子随便怎样，有界也没关系。 只看分母，所以它在无穷远处好用。</p><p>最后一个陷阱：分子分母同时趋于无穷。 第一轮，它上下颠倒了。 第二轮又翻了回来，回到原点。 像一首歌循环播放，法则原地打转。 用代数跳出来：分子分母同时除以x。 剩下的部分直接趋于一。 法则专治不定式，却不能代替代数。</p><h2>4 · 展望与衔接</h2><p>用途一：比较变大的快慢。 对数比任意正次幂：一轮之后趋于零。 幂比指数：求导n轮，趋于零。 对数慢，幂其次，指数最快。 用途二：远处坡度，看导数。 坡度为二的直线加上对数，远处坡度依旧是二。</p><p>另外五种不定式，要先改写成这两种。 改写的功夫，留到下一集。 第七章末尾，Stolz定理对数列做同样的事。 法则打转时，本章稍后的泰勒公式更强大。 每一轮先查三个条件，捷径才靠得住。</p></main></body></html>
