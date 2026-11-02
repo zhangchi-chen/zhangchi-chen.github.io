@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>06-08 泰勒公式（下）：误差有了价签</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+</style></head><body><div class="topbar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span>06-08</span><a class="mv-quiz" href="../quiz/06-08.html">去自测 →</a></div><main><header><div class="tag">视频配套讲稿（朗读原文） · MATH SELF-CHECK: 40 claims re-derived, 3 fixed.</div><h1>06-08 泰勒公式（下）</h1><p class="sub">误差有了价签</p></header><h2>1 · 动机</h2><p>今天，我们给泰勒公式的余项标上价格。 计算器给出e的一串数字，哪几位靠得住？ 上一集，指数函数写成了泰勒多项式加上小o余项。 取x等于一，只加前四项，约得二点六六六七。 第一位小数就错了，小o项却一声不吭。 它只描述自变量趋于零时的情形。 到了x等于一，它一个数也给不出。</p><p>想象两条快递通知：一条说很快到，一条说周五前到。 佩亚诺型余项，就是那句很快到。 拉格朗日型余项，是那句周五前到。 哪辆车送货不知道，只知道时间窗。 那辆车就是xi，窗口就是误差上界。</p><p>于是有两个问题：能忽略吗？最多多大？ 佩亚诺型回答第一问：极限与局部。 拉格朗日型回答第二问：近似与估计。 那个正弦极限放左边，算e的数位放右边。</p><h2>2 · 定理与定义</h2><div class="card gold stmt">定理6.10，原文如下。<br>条件一：直到n阶导数在闭区间连续。<br>条件二：n+1阶导数在开区间存在。<br>和中值定理一样：闭连续，开可导。<br>结论：f(x)=泰勒多项式+一项。<br>余项像泰勒的下一项，只改一处。<br>导数在ξ处取，而非在x₀处。<br>ξ在x₀与x之间，仅此而已。<br>这一项叫拉格朗日型余项。<br>θ表示ξ走了全程的几成。<br>取x₀=0，得麦克劳林公式(8)。<br>把余项当中值定理来读。<br>同一结构：未知点的导数乘步长的幂。<br>阶数升到n+1，分母是(n+1)!<br>ξ存在，却查无地址。<br>习惯：给|f⁽ⁿ⁺¹⁾|整段定上界M<br>无论ξ在哪，|Rₙ|都被它管住。<br>让最坏情形替所有ξ说话。</div><p>这是定理六点十，原文照录。 条件一：直到n阶的导数，在闭区间上连续。 条件二：再高一阶的导数，在开区间内存在。 与中值定理同一模样：闭区间连续，开区间可导。 结论：函数等于泰勒多项式，再加一项。 这一项很像泰勒的下一项，只改了一处。 最高阶导数取在xi，而非展开点。 xi严格落在两点之间，仅此而已。</p><p>这一项，叫做拉格朗日型余项。 theta是走到那一点时的路程占比。 展开点取零，就得到麦克劳林公式八。</p><p>把余项当成中值定理来读。 结构相同：未知点的导数，乘以跨度的幂。 两处升级：阶数加一，分母多了阶乘。 xi存在，却查不到地址。 好习惯：在整个区间上，给最高阶导数定一个上界M。 于是无论xi躲在哪，余项全被管住。 让最坏的情形，替所有可能发言。</p><h2>3 · 方法与证明</h2><p>现在让n等于零，多项式只剩起点的值。 原文说：零阶时，公式七就是拉格朗日公式。 泰勒定理，正是中值定理的推广。 前面学过的中值定理，就是零阶的那一员。</p><p>怎么证明？靠前面讲过的柯西中值定理。 把终点固定，让新变量t一路跑过去。 F就是在动点展开之后，剩下的那一截。 它的搭档G，就是跨度的幂。 t跑到终点时，两者同时归零。 对F求导，各项两两抵消，最后只剩一项。 柯西中值定理一用，余项的样子就出来了。</p><p>条件为何如此？正是柯西中值定理所需。 一张图，看清本章一家子。 柯西负责证明，零阶时又落回中值定理。</p><p>实战一：算e，误差要小于百万分之一。 指数函数求导多少次，仍是它自己。 代入一，e展开为阶乘倒数和加余项。 theta未知，但这个因子总小于三。 误差小于三除以阶乘，只由n决定。 n取八，窗口仍比百万分之一宽。 n取九，终于小于百万分之一。 每多付一项，时间窗就缩小一截。 十项加起来，得二点七一八二八一五。 真正的e，就落在它上方一个极窄的窗里。 预算的习惯：先挑n，再用一个上界结账。</p><h2>4 · 展望与衔接</h2><p>实战二：求零点五的正弦。 正弦的各阶导数，全被夹在负一和一之间。 于是余项不超过幂除以阶乘，无需xi。 用那个三次多项式，近似零点五的正弦。 白送一阶：四次项系数为零，它也算四阶。 误差至多约万分之二点六，窄了十倍。 得到零点四七九一七，误差小于万分之三。 数字和它的误差带写在一起，才算知道。</p><p>不知道xi的代价：上界只能按最坏情形。 算e时，上界大约是真实误差的二点七倍。 稳妥但宽松：按最慢的那辆车估算。 对比上集的正弦极限，从没用到上界。 那里小o项只需比三次方更快消失。 口诀：求极限用佩亚诺型，算数值用拉格朗日型。</p><p>上一集欠下的账清了：小o尾巴有了价钱。 本章的中值定理一家，在这里连成网。 下一集的极值第二充分条件，就看它的正负。 到了数值分析课，价签会变成一份预算。 选好n，让截断误差压到机器精度以下。 再和舍入误差一起权衡，这就是科学计算的日常。 佩亚诺型说误差终会消失，拉格朗日型说它最多多大。 没写误差带的数，只能算半个数。</p></main></body></html>
