@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>08-01 原函数：倒着放的求导，外加一个甩不掉的常数</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+</style></head><body><div class="topbar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span>08-01</span><a class="mv-quiz" href="../quiz/08-01.html">去自测 →</a></div><main><header><div class="tag">视频配套讲稿（朗读原文） · MATH SELF-CHECK: 33 claims re-derived, 2 fixed.</div><h1>08-01 原函数</h1><p class="sub">倒着放的求导，外加一个甩不掉的常数</p></header><h2>1 · 动机</h2><p>今天，把求导反过来播放。 去上课路上，手机记下了速度。 速度是位置变化的快慢，能把位置找回来吗？ 同一份记录，换个起点，就是另一段路。 只要告诉我起点，整段路就确定了。</p><p>求导从函数走到导数，现在要往回走。 每个位置的坡度已经给定，要找出那条线。 这个候选答案，求导后真能回到反正切吗？ 先用乘积法则，再用链式法则，一项一项求导。 两个多出来的项正好抵消，只剩下反正切。 验证成功了，可是没人告诉我们，为什么偏偏试它。 验证很容易，难的是找到它。</p><h2>2 · 定理与定义</h2><div class="card gold stmt">定义1：F是f在I上的原函数<br>第一句：一切发生在区间I上<br>在I的每一点，F的斜率等于f的值<br>注意是“一个”原函数，不止一个<br>定理8.1：区间上连续就有原函数<br>它保证F存在，没说怎么写出来<br>定理8.2：原函数是F加常数<br>第一条：F上下平移，仍是原函数<br>第二条：任意两个只差一个常数<br>找到一个，就找到了全部<br>定义2：全体原函数叫不定积分<br>∫是积分号，f(x)是被积函数<br>被积表达式f(x)dx，积分变量x<br>简记为∫f(x)dx=F(x)+C<br>这个C叫积分常数<br>同一个图案，印在每个尺码上</div><p>这就是我们要找的东西的正式名字：原函数。 第一个条件：所有事情发生在一个区间上。 区间里每一点，左边的坡度正好是右边的高度。 注意，说的是一个原函数，它绝不孤单。 定理八点一说：区间上连续，原函数就一定存在。 它只保证存在，可没说该怎么写出来。</p><p>定理八点二告诉我们，所有答案是什么样子。 第一条：整条线上下平移，照样是原函数。 第二条：任意两个，只隔一个常数。 找到一个，就等于找到了全部。</p><p>定义二把全体原函数，叫作不定积分。 先是积分号，然后是里面的被积函数。 带上微分的整体叫被积表达式，x叫积分变量。 简写成：一个原函数，加上一个常数。 这个常数，叫作积分常数。 同一个图案，印在每个尺码的衣服上。</p><h2>3 · 方法与证明</h2><p>第一条一句话就够：常数一求导，就没了。 第二条：两者相减，导数在整个区间上全是零。 拉格朗日中值定理的推论说：导数为零，就是常数。 这一步，用的正是第六章留下的结论。 可区间这个词很关键。看这个函数，零的两边各有一支。 只把右边一支抬高，导数根本察觉不到。 两段各走各的，常数可以不一样。</p><p>给整个不定积分求导，原来的函数就回来了。 反过来走一遍，总会多出一个常数。 这两步互相抵消，只是多了一个常数。</p><p>对这个函数，原函数的图像是一摞抛物线。 每一条，其实是同一条线上下平移。 站在同一个位置，每条线的切线一样陡。 给一个初始值，就从一摞里选出唯一一条。 常数被定成二，那一条线就找到了。 初始条件，就是在衣架上帮你选好尺码。</p><p>回到运动，教材里的例子：加速度始终不变。 反推一次，速度有无数可能，初速度选定一个。 再反推一次，又冒出第二个常数。 每个常数，由一个初始值来确定。 反推两次，就需要两个初始条件。</p><p>初等函数在它的定义区间上是连续的。 所以在每一个这样的区间上，原函数一定存在。 证明先欠着，留到第九章来补上。 它从没保证你能写出公式。</p><p>那么反过来呢？有原函数，就一定连续吗？ 来看一个函数，越靠近零，抖动越快。 被两条抛物线夹住，它在零点的切线是平的。 离开零点，照常用法则求导，得到两项。 所以这个导函数在整条数轴上存在，原函数就是F。 可是靠近零点，余弦那一项一直来回摆。 所以它在零点没有极限，连续性就在这里断掉了。 有间断的函数，照样可以拥有原函数。 连续足够了，但它并非必需。</p><p>求导有现成的做法：算一个极限就好。 原函数只给了一个目标，没给做法。 所以我们的工具箱，就是把求导公式表反着用。</p><h2>4 · 展望与衔接</h2><p>第一个用处：你的作业答案，和标准答案对不上。 两个分别求导，结果完全一样。 两者只隔常数二分之一。 先别慌，求个导。样子不同的答案，可能全对。</p><p>第二个用处：社团印海报，知道每多印一张花多少钱。 总成本，暂时带着一个未知常数。 这个常数，就是开印之前要付的制版费。</p><p>第六章已经出了力：导数为零，就只隔一个常数。 仍然欠着的：第九章会证明，连续保证原函数存在。 接下来，微分表会变成第一个真正的计算技巧。</p><p>往后看：这个钟形函数连续，原函数一定存在。 可是用表里的公式，写不出它。 概率论会再遇到它：整条直线上积分，或数值计算。 它的原函数是个实实在在的函数，只是在表里找不到。 求导来检验，别忘了常数。</p></main></body></html>

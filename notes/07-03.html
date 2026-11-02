@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>07-03 结清闭区间的旧账</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+</style></head><body><div class="topbar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span>07-03</span><a class="mv-quiz" href="../quiz/07-03.html">去自测 →</a></div><main><header><div class="tag">视频配套讲稿（朗读原文） · MATH SELF-CHECK: 42 claims re-derived, 2 fixed.</div><h1>07-03 结清闭区间的旧账</h1><p class="sub">Settling the closed-interval debts</p></header><h2>1 · 动机</h2><p>今天来结清闭区间的旧账。 期末了，小组账本上有几笔没结清。 第四章许下三个定理，证明一直欠着。 最底下，压着第二章那台老机器。</p><p>不少人试过这样一条捷径。 每一点连续，附近就有界。 那它在整个区间上有界，对吧？</p><p>看看开区间零到一上的倒数函数。 每一点附近，它确实有界。 可从整体看，它一路冲上天。 定理里，究竟是哪个词在出力？ 答案是闭这个字，看它花在哪一步。</p><h2>2 · 定理与定义</h2><div class="card gold stmt">定理4.6：最大、最小值定理<br>闭区间上连续：两个端点也算在内。<br>取到：真有一点到顶，一点到底。<br>在(0,1)上，f(x)=x取不到1<br>定理4.7：介值性定理<br>在两端高度之间，任取一个μ。<br>图像必在内部某处穿过这条线。<br>至少一个交点，这里有三个。<br>若有跳跃间断，某个高度会被跳过。<br>定理4.9：一致连续性定理（康托尔）<br>一致：同一个δ，对区间每点都管用。<br>(0,1)上1/x：δ得越取越小<br>取点1/n与1/(n+1)：越挨越近<br>函数值却始终相差1。<br>每个条件都在承重，删一个就失效。</div><p>定理四点六，最大、最小值定理。 闭区间上连续，两个端点也算在内。 某个点真的摸到顶，另一个点踩到底。 开区间上，直线逼近一，却始终到不了。</p><p>定理四点七，介值性定理。 在两端高度之间，随便取一个高度。 图像一定会在内部某处穿过它。 至少一个交点，这里有三个。 图像一跳，某个高度就被跨过去了。</p><p>定理四点九，康托尔的一致连续性定理。 一致，就是一个delta管住整个区间。 倒数函数越靠近零，delta就得越小。 取相邻两个倒数点，它们越挨越近。 可函数值之间，始终隔着整整一。</p><p>每个条件缺一不可，删掉就出错。</p><h2>3 · 方法与证明</h2><p>我们从刚闭合的环上，取下三把钥匙。</p><p>教材这段有界性证明，一口气读完。 第一步，在一点连续，就给出一个邻域和一个局部的界。 每一点分到一个，一共无穷多个邻域。 就像旅途的每一刻，各有一个小相框。 它们合起来，构成闭区间的一个开覆盖。 第二步，有限覆盖定理，只留下有限个。 一本相册，依然装下整个旅程。 第三步，在有限个界里挑最大的那个。 任何一点，总落在留下的某个邻域里，被大界管住。 闭这个字，恰恰花在第二步。</p><p>回到倒数函数，它处处局部有界。 越靠近零，邻域里的界就越大。 有限个邻域，总有一段靠近零的地方盖不住。 开区间上，选不出有限个来覆盖，有界就落空了。 从局部到有限，记住这三步。</p><p>下一笔：最大、最小值定理。 有界，所以这些函数值有上确界。 挑一串点，函数值一步步贴近上确界。 这些点也许乱跳，但跑不出闭区间。 致密性定理出手，抽出一个收敛的子列。 又是闭字在出力，极限点逃不出闭区间。 极限点连续，函数值正好是上确界。 把函数翻个身，再做一遍，最小值也有了。 两把钥匙合作，一把给出界，一把给出点。 开区间上，这串点逃到了区间外面。</p><p>下一笔：介值性定理。 设左端在这条线下面，右端在上面。 对半切开，留下符号仍在变化的那一半。 一次又一次，留下的区间一层套一层。 始终不变的是，左端在下，右端在上。 宽度缩成零，区间套定理交出唯一的一点。 一边不超过，一边不低于，只能正好落在线上。 两个端点碰不到这条线，所以这一点在内部。 第四章跑过的二分法，现在成了证明。</p><p>最后一笔：一致连续性定理。 反过来假设，有一道间隔怎么也甩不掉。 于是有一对对点，越挨越近，函数值却总隔着那道间隔。 致密性定理再出手，抽出子列收敛到一点。 它们的同伴也被拖过去，两列点拧成一股。 在这一点连续，两个函数值被拉到一起。 可那道间隔从来不肯缩小，矛盾了。 所以，它在闭区间上一致连续。</p><p>闭字花在这里：极限点必须落在区间里。 倒数函数那两列点，拧向零，落在区间外面。 也可以对半切，留下仍然不一致连续的那一半。 套出的那一点，和它的连续性矛盾，殊途同归。</p><h2>4 · 展望与衔接</h2><p>回到账本，每一笔旁边配上了钥匙。 有界靠有限覆盖，取到最值靠致密性。 介值靠区间套，康托尔定理两把钥匙皆可。 第二章那一笔也结清了，今天的钥匙全靠它。</p><p>第一个应用：最大值一定存在，比候选点才有意义。 第二个应用：把零到一映回自己的连续函数。 函数减自变量，从非负走到非正，必定穿过零。 第三个应用：连续函数可积，靠的就是康托尔定理。</p><p>从局部到有限，将来会成为紧性的定义。 多元函数和积分理论里，这一招一再上演。 局部要变整体，只要集合闭且有界，这招就回来。 账本合上了，第四章的承诺全部兑现。</p></main></body></html>

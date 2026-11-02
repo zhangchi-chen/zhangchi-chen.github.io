@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>07-04 上极限与下极限：数列的两条影子线</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+</style></head><body><div class="topbar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span>07-04</span><a class="mv-quiz" href="../quiz/07-04.html">去自测 →</a></div><main><header><div class="tag">视频配套讲稿（朗读原文） · MATH SELF-CHECK: 40 claims re-derived, 2 fixed.</div><h1>07-04 上极限与下极限</h1><p class="sub">数列的两条影子线</p></header><h2>1 · 动机</h2><p>上极限与下极限，数列的两条影子线。 涨涨落落一整季，河堤上留下两道水痕。 记下的不是某一次洪峰，而是水一再回到的高度。</p><p>再看一道作业题里的数列。 这些点上下来回跳，一直不停。 偶数项慢慢爬向1。 奇数项慢慢滑向负一。 那极限是1，或者是负一？ 哪个也不是。两个子列意见不合，极限根本不存在。 可是把两个答案一起扔掉，就太可惜了。</p><p>先在所有点的上方，画一条线。 往下压，只要上方剩下的点是有限个。 压到1以下，就有无穷多个点冒出来。 于是这条线停在1，成了上影子线。 从下面往上推，下影子线停在负一。 两条影子线，就是数列自己的两道水痕。 它们的正式名字，叫上极限和下极限。</p><h2>2 · 定理与定义</h2><div class="card gold stmt">先认识基本概念：聚点<br>定义1：a的任一邻域含无穷多项<br>把1的邻域缩小，里面依然无穷多点<br>所以1是聚点，−1也是<br>而0的小邻域里，一个点也没有<br>取值重复，就按重复的项来数<br>sin(nπ/4)总回到1：1是聚点<br>等价地说：聚点就是收敛子列的极限<br>有界数列一定有聚点吗？<br>定理7.4：有，而且有最大最小聚点<br>定义2：最大最小聚点就是上下极限<br>本例：上极限是1，下极限是−1<br>sin(nπ/4)有五个聚点<br>最大是1，最小是−1（教材例1）<br>下极限≤上极限；相等等价于收敛<br>两线重合于A，数列就收敛到A</div><p>一切从一个概念出发：聚点。 定义一：每个邻域里，有无穷多项。 把1的邻域缩得再小，里面依然有无穷多个点。 所以1是聚点，负一也是。 而零附近的小邻域里，一个点也抓不到。 同一个值出现多次，就算多个项。 这个正弦数列总回到1，所以1是聚点。 换句话说，聚点就是收敛子列的极限。</p><p>有界数列，一定有聚点吗？ 定理七点四：有，而且有最大和最小的聚点。 定义二：最大的聚点叫上极限，最小的叫下极限。 在这个例子里，上极限是1，下极限是负一。 正弦数列有五个聚点。 最大的是1，最小的是负一，正是教材例一。 下极限不超过上极限；相等就是收敛。 两线合在一起，数列就收敛到那里。</p><h2>3 · 方法与证明</h2><p>可最大的聚点，凭什么一定存在？ 致密性定理告诉我们：有界数列一定有收敛子列。 聚点一定存在：第二章的定理在这里兑现。 聚点集合有界，上下确界一定存在。 而且上确界自己，也是聚点。 它的任何邻域里总有聚点，于是有无穷多项。 这对上确界和下确界，正是上极限和下极限。 教材换了一条路：把范围一分为二。 只要上半段有无穷多项，就把它留下。 一层套一层，最后收拢到最大的聚点。</p><p>上极限有三种等价的说法，考试三种全要。 定理七点七用epsilon和N来说。 第一条：从某项开始，每个点全在这条线下方。 第二条：有一个子列，始终在降低的线上方。 最后总能压住，又无数次够得着。 定理七点七撇，换成数项的个数。 比上极限高的任何一条线上方，只有有限项。 比上极限低的任何一条线上方，有无穷多项。 第三种：尾部上确界的极限。 去掉前面若干项，取剩下部分的上确界。 尾巴越短，上确界只会往下走。 一路降到上极限1。</p><p>现在把三种说法来回翻译，这是考试最爱。 线抬高epsilon，上方只剩有限项。 线降低epsilon，上方有无穷多项，也就有子列。 尾部上确界，被第一条压住，被第二条托住。 第一个例子验算，三行全得1。 正弦数列也对得上：1和负一。 小心：上极限不一定是数列的某一项。</p><p>把定理七点六当探测器：两条线会不会重合？ 两者相等时，上极限把尾部压在下面。 下极限的那一条，从下面把尾部托住。 带子再窄，尾部也被夹住，这就是收敛。 聚点分成两个，两条线永不相遇。 注意：这样证明收敛，根本不用先猜极限。</p><h2>4 · 展望与衔接</h2><p>极限可能不存在，上极限却总在。 比它高的线，迟早压住尾部；比它低的，永远压不住。 用途一：以后幂级数的收敛半径，就靠它来算。 用途二：Stolz定理，正是靠夹紧这两条线证明的。 定理七点八：上极限保持不等号的方向。 先把它摆在明处，那个证明要靠它。</p><p>以后，这一对上下极限，会用来定义广义的极限。 集合列，函数列，甚至随机事件。 柯西阿达马公式，让上极限精确量出幂级数的收敛半径。 回到河边：两道水痕合成一道，水位就稳定了。 两条影子线，三种说法，一个收敛判据。</p></main></body></html>

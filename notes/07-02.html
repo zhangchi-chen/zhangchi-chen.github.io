@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>07-02 等价环：让定理绕圈接力</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+</style></head><body><div class="topbar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span>07-02</span><a class="mv-quiz" href="../quiz/07-02.html">去自测 →</a></div><main><header><div class="tag">视频配套讲稿（朗读原文） · MATH SELF-CHECK: 36 claims re-derived, 3 fixed.</div><h1>07-02 等价环</h1><p class="sub">让定理绕圈接力</p></header><h2>1 · 动机</h2><p>等价环，定理绕着圈接力一周。 上一集，我们把六个定理摆上了书架。 每个定理换一种说法，实数轴上没有洞。 上一集说过，任何一个拿出来就够用。 可是，凭什么一个定理就能推出另外五个？</p><p>最笨的办法，是两两之间逐一证明。 一共三十个证明，期末前根本来不及。 宿舍派对上，有人提议玩递包裹。 每个人只递给下一个人。 绕满一圈，每人拿过包裹。 包裹，就是没有洞这个性质。 六次递交，抵得上三十个证明。 等等，绕圈证明，不是循环论证吗？ 不是。每个箭头各自证明，只假设起点。 环证明的是，六个定理同真同假。</p><h2>2 · 定理与定义</h2><div class="card gold stmt">地图：六个定理围成圈，编号照教材<br>教材用一句话说明这件事<br>还规定了证明的路线<br>第一句：任一个推出其余五个<br>第二句：按1⇒2⇒…⇒6⇒1证明<br>前三支：定理2.9、7.1、7.3<br>4⇒5、5⇒6是习题；6⇒1是例3<br>要4⇒2？走4⇒5⇒6⇒1⇒2<br>一圈走通，30个推出全有<br>每个定理至少进一支：最少六支<br>以1为中心来回推：10支<br>各自从公理证出，仍缺互推</div><p>先看地图，六个定理围成一圈，编号照教材。 教材是这样说的。 接着规定了证明走哪条路线。 第一句，任意一个，推出其余五个。 第二句，证明按顺序绕圈走一周。 前三个箭头，是定理2.9、7.1和7.3。 接下来两个是习题，最后一个是例3。</p><p>想从四推出二？绕着圈走过去。 任意有序对连通，三十个推出全拿到。 每个定理至少进来一个箭头，所以最少六个。 若以定理一为中心来回推，要十个箭头。 各从公理证出，彼此仍缺互推。</p><h2>3 · 方法与证明</h2><p>合影慢镜头，第一次递交，一到二。 这就是定理2.9，第二章欠下、留到这里的证明。 取一个递增、又有上界的数列。 各项合在一起，非空又有上界。 于是确界原理给出上确界xi。 任取一个正数epsilon，在墙下画一条窄带。</p><p>关键一步来了，必定有某一项进入带里。 要不然，下沿成了更小的上界，矛盾。 数列递增，后面每一项至少这么高。 也越不过那堵墙，因为墙是上界。 所以从那一项起，所有项落在带里。 epsilon变小，带变窄，起点右移。 这正是收敛到xi，数列贴住了自己筑起的墙。 递减数列同理，只是改成贴着下确界。</p><p>第二次走捷径，从三直接到一，不在环上六个箭头里。 加上前两个箭头，它自己围成一个小环。 取一个非空、有上界的集合。 起点，左端取集合里的点，右端取一个上界。 每个区间，肩负两项任务。 任务一，右端始终是上界。 任务二，集合里总有点落在区间内。 对半分。中点若是上界，就留左半边。 如果不是，集合在它右边有点，就留右半边。 不管哪种情况，两项任务照样成立。</p><p>看对分怎样在两项任务之间来回跳。 区间越来越短，区间套定理给出唯一一点。 这个点是上界吗？假设集合里有点超过它。 可右端不断逼近它，迟早落到这个点左边。 上界比集合里的点小？矛盾。 任务一被它继承了，它是上界。 它是最小的吗？任取一个稍小的数。 左端也在逼近，很快越过那个更小的数。 集合的点又够到左端，那个更小的数就不是上界。 任务二也继承下来，它就是上确界。 两项任务，正好拼成最小上界。</p><p>让环闭合的那个箭头，教材例3做了出来。 下面是教材给出的骨架。 收尾是柯西列和它的极限。 放一把刻度均匀的尺子。 它是第一个越过集合的刻度。 退一格，就越不过集合了。 幕后功臣是阿基米德性，保证刻度存在。 来自第一章，再小的步子也能走远。</p><p>两把尺子，两个刻度，彼此夹住对方。 两者相差，小于较粗的间距。 间距越来越小，刻度挤在一起，成了柯西列。 这时动用定理六，柯西收敛准则，它就有极限。 每个刻度是上界，它们的极限也是。 退一格也挤过来，没有更小的上界。 所以极限正是上确界，环闭合了。</p><p>二到三是定理7.1，端点朝一边走，终会收敛。 三到四是定理7.3，先反设，再不断对分。 四到五是习题，从有限覆盖出发，找出一个聚点。 五到六也是习题，从收敛子列，走到柯西收敛准则。 现在，作业在环上的位置一清二楚。</p><h2>4 · 展望与衔接</h2><p>何必费劲证明它们等价？ 因为每项任务，总有一个定理用着最顺手。 看这个层层开根号的数列，递增，而且小于二。 有界的递增数列必收敛，两行搞定，极限是二。 改用柯西收敛准则，就要估计每段间隔，很累。 反过来，这个交错和忽大忽小。 这回轮到柯西收敛准则两行搞定。 有了等价，哪个顺手就用哪个。 六个之中任取一个，可以当作实数的公理。 其余五个，顺着环免费送到。</p><p>到了实分析，这个环会画到度量空间里。 那里没有大小之分，确界原理就失去意义。 但柯西性质留了下来，成为完备性的定义。 环一闭合，第二章和第四章欠下的证明，就能补上了。 哪一个定理最合适，就用哪一个。</p></main></body></html>
