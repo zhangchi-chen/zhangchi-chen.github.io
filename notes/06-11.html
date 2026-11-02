@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>06-11 辅助函数构造：从结论倒着走</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+</style></head><body><div class="topbar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span>06-11</span><a class="mv-quiz" href="../quiz/06-11.html">去自测 →</a></div><main><header><div class="tag">视频配套讲稿（朗读原文） · MATH SELF-CHECK: 46 claims re-derived, 1 fixed.</div><h1>06-11 辅助函数构造</h1><p class="sub">从结论倒着走</p></header><h2>1 · 动机</h2><p>辅助函数，从结论倒着往回走。 一道熟悉的考题，函数在两端取零。 要找一个内部点，位置乘坡度等于高度。 第一反应，直接对原函数用罗尔定理。 没错，可惜包裹送错了地址。</p><p>罗尔定理要求两端一样高。 可题目给的是结论，不是等高的两端。 像追查包裹，从门口倒着查回仓库。 每次构造，问的是同一件事，减去什么才能两端相等。</p><p>回放奠基一招，两端不等高。 减去弦，两端一起落到零。 罗尔定理给出水平切线，原图上它与弦同向。 五秒钟，拉格朗日定理的证明就完成了。 今天这一招变成四张卡，加一道检查。</p><h2>2 · 定理与定义</h2><div class="card gold stmt">引擎是定理6.1罗尔中值定理<br>连续且可导：无断点、无不可导点<br>条件三两端相等，正是要造的那条<br>结论：内部某处有水平切线<br>要点：罗尔定理让导数为零<br>所以目标要读成F′(ξ)=0<br>定理6.2的构造：减去弦<br>两端验算：F(a)=0，F(b)=0<br>F′(ξ)=0：f′(ξ)就是弦斜率<br>定理6.6的构造：把x换成g<br>同样验算：F(a)=F(b)=0<br>罗尔定理得f′(ξ)=k·g′(ξ)<br>两者都是罗尔定理换了装</div><p>一切的引擎，就是罗尔定理。 前两个条件，就是没有断开，也没有不可导点。 条件三，两端相等，往往要靠我们亲手造出来。 回报是，内部某处有一条水平切线。 要点是，罗尔定理让导数为零。 所以，要把目标读成某个函数的导数等于零。</p><p>拉格朗日定理的构造，就是减去弦。 两端代进去验算，结果全是零。 F的水平切线，正说明切线与弦同向。</p><p>柯西定理的构造一样，只是拿g做尺子。 同样验算，两端又全是零。 罗尔定理接着说，在同一时刻，两个变化速度成固定倍数。 两者全是罗尔定理换了装。</p><h2>3 · 方法与证明</h2><p>像导航里存好的四个路线，终点决定用哪一个。 第一张卡，直接相减，目标里含有弦的坡度。 做法是减去弦，拉格朗日定理正是这样证的。</p><p>第二张卡，指数因子，导数与函数混在一起。 做法是给原函数乘上一个指数因子。 一求导，目标就整个冒了出来。 指数因子永远大于零，所以导数为零正好就是目标。</p><p>实例，两端为零，证明某点坡度等于高度。 这里拉姆达取负一，乘上衰减因子，两端仍是零。 罗尔定理让F在某点变平，那里坡度等于高度。</p><p>第三张卡，分段拼接，目标里有两个不同的点。 选点切开，对半切，或靠介值性定理找点。 实例，三处的高度分别是零、一、三。 左半段，弦的坡度是一，某处切线也是一。 右半段，弦的坡度是二，也有切线与它同向。 两点分居两半，自然不是同一个点。</p><p>第四张卡，对称构造，把一个点与它的镜像配成对。 把原函数和它的镜像加起来，就是F。 两端自动相等，加起来是同一个和。 于是，某个点和它的镜像，切线坡度相同。 小字提醒，对折点让等式白白成立。 所以换成另一版，原函数减去它的镜像。 拉格朗日说，两个坡度之和是弦坡度的两倍。</p><p>现在倒着推，从目标出发。 回到开头那道考题，直接用罗尔定理到不了那里。 第一步，把所有项移到一边，让它等于零。 第二步，问一句，谁的导数是这个样子？ 商的求导法则响了铃，分子正好就是它。 除以一个不会为零的平方，辅助函数就出现了。</p><p>新旧两个函数并排，零点一样，峰往左挪了。 检查一，F的两端全是零。 检查二，F的导数为零，正是目标乘上一个非零因子。 罗尔定理收尾，那点的切线正好穿过原点。 要领是，把目标看成一个乔装的导数。 乘一乘，除一除，直到露出求导表里的熟面孔。</p><p>卡从哪里来？结论替自己选好了构造。 第一张卡来自几何，看到弦的坡度，就减去弦。 第二张卡，想让导数就是目标，于是乘因子。 第三张卡，来自结论里点名的两个点。 第四张卡，来自结论里的镜像对称。</p><p>写罗尔定理之前，先拍张门口照，自检一下。 测试题，函数从高度一出发，又回到一。 目标是，某点的坡度等于高度取负。 错招，直接把目标拿来做辅助函数。 可罗尔定理只管导数为零，这里甚至要二阶导数。</p><p>改用第二张卡，让导数带上目标。 检查一，左端是一，右端却是e。 不相等，检查失败，而失败本身就是信息。 试试常数一，坡度是零，永远不会是负一。 所以题设撑不起这个目标。</p><p>修改数据，右端取e分之一，两端就相等了。 两道检查，两端相等，导数恰是目标的非零倍。 光有两端相等不够，原函数本身就有，却到不了目标。 考场上，这类证明变成两分钟的分类活儿。 认卡，写函数，自检，最后用一次定理。</p><h2>4 · 展望与衔接</h2><p>应用一，多项式两个零点之间，导数加自身必有零点。 又是第二张卡，本例零点约在0.618。 应用二，两个坡度的倒数，加起来是二。 第三张卡，在高度一半处切开，这个点靠介值性定理找。 两次拉格朗日定理，两块加起来正好是二。</p><p>每张卡，全是本章一二集那两招的变装。 两函数目标，用本章第四集的柯西构造。 第三张卡的切点，常靠第四章的介值性定理。</p><p>第二张卡日后回归，成为一阶线性方程的积分因子。 从结论倒着走，是以后每门课找证明的基本功。 终点决定路线，门口照片确认送达。</p></main></body></html>

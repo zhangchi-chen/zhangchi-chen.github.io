@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>07-01 实数的完备性：六把钥匙，一扇门</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+</style></head><body><div class="topbar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span>07-01</span><a class="mv-quiz" href="../quiz/07-01.html">去自测 →</a></div><main><header><div class="tag">视频配套讲稿（朗读原文） · MATH SELF-CHECK: 30 claims re-derived, 3 fixed.</div><h1>07-01 实数的完备性</h1><p class="sub">六把钥匙，一扇门</p></header><h2>1 · 动机</h2><p>六把钥匙开同一扇门：数轴没有空隙。 六个室友，钥匙各不相同，却能打开同一扇门。 门，是实数的完备性；钥匙，是六个定理。</p><p>第二章说过：有界又一路递增，必有极限。 试根号二的近似值：每次多一位。 每一项是分数，只升不降，并且始终小于二。 它最后停在哪？在实数里，正好是根号二。 可根号二不是分数，在有理数里，它无处可停。 同一个数列，同样的条件，结果却截然不同。 关键不在数列，而在脚下那条数轴。</p><p>把有理数想成一条街，偏偏少了一个门牌号。 快递员越走越近，那个门牌却根本不存在。 实数没有留下任何空隙，这就是完备性。 没有空隙只是图像，教材给了六个精确说法。</p><h2>2 · 定理与定义</h2><div class="card gold stmt">钥匙一：确界原理（定理1.1）<br>上界有很多，其中有一个最小的<br>最小上界就是上确界 sup S<br>对称地：有下界必有下确界<br>钥匙二：单调有界定理（定理2.9）<br>只升不降，又出不了走廊，必定停稳<br>递增递减都一样：有界必收敛<br>注意开头：“在实数系中”<br>钥匙三：区间套定理（定理7.1）<br>闭区间一个套一个，长度趋于0<br>这样的区间套恰好套住一点ξ<br>左右端点从两边收敛到同一点ξ<br>开区间(0,1/n)：交集是空集<br>钥匙四：有限覆盖定理（定理7.3）<br>开覆盖：S的每点都落在某个开区间里<br>这个开覆盖可以有无穷多个开区间<br>对闭区间[a,b]，有限个就够了<br>从无穷多块到有限块：这就是它的威力<br>钥匙五之一：聚点定理（定理7.2）<br>聚点：它的任何邻域都含S的无穷多点<br>有界无限点集至少有一个聚点<br>钥匙五之二：致密性定理<br>有界数列未必收敛，却总有收敛子列<br>和聚点定理同一思想，换成数列语言<br>钥匙六：柯西收敛准则（定理2.11）<br>柯西列：足够靠后，任两项相距小于ε<br>ε再小，后面的项照样挤在一起<br>收敛⇔是柯西列：无需事先知道极限<br>六个定理，六幅图，同一事实：无空隙</div><p>第一把钥匙：确界原理，定理一点一。 上界有许许多多，偏偏有一个最小。 这个最小的上界就是上确界，集合紧紧靠着它。 反过来看：有下界，就一定有下确界。</p><p>第二把钥匙：定理二点九，只升或只降的有界数列。 只升不降，又走不出走廊，它终究要停下来。 上升下降一样，有界就必定收敛。 留意开头这几个字：在实数系里。</p><p>第三把钥匙，定理七点一：线段一层套一层。 带端点的线段一个套一个，宽度缩到零。 这样一串线段，恰好套住唯一一个实数点。 左端点往上，右端点往下，在那一点会合。 换成不带端点的线段，最后一个点也不剩。</p><p>第四把钥匙：有限覆盖定理，定理七点三。 开覆盖：一堆开的线段，每个点至少落进一段。 就像一条被子，由无穷多块布片拼成。 盖住带端点的线段，只要有限几块就够了。 无穷多块，缩成有限几块，这就是它的威力。</p><p>第五把钥匙的前半：聚点定理，定理七点二。 聚点：无论邻域多么小，里面总有集合的无穷多个点。 无穷多个点挤在有界范围，总会聚成一团。 第五把钥匙的后半：致密性定理。 有界数列可以来回跳，可是总能挑出一串收敛的项。 思路和聚点定理一样，只是改用数列来说。</p><p>第六把钥匙：柯西收敛准则，定理二点一一。 柯西列：足够靠后，任两项距离小于epsilon。 epsilon再小，后面的项照样挤在一起。 所以收敛等同于是柯西列，用不着先知道极限。 六个定理，六幅图，底下是同一件事：数轴没有空隙。</p><h2>3 · 方法与证明</h2><p>什么任务用哪把钥匙？这张表就是本集的要点。 想说明确界存在，就拿第一把钥匙。 一步步递推、只朝一个方向走的数列，用第二把钥匙。 要靠一次次对半分，逼出一个点？用第三把钥匙。 每点附近各知一点，要拼成有限论证？第四把钥匙。 回想第四章第三集：闭又有界，无路可逃。 要从有界数列里挑出收敛的一串？用第五把钥匙。 想证收敛却猜不出极限？用第六把钥匙。 钥匙二五六，第二章用过，证明留到本章。 经验之谈：看任务的样子，挑对应的钥匙。</p><p>现在拿六把钥匙，到有理数这条街上逐一试试。 钥匙一：平方小于二的有理数，有上界二。 可它的上确界是根号二，有理数里偏偏没有。 钥匙二：那串小数近似有界又只升不降，却无处落脚。 钥匙三：一层层套住的唯一点是根号二，并非分数。 钥匙四：绕开根号二的开线段，盖满一到二的分数。 可只取有限几段，洞的旁边总有分数漏网。 钥匙五：这群小数只在根号二聚成一团。 所以没有分数当聚点，也没有哪一串项停在分数上。 钥匙六：小数越来越吻合，是柯西列，却无分数可停。 六次失灵，原因只有一个：根号二那里缺了一个点。 放到有理数里全失效；靠的是完备性。</p><p>一个细节：这串开线段往零延伸，盖住零到一之间。 可是有限几段，零旁总有空白。 所以带端点这一条，少了就不成立。</p><h2>4 · 展望与衔接</h2><p>任务一：每一项由前一项算出，它会收敛吗？ 只升不降，始终低于二：第二把钥匙保证收敛。 先保证极限存在，再解一个方程，得到二。 任务二：正弦项不断累加，极限很难猜。 钥匙六不用猜：后面的项越挤越紧，所以收敛。</p><p>接下来第七章第二集会证明：六个定理可以互相推出。 然后第七章第三集，补齐第二章和第四章欠下的证明。 到了实分析课上，这一章会变成一个定义。 一个空间满足这里的任意一条，就称为完备。 填满有理数的洞，也是严格构造实数的途径之一。 六把钥匙，一扇门，门后的数轴没有空隙。</p></main></body></html>
