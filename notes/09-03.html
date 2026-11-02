@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>09-03 牛顿–莱布尼茨公式：微分与积分的和解</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+</style></head><body><div class="topbar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span>09-03</span><a class="mv-quiz" href="../quiz/09-03.html">去自测 →</a></div><main><header><div class="tag">视频配套讲稿（朗读原文） · MATH SELF-CHECK: 44 claims re-derived, 1 fixed.</div><h1>09-03 牛顿–莱布尼茨公式</h1><p class="sub">微分与积分的和解</p></header><h2>1 · 动机</h2><p>两个看似无关的问题，其实是同一个 很久以来，这两个问题各走各的路 一派人想知道，图像在一点有多陡 这就是切线问题，第五章的核心 另一派人问，图像下方的面积有多大 他们的办法是切成细条，再全部加起来 两派各有一套工具，一套记号，一套技巧</p><p>期末有道题，求这块面积，从零到一 小林切成细条，像九之一那样硬算极限 演算一整页后，和式稳稳落在零点六九三附近 小陈反过来，找一个坡度恰好如此的函数 它从零到一的升高量，算出来是零点六九三 同一个数，走的路却完全不同，是巧合吗 今天就来说明，这绝不是巧合</p><h2>2 · 定理与定义</h2><div class="card gold stmt">取[a,b]上的连续函数f<br>让右边界x滑动，涂出面积<br>阴影面积随x变，记作Φ(x)<br>这就是变上限积分<br>x移动时，Φ画出自己的图像<br>f高的地方，面积涨得快<br>f低的地方，面积涨得慢<br>待证：Φ的增速等于高度f(x)<br>教材中的定理9.10<br>条件只有一条：f连续<br>结论一：Φ在[a,b]上处处可导<br>在端点，理解为单侧导数<br>结论二：Φ′(x)=f(x)<br>它被誉为微积分学基本定理<br>累积面积一求导，得回高度</div><p>先在零到六上取一个连续函数 让右边界向前滑，身后的面积随之涂满 面积随边界位置而变，把它叫作Phi 写成符号，就是变上限积分 边界一动，面积就画出自己的图像 图像高的地方，面积涨得快 图像低的地方，面积涨得慢 要证的是，面积涨的速度等于边界处的高度</p><p>教材把它写成定理九点十 条件只有一个：函数连续 结论一，面积函数处处可导 在两个端点，只看一侧的导数 结论二，它的导数恰好就是原来的函数 它被誉为微积分学基本定理 累积的面积一求导，高度就回来了</p><h2>3 · 方法与证明</h2><p>证明只有两步，盯紧连续性在哪里用上 把边界往右轻轻推一点 新增的面积，正是这条窄带 除以宽度，就得到窄带的平均高度 函数连续，积分第一中值定理保证平均高度取得到 于是窄带里存在一点，高度恰好如此 第一步，平均高度等于那一点的高度 此刻毫无近似，矩形和窄带面积相等 第二步，窄带越缩越窄，那一点被挤到边界上 关键一步靠连续性，把两个高度拉到一起 往左推也一样，窄带落在左边，论证照旧 所以极限存在，面积涨的速度就是高度，证完</p><p>拿掉连续性，第二步就可能垮掉 设函数在一这个点，从一跳到二 右边的窄带平均高二，左边只有一 左导数是一，右导数是二，这里不可导</p><p>第一个回报，连续函数一定有原函数 八之一那集的定理八点一，证明一直欠着 欠账付清，收据就是面积函数本身 就连写不出初等原函数的钟形图像，也有原函数</p><p>第二个回报，牛顿莱布尼茨公式 任意取一个原函数，来路不限 导数相同，所以两者的间距不变 这正是六之二讲过的拉格朗日中值定理推论 在左端面积为零，所以常数就是F的起点值 再走到右端，公式就到手了 整块面积，就等于原函数升高了多少 教材原文就是这样追出来的 像退房，走时带的减去来时带的 求面积变成记账，找原函数，两头一减</p><p>教材的定理九点一，直接写出了这个公式 两个条件，函数连续，导数关系处处成立 九之二说过，连续就可积，原函数负责给出数值 导数关系在内部失效，就别套公式，第十一章细说</p><h2>4 · 展望与衔接</h2><p>回到开头那道题，九之一的和式极限 用对数做原函数，一减就是零点六九三 小林那一页，和小陈那一步，本是同一个方法 第二个例子，四分之一个圆盘的面积 第八章的表里，原函数带反正弦 代入两端，得到四分之一个派 几何也同意，正好是整个圆的四分之一</p><p>用途一，手机充电，先快后慢 充进去的电，等于这块面积，终点减起点 按这个充法，半小时充进百分之四十五 用途二，第十章的微元法靠它驱动 按连续速度累积的量，反着求一次导，两头一减 九之四那集，面积函数要拿来求导、求极限</p><p>到了两个变量，面积铺满一块平面，边界接替移动的边 它叫格林公式，以后再讲 坡度和面积，是同一条路，两个方向</p></main></body></html>

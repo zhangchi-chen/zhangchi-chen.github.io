@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>08-06 万能代换：别的招都不灵时的兜底牌</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+</style></head><body><div class="topbar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span>08-06</span><a class="mv-quiz" href="../quiz/08-06.html">去自测 →</a></div><main><header><div class="tag">视频配套讲稿（朗读原文） · MATH SELF-CHECK: 50 claims re-derived, 3 fixed.</div><h1>08-06 万能代换</h1><p class="sub">别的招都不灵时的兜底牌</p></header><h2>1 · 动机</h2><p>有些积分，任何招数全不管用。 今晚的作业里，就有这样一道。 先试凑微分，可是凑不上。 再试着拆开，有一块看着仍无从下手。 部分分式只收有理函数，它不是。 想要一个转换器，三角进，有理出。</p><p>想想压在书包底的那个充电宝。 它总能救急，可从来不轻。 万能代换，也叫半角代换，就是这个充电宝。 任何三角函数有理式，它总能转换。 代价是很沉，换出的分式往往很繁。 学会用它，也学会何时把它留在家。</p><h2>2 · 定理与定义</h2><div class="card gold stmt">先看课本的原话。<br>新变量 t=tan(x/2)。<br>从(−1,0)连P，交y轴于t。<br>那个角恰是x/2，圆心角的一半。<br>P的高度 sin x，用t来写。<br>横坐标 cos x，也用t来写。<br>验算：t=½落在(3/5,4/5)<br>dx也变成t的分式。<br>(−π,π)里的x与t一一对应。<br>三处一换，整个被积式变有理。<br>t的分式加减乘除，仍是分式。<br>这正是部分分式要的原料。<br>它保证有路可走，不保证路近。</div><p>先看课本里的原话。 一个新变量，半角的正切。 从圆最左边的点连向动点，与纵轴交在高度t。 左边那个角，恰好是圆心角的一半。 动点的高度，变成关于t的分式。 横坐标同样是t的分式。 验算，二分之一落在五分之三、五分之四，正在圆上。</p><p>连微分也变成t的分式。 从负派到派，每个角恰好对应一个t。 三处一起换掉，整个被积式就成了有理式。 t的分式无论怎么加减乘除，结果仍是分式。 这正是部分分式那套流程要的原料。 它保证总有路，但从不保证路近。</p><h2>3 · 方法与证明</h2><p>这些分式从哪来？不是凭空变出的。 用倍角公式，再给分母垫上一个一。 上下同除以同一个平方，满眼全是t。 注意，这一除只在t有定义的地方可做。 看这个小三角形，两条直角边是一和t。 余弦走同样两步，结果一样干净。 两个分母相同，正是斜边的平方。 微分这一步，用凑微分，再把分式翻过来。 没有新东西，每一步全是熟悉的工具。</p><p>回到今晚那道题，让转换器开工。 三个分式，一个一个代进去。 一化简，杂项全约掉，只剩一小截。 进去很繁，出来很轻，至少这一次。 逐项积分，一行就搞定。 把半角正切换回去，答案回到x。 先别急着信，求导看能不能复原。 链式法则只用一行，原来的被积式回来了。 图像也同意，在四分之一圈处，切线陡度正好是2。</p><p>课本紧接着提醒了一句。 拿一道同类题，让两条路比一比。 就像绕了一学期远路，才发现的那条近路。 走半角这条路，分母变成四次多项式。 走正切这条路，同除一下，凑两次微分就完。 终点一样，路程却天壤之别。 这就是那句提醒，总能成功，却未必最省事。</p><p>正切这条路为何可用？把正弦余弦同时变号看看。 被积函数半圈一循环，和正切一样。 转半圈，两个符号一起翻，正切却纹丝不动。 同时变号而式子不变，就先试正切。</p><p>可有时候，压根没有近路。 正弦余弦搅在一起，也没有平方。 凑微分？分子并非分母的导数。 正切这条路？一变号，式子就变了样。 直接拆部分分式？它可不是有理函数。 近路全堵死了，掏出那个充电宝。 半角一换，分母立刻变得整齐。 乘上微分，只剩下一个对数。 近路走不通的时候，它照样能把你带到。</p><h2>4 · 展望与衔接</h2><p>同样的思路，这回挡路的是根号。 看课本对这类根式怎么说。 为何要这个条件？否则分式是常数，t根本动不了。 当c等于零，一次式的根号也包括在内。 看例题，把整个根号叫作t。 反过来解，原变量成了t的有理函数。 微分同样是t的有理式。 根号消失了，只剩纯粹的有理函数。 交给部分分式，拆成三个小项。 积分出来，是一个对数减去两倍反正切。 一道题，把整章的方法连在一起。</p><p>退一步看，第八章一共五站。 第一换元法，第二换元法，分部积分法。 然后是部分分式，以及给它供料的万能代换。 产物全交给部分分式，两者合起来闭合有理世界。 微分那一步，再次靠的是凑微分。 诚实的边界，钟形函数的原函数，没有一站写得出。 原函数确实存在，第一集讲过，只是不初等。</p><p>以后跨一整个周期积分，对称往往更省事。 积分表为何看上去有限？ 一大类被积函数，最后全化成有理函数。 再往外，是根本没有初等答案的积分。 椭圆积分就住在那里，定积分各章会另想办法。 充电宝带好，但先找找近路。</p></main></body></html>

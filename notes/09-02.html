@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>09-02 可积性：上和与下和的夹逼</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+</style></head><body><div class="topbar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span>09-02</span><a class="mv-quiz" href="../quiz/09-02.html">去自测 →</a></div><main><header><div class="tag">视频配套讲稿（朗读原文） · MATH SELF-CHECK: 32 claims re-derived, 2 fixed.</div><h1>09-02 可积性</h1><p class="sub">上和与下和的夹逼</p></header><h2>1 · 动机</h2><p>这一集，两道围栏把所有的和夹住 上一集的定义里，藏着一份永远做不完的任务 分割随便换，样本点随便挑，和就有无穷多个</p><p>想象你在班群里卖旧教材，报价一条接一条地涌来 你不用记住每一条，只盯最高和最低两个 成交价落在两者之间，两端一靠拢，价格就定了 再出一个谜题：两个函数，各有无穷多个间断点 一个可积，另一个却不可积，区别到底在哪里</p><h2>2 · 定理与定义</h2><div class="card gold stmt">固定分割，每段取上确界和下确界<br>按Mᵢ立柱子，加起来是上和S(T)<br>按mᵢ立柱子，加起来是下和s(T)<br>上和与下和，合称达布和<br>教材里的原话是这样的<br>任取ξᵢ，柱高夹在mᵢ与Mᵢ之间<br>黎曼和全夹在s(T)与S(T)之间<br>样本点贴近上确界，和就逼近上和<br>两个数，顶替无穷多种取样<br>可积，就是两道围栏能挤到一起<br>这就是可积准则，定理9.3<br>对每个ε，只需存在一个分割满足它<br>一个就够：细度小的分割自动跟上<br>每段的振幅：ωᵢ=Mᵢ−mᵢ<br>缺口就是ΣωᵢΔxᵢ：振幅乘宽度<br>准则改写：总缺口ΣωᵢΔxᵢ&lt;ε</div><p>分割固定后，每一小段找上确界和下确界 用上确界当高度立柱子，面积加起来就是上和 换成下确界当高度，加起来就是下和 上和与下和，合起来叫作达布和 教材里的原话，是这样写的 样本点随你挑，柱子的高度总在两道围栏之间 所以不管怎么取样，黎曼和逃不出这两道围栏 把样本点挪到最高处附近，黎曼和就能贴住上和 两个数顶替所有取样，就像最高最低价</p><p>可积，说到底就是这两道围栏能挤到一起 这就是教材里的可积准则，定理9.3 每个epsilon，只要一个分割做到就够 意外的是，一个就够，细度小的分割会自动跟上 每一小段上函数起伏的幅度，叫作振幅 两道围栏之间的缺口，就是振幅乘宽度，再加起来 换个说法：小块面积总和，压到epsilon以下</p><h2>3 · 方法与证明</h2><p>现在添一个分点，看看围栏怎么变 上面的围栏只会往下压，下面的只会往上抬 因为半段上的上确界，超不过整段上的 分点越加越多，两道围栏一点点收紧 两个分割一合并就看清：下和永远不会高过上和</p><p>上和一路下压，压不过去的底线，叫上积分 下和一路上抬，抬不过去的顶线，叫下积分 再看狄利克雷函数：有理点上取一，无理点上取零 小段再短，有理点和无理点也总是同时出现 于是上和永远是一，下和永远是零 分点加得再多，缺口也纹丝不动 上积分是一，下积分是零，它不可积</p><p>有三类函数，各有各的办法，把缺口压小 第一类，在闭区间上连续的函数 一致连续保证：分得够细，每段振幅一律很小 每一块全在那条线以下，加起来自然小于epsilon 第二类，有界，而且只有有限个间断点 把每个间断点，圈进一个很短的小区间 那里振幅虽大，宽度却小得可怜 剩下的部分是连续的，用第一类的办法压小</p><p>第三类，在闭区间上只升不降、或只降不升的函数 递增时，振幅就是右端比左端高出的那一截 把小块全推到同一列，正好叠成整段的总升幅 不论怎么分割，振幅加起来，始终是同一个总升幅 这一列宽不过细度，缺口自然随细度一起变小 细度一缩，缺口跟着缩，这类函数就可积了</p><p>更好读的版本来了：可积的第三充要条件 门槛epsilon，盯住振幅达到它的小段 这些小段加起来的总宽度，要能压到任意小 就像课程给的迟交天数，随你分配，总数封顶 分点越来越密，红色的小段越缩越窄 振幅大没关系，只要它占的总宽度够小</p><p>回到开头的谜题，先看黎曼函数 分母越大，点越矮；无理点上一律是零 每一段里总有无理点，所以下和一直是零 高度达到epsilon的点，只有有限几个 给它们各套一个小区间，总宽度压到eta以下 其余的小段里，函数值全在门槛以下 条件成立，黎曼函数可积，积分是零 间断点无穷多，照样可积，和狄利克雷函数正好相反 区别在于，大振幅总共占了多宽</p><h2>4 · 展望与衔接</h2><p>最后一个坑：把两个可积函数复合起来，会怎样 外层连续、内层可积，复合之后照样可积 思路是：外层的一致连续，配合内层的第三充要条件 内层只轻轻晃动的地方，复合后也只是轻轻晃 内层晃得厉害的地方，总宽度本来就很小 可要是外层不连续，结论就会翻车</p><p>一个只在零点掉下去的函数，显然可积 再把黎曼函数喂给它 零到一之间的有理点，黎曼函数不为零，结果是一 无理点上黎曼函数是零，结果是零 复合出来的，正是乔装的狄利克雷函数，不可积 内层把无穷多个点，一股脑送进外层唯一的间断点 这和第四章那个复合的漏洞，是同一个病根</p><p>第一个用处：内层可积，套上绝对值或平方，照样可积 第二个用处：按分钟跳价的骑车费用，照样可积 下一集的引擎，靠的正是连续函数一定可积 这两道围栏，就是确界那一章的老朋友</p><p>到了实分析课，这一整集会被压成一句话 有界函数可积，当且仅当间断点是零测集 一个处处间断，一个只在有理点间断 说到底，可积说的是振幅 而复合，要靠外层连续，才管得住振幅</p></main></body></html>

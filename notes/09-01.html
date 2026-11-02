@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>09-01 定积分：分割、近似、求和、取极限</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+</style></head><body><div class="topbar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span>09-01</span><a class="mv-quiz" href="../quiz/09-01.html">去自测 →</a></div><main><header><div class="tag">视频配套讲稿（朗读原文） · MATH SELF-CHECK: 27 claims re-derived, 4 fixed.</div><h1>09-01 定积分</h1><p class="sub">分割、近似、求和、取极限</p></header><h2>1 · 动机</h2><p>定积分，就四步：分割，近似，求和，取极限。 这块图形的上边是弯的，它到底有多大？ 矩形和三角形有公式，弯边没有。</p><p>两个同学动手，各切了四条。 第一位，每条量左边的高度。 第二位量右边，结果可不一样。 0.219和0.469，哪个才是面积？ 切成十六条，两个答案慢慢靠拢。 六十四条，距离又缩小了。 多出的小块推过去，叠成细细一列。 所以面积，就是这些和最后稳住的那个数。</p><p>物理也撞上这堵墙：力在变，功怎么算？ 力乘距离这条公式，只在力不变时管用。 把路切成小段，每段里假装力不变。 面积也好，功也好，是同一个和。 骨架就四步：分割，近似，求和，取极限。</p><h2>2 · 定理与定义</h2><div class="card gold stmt">第一步：在[a,b]里插分点<br>这叫分割T，‖T‖叫细度<br>中间n−1个分点，切出n段<br>每段宽度记作Δxᵢ<br>最宽的那段，决定细度‖T‖<br>‖T‖小，说明没有一段是宽的<br>第二步：每段里任取一点ξᵢ<br>用f(ξᵢ)当整条的高度<br>第三步：高乘宽，全部加起来<br>这个和叫积分和，也叫黎曼和<br>ξᵢ换个位置，和就变了<br>第四步：让每段变细，看和的去向<br>够细的分割、任意取点，和都靠近J<br>f在[a,b]上可积，J是定积分<br>先给误差ε，要多小就多小<br>再找δ，只要‖T‖&lt;δ<br>任何这样的分割，不能挑<br>取点也任意，不许挑好位置<br>所有这些和，全落在J附近ε以内</div><p>第一步，往区间里撒几个分点。 这叫分割；最宽一段的宽度，叫细度。 两端之间的分点，切出的段数总比点数多一。 每一段，有自己的宽度。 细度，由最宽的那一段说了算。 细度小，就是说，一段宽的也没有。</p><p>第二步，每段里随便挑一个点。 那一点的高度，就代表整条。 第三步，高乘宽，再统统加起来。 课本管它叫积分和，也叫黎曼和。 把点挪一挪，总和跟着变。</p><p>第四步，把每段切细，看总和往哪儿去。 只要切得够细，点随便取，和总落在同一个数旁边。 这时函数叫可积，那个数，就是它的定积分。</p><p>先给一个误差，想多小就多小。 你回一个上限，每段不许比它宽。 这么细的分割，一个也不许挑。 每段里的点也随便放，不挑顺手的。 这些总和，全落进那条窄带里。</p><h2>3 · 方法与证明</h2><p>回到开头那条线，越切越细。 总和不乱跑了，慢慢稳住。 这回分割不动，只把点挪来挪去。 总和会抖，切得越细，抖得越轻。</p><p>想想怎么估一个月的午饭钱。 排了哪个窗口，就记那个价。 时段切得越细，排哪一队越无所谓。 定义要的就是这个：不管排哪队，总数一样。</p><p>小心，点多，可不等于每段细。 往左半边塞上一千个点。 右半边仍是一整段，细度照样是一半。 光这一段，点一挪，总和能变八分之三。 一千个点，总和照样稳不住。 等分就不一样了：点越多，每段越细。 所以等分能帮你算，却当不了定义。</p><p>句式是第三章的老朋友：规矩照旧，对象换了。 那时候，一个输入只对应一个值。 这里，同一个细度，背后有无数个和。 课本特意提醒：积分和不是细度的函数。 所以它要两头稳：换分割要稳，换点也要稳。</p><p>为什么这么较真？被坏样本坑过，你就懂了。 请出狄利克雷函数：有理数给一，无理数给零。 每段全挑有理数，总和正好是一。 改挑无理数，总和就是零，切多细也一样。 误差给到一半，没有哪个数能同时挨着零和一。 所以它不可积，完整的故事，下一集细讲。</p><p>把定义反过来用，收拾一个吓人的和。 每一项拎出一个因子，样子就眼熟了。 它正是一条平缓的线，在零到一上的黎曼和。 等分，每段的高度取在右端。 先认定它可积，下一集再给理由。 这时等分取右端就够了，因为细度确实趋于零。 这个和逼近二的自然对数，约0.693。 这个值先借来用，算它的工具，再过两集登场。</p><p>积分号就是拉高的S，意思是求和。 下面是积分下限，上面是积分上限。 符号的后半截，说的仍是高乘宽。 积分变量只占个位置，换名字，值不变。</p><h2>4 · 展望与衔接</h2><p>面积问题，换成了新语言：一个定积分。 变力做的功，也写成一个定积分。 午饭钱的总数，是花钱快慢的积分。 考试小技巧：在和式极限里，认出函数和区间。</p><p>下一集，用两个只看分割的量，把这些和夹住。 后面讲弧长，走的也是这四步。 定义只说清它是什么，没教你怎么算。 再过两集，求导和积分会变成一对互逆的操作。 和式退场了，骨架回来算体积和侧面积。 四步之外再加一条：怎么选，答案不变。</p></main></body></html>

@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>08-05 有理函数：先拆包裹，再逐件签收</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+</style></head><body><div class="topbar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span>08-05</span><a class="mv-quiz" href="../quiz/08-05.html">去自测 →</a></div><main><header><div class="tag">视频配套讲稿（朗读原文） · MATH SELF-CHECK: 45 claims re-derived, 3 fixed.</div><h1>08-05 有理函数</h1><p class="sub">先拆包裹，再逐件签收</p></header><h2>1 · 动机</h2><p>今晚的作业里，有一道积分让人无从下手。 分子四次，分母五次，像一个又大又沉的包裹。 凑微分？可分子并非分母的导数。 三角代换？可这里根本没有根式。 分部积分？无论选哪一块求导，剩下的照样难。</p><p>先看一个小一号的同类积分。 一位同学出手，把它拆成两个小分式。 两块各自很温顺，加起来正好拼回原图。 每一项一步就积出来，得到对数。</p><p>整个思路就是：先在驿站把大包裹拆开。 每个标准小箱，送达路线早已知道。 对有理函数来说，靠猜的日子到此结束。 四个站点，顺序永远固定。</p><h2>2 · 定理与定义</h2><div class="card gold stmt">教材给出了一个保证。<br>假分式：分子次数≥分母次数。<br>真分式：分子次数更低。<br>其一：假分式=多项式+真分式。<br>其二：真分式=部分分式之和。<br>接着：每个因式产生哪些部分分式。<br>(x−a)ᵏ对应k项：从1次到k次<br>二次因式同理，但分子是Bx+C。<br>为何Bx+C？分子可到一次。<br>p²−4q&lt;0：这个二次式无实根。<br>对比x²−1：在±1穿过，可再拆。<br>最后：所有积分只归结为两种形式。<br>形式一：常数除以(x−a)ᵏ。<br>形式二：一次式除以二次式的幂。<br>任务拆成两半：先化归，再逐项积分。</div><p>教材先给我们一个保证。 假分式，就是分子次数不低于分母次数。 真分式，就是分子次数严格更低。 第一个承诺：假分式能拆成多项式加真分式。 第二个承诺：真分式能拆成部分分式之和。</p><p>接下来，看每个因式会产生哪些部分分式。 一次因式的幂，从一次到最高次，每次一项。 二次因式也一样，只是每个分子换成一次式。 为何分子一次？一次比二次低，依然是真分式。 判别式小于零，说明这个二次式没有实根。 对比穿过横轴的二次式：它能拆成两个一次因式。</p><p>最后，所有这些积分只归结为两类形式。 形式一：常数除以一次因式的幂。 形式二：一次式除以二次式的幂。 所以任务分两半：先化到这两类形式，再逐项积分。</p><h2>3 · 方法与证明</h2><p>第一站：先比较分子和分母的次数。 我们的包裹四次低于五次，已是真分式，直接通过。 可是三次比二次，是假分式，要先做除法。 商和余数恰好一样，是同一个x。 多项式部分直接逐项积分，只有余下的真分式进入下一站。 跳过除法，拆出来的部分分式永远对不上。 去掉分母后，左边是三次，右边至多一次，根本对不上。</p><p>第二站：只用实数，把分母分解开。 试几个小整数：二和负二，代进去全是零。 把这两个根除掉，分母就剩三个实因式。 在负二那里，图像只碰一下横轴，那个因式是平方。 它的判别式是负三，这个二次式到此为止。 一般来说，实数范围的因式只有这两类。 积分是在实数里做的，实的因式就足够了。</p><p>第三站：每个因式各自生出一摞小箱子。 这个一次因式，生出一个小箱。 平方的因式生出两个小箱，每个幂次一个。 二次因式生出一个小箱，分子是一次式。 把它们排好：四个小箱，一共五个待定系数。 五个未知数，正好对上分母的五次。 最常见的隐蔽错误：平方因式只写了最高次那一项。 拿小例子试：常数要恒等于一次式。 补回漏掉的那一箱，两个系数立刻解出，全是一。 规则就是：每个幂次各一箱，一个也不能少。</p><p>第四站：确定系数，第一步是去掉分母。 它对每个值成立，所以我们可以选值代入。 快速通道：代入二，除了一项，其余全部消失。 于是第一个系数等于一，马上签收。 原因是其余各项全含这个因式。 代入负二，同样的办法又交出一个：负一。 注意：这个根只交出最高次那一箱，低次那箱交不出来。 剩下三个，就比较两边同次幂的系数。 解这个小方程组，最后三个系数各就各位。 能代根的走快速通道，其余的只能老实解方程。 就这样，大包裹拆成了四个标准小箱。</p><p>现在逐箱签收，先看形式一。 一次方得到对数，更高的幂次用幂函数公式。 我们的三个一次箱：两个对数，一个幂函数。 形式二：把分子拆成分母的导数，再加一个常数。 我们这箱：负一半的导数，加二分之一。 导数这一块，就是凑微分，直接得到对数。 这里不用绝对值，因为这个二次式永远是正的。 常数这一块，先把分母配成完全平方。 最后，用反正切公式收尾。 幂次更高时，常数这一块用递推公式降下来。 全部签收，整个积分一口气写完。</p><p>最后一个好习惯：拆分结果是函数的恒等式。 只要有定义，两边就相等，选一个点来验算。 取一个解题时没用过的点：左边是负九分之四。 右边逐箱相加，也得到同一个数，吻合。 再看它怎样抓住一个笔误。 抄错一个系数，右边就对不上，笔误立刻被抓。 积分之前花几秒验一下，免得从头返工。</p><h2>4 · 展望与衔接</h2><p>这样的包裹从哪里来？常常来自前面几集。 凑好指数函数，开头那个小积分又出现了。 三角代换之后，常常剩下正割的积分。 把正弦凑进微分，又是一个有理包裹。 签收两个小箱，正割的积分就到手了。</p><p>下一集的万能代换，同样会产出有理函数。 在底下运作的引擎，就是这条流水线。 以后加上积分上下限，每个小箱就变成一个数。 到那时，不需要任何新的工具。</p><p>每个有理函数的积分，只由有理式、对数和反正切组成。 这四集的方法合在一起，形成一个闭环。 圈外的依然在圈外，比如第一集的钟形函数。 下一集补上最后一个通用转换器，并非魔法。 先拆包裹，再一件一件地签收。</p></main></body></html>
