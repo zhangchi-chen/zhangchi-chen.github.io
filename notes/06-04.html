@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>06-04 柯西中值定理：两个过程，同一瞬间</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+</style></head><body><div class="topbar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span>06-04</span><a class="mv-quiz" href="../quiz/06-04.html">去自测 →</a></div><main><header><div class="tag">视频配套讲稿（朗读原文） · MATH SELF-CHECK: 39 claims re-derived, 1 fixed.</div><h1>06-04 柯西中值定理</h1><p class="sub">两个过程，同一瞬间</p></header><h2>1 · 动机</h2><p>柯西中值定理，两个过程，同一个瞬间。 两个室友，晚上八点一起开始下载，九点一起停下。 A匀速下了三个G，B先慢后快。 算总量，A正好是B的三倍。 有没有某个瞬间，A的速度正好是B的三倍？</p><p>把两人的速度之比，随时间画出来。 比值一路往下走，八点半正好等于三。</p><p>拉格朗日中值定理，一次只能看一个人。 很诱人的做法：两人各用一次，再把结果相除。 可这样得到的，是两个各自的瞬间。 这一集的定理保证，有一个瞬间，两人共用。</p><h2>2 · 定理与定义</h2><div class="card gold stmt">教材定理6.6：柯西中值定理<br>条件一：两函数在[a,b]上连续<br>条件二：在(a,b)内两者可导<br>条件三：两个导数从不同时为零<br>条件四：g(a)≠g(b)，有净进展<br>结论：某个内部ξ处，速度比等于总量比<br>左边是某一瞬间，右边是整个时段<br>上下两个ξ是同一个——这才是关键<br>横轴放B的进度，纵轴放A的进度<br>这是参数方程的曲线<br>右边：连接两端的弦的斜率<br>左边：某一瞬间x处切线的斜率<br>滑动这一瞬间：在ξ处切线平行于弦<br>仍是拉格朗日的图，只是横轴换成g<br>教材指出：取g(x)=x即得特例<br>分母变成1和b−a：正是拉格朗日</div><p>先看教材原话，这就是柯西中值定理。 条件一：两个函数在整个闭区间上连续，端点也算。 条件二：在区间内部，两个函数处处可导。 条件三：可以有一个停下，但两个不会同时停下。 条件四：B的起点和终点不一样，确实有进展。 结论是：区间内部某个瞬间，速度之比等于总量之比。 左边只看一个瞬间，右边看的是整个时段。 分子分母用的是同一个瞬间，这才是关键。</p><p>把两人的进度合成一个点，一横一竖。 这个点走出一条轨迹，时间成了藏在背后的变量。 总量之比，就是连接两端那条弦的坡度。 速度之比，就是那一瞬间切线的坡度。 让瞬间滑动，到了某一刻，切线和弦正好平行。 正是拉格朗日那张图，只是横轴换了。 教材特意指出：第二个函数取成自变量，就是特例。 分母一化简，就回到了前两集的拉格朗日中值定理。</p><h2>3 · 方法与证明</h2><p>证明的思路：把整张图往下压，直到弦躺平。 这一推就是辅助函数：减掉B进度的固定倍数。 在两个端点，辅助函数的值全是零。 两端一样高，中间又光滑，罗尔定理出场了。 罗尔给出内部一点，那里切线是平的。 展开来看：那一刻，两个速度成固定倍数。 危险的一步来了：要相除，B的速度就不能是零。 要是B在那一刻停住，等式会逼另一位也停住。 两个同时停住，恰恰是条件三排除掉的情形。 所以B的速度不为零，相除，定理就出来了。 和拉格朗日的证明是同一招，只是减掉的东西换了。 到本章后面专讲构造辅助函数时，它就是第一招。</p><p>现在拿平方和立方，在零到一上试一试这条捷径。 对平方用拉格朗日，瞬间落在二分之一。 对立方，瞬间落在大约零点五七七。 放到同一条时间轴上，两个游标慢慢分开。 就像拿不同时刻截的两张图，去比两个人的进度。 一相除，分子和分母来自两个不同的瞬间。 而且数值总是对的，所以这个陷阱特别隐蔽。 可它并不来自同一个瞬间。 柯西给的瞬间，其实是三分之二。 二分之一、零点五七七、三分之二，三个瞬间各不相同。</p><p>条件四防的是：总量之比的分母变成零。 最极端的，是B根本不动，这一条先把它排除。 条件三为什么要？平方和立方，换到负一到一上。 在零这一刻，两个速度同时为零，点停在尖点上。 弦是平的，可没有一条切线是平的。 罗尔给的点，偏偏落在停住的地方，没法相除。</p><h2>4 · 展望与衔接</h2><p>再看教材例一，一个带对数的中值等式。 读题的诀窍：先看增量旁边站着谁。 这个对数，其实是对数函数自己的增量。 就让对数当第二个函数，四个条件全部成立。 柯西定理把这个比值，交给了某一个瞬间。 去掉分母，正好是例一的结论。 记住习惯：看到已知函数的增量，就请它来当第二个函数。</p><p>再看一例：沿着圆周走一段弧。 柯西保证，总有一条切线和弦平行。 由对称性，切点正好在中间那个角。 于是顺手得到一个三角恒等式。</p><p>这个定理，就是下一集的发动机。 洛必达法则，就是用它证明的。 两个量被同一个隐藏变量推着走。 总有某一刻，两者变化快慢之比，等于总变化之比。 洛必达是它的极限版，统计里的相对风险也是这个样子。 两个过程，同一个瞬间，这就是柯西中值定理。</p></main></body></html>
