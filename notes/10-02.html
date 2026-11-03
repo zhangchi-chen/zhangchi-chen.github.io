@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>10-02 公式自检：让圆和球替你查错</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+</style></head><body><div class="topbar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span>10-02</span><a class="mv-quiz" href="../quiz/10-02.html">去自测 →</a></div><main><header><div class="tag">视频配套讲稿（朗读原文） · MATH SELF-CHECK: 38 claims re-derived, 1 fixed.</div><h1>10-02 公式自检</h1><p class="sub">让圆和球替你查错</p></header><h2>1 · 动机</h2><p>今天让圆和球替我们抓错 考前一晚，两份笔记写得不一样 一份多出一个根号，另一份没有 这一章公式一大串，系数个个温和 错的写法看起来一样可信</p><p>小票可疑时，我们拿熟悉的价钱来对照 我们的价钱表，几何课上早就印好了 圆、球和圆锥，六个答案闭着眼也能背 方法一，用微元推出，再拿老答案对照 方法二，先凭记忆写出，看量纲，再对照</p><h2>2 · 定理与定义</h2><div class="card gold stmt">课本先给面积：窄条和扇形<br>再是截面求体积和旋转体<br>最后是弧长和旋转曲面面积<br>每条公式都是切片再求和<br>温和的系数来自圆和三角形<br>根号因子来自小弦的倾斜<br>课本警告：用圆柱侧面积会出错<br>圆柱带宽dx，圆台带宽ds<br>今天拿真实的球来比一比<br>量纲：长度L，面积L²，体积L³<br>斜率y′是长度比长度：纯数</div><p>课本先讲面积，切成窄条或者小扇形 然后是截面求体积，以及旋转体 最后量弧，再量旋转出的面 每条是细片相加，上一集造出 这些系数来自圆和三角形 根号因子量的是小弦有多斜</p><p>课本特别提醒了一个诱人的捷径 圆柱的带子直立，圆台的带子顺着坡倾斜 今天让真正的球说话 线、面、体，分别是一维、二维、三维 坡度是升高比前进，量纲消掉，是纯数</p><h2>3 · 方法与证明</h2><p>测试一，圆周一圈有多远，答案早知道 让一个点绕圆走完一整圈 它的速度始终等于半径 一步步加起来，正好是老答案</p><p>测试二，圆的面积，我们特意算两遍 第一条路，从圆心铺开一片片小扇形 转满一圈，正好是老答案 第二条路，竖着切成窄条，点沿着圆周走 窄条也落在同一个答案上 两条独立的路走到一起，这是最强的核对 它的绝对值从哪来，紧接着的一集细讲</p><p>压轴戏来了，球的表面积，价钱早知道 把上半个圆绕着直径转一圈 第一份笔记把球切成一圈圈圆台 关键的一步，把根号因子化简 乘上高度，根号全部抵消，只剩半径 意外的是，一样厚的切片，面积一样大 第一份笔记正好对上老答案 第二份笔记改用直立的圆柱带 积分就是半圆面积再放大 结果比真值少了两成多 小票错了，可看上去毫无破绽</p><p>看看量纲，两个答案同样是面积 看量纲，就像拼写检查 它能抓出乱码，却放过用错的近义词 错答案拼写完美，只是意思不对 漏掉的是纯数，量纲察觉不到它的离开 这个错，只有老答案抓得住</p><p>两条带子只在赤道上一致，那里最平 靠近两极，带子斜得厉害，捷径亏得最多 圆柱处处是平的，两条带子完全一致 所以错公式才眼熟，最容易的情形它没出错</p><p>方法二，旋转体的体积公式只记得一半 是圆周，或是圆盘？先问量纲 体积要三维，厚度只提供一维 所以每片要贡献一个面积，也就是圆盘 另一个只是绕一圈的距离，积出来是面积 一眼就能排除，体积绝不会是面积 再对价钱，球的体积完全吻合 圆锥也对上了老答案 量纲先定形状，老答案再定数字</p><p>最后一项，圆锥的侧面，价钱也早知道 这里的l是母线，从顶点斜着到底边 坡度始终不变，根号因子是个固定比值 积出来，正好是老价钱 一个因子来自半径，母线来自倾斜的微元 丢掉它，就犯了把高当母线的老毛病</p><p>量纲能抓什么，又会漏掉什么 它能抓住乱搭配，比如记错的根号 那是把纯数和面积硬加在一起 也能抓住冒充体积的面积 它放过系数错误，有没有根号，同样是面积 所以分两层核对，先量纲，再老答案</p><h2>4 · 展望与衔接</h2><p>应用一，从球上切下的一顶帽子 被积函数是常数，一步就算完 帽子盖住整个球时，又回到全球面积 应用二，考试时记不清极坐标的一半系数 量纲帮不上忙，一个圆就能看出面积翻倍了</p><p>今天核对的公式，全是上一集造出来的 今天就是流水线末端的质检 后面的物理应用，也要过这两道检查 总压力要是力，功要是力乘以距离</p><p>物理课先靠量纲猜公式 数值计算课用它揪出不可能的结果 今天它抓到错根号，也认了自己的短板 先看量纲，最后由圆和球说了算</p></main></body></html>

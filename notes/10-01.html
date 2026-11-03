@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>10-01 微元法：切薄片，过一道o(Δx)检验</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+</style></head><body><div class="topbar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span>10-01</span><a class="mv-quiz" href="../quiz/10-01.html">去自测 →</a></div><main><header><div class="tag">视频配套讲稿（朗读原文） · MATH SELF-CHECK: 30 claims re-derived, 3 fixed.</div><h1>10-01 微元法</h1><p class="sub">切薄片，过一道o(Δx)检验</p></header><h2>1 · 动机</h2><p>今天讲微元法：切得薄，再过一道检验 应用题总是那三步：切片，相乘，积分 像张规则卡，背面空空，没写理由</p><p>比如，你想给宿舍台灯罩包一层布 它的侧边是一条直线，绕着轴转一圈 方案A，把它切成一圈圈薄圆柱 方案A说，大约要9.42平方分米 方案B，改切成一圈圈薄圆台 方案B说，大约要13.33平方分米 同一个灯罩，两个答案隔着将近四平方分米</p><p>这两套切法看着够薄，到底谁错了 今天，这张规则卡要变成定理 代价是，每个公式要老实跑一次单元测试 而这个测试，正好会查出方案A的错</p><h2>2 · 定理与定义</h2><div class="card gold stmt">先看课本原话<br>核心：线性形式加o(Δx)条件<br>第一句：Φ分布在[a,b]上<br>Φ(x)管[a,x]，Φ(b)是目标<br>第二句：在小段上取近似量Δ′Φ<br>第三句：近似量形如f(x)Δx<br>并且要求f连续<br>第四句：误差必须是o(Δx)<br>也就是：误差/Δx→0<br>于是写dΦ=f(x)dx，再积分<br>课本还附了三条注意<br>每条注意都是一条假设<br>把方法拆成三条假设<br>(i)代数可加性：整体等于各段之和<br>空区间上的量为0：Φ[a,a]=0<br>(ii)一阶近似：线性项加高阶无穷小<br>(iii)引擎：微积分基本定理<br>输入(i)(ii)，输出一个积分</div><p>先看课本里的原话 核心是一个线性形式，再加一个误差条件 第一句：要求的量铺在一段区间上 累计量一路往右攒，走到终点就是答案 第二句：在一小段上，选一个算得出的近似量 第三句：近似量要写成系数乘宽度 而且系数要连续 第四句：误差要比宽度消失得更快 比如这里，误差除以宽度一路缩向零 然后写下这个微元，从头积到尾</p><p>课本紧接着给了三条注意 每条注意，其实是一条假设 我们把这个方法拆成三条假设 第一，代数可加性：整体等于各段相加 而零宽度的区间，装的量是零 第二，每一小段是线性项，加一个高阶无穷小 第三，引擎是第九章的微积分基本定理 喂进前两条，出来一个积分</p><h2>3 · 方法与证明</h2><p>现在来证明，只要两步 第一步：小段的量，就是累计量的增量 除以宽度再取极限，导数就是前面那个系数 画成图，累计量往上爬的坡度就是那个系数 第二步：用基本定理，最多再加一个常数 起点处累计为零，常数只能是零 结论来了：目标恰好就是一个积分 两步写完，规则卡原来是穿工装的定理 连续性只用了一次，就在第二步 这个记号是第五章的微分，形式不变性也在</p><p>现在把三条注意，一一对上假设 注意一，原样就是可加性 反例：区间上的最高点，加不起来 注意二：近似量要严格按照定义来选 弧长由弦长和定义，所以选弦 注意三，就是一阶近似那条的入门检验 测试通过，这个公式才能发布</p><p>接下来连推四个微元，靠推，不靠背 课本的清单，我们逐个挣来 第一个微元是面积：曲线下的一根窄条 凑近看，窄条几乎就是一个矩形 顶上剩的一小块，被曲线的起伏框住 连续性让它趋于零，面积微元过关 曲线跑到轴下面时，要取绝对值</p><p>第二个，极坐标面积：切一片细扇形 凑近看，就是中学学过的扇形 看成细三角形，一阶上答案一样 细扇形里半径几乎不变，这一关也过了</p><p>第三个，体积：切一片薄片，像切面包 截面变化连续，薄片这一关就过了 曲线一转，每个截面是一个圆盘 圆盘面积乘厚度，就是体积微元</p><p>第四个，弧长：第五章的微分三角形回来了 小三角形，照样满足勾股定理 把宽度提出来，弧长微元就出现了 坡度连续，弦和切线在一阶上一致</p><p>好戏来了：旋转曲面，就是那个灯罩 候选A，偷懒版：把这一圈看成圆柱 候选B，老实版：贴着这段的圆台 面积等于平均周长，乘以斜高 给B跑检验：剩下的缩得更快，通过 放大来看，圆台紧贴曲线，只剩碎屑 再测A：误差里留着一整个一次项 按每一份宽度算，误差停在非零值</p><p>在灯罩边上，把切片一次次缩小十倍 老实版一路缩到零，偷懒版停在2.6附近 偷懒版的误差是一阶的，算不上高阶无穷小 这些误差堆起来消不掉，公式就错了 灯罩上缺的那块布，就是它 老实版胜出：周长乘以弧长微元 这个检验，就是上线前抓虫的单元测试</p><p>同一个检验，也能抓住弧长的捷径 拿影子做微元，每条曲线的长度就等于影子 正方形的对角线，居然算成了1 检验一眼看穿：比值停在零以上 只有完全水平的曲线，才处处过关</p><h2>4 · 展望与衔接</h2><p>五个微元一张卡，个个过了检验 下一集，它们要逐个对照中学公式 量水瓶的截面积，叠薄片求容积 到物理应用那集，同一张清单算功、压力和质量</p><p>三条假设铺到平面上，就是平面上的积分 沿曲线铺开，就是曲线积分 切得薄，过一道检验，方法就这么多</p></main></body></html>

@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>10-03 闭合参数曲线的面积：符号跟随行进方向</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+</style></head><body><div class="topbar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span>10-03</span><a class="mv-quiz" href="../quiz/10-03.html">去自测 →</a></div><main><header><div class="tag">视频配套讲稿（朗读原文） · MATH SELF-CHECK: 38 claims re-derived, 3 fixed.</div><h1>10-03 闭合参数曲线的面积</h1><p class="sub">符号跟随行进方向</p></header><h2>1 · 动机</h2><p>今天说闭合曲线围出的面积，和一个跟着方向走的符号。 两个室友，要算同一个椭圆的面积。 室友一把椭圆代进公式，得到负六派。 室友二换了个写法，得到正六派。 同一个椭圆，同一个公式，符号却相反。 区别只在于，两人绕圈的方向不同。</p><p>想象你在操场上跑一圈。 再想象一个怪计步器，这边跑记正，那边跑记负。 今天就弄清这个符号从哪来，怎么驯服它。</p><h2>2 · 定理与定义</h2><div class="card gold stmt">先看简单情形：不闭合的弧<br>设曲线由参数方程给出，t∈[α,β]<br>y连续，x连续可微，开区间上x′≠0<br>记 a=x(α)，b=x(β)<br>曲线与x=a、x=b、x轴所围区域<br>其面积 A=∫_α^β|yx′|dt<br>现在让曲线闭合：点回到起点<br>若曲线闭合：起点与终点重合<br>且在(α,β)上自身不相交<br>面积 A=|∫_α^β yx′dt|<br>也等于 |∫_α^β xy′dt|<br>这个公式由(1)和(3)推出<br>绝对值内符号由定向（行进方向）决定<br>不自交的闭曲线叫简单闭曲线</div><p>先看容易的情形：一段回不到起点的弧。 设一条曲线，随着 t 在区间上走，一笔画出来。 高度连续就好，横轴上的影子一直向同一边走，从不停下。 标出影子的起点和终点。 弧、两条竖线和横轴，一起围出一块区域。 它的面积，就是一个关于 t 的积分。</p><p>现在让曲线闭合，点又回到了起点。 假如曲线闭合，终点正好落回起点。 而且一路上自己不和自己相交， 那么围出的面积，就是一个积分再取绝对值。 两个坐标换个角色，也一样。 它由公式一和公式三拼出来。 绝对值里面的符号，取决于曲线往哪个方向走。 不和自己相交的闭曲线，叫作简单闭曲线。</p><h2>3 · 方法与证明</h2><p>回到公式三，它只是换了身衣服的换元法。 让参数带着横坐标走，微元也跟着换样子。 上下限也跟着搬家，正是第九章的老规矩。 要是弧从右往左走，积分就悄悄变成负的。 这半个椭圆，居然报出负三派。 速度连续又从不为零，半路就没法掉头。 绝对值把反向吸收掉，面积是三派。 刚好是六派的一半，上一集的裁判点头。</p><p>回到闭曲线，真正危险的是符号。 让点逆时针跑，盯着累计值。 累计值一路往下，停在负六派。 再顺时针跑同一个椭圆。 这次一路往上，停在正六派。 这种读法下，逆时针得负，顺时针得正。 另一种读法正好反过来，逆时针得正。 符号说的是你，不是这块区域。 在公式卡上写一句：去掉绝对值，答案就带符号。 加回绝对值，两圈一样是六派。 就像操场，往哪边跑，一圈就是一圈。</p><p>例一：一般的椭圆。 参数走一整圈，方向是逆时针。 关键一步：被积函数是正弦平方的负倍数。 正弦平方一圈平均一半，积分是负派 a b。 取绝对值，得到派 a b。 变成圆，上一集的裁判又点头了。</p><p>例二：轮子滚一圈，画出摆线一拱。 区间内部，横向一直向前，公式三可以用。 高度和横向速度恰好相同，被积函数成了平方。 结果是滚动圆面积的整整三倍。 检验一下：拱放得进一个四派 a 方的框， 又装得下一半大小的三角形，答案正好在两者之间。</p><p>同一圈，两种读法。 两者总是相反，加起来，闭合一圈刚好是零。 于是相减再除以二，两个坐标平起平坐。 一平均，得到平移不变的形式。 拿圆来检验：被积式缩成一个常数。 绕满一圈，又是派 r 方。</p><p>把整圈平移一下，就像换了个原点。 被积式多出了两项。 绕回起点，总的升降和进退相抵，多出的项消失。 要是弧没闭合，多出的项就留着。 每一小块，是从原点扇出的细三角形。 原点挪到外面，有些三角形记负，总和却没变。</p><p>说句实话：课本到底怎么证公式四？ 在最左和最右的地方，把曲线切开， 剩下上下两条图像，公式一拿它们相减。 逆时针走，上面那段倒着跑，负号就从这来。 这要求每条竖线和曲线最多碰两次。 C 形曲线就不行，竖线会穿过四次。 公式说的是所有简单闭曲线，这个证明只管到一部分。 一般情形的证明，先欠着。</p><h2>4 · 展望与衔接</h2><p>第二十一章的格林公式，会把它化成区域上的积分。 这笔债就此付清，C 形也算。 第二十二章的斯托克斯公式，把它推到曲面上。 那两集，会回头指向今天这一集。</p><p>应用一：跑表把你的一圈逐点记下来。 多边形上，积分变成顶点求和，得到一千四百五十平方米。 反着跑，原始的和是负一千四百五十。 应用二：字体文件里，字母的洞要反着画。 面积的正负，告诉软件哪一圈是洞。</p><p>往后看：这其实是课程里第一个曲线积分。 求积仪描一圈边界，靠的正是它。 记住：符号说方向，绝对值说面积。</p></main></body></html>
