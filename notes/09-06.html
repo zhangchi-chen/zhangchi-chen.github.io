@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>09-06 积分中值定理：一段路的平均速度</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+</style></head><body><div class="topbar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span>09-06</span><a class="mv-quiz" href="../quiz/09-06.html">去自测 →</a></div><main><header><div class="tag">视频配套讲稿（朗读原文） · MATH SELF-CHECK: 44 claims re-derived, 2 fixed.</div><h1>09-06 积分中值定理</h1><p class="sub">一段路的平均速度</p></header><h2>1 · 动机</h2><p>外卖送到了，二十分钟骑了六公里。 软件显示，平均时速十八公里。 可是车速一刻也没停下来。 有没有哪一刻，正好就是十八？ 偷个懒，把首尾两个读数一平均，得六。 可按时速六公里，二十分钟只能骑两公里。</p><p>五次测验求平均，加起来再除以五。 可车速在每个瞬间，各有一个读数。 无穷多个读数，根本没法加完再除。 同一个词，平均，这回需要第二个意思。 今天先定义它，再去抓住那一刻。</p><h2>2 · 定理与定义</h2><div class="card gold stmt">把[a,b]n等分，每段读一个值<br>这n个读数，照老办法平均<br>它正是黎曼和除以(b−a)<br>越分越细，样本平均趋于稳定<br>极限就是f在[a,b]上的平均值<br>几何上：把面积摊平成等面积矩形<br>这里f的平均高度是1.75<br>回到骑手：路程是速度的积分<br>平均速度=路程÷时间<br>摊平后高度正是18，App没算错<br>曲线在t=5和t=15处穿过18<br>确实有一刻恰好等于平均速度<br>06-02的拉格朗日中值定理说过<br>路程写成积分：同一句话，换件衣服<br>这就是今天的定理，逐句来读<br>如果f在[a,b]上连续<br>那么至少存在一点ξ∈[a,b]<br>使得积分等于f(ξ)(b−a)<br>第一句：曲线一笔画成，没有跳跃<br>第二句：至少一个点，可能不止<br>第三句：面积等于高f(ξ)的矩形<br>除以(b−a)：f(ξ)就是平均值<br>一句话：连续函数取到平均值<br>f、g都连续，g在[a,b]上不变号<br>那么至少存在一点ξ∈[a,b]<br>使得fg的积分等于f(ξ)乘g的积分<br>取g≡1，就是定理9.7<br>中值点ξ总能取在开区间(a,b)内<br>端点也可能行，但内部一定有一个</div><p>把区间等分成很多段，每段读一个值。 这些读数，先照老办法平均。 细看，它正是黎曼和，再除以区间宽度。 越分越细，这个平均慢慢稳住了。 它的极限，就叫函数在这一段上的平均值。 画成图，就是把面积摊平成一块矩形。 对这个函数，摊平后的高度是1.75。</p><p>回到骑手，路程就是速度的积分。 平均速度，就是路程除以时间。 把面积摊平，高度正好十八，软件没算错。 车速两次穿过十八，第五分钟和第十五分钟。 所以真的有那么一刻，正好等于平均速度。 这话我们听过：第六章的拉格朗日中值定理。 把路程写成积分，同一句话，换了身衣服。 这就是今天的定理，我们一句一句读。</p><p>第一，函数是连续的。 那么区间里至少有一个点， 面积正好是那一点高度的矩形。</p><p>第一句：图像一笔画完，没有跳跃。 第二句：至少一个点，也许不止一个。 第三句：整块面积，变成那个高度的矩形。 除以区间宽度，那个高度正是平均值。 一句话：连续函数一定取得到平均值。</p><p>推广的定理，多了一个不变号的函数。 那么至少有一个点， 加权积分，等于这点的值乘以权的总量。 权取成常数一，就是前一个定理。 课本的注：中值点总能取在内部。 端点也许也可以，但内部一定有一个。</p><h2>3 · 方法与证明</h2><p>这个点凭什么存在？三步，三件借来的工具。 第一步，最大最小值定理：有最小值和最大值。 于是整段图像，夹在这两条线之间。 第二步：对不等式积分，大小关系不会翻转。 面积被夹在矮矩形和高矩形之间。 除以区间宽度，平均值也被夹在中间。 第三步，介值定理：函数连续爬升。 途中必然经过平均高度，那里就是中值点。 这里中值点是根号三，高度正好1.75。 三步三份功劳：第四章两份，本章一份。</p><p>去掉连续性，第三步立刻失灵。 这个阶梯函数平均是二分之一，却一次也取不到。 上下界照样成立，只有取到这件事落空。</p><p>来算一个：正弦在一个拱上的平均值。 一个拱下面的面积，恰好是二。 再除以宽度派，平均值约是0.64。 首尾两个高度平均是零，真正的平均高得多。 中值点在哪？看正弦碰到这条线。 两个解，约0.69，和它的对称点约2.45。 两个点在区间内部，正如课本的注所说。 为什么在内部？把拉格朗日用在变上限积分上。 弦的陡度就是平均值，同向的切线落在内部。</p><p>再加上权：总评里，作业和考试占比不同。 比例一变，总评就动，可始终在七十到九十之间。 连续的版本：给函数配上权，再求平均。 权偏向右边，平均就从1.75升到2.125。 权的符号固定，平均跑不出范围，介值定理接手。</p><p>可一旦权变了号，加权平均就可能跑出界。 举个例子：一条直线，配一个会掉到零下的权。 加权平均高过了最大值，哪个点也对不上。 不变号这个条件，是顶梁柱，不是摆设。</p><p>考试用法一：拿最值快速估范围。 比如这个，被积函数从一降到二分之一。 区间宽度是一，积分就在二分之一和一之间。 真实值约0.785，果然落在中间。 看成平均高度：中值点在内部，所以严格不等。 用法二：正负面积会抵消，绝对值不会。 用法三：只知道一个因子的范围，就把它提出来。 比如这一族积分，随着次数升高，被压向零。</p><h2>4 · 展望与衔接</h2><p>回看第九章第三集：那里有个证明，悄悄用了它。 窄条的面积，等于条内某个高度的矩形，正是它。 让窄条缩小，连续性一出手，导数就等于函数值。 往后看：积分第二中值定理，因子只升或只降。 课本里写着它，第十一章的狄利克雷判别法靠它驱动。</p><p>展望：权换成一个分布的密度，平均就成了期望。 函数一旦间断，就只剩上下界。 记住一句：连续函数，总有一刻取到平均值。</p></main></body></html>

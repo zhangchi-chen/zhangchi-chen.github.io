@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>09-04 变限积分：上限一动，积分就成了函数</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+</style></head><body><div class="topbar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span>09-04</span><a class="mv-quiz" href="../quiz/09-04.html">去自测 →</a></div><main><header><div class="tag">视频配套讲稿（朗读原文） · MATH SELF-CHECK: 35 claims re-derived, 4 fixed.</div><h1>09-04 变限积分</h1><p class="sub">上限一动，积分就成了函数</p></header><h2>1 · 动机</h2><p>上限一旦动起来，积分就变成了函数。 一道作业题：求这个积分的导数。 你的作业答案，三两下就写完了。 可答案册上，多出了一个积分。 两边用的，似乎全是上一集的那条定理。 同一条定理，却给出两个答案。到底谁对？</p><p>想弄清楚，先想象一个下载进度条。 边缘一直在动，填满的那部分就是读数。 现在让下载速度忽快忽慢。 到现在为止下载的量，就是速度图像下面的面积。 这块面积的右边，是一面可以拖动的墙。 墙停在哪里，就对应一个数。这就是函数。</p><h2>2 · 定理与定义</h2><div class="card gold stmt">此积分称为变上限的定积分；<br>类似地，Ψ(x)=∫ₓᵇf(t)dt<br>两者合称变限积分。<br>两式中的积分变量不能写成x，<br>如∫ₐˣf(x)dx，免得与上限混淆<br>慢慢读：x是墙所在的位置。<br>t在底下跑，从a扫到墙边。<br>扫完之后t用完了，只剩x。<br>拖动墙，Φ就画出自己的图像。<br>定理9.9：若f在[a,b]上可积，<br>那么Φ在[a,b]上连续。<br>为什么？把墙推一小步Δx。<br>新添的窄条，就是ΔΦ。<br>可积必有界：窄条装得进高M的盒子<br>|ΔΦ|≤M|Δx|：小推动，小变化<br>即使f有跳跃，这个估计照样成立。<br>Φ照样连成一片，但在跳跃处折了一下。<br>那里左、右导数存在，但不相等。<br>定理9.10：若f在[a,b]连续，<br>Φ在[a,b]处处可导，且Φ′=f。<br>f连续时，窄条几乎是个矩形。<br>高是f(x)，ΔΦ/Δx→f(x)<br>09-03造了机器，本集来开动它</div><p>这样的积分，叫作变上限的定积分。 类似地，也可以从x积到右端。 两者合起来叫变限积分。 在这两个式子里，积分变量不能写成x， 不然就会和上限里的x搞混。</p><p>慢慢读。字母x，标出墙站在哪里。 同时，t在底下奔跑，从左端扫到墙边。 扫完以后，t就用完了。只剩下墙的位置。 拖着墙走，这个积分就画出了自己的图像。</p><p>定理九点九：只要f在区间上可积， 那么这个变上限积分就是连续的。 为什么？把墙往前推一小步。 新添的窄条，正是改变量。 可积函数一定有界，所以窄条能装进一个矮盒子。 所以推得少，变化也少。这就是连续。</p><p>就算f突然跳一下，这个估计照样成立。 积分的图像照样连成一片，只是在跳跃处折了一下。 在那一点，左导数和右导数存在，却不相等。</p><p>定理九点十：如果f在区间上连续， 那么这个积分处处可导，导数正好就是f。 f连续的时候，窄条几乎就是一个矩形。 它的高是墙边的函数值，增加的快慢就是这个高度。 上一集造好了这台机器，这一集，我们开着它上路。</p><h2>3 · 方法与证明</h2><p>第一程：如果墙的位置，本身也是一个函数呢？ 这块面积，就是那个积分在墙边的值。 这是复合函数，交给第五章的链式法则。 外层求导，得到墙边的高度。 再乘上墙移动的速度。 高度乘速度，正是面积增加的快慢。</p><p>现在，让左端也动起来。 在固定的左端点处拆开，用的是区间可加性。 左边那块被减掉，所以带负号。 链式法则用两次，每面墙一次。 两面墙在动，贡献两项，符号相反。</p><p>试驾一下：选一个能手算核对的例子。 两面墙的项一减，剩下x分之一。 直接计算，导数也是x分之一。两边吻合。</p><p>回头看看定义里的那条警告。 想象两个同名的室友，共用一个信箱。 于是信总被拆错，互相弄丢。 这里也一样：一个字母同时干两份活。 修正很容易：给扫动的那个变量另起一个名字。 t是哑变量，也叫约束变量，换个名字，值一点也不变。 x可是自由的：它一动，值就跟着变。</p><p>回到那道作业题。这里，x躲进了被积函数。 作业里，把这个x当成了常数。 可它跟着墙动，所以先提到积分外面。 这时用乘积的求导法则，得到两项。 答案册是对的。</p><p>再来一道考试常客，x藏得更深。 把x冻住，答案竟然是零，显然错了。 先拆开。按线性性质，把x提到外面。 前一项用乘积法则，后一项直接用那条定理。 两项正好相撞，互相抵消。 再求一次导，f本身就回来了。</p><p>接下来，用这样的函数造一个极限。 面积疯狂变大，指数却越来越小，像在拔河。 取对数，得到无穷比无穷的形式。 用第六章的洛必达法则，分子交给那条定理。 这块面积，几乎全挤在墙边最后那一窄条里。 再用一次洛必达，比值稳稳落在1。 对数趋于一，所以极限就是e。</p><p>最后一程：f的原函数，全是它上下平移。 积分在左端是零，所以平移量就是F在左端的值。 所以F就是这个积分，再加上它在左端的值。 第八章的原函数族，终于有了能写出来的一员。</p><h2>4 · 展望与衔接</h2><p>应用一：那道考试常客，其实是一个位置函数。 跑800米测试，你从静止起跑，加速度是f。 起点为零，初速为零，加速度是f，正是这一跑。</p><p>应用二：一个非负的密度函数，和墙左边的面积。 它把左边所有的可能性全收集起来。左端暂时先不深究。 而它的导数，就是密度函数。同一个模式。 以后学随机现象，它叫分布函数。</p><p>应用三：第十一章的无穷积分，正是它的极限。 下一集的那些公式，全能用对上限求导来验证。 再往远看，被积函数可能同时依赖另一个变量。 求导和积分交换次序，并非理所当然，一致收敛会出现。 那是后面一章的故事，我们先只记住名字。 上限一动，积分就活成了一个函数。 墙可以动，哑变量只是哑变量，求导之前先拆开。</p></main></body></html>
