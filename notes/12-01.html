@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>12-01 看部分和，别只盯单项</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+</style></head><body><div class="topbar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span>12-01</span><a class="mv-quiz" href="../quiz/12-01.html">去自测 →</a></div><main><header><div class="tag">视频配套讲稿（朗读原文） · MATH SELF-CHECK: 37 claims re-derived, 2 fixed.</div><h1>12-01 看部分和，别只盯单项</h1><p class="sub">Watch the partial sums, not the single terms</p></header><h2>1 · 动机</h2><p>盯住总数，别只看某一项。 一张写不完的清单，加一，减一，再加一。 小王两两配对，每一对抵消成零。 小李先留出第一项，再配对，得到一。 项一样，顺序也一样，答案却有两个。 到底哪一个才是真的和？ 无穷多个数相加，此刻并没有定义。</p><h2>2 · 定理与定义</h2><div class="card gold stmt">计算器只会加有限个数<br>想象食堂收银屏：朋友不停加菜<br>屏幕显示的是累计总额<br>前n项的累计，叫部分和Sₙ<br>定义1：数项级数与通项<br>uₙ叫通项；整个和式叫级数<br>定义2：级数收敛，就是部分和收敛<br>所谓的和S，就是部分和的极限<br>部分和发散，级数就没有和<br>清单的累计：1,0,1,0…发散<br>所以那道题本来就没有和<br>第一个例子：等比级数<br>q≠1时，部分和有公式<br>|q|&lt;1时，Sₙ→a/(1−q)<br>例：1/2+1/4+1/8+⋯=1<br>|q|≥1时，部分和不收敛<br>例二：Σ1/(n(n+1))<br>关键一步：拆项，相邻抵消<br>剩下Sₙ=1−1/(n+1)→1<br>级数收敛，和恰好为1<br>级数与数列，是同一件事的两面<br>级数→数列：取部分和<br>反过来，数列→级数：取相邻差<br>它的部分和正好是aₙ<br>级数的问题，就是数列的问题</div><p>计算器只能做有限次加法。 想象食堂的收银屏，朋友们不停地加菜。 屏幕只显示加起来的总额。 加到第 n 项的总额，叫做部分和。 定义一：数项级数和它的通项。 第 n 项叫通项，整串式子叫级数。</p><p>定义二：级数收敛，就是部分和数列收敛。 所谓的和，就是部分和的极限，仅此而已。 部分和发散，级数就没有和。 清单的总额在一和零之间来回跳，于是发散。 原来，那道怪题本来就没有和。</p><p>第一个例子，等比级数。 公比不是一时，部分和有现成公式。 公比的绝对值小于一，部分和就收敛。 每一项是前一项的一半，加起来正好是一。 公比的绝对值不小于一，就发散。</p><p>第二个例子，每一项是相邻整数乘积的倒数。 关键一步：拆开，再成对抵消。 只剩首尾两项，部分和逼近一。 级数收敛，和正好是一。</p><p>级数和数列，是同一件事的两面。 从级数出发，取部分和得到数列。 反过来，前后两项相减，排成一个级数。 它的部分和，又回到原来的数列。 所以，级数的问题就是数列的问题。</p><h2>3 · 方法与证明</h2><p>能写出部分和的公式，是难得的运气。 不知道极限，也想判断收敛，就请出柯西。 定理十二点一，级数的柯西准则。 这一段的和，正是两个部分和相减。 这就是数列的柯西准则，换了身衣服。</p><p>读成：走到足够远，任何一段的和很小。 想象一扇窗框住 p 项，往远处滑。 要变小的是窗里的总和，不只是某一项。 窗口再宽，也要成立，这才是难点。 先给容忍度，再看要走多远。 把窗口收到最窄，只框一项。 于是远处的每一项，也必须趋于零。</p><p>推论：级数收敛，通项一定趋于零。 五秒检查：通项不趋于零，直接发散。 那张清单的项，正负一来回，从不变小。 考试陷阱：通项趋于零，只是必要条件。 项变小是白送的，换不来收敛。</p><p>轮到调和级数登场了。 第一眼看，项趋于零，推论什么也说不出来。 第二眼，用柯西准则框住一段。 这一段里，每一项不小于最后那一项。 所以整段的和，至少是二分之一。 不管走多远，总有一段的和不小于二分之一。 课本的例三，一步就证完了。 容忍度取二分之一，准则失效，调和级数发散。</p><p>第三眼，前十六项一组比一组多一倍。 每组里最后一项最小，所以每组至少二分之一。 每多翻倍一次，总和至少多出二分之一。 每一项在消失，总和却冲过任何上限。 越过四要三十一项，越过十要一万两千多项。</p><p>回到开头那道怪题。 定理十二点四：收敛级数加括号，和不变。 可是发散的级数一加括号，就可能凭空冒出答案。 两人各挑了一半部分和，一边是零，一边是一。 收敛与否，先看部分和本身。</p><h2>4 · 展望与衔接</h2><p>第一个用处：零点九循环到底是什么？ 它是公比十分之一的等比级数，和恰好是一。 每个无限小数，背后全是部分和的极限。 第二个用处：一个程序，项一变得很小就停下来。 拿调和级数试，它报出约十九，一个不存在的和。 补丁：项变小，并不能证明收敛。</p><p>回看上一章，反常积分问的也是，远处的尾巴有多大。 两个柯西准则是双胞胎，第四集再会合。 下一步，想证收敛，需要拿来比较的标杆。 调和级数就是第一块标杆，发散的那一块。 第十三章，它原样变成一致收敛的柯西准则。</p><p>最后想一想，和就是部分和的极限，这本身是一个选择。 后面的课程里，切萨罗求和会给它二分之一。 而我们这门课，始终只认部分和。 盯住总数，别只看某一项。</p></main></body></html>

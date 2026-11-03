@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>10-04 弧长与曲率：这条路弯得多急</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+</style></head><body><div class="topbar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span>10-04</span><a class="mv-quiz" href="../quiz/10-04.html">去自测 →</a></div><main><header><div class="tag">视频配套讲稿（朗读原文） · MATH SELF-CHECK: 34 claims re-derived, 2 fixed.</div><h1>10-04 弧长与曲率</h1><p class="sub">这条路弯得多急</p></header><h2>1 · 动机</h2><p>弧长与曲率，说的是一条路弯得有多急。 地图上，去图书馆的那条路弯弯绕绕。 可尺子只认直线，对弯路无能为力。 把地图放大，每一小段渐渐变直。 把直的小段加起来，看总数稳不稳。</p><p>第二个问题。两条路，同样转过一个直角。 校园小路慢慢地转，车库坡道一眨眼就转完。 转的角度一样，坡道却急得多，这是为什么？ 今天回答两件事：曲线多长，弯得多急。</p><h2>2 · 定理与定义</h2><div class="card gold stmt">在曲线C上依次取分点<br>相邻分点连起来，得到内接折线<br>折线总长是各段弦长之和<br>这套语法，09-01见过<br>分割、求和、取极限，换到曲线上<br>分割加细，折线越来越贴近曲线<br>多加一个分点，折线只会变长<br>总长节节攀升：有没有有限极限？<br>定义1：折线总长有有限极限，称可求长<br>细度‖T‖：最长的那段弦<br>极限有限：总长稳定在一个数s<br>这时称C可求长，s就是它的弧长<br>小心：连续曲线未必可求长<br>原点附近越抖越密，折线总长无界<br>定理10.1：连续可微，就可求长<br>无自交、不封闭：从起点走到终点<br>连续可微：速度向量连续变化<br>于是：弧长就是速率的积分</div><p>沿曲线从头到尾依次取分点。 把相邻的点连起来，就是一条内接折线。 折线总长，就是各段弦长加在一起。 这套语法我们见过，就在定积分那一集。 分割，求和，取极限，只是这次切的是曲线。 分点越取越密，折线紧紧贴住曲线。 每多加一个分点，折线总长只增不减。 总长节节攀升，可它有没有有限的终点？</p><p>定义一：如果折线总长有有限极限，就称曲线可求长。 分割细不细，看最长的那段弦。 极限有限，就是总长最终稳稳停在一个数上。 这时称曲线可求长，那个数就是它的弧长。 小心，连着的曲线也可能量不出长度。 抖动挤向原点，折线总长一路跑向无穷。</p><p>定理十点一：坐标连续可微，曲线就可求长。 曲线从起点走到终点，只走一遍，从不自交。 也就是说，速度箭头变化时从不跳变。 所以弧长就是一路的速率累加起来。</p><h2>3 · 方法与证明</h2><p>为什么会是积分？盯住一段弦看。 勾股定理用两条直角边算出弦长。 中值定理把两条边换成导数取样。 麻烦来了：这两个取样点不一定落在一处。 真正的功夫，是把两个取样点并成一个。 导数连续，正是这一换站得住的理由。 和微元法那一集的一阶检验是同一回事。 对齐之后，正是速率的积分和，积分登场。</p><p>让弦缩成一小段切线，这就是弧微分。 又是勾股定理，这次在微分三角形上。 讲微分时画过它，如今斜边终于有了名字。 对函数图像，把沿x的那一步提出来。 参数方程里，两条边按t的步长来量。 极坐标曲线：用半径和角度改写两个坐标。 平方相加，交叉项互相抵消，留下干净的结果。 三种写法，底下是同一个微分三角形。</p><p>第一段路：自行车轮滚动时，气门芯画出的拱形。 车轮转一整圈，画出完整的一拱。 用半角公式，速率化成一个正弦。 积分一算，一整拱恰好等于八个半径。 检验：过拱顶的两段弦略短一些，理应如此。 横着走再竖着走，算多了。八个半径夹在中间。</p><p>第二段路：悬链线，两个钩子之间垂下的链子。 根号底下恰好是完全平方，根号一下子没了。 于是弧长有了干净的表达式。 检验：只比水平距离多一点，因为底部几乎平直。</p><p>回到那两条路：切线转过的角度一样。 这个角是切线的倾角，就是前进的方向。 光看转过的角度，分不出哪条更急。 区别在于，转这个弯，各自用了多少路程。 每走一单位路转多少，这就是平均曲率。 把弧缩到一点，就得到该点的曲率。 角度除以长度，单位是长度的倒数，量纲检验通过。 圆上每一点弯得一样，曲率是半径的倒数。 坡道半径小，曲率就大，谜底揭晓。 直路从不转弯，曲率为零。</p><p>要算曲率，先从速度箭头读出倾角。 倾角的变化率除以速率，一般公式就出来了。 对函数图像，分子上只剩下二阶导数。 二阶导数回来了，它说明斜率变得多快。 检验：在半圆顶上，图像公式答案一致。 椭圆在两头尖处最弯，在两侧扁处最缓。 半轴取2和1，曲率从2一路降到四分之一。</p><p>每一点有一个最贴的圆：曲率圆，也叫密切圆。 它经过这一点，并在这里与曲线相切。 它在切线同一侧，跟曲线往同一边弯。 它的半径叫曲率半径，圆心叫曲率中心。 它与曲线二阶贴合：切线、侧向、弯度全一样。 绕椭圆一圈：尖处圆变小，扁处圆变大。</p><h2>4 · 展望与衔接</h2><p>放假坐高铁回家，铁轨从直道转进弯道。 你感到的侧向推力，由速度和曲率共同决定。 直道直接接上圆弧，曲率瞬间跳变。 铁轨没有拐角，乘客的咖啡却猛地一晃。 办法是插入一段过渡曲线，让曲率慢慢升上去。 一段简单的三次曲线就能胜任。 它的曲率从零起步，到末端几乎正好接上弯道。 乘客感受的是曲率平不平滑，不只是铁轨。 所以高铁转弯，从来不急。</p><p>跑步软件隔几秒记一个定位点，再把弦长加起来。 这是一条内接折线，弯路上总会少算一点。 定义借了定积分的骨架，证明用了微元法的检验。 微分给了我们三角形，二阶导数成了曲率的分子。 公式自检那一集的量纲检验，曲率也当场通过。</p><p>到了空间，曲率多了挠率和一个随曲线滚动的标架作伴。 在微分几何课上，曲率是第一个不变量。 物理课上，它又出现在法向加速度里。 弧长是折线的极限，曲率是每单位长度的转角。</p></main></body></html>

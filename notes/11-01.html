@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>11-01 无穷积分：无尽尾巴的面积账单</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+</style></head><body><div class="topbar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span>11-01</span><a class="mv-quiz" href="../quiz/11-01.html">去自测 →</a></div><main><header><div class="tag">视频配套讲稿（朗读原文） · MATH SELF-CHECK: 44 claims re-derived, 3 fixed.</div><h1>11-01 无穷积分</h1><p class="sub">无尽尾巴的面积账单</p></header><h2>1 · 动机</h2><p>无穷积分：没有尽头的尾巴，面积到底要付多少 一枚火箭想离开地球，再也不回来。 引力一路拉着它，越来越弱，却从来不会消失。 每走一小段，付一点功，就像上一集的功元素。</p><p>从地面一路加到远处的一堵墙。 把墙推到无穷远，总功停在一个有限的数上。 路没有尽头，这笔账却是有限的。</p><p>用发射时的动能来付这笔账。 换成地面的引力加速度，所需速度就出来了。 大约每秒十一点二公里，这就是第二宇宙速度。 无尽的路，什么时候只花有限的钱？</p><p>想象一份订阅，每期的费用越来越少。 缩得够快，总共付的钱有限。 缩得太慢，这笔账就会一直变大。</p><h2>2 · 定理与定义</h2><div class="card gold stmt">第一步：先算定积分∫ₐᵘ<br>u一动，它就是变限积分F(u)<br>第二步：让墙跑远，u→+∞<br>如果F(u)趋于数J，J就是答案<br>没有新的积分，只是给极限起名<br>定义1 设f定义在[a,+∞)上<br>且在任何有限区间[a,u]上可积<br>如果u→+∞时极限J存在<br>那么称J为f的无穷限反常积分<br>简称无穷积分，记作∫ₐ^{+∞}<br>并称这个积分收敛；<br>如果极限不存在，就称它发散<br>记号∫ₐ^{+∞}提醒你有极限要取<br>无穷不能代入，只能让u变大<br>F(u)会稳定、冲向无穷，或来回摆<br>只有稳定才叫收敛，其余两种叫发散<br>火箭的账单：收敛，值为GMm/R<br>两步，顺序固定：先积到u，再放走u</div><p>第一步，先算到墙为止的定积分。 让墙动起来，它就是第九章的变限积分。 第二步，让墙一路跑向正无穷。 如果这些值稳定到一个数，这个数就是答案。 没有发明新的积分，只是给一个极限取了名字。</p><p>定义一：函数定义在一条无尽的射线上。 并且在每一个有限的区间上可积。 如果上限趋于正无穷时，积分有极限， 那么这个极限，就叫作无穷限反常积分， 简称无穷积分，用这个简洁的记号来写， 并且说这个积分收敛； 如果没有极限，就说它发散。</p><p>上限写着无穷，是提醒你要取极限，不能跳过。 无穷没法直接代入，只能让墙一直走。 累计面积可能稳定，可能冲向无穷，也可能来回摆。 只有稳定下来才叫收敛，另外两种叫发散。 所以火箭的那笔账，是一个收敛的无穷积分。 两步，顺序不变：先积到墙，再把墙放走。</p><h2>3 · 方法与证明</h2><p>现在看最关键的一族：幂函数的倒数。 想象一排手机电池，各自按不同的速度掉电。 指数不是一时，第九章的公式直接算出。 一切取决于一项：u的那个幂，走到远处会怎样。 p大于一时，这一项衰减到零。 积分收敛，得到一个干净的有限值。 p小于一时，这一项冲向无穷，积分发散。 恰好等于一时另算：得到对数，永远往上爬。</p><p>整族结果出来了：大于一，收敛，值很干净， 等于一或小于一，发散。 p越大，图像越早贴向横轴。 衰减越快，尾巴越小：二、一、二分之一。 最平缓的电池永远放不完。 分界线恰好落在一。 对数爬得很慢，要到两万多才到十。</p><p>同一族积分，只是藏了一个对数。 令t等于对数，就是第八章的第一换元法。 上下限也随着变量一起换，这是第九章的做法。 它变回了同一族，所以p大于一才收敛。 对数压缩了横轴，可是尺子没有变。</p><p>函数非负时，积分就是一块没有尽头的面积。 收敛：区域没有尽头，面积却有限。 函数非负，累计面积只会变大。 所以发散就是面积为正无穷，这也是答案。</p><p>函数正负交替时，发散也可能是来回摆。 典型错误：给发散积分写个数，比如零。 老实写上发散，因为根本没有值。</p><p>两头是无穷时，在任意一点切开，分成两半； 两半各自收敛，整个积分才收敛。 两堵墙各自跑远，谁也不用等谁。 切在哪里，不影响收敛，也不影响结果。 移动切点，只是一小块有限的面积换了一边。</p><p>试试这座平缓的小山，从零处切开。 右半边是反正切，爬到二分之派。 左边对称，合起来正好是派。 改在一处切开，两块变了，总和仍然是派。</p><h2>4 · 展望与衔接</h2><p>应用一：电容放电，电流越来越小，从未停止。 可是流过的总电荷量是有限的。 它恰好等于最初存的电荷，一点不少。 应用二：把一个电荷拉开，一直拉到无穷远。 又是一笔有限的账，物理学把它叫作电势能。</p><p>今天用的，全是第八章和第九章的旧工具。 有些尾巴没法直接算，第十一章第三集会造出尺子。 也有的在有限的点上无界，那是下一集的事。</p><p>以后学到的密度函数非负，总面积等于一。 第八章的钟形图像会回来，面积以后再算。 每一个分布的归一化常数，全是无穷积分。 尾巴没有尽头，衰减够快，面积就有限。</p></main></body></html>

@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>11-02 瑕积分：先找瑕点，再积分</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+</style></head><body><div class="topbar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span>11-02</span><a class="mv-quiz" href="../quiz/11-02.html">去自测 →</a></div><main><header><div class="tag">视频配套讲稿（朗读原文） · MATH SELF-CHECK: 34 claims re-derived, 2 fixed.</div><h1>11-02 瑕积分</h1><p class="sub">先找瑕点，再积分</p></header><h2>1 · 动机</h2><p>今天的麻烦，就藏在一个点上。 想象一个程序，只有一个输入会让它崩溃。 有些被积函数，也是这个样子。 在某个点附近，函数值没有上界。 课本把这样的点叫作瑕点。 离开这个点，函数照样可以积分。 所以要养成习惯，先找瑕点，再动手。</p><p>来看一道很多人做错的考题。 有同学找到原函数，代入两个端点。 算出负二，就这样交了上去。 看图，函数从不为负。 就像食堂小票，每项花钱，总额却是负数。 非负的函数，积分不可能是负的。 毛病出在零这一点，函数在这里无界。 牛顿莱布尼茨公式，要求函数可积。 而那个原函数在零这里断开，跨不过去。 第九章的公式，被用在了条件之外。</p><p>老老实实再算一遍，先在瑕点拆开。 右边这段，停在epsilon，再积到一。 这一段是普通的定积分，值很好写出来。 让epsilon靠近零，这个值无限增大。 右边这段发散，整个积分也就发散。 负二从来不是答案，它是一份报错。</p><h2>2 · 定理与定义</h2><div class="card gold stmt">课本把这次重算写成了定义<br>定义2：先积[u,b]，再令u→a⁺<br>a 称为瑕点，积分称为瑕积分<br>其一：f 在 a 的任一右邻域无界<br>其二：每个[u,b]上 f 可积<br>每个 ∫ᵤᵇ f 都是 u 的函数<br>再让 u 从右侧趋于 a<br>极限 J 存在：积分收敛于 J<br>极限不存在：积分发散<br>和上一集同一套：先积分，再取极限<br>只是墙的方向变了：从内侧逼近<br>若瑕点在右端 b，墙从左侧逼近<br>无论哪端，极限都是单侧的<br>若瑕点在区间内部呢？<br>在c拆开：收敛当且仅当两段均收敛<br>两端均为瑕点：同样先拆开<br>每段各有一堵墙、一个极限<br>事故里，右段发散就足够了</div><p>课本把刚才的做法，写成了定义。 定义二：先积分，再让墙逼近a。 点a叫作瑕点，积分叫作瑕积分。 第一条：在a右边，靠得再近，函数也没有界。 第二条：在每个避开a的闭区间上，函数可积。 每一段是普通积分，它的值随u变化。 然后让u从右边滑向a。 如果极限存在，积分就收敛，值就是这个极限。 没有极限，就说积分发散。</p><p>这和上一集是同一套做法：先积分，再取极限。 变的只是方向，墙从区间里面逼近。 如果瑕点在右端，墙就从左边靠过去。 无论哪一端，极限只从一侧去取。</p><p>瑕点在区间里面，又怎么办？ 整体收敛，当且仅当两段均收敛。 两个端点均为瑕点，也照样拆开。 每段各有一堵墙，各走各的，各取极限。 回到那次事故，一段发散，就已足够。</p><h2>3 · 方法与证明</h2><p>函数无界，积分就一定发散吗？ 看这个函数，x靠近一时，它冲向无穷。 在一之前停下，反正弦就能算出面积。 墙滑向一，面积稳稳停在二分之pi。 函数冲向无穷，面积却是有限的。 无界本身不决定结果，冲得多快才决定。</p><p>多快才算太快？来试一整族幂函数。 q小于一收敛，大于等于一发散。 只要q和一不相等，这段就能直接算。 u滑向零时，只有这一项在动，它决定一切。 它的去向，只看指数的正负。 q小于一时，这一项消失，积分收敛。 q大于一时，这一项趋于无穷，积分发散。 q等于一时，得到对数，也会无限增大。 分界正好是一，而一本身属于发散。</p><p>把上一集的那一族，摆在旁边。 让指数一路变大，两边结论在同一个位置翻转。 在无穷远，幂次要大于一；在瑕点附近，要小于一。 同一把尺子，读法相反，一在两头均发散。 在零附近，幂次越小，冲得越慢。</p><p>最后一道题，两头均有麻烦。 在一这里拆开，得到瑕积分和无穷积分。 瑕积分这段，只有p小于一才收敛。 无穷积分这段，只有p大于一才收敛。 两个要求无法同时满足，所以无论怎么选，均发散。 无论p取多少，总有一端发散。</p><h2>4 · 展望与衔接</h2><p>第一个用处，算出四分之一个圆周。 求弧的公式，给出的正是刚才的积分。 端点的切线竖了起来，弧却只有二分之pi。 第二个用处，来回振动的小球。 把每一小段的时间加起来，终点速度为零。 同一个瑕积分，四分之一周期是二分之pi。</p><p>这要回到第九章：先看条件，再用公式。 上一集给了我们孪生的做法，和镜像的分界线。 两类反常积分，本质上全是极限。 算不出来时，两类均需要尺子。 下一集，一条比较原则，配两把尺子。 以后积分依赖一个变量时，也先找瑕点。 所以先找瑕点，再去积分。</p></main></body></html>

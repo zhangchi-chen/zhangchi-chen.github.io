@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>10-05 定积分的物理应用：压力、功与引力</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+</style></head><body><div class="topbar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span>10-05</span><a class="mv-quiz" href="../quiz/10-05.html">去自测 →</a></div><main><header><div class="tag">视频配套讲稿（朗读原文） · MATH SELF-CHECK: 36 claims re-derived, 3 fixed.</div><h1>10-05 定积分的物理应用</h1><p class="sub">压力、功与引力</p></header><h2>1 · 动机</h2><p>今天，积分要去干四份物理活。 物理作业说，压力就是压强乘面积。 可闸门是竖着的，越往下，水推得越狠。 按水面算得零，按最深处算又大得离谱。</p><p>抽水更麻烦，每层要爬的高度不同。 细杆拉质点，每一小段各拽各的方向。 插座上的220伏，也藏着一种奇怪的平均。 四份活，同一把工具：前面讲过的微元法。</p><h2>2 · 定理与定义</h2><div class="card gold stmt">这张工作单，今天要跑四遍<br>第一步：认出分布在区间上的量Φ<br>第二步：检查Φ对区间可加<br>第三步：薄片上定律不变，写微元<br>第四步：检验误差o(Δx)和量纲<br>第五步：积分，四题共用这张单<br>任务一：半径3米的圆形闸门<br>教材原文如下<br>同一深度，压强相同，都是ρgx<br>所以要横着切：每条深度不变<br>深x处的窄条半宽为√(9−x²)<br>压强乘窄条面积，就是dP<br>检验：深度取x，误差是o(Δx)<br>量纲检验：压强×面积=力<br>从水面x=0加到x=3<br>换元u=9−x²，得P=18ρg</div><p>就是这张卡片，今天要跑四遍。 第一步，说清楚哪个量分布在区间上。 第二步，确认各小段加起来正好是整体。 第三步，在一片薄片上把定律冻住，写出微元。 第四步，偏离要比薄片缩得更快，量纲要对得上。 第五步，积分。四个问题共用这套步骤。</p><p>任务一：圆闸门半径三米，水齐圆心。 教材是这样说的。 第一层意思：同样深，压强就一样。 所以横着切，每一条的深度不变。 勾股定理告诉我们，这一深度的窄条有多宽。 压强乘上窄条面积，就是这一条受的力。 检验一下：整条按同一深度算，错不了多少。 量纲也对：压强乘面积，确实是力。 从水面一直加到闸门最底下。 一次换元，干干净净得到十八个rho g。</p><h2>3 · 方法与证明</h2><p>任务二，把一个圆锥形水池抽干。 想象一栋楼，每层的水要扛上楼顶。 越往下，半径从十五米匀速缩到零。 教材是这样写的。 体积换成水的分量，再乘上这一层要爬的高度。 检验：薄层上下，要爬的高度几乎一样。 这正是微元法那一集的同一招。 单位落在焦耳上，功本该如此。 把每一层从池口一路加到锥尖。 展开一积，抽水的总账马上出来了。</p><p>任务三：一根质量均匀的细杆。 质点就在中点正上方，隔着一段距离。 万有引力定律告诉我们，每一小段拉得多用力。 最省事的做法：把这些大小直接加起来。 可这是错的：每股拉力方向各不相同。</p><p>搬宿舍那天，两个人成直角拉同一个箱子。 箱子只受五牛，不是七牛，力是按箭头相加的。 所以大小不能直接相加，卡片第二步过不了。</p><p>办法是：每股拉力拆成横、竖两份。 左右对称的两段，横向拉力正好抵消。 竖向部分方向一致，这回能加。 竖向部分积起来，正是教材的答案。 拿一根杆试试，捷径多算了一成多。</p><p>任务四：插座的电压来回摆动，接在电阻上。 每一瞬间，功率是电压的平方除以电阻。 能量一刻一刻累积，一个周期的功就是积分。 把峰削下来填进谷里，波形正好齐到一半。 所以一个周期的功，结果很整齐。 把功平摊到整个周期上，就是平均功率。 教材这样讲有效值。 平均功率就是讲过的平均值，换了个名字。 有效值，就是让电阻同样发热的稳定电压。 只能是平方平均，电压的普通平均正好是零。 所以插座上的220伏，说的是有效值。</p><h2>4 · 展望与衔接</h2><p>最后一个习惯：答案出门前先复核。 闸门顶住的力，和十八立方米水一样沉。 它也恰好落在零和最深估计之间。 把细杆缩成一个点，牛顿的质点公式就回来了。 峰值约311伏，和标签上的220伏并不矛盾。</p><p>拉弹簧也一样：拉得越远，功按平方涨。 宿舍水壶上的1500瓦，也是平均功率。 微元法跑完了四份活，量纲检验盯住了每个微元。 积分中值定理，摇身变成了平均功率。</p><p>下一章，区间一路伸到无穷远，记账方式不变。 以后，这套步骤会去称一块薄板的质量。 可要是手里只有一串测量值，根本没有公式呢？ 或者原函数存在，却写不成初等函数。 这时靠教材最后一节的梯形法和抛物线法。 以后的数值分析课，会算清它们偏了多少。 薄板的平衡点、转动惯量，也走这套步骤。 切片，冻住定律，检验，再求和，这就是积分做物理。</p></main></body></html>
