@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>11-03 敛散判别：拿 p 积分当标尺</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+</style></head><body><div class="topbar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span>11-03</span><a class="mv-quiz" href="../quiz/11-03.html">去自测 →</a></div><main><header><div class="tag">视频配套讲稿（朗读原文） · MATH SELF-CHECK: 40 claims re-derived, 2 fixed.</div><h1>11-03 敛散判别</h1><p class="sub">拿 p 积分当标尺</p></header><h2>1 · 动机</h2><p>今天，不求面积，照样判断有限无限。 今晚的作业：这块无尽的面积有限吗？ 第一反应：先找原函数，再让墙跑远。 死路：第八章说过，它没有初等原函数。 第二反应：图像越来越平，面积就有限？ 可是x分之一也趋于零，面积却是无穷大。</p><p>光是变小不够，关键看变小得多快。 定义里的那个极限，往往算不出来。 目标：只看图像的样子，就下结论。 第一把尺子：图像在轴上方，就比大小。 第二把尺子：图像上下摆动，就看抵消。 抽屉里的尺子，就是前两集量过的幂函数族。 分界就在一：比它陡就收敛，不然发散。</p><h2>2 · 定理与定义</h2><div class="card gold stmt">定理11.1：柯西准则<br>白话：G以后，每一块面积都很小<br>任给ε&gt;0，总能找到起点G<br>要的是面积小，不是函数值小<br>1/x从u到2u的面积恒为ln 2<br>收敛且lim f存在，极限必为0<br>f≥0时，F(u)随u单调增加<br>单调有界，必有极限：第7章的钥匙<br>定理11.2：比较原则<br>画面：f压在g下面，都非负<br>g的面积有限，f的也有限<br>反过来：f发散，g也发散<br>注意：g发散，推不出f的结论<br>实际做题，g就选尺子c/xᵖ<br>推论3：比较原则的极限形式<br>xᵖf(x)→λ：远处f像λ/xᵖ<br>p&gt;1且0≤λ&lt;+∞：收敛<br>p≤1且0&lt;λ≤+∞：发散<br>λ=0：f比尺子还小；λ=+∞：更大<br>其余情形无结论：换个p再看</div><p>柯西准则：今天所有判别法的引擎。 说白了：足够远之后，每一块面积很小。 要多小就给多小，总能找到一个起点。 它要的是面积小，不是高度小。 x分之一每次走到两倍远，面积一样大。 只剩一句：图像若有极限，面积有限就逼它为零。 图像在轴上方，墙往右移，面积只增不减。 有上界就够了，这是第七章那把钥匙。</p><p>比较原则：大的面积管住小的面积。 小的图像，整条压在大的下面。 上面的面积有限，下面的就被困住了。 倒过来读：下面无穷大，上面也无穷大。 小心：上面发散，下面的结论无从得出。 做题时，上面那条就从抽屉里拿尺子。</p><p>极限形式：用极限来比，不用不等式。 到了远处，它就像尺子按比例放缩。 尺子够陡、比值有限，甚至为零，就收敛。 尺子太平、比值为正，哪怕无穷，就发散。 比值为零，比尺子更小；无穷，就更大。 其余搭配不下结论，换一把尺子再看。</p><h2>3 · 方法与证明</h2><p>例一：任意幂次，乘上衰减的指数。 乘上平方，指数压倒一切幂次，比值趋于零。 尺子够陡，比值为零：幂次再大也收敛。 例二：分子几乎和分母一样快地变大。 乘上平方根，比值稳稳地停在一。 尺子太平，比值为一：发散，一个原函数也没求。</p><p>图像要是变号，先看它的绝对值。 每一块上，抵消只会让面积更小，它被拖着收敛。 这叫绝对收敛，带号的总面积不超过不带号的。 带号的收敛，不带号的发散，这叫条件收敛。 想想打电话时，在宿舍走廊来回走。 位置稳定了，计步器却一直往上涨。 条件收敛，全靠正负互相抵消撑着。</p><p>狄利克雷判别法，专门对付这样的抵消。 第一，一个因子积出来的面积，一直困在带子里。 第二，另一个因子只往一个方向走，最后归零。 两条成立，乘积的积分就收敛。 阿贝尔判别法，把两份活换个分法。 一边已收敛，另一边往一个方向走，且有界。</p><p>回到作业，这次一口气看整个家族。 陡的幂次不难：尺子罩住它，绝对收敛。 幂次平缓时：正弦积出来的面积，不超过二。 幂函数一路减到零：狄利克雷说，收敛。 是绝对收敛吗？要证明不是，就给它垫个底。 垫底：幂次换成一，正弦再平方，只会更小。 拆开看：一项发散，减去一项收敛。 底下的面积无穷，上面的也无穷：条件收敛。 全家一张图：陡的绝对收敛，平的条件收敛。 两个论证会合：一个证收敛，一个证非绝对。</p><p>又是分工合作，就是分部积分那集的小组作业。 引擎，就是第九章预告过的那个更强的兄弟定理。 衰减的因子，只在这一块的两端出声。 每段被带子封顶，整块就被衰减的因子封顶。 因子衰减到零，这一块终会很小，柯西准则收尾。 注意：全程没算乘积的原函数，只做估计。 阿贝尔立刻得到：减掉那个因子的极限。</p><h2>4 · 展望与衔接</h2><p>到了瑕点，工具照旧，改用上一集的q次幂来比较。 分界反过来：在瑕点，炸得慢的才收敛。 两个判别法照样搬过去，瑕点代替无穷远。</p><p>应用一：钟形的图像没有面积公式，尾巴照样收敛。 前两集许诺的归一化，从此有了根基。 应用二：光绕过边缘时，出现的那个积分。 把平方换成新变量，狄利克雷判定收敛。 图像根本不变小，面积照样收敛。</p><p>级数那一章，把面积换成求和，再演一遍。 同样的骨架，同样的比较，同名的两个判别法。 到那时，抵消里有个悖论：打乱顺序，总和会变。 所以，动笔之前，先拿尺子量一量尾巴。</p></main></body></html>
