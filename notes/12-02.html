@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>12-02 正项级数：找个基准来比较</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+</style></head><body><div class="topbar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span>12-02</span><a class="mv-quiz" href="../quiz/12-02.html">去自测 →</a></div><main><header><div class="tag">视频配套讲稿（朗读原文） · MATH SELF-CHECK: 36 claims re-derived, 3 fixed.</div><h1>12-02 正项级数</h1><p class="sub">找个基准来比较</p></header><h2>1 · 动机</h2><p>正项级数，找一个基准，再来比较。 上一回，几何级数和裂项级数的部分和可以直接写出。 换成平方倒数的级数，部分和就没有简洁公式了。 通项越来越小，可是调和级数的通项也一样。 但调和级数发散，上一集已经证明过了。 通项变小，定不了胜负。那该看哪里？</p><p>八百米测试，身边朋友的配速已知。 假设你每一段，跑得不比朋友慢。 那你冲线的时间，就不会比朋友晚。 朋友的总用时，就是你累计用时的天花板。 正项就像分段用时，总和只增不减。 今天就拿可靠的基准，来衡量未知的级数。</p><h2>2 · 定理与定义</h2><div class="card gold stmt">uₙ≥0时，部分和每次只加不减<br>S₁≤S₂≤S₃≤⋯，台阶从不下降<br>只升不降的台阶，只有两种结局<br>要么停在某个天花板下面<br>要么越过你画的每一块天花板<br>这就是第二章的单调有界定理<br>定理12.5说的正是这件事<br>正项把收敛问题变成了有界问题<br>现在把两个正项级数逐项对齐<br>设从某个N以后，总有uₙ≤vₙ<br>前N项可以捣乱，有限项决定不了<br>这就是比较原则，定理12.6<br>道理：过了N，u的每步不高过v的<br>总和≤前N项+v的总和，有界<br>再用定理12.5，第(i)条成立<br>第(ii)条只是倒过来读<br>小的都发散了，大的不可能收敛<br>首个应用：平方倒数压在裂项级数下<br>裂项和为1，所以Σ1/n²的Sₙ&lt;2<br>uₙ≤vₙ时，四种情形一览<br>比收敛的还小：安全，也收敛<br>比发散的还大：安全，也发散<br>比收敛的大？什么也推不出<br>1/n²之上，有收敛也有发散<br>考点陷阱：小的收敛推不出大的收敛<br>比发散的小？同样什么也推不出<br>收敛往下传，发散往上传<br>不等式常常难凑，极限反而好求<br>把两项相除，看比值uₙ/vₙ的极限<br>这就是比较原则的极限形式<br>0&lt;l&lt;+∞：两边通项衰减得一样快<br>过了N，uₙ夹在两个vₙ倍数之间<br>第(i)条：同时收敛或同时发散<br>l=0：过了某个N，总有uₙ&lt;vₙ<br>所以要Σvₙ收敛，才得Σuₙ收敛<br>l=+∞：比发散的大，第(iii)条<br>注意：l=0而Σvₙ发散，推不出</div><p>没有负的项，部分和每次只加不减。 所以部分和像台阶，只往上，从不往下。 这样的台阶，结局只有两种。 要么，它停在某块天花板下面， 要么，它越过你画出的每一块天花板。 这正是第二章的老定理，有界就收敛。 定理十二点五，说的正是这件事。 有了正项，问收敛，就变成了问有界。</p><p>现在，把两个正项级数一项一项对齐。 假设过了某一项，每项总不超过对应的那项。 开头几项可以捣乱，有限个项改变不了收敛与否。 这就是比较原则，定理十二点六。 为什么成立？过了那一项，小级数每步不比大级数高。 所以总和压在开头加基准总和之下，有界。 再用定理十二点五，就得到收敛，第一条成立。 第二条，就是同一件事倒过来说。 小的已经停不下来，大的更不可能停下。 第一个应用，平方倒数压在裂项级数下面。 裂项级数和为一，所以部分和总小于二，收敛。</p><p>一大一小两个级数，一共四种情形。 比收敛的级数小，是安全的，它也收敛。 比发散的级数大，同样安全，它也发散。 比收敛的级数大？这推不出任何结论。 在平方倒数上方，有收敛的，也有发散的。 考试陷阱，小的收敛，推不出大的也收敛。 比发散的级数小？同样推不出，下面两种全有。 收敛向下给小的，发散向上给大的。</p><p>不等式往往难凑，求个极限反而容易。 两项相除，看看比值最后停在哪里。 这就是比较原则的极限形式。 极限是一个正数，说明两边的通项，衰减得一样快。 过了某一项，它就被夹在对方的两个倍数之间。 所以两者同时收敛，或同时发散，这是第一条。 极限是零，过了某一项，它总比对方小。 所以第二条，要基准收敛，才能推出收敛。 比值趋于正无穷，它终将压过对方，这是第三条。 注意，极限是零，基准却发散，就推不出任何结论。</p><h2>3 · 方法与证明</h2><p>先看课本的例子，一串很小的正弦值相加。 每一项，略低于对应的调和级数项。 比发散的级数小，光靠不等式，走不下去。 极限形式来救场，比值趋向一。 极限是一，调和级数又发散，所以它也发散。</p><p>第二个例子，分母削掉一点的几何级数。 这次每一项，全高过对应项，比收敛的大。 顺手的不等式，又指向了没用的方向。 比值趋向一，减掉的那点微不足道。 极限是一，几何级数又收敛，所以它也收敛。 启示是，极限为正又有限，谁大谁小就无所谓。</p><p>选基准之前，先比一比各部分变大的快慢。 这就是零二零八集讲的阶的比较，现在用在通项上。 对数输给幂，幂输给指数，指数输给阶乘。 到第二十项，阶乘已经是十九位数。 分子分母，各自只留下跑得最快的那一项。 它就像公比三分之二的几何级数，所以收敛。 分子带对数，跟平方倒数相比，极限是零。 按第二条，基准收敛，它也跟着收敛。 反过来，分母只剩对数，比值趋于正无穷。 按第三条，它跟着调和级数一起发散。</p><p>每验证一个基准，就在会员卡上打一个孔。 第一孔，几何级数，公比的绝对值小于一就收敛。 第二孔，调和级数，兑现上一集的承诺，作发散的锚。 第三个基准，p级数恰好在指数大于一时收敛。 证明留到十二零四集，在那之前，先用铅笔打孔。 指数小于一，比调和级数大，所以发散。 每张卡记两样，结论和理由。</p><p>这张卡能集满吗？说实话，不能。 收敛级数里没有最慢的，总能找到更慢的。 所以，再聪明的比较法，也判定不了所有级数。 十二零三集，会把跟几何级数的比较自动化。</p><h2>4 · 展望与衔接</h2><p>快问快答。先暂停，选好基准和形式，再下结论。 第一个在平方倒数下方，比收敛的小，所以收敛。 第二个，比值趋于正的常数，所以收敛。 第三个在调和级数下方，这条路走不通。 用极限形式，比值趋于一，它跟着调和级数一起发散。 规律是，顺手的不等式方向不对，就改求极限。</p><p>找基准来比较，这个习惯贯穿整个分析学。 数值课里，误差要跟网格间距的幂来比。 机器学习里，训练损失也要跟几何衰减来比。 招式从来不变，把未知的压在已知的基准下面。 正项，好基准，再加上对的方向，这就是全部。</p></main></body></html>

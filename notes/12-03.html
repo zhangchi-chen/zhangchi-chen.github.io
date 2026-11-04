@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>12-03 比式与根式判别法：每项还剩多少</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+</style></head><body><div class="topbar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span>12-03</span><a class="mv-quiz" href="../quiz/12-03.html">去自测 →</a></div><main><header><div class="tag">视频配套讲稿（朗读原文） · MATH SELF-CHECK: 43 claims re-derived, 2 fixed.</div><h1>12-03 比式与根式判别法</h1><p class="sub">每项还剩多少</p></header><h2>1 · 动机</h2><p>两个判别法，一个问题：每一项能剩下多少？ 作业题来了：立方除以二的幂。 上一集教我们：先找基准，再来比较。 可是比哪一个？分子分母正在较劲。 换个思路：让每一项和前一项比一比。 后项除以前项，乱糟糟的式子一下化简。 越往后，每一项大约只剩前一项的一半。</p><p>想象一块手机电池，每过一小时只剩一半。 过了前几项，一列几何级数从上面压住它。 于是级数收敛，根本不用猜基准。 这一招叫比式判别法，它的兄弟叫根式判别法。 今天弄清三件事：为何有效，何时失效，谁更强。</p><h2>2 · 定理与定义</h2><div class="card gold stmt">比式判别法（达朗贝尔判别法）。<br>前提：正项级数，每项大于零。<br>N₀之后，比值总不超过定数q&lt;1。<br>q是固定的，天花板不能往上挪。<br>那么级数收敛。<br>若比值总不小于1，项就不缩小。<br>那么级数发散。<br>推论1：极限形式，只算一个极限。<br>q&lt;1收敛；q&gt;1或+∞发散。<br>恰好等于1？推论没有结论。<br>根式判别法（柯西判别法）。<br>n次根：平均每步乘的因子。<br>根值始终≤l&lt;1：收敛。<br>根值≥1：项不趋于零，发散。<br>推论2：只需上极限，不必有极限。<br>上极限：根值反复回到的最高处。<br>上极限小于1：照样收敛。<br>上极限大于1：无穷多项超过1，发散。<br>注：两个判别法谁更强。<br>比值极限为q，根值极限也是q。<br>比值极限能判的，根值也能判。</div><p>课本原文：比式判别法，也叫达朗贝尔判别法。 前提是正项级数，每一项全大于零。 从某一项起，比值始终不超过一个小于一的定数。 这块天花板是固定的，不能慢慢往上挪。 那么，级数收敛。 可要是比值从不低于一，项就不会缩小。 那么，级数发散。</p><p>推论一，极限形式：只算一个极限，再读答案。 小于一就收敛，大于一或是正无穷就发散。 要是恰好等于一呢？推论什么也没说。</p><p>再看根式判别法，也叫柯西判别法。 开n次方，得到平均每一步乘上的因子。 根值总不超过小于一的定数：收敛。 根值不小于一，项也不小于一，发散。</p><p>推论二：不必有极限，只看上极限。 上极限，就是根值一次次回到的最高位置。 上极限小于一，根值再跳也照样收敛。 上极限大于一，无穷多项超过一，发散。</p><p>最后一条注记：两个判别法谁更强。 比值一旦有极限，根值的极限就跟它一样。 比值极限能判定的，根值也一定能判定。</p><h2>3 · 方法与证明</h2><p>为什么成立？揭开面具，它就是比较原则。 先扔掉开头几项，有限几项不影响结果。 一级一级往下乘，每一步多乘一个q。 结果：每一项全压在几何级数的项下面。 比一个收敛级数更小，比较原则来收尾。 根式更快：根值小，项就在几何项下面。 两者全是上一集的比较，对手是几何级数。 上一集的几何比较，现在一步就能搞定。</p><p>通俗地说，q就是电池每小时留下的那一份。 每小时总留不满，电量就按几何速度衰减。 留得满满甚至更多，电量从不下降，项不趋于零。 发散那一半，就是本章第一集的必要条件。</p><p>小心：每一步比值小于一，仍然不够。 调和级数留下的份额，一路逼近百分之百。 调和级数依然发散：天花板必须固定，而且小于一。</p><p>接下来两道名题，两个判别法同时失灵。 两者的比值全逼近一。 根值也一样：两者极限全是一。 读数相同，一个收敛，一个发散。 极限恰好是一，极限形式就无法判断。 为什么？对数坐标下，几何衰减是一条直线。 两条线渐渐变平，迟早高过每一条直线。 它们衰减得太慢，哪个几何级数也压不住。 在一这里，几何镜头太粗，p级数挤成一团。</p><p>再看课本里的例题，分子里有正负交替。 奇数项分子是一，偶数项分子是三，忽高忽低。 比值轮流出现：二分之三，六分之一，来回交替。 没有极限，比式判别法无能为力。 根值：分子是一或三，开n次方后趋于一。 根值趋于二分之一，小于一，级数收敛。 根值的妙处：把忽大忽小的因子，平均成每步一半。 比值极限推出根值极限，反过来不成立。</p><p>课本里另一个级数，比值来回摆动。 每一步轮流乘上两个因子，一来一回。 像每周通勤：最慢那天和最快那天，总会再来。 第七章的影子线：上极限与下极限。 连最坏的比值也小于一，级数收敛。 连最好的比值也大于一，级数发散。 要是两条线跨在一的两边，比式判别法无法判断。 记住这一段，到了第十四章，上极限会当主角。</p><p>一张随身小卡片：按顺序问三个问题。 有阶乘或是固定底数的n次幂？用比式判别法。 整项是某个式子的n次方？用根式判别法。 要是得到一，就离开几何级数的世界。 下一集接手：p级数做基准，再加拉贝判别法。</p><p>轮到你了：先暂停，判定这两道题。 第一题有阶乘，用比式：极限四分之一，收敛。 第二题分母是n次方，用根式：极限二分之一，收敛。</p><h2>4 · 展望与衔接</h2><p>用途一：把数列加起来，证明它趋于零。 阶乘对上幂：比值趋于e分之一，小于一。 级数收敛，顺手证出这个数列趋于零。 用途二：含一个变量的一族级数，比值趋于零。 变量再大，阶乘也终将胜出，级数收敛。 以后学数值分析，q会在不动点迭代里再出现。 误差每一轮只剩固定的一份，仍是同一幅图。</p><p>两个判别法问的是同一件事：每一项剩下多少。 小于一就收敛，大于一就发散，恰好等于一，判别法失效。 比值摇摆的时候，根式判别法仍可能看清。</p></main></body></html>
