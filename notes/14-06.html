@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>14-06 欧拉公式：e、i、π同框</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+</style></head><body><div class="topbar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span>14-06</span><a class="mv-quiz" href="../quiz/14-06.html">去自测 →</a></div><main><header><div class="tag">视频配套讲稿（朗读原文） · MATH SELF-CHECK: 40 claims re-derived, 2 fixed.</div><h1>14-06 欧拉公式</h1><p class="sub">e、i、π同框</p></header><h2>1 · 动机</h2><p>欧拉公式：三个最有名的常数，终于同框 这三位各占一章，从来没在同一张照片里 直到有位同学，穿着印有它们的衣服走来 可是e的实数次方，永远是正的 那它怎么会等于负一？ 老办法失灵：连乘虚数次，根本无从谈起 我们需要一个定义，完全不问乘多少次</p><p>泰勒级数那一集里，它有另一副面孔 这个级数里，只有加和乘 而复数，同样会加会乘 于是干脆让级数，来定义指数函数 上回是函数变级数，这回是级数造函数</p><h2>2 · 定理与定义</h2><div class="card gold stmt">热身：复数是一对实数，平面上一点<br>两对实数相乘，有专门的规则<br>虚数单位i=(0,1)：i²=−1<br>复数项级数逐项加zₙ=aₙ+ibₙ<br>部分和在平面上走，最后停在一点<br>复数项级数收敛，当且仅当<br>实部级数与虚部级数都收敛；<br>若Σ|zₙ|收敛，级数绝对收敛。<br>原因：实部、虚部都不超过模<br>模也不超过两部分之和<br>第12章的判别法原样可用<br>特别地，绝对收敛仍然推出收敛<br>定义(5)：eᶻ=Σzⁿ/n!<br>收敛半径+∞，在整个复平面上收敛<br>原因：ⁿ√(1/n!)→0<br>14-02柯西-阿达马公式：R=+∞<br>于是eᶻ在平面每一点都有定义<br>各项模之和为e^|z|，绝对收敛<br>在实轴上，新eᶻ就是老eˣ</div><p>先热个身：复数就是一对实数，也就是平面上一个点 两对实数相乘，有一条专门的规矩 按这条规矩，这个点自己乘自己，得到负一</p><p>复数项级数，就是把复数一项一项加起来 部分和在平面上散步，最后停在一个点 课本说：复数项级数收敛，当且仅当 实部级数和虚部级数，两个一起收敛 如果各项的模加起来有限，就叫绝对收敛 原因：影子从来超不过箭头本身 箭头也超不过两条直角边加起来 所以第十二章的判别法，照样能用 特别是，绝对收敛照样保证收敛</p><p>课本第五式：直接用这个级数定义指数函数 它的收敛半径是正无穷，在整个复平面上收敛 为什么是无穷？系数开方后一路缩到零 柯西阿达马公式原样照搬，半径是无穷大 于是平面上每一个点，指数函数通通有定义 更妙：各项的模加起来有限，所以绝对收敛 回到实轴，新的指数函数就是老朋友</p><h2>3 · 方法与证明</h2><p>关键一步：代入一个纯虚数 一切取决于i的各次幂 四个值轮流出现，第四步回到一 每乘一次i，就转过四分之一圈</p><p>把循环一项项代进级数 偶次幂的项，全是实数 奇次幂的项，各自带着一个i 顺序一点没动：两列就是实部级数和虚部级数 实部级数，是泰勒表里的老朋友：余弦 虚部级数，是另一位老朋友：正弦 两列各自收敛，合起来正好就是它 一个级数，分成两列，见到两位老朋友</p><p>这就是欧拉公式，装进框里 对每一个实数，统统成立，没有例外 现在把pi代进去 余弦给出负一，正弦给出零，结果就是负一 把一移过去，零就出现了 五个常数合影，没有魔法，只是pi处的余弦正弦</p><p>现在把这个点画到平面上 它到原点的距离，永远恰好是一 角度变大，点就沿着圆走，像朋友绕环岛散步 你从两条轴上读出位置：横着是余弦，竖着是正弦 它的速度是一：转过的角度，就是走过的路程 速度始终和位置垂直，正是导数那几集的圆周运动 走四分之一圈，正好到达i 走半圈，落在负一：衣服上那句话，原来是散步半圈</p><p>复数的指数形式：模乘上一个旋转 模管伸缩，角度管方向 乘上圆上的一个点，整个平面就转过去 按乘法规则一算：纯粹的旋转，别无其他</p><p>再看：指数上的加法，变成了乘法 证明就是把两个级数乘起来，叫柯西乘积 每条对角线，靠二项式定理收成一项 可是沿对角线相加，等于换了顺序，这样可以吗？ 可以，两边全绝对收敛，第十二章的乘积定理管用 换顺序那一集说过：绝对收敛，顺序随便换 少了它，一个收敛的交错级数，自己乘自己反而发散 把两次旋转放进去：先后转两次，角度直接相加 对比实部和虚部，两角和公式白白送到手里 棣莫弗公式，留给你当课本习题</p><h2>4 · 展望与衔接</h2><p>第一个用处：把一个复数，写成模和辐角 八次方：八个八分之一圈，正好转满一圈，答案是十六 第二个用处：一的六个六次方根，均匀排在圆上</p><p>电路和信号课第一天就用它：交流电变成旋转的箭头， 微分方程，摇身变成代数 将来学复分析：可导一次，就能无限次求导 泰勒级数那一集的平坦反例，在那里活不下去 下一章傅里叶级数仍是实的，旋转图会一再回来 一个级数造出了函数，也让三个常数终于同框</p></main></body></html>

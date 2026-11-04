@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>14-05 二项式级数的端点：先猜后证</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+</style></head><body><div class="topbar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span>14-05</span><a class="mv-quiz" href="../quiz/14-05.html">去自测 →</a></div><main><header><div class="tag">视频配套讲稿（朗读原文） · MATH SELF-CHECK: 34 claims re-derived, 2 fixed.</div><h1>14-05 二项式级数的端点</h1><p class="sub">先猜后证</p></header><h2>1 · 动机</h2><p>二项式级数的端点，先猜，再用拉贝判别法来证 上一集证过，在两端点之间，级数的和就是这个幂函数 可是两个端点没有填，教材把推导推给了别处 今天的记分表，三段阿尔法，两个端点，格子全被盖住</p><p>就像门口的快递，先掂一掂，猜猜里面是什么 然后在镜头前拆开，确认一下 计划是先从函数来猜，再用三件工具来证</p><p>端点难在哪里？在那里，相邻两项之比趋于一 比值的极限恰好是一，这时无法判断 所以需要更细的判别法，而在这之前，先猜一猜</p><h2>2 · 定理与定义</h2><div class="card gold stmt">教材给出的二项式级数端点表<br>α≤−1：两个端点均发散<br>−1&lt;α&lt;0：右端点收敛<br>α&gt;0：两个端点均收敛<br>α取0,1,2,…时只是多项式<br>定理14.6(ii)，来自14-01<br>左端点收敛，和函数在那里右连续<br>端点处的和，等于从内侧逼近的极限<br>拉贝判别法（12-04，极限形式）<br>它专门对付比值趋于1的情形<br>看靠近的速度：n乘缺口，极限为r<br>r&gt;1收敛，r&lt;1发散</div><p>这是教材给出的二项式级数端点表 阿尔法不超过负一时，两个端点均发散 阿尔法在负一和零之间，右端点收敛 阿尔法为正时，两个端点均收敛 阿尔法是自然数时只是多项式，表格讲其余情形</p><p>定理十四点六第二部分，来自十四零一集 如果在左端点收敛，和函数在那里就右连续 说白了，端点处的和，就是从里面逼近得到的极限</p><p>十二零四集的拉贝判别法，极限形式 它专门对付比值慢慢趋于一的情形 看它靠近一有多快，把缺口乘上n，再取极限 大于一就收敛，小于一就发散</p><h2>3 · 方法与证明</h2><p>第一步，问问函数，和应该是多少 在负一处，函数给出零的阿尔法次方 阿尔法为正时，结果是零，完全有限 阿尔法为负时，函数冲向正无穷 猜测是，在负一处收敛，恰好当阿尔法非负</p><p>在正一处，函数给出二的阿尔法次方，总是有限 小心，阿尔法等于负一时，函数值是二分之一 可它的部分和在一和零之间来回跳，始终不收敛 改听通项，通项趋于零，恰好当阿尔法大于负一 这就是十二零一集讲的收敛必要条件 猜测是，在正一处收敛，恰好当阿尔法大于负一 猜了两分钟，铅笔先填好，现在拆箱验证</p><p>取负的阿尔法，假如级数在负一处收敛 那么由定理十四点六，和函数在负一处右连续 所以这个有限的和，必须等于右极限 可那个极限是正无穷，矛盾 所以阿尔法为负时，在负一处发散 记忆窍门成了证明，出大力的是这条定理 十四零一集的一致收敛卡片，在这里兑现了</p><p>第二步，看通项的绝对值 两端通项绝对值一样，只是符号不同 后一项除以前一项，几乎全部约掉 改写成一减去一个小缺口 比值慢慢逼近一，这正是拉贝的地盘 按拉贝的要求，把缺口乘以n n越来越大，它趋于一加阿尔法 阿尔法为正，结果大于一；为负，就小于一</p><p>再慢慢算一遍，阿尔法取正负二分之一 两边的相邻项之比，分别是这样 乘上n以后，左边趋于一点五，右边趋于零点五 在十二零四集学拉贝，就是为了这一步</p><p>阿尔法为正时，两端均绝对收敛 再由定理十四点六，两端的和就出来了 阿尔法为负时，绝对值级数发散 在负一处通项同号，级数直接发散</p><p>第二档的正一端，拉贝已经排除了绝对收敛 可这里的通项正负交替，一正一负 因为阿尔法大于负一，绝对值越来越小 而且趋于零，正是刚才那个必要条件 十二零五集的莱布尼茨判别法，给出收敛 收敛，但不是绝对收敛，这叫条件收敛 第二档完成，左端发散，右端收敛</p><p>最后一档，阿尔法不超过负一 比值至少是一，所以绝对值始终不小于一 阿尔法等于负二时，通项越摆越大 通项不趋于零，两端均发散 铅笔写下的猜测，拆箱以后全部成立</p><p>考试前的十秒自检，阿尔法取正负二分之一 二分之一就是平方根，平稳落在零 这个零是真的，部分和慢慢爬向它 负二分之一时，在负一处冲向正无穷 这和教材第九式一致，右端点收敛 如果答案和函数的形状矛盾，就回头检查</p><h2>4 · 展望与衔接</h2><p>用处一，得到根号二的级数 部分和来回摆动，逼近一点四一四 用处二，左端点白送一个精确的和 这些数慢慢加起来，恰好等于一</p><p>拉贝、莱布尼茨和必要条件，全是十二章的老朋友 十四零一集的定理，把猜测变成了证明 十四零四集留下的空栏，现在填满了</p><p>这个习惯能走很远，先看形状，再去检验 在微分方程里，解在边界附近的样子，也这样猜 后面的分析课里，积分在端点的表现也一样 每一次，最后用合适的判别法来确认 先从函数猜，再用拉贝判别法证</p></main></body></html>

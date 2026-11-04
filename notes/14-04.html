@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>14-04 泰勒级数：系数里写着函数的一生</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+</style></head><body><div class="topbar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span>14-04</span><a class="mv-quiz" href="../quiz/14-04.html">去自测 →</a></div><main><header><div class="tag">视频配套讲稿（朗读原文） · MATH SELF-CHECK: 48 claims re-derived, 2 fixed.</div><h1>14-04 泰勒级数</h1><p class="sub">系数里写着函数的一生</p></header><h2>1 · 动机</h2><p>泰勒级数：一个函数的一生，写在它的系数里 一张校园卡上只有几个数字，却代表一个完整的人 函数也有一张卡：它在一点处的各阶导数 把卡上的数字排好，就成了一个幂级数</p><p>拿余弦在零点的卡来读一读 它在零点的导数，在一、零、负一、零之间轮转 部分和贴着图像，一次比一次贴得远 每一张卡，能否像这样认回它的主人？</p><p>第六章的泰勒公式，早就把函数拆成了两块 多项式那一块，正是这个级数的部分和 所以，一切取决于余项 余项一旦消失，卡就把函数完整地交回来</p><h2>2 · 定理与定义</h2><div class="card gold stmt">定义：f在x₀处的泰勒级数<br>前提：在x₀处有任意阶导数<br>第n项系数是f⁽ⁿ⁾(x₀)/n!<br>x₀=0时，叫作麦克劳林级数<br>定义里没保证收敛，更没保证收敛到f<br>定理14.11给出确切的条件<br>说的是x₀附近一整个区间<br>充要条件：两边互相保证<br>区间内每个x，余项都要趋于0<br>一行证明：f减部分和正是Rₙ<br>任意阶可导，余项却不消失？<br>课本例1回答：真有这样的函数<br>主角：f(x)=exp(−1/x²)<br>x≠0时为正，在0处补定义为0<br>放大0附近：图像越贴越紧<br>x=0.1时f≈3.7×10⁻⁴⁴<br>它在0处的卡：每阶导数都是0<br>原因：指数衰减压垮1/x的任何幂<br>泰勒级数0+0+0+⋯，处处收敛<br>收敛得很好，却收敛错了函数<br>余项恒等于f(x)，永远不消失<br>卡上空空如也，人却明明在场<br>任意阶可导还不够，余项趋于0才行</div><p>这是定义：函数在一点处的泰勒级数 第一个要求：这一点的任意阶导数全存在 每个系数，是一个导数除以一个阶乘 把展开点放在零点，它就叫作麦克劳林级数 定义没有保证收敛，更没保证收敛到原函数</p><p>定理十四点十一，给出了确切的条件 它说的是展开点附近的一整个区间 充分又必要，两边互相保证 区间里的每一点，余项全要缩到零 证明只要一句话：部分和缺的那一块，正是余项 任意阶导数全存在，余项却偏偏不消失？</p><p>课本例一回答：真的有这样的函数 主角登场：就是例一里的那个函数 离开零点它总是正的，在零点就补成零 放大零点附近，图像贴得一次比一次紧 在零点一处，小数点后先跟四十三个零 读它在零点的卡：每一阶导数全是零 为什么？指数式的衰减，压得住任何幂次的爆发 所以它的泰勒级数全是零，处处收敛 一个好好收敛的级数，说的却是另一个函数 余项每一次就是整个函数，永远不消失 她的卡上一片空白，可她明明就坐在教室里 导数再多也不够，真正说了算的是余项趋于零</p><h2>3 · 方法与证明</h2><p>现在看好的情形，带上第六章的拉格朗日型余项 对指数函数来说，每一阶导数就是它自己 所以余项被阶乘分式压住了 在三这里，分式先往上爬，然后被阶乘压垮 阶乘跑赢指数，这是第十二章的速度阶梯 指数函数处处等于它的麦克劳林级数</p><p>对正弦来说，每一阶导数，大小不超过一 一句话搞定：同一个阶乘分式，前面的因子也省了 余弦白送：把正弦的级数逐项求导就好 表格的前三条，对每个实数成立 对数这一条，来自上一集的阶梯 代入一，这一条写出的就是二的对数 第十二章那个常数，如今正式写进表格</p><p>下一条：课本里的二项式级数 直接对付余项很麻烦，课本换了一条更聪明的路 相邻系数之比趋于一，所以收敛半径是一 第一格：先给和函数起个名字 第二格：导数乘上那个因子，拆成两列系数 两列一加，含n的部分抵消，只剩下阿尔法 第三格：和函数满足一个微分方程 第四格：拿它除以期待的答案，记作F 一求导，里面正好是那个方程，导数就成了零 F一直停在一，和函数正是我们要的那个函数 妙就妙在：一项也不加，照样认出和函数 前两章的逐项求导，在这里变成证明</p><h2>4 · 展望与衔接</h2><p>表格像群聊一样，每条回复引用一条旧消息 回复一：把几何级数的变量换个符号 回复二：换成一个负的平方 逐项积分，反正切的级数就到手了 两端也成立，在一处给出四分之派 回复三引用二项式：阿尔法取负二分之一，再换个符号 回复四：再把变量换成它的平方 再逐项积分一次，反正弦的级数也来了 每个展开式身上，挂着它引用了谁、改了什么 第六章的老办法：用不着从头一阶阶求导</p><p>有一格明显空着：二项式那一条的端点 课本按阿尔法分三种情形，证明交给了别的书 我们不接受这种推迟：下一集亲手补齐证明 工具备好了：拉贝、莱布尼茨、阿贝尔</p><p>用交错级数来算，离真值的距离只是项数分之一 想要四位小数，这个估计要大约一万项 两条对数相减，偶数次的项全部抵消 取三分之一，对数里面正好变成二 只要四项，就已经超过四位小数的精度 一万项对四项，这就是好代换带来的速度</p><p>在复数里，圆盘上处处可导，级数就必定回到函数 那张空白卡的主人，沿着虚轴一靠近零就无界 这个对比通往复分析，本章第六集就在旁边 系数能写下函数的一生，前提是余项消失</p></main></body></html>
