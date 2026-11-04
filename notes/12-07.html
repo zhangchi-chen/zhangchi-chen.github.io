@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>12-07 重排：换个加法顺序，答案任你挑</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+</style></head><body><div class="topbar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span>12-07</span><a class="mv-quiz" href="../quiz/12-07.html">去自测 →</a></div><main><header><div class="tag">视频配套讲稿（朗读原文） · MATH SELF-CHECK: 34 claims re-derived, 3 fixed.</div><h1>12-07 重排</h1><p class="sub">换个加法顺序，答案任你挑</p></header><h2>1 · 动机</h2><p>只换加法的顺序，答案就会跟着跑。 同一把硬币，换个顺序投进去。 小屏幕只显示累加的总额，别的你看不到。 硬币有限时，怎么换顺序，总额全一样。 硬币无穷多时，总额只能看读数最后停在哪。</p><p>老朋友来了：交错调和级数。 莱布尼茨判别法告诉我们它收敛，和就叫A。 它不是零：部分和把它夹在十二分之七和六分之五之间。</p><p>每一项减半，就得到A的一半。 这一步没问题：每项乘同一个数，和也跟着乘。 把减半后的各项挪到负项下面，空位补上零。 补上的零不改变和，累计值只是停一下。</p><p>上下对齐，一列一列地加。 奇数列里，正项原样落到下面。 第二列：两个二分之一，一正一负抵消了。 第四列：两个负的四分之一，合成负的二分之一。 节奏一再出现：一列抵消，下一列合并。 去掉零，最下面的这一串，和是A的二分之三。 这正是教材的算法，一字不改。 同一批项，每项只用一次，和却多出一半。 既然和不为零，两个答案就真的不同。</p><h2>2 · 定理与定义</h2><div class="card gold stmt">我们作弊了吗？先查：这真是重排吗<br>重排：每项恰用一次，只换顺序<br>正项：奇数的倒数，依次全部出场<br>负项：偶数的倒数，各用一次<br>两正一负：变的只是累加的顺序<br>有限和：交换律保证顺序无关<br>回顾12-01：和是部分和的极限<br>顺序一换，部分和数列也换了<br>新的数列，当然可以有新的极限<br>硬币没变，读数却变了，读数就是总额<br>教材的注说得很明白<br>重排后即使收敛，和也未必不变<br>适当重排，它甚至可以发散<br>也可以收敛到任意预先给定的数<br>有安全的级数吗？有：绝对收敛的<br>定理12.13：绝对收敛可任意重排<br>其一：重排后仍然绝对收敛<br>其二：它的和仍然是原来的S<br>那条件收敛凭什么能被引到任何地方</div><p>我们作弊了吗？先看看它是否只换了顺序。 重排就是：每一项恰好用一次，只换顺序。 正项：每个奇数的倒数，依次各出现一次。 负项：每个偶数的倒数，各用一次。 两个正项配一个负项，变的只是累加的次序。 有限个数相加，交换顺序从不影响结果。 回想部分和那一集：和，就是部分和的极限。 顺序一换，部分和就成了另一个数列。 新数列，自然可以停在新的地方。 硬币没变，屏幕读数变了，而读数就是总额。</p><p>教材在注里说得很明白。 重排后即使收敛，和也未必等于原来的和。 适当重排，它甚至可以发散。 或者收敛到事先指定的任何一个数。</p><p>有没有安全的级数？有，绝对收敛的那些。 定理12.13：绝对收敛的级数，可以任意重排。 第一，重排后的级数，仍然绝对收敛。 第二，它的和一点不变，仍是原来那个数。 那么，条件收敛的级数，凭什么能被引到任何地方？</p><h2>3 · 方法与证明</h2><p>这个引导论证很常见，但教材里没有写。 上一集的道具：正项装一袋，负项装一袋。 条件收敛时，这两个级数全部发散。 说白了，每一袋自己加起来，总和是无穷大。 级数收敛，所以每一项越来越小，趋于零。 目标定在一点五，就像播放列表要刚好放到铃响。</p><p>低于目标，就从正项袋里依次取，直到越过目标。 三个正项下去，刚好越过目标。 上一集的结论：正项取不完，总能越过。 高于目标，就换成负项，直到落回目标下面。 一个负项就够了，马上落到目标下面。 负项那袋，同样永远取不完。 反复进退：越过目标，落回目标，一次又一次。</p><p>每一轮至少取一项，所以每一项迟早被用到。 能越过多远？最多就是最后加上的那一项。 项越来越小，偏离也越来越小。 部分和一折一折地收窄，逼近目标。 播放列表刚好在铃响时结束：这个和就是一点五。 换成别的目标，做法一样，负数也可以。</p><p>现在瞄准正无穷：目标依次是一、二、三，一路往上。 每越过一个目标，就放一个负项，再接着往上冲。 每次回落最多二分之一，部分和照样冲向正无穷。 同一批项，这次却发散了，正如注里所说。</p><p>再看安全的一边：绝对收敛为什么不怕换顺序？ 证明分两步。第一步：正项级数。 新级数开头的几项，全藏在原级数开头的若干项里。 没有负项，新部分和永远不超过原来的和。 增大又有上界，所以收敛，极限不超过S。 反过来再做一遍，两个和只能相等。</p><p>第二步，有正有负：像上一集那样，每一项拆成两部分。 绝对收敛时，两部分的级数全部收敛。 项一换顺序，两部分也跟着同样换。 第一步收尾：和不变，绝对收敛也不变。</p><p>绝对收敛：加法的顺序无关紧要。 条件收敛：顺序就是一个旋钮。 一转旋钮：任意目标，或者干脆发散。 考试陷阱：光是收敛，换顺序就可能出事。 只有绝对收敛才受保护，二分之三A就是反例。 换序后就算收敛，也可能停在别处。 发散也可以选：刚才那一路冲向正无穷。</p><h2>4 · 展望与衔接</h2><p>这有什么用？先看期望值。 期望值：每个结果乘上它的可能性，再全部加起来。 可结果之间没有天然的先后，先加哪个？ 所以期望的定义，要求绝对收敛。 这样，结果怎么排，期望值全不变。 以后交换两个求和号，也要靠绝对收敛。</p><p>回顾：上一集那两袋取不完的项，就是引导的燃料。 部分和那一集说过：和是极限，所以顺序才要紧。 最后欠一笔：A的值，留到泰勒级数那一集揭晓。 条件收敛时，顺序本身就是答案的一部分。</p></main></body></html>

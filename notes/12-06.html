@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>12-06 绝对收敛与条件收敛：把正项和负项分开</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+</style></head><body><div class="topbar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span>12-06</span><a class="mv-quiz" href="../quiz/12-06.html">去自测 →</a></div><main><header><div class="tag">视频配套讲稿（朗读原文） · MATH SELF-CHECK: 39 claims re-derived, 4 fixed.</div><h1>12-06 绝对收敛与条件收敛</h1><p class="sub">把正项和负项分开</p></header><h2>1 · 动机</h2><p>绝对收敛与条件收敛。 上一集,交错调和级数收敛了。 可各项大小加起来,没有上界。 级数收敛,大小加起来却无穷。</p><p>洗衣服前,浅色深色分两袋,各称各的。 级数也这样分:正项一边,负项一边。 这一例,两袋分量各自有限。 和就是两袋分量相减。 交错调和级数,也这样分袋。 两袋把秤全压爆了,各自无穷大。 无穷减无穷,级数却有和。 哪些级数能分袋称,哪些只能混在一起?</p><h2>2 · 定理与定义</h2><div class="card gold stmt">每个级数都配一个绝对值级数<br>绝对值级数收敛:绝对收敛<br>条件收敛:收敛,但Σ|uₙ|发散<br>交错调和级数:条件收敛的代表<br>1−1/4+1/9−⋯绝对收敛<br>有一格永远是空的:定理12.12<br>绝对收敛的级数一定收敛<br>来回走,不会比走过的路更远<br>每项拆成正部pₙ与负部qₙ<br>正的项:pₙ就是它,qₙ为0<br>负的项:pₙ为0,qₙ是它的大小<br>两部分都在0与|uₙ|之间<br>相加得大小,相减得原项<br>条件收敛⇒Σpₙ与Σqₙ都发散<br>各自趋于+∞,混合才收敛</div><p>每个级数身边,有一个绝对值级数。 绝对值级数收敛,就叫绝对收敛。 条件收敛:级数收敛,绝对值级数却发散。 交错调和级数,条件收敛的代表。 平方倒数的交错级数,绝对收敛。 有一格永远没有级数:这是定理十二点十二。 绝对收敛的级数,一定收敛。 来回走,离起点不会比走过的路更远。</p><p>每一项拆成两块:正部和负部。 正的项:正部就是它本身,负部是零。 负的项:正部是零,负部是它的大小。 无论正负,两部分夹在零和大小之间。 相加是大小,相减回到原项。 条件收敛时,正部和负部的级数全发散。 各自趋于正无穷,合在一起才收敛。</p><h2>3 · 方法与证明</h2><p>柯西收敛准则:远处每段全小于epsilon。 绝对收敛,保证大小的远段和很小。 三角不等式:带符号的段和,超不过大小之和。 带符号的段也很小。 再用柯西收敛准则,级数收敛,证完。</p><p>每一项画成柱子,正的朝上,负的朝下。 正部:负的柱子压成零。 负部:正柱压平,负柱翻上来。 两排相加,得到各项的大小。 第一排减第二排,原来的项回来了。 分解里每一个等式,就是这张图。</p><p>情形一:绝对值级数收敛。 每一部分逐项压在大小下面。 和绝对值级数一比,两部分全收敛。 和是两个有限总数相减。 反过来,两部分全收敛,就绝对收敛。</p><p>难的情形:级数收敛,却不绝对收敛。 先假设正部级数收敛。 由线性性,负部级数也收敛。 两部分相加,绝对值级数也收敛。 可它是发散的,矛盾。 负部同样如此。 在交错调和级数上看一看。 结论:两部分趋于正无穷。 再说一遍:各自无穷,合起来才收敛。 记住这两个无穷部分,下一集要用。</p><p>分类时,先看绝对值级数,再看级数本身。 练习一:按p分类,先暂停。 指数里多出的部分趋于零,大小像p级数。 p大于一:绝对收敛。 p在零到一之间:大小发散,却条件收敛。 p小于等于零:项不趋于零,发散。</p><p>练习二:暂停,再分一次类。 项递减趋于零,由莱布尼茨判别法收敛。 可大小贴着调和级数走:条件收敛。</p><p>练习三:分母是阶乘,x任取,暂停。 大小不超过阶乘的倒数,而这个级数收敛。 无论x取什么,绝对收敛。</p><p>看两部分:全有限,就是绝对收敛。 恰好一个无穷:级数发散。 两个全无穷:可能条件收敛,也可能发散。</p><p>陷阱一:收敛就绝对收敛?错。 交错调和级数就是反例。 陷阱二:发散就绝对值级数发散?对。 可它没用,只是定理十二点十二倒过来说。 第一个陷阱最丢分,它正是分类的意义。</p><p>两个级数相乘,要加一整张乘积表。 两者绝对收敛,怎么加都是两和之积。 沿对角线相加,就是柯西乘积。 把几何级数平方,逐条对角线相加。 每往下一条,多一份更高的幂。 公比绝对值小于一时,和是一减r,平方,再取倒数。 为什么要绝对收敛?因为加的顺序不能影响结果。 表格没有天然的顺序,完整答案在下一集。</p><h2>4 · 展望与衔接</h2><p>用途一:两个同学分工,一人加一部分。 相减能成功,恰好在绝对收敛时。 条件收敛时,两个人永远加不完。</p><p>用途二:第十四章,柯西乘积把指数级数相乘。 每条对角线合并,指数相加。 上集的悬念,有了名字:条件收敛。 两个无穷部分,打包留给下一集。 往后看:期望也是这样拆开定义的。 两部分必须有限,测度论把这叫可积。 把正负分开,看看哪一袋称得出来。</p></main></body></html>

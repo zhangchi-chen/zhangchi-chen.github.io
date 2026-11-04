@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>12-05 交错级数：下降、抵消、余项可控</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+</style></head><body><div class="topbar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span>12-05</span><a class="mv-quiz" href="../quiz/12-05.html">去自测 →</a></div><main><header><div class="tag">视频配套讲稿（朗读原文） · MATH SELF-CHECK: 34 claims re-derived, 1 fixed.</div><h1>12-05 交错级数</h1><p class="sub">下降、抵消、余项可控</p></header><h2>1 · 动机</h2><p>交错级数，一步下降，一次抵消，余项可控。 有个经典公式，能算出四分之派。 证明放在后面，今天只拿它来做试验。</p><p>只算三项，结果大约是零点八六七。 可是真值未知，它到底离得多远？ 再减去七分之一，又跳回零点七二四左右。 每加一项就来回一摆，摆幅越来越小。 看来真值总被夹在相邻两个部分和之间。 如果真是这样，下一项就是最坏的偏离。 今天的定理，会把这个愿望变成保证。</p><h2>2 · 定理与定义</h2><div class="card gold stmt">交错级数：u₁−u₂+u₃−⋯<br>每个uₙ都为正，交替全靠符号<br>课本例一：1−1/2+1/3−⋯<br>例二：1−1/3!+1/5!−⋯<br>例三：1/10−2/10²+⋯<br>收敛吗？一幅图回答全部三个<br>定理12.11：莱布尼茨判别法<br>如果交错级数(1)满足<br>(i) 数列{uₙ}单调递减<br>(ii) lim uₙ=0，<br>那么它收敛。<br>条件(i)：每一项不比前一项大<br>条件(ii)：各项一直缩到零<br>结论：部分和趋于一个数<br>两个条件，只承诺收敛<br>如果级数满足莱布尼茨判别法条件，<br>余项估计：|Rₙ|≤uₙ₊₁<br>Rₙ=S−Sₙ：前n项之后剩下的<br>白话：第一个没加的项管住误差</div><p>交错级数，就是正负号轮流出现。 每一项的大小全是正数，交替只靠符号。 课本第一个例子，交错调和级数。 例二，分母是奇数的阶乘，正负交替。 例三，分子一二三，分母是十的乘方。 它们收敛吗？一幅图就能回答这三个。</p><p>这就是今天要讲的，莱布尼茨判别法。 如果这个交错级数满足两个条件， 第一，数列单调递减， 第二，各项趋于零， 那么它收敛。 条件一，每一项不比前一项大。 条件二，各项一直缩小到零。 结论是，部分和最终停在一个数上。 两个条件，只换来一个承诺，收敛。</p><p>推论是，如果级数满足这两个条件， 那么余项不超过下一项。 余项，就是加完前面这些项之后剩下的部分。 说白了，第一个没加上的项，就管住了偏离。</p><h2>3 · 方法与证明</h2><p>把交错调和级数的部分和画出来。 一路锯齿跳动，先只看偶数项。 两两配对，偶数项部分和就是一串括号相加。 条件一保证，每个括号不小于零。 所以偶数项部分和，只升不降。 奇数项换个分法，第一项减去一串括号。 括号仍然不小于零，而且全被减掉。 所以奇数项部分和，只降不升。</p><p>就像和室友来回转账，结清一笔账。 你一转出就多付了，对方一退回又少付了。 真实的欠款，被夹在两串累计数之间。 任何一个偶数项，全低于任何一个奇数项。 相邻两者的距离，正好是一项。 条件二，把这段距离压到零。 这些区间一层套一层，越缩越窄，直到零。</p><p>这正是第七章的区间套定理，又回来了。 它给出唯一一个点，落在每个区间里。 两串部分和一起逼近它，所以级数收敛。 整个证明，只有短短两句。 这个和记作A，它的精确值留到第十四章揭晓。</p><p>再送一个福利，和总落在相邻两个部分和之间。 这两者只隔一项，所以余项不会更大。 换成欠账来说，下一笔没付的钱，就是最大的偏离。 算到第几项，偏离就不超过下一个分数。 核对一下，真实的偏离始终在上限之下。 想让偏离不超过百分之一，算九十九项就够。 慢是慢，但有保证，而且事先就知道。</p><p>回到四分之派，那个级数两个条件全满足。 用了三项，偏离最多是第四项，七分之一。 真实偏离大约零点零八一，确实在上限之下。 开头的问题，不用知道派就解决了。</p><p>注意，两个条件缺一不可。 去掉条件一，这些项忽大忽小，但仍趋于零。 这下有的括号变成负数，奇数项就能回升。 它居然发散，光是奇数位上的项，加起来就无穷大。 去掉条件二，这些项仍在递减，却只降到一。 两串部分和仍各自停下，却始终隔着一。 项不趋于零，就违反收敛的必要条件，一定发散。 所以要逐条核对，两个条件一个也不能漏。</p><h2>4 · 展望与衔接</h2><p>悬念来了，交错调和级数确实收敛。 去掉符号，调和级数却发散。 它本身收敛，取了绝对值却发散。 这种收敛有个名字，叫条件收敛。 绝对或者条件，留给下一讲来分。 考试陷阱，能用莱布尼茨，就是绝对收敛？错。 这个判别法只保证收敛，从不保证绝对收敛。 过两讲，这个级数换个顺序相加，和就变了。</p><p>练习一，暂停一下，核对两个条件。 阶乘缩得飞快，算三项，偏离就不到零点零零零二。 练习二，十的乘方那个，同样核对一遍。 后一项至多是前一项的五分之一，而且趋于零。 算三项，偏离至多零点零零零四。 两道练习的完整过程，写在笔记里。</p><p>数值分析里的投影方法，也是高估低估交替逼近。 容斥公式也是交错和，同样这样估价。 两个条件，两串部分和，一张价签。 一步下降，一次抵消，余项可控。</p></main></body></html>
