@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>13-01 逐点收敛：一个点一个点地过线</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+</style></head><body><div class="topbar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span>13-01</span><a class="mv-quiz" href="../quiz/13-01.html">去自测 →</a></div><main><header><div class="tag">视频配套讲稿（朗读原文） · MATH SELF-CHECK: 30 claims re-derived, 2 fixed.</div><h1>13-01 逐点收敛</h1><p class="sub">一个点一个点地过线</p></header><h2>1 · 动机</h2><p>逐点收敛：一整族函数，一个点一个点地过线 每一条线光滑漂亮，全部经过右上角同一个点 幂次一升高，这条线就往地面塌下去 这一整族函数，到底要去哪里？ 看上去是地面，可最右端那个点一动不动 而在右端附近，两个极限谁先谁后，大有讲究</p><p>想象一次小测，一桌一桌地发回来 每个人终究会及格，只是时刻各不相同 可从来没人宣布统一的截止时间 座位是一个个点，分钟是下标一步步往前走</p><h2>2 · 定理与定义</h2><div class="card gold stmt">钉住一点x₀，读出每条曲线的高度<br>这些高度就是一个普通数列<br>函数列＝一族数列，每个x一个<br>热身：fₙ(x)=sin(nx)/n<br>任意固定x，|fₙ(x)|≤1/n<br>极限函数为0，收敛域是全体实数<br>若x₀∈E处数列{fₙ(x₀)}收敛<br>就称函数列{fₙ}在x₀收敛<br>若在D⊂E的每一点都收敛<br>由此定义的f称为极限函数<br>全体收敛点的集合称为收敛域<br>每个点各管各的，这就是逐点<br>对每个x∈D和每个ε&gt;0，存在N<br>N一般依赖ε和x，记作N(ε,x)<br>每张桌子的及格时刻由N(ε,x)决定</div><p>钉住一个点，挨个读出每条线在那里的高度 这些高度排起来，就是第二章那种普通数列 函数列其实是一族数列，每个点各领一个</p><p>先热个身：波越抖越快，可也越来越矮 站在哪个点，高度被n分之一压向零 极限函数是零，收敛域是全体实数</p><p>钉住一个点，如果那里的一串数收敛 就说函数列在这个点收敛 如果在集合D的每一点上收敛 把这些极限收集起来的函数，叫作极限函数 所有收敛点合在一起，就是收敛域 每个点只管自己，这就是逐点的意思</p><p>每个点、每个精度要求，总能找到一个N 一般来说，这个门槛既看精度，也看是哪个点 每张桌子自己的及格时刻，就由这个门槛决定</p><h2>3 · 方法与证明</h2><p>下面请出本章的主角：幂函数这一族 在零这个点，从第一步起就是零 在二分之一处，每步减半，转眼归零 在四分之三处，照样归零，只是慢一些 贴近1的地方，它慢慢爬：一百步后仍有三分之一多 在1这个点，高度纹丝不动，极限是1 在负1处来回翻转，又是第十二章开头那种振荡 在负1和0之间，正负来回换，大小照样归零 绝对值超过1，幂次一路变大，没有极限</p><p>把收敛的点汇总起来，就是收敛域 极限函数在内部是零，到了右端点却是1 这一族里每一条，全是不断开的线 可它们的极限，偏偏在一个点上从零跳到1 连续性没能熬过取极限，原因先按下不表</p><p>在右端点，两个极限迎面相撞 先把n按住，让点滑到右端，高度升到1 再让下标跑起来：一路是1，答案是1 反过来：点停在1的左边，让n跑，高度沉到零 再让点滑过去：一路是零，答案是零 两次老老实实的计算，却给出两个答案 所以取极限的先后，不能随手交换 修复的条件，要等第十三章第四集的定理13.8</p><p>把及格线定在百分之一，问每个点何时过线 对内部的点，课本直接给出了门槛 这个门槛不多不少：过了它及格，不到它不及格 往后排走，盯住等待的步数 每多一个9，等待就变成大约十倍 越靠近右端，等待的步数越没有尽头 所以没有哪一个门槛，能照顾到整个区间 每个人终会及格，可就是等不到全班及格的那一分钟 全班共用同一个门槛？那是下一集要讲的事</p><h2>4 · 展望与衔接</h2><p>函数项级数也一样，一个点一个点地看 把点钉住，它就是第十二章的数项级数 级数逐点收敛，就是部分和函数列逐点收敛 拿几何级数来说，部分和有现成的公式 在内部，幂次归零，和函数就出来了 两个端点发散，收敛域是开区间，和第十二章一样 上一集那个正弦级数，其实早就是逐点收敛</p><p>陷阱来了：每一项连续，极限就连续吗？不对 逐点收敛，什么性质也保不住 到后面，积分和导数也会出问题</p><p>往远处看：机器学习里，模型一版接一版地训练 盯住一个输入，看预测慢慢稳定，这就是逐点 整个模型能不能一起稳定，以后的概率课会再谈</p><p>幂函数一句话：收敛域、断开的极限、没有上限的门槛 整套做法：钉住一点，解一个普通数列，再把答案收集起来 每个点按自己的节奏过线，一句话，这就是逐点收敛</p></main></body></html>

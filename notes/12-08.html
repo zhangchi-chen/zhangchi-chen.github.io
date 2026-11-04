@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>12-08 阿贝尔与狄利克雷：分部求和登场</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+</style></head><body><div class="topbar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span>12-08</span><a class="mv-quiz" href="../quiz/12-08.html">去自测 →</a></div><main><header><div class="tag">视频配套讲稿（朗读原文） · MATH SELF-CHECK: 46 claims re-derived, 3 fixed.</div><h1>12-08 阿贝尔与狄利克雷</h1><p class="sub">分部求和登场</p></header><h2>1 · 动机</h2><p>阿贝尔与狄利克雷，以及背后的分部求和 习题集里的一个级数，它收敛吗？ 通项趋于零，可光凭这点不够 比较原则只换来一个发散的上界 莱布尼茨要一步一换号，这里却成团换号</p><p>可是看它的部分和，好像慢慢稳住了 把正弦一个个加起来，总和从不跑远 另一个因子一路平稳地减小到零 又是小组作业，一人很稳，一人爱晃却不走远 两人合力，级数就收敛，分部求和会讲清原因</p><h2>2 · 定理与定义</h2><div class="card gold stmt">从有限和 Σεᵢvᵢ 出发<br>记σₖ=v₁+⋯+vₖ，即累加和<br>阿贝尔变换（分部求和公式）<br>每项：ε的相邻差乘以累加和σ<br>再加一个尾项：εₙ乘σₙ<br>单个的v消失了，只剩累加和σ<br>证明：vₖ=σₖ−σₖ₋₁，σ₀=0<br>代入后按σ合并，相邻ε两两配对<br>没有技巧，只是换了谁乘谁<br>用数字验证：两边都是3<br>眼熟吗？这就是08-04的分部积分<br>ε扮演u，累加和σ扮演v<br>分工同08-04：一个作差，一个累加<br>边界项uv变成尾项εₙσₙ<br>推论：阿贝尔引理<br>条件(i)：εₖ只朝一个方向变<br>条件(ii)：每个|σₖ|都不超过A<br>结论：整个和不超过3εA，与n无关<br>原因：单调意味着每一步同号<br>各步合计≤2ε，尾项再加一个ε<br>常数3很宽松，关键是上界里没有n<br>由此得到两个判别法，一张表装下<br>定理12.15：阿贝尔判别法<br>阿贝尔：aₙ单调有界，Σbₙ收敛<br>定理12.16：狄利克雷判别法<br>狄利克雷：aₙ单调趋于0，部分和有界<br>两个判别法在两个因子间分配要求<br>最弱一格：1·(−1)ⁿ⁺¹ 发散</div><p>先看一个有限和，每项是两个因子相乘 sigma k 是第二个因子的累加和 这就是阿贝尔变换，也叫分部求和公式 每一项是第一个因子的一步，乘上累加和 最后再加一项，末值乘以最后的累加和 一个个的项不见了，只剩下它们的累加和</p><p>证明只是记账，每项是相邻两个累加和的跳跃 代入后按累加和归拢，相邻项自然配对 这里没有技巧，只是换了一下谁乘谁 用几个整数验算，两边同样是三</p><p>眼熟吧？这正是第八章的分部积分，换成了求和 平稳因子扮演u，累加和是搭档 一个求增量，一个求累加，分工和从前一样 积分里的边界项，变成了刚才的尾项</p><p>由它马上得到阿贝尔引理 第一个条件，第一个因子只朝一个方向走 第二个条件，每个累加和离零不超过固定的距离 结论是，不管加多少项，总和有固定的上限 为什么？一路同向，每一步方向相同 各步至多两个epsilon，尾项再加一个 三这个常数故意给得宽松，关键是项数消失了</p><p>由此得到两个判别法，一张小表就能装下 这是阿贝尔判别法 阿贝尔对平稳因子要求很少，却要另一个级数收敛 再看狄利克雷判别法 狄利克雷要平稳因子趋于零，另一边只要累加和有界 两个判别法只是把要求在两个因子之间挪动 最弱一格失败，常数乘来回翻的符号停不住</p><h2>3 · 方法与证明</h2><p>要证明它，就瞄准本章第一集的柯西准则 任取连续的一段，项数随意 段内的累加和是两个部分和相减，不超过两倍上界 爱晃的那位只要别走远就好 阿贝尔引理一用，整段就被首项乘常数压住 任给epsilon，项数够大时上限小于它 远处每一段全很小，由柯西准则，级数收敛 阿贝尔的证明是孪生版，这回由另一个级数提供小量 为什么非要朝一个方向？看一个趋于零却来回摆的因子 配上来回翻的符号，乘出来是调和级数，发散</p><p>家族团聚，另一个因子只翻符号，累加和有界 狄利克雷说，递减趋于零，交错级数就收敛 这正是交错级数那一集的莱布尼茨判别法 这些判别法一层套一层，不是对手</p><p>真正的难题来了，余弦的累加和有界吗 乘上一个辅助因子，每个余弦拆成两个正弦相减 相邻的项成对抵消，整条链缩成一个正弦 这就是教材里的第二十一式</p><p>零到二派之间辅助因子为正，放心相除 所以余弦的累加和有界，上界和项数无关 取三分之一派，上界是一点五，累加和始终在界内 正弦用同样的办法，累加和也有界</p><p>离两端远一点，一个界就能管住所有的点 一旦靠近零，上界就急剧变大 就在零这一点，每个余弦全是一，累加和一路增大 这时余弦级数变成调和级数，真的发散</p><p>收获时刻，把正弦级数拆成两个搭档 平稳因子递减趋于零，正弦的累加和有界 由狄利克雷判别法，它收敛，开头那道习题也解决了 余弦级数在零和二派之间同理收敛</p><p>绝对收敛吗？试一试二分之一派 取了绝对值，只剩奇数的倒数 和调和级数的一半比较，它发散 所以在二分之一派处，它是条件收敛</p><h2>4 · 展望与衔接</h2><p>第一个应用，阿贝尔判别法一句话解决 一个因子慢慢增大却有界，另一个级数收敛 第二个应用，因子缩得这么慢，照样收敛</p><p>乘积的反常积分，也有同样的两个判别法 两个判别法将来会有一致收敛的版本 以后这个正弦级数会帮我们算出一些特殊值</p><p>整章的工具箱，画在一张图上 第一步，看通项是否趋于零，否则直接发散 正项级数就用比较原则、比式根式、积分或拉贝 有正有负？先看是否绝对收敛 不绝对收敛又是交错的，就用莱布尼茨 平稳因子乘上爱晃的因子，就找阿贝尔或狄利克雷 一个平稳，一个有界，合起来就收敛</p></main></body></html>

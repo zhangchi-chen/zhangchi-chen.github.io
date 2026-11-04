@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>13-02 一致收敛：最差的点也要过关</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+</style></head><body><div class="topbar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span>13-02</span><a class="mv-quiz" href="../quiz/13-02.html">去自测 →</a></div><main><header><div class="tag">视频配套讲稿（朗读原文） · MATH SELF-CHECK: 38 claims re-derived, 3 fixed.</div><h1>13-02 一致收敛</h1><p class="sub">最差的点也要过关</p></header><h2>1 · 动机</h2><p>一致收敛：连最坏的点也要过关。 上一集，那串幂函数在零到一之间，处处趋于零。 把epsilon定成百分之一，问每个点等几步。 越靠近一，要等的步数越是暴涨。 没有哪一个步数，能管住整个区间。</p><p>想象一下，截止前一晚的班级群。 逐点收敛，就是给每人发私信，时间各不相同。 一致收敛，是群里发一条公告，全班同一个时间。 全班过关，要看最坏的那一位能否过关。 这个最坏的数，就是本集的核心。 我们要的，是整条线一起安定下来。</p><h2>2 · 定理与定义</h2><div class="card gold stmt">先画出极限函数f<br>上下各加ε，围成一条带子<br>前几条fₙ会冒出带子<br>从n=5起，整条曲线都在带内<br>这就是一致收敛：一个N，处处在带内<br>逐点收敛只要求每个x迟早进带<br>不同的x，进带时刻各不相同<br>xⁿ靠近1的那段，始终在带外<br>教材定义1正是这样说的<br>任给ε&gt;0：带子宽度由你定<br>存在N：群里只发一个时间<br>n&gt;N后，D上每点误差都小于ε<br>关键：N只依赖ε这一个量<br>逐点：N(ε,x)；一致：N(ε)<br>差别全在“∃N”放在“∀x”前面<br>否定形式：一个ε₀让每个N都失手<br>无论N多大，总有x′和n′超出ε₀<br>逐个检查x，条件有无穷多个<br>不如只记最差的误差：上确界<br>07-04的老朋友：上确界<br>每个n一个数，像按最低分看全班<br>定理13.2：一致⇔最差误差→0<br>几何变计算：只盯一个数列<br>这里上确界是1/n，趋于0<br>13-01留下的悬念，今天解开<br>还记得04-05的一致连续吗？<br>这里一个N管所有x，同一把尺子<br>16-04还会第三次用到它</div><p>先画出蓝色的极限函数。 两侧各加epsilon，成一条带。 前几个函数，会冒出带外。 从第五条开始，整条线全在带子里。 这就是一致收敛：一个时刻，整条线进带。</p><p>逐点收敛只要求，每个固定的点迟早进带。 不同的点，进带时刻各不相同。 而在靠近一的地方，每条线总有一截伸出带外。</p><p>教材的定义一，说的正是这件事。 任给epsilon，带子多窄由你定。 接着存在一个时刻，群里只发这一个。 此后每一点的偏离，全小于epsilon。 关键：时刻只由epsilon定。 逐点收敛允许时刻随点而变，一致收敛不允许。 区别在于先选时刻，或是先选点。 否定：一个固定的epsilon难倒所有时刻。 时刻定得再晚，之后总有某个点，偏离仍然很大。</p><p>一个点一个点去核对，条件就有无穷多个。 不如只记最坏的偏离：上确界。 第七章的老朋友，用一个数概括全体。 每一轮只记一个数，就像按最低分看全班。 定理十三点二：一致收敛，等价于最坏的偏离趋于零。 几何变成了计算：只要盯住一个数列。 这里最坏偏离是n分之一，趋于零。</p><p>第十三章第一集留下的悬念，今天解开了。 第四章的一致连续：一个delta管所有点。 这里一个时刻管所有点，仍是同一把尺子。 到了第十六章，这把尺子会第三次登台。</p><h2>3 · 方法与证明</h2><p>回到我们的老展品：零到一上的幂函数。 不管次数多大，右端那截总能爬到一。 所以最坏的偏离，始终等于一。 最坏的偏离纹丝不动，所以不是一致收敛。 教材选了一个具体的点，随n变大逼近一。 那里的偏离只比一少一点，不低于一半。 把epsilon定为一半，没有时刻躲得过。</p><p>换一个集合：离一远一点，停在某个b。 这时最坏的偏离，被右端的值封顶。 右端的值趋于零，所以在小集合上一致收敛。 教材这样总结：同一个函数列，两个集合，两个答案。 一致收敛，是函数列和集合这一对的性质。</p><p>再看一个更狡猾的函数列，住在整个正半轴上。 固定一个点：指数压倒一切，函数值趋于零。 可是看整条线：上面有一个尖峰。 峰顶的位置，随n变大向零滑去。 而峰的高度，会无限变大。 就像一个每轮换座位的学生。 老师看向哪里，他就已经不在那里。 尖峰冲出任何带子，所以不是一致收敛。</p><p>推论给的捷径：沿着会移动的点去看。 取n分之一这些点：函数值趋于一，而不是零。 教材把两条路全写了：看峰高，或者取点。</p><p>级数也一样，看部分和函数列。 展品是几何级数，它的和函数我们早就知道。 加完n项，剩下的就是余项。 选一个滑向一的点，那里的余项无限变大。 所以在开区间上不一致收敛，一的附近余项无界。 先记住一个词：内闭一致收敛。 后面两集，会让这个词真正用起来。</p><p>一个陷阱：每个函数全连续，就一定一致收敛吗？ 反例：一族越来越平的直线。 每个固定的点上，值趋于零。 可是往右一直走，每条线全会无限升高。 每一轮最坏的偏离，全是无穷大。 可是在有界的一段上，最坏的偏离趋于零。 一致收敛要靠自己证明，连续性给不了它。</p><h2>4 · 展望与衔接</h2><p>用处一：画图要处处准到一个像素。 这是关于上确界的承诺：最坏的像素说了算。 用处二：计算器里的正弦，靠一个多项式。 在整个窗口里，最坏的偏离始终极小。</p><p>留给下一集：不知道极限，也能证明一致收敛。 定理十三点一，柯西准则，先当作黑箱来用。 再留给第十三章第四集：一致收敛能换来什么。</p><p>再往远看：两个函数最大的间隙，是真正的距离。 以后的课程，用它丈量整个函数空间。 把这样的空间补完整，积分理论就在那里再造。 记住：最坏的点也过关，才算全体过关。</p></main></body></html>
