@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>17-04 方向导数与梯度：最陡的上坡方向</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+</style></head><body><div class="topbar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span>17-04</span><a class="mv-quiz" href="../quiz/17-04.html">去自测 →</a></div><main><header><div class="tag">视频配套讲稿（朗读原文） · MATH SELF-CHECK: 41 claims re-derived, 1 fixed.</div><h1>17-04 方向导数与梯度</h1><p class="sub">最陡的上坡方向</p></header><h2>1 · 动机</h2><p>方向导数与梯度：哪边上坡最陡？ 傍晚跑步，地图把校园小山画成一圈圈等高线。 你在半山腰的一个点停下来。 运动软件显示正前方的坡度。 原地慢慢转身，读数一直在变。</p><p>上一集为止，偏导数只看东和北。 可跑步的人，能朝任何方向出发。 每个方向，各有一个坡度读数。 八个方向里，西南最陡，读数2.12。 但两个方向之间，也许有更陡的。 两个问题：沿一条射线坡度多少，哪条最陡。</p><h2>2 · 定理与定义</h2><div class="card gold stmt">从P₀引一条方向为l的射线<br>沿射线走到点P，距离为ρ<br>升高的量除以走过的距离<br>让ρ从正的一侧趋于0<br>这个极限就是沿l的方向导数<br>定义1：空间点处的方向导数<br>只取ρ→0⁺：沿射线的右导数<br>沿x轴正向，它就是fₓ<br>沿x轴负向，它变成−fₓ<br>每条射线都算极限，算不完<br>可微时，一个公式全部搞定<br>定理17.6：可微时方向导数都存在<br>α、β、γ是l的方向角<br>它们的余弦叫l的方向余弦<br>合起来就是单位向量l₀</div><p>从这个点出发，引一条射线。 沿射线走出一小段，到达一个新的点。 升高除以距离，是平均坡度。 让距离从正的一侧缩小到零。 这个极限，就是沿这条射线的方向导数。 课本的定义一，说的正是这件事。 距离只从正侧缩小，它是沿射线的右导数。 沿横轴正向，它就是偏导数。 掉头沿负向走，符号反过来。</p><p>每个方向各求一次极限，永远算不完。 只要可微，一个公式就全部搞定。 定理17.6：只要可微，每个方向的方向导数存在。</p><p>射线与三条坐标轴的夹角，叫方向角。 这三个角的余弦，叫方向余弦。 三个余弦，拼成模为一的向量。</p><h2>3 · 方法与证明</h2><p>为什么成立？回想十七章第一集的全微分。 代入射线上的增量，再除以距离。 余项消失，功劳全在线性主部。</p><p>例一：沿给定方向，求方向导数。 注意：这个向量的模是3，先除以3。 偏导数乘方向余弦再相加，得三分之一。 朝这个方向，每走一步，升高三分之一。 忘了先除以3，就会得到1，是真值的3倍。</p><p>每个方向导数存在，函数就一定连续吗？ 例二：抛物线与横轴之间取一，其余地方取零。 从原点出发的每条射线，起步时取值为零。 就算紧贴横轴，开头一小段也取零。 所以在原点，每个方向导数等于零。 换一条路，沿更平的抛物线走向原点。 一路上函数值始终是一，原点处却是零。 在原点，它既不连续，更谈不上可微。 就像十六章第二集，一条弯路胜过所有射线。 可微只是充分条件，不是必要条件。 方向导数再多，也换不回连续。</p><p>没有可微，公式本身也会出错。 把链式法则那一集的反例请回来。 两个偏导数等于零，公式算出零。 可沿对角线，真实坡度约0.35，不是零。 光有偏导数，推不出别的方向，要靠可微。</p><p>可微时，公式是两个向量的内积。 后一个向量，就是我们选的方向。 前一个只跟函数和点有关，它叫梯度。 定义二：偏导数组成的向量，叫梯度。 方向导数，等于梯度与方向的内积。 也就是梯度的模，乘夹角的余弦。 课本说：夹角为零最大，反向最小。</p><p>回到小山，这个点的梯度是一支箭头。 让方向绕这个点转一圈。 方向导数，就是梯度在方向上的投影。 与梯度对齐，读数最大，约2.24。 转到直角，横向走，读数为零。 完全掉头，正对下坡，读数最小。 其余方向，就是最大读数乘一个余弦。 最陡的方向不是西南，而是梯度方向。</p><p>例三：求一个三元函数的梯度。 三个偏导数依次是一、负三、负三。 所以梯度的模是根号十九。 沿梯度方向增加最快，速度是根号十九。</p><p>现在沿过这个点的等值线走。 高度不变，切线方向的读数是零。 读数为零，说明梯度和切线垂直。 最快的上坡，一点也不往旁边浪费。</p><p>把地图升起来，变回小山。 每条等值线，是在同一高度切出来的。 梯度箭头垂直穿过每条等值线。 线越密，箭头越大，坡越陡。 这正是登山者熟悉的读图法。</p><p>二元函数，去掉第三项即可。 三元函数的梯度，是等值面的法向量。 具体方程，留到十八章第四集。</p><h2>4 · 展望与衔接</h2><p>整张地图画满梯度箭头，个个朝上坡。 哪边最陡？顺箭头走。 有多陡？看箭头有多大。 跑步时的两个问题，答完了。</p><p>应用一：山上的雨水，沿最陡的方向流下。 应用二：宿舍温度图上，梯度指向升温最快的方向。 沿等值线走，温度保持不变。</p><p>这一切，靠的是十七章第一集的可微性。 十八章第四集，梯度会成为等值面的法向量。 十八章第五集，条件极值处，等值线相切。 二十三章第一集，梯度是矩阵导数里的一排。</p><p>展望：机器学习，逆损失函数的梯度走。 梯度下降，就是表盘反向那一格，跑上百万次。 每个方向一个坡度，一支箭头全说清。</p></main></body></html>

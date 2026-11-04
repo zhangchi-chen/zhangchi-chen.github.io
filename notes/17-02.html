@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>17-02 偏导数：定住一个变量，求另一个的导数</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+</style></head><body><div class="topbar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span>17-02</span><a class="mv-quiz" href="../quiz/17-02.html">去自测 →</a></div><main><header><div class="tag">视频配套讲稿（朗读原文） · MATH SELF-CHECK: 33 claims re-derived, 1 fixed.</div><h1>17-02 偏导数</h1><p class="sub">定住一个变量，求另一个的导数</p></header><h2>1 · 动机</h2><p>偏导数，就是先按住一个变量，再对另一个求导。 一元的时候很简单，每个点只有一个坡度。 可现在函数有两个输入，两个全能动。</p><p>就像宿舍那张书桌，前后左右一起晃。 按住一条边，它就只能朝一个方向晃。 只朝一个方向晃，这就是一元问题。</p><p>函数也一样。把y定住，就只剩一个变量在动。 求两次导，次序相反，两位同学一个得负一，一个得一。 同一个函数同一个点，谁错了？先记着。</p><h2>2 · 定理与定义</h2><div class="card gold stmt">定义2：把y定在y₀，只让x动<br>记作f_x(x₀,y₀)；对y同理<br>定住y=y₀，剩下x的偏函数<br>x挪动Δx，z的变化叫偏增量<br>除以Δx，得到割线的斜率<br>让Δx趋于0，割线转成切线<br>切线斜率就是f_x，这里等于1<br>做法：把y当常数，照常求导<br>例2：在点(1,3)求两个偏导<br>定住y：f_x=3x²+4xy<br>代入(1,3)：f_x=15<br>换过来：定住x，让y动<br>定住x：f_y=2x²−3y²<br>代入(1,3)：f_y=−25<br>同一点，两个变化率：15与−25<br>例3：z=xʸ，该用哪条法则？<br>定住y：它是幂函数，用幂法则<br>定住x：它是指数函数，用指数法则<br>定住谁，决定哪条法则登场<br>画出来：f的图像是一张曲面<br>用竖直平面y=y₀切开它<br>切口是条曲线：偏函数的图像<br>P处切线T_x斜率tanα=f_x<br>换x=x₀来切：得到切线T_y<br>它的斜率tanβ=f_y<br>两个斜率，两条切线，同一点P<br>撑起切平面还要可微(17-01)<br>偏导数单独有多弱？看这个函数<br>两轴上f恒为0，两个偏导都是0<br>可沿对角线y=x，f一直是1/2<br>偏导都存在，f在原点却间断<br>偏导只盯着两条轴(回顾16-02)</div><p>定义二：一个变量按住，只让另一个动。 这个极限就叫偏导数，另一个变量照样定义。</p><p>把一个变量定住，剩下的就是偏函数。 让自变量挪一小步，高度的变化叫偏增量。 再除以这一小步，得到割线的坡度。 步子缩到零，割线慢慢转成切线。 切线有多陡，就是偏导数；这里正好是一。</p><p>做法：被定住的变量当常数，照常求导。 课本例二，在点一、三处求两个偏导。 把y定住。每一项照旧求导，最后一项直接消失。 代入这个点，得到十五。 换过来。把x定住，让另一个动。 把x定住。照样逐项求导，这回第一项消失。 代入这个点，得到负二十五。 同一个点，两个方向：一边快速上升，一边下降更快。</p><p>例三：底数和指数全是变量，该用哪条法则？ 指数定住，它就是幂函数，用幂函数的法则。 底数定住，它就成了指数函数，换指数函数的法则。 定住的是谁，决定了哪条法则登场。</p><p>画出来，函数的图像是一张起伏的面。 用一张竖直的平面，把它切开。 切口是一条线，正是偏函数的图像。 这条线在这一点的切线有多陡，就是偏导数。 换个方向再切，得到第二条线和它的切线。 它有多陡，就是另一个偏导数。 两个坡度，两条切线，穿过同一个点。 光有两个坡度撑不起切平面，上一集说了，要可微。</p><p>光有偏导数，能力有多弱？看这个函数。 两条轴上函数全是零，两个偏导数也是零。 可沿着对角线走进来，函数值一直是二分之一。 偏导数全存在，可函数在原点断开了。 偏导数只盯着两条轴，这正是第十六章两条路径的教训。</p><h2>3 · 方法与证明</h2><p>偏导数本身也是函数，可以再求一次偏导。 每个再分两支，一共四个二阶偏导数。 两个变量全用到的，叫混合偏导数。 注意，下标的先后，就是求导的先后。 意思是先对x求导，再换另一个变量。 课本的分式写法，也是从左往右的次序。 有的书把次序反过来，看书先查约定。 画个两乘两的表：横着看第一次，竖着看第二次。 斜对着的两格，是混合偏导数。 高阶偏导数也一样，一步一步往后读。</p><p>先拿一个指数函数，把四个格子填满。 每对y求一次导，就多出一个因子二。 四格依次是原函数的一、二、二、四倍。 看，两个混合偏导数一样。</p><p>再来个难一点的，课本里的反正切函数。 先求出两个一阶偏导数。 再求混合偏导：两种次序，结果一样。 又一样了。可总是这样吗？</p><p>回到那两位同学：负一和一。 课本注记给出了这个函数和两个值。 甲同学先对x求导，盯着竖直的那条轴。 在那条轴上，她算出的正好是步子的相反数。 再对另一个变量求导，得到负一。 乙同学先对y求导，盯着水平的那条轴。 他算出的正好是步子本身。 再对另一个变量求导，得到一。 同一个函数，同一个点，换个次序，答案就变了。 谁也没算错。两种次序，其实是两个累次极限。</p><p>两者出自同一个量：小矩形四角的函数值，带号相加。 先缩宽度，再缩高度，这是甲同学走的路。 先缩高度再缩宽度，就是乙同学的路。 这里的商，是平方组成的比值。 两个累次极限，一个负一，一个一，正是两人的答案。 第十六章就提醒过：累次极限可以不一样。</p><p>定理十七点七：两个混合偏导数连续，它们就相等。 为什么？对那个四角的量，用两次中值定理。 这个商，等于矩形里某一点的一个混合偏导。 也等于另一点上的另一个混合偏导。 矩形一缩，连续性把两个值拉到同一个角上。 于是两个累次极限，被钉在了一起。 在反例里，原点旁边混合偏导既取到一，也取到负一。 所以它在原点间断，定理的条件落空了。 从这以后，课本默认混合偏导数连续。 从此求导次序无所谓，靠的就是这条定理。</p><h2>4 · 展望与衔接</h2><p>第一个应用：宿舍窗台上，晒着一瓶密封的水。 瓶里的压强，取决于温度和体积两样东西。 升温时压强上升多快，就是偏导数。 温度保持，捏一捏瓶子，就换成另一个偏导数。</p><p>第二个应用：平板里稳定的温度，满足拉普拉斯方程。 前面的反正切正好满足，两项一加正好是零。</p><p>全微分那一集说过：偏导只是两条轴上的样本。 到了链式法则那一集，偏导数就是原料。 后面讲到Hesse矩阵，它对称也是靠这条定理。</p><p>交换两个极限过程的定理，这只是第一个。 后面有极限换积分，导数换反常积分。 以及积分与积分交换次序。 定住一个，动另一个；只要连续，次序就无所谓。</p></main></body></html>

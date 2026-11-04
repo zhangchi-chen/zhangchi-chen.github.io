@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>17-03 多元复合函数的链式法则：画出树形图</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+</style></head><body><div class="topbar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span>17-03</span><a class="mv-quiz" href="../quiz/17-03.html">去自测 →</a></div><main><header><div class="tag">视频配套讲稿（朗读原文） · MATH SELF-CHECK: 37 claims re-derived, 0 fixed.</div><h1>17-03 多元复合函数的链式法则</h1><p class="sub">画出树形图</p></header><h2>1 · 动机</h2><p>今天，一张小图替我们把账算清。 一道作业题，变量叠了两层。 我们要它在这一点对第一个变量的变化快慢。</p><p>一位同学先把式子代进去，算出四。 另一位套用一元的链式法则，算出一。 一个说四，一个说一，对不上。 乙的结果偏小，漏了什么？</p><p>这里一动，中间变量一起变。 乙只算一条路，另一条丢了。 被丢掉的那一路，贡献了三。 两路一加，答案对上了。</p><p>就像校园地图：从宿舍去教学楼，有两条路。 每段乘一个倍数，两路的份额最后相加。 哪些相乘，哪些相加？把图画准。</p><h2>2 · 定理与定义</h2><div class="card gold stmt">z在顶上，下面是x和y<br>x和y下面各挂s和t<br>x、y是中间变量，s、t是自变量<br>每条边：上层对下层的偏导数<br>沿一条路径，各边相乘<br>所有到达s的路径相加<br>到s有两条路，就有两项<br>定理17.5：先条件，后结论<br>条件一：φ、ψ在点(s,t)可微<br>条件二：f在点(x,y)可微<br>结论：复合函数在点(s,t)可微<br>公式就是树形图的读法：两路两项<br>求∂z/∂t，换走通向t的两路<br>一般形式：m个中间变量<br>每个uₖ通一条路，共m项<br>f要可微，uₖ有偏导数即可<br>定理17.5还保证复合函数可微<br>只有一条路时，就是一元链式法则</div><p>终点放顶上，两个变量挂下面。 每个中间变量，再挂两个自变量。 中间一层是中间变量，最下一层是自变量。 每条边上，写上层对下层的偏导数。 顺着一条路走到底，一路乘下去。 通向同一片叶子的路，全加起来。 通向它的路有两条，答案就有两项。</p><p>定理十七点五：先给条件，再给公式。 条件一：下面一层，在这一点可微。 条件二：顶层也要可微，原因后面揭晓。 那么，复合函数也可微。 公式就是把树形图念出来：两条路，两项。 对第二个自变量，换走通向另一片叶子的两条路。</p><p>一般形式：变量个数随意。 每个中间变量一条路，一条路一项。 顶层要可微；下面一层，有偏导数就够了。 定理条件更强，结论也更强：复合函数可微。 只有一条路的时候，就回到了一元链式法则。</p><h2>3 · 方法与证明</h2><p>树形图凭什么成立？回到全微分。 关键一步：把中间变量的改变量，换成自变量的。 整理后，这个系数正是两路之和。 线性式套进线性式，结果仍是线性的。 剩下的小尾巴会消失，因为下面一层是连续的。 记住开头那一步：顶层可微，它才成立。</p><p>看课本例一：对数里有两个中间变量。 字母换了，树形图的样子没变。 最常见的错：写完第一条路就停笔。 就像计步器少记了一段路，总数当然偏少。 改正：每条路写一项，颜色和路一一对应。 蓝色一路加黄色一路，导数才算完整。 好习惯：先数一数有几条路，再动笔。 另一个偏导数同理，走通向另一片叶子的路。</p><p>现在看危险的条件：顶层要是只有偏导数呢？ 课本用一个反例回答。 两条轴上函数全是零，偏导数也是零。 照链式法则算，沿对角线的变化快慢是零。 真的走一遍，看看高度怎么变。 高度正好是走过的一半，真实的导数是二分之一。 二分之一对零，法则在这里失效了。 原因：顶层函数在原点不可微。 唯一可能的切平面是水平的，函数却离它太快。 老教训：两条轴上的坡度，拼不出切平面。 定理要的那一条，正是这个反例缺的。</p><p>例三：同一个变量，既在里面，又在外面。 树形图里，有一根枝跳过中间，直通到底。 三条路通到底，答案就有三项。 抄近路的那一项，一个乘法也不用。 三项之和，叫作全导数。 注意：这里的偏导数，只管抄近路的那一项。 在起点，全导数是二，偏导数却是一。</p><p>回忆一元的情形：微分的样子不会变。 两个变量的版本，课本这样写。 不管是不是自变量，公式形状不变。 不必先决定谁是自变量。 例七：指数函数乘正弦。 先剥外层，把中间变量看成自由的。 就像拆快递，一层一层拆，不用看地图。 再剥一层，换成最底层的微分。 整理一下，两个偏导数就是前面的系数。 从头到尾，没画树，也没问谁是自变量。</p><h2>4 · 展望与衔接</h2><p>第一个应用：换成极坐标。 同样的树，底下换成半径和角度。 通到半径的路有两条，就是两项。 通到角度的路，也有两条。 每个点上，这两个方向就是坐标轴转了个角。 平方再相加，混在一起的项正好抵消。 换成半径和角度，信息一点也没丢。</p><p>第五章欠下的账，在多元情形里补上了。 到第十八章，隐函数求导靠的就是它。 第二十一章里，平面上的积分换元也要用它。</p><p>往后看：这棵树，其实是在做矩阵乘法。 一横一竖，乘了再加，和树形图一样。 到第二十三章，这会变成一句关于矩阵的话。</p><p>总结一下：画出树，沿路相乘，各路相加。 再看顶层：必须真正可微。 这样，树形图就不会让你漏掉任何一条路。</p></main></body></html>
