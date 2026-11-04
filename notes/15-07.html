@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>15-07 从矩形波到MP3：傅里叶的压缩魔法</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+</style></head><body><div class="topbar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span>15-07</span><a class="mv-quiz" href="../quiz/15-07.html">去自测 →</a></div><main><header><div class="tag">视频配套讲稿（朗读原文） · MATH SELF-CHECK: 32 claims re-derived, 2 fixed.</div><h1>15-07 从矩形波到MP3</h1><p class="sub">傅里叶的压缩魔法</p></header><h2>1 · 动机</h2><p>从矩形波到MP3，傅里叶的压缩魔法。 这是一个矩形波，平平的，然后突然一跳。 正弦的图像处处光滑，没有折角，也没有跳跃。 光滑的东西加在一起，怎么可能拼出跳跃？</p><p>想象一下你手机播放器里的均衡器。 每个滑块，管着一个谐波。 越往右的滑块，振动得越快。 这些滑块里，藏着一个叫矩形波的预设。 你手机里的歌，靠的也是这些滑块。 今天先搭出波形，再读懂配方，最后把它压缩。</p><h2>2 · 定理与定义</h2><div class="card gold stmt">周期2π的矩形波：左半段取−π/4<br>f(0)=0，右半段取π/4<br>x≠kπ时，f是奇次谐波之和<br>x=kπ处级数收敛于0（每项都是0）<br>白话：只有正弦，而且只要奇次<br>1号到1，3号到1/3，5号到1/5<br>跳跃处取中点0，见15-02<br>把矩形波展开成傅里叶级数<br>看成不同频率的简谐振动的叠加<br>电工学里，这叫谐波分析<br>谐波分析，就是读出每个滑块高度</div><p>教材的例子：左半边低。 原点取零，右半边高。 跳跃之外，它是奇次谐波之和。 跳跃处，每一项为零。</p><p>说白了：只有正弦，而且只有奇数次的。 一号推到顶，三号推到三分之一，五号推到五分之一。 跳跃处恰好停在零，收敛定理早说过。</p><p>教材给它起了名字。 看成简谐振动的叠加。 这就叫谐波分析。 在均衡器上，这就是读出每个滑块的高度。</p><h2>3 · 方法与证明</h2><p>现在动手拼，一次只推一个滑块。 推起一号滑块：只有一个正弦，太圆了。 三号推到三分之一：两侧陡了起来。 五号推到五分之一：顶部变平，肩膀变尖。 偶数号的滑块一动不动，只推奇数号。 继续推七号、九号，越贴越紧。 快进一下，一口气用上二十五个奇次谐波。 顶部平了，两壁陡了，教材里的那张图动了起来。 可是细看跳跃处，总有小波纹贴着。</p><p>先记住这些波纹。可为什么只有奇数号在动？ 先不算积分，直接从波形读配方。 第一项：它是奇函数，关于原点对称。 奇函数让余弦全部消失，奇偶延拓那一集讲过。 第二项：平移半个周期，它就上下翻了个身。 这一翻，偶次谐波全部清零，正是周期那一集的指纹。 偶次谐波不会翻身，两半正好抵消。 奇次谐波跟着翻，两半叠加起来。 一个积分也没算，预测已经出来：只有奇次正弦。 积分只是确认：奇数号得它的倒数，偶数号得零。 那个高度是特意挑的，为了让系数干干净净。</p><p>现在回到跳跃处的那些波纹。 谐波越加越多，波纹越来越往跳跃处挤。 尖峰从不变矮：收敛那集的吉布斯现象。 折角的代价，要用高频谐波来付。 波形越光滑，系数消失得越快。 定理15.1：系数大小加起来有限， 级数就处处绝对且一致收敛。 又是M判别法：一道篱笆拦住所有尾巴。 可我们的矩形波不满足：奇数的倒数加起来是无穷大。 篱笆没用：连续部分和，没法一致收敛到跳跃。 至于逐点收敛，早在狄利克雷判别法那里就解决了。</p><h2>4 · 展望与衔接</h2><p>这一整套工具，最早是为了研究热而造的。 圆环一半热、一半冷，正是矩形波。 每个正弦分量各自冷却，振得越快，消失得越快。 什么样的温度能这样拆？答案就是收敛定理。</p><p>收获的时刻到了：只留下前几个谐波。 只用三个滑块，形状就已经一眼认得出。 其余的丢掉，这就是有损压缩。 就像只留着低频的几个滑块，就把歌发出去。 对丢掉的那些高频，耳朵相当宽容。 眼睛也宽容：JPEG把照片一块一块地处理。 MP3和JPEG，做的正是这样的取舍。</p><p>可为什么剪掉没事？为什么偏偏是正弦，而不是多项式？ 像系数那集讲的，方向两两正交，丢掉一个，其余不动。 方向斜着，丢一个，另一个从一变成三。 x的各次幂互相倾斜，正弦余弦从不这样。</p><p>以后的傅里叶变换，能处理不会循环的信号。 它的离散版本，就藏在每一通电话、每一张照片里。 特征函数会在微分方程和机器学习里再次登台。</p><p>回头看看这一章：系数、收敛、延拓、周期。 接着是特殊值，最后，是今天的信号。 前半章的常数，章末压缩的歌，出自同样五个公式。 同一套工具，连起数字与声音。</p></main></body></html>

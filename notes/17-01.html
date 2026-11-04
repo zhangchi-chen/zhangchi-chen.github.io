@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>17-01 全微分：切平面来当线性替身</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+</style></head><body><div class="topbar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span>17-01</span><a class="mv-quiz" href="../quiz/17-01.html">去自测 →</a></div><main><header><div class="tag">视频配套讲稿（朗读原文） · MATH SELF-CHECK: 24 claims re-derived, 3 fixed.</div><h1>17-01 全微分</h1><p class="sub">切平面来当线性替身</p></header><h2>1 · 动机</h2><p>全微分：一块平板来替山坡出场 在手机上放大登山地图，山坡慢慢变平 近看，等高线变得笔直，间隔几乎一样 笔直又等距的等高线，就是平面的指纹</p><p>不用计算器，估一估1.08的3.96次方 把它看成x的y次方，离点一四只有一小步 可是该用哪块平面？一元时，一个坡度就够 这里有两个坡度，横着一个，竖着一个 两个坡度，一定能定出切平面吗？ 未必。两个坡度齐全，切平面却可能没有 今天就问：二元函数的可微怎么定义</p><h2>2 · 定理与定义</h2><div class="card gold stmt">一元回忆：Δy=AΔx+o(Δx)<br>平面上，线性函数要两个常数<br>定义升一维，05-08的承诺兑现<br>定义1：全增量=线性部分+o(ρ)<br>这时称f在P₀可微，线性部分叫全微分<br>从P₀迈一步(Δx,Δy)到P<br>全增量Δz：这一步高度变了多少<br>ρ是这一步的直线长度<br>A、B只由P₀决定，与步子无关<br>所以AΔx+BΔy是步子的线性函数<br>o(ρ)是比ρ高阶的无穷小<br>Δz=线性估计+远小于ρ的误差<br>先试教材例1：f(x,y)=xy<br>把xy看成矩形的面积<br>两边各伸长Δx、Δy，面积增加Δz<br>两条细边y₀Δx、x₀Δy是线性部分<br>角上一小块ΔxΔy，像滑落的配料<br>角块除以ρ，不超过ρ/2→0<br>xy可微，dz=y₀Δx+x₀Δy<br>这是05-08里L形条带的二维版<br>换成图像：f的图像是一张曲面<br>在P₀上方那点，放上线性部分的平面<br>dz是平面的升高，Δz是曲面的升高<br>Δz−dz：曲面与平面间的缝隙<br>盯住缝隙，向P₀放大<br>越放大，曲面越贴近那块平面<br>缝隙除以ρ仍趋于0，这就是o(ρ)<br>可微⇔有不平行于z轴的切平面<br>h：Q到平面的距离；d：Q到P的距离<br>Q滑向P时h/d→0，就叫相切</div><p>回忆一元：增量是常数乘步子，外加一点零头 平面上，线性函数要两个常数才够 同一个定义升一维，第五章第八集的承诺兑现了 定义一：全增量拆成线性部分，加一个零头 这时f就叫可微，线性部分叫作全微分</p><p>一句一句看：从起点迈出一小步 全增量，就是这一步走完，高度变了多少 rho就是这一步走了多远 A和B只看起点，跟这一步怎么走无关 所以前一部分，是步子的线性函数 零头是高阶无穷小：比rho消失得更快 一句话：增量是线性估计，加上远小的偏离</p><p>先试教材例一：x乘y 把x乘y想成一块矩形的面积 两条边各伸出一点，面积多出的就是全增量 沿着两边的两条细条，就是线性部分 角上那一小块，像托盘边快滑落的配料 角块比rho，顶多是它的一半，终会消失 所以x乘y可微，两条细条就是它的全微分 这正是第五章那条L形条带的二维版</p><p>换成图像来看：f的图像是一片起伏的山坡 在起点正上方，放一块线性部分的平板 全微分是平板升高多少，全增量是山坡升高多少 两者相减，就是山坡和平板之间的缝隙 盯住这道缝，往起点放大 越放大，山坡越贴着那块平板 就算拿rho去比，缝隙也照样消失，这就是零头 定理十七点四：可微，正好对应不竖直的切平面 检验法：看动点到平板的距离，和到起点的距离 动点滑近时，前者比后者小得多，就叫相切</p><h2>3 · 方法与证明</h2><p>如果A和B存在，它们是多少？先只横着走 另一个方向不动，增量之比就趋向A 这个极限，就是横向截线的坡度，也就是偏导数 只沿另一个方向走，同样的道理给出B 定理十七点一：可微，偏导数就存在，正是A和B 所以全微分，由两个偏导数拼成 两个偏导数，只是同一个线性映射的两次取样 常数没有选择余地，所以全微分是唯一的 反过来却未必：偏导数存在，未必可微</p><p>教材例五：一个带根号的函数，原点处取零 它的图像像一顶帐篷，杆尖正好在原点 沿两条坐标轴，帐篷高度一直是零，偏导数全为零 要是可微，全微分只能是零 这时缝隙就是函数本身，再除以rho 这个商，会趋于零吗？</p><p>用十六章第二集的老办法：沿坐标轴，它是零 沿对角线走，这个商始终是二分之一 两条路径，两个答案，极限不存在，所以不可微 其实这个商，只看你从哪个方向走来 教训是：偏导数只盯着两条坐标轴 可微却要把所有方向，一起管住 帐篷的杆尖，放得再大，也压不平</p><p>那什么时候一定可微？定理十七点二给了充分条件 定理十七点二：附近有偏导数，在该点连续，就可微 目标：减掉线性部分后，零头要远小于rho 走L形路径，每段请出拉格朗日定理 步子越缩越小，连续性把偏移的坡度拉回原处 剩下的是小系数乘rho，所以可微 注意：偏导数连续够用，却并非非有不可 教材有一例：原点可微，偏导数却不连续 先求偏导数，再看零头比rho是否趋于零 捷径：偏导数连续，立刻可微</p><h2>4 · 展望与衔接</h2><p>回到开头的估算：用线性近似来代替函数 取x的y次方，在点一四，函数值是1 在这里，两个偏导数是4和0，因为1的对数是0 于是估计值是1加4乘0.08，等于1.32 真值大约1.3563，比估计高出约0.036 这段缺口来自二阶项，十七章第五集来补</p><p>用处二，估偏离：书桌测得120乘60厘米 每条边最多测错0.5厘米 全微分给出90平方厘米，精确的最坏情况是90.25 缺的那0.25，正是前面那个角块</p><p>十七章第三集会讲：全微分的形式不变性 往前看：这个线性映射，就是f在这一点的导数 到了高维，它变成矩阵，也就是二十三章的雅可比矩阵 在泛函分析里，它成了线性算子 记住一句：凑近看，增量就是线性部分加零头</p></main></body></html>

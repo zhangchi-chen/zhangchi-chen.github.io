@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>15-06 从ζ(2)到L函数：特殊值画廊</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+</style></head><body><div class="topbar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span>15-06</span><a class="mv-quiz" href="../quiz/15-06.html">去自测 →</a></div><main><header><div class="tag">视频配套讲稿（朗读原文） · MATH SELF-CHECK: 48 claims re-derived, 6 fixed.</div><h1>15-06 从ζ(2)到L函数</h1><p class="sub">特殊值画廊</p></header><h2>1 · 动机</h2><p>从泽塔二到L函数，一座特殊值画廊 宿舍走廊里，挂着一面数字展览墙 其中四幅，来自上一集 每张小标签，写着它出自哪个辅助函数</p><p>朋友顺口一问：换成立方，能得到泽塔三吗？ 级数照样算得出，泽塔三却始终不露面 而墙上，仍空着四个画框 今天填上三个，剩下一个如实空着</p><p>我们需要第二条生产线：帕塞瓦尔等式 平方能够到达四次方，代入一个点做不到 哪条线造出哪个值？泽塔三为什么落空？</p><h2>2 · 定理与定义</h2><div class="card gold stmt">帕塞瓦尔等式（教材习题）<br>左边：用f²量出f有多大<br>右边：系数逐个平方再求和<br>同一大小两种量法：勾股定理<br>注意：常数项是a₀²/2<br>画廊里的值，完整列出<br>λ只取奇数分母，β再加正负交替<br>β(3)、L(1,χ₃)是标准补充<br>β(3)的辅助函数：x(π−x)<br>(0,π)上是一道抛物线拱<br>只有奇次谐波，系数按立方衰减<br>在π/2处，正弦正负1交替<br>三个空框，三条路线</div><p>这是帕塞瓦尔等式，教材在习题里给出 左边量的是f整体有多大 右边把每个系数平方，再全部加起来 就像勾股定理，只是方向有无穷多 小心：常数项的权重与众不同</p><p>画廊里的值，全部列在这里 兰姆达只留奇数分母，贝塔再让符号交替 贝塔三和卡伊三的那一项，是标准补充</p><p>造出贝塔三的辅助函数在这里 从零到派，是一道两端为零的抛物线拱 只剩奇次谐波，系数按立方往下掉 到了正中间，这些正弦轮流取正一和负一 三个空框，对应三条路</p><h2>3 · 方法与证明</h2><p>第一框泽塔四，只用现成的系数 这些系数，上一集已经算好了 左边是一个干净的积分，得五分之二派四次方 危险的一步来了，就是常数项 正确的是九分之二派四次方，不是九分之一 一平方，正负号全没了 两边一对照，十六倍泽塔四就现身了 相减再除，泽塔四等于九十分之派四次方 第一框挂上墙，正是教材那道习题 验算一下，部分和一路逼近它</p><p>第二框贝塔三，这回先定级数 想要的是只有奇次项，系数像立方分之一 函数两端为零，衰减最慢的那项就消失 二阶导数是常数，于是只剩立方项 拱形左右对称，偶次谐波全部抵消 按奇函数延拓，就是那条正弦级数 代入正中间，左边就是拱顶的高度 贝塔三等于三十二分之派立方 这个点很安全：不是跳跃点，级数也绝对收敛 第二框挂上：老配方倒着用</p><p>最后一框，先得有一套徽章 门口给来宾发徽章，正、负、空，轮着来 这就是卡伊三：正一、负一、零，循环 卡伊四四人一轮：正一、零、负一、零 卡伊四就是正弦，每次转四分之一圈 它们是狄利克雷特征，模三和模四 注意，特征还得满足完全积性 它的L函数，给每张徽章配上倒数再求和 贝塔其实一直是L函数，属于卡伊四</p><p>要用的工具，是锯齿波级数 它是x的级数平移，收敛性在第十二章第八集验过 绕着圆每次跳三分之一圈，看高度怎么变 又是卡伊三，只多一个倍数 在这一点，锯齿波的高度是六分之派 除掉那个倍数，第三框的值就落地了 这里不是跳跃点，值约为0.6046 同一个锯齿波，转四分之一圈，又给出贝塔一 第三框挂上，老筛子有了正式的名字</p><p>真正的问题来了：泽塔三为什么没有座位？ 画一张座位表，每条生产线占一列 左边一列，偶函数配余弦，分母是偶次幂 右边一列，奇函数配正弦，分母是奇次幂 帕塞瓦尔一平方，幂次一定翻成偶数 泽塔三要的是奇次幂，而且全是正号 余弦在零点全是正号，可惜幂次是偶数 正弦的幂次对了，可在零点每一项全是零 换到别处，迟早会有正弦变成负的 所以泽塔三，只能站在两列之间的过道 注意，我们只排除了这几条线</p><h2>4 · 展望与衔接</h2><p>泽塔三在1978年被证明是无理数，人们没少努力 但奇数处的泽塔值，至今没有一个闭式 完成的展墙，每一框标着生产线 这一切，靠的是第十五章第五集和第四集 泽塔函数本身连续可导，第十三章第四集验过</p><p>应用一：泽塔四是更快的算派配方 十项求和，乘九十，开四次方，已是3.1414 泽塔二路线十项之后，仍卡在3.049 应用二：帕塞瓦尔是一份能量预算 x平方的常数项加一次谐波，已占百分之96.6 从常数到声音，接下来交给本章的压轴一集</p><p>往远处看，这面墙是解析数论的一楼 楼上，L函数不断推广，带上欧拉乘积，刻画素数 今天算出的这些值，就是一楼的展品 筛子转了正：狄利克雷证明，这些L值全不为零 于是首项与公差互素的等差数列，含有无穷多个素数</p></main></body></html>

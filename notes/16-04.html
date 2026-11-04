@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>16-04 闭区域上的连续函数：老定理，新家</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+</style></head><body><div class="topbar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span>16-04</span><a class="mv-quiz" href="../quiz/16-04.html">去自测 →</a></div><main><header><div class="tag">视频配套讲稿（朗读原文） · MATH SELF-CHECK: 35 claims re-derived, 4 fixed.</div><h1>16-04 闭区域上的连续函数</h1><p class="sub">老定理，新家</p></header><h2>1 · 动机</h2><p>闭区域上的连续函数，老定理搬进新家。 闭区间上，连续函数一定能取到最高点。 同学问：开的单位正方形上，横坐标在哪里最大？ 不管选哪个点，右边总有更大的。 右边界本该赢，可惜它在集合外面。 把边界补上，最大值1就落在右边上。</p><p>零四零六里，闭区间上有四条定理。 今天搬家，四件家具要搬进平面。 可是新房间里，也许藏着新陷阱。 答案就两个词：有界闭，以及连通性。</p><h2>2 · 定理与定义</h2><div class="card gold stmt">定义：在一点连续，在D上连续<br>先给函数值一个误差ε<br>再找P₀周围半径δ的圆盘<br>圆盘里的值与f(P₀)相差小于ε<br>只算D里的点：边界处圆盘被截<br>在聚点处：二重极限等于f(P₀)<br>在D上连续：每一点都连续<br>家具清单：旧地址与新地址<br>定理16.8：有界且取到最大、最小值<br>有界：所有函数值落在一条带里<br>取到：某点Q恰好达到最高值M<br>定理16.9：有界闭区域上一致连续<br>δ&gt;0只由ε定，对D中点对通用<br>D中两点相距小于δ，值差小于ε<br>定理16.10：区域上的介值性定理<br>一低一高，中间的μ必被取到<br>16.8与16.9对有界闭集也成立<br>但16.10要连通性：须是区域<br>有界闭撑起三条，连通性撑起第四条</div><p>定义：先说一点处连续，再说整体连续。 先给函数值定一个允许误差。 然后在这点周围，找一个小圆盘来回应。 圆盘里每一点的值，全落在误差带里。 只算集合里的点，边界处的圆盘只剩一半。 在聚点处，这就是说，点趋近时的极限等于函数值。 在整个集合上连续，就是每一点处连续。</p><p>来看家具清单，旧地址和新地址并排放。 定理16.8：函数有界，并且能取到最大值和最小值。 有界，就是所有函数值装进一条带子里。 取到，就是真有一个点恰好达到最高值。 定理16.9：在有界闭区域上，连续就是一致连续。 半径是正数，只看误差；所有点对通用。 区域里任意两点只要够近，函数值就够近。</p><p>定理16.10：区域上，中间值一定能取到。 一低一高，中间的目标值一定会被取到。 教材补充说，16.8和16.9对有界闭集同样成立。 但16.10需要连通性，也就是必须是区域。 有界闭撑起前三条，连通性撑起第四条。</p><h2>3 · 方法与证明</h2><p>谁来搬？是十六零一里平面的完备性定理。 第一格：假如无界，就挑出越来越高的点。 第二格：点列有界，聚点定理给出收敛子列。 第三格：区域是闭的，极限点跑不出去。 第四格：极限点处连续，值却冲向无穷，矛盾。 四格四个工具：挑点，聚点定理，闭性，连续性。</p><p>有界是有界了，可最高的那个值能取到吗？ 假设取不到，每点的值严格低于它。 取那段间隔的倒数，分母恒正，所以它连续。 由第一部分，连续的它必须有界。 可函数值逼近顶端，倒数就爆炸了。 矛盾！所以真有一点取到了最高值。 这就是零七零三里直线上的老招，原样再来一遍。 最小值，把函数上下翻转再做一遍。</p><p>一致连续，就是整个区域共用一把尺。 一把尺的想法，零四零五和十三零二见过。 十六零二管所有路径，今天管所有点对，第四站。 十三零二是一个下标管所有点，这里一个半径管所有点对。 反证：假设有一个误差，让每个候选半径失败。 于是有越来越近的点对，函数值却总隔着一段。 前面那组点有收敛子列，极限仍在区域里。 三角不等式让每个搭档被拖到同一个极限。 那一点连续，把两个值拉到一起，间隔没了。</p><p>介值性定理需要一条路。 教材沿着区域里的一条折线走过去。 某一段上值跨过了目标，一元的定理来收尾。</p><p>来看十六零一里那两个开象限。 函数取横坐标的符号：1和负1。 它在集合上连续，每点附近是常数。 它取到1和负1，却从来取不到0。 两个校区之间没有桥，消息就是过不去。 连通性是承重墙，教材白纸黑字写着。</p><p>陷阱卡：少一个词，就丢一条定理。 有界但不闭：开单位正方形上取横坐标。 上确界1始终取不到，像奖杯架没有墙可靠。 定理16.8在这里失效，因为少了闭性。 不连通：刚才的符号例子，定理16.10就垮了。 换成闭集也没用：两个分开的闭圆盘一样失败。</p><p>最后一个陷阱，指向下一章：对每个变量分别连续。 函数在两条坐标轴上为0，其他地方为1。 沿横轴它一直是0，所以对横坐标连续。 沿纵轴也一样，对纵坐标连续。 可沿对角线走近：一路是1，原点却是0。 所以它在原点并不连续。 分别连续，并不等于连续。 到了十七零一，偏导数正好走在这条断层上。</p><h2>4 · 展望与衔接</h2><p>用处一：有界闭集里，一定有离宿舍最近的点。 到宿舍的距离是连续的，定理16.8给出最小值。 用处二，照片缩放：一个像素大小管住整张图。 格子比16.9的半径小，误差处处达标。 用处三：有18度和26度，就必有22度。</p><p>欠账结清：零四零六陈述，零七零三证明。 今天靠十六零一的完备性工具搬进平面。 在任意维数的空间里，四条定理原样成立。 到了度量空间，有界闭不够用，要换成紧。 展望：紧集上的连续函数，是被引用最多的定理之一。 最优化的存在性结果引用它，度量空间的拓扑也用它。 机器学习里损失函数的地形分析，也用到它。 三条靠有界闭，一条靠连通性。</p></main></body></html>

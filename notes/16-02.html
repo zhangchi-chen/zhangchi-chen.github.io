@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>16-02 二重极限：每条路径都须给出同一个值</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+</style></head><body><div class="topbar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span>16-02</span><a class="mv-quiz" href="../quiz/16-02.html">去自测 →</a></div><main><header><div class="tag">视频配套讲稿（朗读原文） · MATH SELF-CHECK: 25 claims re-derived, 2 fixed.</div><h1>16-02 二重极限</h1><p class="sub">每条路径都须给出同一个值</p></header><h2>1 · 动机</h2><p>二重极限：不管走哪条路，终点读数一样。 打开校园地图，大家要去的是食堂门口。 走到哪里，手机上就有一个读数。 你走斜的那条路，读数稳稳停在零点五。 室友走河边那条路，读数是零。 同一扇门，两个答案，到底算哪个？</p><p>一元函数只能从左边或右边过来。 左右一致，事情就办完了。 到了平面，来的路有无数条。</p><p>而且路可以弯，也可以绕着圈进来。 记住这幅图，后面它会一次次回来。 门口要有一个确定的值，得满足什么？ 答案是：每一条路一致，不只是两条大路。</p><h2>2 · 定理与定义</h2><div class="card gold stmt">f定义于D，P₀为D的聚点，A为定数<br>若任给ε&gt;0，存在δ&gt;0，使下式成立<br>称f在D上当P→P₀时以A为极限<br>你先给ε，函数要找出δ<br>δ画出P₀周围的空心邻域<br>圆心挖掉：f(P₀)与极限无关<br>邻域∩D内每点，值离A小于ε<br>“每一点”悄悄包含了所有路径<br>定义里没提路径，哪条都逃不掉<br>P₀是聚点：空心邻域里总有D的点<br>空心邻域与聚点，来自16-01<br>极限存在⇔沿每个子集E⊂D极限存在<br>（E以P₀为聚点）。由此得：<br>推论2：两路径极限不同⇒无二重极限<br>推论3：极限存在⇔f(Pₙ)总收敛<br>子集E可以是直线、曲线或点列<br>极限存在，沿每个子集都趋于A<br>推论2好用：两路径不一致就够了<br>推论3把路径换成点列，便于计算<br>查几条路只能否定，不能证明</div><p>定义一：函数、定义域的聚点，和一个定数。 任给误差，总有半径，让空心邻域里的点全部达标。 这时就说，A是它的极限。</p><p>你先定误差，函数来找半径。 半径画个圆，挖掉圆心，就是空心邻域。 圆心不算，那里的值是多少无所谓。 圆里属于定义域的每个点，一律要达标。 每一个点，这几个字悄悄管住了所有的路。 定义里没点名任何路，所以每条路一视同仁。 它是聚点，所以圆里永远有点可查。 这两样工具，来自第十六章第一集。</p><p>定理十六点五：极限存在，当且仅当沿每个子集存在。 每个子集必须以它为聚点。 推论二：两条路径极限不同，二重极限就不存在。 推论三：极限存在，当且仅当每个点列的函数值收敛。</p><p>子集可以是一条直线、一条弯线，或者一串点。 极限存在的话，它们一律通向同一个数。 推论二最好用：两条路不一致，就够了。 推论三把路换成一串点，算起来方便。 查几条路，只能推翻，不能证明。</p><h2>3 · 方法与证明</h2><p>第一件工具：用极坐标夹住它，证明极限。 教材的例二，原点的值定为零。 换成极坐标：一个半径，一个角度。 半径的次方约掉一半，留下干净的结果。 绕着圆走一圈，波形始终碰不到天花板。 天花板跟角度无关，每个方向通用。 按误差定好半径，每条射线一起达标。 二重极限就是零。</p><p>关键在于：一个上界，同时管住所有角度。 一把尺子管全部，我们已经见过两次。 四章五集、十三章二集，尺子只有一把。 今天轮到半径：一个半径管所有方向。</p><p>第二件工具：两条路，推翻一个极限。 例三：沿每条直线，极限跟直线的倾斜有关。 换一条线就换一个值，所以二重极限不存在。 把直线代进去，变量自己约掉了。 整条直线上一直是这个值，不只是终点。 给每条线标上它的值，标签各不相同。 这正是开头那两条路。 两个值不一样，推论二一出手就结束了。</p><p>注意了：同一个函数，换极坐标再看。 半径整个消失了，只剩角度。 沿任何一条射线，值是固定的，极限存在。 每条射线有极限，二重极限却不存在。 陷阱在这：每个角度各有极限，不等于二重极限。 只有跟角度无关的上界，像刚才那样，才算数。 圆缩得再小，值的范围也不肯收拢。</p><p>下一个问题：要是所有直线一致呢？ 例四：在抛物线和横轴之间取一，别处取零。 每条直线给零，更平的抛物线却给一。 阴影贴着横轴，越靠近原点越细。 随便取一条直线，到了原点附近，它就高过抛物线。 靠得够近，直线就离开阴影，读数为零。 两条坐标轴也在外面，每条直线的读数是零。 现在走体育馆那条小路，只有老生才知道。 它一路走在阴影里，读数一直是一。 直线说零，抛物线说一，二重极限不存在。 直线打架就有结论；直线一致，等于没说。</p><p>第三件工具：第三章第四集的点列试探，搬到平面。 用例三的函数，沿对角线取点：每次是二分之一。 改沿横轴取点，每次是零。 两串点交替着走，读数来回跳，停不下来。 一列停不下来的点就够了，推论三说极限不存在。</p><h2>4 · 展望与衔接</h2><p>把三件工具合起来：遇到新的二重极限怎么办。 第一步：换极坐标，找一个跟角度无关的上界。 第二步：角度甩不掉，就去找两条路。 两条直线，直线对抛物线，或者两条抛物线。 第三步：证据走到哪，结论就到哪。</p><p>拿一个新函数，在原点试一试。 换极坐标，大小不超过半径，角度随意。 半径就取误差本身，极限是零，轻松收工。</p><p>换一个难缠的函数：极坐标的上界缩不下去。 每条直线一致，读数慢慢降到零。 可是沿着抛物线，它恰好是二分之一。 直线对抛物线，两个答案，二重极限不存在。</p><p>一次只动一个变量，那是完全不同的问题。 往远处看：路越多，极限越难。 在球面上、在函数空间里，来路更多。 以后的课程，会用网和滤子来处理。 回到食堂门口：不管走哪条路，读数一样。</p></main></body></html>

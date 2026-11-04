@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>16-03 累次极限：先横后竖，还是先竖后横</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+</style></head><body><div class="topbar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span>16-03</span><a class="mv-quiz" href="../quiz/16-03.html">去自测 →</a></div><main><header><div class="tag">视频配套讲稿（朗读原文） · MATH SELF-CHECK: 31 claims re-derived, 2 fixed.</div><h1>16-03 累次极限</h1><p class="sub">先横后竖，还是先竖后横</p></header><h2>1 · 动机</h2><p>累次极限：先横着走，或是先竖着走？ 一道作业题：这个分式在原点附近趋向哪里？ 小林先让x趋于零，最后得到负一。 小周反过来做，最后得到正一。 同一个函数，同一个点，却有两个答案。 两人各自核对，算式一处错也没有。 那么哪一个才是极限，或者两个全不是？ 两个人回答的，其实是两个顺序不同的问题。 今天弄清两个次序各算出什么，以及何时可信。</p><h2>2 · 定理与定义</h2><div class="card gold stmt">把f想象成一张巨大的成绩表<br>列按x标记，行按y标记<br>目标是角落：x→x₀，y→y₀<br>重极限：两个标签一起走，路线任意<br>这就是16-02里的所有路径<br>累次极限分两步来读这张表<br>第一步：固定一行，一路横向走完<br>这一行的终点值记作φ(y)<br>每一行都这样做：多出一列结果<br>第二步：沿这一列往下，y→y₀<br>这就是先对x、后对y的累次极限<br>也可以先竖着走每一列，再横着走<br>同一张表两种读法，未必一致<br>教材定义3说的正是这件事<br>第一句：每一行都要走得完<br>这些结果组成一元函数φ(y)<br>L就是φ在y→y₀时的极限<br>符号要由内向外读：内层先做<br>交换两个lim，两步的分工也互换<br>注意：累次极限是极限的极限，不是路径</div><p>把这个函数想象成一张巨大的成绩表。 列看一个变量，横排看另一个。 我们的目标，是表格远处的那个角。 二元函数的极限，让两个标签同时移动，路线随意。 这就是第十六章第二集里的所有路径。 累次极限，要分两步来读这张表。</p><p>第一步：固定一横排，一路走到尽头。 这一横排的终点值，记作 phi y。 每一横排照做一次，右边多出一列结果。 第二步：沿着新的这一列，一路走向角落。 这就是先横后竖的累次极限。 也可以先把每一列竖着走完，再沿底边横着走。 同一张表，两套读法，结果未必一致。</p><p>教材的定义三，说的正是这件事。 第一个条件：每一横排，必须能走到底。 这些结果，拼成一个普通的一元函数。 L 就是这个一元函数的普通极限。 记号要从里往外读，里面那一层先做。 两个极限符号一交换，两步的分工也跟着互换。 注意，累次极限是极限的极限，并非一条路径。</p><h2>3 · 方法与证明</h2><p>第一个例子，就是教材例七，小林和小周那道题。 先横着走：每一横排，最后停在它的标签减一。 再往下走，这一列滑向负一。 这正是小林的负一，她是先横着读的。 先竖着走：每一列，最后停在一加上它的标签。 再往右走，底边这一排滑向正一。 两套读法全部走完，终点却不一样。 推论二，把这个冲突变成了明确的结论。 所以二元函数的极限不存在，一条路径也没找。 小林和小周各自正确，只是回答了不同的问题。</p><p>第二个例子是教材例六，第十六章第二集的老朋友。 每条直线各报一个值，所以极限不存在。 先横着走：每一横排，最后停在零。 先竖着走：每一列，最后也停在零。 两个累次极限均存在，而且同为零。 可是表格的对角线，一路读到的是二分之一。 每一横排只路过对角格一次，终点依然是零。 边上那些结果看不到对角线，二元函数的极限却躲不开它。 表格的第一条结论：累次极限相等，什么也证明不了。 这是考试里的经典陷阱，这个函数就是反例。</p><p>第三个例子是教材例八，由两个振荡的正弦项组成。 固定一横排，比如四分之一那一排，一路跑向零。 第二项一直来回摆动，到头也停不下来。 就像那位周测成绩永远定不下来的同学。 所以没有一横排走得到底，内层极限根本不存在。 同样的道理，每一列也走不到底。 两个累次极限，一个也不存在。 现在绕过两层，直接问二元函数的极限。 每个正弦均在一以内，所以函数被坐标的大小压住。 而这个界只和距离有关，跟方向无关。 用第十六章第二集的放缩收尾，二元函数的极限是零。 第二条：二元函数的极限存在，累次极限未必存在。</p><p>教材把这三个例子，总结成这样。 哪个方向也推不出，只能各自检验。 不过，仍有一座桥，而且只通向一个方向。 定理十六点六：两个极限只要同时存在，就一定相等。 证明的思路，三个画面就够了。 画面一：空心邻域里，函数紧贴着极限。 画面二：把x固定，竖着往下滑，点始终在邻域里。 取极限之后不等式依然成立，只多了等号。 画面三：附近每一列照样成立，于是内层结果逼近 A。 二元函数的极限更强，能把累次极限拉到同一值。 注意前提：累次极限必须本身存在。 推论二随之而来：一个值，没法同时等于两个数。</p><h2>4 · 展望与衔接</h2><p>所以这条定理，有两个正确的用法。 用法一：知道二元函数的极限，累次极限白送。 更妙的是，累次极限能先替我们猜出答案。 先竖后横，算出的候选值是二。 径向放缩来确认，一把尺子管住所有方向。 所以极限是二：累次来猜，放缩来证。 用法二：累次极限一旦不等，二元函数的极限立刻出局。 两个一元极限，往往比满地找路径轻松。 但累次极限相等，什么也证明不了，记住例六。</p><p>这已经是第三次，遇到极限次序的问题。 第十三章第一集，函数列的两个极限一交换就出错。 第十三章第四集，一致收敛让极限和积分可以交换。 今天，二元函数的极限迫使存在的累次极限与它相等。 一个原则：两个极限要交换，需要更强的条件来统领。 第十六章第四集里，二元函数的极限成为连续的定义。</p><p>将来交换两次积分的次序，也要定理来撑腰。 它的反例，就是今天这张表，换上了积分号。 同一把伞，雨更大。 两个次序，两个问题，二元函数的极限问得最严。</p></main></body></html>

@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>15-04 周期不必最小：多出的只是一串零</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+</style></head><body><div class="topbar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span>15-04</span><a class="mv-quiz" href="../quiz/15-04.html">去自测 →</a></div><main><header><div class="tag">视频配套讲稿（朗读原文） · MATH SELF-CHECK: 34 claims re-derived, 3 fixed.</div><h1>15-04 周期不必最小</h1><p class="sub">多出的只是一串零</p></header><h2>1 · 动机</h2><p>周期不必是最小的，多出来的只是一串零。 两位室友，各自展开正弦的绝对值。 一人取周期派，另一人取周期二派。 两张系数表，看上去并不一样。 其中一张表，零和非零交替出现。 到底是谁算错了？ 谁也没错，两份答案是同一个级数。 多出来的那些项，全是零。</p><p>今天的结论是，周期取大了也没有坏处。 先看个例子，把余弦当成四派为周期来算。 算出来一列零，中间只有一个真数。 好比按半周记账，饭钱每周交一次。 零和非零交替出现，揭示了每周的节奏。 周期取大什么时候安全？这些零又在说什么？</p><h2>2 · 定理与定义</h2><div class="card gold stmt">15-01的系数公式，周期为T<br>窗口从哪里开始都行，只要满一个周期<br>这是教材的(10′)，原为2π周期<br>规则一：任一整周期均可，k倍也行<br>按kT算，频率每步只走1/k<br>非整数频率的系数，自动为零<br>规则二：周期T/2，奇数n系数为零<br>偶数n=2m处，就是T/2周期的系数<br>规则二就是k=2时的规则一<br>规则三（逆命题）要靠收敛定理<br>奇数n全为零且收敛，周期就是T/2<br>在跳跃点，f按左右极限的平均算<br>教材例题：|sin x|的展开<br>只出现cos 2mx：只有偶次谐波<br>三条规则：放大、减半、倒推</div><p>先请回本章第一集的系数公式，周期记作T。 窗口可以从任意位置开始，只要盖满一个周期。 教材里，二派周期的情形已经写过这一条。 规则一，任何完整周期均可，几倍也可以。 把周期放大几倍，频谱的刻度就密几倍。 整数之间的谐波，系数自动为零。</p><p>规则二，函数周期减半时，奇数号系数为零。 偶数号的系数，正是半周期下的系数，只是换了编号。 规则二，就是k取二时的规则一。</p><p>规则三反过来推，要靠收敛定理撑腰。 奇数号系数全为零，再加上收敛，周期就减半。 在跳跃点，函数值按左右极限的平均来算。</p><p>教材里的锚点，是正弦绝对值的展开。 只剩下偶次谐波。 三条规则，放大，减半，再倒推。</p><h2>3 · 方法与证明</h2><p>演示一，把余弦当作周期四派来算。 周期取四派，谐波按半步往上走。 检查一个半频系数，就看第一个。 仔细看，后半段就是前半段倒过来。 两块面积正好抵消，系数是零。 每个半频系数，全按这个方式归零。 整数频的那几格，就是二派周期下原来的答案。 只剩下余弦自己那一格，系数是一。 格子白算了，答案却没错。</p><p>现在讲一般的道理，先做k等于二。 设函数每半个周期就回到原样，看一个系数。 关键一步，在半个周期处把积分切开。 后半段做个代换，整体往回挪半个周期。 函数值不受影响，余弦在n为奇数时翻个面。 n为奇数时，两半正好抵消。 n为偶数时，两半相加，正好是半周期的系数。 奇数项消失，偶数项留下。 正弦系数也一样，一刀切开就清楚。 一般的k也一样，这里只陈述，只证明了二的情形。</p><p>演示二，把正弦的绝对值按二派来算。 这正是教材里的那道例题。 它是偶函数，只有余弦系数，和第三集一样。 关键一步，把乘积拆成两个正弦。 结果，奇数号为零，偶数号为负。 在系数图上，奇次谐波全部缺席。 零道破了秘密，真正的周期是派。 就像那张饭钱表，零格子揭示了节奏。 用大一倍的周期去算，就能找出最小正周期。 再说一遍，多余的零是信息，不是浪费。</p><p>反过来想，奇数项全为零，能推出什么？ 第一步，剩下的每一项，周期全是一半。 所以和函数，也是每半个周期回到原样。 第二步要靠收敛定理，级数真的收敛回原函数。 只有这样，函数本身才有一半的周期。 没有它，哪一步会断？从级数回到函数的那一步。 系数是积分，积分看不见一个孤立的点。 所以级数描述的，可能是另一个函数。 收敛定理说清楚了，连续点上，级数等于原函数。</p><p>但要小心，这扇门只能往外开。 放大周期总是安全的，只要它确实是周期。 缩小就不可以了，派根本不是余弦的周期。 硬要算的话，公式只读进派那么宽的一段。 算出来的，是这一段反复复制后的级数。 这个窗口悄悄造出了余弦的绝对值，平均值并非零。 把窗口挪一挪，平均值又变成零。 两个窗口，两个答案，算的已经不是余弦了。 如果是真周期，规则一保证每个窗口答案相同。 只留偶数项，描述的是原函数和平移后的平均。 对余弦来说，这个平均处处为零。 缩小周期就换了函数，只有放大才安全。</p><h2>4 · 展望与衔接</h2><p>回想第三集，我们选过延拓的对称性。 今天选的是周期，这是同一类自由。 系数公式并不在乎，我们怎样打扮函数。 但我们的记账方式，会在零的分布上留下指纹。 用途一，正弦平方只有偶次谐波，所以周期是派。 用途二，二派和四派的信号相加，统一按四派来算。 下一集，今天k取三的那一列，会变成筛子。</p><p>往后看，在信号处理里，这叫过采样。 用多余的速度去录，零会揭示真实的带宽。 多出来的数据，换来了确定。 周期放心放大，多出来的只是零，而零会说话。</p></main></body></html>

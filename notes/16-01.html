@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>16-01 平面点集：边界算不算自己人</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+</style></head><body><div class="topbar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span>16-01</span><a class="mv-quiz" href="../quiz/16-01.html">去自测 →</a></div><main><header><div class="tag">视频配套讲稿（朗读原文） · MATH SELF-CHECK: 56 claims re-derived, 3 fixed.</div><h1>16-01 平面点集</h1><p class="sub">边界算不算自己人</p></header><h2>1 · 动机</h2><p>平面点集。边界，算不算自己人？ 学习小组建了个群，有些人已经在里面。 有人明明在群外，有人收到邀请却没进群。 站在边上，和到底在不在群里，是两回事。</p><p>数学里有同样的一幕，圆环 D。 它的点离原点至少为1，又小于2。 半径为1的内圆，属于 D。 半径为2的外圆，被排除在外。 可是，两个圆贴着 D，贴得一样紧。</p><p>有个同学推理说，它不是开集，就一定是闭集。 回到数轴，半开区间既不开也不闭。 开和闭，并不是一对反义词，要先把定义说清楚。 两个问题：你坐在哪里？集合有没有挤在你周围？</p><h2>2 · 定理与定义</h2><div class="card gold stmt">先认识邻域 U(A;δ)。<br>以 A 为心、半径 δ 的圆内部<br>换成正方形也行：圆方互相套得住。<br>挖去圆心：空心邻域 U°(A;δ)<br>只看 A 的周围，不看 A 本身<br>课本按位置把点分成三类。<br>内点：某个邻域整个落在 E 里。<br>外点：某个邻域与 E 毫无交集。<br>界点：每个邻域都含 E 内外的点<br>内点属于 E，外点并不属于 E。<br>界点呢？可能属于，也可能不属于。<br>第二问：E 是否挤在 A 周围？<br>聚点：每个空心邻域都有 E 的点。<br>等价：每个邻域含 E 的无穷多点<br>属于 E 却非聚点，就是孤立点。<br>注意：聚点未必属于 E。<br>再看课本的开集与闭集。<br>开集：E 的每点都是内点。<br>闭集：E 的聚点全部属于 E。<br>没有聚点的点集，也算闭集。<br>最后一个定义：区域。<br>连通：任两点能用集内折线相连<br>开域：非空、连通的开集。<br>开域加上它的边界，成为闭域。<br>这些统称为区域。</div><p>第一件工具，是一个点的邻域。 就是以 A 为圆心的一个圆的内部。 用正方形也可以，圆和方能彼此套住。 把圆心挖掉，就得到空心邻域。 它只看周围的邻居，不看这个点自己。</p><p>课本按位置，把每个点分成三种。 内点周围，有一个小圆盘，完全落在集合里面。 外点周围有个小圆盘，和集合一点也不沾边。 界点的每个小圆盘里，集合内外的点一定同时出现。 内点是集合的成员，外点却不是。 那界点呢？可能属于，也可能不属于。</p><p>第二个问题，集合有没有挤在这个点周围？ 在聚点周围，每个空心邻域里，总能找到集合的点。 换句话说，每个邻域里，集合的点有无穷多个。 属于集合、却不是聚点的点，叫孤立点。 注意，聚点不一定是集合的成员。</p><p>接着是开集和闭集，课本原话如下。 开集里，每个点身边总有一块小圆盘。 闭集，把它所有的聚点全部收进来。 完全没有聚点的点集，也叫闭集。</p><p>最后一个定义，区域。 任意两点，能用几段线段相连，不出集合。 开域，是非空而且连通的开集。 给开域加上它的边界，就成了闭域。 它们统称为区域。</p><h2>3 · 方法与证明</h2><p>画一张表，横着看位置，竖着看有没有被围住。 圆环深处的点，既是内点，也是聚点。 其实，内点一定是聚点。 所以，内点又孤立的那一格，永远填不上。 外圆上的点，是界点，同时也是聚点。 再看一排点，一、二分之一、三分之一，一直下去。 每个点是孤立点，同时也是界点。 圆盘里既有它自己，也有许多外面的点。 外点在表格之外，集合离它远远的。</p><p>课本的例一，讲的正是这个圆环。 两个圆上的点，全是界点。 在任何一个圆上，圆盘再小，也会伸到两边。 同样是界点，一个在里面，一个在外面。 是不是界点，属不属于集合，要分开判断。 考试最爱这一条，闭集的界点全部属于它。 不然，外面的界点，就成了被漏掉的聚点。 开集相反，界点一个也不属于它。 成员个个是内点，总有圆盘碰不到外面。 非开非闭，可以收一些、漏一些，像圆环。 所以圆环既不开，也不闭，同学的捷径走不通。</p><p>把这些点想成有人坐的座位，越靠近原点越挤。 围着原点的圆圈缩得再小，里面照样有人坐。 为什么一定有无穷多个？假设附近只有几个。 半径比最近的距离更小，空心邻域里就没有点了。 所以一定有无穷多个，证明靠的就是这一条。</p><p>来编一本小词典，从数轴翻译到平面。 一点周围的小区间，变成了小圆盘。 区间变成区域，端点变成界点。 含不含端点，变成闭不闭。 平面只是一间更宽敞的屋子，并不是新的学科。</p><p>现在涂上第一和第三象限。 它是开集，每个点总能放下不碰坐标轴的圆盘。 可是，连接两块的任何折线，一定会穿过坐标轴。 两块只在原点碰头，可原点并不属于集合。 所以它是开集，却不算区域。 就像校园被一条河分开，河上没有桥。</p><p>有界，就是能装进以原点为圆心的某个圆盘。 那两个象限是无界的，什么圆盘也装不下。 直径，是集合里任意两点距离的上确界。 它相当于区间有多宽，搬到了平面上。 圆环的直径是4，能无限接近，却达不到。 为什么不超过4？绕道原点，两段各自不到2。 这条绕道，就是三角不等式，以后会反复用到。 单位正方形的直径，就是对角线，而且真能取到。</p><h2>4 · 展望与衔接</h2><p>这个式子在哪里有意义？正好就是圆环。 分子的根号下可以是零，分母却不可以。 这个对数，只活在那两块象限上，彼此分开。 油漆桶只填连在一起的一块，这里要点两次。</p><p>邻域和区间，是第三、四章的老词，今天升级了。 下一集的极限定义，靠的正是今天的空心邻域。 第七章那一圈完备性定理，要搬到平面上来。 柯西准则，闭域套定理，聚点定理，有限覆盖定理。 到了第十六章第四集，聚点定理和闭域套定理挑大梁。 今天的每个词，原封不动地搬到高维空间。</p><p>开、闭、聚点、连通，是度量空间拓扑的基本词汇。 机器学习讲数据流形的时候，说的也是这套语言。 这些词以后会一再出现，不如一次就学扎实。 边界算自己人吗？闭集全收，开集不收。</p></main></body></html>
