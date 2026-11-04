@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>13-04 和函数的三个问题：连续、可积、可微</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+</style></head><body><div class="topbar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span>13-04</span><a class="mv-quiz" href="../quiz/13-04.html">去自测 →</a></div><main><header><div class="tag">视频配套讲稿（朗读原文） · MATH SELF-CHECK: 38 claims re-derived, 2 fixed.</div><h1>13-04 和函数的三个问题</h1><p class="sub">连续、可积、可微</p></header><h2>1 · 动机</h2><p>一个和函数，三个关键问题。 部分和，只是把有限项加在一起。 所以它连续，积分和求导也能一项一项来。 现在由极限来接班，就像一位代课老师。</p><p>第一问：天天到岗吗？也就是，和函数连续吗？ 第二问：批改照旧吗？能不能一项一项地积分？ 第三问：能学新内容吗？能不能一项一项地求导？</p><p>先看一组三角形，越来越高，也越来越窄。 甲同学说：每一点的高度最终变成零，积分是零。 乙同学：每块面积是二分之一，答案也是。 同样的函数，同样的区间，却有两个答案。 所以，极限和积分换个顺序，并不是理所当然。 一个条件管住三个问题：一致收敛。 检验它的工具，就是上一集的M判别法。</p><h2>2 · 定理与定义</h2><div class="card gold stmt">定理13.9回答第一问。<br>一致：N之后fₙ与f处处相距&lt;ε。<br>每项连续：每个fₙ毫无断口。<br>结论：极限函数f在I上连续。<br>反过来读：xⁿ的极限在1处跳。<br>所以xⁿ在[0,1]上非一致收敛。<br>级数版本：定理13.12看部分和。<br>定理13.10回答第二问。<br>“连续”保证每个积分都存在。<br>结论：极限与积分可以交换。<br>级数版就是逐项求积：定理13.13。<br>定理13.11回答第三问，要求最多。<br>x₀是收敛点：fₙ(x₀)有极限。<br>每个fₙ在[a,b]上有连续导数。<br>第三：是导函数列{fₙ′}一致收敛。<br>结论：求导与极限可以交换。<br>级数版本：对部分和用这三条。<br>三种交换，三组条件：记住这张表。</div><p>定理13.9回答第一问。 一致：某项以后，处处离极限不到epsilon。 每一项连续，没有任何断口。 结论：极限函数在整个区间上连续。 反过来读：这组幂函数的极限，在1那里一跳。 所以它不可能一致收敛，本章第一集的跳跃有了解释。 对于级数，把同一定理用在部分和上。</p><p>定理13.10回答第二问。 这里要连续，只是为了让每个积分存在。 结论：极限和积分可以交换顺序。 对于级数，这就是逐项求积。</p><p>定理13.11回答第三问，它的要求最多。 第一，至少有一个点，函数列在那里收敛。 第二，每一项的导函数连续。 第三，注意了：一致收敛的是导函数列。 结论：求导和极限可以交换顺序。 级数版本：同样三条，用在部分和上。 三种交换，三组条件，记住这张表。</p><h2>3 · 方法与证明</h2><p>连续性凭什么能留给极限？这是目标。 第一步：固定一个函数，它处处贴近极限。 第二步：这个函数连续，在点附近几乎不动。 第三步：三小段加起来不到epsilon。 关键：同一个函数，同时照顾两个点，这就是一致。 只有逐点收敛时，所需的项数在1附近爆炸。 没有哪个函数能管住所有点，极限就可能断开。 总之，一致收敛之下，两个极限可以换序。</p><p>积分更简单：在窄带里，面积只能相距一点点。 epsilon变小，距离跟着变小。 回到三角形，这次高度由我们来定。 零右边的任何一点，很快就永远被甩在后面。 每块面积，就是底乘高的一半。 让高度等于项数，面积永远是二分之一。 像搬出宿舍：每天空出来的地板更多。 可那半箱东西一直堆在门口，越堆越高。 极限是一间空房间，积分为零。 二分之一对零，交换失败了。 哪个条件失效了？一致收敛，峰高无限上升。</p><p>第三问藏着更隐蔽的陷阱，看这组函数。 它们一致收敛到直线，距离最多是项数分之一。 它们的导数也完全连续。 但在右端点，每一个导数恰好是零。 导数的极限处处是1，唯独右端点是零。 可极限直线在那里的坡度是1，一不等于零。 哪个条件失效了？导数列并非一致收敛。 定理13.9反着用：极限一跳，就不可能一致。 函数一致收敛了，导数却没有。 只要远离右端点，导数就规矩，交换照样成立。 记住：本章最常漏掉的条件，是导数的一致收敛。</p><p>再改一改三角形：峰高一律是1。 仍然不是一致收敛，峰顶始终不降。 可积分趋于零，结论照样成立。 一致收敛是充分条件，但不是必要条件。 考试时：先验条件，再引定理，别用逆命题。 反方向的结果需要额外条件，比如狄尼定理。</p><p>回顾：几何级数在整个开区间上，并非一致收敛。 但在里面任一闭区间上，M判别法管用。 推论的要求更低：内闭一致收敛就够了。 这就够了，因为连续和可导只看附近。 课本的范例：zeta函数，自变量大于1。 在整条半直线上并非一致：靠近1，尾巴失控。 但在每个闭区间上，各阶导数级数均有优级数。 所以zeta函数的各阶导数全部连续。 全程没有算出和函数，只看级数就知道。</p><h2>4 · 展望与衔接</h2><p>应用一：不写出和函数，照样逐项求积。 一项一项积分，面积约为2.10。 应用二：分母换成立方，就能逐项求导。 导函数是余弦级数，处处连续。</p><p>欠账结清：本章开头那个跳跃，有了解释。 上一集的M判别法，终于有了用武之地。 就像牛顿莱布尼茨公式，这些交换靠定理，不靠运气。 留给后面：幂级数的逐项求导与求积。 后面求zeta的特殊值时，会用到这份光滑。</p><p>逐点收敛：任何性质均无保证。 一致收敛：条件配齐，就能交换。 M判别法：检验一致收敛的工具。 今天：成果直接从级数里读出来。 将来实分析用控制收敛，代价更低。 微分方程的存在性证明，也建在一致度量上。 条件配齐，这位代课老师三问全过。</p></main></body></html>

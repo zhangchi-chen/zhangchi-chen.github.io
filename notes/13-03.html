@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>13-03 M判别法：一道围栏管住所有尾巴</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+</style></head><body><div class="topbar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span>13-03</span><a class="mv-quiz" href="../quiz/13-03.html">去自测 →</a></div><main><header><div class="tag">视频配套讲稿（朗读原文） · MATH SELF-CHECK: 35 claims re-derived, 2 fixed.</div><h1>13-03 M判别法</h1><p class="sub">一道围栏管住所有尾巴</p></header><h2>1 · 动机</h2><p>M判别法，一道围栏，管住所有的尾巴。 作业来了，这个级数在整条实轴上一致收敛吗？ 上一集的办法，是看最坏的偏离能否缩到零。 可这要先拿到和函数，没人给过我们。</p><p>那就换个角度，一项一项地看。 每一项无论在哪儿，始终低于自己的上限。 把这些上限排成一排围栏桩。 所有桩加起来是有限的，这是第十二章的老基准。</p><p>想象一堆快递，每天的箱子大小在变。 可第n号箱子，总能放进自己那层隔板下面。 隔板总和有限，靠后的箱子堆起来就矮。 而且每一天同时成立，这正是一致的意思。 一个收敛的数项级数，竟能同时管住无穷多个函数。</p><h2>2 · 定理与定义</h2><div class="card gold stmt">先看课本原文：定理13.5<br>第一句：各项定义在同一集合D上<br>第二句：ΣMₙ是收敛的正项级数<br>第三句：|uₙ(x)|≤Mₙ处处成立<br>并且对每个n，一项配一个数Mₙ<br>结论：Σuₙ(x)在D上一致收敛<br>又名M判别法，或优级数判别法<br>ΣMₙ叫作Σuₙ(x)在D上的优级数<br>细读一遍：Mₙ里面根本没有x<br>于是一个N管所有x：上集的同一把尺<br>允许上限含x会怎样？试Σxⁿ<br>每个固定x，Σ|x|ⁿ都收敛……<br>但总和在端点附近无界，围栏失效<br>随点变化的上限只换来逐点收敛<br>ΣMₙ必须收敛：取Mₙ=1毫无用处<br>小结：找Mₙ，验上界，验ΣMₙ收敛</div><p>先看课本里的原话，定理十三点五。 第一句，所有的项定义在同一个集合上。 第二句，要有一个收敛的正项级数，里面没有x。 第三句，每一项在集合的每一点，始终不超过上限。 而且对每一项成立，一项只配一个数。 结论是，这个级数在整个集合上一致收敛。</p><p>它另有两个名字，M判别法与优级数判别法。 那串数，就叫作这个函数项级数的优级数。 慢慢读，每个上限只是一个数，跟x无关。 于是同一个门槛管住每一个点，正是上集那把尺子。</p><p>要是上限可以随点变化呢？拿几何级数试一试。 在每一个固定的点上，这些上限加起来有限。 可一靠近端点，总和就无界，围栏立不住。 随点变化的上限，只能换来逐点收敛。 上限之和必须有限，全取一的话什么也证不了。 做法：挑一串数，验上界，验总和有限。</p><h2>3 · 方法与证明</h2><p>凭什么成立？整个证明，写两句就够。 背后的引擎，是一致收敛的柯西准则。 它要求每段尾巴处处很小，而且只用同一个门槛。 第一步，数项级数收敛，由柯西准则，尾段很小。 这个门槛只由一串数决定，点根本没露面。 第二步，三角不等式，再把每项换成上限。 于是每一段尾巴，处处同时低于那条线。 准则满足了，级数一致收敛，证明完成。 零件全是旧的，老柯西准则，加上上集的同一个门槛。</p><p>回到开头的作业，那个正弦级数。 正弦的大小不超过一，所以每根桩取n平方分之一。 这些桩加起来有限，是基准库里现成的p级数。 于是在整条实轴上一致收敛，几秒就搭好了围栏。 余弦级数也一样，同一道围栏照样管用。 注意，从头到尾，我们根本没碰和函数。 这就是它胜过上集定理的地方，不必事先知道极限函数。 上集留下的欠账，今天付清，不用知道极限函数。</p><p>桩高看不出来时，就去找每一项的最高点。 它的峰顶只有一处，高度是n平方分之一的一半。 峰高就当桩高，整条实轴上一致收敛。 记住，每一项的最高点，就是你能用的最矮的桩。</p><p>接下来是考试最爱，开区间上的几何级数。 在整个开区间上，它并非一致收敛。 上集算过，最坏的余项无限增大。 可要是缩到里面一点的闭区间上呢？ 在那里，每个幂始终低于固定的桩，桩的总和有限。 于是在里面每一个这样的闭区间上，它一致收敛。 课本把这叫作，在开区间上内闭一致收敛。 围栏守得住每条过道，却守不住整层楼面。 记住这张表，问的集合不同，答案就不同。 陷阱在这，每段闭区间上一致，不等于整个开区间上一致。 每道围栏各自存在，可区间一靠近端点，总高就趋于无穷。</p><p>搭围栏之前，先用推论做个快速检查。 要是各项本身不能一致地趋于零，就到此为止。 实战一下，每个幂在右端附近，照样能碰到一。 所以这个级数在那里并非一致收敛，一句话就驳倒了。 更大的区间也一样失败，因为它包含这一段。 不过要小心，过了这关，其实什么也没证明。 它的项一致地趋于零，可最矮的桩加起来是无穷大。</p><p>老实讲，这组尖峰一致收敛，却找不到收敛的优级数。 来回振荡的级数，要请别的判别法出马。 这里围栏垮了，桩至少是调和级数，发散。 这时交给阿贝尔和狄利克雷判别法。 今天只点个名，到第十四章开头才真正登台。</p><h2>4 · 展望与衔接</h2><p>用途一，系数的绝对值加起来有限的三角级数。 围栏就是系数的大小，在每一点上一样。 整条实轴上一致收敛，后面的傅里叶级数会用到它。</p><p>用途二，魏尔斯特拉斯那个著名的函数。 围栏是一个几何级数，所以在整条实轴上一致收敛。 著名的结局是，它处处连续，却处处没有导数。 为什么非要一致收敛？这笔债留给关于和函数的三个定理。</p><p>记住这幅图，一串收敛的数，同时管住每段尾巴。 往后看一眼，以后的课上，这道围栏会变得更大。 微分方程的存在定理里，一串逼近解就是这样被围住的。 那里用比较函数来围，围栏一样，只是桩更高。 一道围栏，管住所有尾巴，这就是M判别法。</p></main></body></html>
