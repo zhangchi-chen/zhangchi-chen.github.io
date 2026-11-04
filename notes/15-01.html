@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>15-01 傅里叶系数：向正弦余弦投影</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+</style></head><body><div class="topbar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span>15-01</span><a class="mv-quiz" href="../quiz/15-01.html">去自测 →</a></div><main><header><div class="tag">视频配套讲稿（朗读原文） · MATH SELF-CHECK: 39 claims re-derived, 2 fixed.</div><h1>15-01 傅里叶系数</h1><p class="sub">向正弦余弦投影</p></header><h2>1 · 动机</h2><p>今天看看，一个函数里藏着多少正弦和余弦。 上一章，幂级数的系数一拿就到手。 在零点求导，除以阶乘，系数到手。 新来的，是三角级数。</p><p>假如一条波形，其实就是这样拼成的。 波形交到你手上，里面有多少第一号余弦？ 先试老办法，看零这一个点。 一个方程，却缠着无穷多个未知数。 求导也没用，每一项统统留下来。 要一招只留一项，其余统统归零。</p><p>深夜的宿舍里，两支手电互相垂直。 一支铅笔，在地上和墙上各留一个影子。 关掉一支，另一个影子纹丝不动。 这一切，靠的是两个方向互相垂直。</p><p>在空间里，一个向量的第一分量，就是一次点积。 另外两个方向垂直，贡献是零。 问题来了：函数之间，也能垂直吗？</p><h2>2 · 定理与定义</h2><div class="card gold stmt">点积：对应分量相乘再相加<br>函数像向量：每个x一个分量<br>逐点相乘，求和变成积分<br>正交：这个内积等于零<br>定义：[a,b]上的正交函数<br>乘积的正负面积恰好抵消<br>这一族：常数1和各阶正弦余弦<br>三角函数系是正交函数系<br>教材(6)–(8)：异项乘积积分为零<br>异项相乘得零，自乘不得零<br>记住特例：1自乘给2π，不是π<br>定理15.2：一致收敛时系数被确定<br>条件一：f已经写成三角级数<br>条件二：级数一致收敛<br>结论：系数是f与对应波的积分<br>投影说法：aₖ就是f的影子<br>影高=内积÷轴的平方积分<br>反过来：任取周期2π的可积f<br>定义：傅里叶系数与傅里叶级数<br>积分总存在，系数就总存在<br>注意符号：是∼，不是=<br>∼只记录系数，没说和是多少<br>把∼变成=，是留给15-02的账</div><p>点积就是对应位置相乘，再全部加起来。 把函数看成向量，每个点上一个分量。 逐点相乘，再把求和换成积分。 所谓正交，就是这个内积等于零。 定义说：乘积在区间上积分为零。 两条波一乘，上下的面积正好抵消。</p><p>这一族成员：常数一，加上各阶正弦和余弦。 它们合起来，是一个正交函数系。 教材这张表：不同成员相乘，积分为零。 不同成员得零，自己乘自己不是零。 常数那一格是两倍的派，别的格是派。</p><p>定理说：只要一致收敛，系数就被锁死。 第一个条件：函数已经写成了这样的级数。 第二条：一致收敛，后面要用。 结论：每个系数，是函数和那条波的内积。 用手电的话说，每个系数就是一个影子。 影子多高，等于内积除以轴的大小。</p><p>反过来，从任意一个可积的周期函数出发。 这些数叫傅里叶系数，级数叫傅里叶级数。 只要函数可积，每个系数就算得出来。 请看符号：波浪号，不是等号。 波浪号只记系数，不承诺和是多少。 把波浪号变成等号，这笔账留给收敛定理。</p><h2>3 · 方法与证明</h2><p>我们亲手验证表里的一格。 把乘积拆开，变成两个余弦相加。 两个数不同，所以两条新波没有一条是平的。 这样的余弦走满一圈，山峰山谷正好抵消。 两项全是零，整个积分为零，验证完毕。 同一条波自乘：拆成二分之一加一条快波。 只有那个二分之一留下，走满一圈得到派。 公式前面除以的派，就是从这里来的。 表里其余各格，套路完全一样。 余弦乘正弦是奇函数，对称一下就是零。</p><p>提取系数分三步。第一步，两边乘上选定的余弦。 第二步，每一项各自积分。 能这样做吗？能，因为一致收敛。 乘上一条有界的波，一致收敛照样成立。 第十三章的逐项积分定理，这回真的出力了。 第三步，正交性把其余各列一一抹掉。 只剩一项：第k个系数乘派。 除以派，公式就到手了。 换成正弦去乘，留下来的就是正弦系数。 开头那条波，在余弦上的影子正好是一。 其余影子一个个算出来，配方原样找回。</p><p>常数项为什么带个二分之一？乘一再积分看看。 常数那格是两倍的派，正好吃掉二分之一。 于是常数项也用同一个公式，只是记账更整齐。 注意，算系数只要积分，不必收敛。 定理先假定了收敛，定义却什么也没假定。 收敛定理来之前，先别写等号。</p><p>热身一下：函数就是x本身，一个周期一个周期地复制。 这个函数是奇函数，乘上余弦，仍然是奇函数。 第九章的对称技巧，让所有余弦系数归零。 正弦系数这边是偶函数，取右半边再乘二。 第八章的分部积分，在这里出力。 结果：正负交替，大小像n分之一那样变小。 这就是它在各个正弦上的影子，一正一负，越来越小。 钉在墙上：x的傅里叶级数，用波浪号。 仍是波浪号：只算了系数，没有求和。 第十二章的狄利克雷判别法，早就说过它收敛。 可它加起来是不是x本身？这要交给收敛定理。 把这条锯齿留好，本章后面会再用到。</p><h2>4 · 展望与衔接</h2><p>回头看，这套方法没用到正弦的任何特性。 只要一组正交函数，再加投影。 换一组正交函数，同一个公式照样能用。 教材最后一题，就给了这样一组。</p><p>第一个用处：最小二乘拟合，其实就是投影。 第二个用处：均衡器按频段读影子。 换成小波，医学成像靠的也是投影。 正交加投影，大概是应用数学里用得最多的一招。 借来三样：分部积分、对称、逐项积分。 留下一笔账：把波浪号变成等号。 每条波各投一个影子，彼此互不干扰。</p></main></body></html>

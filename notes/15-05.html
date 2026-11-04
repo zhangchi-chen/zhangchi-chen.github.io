@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>15-05 辅助函数：造一个替你求和的函数</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+</style></head><body><div class="topbar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span>15-05</span><a class="mv-quiz" href="../quiz/15-05.html">去自测 →</a></div><main><header><div class="tag">视频配套讲稿（朗读原文） · MATH SELF-CHECK: 42 claims re-derived, 2 fixed.</div><h1>15-05 辅助函数</h1><p class="sub">造一个替你求和的函数</p></header><h2>1 · 动机</h2><p>今天我们造一个函数,它只负责给级数求和。 平方倒数越加越多,总和逼近1.6449。 它是pi平方的六分之一,pi从哪来? 线索就在熟悉的平方函数里。</p><p>想象宿舍楼下那台自动售货机。 先挑零食,也就是你想求和的级数。 再找到有这款货的机器,也就是辅助函数。 最后按对按钮,也就是选好代入的点。</p><p>整套思路可以写成一张四步的配方卡。 第一步,看清目标级数的符号和分母。 第二步,从四种熟悉的形状里猜函数。 奇偶性决定级数类型,偶函数配余弦,奇函数配正弦。 第三步,尽量选函数连续的点。 在跳跃点,级数给出左右两侧的平均值。 第四步,必要时把两个级数逐项相加。 这张卡我们会跑四遍,越跑越快。</p><h2>2 · 定理与定义</h2><div class="card gold stmt">让每一步都站得住的原理。<br>前提:f满足收敛定理的条件。<br>级数处处收敛到左右极限的平均。<br>连续点处两侧相同,平均就是f(x)。<br>所以级数在一点的值,就是f的值。<br>在一点逐项求值,完全合法。<br>一点处它只是个收敛的数项级数。<br>课本例题与习题给出的四个展开式。<br>x²是偶函数,延拓后连续:余弦级数。<br>|x|是偶函数:三角波,只剩奇次项。<br>x是奇函数:锯齿波,±π等处跳跃。<br>方波是奇函数,在π的整数倍处跳跃。<br>看分母:连续的配n²,有跳跃的配n。<br>还有四个目标值,都是课本习题答案。<br>细看:其中两个跳过了3的倍数。</div><p>先看让每一步站得住脚的原理。 函数满足十五章二集的收敛定理条件。 于是级数在每一点,收敛到左右极限的平均值。 在连续点,两侧极限一样,平均值就是函数值。 所以级数在一点的值,就是函数在那里的值。 在这一点逐项求值,是完全合法的。 无需别的定理,在一点上它只是收敛的数项级数。</p><p>这四个展开式来自课本,用的是十五章一集的系数公式。 平方函数是偶函数,延拓后处处连续,展开成余弦级数。 绝对值函数也是偶函数,图像是三角波,只剩奇数次的项。 恒等函数是奇函数,延拓成锯齿波,在pi的奇数倍处跳跃。 方波是奇函数,在pi的整数倍处跳跃。 分母透露形状:连续的配平方,有跳跃的配一次方。 再看四个目标值,它们是课本习题的答案。 仔细看,其中两个跳过了所有三的倍数。</p><h2>3 · 方法与证明</h2><p>第一遍跑招牌菜,符号全是加,分母是平方。 分母是平方,一项不缺,就选平方函数这台机器。 可系数正负交替,需要余弦把符号抵消掉。 按下pi,余弦和系数同步变号,正好抵消。 先做安全检查,延拓后的函数在pi处连续吗? 左右两侧一起到达pi的平方,图像连续接上。 那里只是图像折了个角,收敛定理依然适用。 于是在pi处,整个级数等于pi的平方。 所以平方倒数之和是pi平方的六分之一。</p><p>一鱼两吃,同一台机器,换个按钮,按零。 验证一下,零点在抛物线光滑的部分,安全。 在零点,余弦全是一,只剩下正负交替的符号。 机器读出的整个级数等于零。 所以交错的版本,和是pi平方的十二分之一。 陷阱是默认安全,两个点我们各自验证过。 换成恒等函数,跳过验证就会出错,pi是跳跃点。 硬套公式会得出pi等于零,其实级数给的是平均值零。</p><p>第二遍,又是全加号,可分母只剩奇数的平方。 偶数项缺席,指向绝对值函数,它的偶次系数全是零。 按零:这是三角波的折角处,可图像依然连续。 在零点,常数项和后面的和式正好抵消。 所以奇数平方倒数和是pi平方的八分之一。</p><p>第三遍,交错的奇数倒数,就是十二章五集的莱布尼茨级数。 分母是一次方,就选延拓后有跳跃的恒等函数。 按二分之pi,很安全,正弦按一零负一零循环。 偶数项全部消失,奇数项正负交替。 所以莱布尼茨级数是pi的四分之一,几秒就到手。</p><p>第四遍是压轴戏,方波,按三分之pi。 三分之pi落在方波的平台上,很安全。 看这些正弦值随n增大,每六个一循环。 三的倍数落在横轴上,正弦恰好是零。 就像表格里的筛选键,一下把整列清零。 留下的项带着二分之根号三,符号交替。 于是方波的高度,等于这个因子乘新级数。 两边一除,新级数等于六分之根号三pi。 那一列零,正是十五章四集的消失系数块,这回成了工具。 选对一个点,就从级数里删掉一整条等差数列。</p><p>第二种口味,同一个方波,按六分之pi。 这回正弦值是正负二分之一和正负一,十二个一循环。 三的倍数带着正负一,是缩小版的莱布尼茨级数。 这份副本是莱布尼茨级数的三分之一,值已知。 其余的项带着正负二分之一,凑成新级数的一半。 于是方波高度等于新级数的一半,加上已知的副本。 减去副本,新级数等于pi的三分之一。 两次筛选得到两个新值,笔记里一一做了数值核对。</p><h2>4 · 展望与衔接</h2><p>每次猜对,难道是运气?完全不是。 唯一性:系数相同的两个函数,在连续点处一定相等。 所以猜出的函数只要系数对上,它的值就是级数的和。 两条路通向同一级数,方波按二分之pi,也得出莱布尼茨级数。 顺手核对一下,去掉偶数项正好剩下四分之三。</p><p>另一条生产线把系数平方:帕塞瓦尔等式。 更多特殊值,留给十五章六集的画廊。 今天靠的是二集的收敛定理和四集的零系数块。 想删掉五的倍数?按五分之pi,正好那些项消失。</p><p>造一个展开式已知的函数,再读出想要的常数。 解析数论和积分变换方法,开局就是这一招。 零食、机器、按钮,对应级数、函数和点。</p></main></body></html>
