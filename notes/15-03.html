@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>15-03 奇延拓与偶延拓：半个区间的三种打开方式</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+</style></head><body><div class="topbar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span>15-03</span><a class="mv-quiz" href="../quiz/15-03.html">去自测 →</a></div><main><header><div class="tag">视频配套讲稿（朗读原文） · MATH SELF-CHECK: 26 claims re-derived, 1 fixed.</div><h1>15-03 奇延拓与偶延拓</h1><p class="sub">半个区间的三种打开方式</p></header><h2>1 · 动机</h2><p>一个函数,半个区间,却能写出三套级数。 作业看着很容易:把x在零到二之间展开。 你交的是余弦级数,可答案给的是正弦级数。 两个公式完全两样,部分和却贴向同一条直线。 到底谁错了?一个函数能有两套展开吗? 更怪的是在右端点:一个级数到二,另一个停在零。</p><p>秘密:两个答案先悄悄做了延拓。 好比课表只排了半周,另外半周由你来定。 照镜子补,得到余弦;倒过来补,得到正弦。 三样工具:伸缩、对称、收敛定理。</p><h2>2 · 定理与定义</h2><div class="card gold stmt">周期2l的公式:教材(3)(4)<br>每项在一个周期2l里恰走n个波<br>系数照旧,只是区间换成[−l,l]<br>f为偶函数时:教材(6)(7)<br>第一句:所有正弦系数bₙ都为零<br>第二句:aₙ只用右半边,算两倍<br>剩下的就是余弦级数<br>f为奇函数时:教材(8)(9)<br>这次余弦系数aₙ全为零,含a₀<br>bₙ同样只要[0,l],乘以2<br>剩下的就是正弦级数<br>教材的一句附注,正好回答作业之谜<br>同一函数同一区间,可有三种写法<br>关键在“适当延拓之后”<br>收敛:沿用15-02的收敛定理</div><p>周期换成两个l,教材这样写级数和系数。 每一项在一个周期里恰好走完整数个波。 系数照旧是积分,只是换到新的周期上。</p><p>f是偶函数时,教材的公式短了一大截。 第一句:正弦系数全部为零。 第二句:余弦系数只看右半边,再乘以二。 剩下的是纯粹的余弦级数。</p><p>f是奇函数时,情形正好反过来。 这次余弦系数全为零,常数项也一样。 正弦系数同样只看右半边,再乘以二。 剩下的是纯粹的正弦级数。</p><p>教材里的一句附注,正好解开作业之谜。 同一个函数,同一个区间,能写成三个样子。 一切取决于适当延拓之后这几个字。 收敛不成问题,上一集的定理照样管用。</p><h2>3 · 方法与证明</h2><p>这套公式哪来的?答案是给横轴改名。 把横轴按比例一拉,两个l的周期就变成两个派。 新函数g的周期是两个派。 对g套用现成的理论,再换回原来的变量。 换元之后,派分之一变成了l分之一。 每个余弦和正弦也跟着改名,教材的级数出现了。 傅里叶理论只有一套,l只是一件戏服。 周期为四时l等于二,每一项随之缩放。</p><p>接下来是对称,第九章第五集的老招数。 在对称区间上,奇函数左右两半正好抵消。 偶函数左右两半一样大,总数翻倍。 取一个奇函数,乘上余弦,依然是奇函数。 左半边转过来盖住右半边,余弦系数全抵消。 乘上正弦就成了偶函数,只算右半边再加倍。 换成偶函数就反过来:正弦抵消,余弦加倍。 一半系数消失,剩下的只看已知的那一半。</p><p>回到作业:函数只给了右半边,这里l等于二。 定理要的是整个周期,左半边只能自己来补。 第一个选择是奇延拓:绕原点旋转半圈。 再周期延拓,级数里只剩正弦。 第二个是偶延拓:对纵轴照镜子。 再周期延拓,级数里只剩余弦。 也可以随便补,比如左半边全补成零。 这时正弦余弦一起出现,就是更一般的级数。</p><p>可真正算系数时,延拓根本不用画出来。 教材的公式只在原来的半个区间上积分。 好比脚手架:吊车拆了,楼却保留着它给的形状。 形状仍然决定一件事:级数在两端取什么值。</p><p>该选哪一个?先问问两个端点。 每一个正弦波在两端恰好为零。 吉他弦两端钉死,那里位移为零,正弦级数正合适。 每一个余弦波到了两端是平的。 细棒两端绝热,端点处是平的,选余弦。 端点上什么也没固定?那就用更一般的级数。</p><p>现在两条路各走一遍,l等于二。 正弦这边,分部积分一次,系数全有了。 结果正是教材上印的正弦展开。 部分和慢慢贴近直线,可在右端点始终停在零。 余弦这边,常数项很好算,只剩奇数频率。 结果又是教材上印的余弦展开。 部分和很快贴上直线,两端也对得上。 区间内部两者等于x,收敛定理亮绿灯。</p><p>注意,两个级数在端点上分道扬镳。 在右端点,奇延拓从二一下跳到负二。 正弦级数取两头的平均,零,正如上一集所说。 左端点却没有跳跃,因为函数本身从零出发。 任何正弦级数在两端一律为零。 偶延拓处处连续,级数在两端正好是零和二。 所以在右端点,三个延拓给出三个答案。 规则是:看延拓后的跳跃,别只盯着原来的公式。</p><h2>4 · 展望与衔接</h2><p>应用一:绝对值函数是偶函数,只有余弦项。 只要在右半边积分,工作量省掉一半。 应用二:这些展开是本章第五集的工具。</p><p>再往远看,这个选择其实是物理的。 振动的弦挑正弦,绝热冷却的细棒挑余弦。 到了微分方程课,边界条件会替你做这个选择。</p><p>今天我们挑的是延拓的对称方式。 下一集问一个更安静的问题:能用哪个周期? 答案是任意周期,本章最妙的秘密。 半个区间,三个延拓,端点告诉你选哪一个。</p></main></body></html>

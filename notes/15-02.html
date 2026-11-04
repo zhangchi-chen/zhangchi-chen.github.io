@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>15-02 收敛定理：跳跃间断点处，中点胜出</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+</style></head><body><div class="topbar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span>15-02</span><a class="mv-quiz" href="../quiz/15-02.html">去自测 →</a></div><main><header><div class="tag">视频配套讲稿（朗读原文） · MATH SELF-CHECK: 32 claims re-derived, 4 fixed.</div><h1>15-02 收敛定理</h1><p class="sub">跳跃间断点处，中点胜出</p></header><h2>1 · 动机</h2><p>今天看傅里叶级数在跳跃处停在哪里 上一集只给了承诺，没给等式 今天我们赢得等号，但它有前提</p><p>例子很简单：左边平，右边是斜坡 用上一集的办法，系数马上算出 关键问题来了：在最右端，级数加起来是多少 第一位同学：斜坡顶端是派，答案就是它 第二位同学：走过终点就回到起点，那里是零 两个人推理得很认真，结论却对不上</p><p>那就让级数自己回答，一项一项地加 部分和慢慢爬向派的一半 派的一半，恰好在两人的说法之间 为什么偏偏是一半？级数何时靠得住？ 一个定理，同时回答这两个问题</p><h2>2 · 定理与定义</h2><div class="card gold stmt">定理15.3（收敛定理）原文如下<br>按段光滑：课本中的定义<br>第一句：按段光滑，有限段光滑弧<br>允许第一类间断点：两侧有极限<br>f′在有限个点处断开，两侧极限有限<br>例中的f：±π处跳跃，0处转折<br>第二句：在每一点，逐点收敛<br>并未承诺一致收敛：跳跃旁最慢<br>第三句：和是左右极限的平均<br>f(x₀+0)：从右侧逼近所见高度<br>f(x₀−0)：从左侧逼近所见高度<br>连续点处两者相等，和就是f(x)<br>跳跃间断点处，和取两者中点<br>推论：处处连续，就处处收敛于f<br>注意：周期相接处也须连续<br>例中f在接缝处π对上0</div><p>这是收敛定理，按课本原话给出 先看条件：按段光滑的定义 第一句：图像由有限段光滑的弧组成 可以有跳跃，只要两侧各自有确定的高度 个别点上坡度可以突变，但两侧各有定值</p><p>例子合格：两端跳一下，原点处转个弯 第二句：每一点各自收敛，各按各的节奏 没人保证一起收敛，跳跃旁的点落后很多</p><p>第三句：级数落在左右两个极限的平均上 右极限，就是从右边走过来看到的高度 左极限，就是从左边走过来看到的高度 图像没有断开处，两侧一致，级数给出函数值 跳开处两侧不一致，级数报两者的平均</p><p>推论：只要处处不跳，级数处处等于函数 注意：周期相接的地方也必须连续 接缝处坡顶对上平地，断开了</p><h2>3 · 方法与证明</h2><p>今天只用不证，证明留在课本里 不过我们能看懂，为什么只能取一半 系数是积分，两侧一起算进去 部分和环顾一个点时，左右两边一视同仁 就像门两边的两位同学，各说各的所见 公平的说法不偏向任何一边，就是平均 所以一半这个值并非人为规定，而是对称送来的</p><p>接下来是考试最爱：两个端点会怎样 周期性把两端焊在一起，整段合成一个圈 就像一条走廊，两头其实是同一扇门 从左边走到门口，看到的是坡顶 穿过这扇门，就到了另一头的平地 课本例一正是这样算的，落在派的一半 不是派，也不是零，两头一起落在派的一半 陷阱就在这里：端点明明有值，级数却不理它 两端的规则：把门两边看到的值取平均 部分和也证实了：两端一起走向派的一半</p><p>来个小动作：只改动函数在一个点上的值 把原点处的值抬到二，条件照样满足 一个点没有宽度，积分根本看不见它 积分没变，系数没变，级数也完全相同 在那一点，级数照样给出零，而不是二 端点也一样：值随便改，级数照样说派的一半 级数只听两侧的声音，从来不看那个点本身 新的值恰好是两侧的平均，级数才会到达它</p><p>等号的回报：代入一个点，得到一条等式 图像连续处用函数值，跳跃处用两侧的平均 代入派：正弦全部消失，余弦只剩正负一 定理给出派的一半，级数只剩下奇数项 这些奇数项越加越多，一步步逼近同一个数 去掉分母，就得到课本里的那个等式 答案：奇数平方倒数之和，是八分之派的平方 这是本课程第一个特殊值，第十五章第五集会批量生产 在原点再验算一遍，得到同一个数</p><p>补充结论：跳跃旁部分和冲过头，永不消退 每个部分和没有断点，只能在缺口处硬爬过去 回想第十三章的管子：跳跃旁，细管套不住部分和 所以跨过跳跃时，级数逐点收敛，却做不到一致 不像十二章看项的大小，这里看光滑</p><h2>4 · 展望与衔接</h2><p>条件就像入学考试：先通过它，再写等号 几个跳跃没关系，照样能过关 无限振荡的断点不过关，定理在那里不作保证 上一集欠下的账，今天结清：波浪号变成等号 有了等号，这一章后面几集可以放心地用</p><p>第一个应用在音频：方波只留几个谐波，边缘就会振铃 第二个在照片：压缩图里边缘旁的光晕，也是过冲 完整的证明，留给以后的课程 展望：证明靠局部性，一点只看它附近 在信号处理里，它变成小波，一次只看一小段 以后的实分析，会为粗糙得多的函数证明收敛 连续的地方给函数值，跳跃给平均，两端跨过门取平均</p></main></body></html>
