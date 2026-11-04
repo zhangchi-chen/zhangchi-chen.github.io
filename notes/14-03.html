@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>14-03 幂级数求和：逐项求导与逐项积分，来回走</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+</style></head><body><div class="topbar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span>14-03</span><a class="mv-quiz" href="../quiz/14-03.html">去自测 →</a></div><main><header><div class="tag">视频配套讲稿（朗读原文） · MATH SELF-CHECK: 44 claims re-derived, 2 fixed.</div><h1>14-03 幂级数求和</h1><p class="sub">逐项求导与逐项积分，来回走</p></header><h2>1 · 动机</h2><p>今天给幂级数求和：求导积分，来回走。 手里只有一个和：几何级数。 可今晚的作业，要的是另外三个和。</p><p>先看第一个：它的部分和慢慢爬向二。 看起来正好是二，可我们算不出来。 麻烦就在每一项多出来的因子n。</p><p>给幂求导，指数就掉到前面来。 改成积分，就要除以指数加一。 真正的问题来了：无穷和能逐项求导吗？</p><p>把级数想成一张照片，你一遍遍地修。 积分是一次柔化编辑，系数被除小。 求导就是撤销键，系数又被乘回来。 哪些编辑、在哪里安全？今天就答。</p><h2>2 · 定理与定义</h2><div class="card gold stmt">核心：半径之内，幂级数像多项式。<br>求导和积分可直接穿过求和号。<br>定理14.8：区间内处处成立。<br>积分从0起，新级数没有常数项。<br>回想13-04：交换需要一致收敛。<br>幂级数在内部闭区间上一致收敛。<br>13-04的定理在此落地，债已还清。<br>想象一架梯子：三个级数上下排开。<br>往上爬是积分：系数除以n+1。<br>往下滑是求导：系数乘以n。<br>上去系数变温和，下来复原。<br>定理14.7：三者收敛区间相同。<br>同一区间：每一档的墙都在R。<br>意外：naₙ看起来比aₙ大。</div><p>一句话说完：半径之内，幂级数就像多项式。 求导和积分，可以直接穿过求和号。 定理十四点八：半径之内，处处成立。 积分从零起步，所以新级数里没有常数项。</p><p>回想十三零四那一集：交换需要一致收敛。 幂级数恰好做到：内部闭区间上一致收敛。 所以十三零四的定理在这里落地，那笔债算是结清了。</p><p>想象一架梯子，三个级数站在横档上。 往上爬就是积分，每个系数被除小。 往下滑就是求导，系数被乘回来。 上去变温和，下来就复原，像撤销。</p><p>定理十四点七：三个级数，收敛区间相同。 同一区间，就是说每一档的墙在同一个位置。 这很意外，因为乘过n的系数看起来大得多。</p><h2>3 · 方法与证明</h2><p>根式判别法一句话说清：开方之后，因子缩成一。 所以上极限不变，上一集的柯西阿达马公式给出同一个半径。 除法也一样：开方之后，它慢慢爬回一。</p><p>教材例六，从我们唯一会的几何级数出发。 树干就是几何级数，只在两堵墙之间成立。 往下滑一档，求导这条轨道给出它的和。 往上爬一档，对数凭空出现了。 一个引擎，两条轨道，我们一个新和也没算。 用眼睛验证：部分和紧贴着图像。</p><p>压轴题来了，教材例七：求这个级数的和函数。 计划是爬两档，每爬一档剥掉一个n。 第一步：提出一个x，让积分正好约掉一个因子。 爬一档：先积分，再除掉x，一个因子没了。 看梯子：爬到一半，只剩一个因子要剥。 再爬一档：顶上是我们会的几何级数。 它的和我们会：就是符号交替的几何级数。 到顶了，手里有了和。现在按两次撤销。</p><p>撤销一次，就是求导，这一档也有了和。 把x乘回去，再按一次撤销。 注意，每一步全在两堵墙之间完成。 把最后一个x乘回去，答案出炉。 在零点一处验算：级数和公式，前四位小数一致。 目标，关键一步，结果：这类题就按这三拍来读。</p><p>但教材加了一条注，专讲端点。 半径相同，可墙上那两个点，可以各不相同。 往下滑可能丢掉端点，往上爬可能捡到端点。 就像滤镜，只在走出工作室导出时才起作用。</p><p>具体例子：几何级数在两堵墙上全发散。 爬一档，左边那堵墙上它收敛了：赚到一个端点。 左墙上，项正负交替又变小，十二零五的莱布尼茨登场。 右墙上是调和级数，照样发散。 滑回去，辛苦赚来的左端点又丢了。 陷阱拆除：能保住的，只是两墙间的开区间。</p><h2>4 · 展望与衔接</h2><p>收获的时刻到了：只在安全的点代入数。 回到第一题：把二分之一代进求导那条轨道。 轨道给出四，再减半，正好是二。谜底揭开。 顺便一提：这个二，就是抛硬币直到正面的平均次数。 例七代入负二分之一，公式给出负六。 拆开符号，又白送一个和：正好是六。</p><p>再到墙上：只因教材说公式在那里成立，才可以代。 代入负一：交错级数落在一个对数上。 翻转符号：交错调和级数等于ln 2。 十二零七欠下的常数A，就是ln 2。</p><p>最后一张卡：梯子可上可下，但只在半径之内。 到了墙上，每步亲手再查：十四零一的习惯。 十四零四把梯子反过来：从函数出发，找它的级数。 十四零五会给今天悄悄用过的端点事实，补上定理卡。</p><p>往远处看：计算机代数软件，正是这样处理级数的。 以后，钟形图像下的面积函数，就由这样的级数定义。 墙内随你编辑、撤销；墙上，就亲手检查。</p></main></body></html>

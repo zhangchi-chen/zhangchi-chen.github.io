@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>14-01 阿贝尔定理：收敛点连成一个区间</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+</style></head><body><div class="topbar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span>14-01</span><a class="mv-quiz" href="../quiz/14-01.html">去自测 →</a></div><main><header><div class="tag">视频配套讲稿（朗读原文） · MATH SELF-CHECK: 40 claims re-derived, 1 fixed.</div><h1>14-01 阿贝尔定理</h1><p class="sub">收敛点连成一个区间</p></header><h2>1 · 动机</h2><p>阿贝尔定理回答一个问题：幂级数在哪里收敛？ 给x选一个数，它就变成普通的级数。 每个x各有自己的答案，收敛或者发散。 这个级数在负一和二分之一处收敛，在一处发散。 那么所有收敛点合起来，会是什么形状？ 会不会零零散散，远处收敛，近处反而发散？</p><p>想象一条宿舍走廊，楼梯口装了一个喇叭。 远处的房间听得见，近一点的房间听得更清楚。 如果某个房间听不见，更远的房间也听不见。 听得见的房间，围绕楼梯口连成一段。 唯一没定下来的，是这一段的两端。 阿贝尔定理证明，幂级数正好遵守这条规律。</p><h2>2 · 定理与定义</h2><div class="card gold stmt">研究幂级数(2)：Σaₙxⁿ<br>阿贝尔定理，课本原文如下。<br>条件：在一点x̄≠0处收敛。<br>结论：|x|&lt;|x̄|处绝对收敛。<br>左右两侧，没测过的一侧也算。<br>x̄处发散：|x|&gt;|x̄|全发散<br>距离恰为|x̄|的点，定理未提。<br>由此，课本引出收敛半径。<br>收敛域：一个中心在0的区间。<br>R是收敛点|x|的上确界。<br>三类：R=0、+∞、有限正数<br>(−R,R)内收敛，|x|&gt;R发散。<br>在x=±R处，可能收敛也可能发散。<br>(−R,R)称为收敛区间。<br>再加上收敛的端点，得到收敛域。<br>课本例2：老朋友Σxⁿ/n。<br>记住收敛域[−1,1)，稍后验证。</div><p>我们研究最基本的幂级数，围绕零展开。 这是阿贝尔定理，课本上的原话。 前提只有一个：在某个非零的点收敛。 于是离零更近的每一点，绝对收敛。 左右两边一起算，连没测过的那一边也算。 反过来，如果在那里发散，更远的点全部发散。 距离正好相等的镜像点，定理一个字也没说。</p><p>课本由这个定理，引出收敛半径的概念。 所有收敛点合起来，是一段围绕零的区间。 半径R，就是收敛点离零距离的上确界。 三种情形：零，正无穷，或者一个有限正数。 半径以内收敛，半径以外发散。 恰好在两个端点，收敛和发散全有可能。 两端点之间的开区间，叫做收敛区间。 加上收敛的那些端点，就得到收敛域。 课本的例二，正是我们开头那个级数。 先记住这个一边开一边闭的收敛域，稍后再验证。</p><h2>3 · 方法与证明</h2><p>目标：从一个收敛点，推到所有更近的点。 在那里收敛，通项就趋于零，所以有界。 关于系数，我们只保留这一个上界。 再取一个更近的点，两点距离之比小于一。 把比值提出来，每一项压在等比上界之下。 画出来看，每一项躲在等比天花板下面。 和收敛的等比级数一比，绝对收敛。 点离零越近，天花板降得越快。 一个不等式，撑起了整个定理。</p><p>发散的那一半，不需要新的想法。 假设某个更远的点居然收敛。 那么前半段会让原来的发散点收敛，矛盾。 所以更远的每一个点，必定发散。</p><p>现在一个半径接一个半径，看这个级数。 没有空洞，一个收敛点会带上所有更近的点。 没有孤岛，一个发散点会排除所有更远的点。 所以收敛点围绕零，连成一整个区间。 开头担心的那些零散小岛，根本不会出现。</p><p>阴影停在哪里，完全由系数决定。 第一个极端：阶乘让非零的x处，通项爆炸。 只有零这一点收敛，半径为零。 第二个极端：哪怕x取十，项先升后降，阶乘胜出。 相邻项之比趋于零，半径正无穷。</p><p>接下来是危险地带：两个端点。 到了半径上，比值是一，天花板变平，失去作用。 阿贝尔定理到此沉默，端点逐个手算。 工具：莱布尼茨判别法，p级数，拉贝判别法。 在一这个端点，它变成调和级数，发散。 在负一处正负交替，项趋于零，莱布尼茨保证收敛。 所以收敛域包含负一，不含一，两端命运不同。</p><p>四个级数，半径全是一，端点会有哪些情况？ 先暂停，自己把每个端点判断一遍。 分母是平方的那个，两端绝对收敛，两端全包含。 刚才算过：负一收敛，一发散。 一处靠莱布尼茨收敛，负一处符号全一致，发散。 系数越来越大，两端的项不趋于零，两端全部发散。 四种情况全出现了，光看半径，猜不出端点。</p><h2>4 · 展望与衔接</h2><p>附赠一个结论，不证：在收敛区间里，内闭一致收敛。 M判别法的篱笆，在任何更小的闭区间上照样成立。 上一章的定理生效，和函数在收敛区间上连续。 端点收敛时，阿贝尔判别法让一致性延伸到端点。 记住这张端点卡片，二项式端点那一集会用到。</p><p>用法一：一个收敛点，就保证了半径的下限。 再有一个发散点，半径就有了上限。 用法二：平移的形式，只是把整个图挪到新的位置。 移到二以后，收敛域从一到三，含一不含三。 用法三：这个数项级数收敛，因为它的点落在收敛区间里。</p><p>今天复用了第十二章的比较判别法和莱布尼茨判别法。 第十三章的工具，终于在半径以内安家。 每个幂级数必有半径，难的情形怎么算，留给下一集。 系数规整的时候，一个极限就给出半径。</p><p>换成复数，同一个证明涂出的是一个圆盘。 复变函数论从这里起步，后面一集会走到盘边。 回顾一下：一个收敛点，让所有更近的点绝对收敛。 至于两个端点，永远要亲手检验。</p></main></body></html>

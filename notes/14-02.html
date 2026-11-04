@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>14-02 柯西-阿达马定理：上极限的高光时刻</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+</style></head><body><div class="topbar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span>14-02</span><a class="mv-quiz" href="../quiz/14-02.html">去自测 →</a></div><main><header><div class="tag">视频配套讲稿（朗读原文） · MATH SELF-CHECK: 40 claims re-derived, 1 fixed.</div><h1>14-02 柯西-阿达马定理</h1><p class="sub">上极限的高光时刻</p></header><h2>1 · 动机</h2><p>柯西阿达马公式：上极限的高光时刻。 上一集说过，每个幂级数必有一个半径。 今天的问题是：怎样从系数读出半径？ 通常，开方后求一个极限，就得到半径。 再来看课本的例三。 奇次项用三分之一的幂，偶次项用二分之一的幂。 开方以后，它在三分之一和二分之一间来回跳。 它停不下来，极限根本不存在。 那个用极限的公式，用不上了。 可是这个级数，显然有半径。 在一处收敛，在三处，偶次项却爆炸了。 所以半径在一和三之间，到底在哪？</p><p>想一想，一学期里公交的晚点。 有一天晚点了四十分钟，那是最糟的一天。 真正要防的，是一再出现的最坏晚点。 看系数也一样：偶发的不算，反复出现的才算。</p><h2>2 · 定理与定义</h2><div class="card gold stmt">07-04集早就备好：上极限。<br>影子线：第n项以后的最高处<br>只降不升，必有极限（可为+∞）<br>也就是：最大的子列极限。<br>例3：偶数项胜出，ρ=1/2<br>下极限是1/3。<br>柯西-阿达马定理，课本原文。<br>第一步：算出ρ，即上极限。<br>(i) 0&lt;ρ&lt;+∞：R=1/ρ<br>(ii) ρ=0：R=+∞<br>(iii) ρ=+∞：R=0<br>ρ越大，R越小。<br>课本还加了一条注。<br>上极限总存在，R总能求出<br>回到课本例3。<br>ρ=1/2，所以R=2。<br>x=±2：偶次项恒为1<br>两端发散，收敛域(−2,2)</div><p>第七章讲上极限的那一集，早就备好了。 影子线：从这一项往后，能达到的最高处。 它只降不升，必有极限，也可能是正无穷。 换句话说，它是最大的子列极限。 在例三里，偶数项胜出，rho等于二分之一。 下极限是三分之一。</p><p>这是柯西阿达马定理，课本上的原话。 第一步，把各项开方，取上极限。 rho是有限正数时，半径是它的倒数。 开方后趋于零，半径就是正无穷。 开方后趋于无穷，半径就是零。 rho越大，半径越小。 课本又补了一条注。 上极限总是存在，半径总能求出。 回到课本的例三。 rho是二分之一，所以半径是二。 在正负二处，偶次项永远等于一。 项不趋于零，两端发散，收敛域是开区间。</p><h2>3 · 方法与证明</h2><p>为什么用上极限，而不用上确界？ 把第一项系数改成一百，上确界就变成一百。 可是改一项，不影响收敛，半径仍是一。 上极限不管偶发，就像通勤一样。 用下极限呢？例三会得到半径三。 在二点五处，偶次项越来越大，下极限说错了。 最坏的子列说了算，那就是上极限。</p><p>证明，分成三个画面。 画面一：对绝对值级数，用第十二章的根式判别法。 关键一步：x的绝对值，直接提到外面。 画面二：小于一，绝对收敛，落在半径以内。 大于一时，无穷多项比一大，级数发散。 画面三：恰好等于一时，判别法不作结论。 这正是上一集的规矩，端点要亲手算。 画出这个V形图，和高度一比一比。 开方趋于零，图形躺平，处处收敛。 开方趋于无穷，图形直立，只剩零这一点。</p><p>那么，用相邻系数之比呢？ 前提是，比值的极限要存在。 例三的比值，忽大忽小。 一支趋于零，一支趋于无穷，没有极限。 极限存在时就放心用，这里比值趋于三。 比值只是捷径，上极限公式永远可用。</p><p>另一个陷阱：缺项的幂级数。 这里，奇次项的系数全是零。 比值要除以零，捷径走不通。 修法一：把平方换成新变量，变成等比级数。 平方小于一，所以半径也是一。 修法二：开方后一、零交替，上极限是一。 课本的例四，也是缺项幂级数。 换成平方以后半径是九，开方得三。 在正负三处，项趋于负一，两端发散。</p><p>把这些方法，整理成一张路线图。 就像穿过校园，先看看近路有没有。 比值有极限？那就走捷径。 有缺项？换个变量，或者直接算上极限。 开方后振荡？取最大的子列极限。 无论走哪条路，最后亲手算两个端点。</p><h2>4 · 展望与衔接</h2><p>用法一：系数里混着两种增速。 开方后被夹到三，半径是三分之一。 用法二：指数只取平方数。 空隙越来越宽，换元帮不上忙。 上极限照样能算：半径是一。 用法三：只要给系数一个上界，就能保证半径。 不必精确算出，也有保底半径。</p><p>上极限和根式判别法，一起登场。 在半径以内，下一集要逐项求导和积分。 换成复数，同一公式算出圆盘的半径。 复变函数论从这里开始，后面一集先看一眼。 以后的分析课，用上极限描述变大的速度。 级数解在边界上的表现，也用它。 连算法跑多久，也用上极限来刻画。 回顾：开方取上极限，再取倒数。 上极限总存在，端点仍要亲手检验。</p></main></body></html>
