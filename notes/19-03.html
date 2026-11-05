@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>19-03 Γ函数与B函数：阶乘的续集</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+</style></head><body><div class="topbar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span>19-03</span><a class="mv-quiz" href="../quiz/19-03.html">去自测 →</a></div><main><header><div class="tag">视频配套讲稿（朗读原文） · MATH SELF-CHECK: 62 claims re-derived, 3 fixed.</div><h1>19-03 Γ函数与B函数</h1><p class="sub">阶乘的续集</p></header><h2>1 · 动机</h2><p>伽马函数与贝塔函数，阶乘的续集。 阶乘像一段台阶，每个整数踩一级。 可是二点五的阶乘，又是多少呢？ 一路乘到一，只能一级一级地走。 我们想要一条坡道，平滑地连起每一级。 麻烦在于，过这些点的图像有无穷多。</p><p>坡道的规矩，每上一级就乘以 s。 起点也定好，第一级高度是一。 从第一级按规矩往上爬，阶乘自己就出来了。 留意这个错开一位，后面会用到。 有个积分守住了规矩，它叫伽马函数。 搭档住在零到一之间，叫贝塔函数。</p><h2>2 · 定理与定义</h2><div class="card gold stmt">二者合称欧拉积分：Γ函数与B函数<br>Γ(s)：xˢ⁻¹e⁻ˣ下的整片面积<br>转动s，面积Γ(s)跟着变<br>在x=1切开：险处在两头<br>放大0附近：e⁻ˣ≈1，只剩xˢ⁻¹<br>∫₀¹xˢ⁻¹dx恰在s&gt;0时有限<br>s=0就失守：0附近面积无限<br>远处e⁻ˣ压垮任何幂：尾部收敛<br>所以Γ(s)恰在s&gt;0时收敛<br>B也查两头：x=0与x=1<br>近0像xᵖ⁻¹，近1像1−x的幂<br>所以B恰在p&gt;0且q&gt;0时收敛<br>Γ光滑吗？上集的判别法来答<br>近0处，xᵃ⁻¹e⁻ˣ压住整族<br>远处，xᵇ⁻¹e⁻ˣ压住整族<br>M判别法：在[a,b]上一致收敛<br>每个[a,b]都成立：内闭一致收敛<br>近s=0处，Γ(s)≥1/(es)<br>积分号下求导：多出一个ln x<br>ln x同样压得住，一再求导：Γ光滑<br>上集的一致收敛，在这里真干活</div><p>二者合称欧拉积分，也就是伽马函数和贝塔函数。 伽马函数就是这条图像下面的全部面积。 转动旋钮，面积跟着变，这就是函数值。 在一处切开，险处在两头，像泳池两端。 放大零附近，指数几乎是一，只剩幂在起作用。 在零附近，只有 s 为正，面积才有限。 取 s 为零，零附近的面积就无限了。 到了远处，指数压垮任何幂，尾部总会收敛。 所以伽马函数恰好在 s 为正时收敛。</p><p>贝塔函数也看两头，零和一。 靠近零像一个幂，靠近一像另一个幂。 所以贝塔函数恰在两个数全为正时收敛。</p><p>伽马函数光滑吗？上一集的判别法来回答。 在零附近，最小的幂压住整个函数族。 到了远处，最大的幂压住全部。 两个上界面积有限，M判别法给出一致收敛。 任取闭区间照样成立，叫内闭一致收敛。 靠近零，伽马函数自己炸开，统一的上界找不到。 在积分号下求导，多出一个对数因子。 对数因子照样压得住，一次次求导，伽马函数光滑。 上一集的一致收敛，在这里真正出力。</p><h2>3 · 方法与证明</h2><p>关键问题来了，升一级真的就是乘以 s 吗？ 远处截断，分部积分。 最危险的一步：边界项消失了，指数胜过任何幂。 让截断点跑到无穷远，升一级就乘以 s。 像一栋楼，每层是楼下那层的 s 倍。 这就是递推公式，一路降到底，得到阶乘。 地基：指数函数下的面积，恰好是一。 验算一下，伽马二是一，伽马六是一百二十。 坡道找到了，台阶之间光滑，每级恰好对上。 当心，伽马 n 给的是前一个数的阶乘。</p><p>看形状，在一和二两处，值全是一。 二阶导数是正的面积，所以图像严格凸。 两头一样高，两者之间就有唯一的最低点。 两头一起冲向正无穷。 把规矩反过来用，伽马函数就伸到零的左边。 反复延拓，只跳过零和负整数。 在这些点旁边，绝对值冲向无穷，正负来回交替。</p><p>课本列出三条：对称、递推、三角形式。 把图像左右翻转，两个数就互换位置。 分部积分一次，第二个数就降一。 代入余弦的平方，贝塔函数变成三角形式。 正弦幂的积分，是贝塔的化身。 验算正弦的立方，得到三分之二，和以前一样。 记得沃利斯公式吗？它在整数处给贝塔取样。</p><p>先看整数，一路降到底，那里面积是 m 分之一。 阶乘之比，换成伽马值，记得错一位。 一般情形，贝塔函数可以写成伽马值的比。 验算一下，两边全是一。 再验一次，两条路全得十二分之一。 一般情形的证明，课本留到第二十一章。</p><h2>4 · 展望与衔接</h2><p>用法一，五次分部积分，一步到位。 用法二，多项式面积，一步算完。 仍欠一个值，伽马二分之一，下集来算。</p><p>往后看，伽马分布的归一化常数，就是伽马值。 贝塔分布住在零到一之间，除以贝塔值。 统计公式里那些伽马常数，源头就在这里。 台阶有了坡道，坡道也有了搭档。</p></main></body></html>

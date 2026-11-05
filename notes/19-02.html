@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>19-02 含参量反常积分：一致收敛回来了</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+</style></head><body><div class="topbar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span>19-02</span><a class="mv-quiz" href="../quiz/19-02.html">去自测 →</a></div><main><header><div class="tag">视频配套讲稿（朗读原文） · MATH SELF-CHECK: 30 claims re-derived, 2 fixed.</div><h1>19-02 含参量反常积分</h1><p class="sub">一致收敛回来了</p></header><h2>1 · 动机</h2><p>积分上限变成无穷，一致收敛又回来了。 上一集，一块闭矩形换来了三项交换。 现在让这条边一直伸到无穷远。 新的主角：积分上限为无穷，被积函数里带着x。</p><p>本集的主角，一族衰减的正弦波，每个x一条。 对每个正的x换个元，每条波全变成同一条。 答案只取三个值：正负二分之派和零，结尾再证。 被积函数连续，结果却在零处跳了一下。</p><p>每个x各自收敛，只是快慢不一样。 就像给全组订一间自习室，时间要人人合适。 每个x有自己的门槛，过了它尾巴就够小。 一致收敛要的是一个门槛，管住所有的x。 靠近零总有个室友，开会越晚，他到得越晚。</p><p>只要离零留出一点距离，收敛就是一致的。 一路贴近零就不一致了，麻烦一直往零那边挪。 到底要什么是一致的，又该怎么检验？</p><h2>2 · 定理与定义</h2><div class="card gold stmt">定义1：含参量反常积分一致收敛<br>先任给ε&gt;0：带子的半宽<br>存在N：在看x之前就定好<br>M&gt;N后，所有x的尾巴全在带内<br>逐点：N可随x变；一致：N只看ε<br>定理19.7柯西准则：看窗口<br>M之后每个窗口的积分都要小<br>好处：窗口上是正常积分，不必先知收敛<br>把[c,+∞)在A₁&lt;A₂&lt;…处切开<br>每段一项uₙ(x)，成了函数项级数<br>积分一致⇔每种切法的级数一致<br>这些在13-02与13-03有孪生版<br>本集就是第13章的升级重播<br>把尾巴画成x的函数，让M变大<br>远离0处变平，贴近0仍近π/2<br>胖的那段在x≈1/M，逼向0<br>任给M，取点x̄=1/M<br>窗口落在M之后：π/3&gt;1<br>窗口内积分≥(ln 2)/2<br>ε₀=(ln 2)/2击败每个M<br>x≥δ时，尾巴≤2/(Mδ)</div><p>定义一：积分在区间上一致收敛是什么意思。 先随便给一个误差，就是带子的半宽。 存在一个门槛，看到x之前就要定好。 过了门槛，所有x的尾巴全部待在带子里。 逐点时门槛随x变，一致时门槛只看误差。</p><p>定理十九点七，柯西准则，改看一个个窗口。 门槛之后的每个窗口，积分全要很小。 好处是，窗口上只是普通积分，不用先知道收敛。</p><p>把这条无穷的半直线，一刀一刀切成小段。 每一段是一项，整个积分成了函数项级数。 积分一致，等于任何切法下的级数一致。 这一切，在第十三章第二集和第三集里全有孪生版。 这一集，就是第十三章的升级版再放一遍。</p><p>把尾巴画成x的函数，再让门槛越来越远。 离零远处压平，贴着零仍接近二分之派。 最胖的那段跟着门槛走，一路逼向零。</p><p>不管门槛多远，挑一个点，门槛分之一。 派除以三大于一，窗口落在门槛之后。 正弦过半，积分至少是自然对数二的一半。 同一个误差打败每个门槛，贴到零就不一致。 离开零一段距离，尾巴就被统一压住。</p><h2>3 · 方法与证明</h2><p>魏尔斯特拉斯M判别法，用一个可积的界全部压住。 级数版本：每项被一个数压住，这些数的和收敛。 例子：这回两个字母换了角色，y负责滑动。 上界的积分是二分之派，所以对所有实数y一致收敛。</p><p>狄利克雷和阿贝尔判别法，专门对付振荡的被积函数。 离开零一段距离，正弦的部分积分有统一的界。 另一个因子一路降到零，和x无关，于是一致。 一贴近零就失控，部分积分要多大有多大。 条件失效不算证明，真正的证明靠那个窗口。</p><p>阿贝尔的例子：正弦除以x，再乘一个衰减因子。 这个正弦积分本身收敛，里面没有y，自然一致。 因子只降不升，又夹在零和一之间：一致收敛。 记住它，最后的大结局要用到它。 证明和第十三章的孪生版一样，这里就不展开了。</p><p>回到例子，里面任何一个闭区间，离零全有一段距离。 所以在零到正无穷上，内闭一致收敛。 闭子区间就扛得住，因为连续和可微只看附近。 每个正的点，罩上一个闭区间，函数在那里就连续。</p><p>定理十九点十和十九点十一，讲连续和可微。 条件分两栏：谁只要收敛，谁要一致收敛。 原积分本身，只要收敛就够了。 必须一致收敛的，是求偏导之后的积分。 最普遍的事故，是只查原积分一致，就收工。 例子里原积分一致，求导后的积分却发散。 其实导数是零，乱交换反而算不出东西。</p><h2>4 · 展望与衔接</h2><p>收获时刻：算一个带衰减、两正弦相减的积分。 关键一步：把两正弦相减，写成余弦对y的积分。 M判别法给出一致收敛，于是可以交换积分次序。 里层是个分式，再积一次是两个反正切相减。</p><p>去掉第二个正弦，再让衰减慢慢消失。 能一路滑到零，靠的就是阿贝尔给的一致收敛。 极限一取，狄利克雷积分到手：二分之派乘b的符号。 把字母换一换，正是开头的主角，连那一跳也对上了。 这一跳本身说明，从零开始的半直线上，收敛不一致。</p><p>上一集的三项交换，现在改用一致收敛来买单。 第十九章第三集，伽马和贝塔就靠这些判别法驯服。 第十九章第四集的收尾，靠的是积分号下求导。</p><p>以后的课里，拉普拉斯和傅里叶变换全是这类积分。 那里的每一次交换次序，靠的全是今天的保证。 一句话：一致，就是一个门槛同时管住所有的x。 求导时，该查导数的积分，别查原积分。</p></main></body></html>
