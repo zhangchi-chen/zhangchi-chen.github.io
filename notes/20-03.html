@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>20-03 两类曲线积分：同一对象的两面</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+</style></head><body><div class="topbar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span>20-03</span><a class="mv-quiz" href="../quiz/20-03.html">去自测 →</a></div><main><header><div class="tag">视频配套讲稿（朗读原文） · MATH SELF-CHECK: 35 claims re-derived, 0 fixed.</div><h1>20-03 两类曲线积分</h1><p class="sub">同一对象的两面</p></header><h2>1 · 动机</h2><p>两类曲线积分，真的是两样东西吗？ 每天晚上，你骑车沿着同一条弯路去图书馆。 第一个问题，这段路一共有多远？ 第二个问题，风到底帮了你多少忙？</p><p>路程是第一型积分，跟方向毫无关系。 风做的功是第二型积分，方向很要紧。 两集之前，我们按路程过秤；上一集，我们按位移算功。 同一条路，两套记账方法，难道永远互不相干？</p><p>上一集留下一个谜：倒着骑回去，功就变了号。 可是路程的一小段，永远不会是负的。 既然功可以变负，那个负号到底藏在哪？ 本集的主张是：功其实也是一个第一型积分。 要称的是什么？只是力顺着路的那一部分。</p><h2>2 · 定理与定义</h2><div class="card gold stmt">第一个工具：弧长参数s。<br>s是从A出发沿曲线走过的路程。<br>s等距分点，弯道直道一样长。<br>每点切线方向t指向s增大的方向。<br>t就像导航里的箭头，随弯道转动。<br>放大看：一小步ds分成dx和dy。<br>dx/ds是t与x轴夹角的余弦。<br>dy/ds是t与y轴夹角的余弦。<br>教材的表述：切线的方向余弦。<br>勾股定理：dx²+dy²=ds²。<br>两边除以ds²：余弦平方和为1。<br>箭头一路转动，长度始终是1。<br>关键一步：位移里提出一个ds。<br>代入后，ds被提到了括号外面。<br>教材：两类曲线积分的联系。<br>左边第二型，右边第一型。<br>方括号就是数量积F·t。<br>t长度为1，F·t就是切向分量。<br>把F分解：沿t一份，垂直t一份。<br>横向那份只推向路边，不做功。<br>只有切向分量在做功。<br>沿路看：切向分量可大可小可负。<br>顺风逆风，功都是路程乘切向分量。<br>空间里，再加z分量和第三个余弦。<br>教材：空间曲线的情形。<br>三个余弦的平方和仍然是1。</div><p>第一件工具：用骑过的路程标记位置。 它就是从起点出发，沿着路面骑过的距离。 按相同路程打点，弯道直道每段一样远。</p><p>每一点的切线方向，指向路程增加的那一边。 它就像手机导航里的小箭头，跟着弯道转。 放大来看，一小步拆成横向一段和纵向一段。 横向所占的比例，就是切线与横轴夹角的余弦。 纵向所占的比例，就是切线与纵轴夹角的余弦。</p><p>教材这样写：这两个比值就是切线的方向余弦。 检验一下：小三角形有个直角，勾股定理成立。 两边一除，两个余弦的平方加起来正好是一。 箭头一路转向，可它的大小始终是一。</p><p>关键的一步来了：把这一小步的路程提出来。 两式代进去，这一小段路程就被提到了外面。 这就是教材里两类曲线积分之间的联系。 左边是第二型积分，右边是第一型积分。 方括号里，正是力和切线方向的数量积。 切线方向的大小是一，所以这就是力的切向分量。</p><p>在一点把力拆开：一份顺着路，一份横穿过去。 横穿的那一份只把你往路边推，完全不做功。 只有顺路的那份在做功。 一路骑去，顺路那份忽大忽小，甚至变负。 顺风也好逆风也好，功是路程乘顺路风力的累加。</p><p>到了空间里，只是多一个分量、多一个余弦。 空间曲线的情形，教材是这样写的。 三个余弦的平方加起来，仍然正好是一。</p><h2>3 · 方法与证明</h2><p>回到那个谜：每一小段路程永远是正的，负号去了哪？ 倒着骑：同一条路，路程改从图书馆算起。 切线方向跟着反过来，箭头掉了个头。 两个方向余弦，一起变了号。 可每一小段路程原封未动，距离跟方向毫无关系。 所以负号跑进了被积函数里，是余弦把它带进去的。 第一型那一边带上了负号，等式依然成立。 去的时候是顺风，回来就成了逆风，变的只是那个箭头。 方向存放在切线里，从来不放在路程里。</p><p>小练习：从原点直走到坐标一、一的那一点。 它和两条坐标轴各成四十五度，两个余弦相等。 于是它变成第一型积分：两项之和乘那个余弦。 取一个简单的力，横纵坐标用同一个变量来走。 直接算，就是一条直线下的面积，等于一点五。 换成第一型来算：路程因子和余弦正好抵消。 同一个积分，同样是一点五，两张面孔对上了。 反过来也可以：这里的第一型积分，能改写成第二型。 用常数一来检验：结果是根号二，正好是线段全程。 直路上，方向余弦一直不变，换来换去毫不费力。</p><h2>4 · 展望与衔接</h2><p>难一点：球面被一张斜平面切出一个圆。 要算的，是这股力绕着圆走一圈做的功。 方向是：从x轴正方向看过去，逆时针转。 这个斜着的圆，用方程硬写出来，相当费事。 切线和球的半径垂直，也和平面的法向量垂直。</p><p>法向量与半径的向量积，就沿着切线方向。 在这个圆上，交叉乘积加起来是零，所以模是根号二。 除以根号二，每一点的方向余弦就全知道了。 展开合并，整个分子塌缩成负一。 切向分量处处是同一个负数，整整一圈顶着风。 半径再用一次勾股定理：半径平方是三分之二。 一圈的路程乘上那个常数，结果约为负三点六三。 不用写方程，也不用硬算，方向余弦包办了一切。</p><p>第二个用途：切向分量不会超过整个力。 所以功的大小，不会超过最大的力乘以路程。 这种估计离不开第一型，那里每段路程是正的。</p><p>本章收尾的表格：第一型称质量，第二型算功。 积的是什么：一个数量函数，对上力的切向分量。 方向要紧吗？第一型无所谓，第二型很要紧。 最后一栏把两者连在一起：两类曲线积分的联系。 同一个对象的两张面孔，前两集原来是一对双胞胎。</p><p>这个切线方向是老朋友，曾经用来做空间曲线的切线。 格林公式要到下一章才出现，它靠的是有方向的那一面。 可它的几何道理，总要从没有方向的那一面借路。</p><p>升高一维，第一型曲面积分负责过秤。 第二型曲面积分，算的是穿过曲面的流量。 它们之间的联系，换成了法向量来牵线。 这本家庭相册，由格林公式打开，由斯托克斯公式合上。 一条路，两个问题，说到底是一个积分。</p></main></body></html>

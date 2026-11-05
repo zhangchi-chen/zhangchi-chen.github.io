@@ -1,0 +1,75 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>二重积分 · 自测</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+
+/* ---- 手机自测单页覆盖层（深浅主题自适应：浅色文件有 --paper，深色有 --bg/--fg） ---- */
+html,body{margin:0;background:var(--bg,var(--paper));color:var(--fg,var(--ink));
+  font-family:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC","Source Han Sans SC",system-ui,-apple-system,sans-serif}
+/* 中和原幻灯片容器的隐藏/定位，让 section 直接作为文档流内容 */
+section.slide{display:block!important;position:static!important;width:auto!important;height:auto!important;
+  padding:0!important;background:none!important;box-shadow:none!important;transform:none!important}
+.page{max-width:720px;margin:0 auto;padding:18px 16px 60px}
+.topbar{display:flex;justify-content:space-between;align-items:baseline;gap:8px;
+  border-bottom:2px solid var(--grid,var(--line,var(--rule,#e3e0d6)));padding-bottom:10px;margin-bottom:6px}
+.topbar h1{font-size:20px;margin:0}
+.topbar a{color:var(--blue,#1f72b0);font-size:14px;text-decoration:none;white-space:nowrap}
+.lead{color:var(--muted);font-size:15px;margin:12px 0 2px;line-height:1.6}
+/* 表格 → 竖屏卡片（仅 slide 式页面有表格） */
+table.t{display:block;width:auto;border:0}
+table.t tbody,table.t tr,table.t td,table.t th{display:block;border:0;width:auto}
+table.t thead{display:none}
+table.t tr{background:var(--card);border:1.5px solid var(--rule);border-radius:14px;
+  padding:14px 16px;margin:14px 0;font-size:19px;line-height:1.7}
+table.t td{padding:6px 0}
+table.t td:last-child{border-top:1.5px dashed var(--rule);margin-top:6px;padding-top:10px}
+.q{display:block;text-align:center}
+.reveal{cursor:pointer;border:2px dashed var(--rule);border-radius:10px;
+  padding:6px 22px;color:var(--muted);font-size:16px;background:none;font-family:inherit}
+.ans{display:none;line-height:1.8}
+.shown .ans{display:block} .shown .reveal{display:none}
+/* quiz-section 式页面：原 section 自带卡片样式，仅收窄内边距 */
+section.quiz{padding:6px 2px;margin:8px 0;background:none;border:0}
+section.quiz .q{margin:12px 0;text-align:left}
+
+.ex{display:none}</style></head><body><div class="page"><div class="topbar"><h1>二重积分</h1><div style="float:right;font-size:15px"><a href="../notes/21-01.html">← 讲稿</a> · <a href="index.html">目录</a></div></div><div class="quiz"><section class="quiz"><div class="q"><div class="qt">1. 1. 定积分里分割的条件是 λ → 0。二重积分里，谁扮演这个角色？</div><ol><li data-ok="0"><span class="l">A</span>n → ∞ （小块个数趋于无穷）</li><li data-ok="1"><span class="l">B</span>‖T‖ → 0 （细度，即最大小块直径）</li><li data-ok="0"><span class="l">C</span>S_D → 0 （D 的面积趋于零）</li><button type="button" data-show="显示答案" data-hide="隐藏答案">显示答案</button><div class="ex"><b>正确答案：B.</b> 只增加块数不够：把正方形切成 n 条细长条，无论 n 多大，直径始终大于 2。</div></div><div class="q"><div class="qt">2. 2. 为什么定义二重积分之前，D 的面积必须先确定？</div><ol><li data-ok="0"><span class="l">A</span>因为 f 在 D 上必须非负。</li><li data-ok="1"><span class="l">B</span>因为每个积分和都要乘小块面积 Δσᵢ，面积必须有意义。</li><li data-ok="0"><span class="l">C</span>因为 D 必须是矩形。</li><button type="button" data-show="显示答案" data-hide="隐藏答案">显示答案</button><div class="ex"><b>正确答案：B.</b> 积分和 Σ f(ξᵢ, ηᵢ)Δσᵢ 由面积搭成；既不要求非负，也不要求矩形。</div></div><div class="q"><div class="qt">3. 3. 在单位正方形上，曲线 y = x² 及其下方 f = 1，上方 f = 2。f 可积吗？</div><ol><li data-ok="0"><span class="l">A</span>不可积：它沿整条曲线不连续。</li><li data-ok="1"><span class="l">B</span>可积：f 有界，不连续点落在连续函数的图像上，是零面积集。</li><li data-ok="0"><span class="l">C</span>只有把曲线换成直线才可积。</li><button type="button" data-show="显示答案" data-hide="隐藏答案">显示答案</button><div class="ex"><b>正确答案：B.</b> 定理21.7：有界，且不连续点集为零面积集（n 个小矩形盖住曲线，总面积 1/n）。</div></div><div class="q"><div class="qt">4. 4. D 是单位圆盘 x² + y² ≤ 1，面积为 π。估值不等式给出的范围是？ I = ∬_D e^(x²+y²) dσ</div><ol><li data-ok="0"><span class="l">A</span>1 ≤ I ≤ e</li><li data-ok="1"><span class="l">B</span>π ≤ I ≤ eπ</li><li data-ok="0"><span class="l">C</span>0 ≤ I ≤ π</li><button type="button" data-show="显示答案" data-hide="隐藏答案">显示答案</button><div class="ex"><b>正确答案：B.</b> 在 D 上 0 ≤ x² + y² ≤ 1，所以 1 ≤ e^(x²+y²) ≤ e，再乘面积 π。选项 A 忘了乘面积。</div></div><div class="q"><div class="qt">5. 5. 判断：在 D 上有界的函数，在 D 上一定可积。</div><ol><li data-ok="0"><span class="l">A</span>对，由定理21.6。</li><li data-ok="0"><span class="l">B</span>对，由定理21.7。</li><li data-ok="1"><span class="l">C</span>错：在单位正方形的有理点取 1、其余取 0，有界却不可积。</li><button type="button" data-show="显示答案" data-hide="隐藏答案">显示答案</button><div class="ex"><b>正确答案：C.</b> 每个小块里两类点兼有，任意细度下积分和可为 1 也可为 0；它的不连续点占满整个正方形。</div></div><div class="q"><div class="qt">6. 6. f 在区域 D 上连续，D 的面积为 3，∬_D f dσ = 12。下面哪一条一定成立？</div><ol><li data-ok="0"><span class="l">A</span>f 在 D 上处处等于 4。</li><li data-ok="1"><span class="l">B</span>D 中某点 (ξ, η) 处 f(ξ, η) = 4。</li><li data-ok="0"><span class="l">C</span>f 在 D 上处处不超过 4。</li><button type="button" data-show="显示答案" data-hide="隐藏答案">显示答案</button><div class="ex"><b>正确答案：B.</b> 二重积分中值定理：12 = f(ξ, η)·3。若 f 不是常数，A 和 C 都不成立。</div></div></section></div></div><script>document.querySelectorAll("button[data-show]").forEach(function(b){b.onclick=function(){var q=b.parentNode,ex=q.querySelector(".ex");var on=ex.style.display==="block";ex.style.display=on?"none":"block";b.textContent=on?b.dataset.show:b.dataset.hide;q.querySelectorAll("li[data-ok=\"1\"]").forEach(function(li){li.style.outline=on?"":"2px solid #80ED99";});};});</script></body></html>

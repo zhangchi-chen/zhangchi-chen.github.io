@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>20-02 第二型曲线积分：沿路径做的功</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+</style></head><body><div class="topbar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span>20-02</span><a class="mv-quiz" href="../quiz/20-02.html">去自测 →</a></div><main><header><div class="tag">视频配套讲稿（朗读原文） · MATH SELF-CHECK: 32 claims re-derived, 1 fixed.</div><h1>20-02 第二型曲线积分</h1><p class="sub">沿路径做的功</p></header><h2>1 · 动机</h2><p>第二型曲线积分，沿着路径做的功。 上一集给铁丝称重，正走反走结果一样。 今天，一个力推着质点沿这条曲线前进。 想象一位快递员，在校园的小路上送件。 里程表只会往上加，方向它不在乎。 可包裹的收发，非常在乎方向。 那么，功在乎路线吗？在乎方向吗？</p><p>先从一小步说起：一个恒力，一段直线。 这一步的功，就是力和位移的点积。 把这一步拆成两个投影，每条轴上一个。 于是，功拆成了两块，每条轴一块。 关键是带正负号的分量，不是路程。 梯度那一集的投影习惯，又回来了。</p><h2>2 · 定理与定义</h2><div class="card gold stmt">课本中的定义原文<br>细分：在有向曲线上取分点Mᵢ<br>每一小步有带符号的投影Δxᵢ、Δyᵢ<br>在小弧上取点(ξᵢ,ηᵢ)，算P和Q<br>把所有小步的PΔxᵢ+QΔyᵢ加起来<br>如果极限存在，并且与分割和取点无关<br>它就叫第二型曲线积分<br>又称对坐标的曲线积分<br>对比第一型：Δsᵢ是长度，恒正<br>现在反过来走：从B到A<br>每个Δxᵢ、Δyᵢ都变号<br>于是整个积分变号<br>课本对方向性质的原话<br>第一型称重，第二型做功，习惯相反<br>掉头开：里程照加，包裹变号<br>注意：这里的dx带符号，并非长度</div><p>这是课本里的定义原文。 把一条有向曲线，从起点到终点切成小段。 每一小步，有两个带正负号的投影。 在每段小弧上取一点，看那里的力。 把每一小步的功，全部加起来。 如果极限存在，不管怎么分、怎么取点，结果一样， 它就叫第二型曲线积分。 它也叫对坐标的曲线积分。 对比第一型，那里每一段量的是路程，永远为正。</p><p>现在，把同一条曲线反过来走。 每一个投影，正负号全部翻转。 于是，整个积分跟着变号。 课本是这样说的。 第一型称重，第二型做功，同一条曲线，习惯相反。 掉头再开，里程照加，包裹变号。 小心，这里的微小增量带正负号，不是路程。</p><h2>3 · 方法与证明</h2><p>要计算，先用参数描述这条曲线。 第一步，把曲线代进力里。 第二步，增量变成速度乘以时间。 这就得到了课本里的计算公式。 下限对应起点，上限对应终点。 下限可以比上限大，方向就藏在这里。 第一型的积分限总是由小到大，第二型跟着走向。 检验一下：反向走，就是交换上下限，积分随之变号。</p><p>练习一：同一个力，同样两个端点，两条路线。 路线一是直线段，从0走到1。 代进去以后，被积式缩成一个多项式。 沿直线段，功是六分之二十五。 路线二沿抛物线弯过去，用横坐标作参数。 平移一下变量，又化成了一个多项式。 沿抛物线，功是三分之十。 起点终点一样，做的功却不一样。 功什么时候和路线无关，留给后面的一集。</p><p>练习二：换一个被积式，做三次测试。 沿抛物线走，算出来功等于2。 沿直线走，功仍然是2。 再走一圈：向右，向上，再直接回家。 三段分别是零、二、负二，一圈下来是零。 我们试过的每条路线，功全部一样。 两组数据，一个悬念，暂时不下结论。</p><p>回到出发点的曲线，叫封闭曲线。 它的积分，用带小圆圈的积分号来写。 随便选个起点，顺着方向走一圈，分段加起来。 回到练习一，这次绕三角形一圈。 沿底边走，功是二分之三。 沿右边往上，功正好抵消成零。 最后一边是回程，就像退货拿回退款。 它就是原来的直线段反着走，功直接变号。 合计下来，是负的三分之八。 变号性质，省掉了一整条边。</p><p>空间曲线也一样，只是多出高度方向的一项。 现在，算这个力沿一圈螺旋线做的功。 用转过的角度描述螺旋线，转满一圈。 前两项缩成一个常数，一直在往回推。 加上高度这一项，就是沿螺旋线的功。 现在换条路，在同样两端之间直着往上。 只剩高度这一项，结果又不一样。 端点相同，功又一次不同。 用向量形式，课本把它写成一行。 力和每一小步点乘，沿路加起来，这就是功。</p><h2>4 · 展望与衔接</h2><p>用途一：比较两条路线，就是走一个圈。 一条去，一条回，一圈量出不同。 练习一的这一圈，结果是负的六分之五。 用途二：恒力做的功，只看起点和终点。 公式把它化成从起点到终点的一大步。 回头看，上一集给曲线称重，今天让它做功。 两者的分界就是变号，方向记在积分限里。</p><p>往后看，一圈积分竟能看见圈内的区域。 那就是下一章的格林公式。 功与路线无关的场，叫作保守场。 第一型称重，第二型做功，时刻盯住正负号。</p></main></body></html>

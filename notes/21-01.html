@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>21-01 二重积分：定积分搬上平面</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+</style></head><body><div class="topbar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span>21-01</span><a class="mv-quiz" href="../quiz/21-01.html">去自测 →</a></div><main><header><div class="tag">视频配套讲稿（朗读原文） · MATH SELF-CHECK: 35 claims re-derived, 3 fixed.</div><h1>21-01 二重积分</h1><p class="sub">定积分搬上平面</p></header><h2>1 · 动机</h2><p>这一集，定积分要搬到平面上。 千层面的顶面高低不平，这一盘到底有多少？ 底面积乘高？可这里的高度不止一个。 低一维时，我们见过它。</p><p>先切开底边，再用矩形求和，最后取极限。 最大的小段缩到零，极限就是定积分。 今天，同样的步骤搬到一整盘上。</p><p>第一步，用横竖两组直线把底面切成网格。 就像把千层面切成一块块方块。 每个小块有自己的面积，再在里面随便取一个点。 第二步，把弯顶小柱换成平顶小柱。 弯顶小柱的体积，约等于高乘底。 所有小柱加起来，就是积分和。 第三步，把网越织越细，让细度趋于零。 细度看的是最大小块的直径，而不是块数。 只切细条，切再多，直径也缩不了。 积分和的极限，就是体积。</p><h2>2 · 定理与定义</h2><div class="card gold stmt">课本定义3：二重积分<br>D：可求面积的有界闭区域<br>J是一个确定的数：候选答案<br>任给ε&gt;0，总存在δ&gt;0<br>只要分割T的细度‖T‖&lt;δ<br>介点任取：所有积分和<br>积分和与J的距离小于ε<br>这时f在D上可积，J叫二重积分<br>记作∬f(x,y)dσ：两个积分号<br>对照：区间[a,b]变成区域D<br>小段长Δxᵢ变成小块面积Δσᵢ<br>λ→0变成‖T‖→0<br>ε、δ、任取介点：原样照搬<br>唯一的新东西：先要有面积<br>区间自带长度，平面集未必有面积<br>积分和里乘的正是面积Δσᵢ<br>完全落在D内的方块：内面积<br>碰到D的方块全算上：外面积<br>网格加密：内面积不减，外面积不增<br>内外面积相等，D才可求面积<br>等价地说：D的边界是零面积集<br>分段光滑曲线围成的区域可求面积<br>所以本课的区域，完全放心<br>f≥0时：曲顶柱体的体积<br>f≡1时：高为1的平顶柱体<br>体积在数值上就是D的面积<br>面积成了积分的一个特例</div><p>这是课本里的原文定义。 先有一块有界闭区域，面积能求。 J是一个确定的数，是候选答案。 无论带子多窄，总有相应的精细程度。 只要分割比这个程度更细。 介点随便取，每一个积分和。 这些和全落在J的带子里。 这时函数可积，J就是它的积分值。 记号里有两个积分号，平面有两个方向。</p><p>和第九章那一集并排看：区间变成了区域。 线上的小段，变成面上的小块。 两边一样：最大的那块缩到零。 带子、精细程度、介点，原样照搬。 唯一的新东西，是区域必须先有面积。</p><p>区间天生就有大小，平面上的集合却未必有面积。 积分和由面积搭成，面积必须有意义。 铺上方格网，里面的方块合成内面积。 碰到区域的方块全算上，就是外面积。 网越织越细，内面积不会变小，外面积不会变大。 内面积和外面积相等，区域才可求面积。 换句话说，边界那一圈可以压到零面积。 边界由光滑的几段拼成，面积就能求。 所以这门课里的区域，完全放心。</p><p>读法一：函数非负时，它是体积。 读法二：函数恒为一，顶面压平成高度一。 这时体积，在数值上就是底面积。 面积不必另造，只是积分的特例。</p><h2>3 · 方法与证明</h2><p>哪些函数可积？引用两条定理，直接信任。 定理21.6：区域上连续，就一定可积。 定理21.7：有界，不连续点只占零面积，照样可积。 比如抛物线下方取一，上方取二。 它沿着这条线跳，那就用小矩形把线盖住。 小矩形越多，总面积越小，一直压到零。 连续函数的图像，面积只能是零。 有限几条跳跃线，不碍事，照样可积。</p><p>当心：有理点取一，其余点取零。 每块里两类点全有，和可以是一或零。 没有哪个数能同时靠近零和一，所以它不可积。 这正是第九章的狄利克雷函数，升了一维。 它明明有界，可间断点占满了整个正方形，光有界不够。</p><p>这些性质整体搬过来，先看线性。 区域可加：区域切成两块，积分也相加。 被积函数小的那个，积分也不会更大。 绝对值也可积；正负一抵消，结果不会更大。 估值：这块夹在一矮一高两个平顶柱体之间。 为什么能照搬？上和下和原样运转。</p><p>性质七：平均高度的公式，看课本原文。 想象把蓬松的被子拍平，体积不变。 弯顶变成平顶，底不变，体积也不变。 按估值不等式，平顶高度落在最低和最高之间。 函数连续，总有一点恰好取到这个高度。 除以面积，这个值就是区域上的平均高度。</p><h2>4 · 展望与衔接</h2><p>第一个数：直接用定义，算单位正方形上的积分。 函数连续必可积，一族网格就够用。 切成均匀网格，每格取右上角。 每格贡献一个小乘积，整个和折叠成一个完全平方。 网格一再加倍，积分和一步步滑向四分之一。 极限是四分之一，这个积分就等于四分之一。 注意：四分之一，正是一元积分二分之一的平方。 为什么能这样拆？留给第二十一章的下一集。</p><p>第二个数：不求出来，只把它夹住。 菱形的对角线各二十，面积两百。 思路：先看被积函数最低多低、最高多高。 余弦平方只在零到一之间，被积函数被夹在窄窄一条里。 乘上面积，积分被夹在约一点九六和二之间。 窗口只有约百分之二宽，一个原函数也没用到。</p><p>到此只会定义和估计，一般仍算不出。 下一集的累次积分，会把这笔账结清。 往后看：同样三步搬进立体。 课本带星号的一节，推广到任意多维。 以后的测度论，会把零面积集换成零测集。 也就不必先绕道面积了。 分割，近似，取极限：定积分搬上了平面。</p></main></body></html>

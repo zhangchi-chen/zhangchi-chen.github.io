@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>20-01 第一型曲线积分：给曲线称重</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+</style></head><body><div class="topbar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span>20-01</span><a class="mv-quiz" href="../quiz/20-01.html">去自测 →</a></div><main><header><div class="tag">视频配套讲稿（朗读原文） · MATH SELF-CHECK: 37 claims re-derived, 3 fixed.</div><h1>20-01 第一型曲线积分</h1><p class="sub">给曲线称重</p></header><h2>1 · 动机</h2><p>这一集，我们学着给一条曲线称一称。 想象一段项链弧，珠子越往上越沉。 它的线密度，恰好等于它所在的高度。 那么，整段弧的质量是多少呢？</p><p>第一反应：沿着横轴，把密度积起来。 可这只是四分之一圆的面积，约0.785。 可后面细心算出来，答案却正好是1。 毛病在这里：我们量的是影子。 弧越陡，一大段弧留下的影子就越短。 影子少算了长度，答案自然偏轻。</p><p>老老实实，一段一段放上厨房秤。 每一段，质量约等于密度乘以它的弧长。 把每段加起来，再切得越来越细。 定积分那一套，只是区间弯成了曲线。 分割，近似，求和，再取极限。</p><h2>2 · 定理与定义</h2><div class="card gold stmt">教材的定义：第一型曲线积分<br>称为f沿L的第一型曲线积分<br>L是可求长平面曲线：它有长度<br>f是定义在L上的函数<br>分割T把L切成小弧，弧长Δsᵢ<br>每段弧上任取一点(ξᵢ,ηᵢ)<br>求和：Σf(ξᵢ,ηᵢ)Δsᵢ<br>细度‖T‖：最长那段小弧的弧长<br>让细度‖T‖趋于零<br>若极限存在，且与分割和取点无关<br>这个极限就记作∫_L f ds<br>对线密度为f的丝，这就是质量<br>注意：每个Δsᵢ是长度，从不为负<br>倒着走：小弧不变，弧长不变<br>所以和式与极限完全一样<br>第一型曲线积分与方向无关<br>记住这里：第二型会因反向变号</div><p>教材把这件事写成了一条定义。 这个极限，就叫第一型曲线积分。 第一条：曲线必须有长度，可以量出来。 第二条：曲线上要有一个函数。 把曲线切成许多小弧，记下每段弧长。 在每段小弧上，随便挑一个点。 每段按选的点来称，再全部加起来。 细度，看的是最长那一小段弧。 切到最长那段也缩成零。 假如怎么切、怎么挑点，结果全一样。 这个公共的极限，就是沿曲线的积分。 对一根金属丝来说，这个数就是它的质量。</p><p>注意：每一小段只是长度，从来不会是负的。 倒着走一遍，碰到的小弧完全相同。 所以和式没变，极限也没变。 这种积分，压根不认方向。 记住这里：下一集，反着走会让符号翻转。</p><h2>3 · 方法与证明</h2><p>定理20.1把它化成定积分。 曲线光滑、函数连续，这个公式就成立。 根号里那一块，其实是点跑的速度。 速度乘上一小段时间，就是一小段路程。 它就是第十章讲弧长时的弧微分。 所以定理只是换元，再配上弧微分。 关键一步：每段弧长是某刻速度乘时长。 和式变成了普通的积分和，取极限就完成了。</p><p>小心：函数只在曲线上的点取值。 两个坐标，全部换成参数的函数。 回到项链，沿着单位圆走一遍。 在圆上，密度变成正弦，速度恰好是1。 积一个四分之一圈，质量正好是1。 影子的答案偏小，因为它忽略了倾斜。</p><p>曲线是函数图像时，横坐标自己就是参数。 这时一个平方变成1，只剩斜率的平方。 到了空间，第三个坐标再添一个平方。</p><p>第一题：沿着半圆，积距离的平方。 让角度从零转到半圈。 在圆上，距离的平方始终不变。 点的速度，恰好就是半径。 常数乘弧长，答案是派乘 a 的三次方。 先认出常数，硬算就省掉了。</p><p>第二题：一段抛物线，按高度来称。 选哪边手写：横坐标，竖坐标？ 选横坐标，原点处切线竖起来，斜率无界。 选纵坐标，处处光滑，这一边才顺手。 高度乘伸缩，从底下积到顶端。 换一次元，积分就迎刃而解。 大约2.438，参数选对，省下一半力气。</p><p>第三题：平面切过球面，留下一个圆。 要积 x 的平方，可这个圆写成参数很麻烦。 可球面和平面，对三个坐标一视同仁。 转上三分之一圈，坐标轮流换位，圆仍在原地。 所以三个平方的积分，完全相等。 三个加起来，在球面上就是常数。 平面穿过球心，所以这是一个大圆。 每个分到三分之一，也就是三分之二派 a 立方。 先找对称，平均过后再动手积分。</p><h2>4 · 展望与衔接</h2><p>用处一：密度怎么变，金属丝的质量照样能求。 用处二：转动惯量，距离平方乘密度再积分。 均匀的半圆丝，两个转动惯量一加，就是第一题。 离圆心同样远，所以是质量乘半径平方。</p><p>用处三：沿着小路立一道篱笆，高度随函数变。 每块篱笆板，高乘宽，正是那个和式。 项链那段弧上的篱笆，面积正好是1。</p><p>走之前，当心两个陷阱。 陷阱一：下限永远是小的那个数。 上下限写反，质量竟然变成了负数。 长度不会是负的，方向根本存不进上下限。 陷阱二：两个坐标一起代入函数。</p><p>换成给曲面称一称，就是第一型曲面积分。 同样四步，只是小弧换成了小块曲面。 在概率论里，一条曲线也能带上质量分布。 切开，称量，求和，再加细，曲线就称好了。</p></main></body></html>
