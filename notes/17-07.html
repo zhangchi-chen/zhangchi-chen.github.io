@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>17-07 最小二乘法：用直线拟合散点</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+</style></head><body><div class="topbar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span>17-07</span><a class="mv-quiz" href="../quiz/17-07.html">去自测 →</a></div><main><header><div class="tag">视频配套讲稿（朗读原文） · MATH SELF-CHECK: 36 claims re-derived, 0 fixed.</div><h1>17-07 最小二乘法</h1><p class="sub">用直线拟合散点</p></header><h2>1 · 动机</h2><p>这一集：怎样给一堆散点配一条直线 实验本上，六组拉力和长度的读数 几乎是一条直线，可就是对不齐 你拿起尺子，左挪右挪，直到看着顺眼 同组同学画了另一条，看着也挺顺 两条线，两种看法，到底哪条好 光靠眼睛说不清，需要一个能算的数</p><p>量一量每个点到直线的竖直距离 偏差就是直线的高度，减去点的高度 有正有负，直接加起来会互相抵消 每个偏差平方一下，就不会抵消了 从此，最佳就有了意思，总和最小</p><h2>2 · 定理与定义</h2><div class="card gold stmt">给定大致在一条直线上的n个点<br>求直线y=ax+b，使偏差平方和<br>f(a,b)达到最小：最小二乘法<br>未知量不是x和y，而是a和b<br>每组a和b，对应一条候选直线<br>于是f是a、b的二元函数<br>这正是上一集的无条件极值问题<br>为何用平方？绝对值也能防抵消<br>但|t|在零处折角，没有导数<br>t²在零处光滑，导数是2t<br>于是f处处可微，极值工具可用</div><p>教材这样说：给定大致排成一线的若干个点 求一条直线，让偏差的平方和 变得尽可能小，这就是最小二乘法 关键转折：未知的是斜率和截距 选定斜率和截距，就得到一条候选直线 所以这个总和，就是一个二元函数 这正好是上一集练过的无条件极值</p><p>可为什么偏偏用平方？绝对值也不会抵消啊 麻烦来了：绝对值在零点折了个角。 平方却很光滑，处处有切线 于是总和处处可微，上一集的工具全能用</p><h2>3 · 方法与证明</h2><p>思路是：在最低处，两个偏导数必须为零 先只动斜率，就像偏导数练习那样 再只动截距，这回内层导数就是一 两者都在累加偏差，一个多乘横坐标 让两者同时等于零 整理一下，得到线性方程组，叫正规方程组 注意，数据只化成了五个数 三个点也好，三千个点也好，照样是两个方程</p><p>解出来，斜率是一串和的比值 截距也同样解了出来 两个公式同一个分母，危险：它会不会是零 其实它是平方和，每对点贡献一项 所以只要横坐标不全一样，它就是正的 点全挤在一条竖线上，最佳直线就不止一条 否则只有一个解，没有并列</p><p>只有一个候选点，可它真的是谷底吗 二阶偏导数都是常数，处处一样 关键的那个组合，也是正的 按上一集的充分条件，这里是极小值 问题本身一定有最佳直线，所以它就是最小值 上一集的那张表，第一次碰上真实数据 正定，就是一只碗，等高线一圈圈全是椭圆 原来就是那个分母，一举两得</p><p>来点真数字：三个点 先从表里算出五个数 代进去，正规方程组变得很友好 在斜率和截距的平面里，两条线只交一次 两式相减，斜率二分之一，截距六分之七 用公式再算一遍，结果一样 把直线画上去，穿过三个点之间 两小一大，方向相反，刚好平衡 乘上横坐标再加，照样抵消，梯度为零</p><p>把名字当真：每个平方，画成正方形 面积加起来是六分之一，这就是最小值 把直线转开，正方形马上胀大 名字就是字面意思：平方和最小</p><p>附带一个彩蛋：直线正好穿过重心 拿数字验一下，完全吻合 这不是巧合，第二个正规方程说的就是它</p><p>现在抓住第三个点，往上拖 直线跟着转，正方形一路缩小到消失 三个点正好共线，最小值就是零 改了一个读数，五个数里变了两个，直线就跟着变</p><h2>4 · 展望与衔接</h2><p>回到实验本，六组读数有了公认的直线 斜率告诉你，每加一份拉力伸长多少 手机也一样：电量对着看视频的分钟数 斜率就是掉电的速度 只要模型对参数是线性的，这组方程就会回来 平方让总和光滑，剩下的交给上一集的判别法</p><p>顺带一提：它就是统计课里的回归直线 统计软件里的每一个拟合按钮 算的都是这个最小值的放大版 从凭眼睛挪尺子，到一个算得出来的最小值</p></main></body></html>
