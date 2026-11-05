@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>18-04 切平面与法向量：梯度再登场</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+</style></head><body><div class="topbar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span>18-04</span><a class="mv-quiz" href="../quiz/18-04.html">去自测 →</a></div><main><header><div class="tag">视频配套讲稿（朗读原文） · MATH SELF-CHECK: 40 claims re-derived, 1 fixed.</div><h1>18-04 切平面与法向量</h1><p class="sub">梯度再登场</p></header><h2>1 · 动机</h2><p>切平面与法向量，梯度再次登场。 今晚作业：求椭球面在这一点的切平面。 第十七章的公式，只管函数图像那样的面。</p><p>一解出来，就冒出一个可正可负的根号。 留下上半块，咬牙算出两个偏导数。 写满一页草稿，平面终于出来了。 现在把点滑到赤道上，那里高度是零。 高度跑到分母里，导数一下子无界了。 可图上明明有切平面，像一堵竖起来的墙。 我们要的，是直接从方程读出切平面。 答案是第十七章第四集的老朋友，梯度。</p><h2>2 · 定理与定义</h2><div class="card gold stmt">平面曲线在P₀处的切线与法线<br>法向量(F_x,F_y)垂直于切线<br>法线顺着这个向量穿过P₀<br>空间曲线：切线与法平面<br>导数x′,y′,z′是切线的方向数<br>法平面过P₀，与切线垂直<br>曲面在P₀处的切平面与法线<br>法向量是(F_x,F_y,F_z)<br>法线顺着法向量：比例相等就是平行<br>数量积为零是垂直，比例相等是平行</div><p>先看平面曲线：书上给出了切线和法线。 两个偏导拼成法向量，切线与它垂直。 法线沿着这个向量，穿过同一个点。</p><p>再看空间曲线：切线和法平面。 三个导数就是方向数，指向切线的方向。 法平面穿过这一点，与切线成直角。</p><p>然后是曲面：书上给出切平面和法线。 三个偏导拼成法向量，切平面与它垂直。 法线沿着法向量走，比例相等，就是方向一致。 数量积为零就是垂直，比例相等就是平行。</p><h2>3 · 方法与证明</h2><p>为什么是法向量？沿着线走，函数值一直是零。 所以全微分为零，跟十八章第二集一样。 把它看成数量积，梯度就和这条线垂直。 第十七章第四集的梯度回来了，这次是纯几何。 书上的例一：笛卡儿叶形线上的一个点。 在这一点，两个偏导分别是十五和负十二。 代进公式，切线和法线一起出来。 看图：切线贴着圈走，法线垂直穿过去。 可在原点，两个偏导全是零，两支线在此相交。 那里没有唯一的切线，要求梯度不为零。</p><p>先在曲线上连一条割线。 把方向除以t的增量，再让增量趋于零。 一条线配两样：顺着走的切线，横着切的法平面。 这条三次曲线在负一处，方向数是一、负二、三。 切线和法平面马上就能写出来。</p><p>只要对z的偏导非零，曲面在局部就是函数图像。 十八章第二集，直接给出隐函数的两个偏导。 把它们代进第十七章的切平面，再去掉分母。 全部收拢成书上的切平面，法向量现身。 三个变量平起平坐，只要有一个偏导非零就够。</p><p>梯度，恰好是等值面的法向量。 为什么？在面上随便画一条过这点的线。 链式法则一算，梯度与每个切向量垂直。 所以这些切向量躺在同一个平面里。 十七章第四集的账结清了：梯度垂直于等值面。</p><p>书上的例三，正是开头那道作业。 在这一点，梯度是二、四、六。 两步就算完，切平面出来了。 和作业同一个平面，连一个根号也没开。 验一下：这一点确实在平面上。 法线方向是一、二、三，梯度的一半。 那个让根号崩掉的赤道点呢？ 那里梯度是水平的，平面直直立起，什么也没炸开。 可梯度一旦是零，公式就成了一句空话。 锥面的尖就是这样，没有平面贴得住。 函数图像是特例，法向量末位是负一，回到第十七章。</p><p>曲线也可以是两张面的交线。 书上的例二：球面和锥面，在三四五这点相遇。 两张面在这点，各有自己的法向量。 交线在两张面上，切线要同时垂直两个法向量。 两个切平面像走廊两堵墙，墙角那条线就是切线。 垂直两者的方向就是向量积，右手定则定朝向。 书上把三个分量，写成雅可比式。</p><p>这正是十八章第三集的雅可比式，账结清了。 代入这一点，两个梯度就到手了。 三个雅可比式：负一百六，一百二，零。 注意次序要轮换，写反了符号就变。 切线写出来，最后一个分母竟然是零。 分母是零，就是高度一直不动，交线是个水平圆。 法平面化简后，是一张竖直的平面。 它包含竖直的轴，圆的法平面总是这样。 那个零也说得通：高度不变，就带不动另外两个坐标。</p><p>三类对象，收进一张表。 关键方向，全来自导数、梯度或向量积。 陷阱来了：曲线配法平面，曲面配切平面。 像两栋名字反着配的楼，一不小心就走错。 记住：和对象同样维数的那件，才叫切。</p><h2>4 · 展望与衔接</h2><p>这些用在哪？手机里三维游戏的每一帧。 一小块面有多亮，看光线和法向量的夹角。 面由方程给出时，渲染程序把梯度作为法向量。 第二个用处：两张面的夹角，就是法向量的夹角。 两个法向量的数量积，恰好是零。 所以两张面垂直相交，一整圈处处如此。</p><p>第二十章第三集，模为一的切向量连起两类积分。 第二十二章，要给整张曲面挑定法向。 法向沿默比乌斯带走一圈，回来竟然反了。 斯托克斯公式，就要求法向能连续变化。 今天的一切，归结成一句：梯度垂直于等值面。</p></main></body></html>

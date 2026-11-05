@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>18-03 雅可比行列式：坐标变换的汇率</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+</style></head><body><div class="topbar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span>18-03</span><a class="mv-quiz" href="../quiz/18-03.html">去自测 →</a></div><main><header><div class="tag">视频配套讲稿（朗读原文） · MATH SELF-CHECK: 44 claims re-derived, 1 fixed.</div><h1>18-03 雅可比行列式</h1><p class="sub">坐标变换的汇率</p></header><h2>1 · 动机</h2><p>今天讲雅可比行列式，坐标变换的兑换比价。 作业给了两个方程、四个字母。 可是，哪两个字母才是函数呢？ 两个方程能定住两个字母，另外两个自由。 四个字母有六种选法，就像六扇门。 一个行列式，会告诉我们哪扇门能打开。</p><p>回想一个方程的情形：对y的偏导数不为零，就能解。 偏导数为零的地方，图像竖了起来，解不出来。 到了两个方程，谁来接替这个偏导数？</p><p>极坐标往前算容易，到了原点角度定不下来。 换了钱再换回来，钱应该一分不少。 换了坐标再换回来，道理应该一样。</p><p>热身：每个线性方程是一条直线。 两条线交于一点，行列式不等于零。 平行时行列式为零：要么无解，要么解太多。 方程弯了，偏导数就来接替系数。</p><h2>2 · 定理与定义</h2><div class="card gold stmt">教材叫它函数行列式（雅可比行列式）<br>行是方程，列是要解出的字母<br>代入起点P₀，得到一个数<br>J≠0接替定理18.1里的F_y≠0<br>定理18.4：隐函数组定理<br>初始条件：P₀同时满足两个方程<br>一阶偏导数连续：放大看像直线<br>J≠0：这两条近似直线相交<br>于是在近旁确定了隐函数组<br>唯一，但只在近旁：远处另有交点<br>公式(5)：偏导数是两个行列式之商<br>求u_x：把u那一列换成x那一列<br>证明？教材留到第23章，我们也是<br>去掉J≠0，两条线可能只是相切<br>挪一下x：两个解，或者没有解</div><p>教材把它叫作函数行列式，也叫雅可比行列式。 横排是方程，竖列是要解的字母。 代入起点，整个方阵就变成一个数。 雅可比行列式不为零，接过了原来偏导数不为零的任务。</p><p>教材的定理18.4，隐函数组定理。 先看初始条件：起点同时满足两个方程。 偏导数连续，放大以后，两条线看起来像直线。 行列式不为零，近似直线就相交。 起点附近，这就确定了隐函数组。 唯一性只在附近成立，远处另有一个交点。 它们的偏导数，是两个行列式相除。 求这个偏导数，就把一列换成另一列，再加个负号。 证明呢？教材放到第23章，我们也一样。 去掉这个条件，两条线可能只是碰一下。 稍微一挪，解变成两个，或者一个也没有。</p><h2>3 · 方法与证明</h2><p>回到作业，也就是教材的例1。 两个方程全部成立，初始条件满足。 先把八个偏导数算好，排成一张表。 任意挑两列，就得到这扇门的雅可比行列式。 逐个算：七、六、零、五、七、六。 只有一扇门是零，这扇门关上了。 走进一扇门，求出它的两个偏导数。 求导后得到线性方程组，又是热身题。 分母是七，算出七分之五和负七分之六。 这个七并非巧合，正是这扇门的雅可比行列式。 那些商式不用死记：先求导，再解一个小方程组。</p><p>教材的定理18.5，反函数组定理。 坐标变换能往回走吗？ 窍门是移项，把求反函数变成解隐函数组。 两个负号互相抵消，剩下变换本身的行列式。 所以行列式不为零，附近就有反函数组。</p><p>两个行列式互为倒数，乘积是一。 就像换钱：去程乘七，回程乘七分之一，乘积是一。 深层的原因：逆矩阵的行列式互为倒数。 一元前身：反函数的导数是原导数的倒数。 反过来看，乘积等于一，哪个因子也不能是零。</p><p>来看经典例子：极坐标变换的雅可比行列式。 化简以后，就只剩下r。 小格子被拉大，离原点越远拉得越大。 到了原点它变成零：所有角度给出同一点。 回程的行列式是r分之一，两者相乘正好是一。 球坐标给出类似的因子，在竖直的轴上变成零。 小心：除了原点行列式不为零，角度却会绕回来。 绕一整圈回到同一点，在整个平面上找不到反函数。 这个定理是局部的：只保证每一点附近有反函数。</p><h2>4 · 展望与衔接</h2><p>教材例5：换一套斜的坐标，行列式不为零。 换到新坐标，弦振动方程变得极其简单。 解就是两列反向跑的波，靠一次换坐标换来。 这个行列式就像收据：它不为零，就能换回去。</p><p>今天的一切，就是隐函数定理放大了一号。 留一笔账：两张面相交的线，切向由三个行列式给出。 又一笔账：二重积分里，r会说出面积放大多少。 往后，行列式的绝对值成为换元的面积倍数。 同一个兑换比价，以后换算的是面积。 证明和一般形式，等到第23章再讲。</p><p>想解出哪一对字母，就看那一对的行列式。 变换和它的逆变换，行列式相乘等于一。 这一切只在一点附近成立。 雅可比行列式，就是坐标之间的兑换比价。</p></main></body></html>

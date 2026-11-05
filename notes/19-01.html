@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>19-01 含参量积分：参量一动，积分跟着动</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+</style></head><body><div class="topbar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span>19-01</span><a class="mv-quiz" href="../quiz/19-01.html">去自测 →</a></div><main><header><div class="tag">视频配套讲稿（朗读原文） · MATH SELF-CHECK: 50 claims re-derived, 3 fixed.</div><h1>19-01 含参量积分</h1><p class="sub">参量一动，积分跟着动</p></header><h2>1 · 动机</h2><p>积分里，也可以藏着一个会动的量。 作业里，冒出了这样一个积分。 代入两个小整数，图像看上去很温顺。 下面这块面积，显然是有限的。 可每次找原函数，最后总卡住。 先放一边，回头再算。 转折来了：这两个指数可以滑动。 b每停一个位置，就得到一个数。 所以这个积分，其实是一个函数。 函数嘛，就能求极限、求导、再积分。 就是这个想法，会解开那道作业。</p><h2>2 · 定理与定义</h2><div class="card gold stmt">设f(x,y)定义在矩形R上。<br>固定x，f(x,·)是一条曲线。<br>这块面积是一个数，记作φ(x)。<br>x一动，曲线变，面积也变。<br>记下每块面积，φ是x的新函数。<br>每块面积，都是09-01的定积分。<br>这就是含参量积分。<br>x靠近时，面积也靠近吗？<br>定理19.1（连续性）回答：是。<br>条件：f在整个闭矩形上连续。<br>结论：φ在[a,b]上连续。<br>换个读法：极限与积分可交换。<br>这就是积分号下取极限。<br>现在只在一个角上破坏连续。<br>取一个只在原点出问题的f。<br>x→0⁺时，鼓包面积趋于1/2。<br>可每个固定的y处，f都趋于0。<br>先取极限得0，后取极限得1/2。<br>连续性条件，不是摆设。</div><p>先在矩形上，放一个二元函数。 把x按住，f就是一条普通的线。 这块面积是一个数，就叫phi x。 滑动x，图像和面积一起变。 把每块面积记下来，就得到一个新函数。 每块面积，就是第九章第一集的定积分。 这叫做含参量积分。 相邻的两条线，面积也相邻吗？</p><p>连续性定理的回答是：会。 前提是，f在整个闭矩形上连续。 结论是，面积函数不会跳。 换个角度读，极限和积分可以换位。 这一步，叫做积分号下取极限。</p><p>现在只在一个角上，破坏连续。 取一个只在原点出问题的函数。 x越来越小，面积却趋向一半。 可盯住任意一个y，高度最终归零。 换一下次序，零就变成了一半。 连续性这个条件，是真有用的。</p><h2>3 · 方法与证明</h2><p>为什么连续就够？两张图说清。 回忆第十六章第四集：闭矩形上的连续是一致连续。 一个delta，对所有的y同时有效。 两块面积相减，不超过一条细带。</p><p>下一个问题：导数也能钻进积分里吗？ 积分限不动时，先求偏导，再积分。 先求偏导，再去积分。 拉格朗日定理把这个比值，换成附近一点的导数。 偏导数一致连续，极限就能进到积分里。</p><p>现在，让积分的上下限也动起来。 定理十九点四，处理积分限会动的情形。 要求f与偏导连续，端点函数可微。 结论是，导数由三块拼成。</p><p>看两个端点之间的那块面积。 x一动，那条线本身变了，这是第一项。 上限一滑，多出一条窄带，这是第二项。 下限也滑动，那条窄带要减掉，这是第三项。 像打包一个包裹：里面的东西，加上两片盖子。 链式法则一步就给出这三块。</p><p>最常见的失误：只留第一项。 拿一个能手算的例子来试试。 先手算一下，拿到真正的导数。 两端一起右移，上限快一倍。 只留第一项，只拿到真相的三分之一。 加上两片盖子，就和手算对上了。 两头一起动，两片盖子一片也不能少。</p><p>这个例子里，alpha藏在三个地方。 定理保证它可微，所以一定连续。 直接让alpha取零，极限是四分之pi。</p><p>例四：直接找原函数，走不通。 诀窍是：放进一个会动的量，让它滑动。 一头面积是零，我们要的是另一头。 先求导，对数就化成了分式。 用部分分式一拆，导数就干净地出来了。 再把导数从头到尾积回去。 剧情反转：最后一块，正是目标本身。 解出来：八分之pi，再乘以二的自然对数。 放进一个会动的量，求导，再积回去。</p><h2>4 · 展望与衔接</h2><p>第三次交换：两个积分，谁先来？ 定理十九点六：积分顺序可以交换。 两边同为累次积分，只是切的方向不同。</p><p>回到那道放在一边的作业。 关键一步：被积函数本身，就是一个积分。 这道作业，就变成了累次积分。 因为a是正数，闭矩形上处处连续。 交换顺序，内层积分一下就好算了。 答案，是一个干净的对数。 开头那块面积，原来就是这个数。</p><p>三个定理，三次交换。 三次交换，全靠闭矩形上的连续。 矩形一旦伸到无穷远，这就不够了。 那时要靠一致收敛，留给十九章第二集。</p><p>一道眼熟的考题，其实只是特例。 被积函数里没有x，下限不动，只剩一片盖。 后面的伽马函数和贝塔函数，也是含参量积分。 到第二十一章第二集，会再次交换积分顺序。 以后学随机变量，期望和分布函数里也有这种可动的量。 每次滑动那个量再求导，靠的就是今天的定理。 那个量一动，积分就跟着动。</p></main></body></html>

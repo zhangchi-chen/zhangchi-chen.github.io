@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>18-05 拉格朗日乘数法：花得起的最优</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+</style></head><body><div class="topbar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span>18-05</span><a class="mv-quiz" href="../quiz/18-05.html">去自测 →</a></div><main><header><div class="tag">视频配套讲稿（朗读原文） · MATH SELF-CHECK: 30 claims re-derived, 1 fixed.</div><h1>18-05 拉格朗日乘数法</h1><p class="sub">花得起的最优</p></header><h2>1 · 动机</h2><p>拉格朗日乘数法：花得起的最优。 宿舍要做个无盖箱子，容积是定的。 纸板要花钱，用得越少越好。 四面墙加上底面，就是表面积。 容积就是预算，必须正好花完。 预算花满，表面积最省。</p><p>第一反应：先解出高，再代回去。 表面积变成两个自由变量的函数。 能算，可是已经很繁琐。 条件一变，高可能根本解不出来。 我们要一个系统的方法，不必先求解。</p><h2>2 · 定理与定义</h2><div class="card gold stmt">问题：约束条件下求f的极值<br>f是目标函数：要省或要多的量<br>每个φₖ=0是一个约束条件<br>m&lt;n：条件比变量少，仍可选择<br>小故事：8块钱，咖啡1块，饭2块<br>花光预算：x+2y=8<br>满意度f=xy，等值线是双曲线<br>不限预算：无条件极大值不存在<br>限在线上，f才有条件极值<br>不逐点试，怎么找到峰值？</div><p>约束条件成立时，求目标函数的极值。 f是目标函数，就是想省或想多的量。 每个约束条件，是必须守的规矩。 条件比变量少，所以仍有选择余地。</p><p>换个小故事：八块钱，咖啡一块，饭两块。 钱全部花光，就落在预算线上。 满意度是两者的乘积，等值线是双曲线。 不限预算的话，满意度一直变大，没有峰。 限在预算线上，满意度才有条件极值。 不一个个去试，怎么找到峰值？</p><h2>3 · 方法与证明</h2><p>第一步：由隐函数定理，曲线局部是函数图像。 第二步：沿着曲线走，只剩一个变量。 第三步：链式法则，配上隐函数求导公式。 结果：两个梯度在这一点互相平行。 用教材的话说：两条曲线有公共切线。</p><p>看图：预算线，加上一条等值线。 这一条和预算线交在两处。 站在交点沿线走，满意度仍能变大。 只要相交，就仍有买得起的改进。 把等值线往上推，相交，仍然相交。 直到恰好相切：四杯咖啡，两顿饭。 再往上推，曲线就碰不到预算线了。 最优点，就在两曲线相切处。 相切的曲线法向相同，两个梯度就平行。 这里一个梯度正好是另一个的两倍。 梯度那一集的结论在起作用：梯度垂直于等值线。</p><p>平行，就是有个数lambda把两个梯度配平。 两个分量，加上约束条件，一共三个方程。 它们正好是某一个函数的稳定点。 教材叫它拉格朗日函数。 对lambda求偏导，约束条件就回来了。</p><p>回到箱子：四个偏导数一律为零。 关键一步：各乘一个变量。 两两相减，答案就出来了。 底是正方形，高只有底边的一半。 最少的纸板量，就这样算出来了。 容积取4：二乘二乘一的箱子，面积十二。</p><p>lambda呢？它不是废料。 问一句：要是预算多一点呢？ 增速等于负的lambda。 容积是4时，多一份容积，大约多花两份纸板。 生活费多一块，满意度大约多两分。 lambda是约束条件的价格。</p><p>条件多了，每个配一个乘数。 定理18.6说：秩的条件满足，乘数就存在。 秩为m，就是约束梯度彼此线性无关。</p><p>平面切开抛物面，切口是椭圆。 椭圆上哪一点离原点最近，哪一点最远？ 用距离的平方，两个条件各配一个乘数。</p><p>把两个坐标交换，图形完全不变。 相减就能确认，另一支会让高度变负。 只剩下两个点。</p><p>它们正好是椭圆最低和最高的两点。 距离大约是0.58和4.2。 列对函数是关键，后面按部就班。</p><p>老实问一句：解出稳定点，就是最大值吗？ 反例：沿着这条立方曲线，稳定点不是极值。 方法只给候选，由具体问题说了算。 太扁太瘦全费纸板，唯一的候选就是最小。 椭圆有界又封闭，最大最小必定存在。</p><p>丢掉秩的条件，方法可能漏掉答案。 尖点处x最小，方程组却没有解。 原因：那里约束梯度为零。</p><h2>4 · 展望与衔接</h2><p>附带收获：这方法也能造不等式。 不管箱子多大多小，它总成立。 试单位立方体：五，大于约四点七六。 最优形状上，等号恰好成立。</p><p>无条件极值那一集欠了账：边界怎么办？ 内部让梯度为零，边界上就是条件极值。 这里边界胜出：最大是一，最小是负一。 边界上的最值，正是边界曲线上的条件极值。</p><p>经济学叫它影子价格。 约束换成不等式，就推广成KKT条件。 机器学习和运筹学，动辄要解上百万个。 花得起的最优，就在恰好相切的那一点。</p></main></body></html>

@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>18-02 隐函数求导：不必先解方程</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+</style></head><body><div class="topbar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span>18-02</span><a class="mv-quiz" href="../quiz/18-02.html">去自测 →</a></div><main><header><div class="tag">视频配套讲稿（朗读原文） · MATH SELF-CHECK: 43 claims re-derived, 5 fixed.</div><h1>18-02 隐函数求导</h1><p class="sub">不必先解方程</p></header><h2>1 · 动机</h2><p>今天，不解方程也能求导数。 作业给了这条线：笛卡儿叶形线。 题目问：这个圈的最高点在哪里？</p><p>第一反应：先把y解出来，再求导。 可它是关于y的三次方程。 一条竖线竟然和它相交三次。 求根公式会把答案埋进层层根号里。 更糟的是，在圈上，根号下面是负数。</p><p>可你看，切线一直在转，坡度明明就在。 最高点也明明就在那里。 那么，光凭方程就该能求出导数。 上一集说：对y偏导非零处，隐函数存在。 可它没说怎么求导，今天就来补上。</p><h2>2 · 定理与定义</h2><div class="card gold stmt">关键：方程里的y其实是x的函数<br>沿着曲线走，F始终等于0<br>恒为零的函数，导数也是零<br>用17-03的链式法则求导<br>画树：F依赖x与y，y又依赖x<br>第一条路直通x，贡献F_x<br>第二条路经过y，贡献F_y·y′<br>两路相加：F_x+F_y·y′=0<br>F_y≠0时：y′=−F_x/F_y<br>教材把它写成定理18.2的核心<br>方法就是：对复合函数用链式法则<br>注意：式子里的y身兼两职<br>就像y有两件社团外套，轮流穿<br>外套一：在F_x、F_y里y被冻住<br>固定y横着走，就离开了曲线<br>外套二：在y′里，y随x移动<br>叶形线上并排对比：冻住与移动<br>冻住时，−3axy只是去掉x<br>移动时，乘积法则启动，冒出y′<br>这一讲的错误，都始于穿错外套<br>整理右栏：正是F_x+F_y·y′<br>叶形线上导数到手，一步没解<br>在对称轴上那点，斜率为−1<br>正合关于y=x的对称性<br>再问公式：它在哪里失效？<br>分母为零：y²=ax，且在曲线上<br>恰好两点：原点O与点B<br>在B点切线竖直，环在此折返<br>在O点曲线自交，分子分母都为零<br>正是18-01中F_y=0的点<br>公式的分母里，藏着定理的边界</div><p>关键一步：y其实是一个函数。 沿着这条线走，左边始终是零。 一直不变的量，变化的快慢就是零。</p><p>用第十七章第三集的链式法则。 画出变量树：隐函数挂在下面一层。 直达的那条路，给出对x的偏导数。 绕经隐函数的那条路，也贡献一份。 两份加起来，总和必须是零。 能除的地方一除，导数就出来了。 教材这样写，这是定理的计算核心。 方法就这么一句：对复合函数用链式法则。</p><p>注意，这个y同时做着两份工作。 想象它有两件社团外套，轮流披上。 第一件：在偏导数里，它是被冻住的坐标。 把它固定，就只能横着走，离开那条线。 第二件：在导数里，它跟着自变量一起动。</p><p>在叶形线上，把两份工作并排摆开。 冻住的时候，那个乘积只是少了一个因子。 动起来，乘积法则就启动，导数冒了出来。 这里的每个错误，起点是披错了外套。 把移动那一栏整理好，正是那个公式。</p><p>在叶形线上，导数到手，方程一步没解。 在对称轴上那一点试试，坡度是负一。 这正是镜像对称所要求的。</p><p>再追问一句：公式在哪里失效？ 分母变成零，同时点又在这条线上。 恰好两个点：原点，和环上的点B。 在B点，切线笔直竖起，环在这里掉头。 在原点，它和自己相交，分子分母同时为零。 正是上一集的问题点：这里不再是函数图像。 定理的边界，就躲在公式的分母里。</p><h2>3 · 方法与证明</h2><p>下面求二阶导数，这里有条诱人的捷径。 拿圆来试，一阶导数很好求。 捷径是：把y冻住，直接对分式求导。 用显式解一验算，数字对不上。 交作业前抓住了：它明明在动，却被冻住了。</p><p>稳妥的做法：把恒等式再求一次导。 每个偏导数，同样各有两条路。 第一站：二阶导数只出现一次。 再把一阶导数代进去，通分整理。 教材把这个结果记作公式七。 回到圆上，公式和显式解对上了。 对分式求导也可以，只要别把它冻住。 恒等式那条路自动让它动着，所以稳妥。</p><p>另一条路，来自第五章第八集：两边取微分。 一阶微分形式不变性说：这样写照样成立。 让它等于零，读出比值，答案完全相同。 在叶形线上一步算完，坡度一样。 注意，从头到尾，没人指定谁是自变量。 在B点反过来读，答案是零。 第十八章第三集里，它推广到方程组。</p><h2>4 · 展望与衔接</h2><p>回到那道作业题：圈的最高点。 教材给了一个求隐函数极值的方法。 第一步：稳定点在线上，而且对x的偏导数为零。 这里，偏导数为零的地方是一条抛物线。 代进去，得到点A，坐标带着立方根。 原点也满足，但要排除：公式在那里失效。 第二步：在这种点，那个大公式缩成一个分式。 在这一点，二阶导数等于负的a分之二。 是负的，所以是极大值，正是圈的顶点。 从头到尾，那个隐函数一次也没写出来。</p><p>再看上一集那个代数解不开的方程。 这里导数是个简洁的分式，至少是三分之二。 所以这个隐函数一路上升，直接从方程读出来。</p><p>引擎是第十七章第三集的链式法则，那笔债付清了。 第十八章第四集的切线方程，要用的正是这些偏导数。 第十八章第五集推导拉格朗日乘数法，也要用它。</p><p>经济学里，均衡往往只是一个方程：供求相等。 对它做隐函数求导，边际效应直接读出，不用求解。 这就是今天那一步的进阶版。</p></main></body></html>
