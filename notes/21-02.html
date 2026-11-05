@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>21-02 交换积分次序：先画区域，再算积分</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+</style></head><body><div class="topbar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span>21-02</span><a class="mv-quiz" href="../quiz/21-02.html">去自测 →</a></div><main><header><div class="tag">视频配套讲稿（朗读原文） · MATH SELF-CHECK: 37 claims re-derived, 1 fixed.</div><h1>21-02 交换积分次序</h1><p class="sub">先画区域，再算积分</p></header><h2>1 · 动机</h2><p>交换积分次序。先画区域，再算积分。 上一集我们定义了它，却一个也没算出来。 今晚的作业，是三角形上的这个积分。</p><p>一位同学先对y积分，放在里面。 里层需要那个指数函数的原函数。 教材说，它写不成初等函数。 进不去了，像一扇从这边推不开的门。</p><p>另一边，两个室友在清点同一个快递架。 一个人一层一层地加。 另一个人一列一列地加。 两人得到的总数，是同一个二十六公斤。 可架子一乱，难易就分开了。 这个积分就是那个架子，只是层数无穷多。 今天的问题：怎么切，上下限怎么写。</p><h2>2 · 定理与定义</h2><div class="card gold stmt">先从矩形开始：矩形做底，顶是曲面<br>固定一个 x，用竖直平面切开<br>截面面积 S(x)，就是里层积分<br>x 从 0 滑到 2，截面扫过立体<br>外层积分把截面加起来<br>截面积 S(x)=11/6−x²/4<br>从 0 加到 2：体积恰好是 3<br>这是 10-01 的切片求和，分两步<br>换个方向，固定 y 切：仍是 3<br>按层或按列：同一个架子，同一个总数<br>教材把它写成定理 21.8<br>条件一：f 在矩形上可积<br>条件二：每个 x 处，竖切积分存在<br>于是累次积分存在，并且等于二重积分<br>教材注：f 连续，两个累次积分相等<br>离开矩形：底面边界弯了<br>每条竖线与边界至多交两次<br>这是 x 型区域：下 y₁ 上 y₂<br>里层上下限随 x 动：变限积分<br>定理 21.10 及其 y 型版本<br>y 型区域：左 x₁，右 x₂<br>同一块区域，两种写法<br>竖切：0≤x≤1，x²≤y≤x<br>横切：0≤y≤1，y≤x≤√y<br>点(0.5,0.4)两种写法都满足<br>同一个集合，两套上下限</div><p>先从矩形开始：矩形的底，拱起的顶。 把x固定住，用一个竖直平面切下去。 截面的面积，正是里层那个积分。 让x滑过去，截面就扫出整个立体。 外层的积分，把截面加起来。 对这个顶面，x越大，截面越小。 全部加起来，体积恰好是三。 这就是第十章第一集的切片求和，分两步。 换个方向，固定y再切，仍然得三。 按层也好，按列也好，总数一样。</p><p>教材把它写成了定理二十一点八。 第一个条件：矩形上的积分存在。 第二：每一条竖线上，积分存在。 于是累次积分也存在，而且等于它。 教材补了一句：函数连续，两个次序给出同一个值。</p><p>离开矩形，底面的边界弯了。 每一条竖线，最多和边界碰两次。 这就是x型区域，下面一条边，上面一条边。 里层的上下限跟着x走，正是第九章的变限积分。 定理二十一点十说的就是它，外加y型的版本。</p><p>横过来看，y型区域有左边界和右边界。 一块区域，可以写成两个样子。 竖着切：从抛物线往上，到直线为止。 横着切：从直线出发，到抛物线为止。 拿一个点来试：两个写法一起通过。 同一个点集，两套界，草图为证。</p><h2>3 · 方法与证明</h2><p>本章最容易翻车的一步：交换次序。 典型的错误，是不画图就直接换上下限。 解决办法，是固定的四步。 读旧的界，画区域，换个方向切，写新的界。</p><p>举个例子：把这个积分换个次序。 第一步，读：y从抛物线出发，爬到一。 第二步，画图：抛物线上方，顶线下方。 第三步，换个方向，横着切一刀。 横线从y轴进来，从抛物线出去。 第四步，写下新的界，交换完成。</p><p>再看那个诱人的错误答案。 把它真正描述的区域画出来。 那是抛物线下面，完全是另一块。 被积函数取一，面积一个是三分之二，一个是三分之一。 不要光凭代数换，交给草图来决定。</p><p>回到今晚那道作业。 三条边：y轴、顶上的横线和对角线。 第一个次序：竖着切，从对角线到顶。 里层的积分，又撞上了那堵墙。 第二个次序：横着切，从y轴到对角线。 这时，那个麻烦的因子只是个常数。 里层的积分，一下子就算出来了。 推不开的那扇门，从另一边一推就开。 换个元，答案大约是零点零四四。 教训是：先选好次序再动笔，别等淹没了再回头。 那堵墙本身，第二十一章第八集会升一维去量它。</p><p>第二个例子，区域开始反抗了。 求这三条线围出来的三角形面积。 三个顶点：原点，加上两个对称的点。 竖着切，顶边在拐角处换了公式，要分两块。 每块四分之三，合起来是一点五。 横着切，右边的墙又拐了弯，仍是两块。 也难怪：这个三角形沿对角线是对称的。 用三角形面积公式验算，结果一致。 教训：边界一换公式就要拆开，先数拐角。</p><p>两秒钟扫一眼：外层的界，必须是常数。 带变量的界，只能放在里层。 外层的界带着变量，一眼就知道错了。</p><h2>4 · 展望与衔接</h2><p>哪里每天在用它？统计学。 一乘一的正方形上，有一个联合密度。 沿每条竖线积分，就得到X的边缘密度。 换个次序，同一个定理给出Y的边缘密度。 两个边缘密度，各自加起来仍是一。</p><p>第二个用处，八百米测试：速度由加速度累积出来。 路程又由速度累积：两层积分。 在那个三角形上交换次序，只剩一层。 起跑时的一下加速，一直管用到终点。</p><p>说句实话，定理的条件，一个也省不得。 教材的习题里，二重积分存在，两个累次积分却不存在。 反过来的也有：累次积分存在，二重积分却不存在。 所以换次序之前，先看条件，函数连续最省心。</p><p>以后会见到一般的富比尼定理，结论不变，外衣更宽松。 随机变量的课上，边缘密度天天见。 所以，先画区域，再算积分。</p></main></body></html>

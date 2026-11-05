@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>21-03 极坐标与变量变换：面积元素的伸缩率</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+</style></head><body><div class="topbar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span>21-03</span><a class="mv-quiz" href="../quiz/21-03.html">去自测 →</a></div><main><header><div class="tag">视频配套讲稿（朗读原文） · MATH SELF-CHECK: 36 claims re-derived, 2 fixed.</div><h1>21-03 极坐标与变量变换</h1><p class="sub">面积元素的伸缩率</p></header><h2>1 · 动机</h2><p>极坐标和变量变换 任务是在圆盘上积分一个圆形的小山包 用直角坐标写，上下限全是根号 内层的原函数，写不成初等函数 又撞上那堵墙，换个次序也没用</p><p>用距离和角度来描述，圆盘就很简单 换成距离和角度，圆盘就是一个矩形 被积函数也只关心到原点的距离 真正的问题是，那块小面积变成什么 把两套坐标想成两种货币 兑换的比价，跟你站在哪里有关 我们要挣它两次，画一次，算一次</p><h2>2 · 定理与定义</h2><div class="card gold stmt">课本里的极坐标变换：<br>先转到角θ，再沿射线走出r<br>r从0向外，θ转满一圈<br>固定r得圆，固定θ得射线<br>课本已经报出答案：J=r<br>定理21.14把它用起来：<br>第一步：区域D重画成rθ平面的Δ<br>第二步：被积函数代入新坐标<br>第三步，最容易忘的：乘上r<br>三件事：画区域、换函数、补上r</div><p>课本给出的极坐标变换 先转到那个角度，再往外走那段距离 距离从零出发，角度转满一圈 距离固定是圆，角度固定是射线 课本早已说了，答案就是距离本身</p><p>定理二十一点十四把它用了起来 第一步，把区域搬到距离和角度的平面上 第二步，把被积函数换成新坐标 第三步最容易忘，再乘上一个距离 三件事，画区域，换函数，补上那个因子</p><h2>3 · 方法与证明</h2><p>用一圈圈的圆和一条条射线切开平面 挑出一格，夹在相邻两个圆和两条射线之间 像放大照片一样，放到弯边看着变直</p><p>两条直边，就是距离的一小步 两条弧边，是那个小角在圆上切出的弧 弧是半径乘角，距离溜了进来 所以这一格几乎是矩形，一边被距离放大 面积元素就是距离乘两个小步 丢掉的只是一条细边，比这一格消失得更快</p><p>两个小步保持原样，把这格往外推 直边保持原样，弧边越拉越开 弧随距离按比例变大，这就是那个因子 越往外走，同样的小步换来的面积越大 这就是兑换比价，离得越远越贵</p><p>现在用纯代数再算一次 把四个偏导数，两两排成一个方块 展开后平方和是一，结果正好是距离 代数和图形给出同一个因子</p><p>看映射本身，先看左边的小矩形 变成弯弯的小扇块，面积乘上那个因子 比价随位置变化，越靠近原点，格子越小</p><p>用这个定理，第一步是从草图读出上下限 原点在外面，每条射线先进入区域再离开 原点在里面，每条射线从原点走到边界 原点在边界上，角度转不满一圈</p><p>回到开头的圆盘，原点在内，上下限简单 多出来的因子，恰好让原函数变成初等的 再乘上一整圈，答案就出来了 记住这个数，本章第八集会来收获它</p><p>什么时候该换极坐标，看两个信号 信号一，区域是圆的，圆盘、圆环或扇形 信号二，被积函数只关心到原点的距离 两个一起出现，那就是送分题</p><p>极坐标只是众多变换之一，下面是一般定理 条件一，一一映射，两个点不会撞到一起 条件二，一阶偏导数连续 条件三，函数行列式处处非零，格子不被压扁 于是它的绝对值，就是当地面积的兑换比价 第十八章把它比作兑换比价，今天它真来干活 一个变量时，就是第九章的换元法</p><p>新例子，别扭的指数，小小的三角形 指数在暗示，把两者相减和相加当作新变量 反解出原变量，算出来正好是二分之一 三条边一一对应，变成新平面上的三角形 先横着积分，每一条结果干净 做完最后一步，答案约等于零点五九 快速核对，函数被夹在两个数之间，答案合理</p><p>说句实话，极坐标变换违反了条件一 矩形左边整整一条边，全被压成了原点 而且那里因子为零，条件三也不成立 补救，剪掉宽epsilon的细条，再让它趋于零 两边在极限下收敛，靠的是极限，不是糊弄</p><p>最后说那个经典bug，漏掉因子 拿一个圆盘来测，被积函数取一 漏掉因子，得到的竟然是周长，不是面积 补上因子，结果就是熟悉的圆面积公式 看量纲也能识破，面积要的是平方 这就是第十章的老习惯，先拿熟悉的公式核对</p><h2>4 · 展望与衔接</h2><p>用处一，用广义极坐标算椭圆的面积 因子带上两个半轴，面积随之算出 用处二，各个方向看起来一样的密度</p><p>下一集加上高度，就有柱坐标和球坐标 统计里给密度换变量，付同样的兑换比价 一句话，小块面积会伸缩，那个因子告诉你多少 极坐标里，这个倍数就是距离，别丢掉</p></main></body></html>
