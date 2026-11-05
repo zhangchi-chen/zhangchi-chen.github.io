@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>21-06 积分与路径无关：只看起点终点</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+</style></head><body><div class="topbar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span>21-06</span><a class="mv-quiz" href="../quiz/21-06.html">去自测 →</a></div><main><header><div class="tag">视频配套讲稿（朗读原文） · MATH SELF-CHECK: 40 claims re-derived, 1 fixed.</div><h1>21-06 积分与路径无关</h1><p class="sub">只看起点终点</p></header><h2>1 · 动机</h2><p>今天讲一种不挑路的力：怎么走，做功一样。 两个点之间，有三条走法。 真正的问题是：换一条路，答案会变吗？</p><p>先看第一个力，正是二十章第二集里的做功积分。 走直线，得六分之二十五。 走抛物线，得三分之十。 起点终点一样，却已经有两个答案。 走折线，得二分之三。 三条路，算出三个答案。</p><p>换第二个力，走同样三条路。 每条路，全是5。 为什么一个在乎路，另一个毫不在乎？</p><p>算积分之前，先比一比两个偏导数。 第一个力，两个偏导数对不上。 第二个力，两个偏导数相等。 一个积分没算，这个检验已经说出了结局。 今天看它为什么灵，又在哪里悄悄失灵。</p><h2>2 · 定理与定义</h2><div class="card gold stmt">定理21.12：单连通时四条件等价<br>单连通：封闭曲线可在D内缩成一点<br>(i)：沿任一封闭曲线，积分为0<br>(ii)：积分只与起点终点有关<br>(iii)：Pdx+Qdy是全微分<br>(iv)：处处∂P/∂y=∂Q/∂x<br>前三条看全局，(iv)只看单点<br>等价：任一条成立，其余三条也成立<br>证明：沿这四个箭头走一圈<br>第一个过不了(iv)，(ii)也失效<br>第二个通过(iv)：只看端点，得5</div><p>定理说：区域没有洞时，四个条件等价。 说白了，区域没有洞，任何闭路能缩成一点。 条件一：区域里任何闭路，积分全是零。 条件二：只看起点和终点，跟路线无关。 条件三：这个表达式，是某个函数的全微分。 条件四：两个交叉偏导数，在每一点相等。 前三条关乎整个区域，第四条只逐点查看。</p><p>等价的意思是：拿到任何一条，四条全拿到。 证明就是沿四个箭头，走上一圈。 第一个力过不了第四条，所以路线有影响。 第二个力过关了，所以只看两个端点。</p><h2>3 · 方法与证明</h2><p>第一个箭头：闭路全是零，路线就能互换。 从起点到终点，随便取两条路线。 沿一条去，沿另一条回来，就是一个闭路。 根据条件一，这个闭路的积分是零。 所以两条路线结果相同，条件二成立。</p><p>第二个箭头：从路线无关，造出一个函数。 取定起点，积到任意一点，得到u。 每条路线结果一样，所以每一点只有一个值。 现在，向右迈一小步。 经过原来那点再走，变化只来自这一小步。 取附近某一点的P，乘上这一步，就恰好等于它。 步子缩到零，靠连续性，偏导数正好是P。 向上迈一步，同样得出另一个偏导数。 偏导数连续，于是有全微分，回到十七章第一集。</p><p>第三个箭头：从函数回到那个检验。 这两个偏导数，就是u的两个混合偏导数。 混合偏导数连续，先后可以交换。 所以检验处处成立，就是条件四。</p><p>最后一个箭头，回到闭路积分为零。 取一个闭路，因为没有洞，围住的全在区域里。 用二十一章第五集的格林公式，换成区域上的积分。 根据条件四，被积函数处处为零，闭路积分也是零。 一圈走完，四个条件同进同退。</p><p>这样的函数，叫势函数，也叫原函数。 随便走哪条路，只用终点值减起点值。 这就是第九章第三集牛顿莱布尼茨公式的结局，升了一维。</p><p>课本里的例子：这个微分形式，有没有势函数？ 先做检验：两个偏导数一样，通过。 这是一个候选的势函数。 验证两个偏导数，正好得到原来两项。 不管路多弯，从原点出发，答案就是2。</p><p>可这个函数从哪儿来？自己动手造。 像穿过校园：先沿着大街，再拐进一条走廊。 先积横的一段，再积竖的一段，加起来。 横的一段和竖的一段，各给出一部分。 两段加起来，正好是那个候选函数。 注意：折线不能跑出区域，这里整个平面可用。</p><p>关键在这里：区域里不能有洞。 看这个力，原点处没有定义。 它在每个有定义的点，检验全部通过。 绕圆一圈却得二派，二十一章第五集算过。 检验通过，闭路却不为零：洞把链条剪断了。 条件二也失效：两个半圆，结果相反。 圆里围住了原点，格林公式用不上。 不绕着原点的闭路，积分照样是零。 检验只看每一点；链条成立，靠的是没有洞。</p><h2>4 · 展望与衔接</h2><p>物理上，有势函数的力，叫保守场。 做功只看两端的势函数值。 势能取它的相反数，所以做功等于势能的减少。 地球引力就是典型例子。 引力只看下降多少，不看路径。 就像跑步软件，只告诉你起点到终点净爬升多少。</p><p>回到开头：势函数就是乘积，所以每条路得5。 碰上难算的积分？先做检验。 通过了，就找势函数，代入两个端点。 不通过，就挑一条好走的路，或者交给格林公式。</p><p>在空间里，四个条件同样等价，二十二章第四集会讲。 在那里，一个等式变成三个等式。 全微分方程和热力学里的势，用的是同一个想法。 先检验，再留意有没有洞，走哪条路就无所谓了。</p></main></body></html>

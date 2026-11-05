@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>21-05 格林公式：绕边界一圈，看清整个内部</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+</style></head><body><div class="topbar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span>21-05</span><a class="mv-quiz" href="../quiz/21-05.html">去自测 →</a></div><main><header><div class="tag">视频配套讲稿（朗读原文） · MATH SELF-CHECK: 26 claims re-derived, 1 fixed.</div><h1>21-05 格林公式</h1><p class="sub">绕边界一圈，看清整个内部</p></header><h2>1 · 动机</h2><p>格林公式：沿着边界走一圈，就能看清整个内部。 第10章第3集有个绕圈求面积的公式。 可当时的证明，只管上下两段图像拼成的闭路。 换成豆子形状，一条竖线会碰到它四次。 所以那一集留下一个承诺，以后补全证明。</p><p>你只走在边上，怎么会知道里面的事？ 想象你绕着校园里的湖走上一圈。 一路走下来，湖水始终在你的左手边。 湖面上吹着风，每走一步，风推你一下。 只算顺着你前进方向的那部分推力，一路累加。 今天的惊喜：这一圈的总数，正好等于全湖的总数。 第10章留下的那个承诺，今天兑现。</p><h2>2 · 定理与定义</h2><div class="card gold stmt">正方向：沿边界走时，D总在左侧<br>反过来走是负方向，记作−L<br>外边界上，正方向就是逆时针<br>绕着洞走，D在左边就得顺时针<br>设P、Q在闭区域D上有连续一阶偏导数<br>左边算在内部，右边算在边界上<br>L可以逐段光滑：有限条分段光滑即可<br>记忆形式：二阶行列式，交叉相乘再相减<br>取一个具体的风：P=−y³，Q=x³<br>被积式算出来是3x²+3y²<br>按它给湖面上色：转得越猛越亮<br>把整片湖的颜料加起来：二重积分<br>颜料总量是15π/2，约23.56<br>再沿正方向走一圈，累加推力<br>这一圈的总和也是15π/2，分毫不差<br>一句话：边界读出了整个内部</div><p>边界的正方向：沿着边界走，区域始终在左手边。 反过来走，就是负方向，记作负L。 在外边界上，这条规则就是逆时针。 绕洞走时，让区域在左手边，只能顺时针。</p><p>前提是：两个函数在闭区域上，有连续的一阶偏导数。 左边住在区域内部，右边住在边界上。 边界可以有拐角，几段光滑的线拼起来也可以。 好记的写法：上排求导，下排两个函数，交叉相乘再相减。</p><p>取一阵具体的风，绕着椭圆形的湖打转。 里面的被积函数，衡量风在每一点转得多猛。 按这个量给湖面涂色，风转得越猛，颜色越亮。 现在把湖面上的颜料，一列一列加起来。 总共是二分之十五倍圆周率，约等于23.56。 现在不看里面，走一圈，累加沿途的推力。 一圈走完，得到的数字一模一样。 记住这一句：边界读出了整个内部。</p><h2>3 · 方法与证明</h2><p>为什么成立？先看横竖切开形状简单的区域。 把公式拆成两半，先证只含Q的那一半。 先横着积分，一次只看一条横带。 沿着横带，求导被积分抵消，只剩右端减左端。 这就是第9章的牛顿莱布尼茨公式，升高了一维。 按正方向绕一圈：右边往上走，左边往下走。 所以绕一圈时，右端记正，左端记负。 两边是同样两项，第一半成立。 换成竖着切，含P的那一半同样成立。 负号哪来的？上边按正方向走，是从右往左。 两半一加，格林公式就出来了。</p><p>区域复杂一点，就先切成这种好算的小块。 每一块绕着自己的边界，格林公式成立。 这条辅助线被走了两次，像两个同学在走廊里迎面走过。 脚步互相抵消，只剩外面这一圈。 最一般的情形需要更多工具，教材也这么说。</p><p>湖里有了小岛，水面就有了一个洞。 从岸边到小岛加一条辅助线，洞就被打开了。 让水一直在左边：外岸逆时针，岛岸顺时针。 辅助线又抵消了，总数是外圈减去内圈。</p><p>教材里有个经典例子：绕着原点打转的风。 离开原点，两个交叉偏导处处相等。 所以只要闭路不把原点围进去，积分就是零。 可在绕原点的圆上，被积式只剩下角度本身。 走一圈得到二倍圆周率，不是零。洞在说话。 直接套用格林公式会得零，这是陷阱。 原点处两个函数根本没定义，前提就不成立。 挖掉小圆，正方向绕原点的简单闭路，一律得二倍圆周率。</p><p>现在取最简单的一种旋转。 被积式处处等于二，颜料涂得均匀极了。 每块面积涂二，绕一圈就读出两倍面积。 在第10章，它只对上下两段图像拼成的闭路证过。 有了格林公式，带拐角带凹口的区域边界，它也成立。 第10章的承诺，兑现了。</p><h2>4 · 展望与衔接</h2><p>第一个任务：一条斜放的抛物线和横轴围成的面积。 沿着横轴那一段，什么也没发生，贡献是零。 沿弧从右走回左，被积式化成一个根号项。 取一半，面积等于六分之a的平方。 老办法核对，同样是六分之a的平方。</p><p>第二个任务：沿四分之一圆弧的积分，不走它也能算。 沿两条坐标轴把它补成一圈，这两段贡献为零。 可这一圈是顺时针，区域在右手边，是负方向。 所以答案是负的四分之一圆面积，负号来自走向。 一个定理两种用法：边界算面积，面积算边界。</p><p>在地图上圈一块地，只凭拐角就能算面积。 每条边贡献一个交叉乘积，加起来取一半，就是鞋带公式。 求积仪用齿轮做同一件事：描一圈边界，读出面积。</p><p>右边是第20章的第二型曲线积分，有了捷径。 下一集追问：什么时候，任何一圈积分为零？ 以后高斯公式把它搬到立体上，斯托克斯公式聚齐一家。 在流动的水里，这个被积式就是涡量，水转得多猛。 沿边界走一圈，整个内部就尽收眼底。</p></main></body></html>

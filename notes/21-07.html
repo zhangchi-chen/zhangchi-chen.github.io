@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>21-07 重积分的应用:重心与转动惯量</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+</style></head><body><div class="topbar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span>21-07</span><a class="mv-quiz" href="../quiz/21-07.html">去自测 →</a></div><main><header><div class="tag">视频配套讲稿（朗读原文） · MATH SELF-CHECK: 41 claims re-derived, 1 fixed.</div><h1>21-07 重积分的应用:重心与转动惯量</h1><p class="sub">Applications of multiple integrals: centroids and moments of inertia</p></header><h2>1 · 动机</h2><p>今天两个问题:物体在哪平衡,转起来多费劲。 一个午餐托盘,左边轻,右边沉。 一根手指放在哪,托盘才不会歪? 位置求平均,越沉的菜越算数。 平衡点往沉碗那边挪了一格。 汤一洒,质量就摊满了整个托盘。 没有一盘盘可加,求和只能变成积分。</p><p>第二个问题:滑冰选手张开双臂在旋转。 她把手臂收回来,一下子转得更快。 一点没变轻,只是每块离轴更近了。 平衡看位置,旋转看距离的平方。</p><h2>2 · 定理与定义</h2><div class="card gold stmt">密度为ρ的立体V,重心公式如下<br>分子:每处的x乘上该处密度<br>分母∭ρdV就是总质量<br>ȳ与z̄同理,各是一个比值<br>密度均匀时,ρ约掉,只剩平均<br>所以均匀物体的重心只看形状<br>平面薄板:dV换dσ,∭换∬<br>V绕三条坐标轴的转动惯量<br>括号里是点到该轴距离的平方<br>绕z轴:只看x²+y²,高度不计<br>薄板在xy平面上,z全为0<br>绕x轴时,板上点的距离是|y|<br>任意轴l:r是点到l的距离<br>重心加权位置,转动惯量加权r²<br>公式从哪来?答案是微元法</div><p>课本这样写一个立体的重心。 上面是每个位置,乘上那里的密度。 下面就是总质量,别的没有。 另外两个坐标,做法完全一样。 密度均匀,它就约掉了,只剩平均。 这时候,重心只由形状决定。 换成平面薄板,公式降一维,样子不变。</p><p>再看课本里,绕每条坐标轴的转动惯量。 那些平方和,正是到轴距离的平方。 绕竖直的轴转,高度完全不起作用。 薄板没有高度,公式随之瘦身。 对薄板来说,到横轴的距离就是纵向高度。 轴斜着也一样,量点到轴的垂直距离。 一个加权位置,一个加权距离平方。 这些公式从哪来?一位老朋友。</p><h2>3 · 方法与证明</h2><p>第十章第一集的微元法回来了,先把物体切成小块。 把每一小块,看成带着全部质量的一个点。 这又回到了午餐托盘,只是菜多了。 小块越切越细,上下两个和全变成积分。 三步走:切块,看成质点,取极限。 总质量是正数,除法可以安全地取极限。</p><p>凭什么能取极限?第十章第一集早有答案。 第一,整体等于各块加起来。 第二,每块的偏离比小块本身小得多。 不用冒新的险,只是把旧定理再用一次。 第十章第五集,在一元情形里做过同样的事。</p><p>先看均匀的上半椭球体,像一个圆顶。 先别急着积分,找成对的镜像点。 每一对正好抵消,重心落在镜面上。 换个方向也一样,完全不用积分。 上下不一样,高度只能认真算一次。 按高度一片片切开,每片是个椭圆。 每片乘上高度再加起来,分子算好了。 除以半个体积,重心在八分之三的高度。 比一半更低,因为大部分体积挤在宽底附近。</p><p>回到托盘,一块平板顶在一根针上。 现在让平板越往右越沉。 针往右挪,挪到三分之二的位置。 上下方向密度一样,针仍在一半高度。</p><p>转起来!先看一个质点绕轴转。 点跑一圈,半径就是到轴的距离。 离轴远一倍,速度快一倍,能量变四倍。 轴上的点根本不动,一点力气也不费。 整个物体,照样切块再相加。 每条轴的公式,只是读出各自的距离平方。</p><p>小心:到原点的距离,用错了。 圆柱沿着轴往上推,转起来跟原来一样。 到轴的距离不变,到原点的却越来越远。 正确答案跟高度无关,错的随高度变大。 回到滑冰:距离减半,那一项只剩四分之一。</p><p>例一:均匀圆环,绕圆心的竖轴转。 用第二十一章第三集的极坐标,多一个r。 角度给出一整圈,半径给出四次方相减。 把质量换进去,就是课本的答案。 两个检验:细圆环,和整个圆盘。</p><p>例二:圆盘绕直径转,像转硬币。 直径放在竖轴上,只有横向距离起作用。 换成极坐标,积分拆成角度和半径两部分。 换回质量,正是课本的四分之一。 为什么是四分之一?横向平方平均只占一半。 两个方向平分距离平方,正好一半。</p><p>回转半径:把全部质量挤到一个环上。 这个细环,转起来跟原物体一样费劲。 把圆环换成一个自行车钢圈。 整个圆盘,钢圈在半径的十分之七左右。 说白了,就是距离平方按质量的平均。</p><h2>4 · 展望与衔接</h2><p>彩蛋:联合密度就是总质量为一的薄板。 期望就是按密度加权的积分。 期望的位置,就是这块板的重心。 圆盘上随机取一点,平均离圆心多远? 用直角坐标,根号会把积分搅成一团。 换成极坐标,一下子得到三分之二。 功劳属于第二十一章第二集和第三集。 距离平方的平均是二分之一,正是k的平方。</p><p>用途一:重心在底座上方,书架就不会翻。 用途二:自行车减负,先减钢圈最划算。 课本同一节,也讲表面积和引力,这里只提一下。 之后第二十二章第一集,用同样办法称量空间的面。</p><p>往后看,力学把这些积分排成三乘三的惯性张量。 将来的随机课程里,期望就是这些积分。 切块,加权,求和,坐标让形状来挑。</p></main></body></html>
