@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>17-06 无条件极值：AC − B² 背后的二次型</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+</style></head><body><div class="topbar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span>17-06</span><a class="mv-quiz" href="../quiz/17-06.html">去自测 →</a></div><main><header><div class="tag">视频配套讲稿（朗读原文） · MATH SELF-CHECK: 42 claims re-derived, 1 fixed.</div><h1>17-06 无条件极值</h1><p class="sub">AC − B² 背后的二次型</p></header><h2>1 · 动机</h2><p>今天的问题：一张面在哪里登顶，在哪里见底？ 一元的时候：先找导数为零的点，再看弯曲方向。 这是第六章的费马定理，再加上弯曲的方向。</p><p>两个变量，二阶偏导有三个，到底听谁的？ 直觉会说：两条切片全向上弯，就是极小值。 拿这个看似无害的函数，在原点试一试。 沿两条坐标轴切开，得到的全是开口向上的抛物线。 可是沿另一条对角线，抛物线倒扣过来。 书桌角的两面墙全向上弯，这里却没有极小值。 只看两个方向远远不够，需要一次看遍所有方向。</p><h2>2 · 定理与定义</h2><div class="card gold stmt">先说清：什么叫极大值、极小值？<br>定义：在邻域内处处比较函数值<br>只谈内点：整个邻域要在定义域里<br>例：f=2x²+y²在原点取极小值<br>过原点的每条切片都上弯，f≥0<br>√(1−x²−y²)在原点取极大值<br>h=xy：一条对角线上弯，另一条下弯<br>形状像马鞍：既非极大也非极小<br>若P₀是极值点，固定y=y₀切一刀<br>切片在x₀取极值，费马给出f_x=0<br>改为固定x=x₀，同理f_y=0<br>定理17.10：极值的必要条件<br>17-04的梯度归零：切平面水平<br>grad f=0的点叫稳定点（驻点）<br>稳定点未必是极值点：看h=xy<br>稳定点只是候选；判定要看二阶<br>二阶偏导排成黑塞（Hesse）矩阵<br>二阶偏导连续，f_xy=f_yx<br>定理17.11：极值的充分条件<br>实用版：A、B、C排成四条判据<br>正定：每个非零方向上二次型为正<br>负定：各方向为负；不定：有正有负</div><p>先说清楚，什么叫极大值，什么叫极小值。 定义要求在整个邻域里比较函数值。 而且只谈内点，那个小圆盘要整个落在定义域里。 第一个例子是一只碗，在原点取到极小值。 过原点的每一刀全向上弯，附近没有更低的点。 第二个例子是一座穹顶，在原点取到极大值。 第三个例子：一条对角线往上翘，另一条往下垂。 形状像一副马鞍，原点既不是顶也不是底。</p><p>假设这里是极值点，把一个变量冻住，切一刀。 这条切片是一元函数，有极值，费马定理让它导数为零。 改冻另一个变量，同样的道理，另一个偏导也为零。 正式表述：定理十七点十，极值的必要条件。 本章第四集的梯度缩成零，切平面变得水平。 梯度为零的点有专门的名字，叫稳定点，也叫驻点。 当心：稳定点只是候选，马鞍面就是反例。 梯度只筛出候选，决定要靠二阶信息。</p><p>把四个二阶偏导排成方阵，就是黑塞矩阵。 二阶偏导连续，两个混合偏导相等，矩阵是对称的。 定理十七点十一，充分条件，看正定负定。 落到实处，就是三个数写成的四条规则。 正定的意思是：往哪个方向迈步，二次型全是正的。 负定是各个方向全为负；不定是有正也有负。</p><h2>3 · 方法与证明</h2><p>为什么看正定？上一集的泰勒公式早就备好了答案。 在稳定点上，一次项整个消失。 剩下二次型的一半，外加更快变小的余项。 离这点越近，二次部分越能盖过余项，形状由它说了算。 这就是第五章许诺过的二阶微分，今天正式兑现。 就像一元的二阶导数，只是每个方向各有一个。</p><p>压轴的来了：把这张表读成二次型的正负。 线性代数早就认识这个数，它来自黑塞矩阵本身。 配个方，那个组合就自己冒出来了。 这个数为正，A也为正：正定，像碗，极小值。 这个数为正，A为负：负定，像穹顶，极大值。 这个数为负就是不定，有升有降，没有极值。 像宿舍后两山之间的山口，一边上坡一边下坡。 这个数为零：只是半定，那个余项可能反客为主。 这一格不给答案，只是沉默。</p><p>回到开头的陷阱：这个数算出来是负五。 不定：交叉项够强，压过了两面墙。 课本例六，动手算一算。 两个偏导同时为零，落到唯一的稳定点。 这个数是二十，为正，A也为正。 正定，所以是极小值，等于负八。 课本例七：原点是稳定点。 这个数是负一，不定，原点没有极值。 亲手验证：沿横轴为正，沿另一条直线为负。</p><p>现在来到危险的一格：这个数恰好为零。 课本例八，同样看原点。 原点是稳定点，这个数恰好为零。 表格不说话了，只能直接问函数。 两条抛物线中间，函数为负，外面为正。 这道山谷一直挤到原点，任何小圆盘里正负全有。 原点的函数值是零，所以既非极大也非极小。 更怪的是：限制在任何一条直线上，原点看起来全是极小。 在那条平坦的方向上，二次型是零，高阶项说了算。 陷阱藏在一条弯曲的路上，直线根本碰不到。 可另一个函数同样是零，却有货真价实的极小值。 同样是零，结局相反：这一格是沉默，不是答案。</p><p>第一个提醒：偏导数不存在的地方，也可能藏着极值。 圆锥在尖端最低，那里却没有偏导数。 所以候选有两类：稳定点，和偏导不存在的点。 第二个提醒：闭区域上，最值可能落在边界。 做法是比较三类点：稳定点、偏导不存在的点、边界点。 边界上找最值是条件极值问题，这笔账留到第十八章。</p><h2>4 · 展望与衔接</h2><p>一个用处：后面的最小二乘法，就靠这张表确认是极小。 物理里也一样：小球在势能极小的地方稳稳停住。 停在没有极值的稳定点上，轻轻一推就滚走了。 一句话：梯度负责找候选，二次型负责做判定。 除非那个数为零或偏导缺席，那就直接看函数。</p><p>展望：假如黑塞矩阵处处半正定。 那函数就是凸的，任何稳定点自动成为全局最小。 机器学习里的损失函数，背后站着的就是这条事实。 两面墙远远不够，判别要读整个二次型。</p></main></body></html>

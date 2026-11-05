@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>18-01 隐函数定理：藏在方程里的函数</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+</style></head><body><div class="topbar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span>18-01</span><a class="mv-quiz" href="../quiz/18-01.html">去自测 →</a></div><main><header><div class="tag">视频配套讲稿（朗读原文） · MATH SELF-CHECK: 35 claims re-derived, 5 fixed.</div><h1>18-01 隐函数定理</h1><p class="sub">藏在方程里的函数</p></header><h2>1 · 动机</h2><p>一个函数藏在方程里，我们去找它。 有的方程很好解，比如这个圆。 解出来，圆分成上下两支。</p><p>再看教材里一个顽固的方程。 想把它拎出来，它却同时躲在两处。 怎么移项，它总会回到另一边。</p><p>可是把解画出来，竟是一条光滑的线。 竖线扫过去，每次恰好碰一点。 原因是：对 y 的偏导数始终不小于二分之一。 所以，里面藏着一个规规矩矩的函数。 写不出来，我们敢不敢信它、用它？</p><p>回到圆上，一个横坐标给出两个答案，选哪个？ 定理会回答，但只看一点附近。</p><h2>2 · 定理与定义</h2><div class="card gold stmt">设定：方程F(x,y)=0过点P₀<br>定理18.1：隐函数存在唯一性定理<br>(i)：F在D上连续，P₀是内点<br>(ii)：初始条件，P₀在曲线上<br>(iii)：F_y在D上连续<br>(iv)：F_y(x₀,y₀)≠0<br>于是定理给出结论1°和2°<br>1°：邻域内，解集是一个函数图像<br>图像：每条竖线恰好交一次<br>定义区间(x₀−α,x₀+α)<br>代回去恒成立：F(x,f(x))≡0<br>“唯一”：邻域内没有第二支<br>2°：隐函数在区间上连续<br>关键在于：承诺只是局部的<br>就像“食堂现在人少”，不是整学期<br>圆上(0,1)附近，y是x的函数<br>(1,0)附近：竖线交两次或不交<br>框缩得再小，也成不了图像<br>那里F_y=2y=0，(iv)失效<br>只承诺一个邻域，不承诺整条曲线</div><p>先摆好：一个方程，和它解集上的一个点。</p><p>这是教材原文，先看四条假设。 第一条：F 连续，而且这个点在区域内部。 第二条是初始条件：这个点真的在线上。 第三条：沿竖直方向的偏导数也连续。 第四条最关键：在这一点往上走，F 真的在变。</p><p>定理给我们的回报，就在这里。 结论一：凑近这个点，这条线就成了函数的图像。 所谓图像，就是每条竖线恰好碰它一次。 它定义在点附近的一个小区间上，并且经过这个点。 把隐函数代回去，方程一路成立。 唯一，意思是方框里没有第二支溜进来。 结论二：这个隐函数一笔就能画完。</p><p>关键来了：这个承诺只管局部。 就像朋友说食堂此刻人少，并非一整个学期。 在圆的顶部附近，它确实是函数。 到了最右端，竖线要么碰两次，要么一次也碰不到。 方框缩得再小，麻烦也甩不掉。 恰好在那里，对 y 的偏导数等于零，第四条失效。 大声说一遍：只管一个邻域，从不管整条线。</p><h2>3 · 方法与证明</h2><p>凭什么一定存在？一张图就能讲清。 想象一张搜索网格，每列恰好藏一个目标。 第一步：不妨设在这个点，对 y 的偏导数为正。 由于连续，在它周围一个小方框里依然为正。 于是顺着竖线往上爬，F 只升不降。 第二步：这个点是零点，往下为负，往上为正。 第三步：左右挪动，符号沿着边保持不变。 边角上符号要是变了，就把框收窄一点。</p><p>第四步：随便挑一列，从负走到正。 介值定理保证，这一列上一定有零点。 而 F 只升不降，绝不会第二次碰到零。 每一列照做，点连起来就是隐函数。 这个边上涂了颜色的矩形，就是整个证明。 两件工具，来自第十六章第四集，再次登台。</p><p>隐函数为什么连续？同一张图挪一挪就知道。 在这点周围画个扁框，下边为负，上边为正。 附近的每一列，零点全落在扁框里。</p><p>为什么看 y 方向？要解的就是它。 竖直方向要切过这条线，而不是贴着它走。 在最右端，竖直方向的偏导数为零，水平方向的却不是。 互换角色，同一定理反过来给出函数。</p><p>注意：这些条件够用，却并非必需。 看这个三次方程：在原点，第四条失效。 可是立方相等，数就相等，这就是一条直线。 所以那里为零，并不说明隐函数一定没有。</p><p>但更多时候，第四条一失效，结论就垮了。 这条八字形的线，在原点自己交叉。 原点附近，除了原点那一列，每列碰两次。 方框缩得再小，交叉依旧在里面。</p><p>再多一个连续性，隐函数就能求导了。 它附带一个公式，由两个偏导数组成。 拿圆来试，公式化简得很干净。 在顶部附近，上半支的倾斜程度完全吻合。 自变量更多时，故事照旧，先记住名字就好。</p><h2>4 · 展望与衔接</h2><p>用处一：它就是轨道的开普勒方程。 时间均匀流逝，藏着的函数告诉我们星体在哪。 用不着公式，定理保证它不会跳。</p><p>用处二：这个证明，本身就是一份算法。 每次对半切，留下仍会变号的那一半。 对分二十次，藏着的值精确到小数点后四位。</p><p>欠下的第一笔：下一集，无须解出也能求导。 到了方程组，这个条件换成雅可比的版本。 再往后，切线可以直接从方程里读出来。 往前看，同一个矩形论证，能推广到方程组。 那就是第二十三章里完整的隐函数定理。 门后，是更高维的光滑世界：流形。 记住：只要对 y 的偏导数不为零，附近就藏着函数。</p></main></body></html>

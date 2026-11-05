@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>17-05 多元函数的泰勒公式：近似升到二阶</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+</style></head><body><div class="topbar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span>17-05</span><a class="mv-quiz" href="../quiz/17-05.html">去自测 →</a></div><main><header><div class="tag">视频配套讲稿（朗读原文） · MATH SELF-CHECK: 40 claims re-derived, 1 fixed.</div><h1>17-05 多元函数的泰勒公式</h1><p class="sub">近似升到二阶</p></header><h2>1 · 动机</h2><p>今天，近似要再往上爬一级 在全微分那一集，切平面估出了1.32 真值大约1.3563，平面偏了0.036</p><p>平面太平了，看不见图像在拐弯 沿着这一步，图像往上弯，离开了直线 一阶已经用尽，我们要再爬一级 想想地图软件，有平面视图，也有地形视图 同一条路，多了一层地面的弯度 我们的目标，是能看见弯的二阶近似 要用两样东西，凸区域，和化成一元的办法</p><h2>2 · 定理与定义</h2><div class="card gold stmt">凸区域：任意两点连线仍在区域内<br>圆盘是凸的，矩形也是凸的<br>马蹄形不是：这条线段跑出去了<br>为什么在乎？证明要沿线段PQ走<br>马蹄形上半路出界，结论可能失效<br>凸性是假设，不是装饰<br>定理17.8（中值定理）原文如下<br>条件：f在凸开域D上可微<br>任取D中两点P和Q<br>增量等于偏导乘步长之和<br>偏导取在线段上的某个中间点<br>θ在0和1之间，具体位置未知<br>这是一元中值定理的二元翻版<br>定理17.9（泰勒定理）原文如下<br>条件：P₀附近有n+1阶连续偏导<br>泰勒多项式：0到n阶全在P₀取值<br>余项：多一阶，取在线段中途<br>这就是拉格朗日型余项<br>只要o(ρⁿ)，少一阶光滑就够<br>ρ是步长，余项比ρⁿ更快趋于0<br>余项两种写法：精确式或o(ρⁿ)</div><p>凸区域，任意两点之间的线段，全在区域里 圆盘是凸的，矩形同样是凸的 马蹄形不是，这条线段跑到了外面 为什么要管？因为证明要沿着这条线段走 在马蹄形上，半路出了区域，结论可能失效 所以凸性是真正的假设，不是装饰</p><p>这是定理17.8，中值定理 第一，函数f在凸开域上可微 任取两个点，迈一步过去 增量就是偏导乘步子，再相加 偏导数取在线段上的某一个点 theta在0到1之间，定理不说在哪儿 它就是一元中值定理的二元版本</p><p>接下来是定理17.9，泰勒定理 条件是，附近各阶偏导数，直到比n高一阶，全部连续 泰勒多项式，从零阶到n阶，全在这一点取值 余项再高一阶，取在线段半路的某个点 这是拉格朗日型余项，和一元一样</p><p>如果只要余项是高阶无穷小，光滑可以少一阶 rho是步子大小，余项比那个次方消失得快 余项有两种写法，一种给出公式，一种只说它很小</p><h2>3 · 方法与证明</h2><p>核心来了，一个化成一元的技巧 沿着直走廊，从宿舍走到食堂，t从0走到1 把一路上的函数值记下来，就是phi phi只是零到一上的一元函数 第一步，两端正好是两点的函数值 第二步，借来一元中值定理 在某个theta处，切线和弦一样陡 第三步，链式法则把它翻译成偏导数 停在theta那一刻，二元中值定理就出现了 凸性就用在这里，整条走廊必须在区域里</p><p>这次借第六章第七集的一元泰勒公式 每求一次导，算子就多作用一次 从起点展开，走到终点，泰勒定理就出来了 邻域是个圆盘，走廊自然在里面</p><p>小心，算子平方，不是把数平方 平方就是，先作用一次，再作用一次 展开得到四项，跟二项式的展开一样 混合偏导数连续就相等，两个混合项合成一项 系数是一二一，正是二项式的规律 别忘了二阶项前面那个二分之一 这就是完整写出来的二阶泰勒公式</p><p>回到开头的那个乘方，在好算的点附近展开 先把各阶偏导数在这一点的值算出来 为什么有零？因为在那条线上，函数一直是1 代进去，二阶多项式只有四项 系数6和1里面，已经含了二分之一 地形图打开了，路线终于有了弯度 现在代入开头的那一步，逐项来算 加起来，得到1.3552 离真值只偏了大约0.0011 开头那组数字，在这里收尾 步子减半，平面偏离约剩四分之一，二阶约剩八分之一 平面偏离按平方缩，二阶按立方缩</p><p>从几何上看，切平面只贴合到一阶 二阶多项式的图像，贴着整整一小片 过这一点的每条截线，全贴合到二阶 第五章第九集里，二阶微分的一半把切线弯成了抛物线 同一个二分之一弯了切平面，旧账结清</p><p>二阶项有什么用？先把它写成矩阵 H就是四个二阶偏导数排成的方阵 在例子里，这个矩阵正好给出我们用过的两项 这笔账留给第十七章第六集，在那里它来判断极值</p><h2>4 · 展望与衔接</h2><p>应用一，凸区域上两个偏导全是零，函数就是常数 中值定理一用，任意两点的函数值就相等 应用二，右边就是梯度和步子的内积 梯度有上限，函数的变化也就有上限</p><p>展望一下，数值软件用牛顿法来解方程组 在猜测处线性化，解出来，迈一步，再循环 说白了，就是全微分那一集的线性近似，一圈一圈反复用 今天，近似从平面爬上了二阶，看见了弯 凸的走廊，一元的引擎，再加链式法则来翻译</p></main></body></html>
