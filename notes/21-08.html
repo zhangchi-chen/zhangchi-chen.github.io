@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>21-08 反常二重积分：极坐标攻下高斯积分</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+</style></head><body><div class="topbar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span>21-08</span><a class="mv-quiz" href="../quiz/21-08.html">去自测 →</a></div><main><header><div class="tag">视频配套讲稿（朗读原文） · MATH SELF-CHECK: 32 claims re-derived, 3 fixed.</div><h1>21-08 反常二重积分</h1><p class="sub">极坐标攻下高斯积分</p></header><h2>1 · 动机</h2><p>反常二重积分：看极坐标怎样攻下高斯积分。 这条钟形曲线，谁都迟早会遇到。 右半边底下一直到最远，面积是多少？</p><p>本能反应是先找原函数，再代入两端。 可是熟悉的函数怎么拼都拼不出来。 就是交换积分次序时碰到的那堵墙。 通往答案的那道楼梯，被锁上了。</p><p>那就换乘校车，绕道二维平面。 未知数一平方，就像是一个二重积分。 可这个象限没有尽头，面积是无限的。</p><p>二重积分本来是靠切分有界区域定义的。 区域一旦无界，这套切分就失灵了。 所以要一个新定义，也要真能算出来。 剧透一下：答案里藏着一个圆周率。</p><h2>2 · 定理与定义</h2><div class="card gold stmt">教材定义1，原文如上<br>首先，f定义在无界区域D上<br>画一条包围原点的光滑封闭曲线γ<br>截出Dᵧ=D∩Eᵧ：D在γ内的部分<br>在这块上f要可积：老理论管用<br>dᵧ：γ上的点离原点最近的距离<br>让dᵧ→+∞：曲线向四面八方退去<br>极限存在、有限且与γ的选取无关<br>这时反常二重积分收敛，等于该极限<br>为什么要求与γ的形状无关？<br>圆、方、怪形：只是扫过平面的方式不同<br>两种扫法若给两个数，积分就没意义<br>f≥0时，各种扫法结果一致<br>定理21.18，原文如上<br>f≥0：有界部分可积，积分有上界<br>f非负：区域越大，积分只升不降<br>只升不降又有上界，就必有极限<br>f变号时，收敛必是绝对收敛<br>和一元不同：这里没有条件收敛<br>再看教材例1：我们的目标<br>两个数：象限π/4，钟形√π/2</div><p>这是教材里的定义，一字不改。 首先，函数定义在一个无界区域上。 接着，画一条包住原点的光滑封闭曲线。 这条曲线从区域里截出有界的一块。 在这块有界的部分上，旧的二重积分照样能用。 量一量这条曲线离原点最近有多近。 然后把这条曲线往四面八方，越推越远。 不管曲线什么形状，积分都停在同一个有限数。 这时就说反常二重积分收敛，值就是这个数。</p><p>为什么曲线的形状不许影响结果？ 圆的、方的、怪的，只是扫过平面的方式不同。 要是两种扫法给出两个数，信哪个？ 好消息：函数非负，形状随便选。</p><p>教材把这件事写成了一条定理，就是这条。 函数非负时，只要各块积分不超过一个天花板。 没有负值，区域一变大，积分只会往上加。 一直往上爬，又顶不过天花板，只能停下来。 函数变号时，收敛就等于绝对收敛。 和一元不一样，这里不存在条件收敛。 下面就是我们要攻下的例题。 两个数：一个是象限的，一个是钟形线的。</p><h2>3 · 方法与证明</h2><p>第一步，先拿四分之一圆盘下手，这是极坐标的主场。 这个函数只关心你离原点有多远。 极坐标的小块面积多带一个r，就是之前的伸缩率。 多出来的这个因子，正好打开了指数这把锁。 在四分之一圆盘上，答案能完整写出来。 半径越推越远，数值爬向圆周率的四分之一。 极坐标那集的圆盘例子，在这里开花结果。</p><p>圆盘给了答案，可我们要的未知数，住在正方形上。 在正方形上，函数拆成横竖两部分相乘。 化成累次积分，它恰好是一个完全平方。 这一步靠的是交换积分次序那集的定理。</p><p>最关键的一步：用两个四分之一圆盘夹住正方形。 小的四分之一圆盘，刚好装进正方形。 最远的角在对角线上，离原点更远一些。 穿过这个角的大圆盘，把整个正方形都盖住了。 就像配送区：小圆区报价偏低，大圆区报价偏高。 函数处处为正，区域越大，积分就越大。 两边的报价，极坐标公式直接给出。</p><p>让正方形变大，看低价和高价越靠越近。 边长为一时，正方形的值稳稳夹在中间。 边长为二时，两头报价几乎贴在一起。 推到极限，两头都等于圆周率的四分之一，中间只能跟着。 所以未知数的平方，恰好是圆周率的四分之一。 面积是正的，取正根，大功告成。 那堵老墙终于被量出来了，是从它挡不住的方向。 常见失误：把圆周率的四分之一当成一元积分。 四分之一圆周率是平方，答案要再开一次方。</p><p>按对称性复制四个象限，整个平面恰好是圆周率。 整条直线上，面积是圆周率的平方根。 把变量拉伸一下，答案变成二倍圆周率的平方根。 除以这个常数，正态密度的总面积恰好是一。 教材原话：概率论里经常用到它。</p><p>为什么非要爬到平面上去？ 原函数写不出来，一元的招数全都碰壁。 坐车上到平面，拆开，夹住，再坐回一维。 这就是二维绕道，绕开锁住楼梯的那趟校车。</p><p>工具一：函数非负，积分有上界，就收敛。 柯西判别法：按高于二次的幂衰减，就收敛。 为什么是二？越往外圆环越大，吃掉了一次方的衰减。 这个二就是平面的维数；在直线上，分界线是一。 策略：函数为正、区域无界，先拿圆盘去填。 径向积分收敛就搞定，形状问题定理已经管了。</p><h2>4 · 展望与衔接</h2><p>教材用同一招，把贝塔函数和伽马函数连了起来。 两件旧工具，极坐标和累次积分，换来一个新数。 到了概率课，正态分布靠的就是今天这个常数。 往后看，同样的算法能推广到任意维数。 伽马函数在二分之一处的值，也出自这里。 后面会学的热核和维纳测度，都站在这个积分上。 楼梯锁住了，绕道平面，圆周率就在那里等着。</p></main></body></html>

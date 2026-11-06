@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>23-01 向量函数：导数是一个矩阵</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+</style></head><body><div class="topbar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span>23-01</span><a class="mv-quiz" href="../quiz/23-01.html">去自测 →</a></div><main><header><div class="tag">视频配套讲稿（朗读原文） · MATH SELF-CHECK: 38 claims re-derived, 3 fixed.</div><h1>23-01 向量函数</h1><p class="sub">导数是一个矩阵</p></header><h2>1 · 动机</h2><p>今天，导数将不再是一个数。 第二十一章第三集里，极坐标把方格弯成了扇环。 每个小格的面积大约放大了r倍，为什么偏偏是它？ 它来自这个映射的导数。可是，导数到底是什么？</p><p>一元时，导数就是一个数：切线有多陡。 第五章第八集用线性部分代替变化：一个数乘增量。 第十七章第一集里，两个自变量，它变成了一对数。 极坐标映射吃进两个数，吐出两个数。</p><p>这就有了四个偏导数，哪一个才算导数？ 从平面到四维空间的映射，有八个偏导数，该怎么排？ 室友横着写一排，你竖着写一列。 同样八个数，形状随便摆，或是被逼出来的？ 剧透：导数是一整张表，装满变化快慢。 第五章第八集许下的诺言，今天兑现。</p><h2>2 · 定理与定义</h2><div class="card gold stmt">先看课本原文的定义<br>D是开集，x₀往哪个方向都能动<br>左边是真实的变化量，一个m维向量<br>A(x−x₀)是线性变换给的预测<br>剩下的余项是o(‖x−x₀‖)<br>余项除以步长，必须趋于0<br>余项是向量，每个分量都得这么小<br>A只依赖于x₀，附近每个x共用它<br>A(x−x₀)是微分，A是导数<br>放大x₀附近，映射与替身难分彼此<br>这是切平面思想，升级成整个映射<br>n=m=1时，A是1×1矩阵：斜率<br>二元时，矩阵是一行：(A B)<br>f:Rⁿ→Rᵐ时，导数是m×n矩阵<br>课本：导数矩阵（雅可比矩阵）<br>第i行管输出fᵢ，第j列管输入xⱼ<br>为何这样排？A乘步子要得出变化<br>进去n个数一列，出来m个数一列<br>所以行对应输出：排法不是口味问题<br>f可微，当且仅当每个分量函数可微<br>第i行是fᵢ的梯度：梯度叠成矩阵</div><p>这是课本原文的定义。 定义域是开集，从出发点往哪个方向迈步全可以。 左边是真实的变化，输出空间里的一支箭头。 接下来是预测：把线性变换作用在这一步上。 剩下的那一点，就是余项。</p><p>步子越缩越小，余项比步子缩得更快。 余项是一支箭头，它的每个分量也必须这么小。 这个线性变换只由出发点决定，往哪边迈步全用它。 这个预测叫微分，而线性变换本身，叫作导数。</p><p>越放大，弯弯的映射和它的线性替身越分不清。 这就是切平面的想法，升级到了整个映射。 一个输入一个输出时，矩阵缩成一个数。 两个输入一个输出，矩阵就是那一对数排成一排。 一般地，导数是一张表：输出各占一排，输入各占一列。</p><p>课本把每个元素写了出来，这就是雅可比矩阵。 每一排对应一个输出，每一列对应一个输入。 为什么这样排？它乘上这一步，必须得出变化量。 进去一列输入，出来一列输出。 所以每一排只能对应输出，排法根本不是口味问题。 向量函数可微，恰好就是每个分量函数全部可微。 每一排是一个分量的梯度，梯度叠起来就是矩阵。</p><h2>3 · 方法与证明</h2><p>课本例一：一个从平面到四维空间的映射。 四个输出两个输入，所以应该是四排两列。 前两排：把前两个分量分别求偏导。 后两排也照这样算。 那个零是说：第三个输出根本不理第一个输入。 现在代入两个坐标全是一的点，逐个算。 这就是那一点的导数，一张四排两列的数表。 竖着读一列：只推一下第一个输入，看四个输出怎么变。</p><p>陷阱来了：写得出矩阵，什么也说明不了。 课本原话直接提醒了这一点。 试一个函数，它的第二个分量藏着一个出名的捣蛋鬼。 在原点，四个偏导数全部存在，矩阵写得出来。 可是沿着对角线，第二个分量一直是二分之一。 所以它在原点并不连续，更谈不上可微。</p><p>补救办法是一个充分条件：偏导数连续。 把这些关系画成一架梯子，箭头只朝一个方向。 可微白送两样东西：连续，以及偏导数存在。 可是从偏导数存在走到可微，这条路走不通。 这架梯子上，没有哪一条箭头能倒过来。</p><p>接下来是链式法则，想象出国时串联转换插头。 这是链式法则，课本原文。 先看两个矩阵的尺寸。 中间的尺寸像插头配插座，正好对上。 顺序一换，尺寸一般就对不上了。 所以尺寸对得上，就是一次免费的自检。</p><p>拆开来看：一排乘一个二乘二的矩阵。 第一个元素，是两个乘积加在一起。 这正是第十七章第三集那棵树状图。 那棵树，就是矩阵乘法一个数一个数地展开。 记得一阶微分的形式不变性吗？ 把内层的微分代进去，两个矩阵的乘积就出现了。 那个老戏法，不过是这个矩阵等式的影子。</p><p>输入和输出个数相同时，方阵有一个特别的数：行列式。 它的绝对值，就是映射把小块面积伸缩的倍数。 极坐标的行列式正好是r，就是那个面积因子。 第二十一章三、四两集里换元用的，全是它。 第十八章第三集叫它兑换比例，现在整张兑换表全摆出来了。</p><p>那么，向量函数到底怎么求导？ 每个分量，用第十六到十八章的老工具求导。 然后叠起各排，没有新法则，只有新记账。 而这套记账方式，恰恰就是内容本身。</p><h2>4 · 展望与衔接</h2><p>第一个用途：物理实验里，你测出距离和角度。 报告要的是直角坐标，读数的偏离靠雅可比矩阵带过去。 第二个用途：台灯有两个关节，两个角度决定灯头在哪。 雅可比矩阵把关节转得多快，变成灯头走得多快。 旧账结清：一个数、一对数、一棵树，全是矩阵。 第二十三章第二集里，行列式不为零，会撑起两个大定理。</p><p>再往后，在赋范空间里，矩阵让位给有界线性算子。 定义一个字也不用改，这是通往泛函分析的路。 把二阶偏导数叠成一张表，就得到Hesse矩阵。 那正是第十七章第六集的极值判别，穿上了矩阵外衣。 导数从来就是线性变换，变量一多，它就成了矩阵。</p></main></body></html>

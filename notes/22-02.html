@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>22-02 曲面的侧：默比乌斯带的警告</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+</style></head><body><div class="topbar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span>22-02</span><a class="mv-quiz" href="../quiz/22-02.html">去自测 →</a></div><main><header><div class="tag">视频配套讲稿（朗读原文） · MATH SELF-CHECK: 35 claims re-derived, 2 fixed.</div><h1>22-02 曲面的侧</h1><p class="sub">默比乌斯带的警告</p></header><h2>1 · 动机</h2><p>曲面的侧，和默比乌斯带的警告。 台扇正对着羽毛球拍吹。 每秒钟，到底有多少空气穿过拍面？ 室友从左往右算，得到正三。 你从右往左算，得到负三。 谁也没算错，只是穿过的方向选反了。</p><p>可是曲面本身，并不带箭头。 所以算通量之前，必须先选定一侧。 上一集算曲面壳的质量，从没问过侧。 从哪一面看，质量全是同一个数。 通量可不一样，换一侧，答案就变号。 问题来了，每个曲面全能选出一侧吗？</p><h2>2 · 定理与定义</h2><div class="card gold stmt">教材用法线绕圈来定义侧<br>在连通曲面S上取一点M₀<br>在那里选定一个法线方向<br>过M₀画闭曲线L，不离开S<br>沿L走一圈，法线连续转动<br>回到M₀方向相同：双侧曲面<br>如果方向相反：单侧曲面<br>双侧：每圈回来方向都不变<br>只要一圈反向，就是单侧<br>试验一：一条普通的圆柱带<br>从M₀出发，法线朝外<br>带着它沿中线走一圈<br>回来仍朝外：双侧曲面<br>试验二：扭了半圈的带子<br>从M₀出发，法线朝上<br>走一圈，一路连续转动<br>回到起点，法线却朝下<br>默比乌斯带是单侧曲面<br>处处没跳，只是一步步翻过来<br>教材用一条纸带做出它<br>取一条矩形纸带ABCD<br>两端直接粘上：普通圆柱带<br>先把一端扭半圈：A接C，B接D<br>这就是默比乌斯带，像扭了的皮带<br>把拇指按在皮带中线上<br>滑一圈，拇指倒过来了<br>沿中线刷漆，刷子不离开<br>一圈后到了“另一面”，接着刷<br>回到起点，两面全刷上了<br>沿边缘走：只有一条边<br>一个面，一条边，边绕两圈<br>双侧曲面的正侧有约定<br>曲面z=z(x,y)：上侧为正<br>上侧：法线与z轴成锐角<br>封闭曲面：外侧为正，内侧为负</div><p>教材把它变成一次带着法线的散步。 先站在连通曲面上的一点。 在那里，挑定一个法线方向。 过这点画一条闭曲线，不离开曲面。 沿它走一圈，法线连续地转，不许跳。 回到起点方向不变，这是双侧曲面。 要是回来方向反了，就是单侧曲面。 双侧，意味着每一圈回来，方向全不变。 只要有一圈让它反了向，就是单侧。</p><p>先试一条普通的圆柱带。 从这里出发，法线朝外。 带着它沿中线走一圈。 回来时依然朝外，正是双侧曲面。</p><p>再试扭了半圈的带子。 从这里出发，法线朝上。 走一圈，法线一路平滑地转。 回到起点，法线竟然朝下了。 所以默比乌斯带是单侧曲面。 哪里也没跳，法线只是一点点翻了过来。</p><p>教材用一条纸带把它做出来。 拿一条矩形纸带。 两头直接接上，得到普通的圆柱带。 先把一端扭转半圈，再把对角接起来。</p><p>这就是默比乌斯带，一条扭了半圈的皮带就能做。 把拇指按在皮带中间。 滑一圈回来，拇指上下颠倒了。 现在沿中间刷漆，刷子一直贴着。 一圈之后，你已在另一面，接着刷。 回到起点，纸带的两面全刷上了。 再沿着边缘走，边只有一条。 一个面，一条边，这条边绕了两圈。</p><p>教材约定了哪一侧为正。 对函数图像那样的曲面，上侧为正。 上侧，就是法线和竖直轴成锐角。 封闭曲面，外侧为正，内侧为负。</p><h2>3 · 方法与证明</h2><p>积分为什么在乎侧？看看影子。 法线朝上时，地面上的影子算正。 把法线翻向下，同一个影子就算负。 另外两个影子，按另外两根轴同样定号。</p><p>把曲面切成小块，每块投下三个影子。 每个影子乘上对应的分量，再全部加起来。 取极限，就是第二型曲面积分。 对流动的液体，它就是穿过所选那一侧的通量。</p><p>现在换到另一侧。 三个影子一起变号。 所以整个积分就变号。 第一型曲面积分，从来不变号。 第二十章里，曲线一反向，曲线积分就变号。 剧情一样，只是高了一维，翻的是整侧。 早在第十章，逆时针绕圈，就已在悄悄选侧。</p><p>定理二十二点二，取上侧，就在投影区域上积分。 只要把曲面的高度代进去。 取下侧，就是同一个积分，再添一个负号。</p><p>举个例子，单位球面的四分之一，取外侧。 它拼不成一个函数图像，就沿赤道切开。 上半片，外侧就是上侧，带正号。 下半片，外侧就是下侧，带负号。 下半片上高度为负，又一个负号。 两个负号抵消，上下两半一模一样。 赤道以下，高度为负，影子也为负，乘积为正。 极坐标收尾，结果是十五分之二。 这两个正负号，就是这道题的全部。</p><p>封闭曲面，法线全部朝外，这是正的一侧。 法线朝里，是内侧，算负的。 高斯公式，正是建立在这个约定上。</p><p>第一个陷阱，各片的侧选得不一致。 上片取上侧，下片取下侧，得十五分之二。 错的做法，两片全取上侧，结果抵消成零。 第二个陷阱，换侧时三项一起变号。 只让最后一项变号，是常见的错误。</p><h2>4 · 展望与衔接</h2><p>回到球拍，选定一侧，答案就只有一个。 冬天穿过宿舍墙的热量，也要先选侧。 三维图形里，法线统一的网格，就选好了侧。 单侧曲面通向拓扑学，比如克莱因瓶。 斯托克斯公式用右手法则，把侧和边界配对。 两型之间的桥梁，也就是方向余弦，留到后面再讲。 算通量之前，先问一句，哪一侧？</p></main></body></html>

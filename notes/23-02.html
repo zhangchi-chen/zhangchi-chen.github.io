@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>23-02 反函数定理与隐函数定理全貌：不为零的行列式</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+</style></head><body><div class="topbar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span>23-02</span><a class="mv-quiz" href="../quiz/23-02.html">去自测 →</a></div><main><header><div class="tag">视频配套讲稿（朗读原文） · MATH SELF-CHECK: 32 claims re-derived, 3 fixed.</div><h1>23-02 反函数定理与隐函数定理全貌</h1><p class="sub">不为零的行列式</p></header><h2>1 · 动机</h2><p>反函数定理和隐函数定理，完整的样子。 在球坐标那一集，换元要付一个体积因子。 有个问题被跳过了：总能换回去吗？ 点落在竖轴上，转多少角度，位置一动不动。 这里角度读不回来，体积因子也正好是零。</p><p>是巧合吗？第十八章用一个方程见过它。 对y的偏导不为零的地方，局部就是一个函数图像。 偏导为零的地方，切线竖起来，图像就断了。</p><p>现在方程不止一个，一面墙变成好几面墙。 一个空间映射，什么时候能在一点附近撤销？ 两个问题，一个答案：雅可比行列式不为零。 和第十八章一样，这个承诺只管一点附近。</p><h2>2 · 定理与定义</h2><div class="card gold stmt">定理23.17：反函数定理<br>条件(i)：f′存在且连续变化<br>条件(ii)：x₀处行列式≠0<br>不为0：小方块不会被压成线段<br>结论1°：在某邻域U上f是一一映射<br>结论2°：f⁻¹可微，导数是逆矩阵<br>读法：在对应点x=f⁻¹(y)求逆<br>为何只管局部？看课本的映射<br>它的雅可比行列式是e²ˣ，恒正<br>可是一条高长条绕原点转两圈<br>一元时区间上f′≠0，f严格单调<br>定理23.18：隐函数定理<br>条件(i)：手里已有一个解<br>条件(ii)：F′在Ω上连续<br>条件(iii)：方阵块行列式≠0<br>m=1时方阵只剩一格：F_y≠0<br>18-03：二阶雅可比行列式接班<br>结论：局部唯一确定y=f(x)<br>定理23.19：拉格朗日乘数法<br>秩为m：m个约束梯度线性无关<br>结论：f′是约束各行的组合</div><p>这是课本里的反函数定理原文。 第一个条件：导数处处存在，而且连续变化。 第二个条件：在选定的那一点，行列式不为零。 不为零，小方块就不会被压扁成一条线。 第一个结论：小邻域里，不同的点像也不同。 第二个结论：反函数也有连续导数，就是逆矩阵。 读的时候注意：先找回原来那一点，再求逆。</p><p>为什么只管局部？看课本里的一个映射。 它的雅可比行列式是指数函数，处处为正。 可是一条高带子，绕着原点缠了两圈。 一元时导数处处非零，函数只朝一个方向走。</p><p>这是课本里的隐函数定理原文。 第一个条件：手里已经有一个解。 第二个条件：导数在整个区域上连续。 第三个条件：只要求那块方阵的行列式不为零。 一个方程时，方阵只剩一格，正是十八章的老条件。 十八章两个方程时，已由二阶雅可比行列式接班。 结论：在已知解附近，方程组恰好确定一个函数。</p><p>最后是向量形式的拉格朗日乘数法。 秩的条件：约束梯度彼此线性无关。 结论：目标的导数由约束梯度组合而成。</p><h2>3 · 方法与证明</h2><p>先问：反函数的导数，为什么偏偏是逆矩阵？ 先打包，再拆包，手里仍是原来那件东西。 上一集的链式法则一用，两矩阵乘出原样不动。 这样的两个方阵，互为逆矩阵。 一元时取倒数，到这里倒数升级成矩阵求逆。 注意：这两步悄悄假设了反函数存在而且可微。 条件省不掉：两个行列式之积必须是一。</p><p>课本里的例题：球坐标变换。 这是正向的雅可比矩阵，每个坐标占一排。 它的行列式，正是球坐标那一集的体积因子。 它恰好在竖轴上为零，别处全不为零。 逆矩阵要除以这个行列式，转角那一排近轴就爆炸。 离轴越近，同样一小步，角度转得越猛。 同一个行列式：先管体积，再管可逆。 极坐标、球坐标的换元，背后全靠它。</p><p>课本怎样证出反函数存在？分四格看。 第一格：导数可逆，就能先归一化。 映射是恒等减去余项，解方程变成找不动点。 第二格：余项把任意两点按固定比例拉近。 第一个条件也出力了：连续性让余项的导数很小。 第三格：从已知点出发，一遍遍代回去。 就像找朋友的房门，每次把剩下的走廊砍掉一半。 步子按比例缩小，是柯西列，一定收敛。 第四格：极限点正是方程的解，要找的原像。 两个解要比自己更近，不可能，所以解唯一。</p><p>隐函数定理，用一招就从反函数推出来。 造一个新映射：自由变量保留，其余的换成方程。 新映射是方的，导数是分块三角矩阵。 两个行列式相等，第三个条件正好是新映射需要的。 新映射可以撤销，第二块取零就是解原方程组。 用链式法则对恒等式求导，两块必须抵消。 乘上那块的逆矩阵，定理里的公式就到手了。 只剩一元时，退回第十八章的老公式。</p><p>最后一站：拉格朗日乘数，装进一个矩阵式子。 目标的梯度，由约束梯度组合而成。 两个变量一个约束，就是第十八章那张相切的图。 有了秩的条件，约束集局部成了图像，乘数也就有了。 丢掉秩的条件，方法就会失灵：找尖点线的最左点。 尖点处约束的导数是零，什么乘数也配不平。</p><h2>4 · 展望与衔接</h2><p>用处一：数据一变，解就可微地跟着走。 用处二：同时守住月预算和课表，求最好的结果。 满秩的水平集局部就是图像，这正是光滑面的本来意思。</p><p>往后看：流形上的坐标卡，就是一个个局部反函数。 多元牛顿法是第三格的加强版，优化天天用。 一元时认识的线性主部，最后成了一个矩阵。 它的行列式只要不为零，就为这两个定理掌舵。</p></main></body></html>

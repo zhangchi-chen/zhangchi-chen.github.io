@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>22-01 第一型曲面积分：给曲面称重</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+</style></head><body><div class="topbar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span>22-01</span><a class="mv-quiz" href="../quiz/22-01.html">去自测 →</a></div><main><header><div class="tag">视频配套讲稿（朗读原文） · MATH SELF-CHECK: 42 claims re-derived, 2 fixed.</div><h1>22-01 第一型曲面积分</h1><p class="sub">给曲面称重</p></header><h2>1 · 动机</h2><p>第一型曲面积分，给一张曲面称一称。 室友过生日，礼物是一个篮球，需要包好。 第一反应，是去量它投在桌上的影子。 从上往下看，影子只是一个平的圆盘。 可是球的表面积，是影子的整整四倍。 上半个和下半个的影子加起来，也才一半。 球面越陡，投下的影子就越小。</p><p>换成闪粉纸，闪粉厚的地方，纸就更沉。 密度处处在变，这层纸到底有多沉？ 第二十章，我们给一根有密度的细线称过质量。 有密度的曲面薄壳，要的是它的孪生公式。 真正的问题是，弯曲的小片和下面的平地有什么关系？</p><h2>2 · 定理与定义</h2><div class="card gold stmt">定义四步：分割、取点、求和、极限<br>定义：第一型曲面积分。<br>先把S分成小块Sᵢ，面积ΔSᵢ<br>每块取一点，读出那里的f值<br>乘上小块面积，再全部加起来。<br>‖T‖：各小块直径的最大值。<br>令‖T‖→0：每块都缩小。<br>和式趋于J，与分法和取点无关<br>J就是f在S上的第一型曲面积分<br>逐句对照20-01，只是升了一维<br>取f≡1：和式就是总面积<br>正如∫ds给出曲线的弧长<br>取f=ρ为密度：积分就是质量<br>定义能称重，却还没法计算。<br>定理22.1：化到投影区域上计算<br>左边：在曲面S上积分<br>右边：在平面区域D上积分<br>代入高度z(x,y)，f读的仍是曲面<br>多出一个因子：根号，管伸缩<br>条件：S光滑，f在S上连续</div><p>照着第二十章走四步：分割，取点，求和，极限。 下面是课本原话给出的定义。 先把曲面切成许多小块，记下每块的面积。 每块取一个点，读出那里的函数值。 每个读数乘上自己那块的面积，再全部加起来。 取所有小块直径的最大者，盯住最大的那块。 让最大直径趋于零，每一块就跟着变小。 和式逼近同一个数，与分法和取点无关， 这个数，就叫函数在曲面上的第一型曲面积分。</p><p>一句一句对照，就是细线那个定义升了一维。 函数处处取一，和式就是总面积。 正如线积分里放一，量出曲线全程。 把函数换成密度，积分给出薄壳的质量。 定义说清了称什么，却没说怎么算。</p><p>定理二十二点一，把整件事搬到投影区域上去做。 左边，是曲面上的积分。 右边，是平面阴影上的普通积分。 代入曲面的高度，函数读到的仍是曲面上的值。 另外多了一个根号，负责把阴影撑回曲面。 条件：曲面光滑，函数在曲面上连续。</p><h2>3 · 方法与证明</h2><p>为什么会冒出根号？把一小块放大来看。 放大之后它几乎是平的，就是切平面的一小片。 正下方是它的投影，地面上的一个小矩形。 小片倾斜了，法向量不再竖直向上。 斜放的天窗，玻璃比它盖住的地面大。 阴影按余弦缩小，除回去就是小片面积。 切平面的法向量，直接给出了这个余弦。 根号，就是阴影被撑大的倍数。 坡越陡，根号越大，正是影子偷偷藏起纸的地方。</p><p>它的一元版本在第十章，曲线上的弧微分。 同一个故事升了一维：一有坡度，面积就被撑大。 第十章早就警告过：丢掉根号，面积就会算错。</p><p>例一：球冠上，按高度分之一加权。 球冠是一张图像，就是球面的上半高度。 它的投影，是球冠边缘下方的圆盘。 第一步关键：在球面上，根号化成半径除以高度。 第二步：两个根号一乘，就消失了。 剩下的只看到圆心的距离，正好交给极坐标。 换成极坐标，角度绕一整圈，半径从中心走到边缘。 半径方向积出一个对数，答案干干净净。 这告诉我们：被积函数配得巧，根号会自己消失。</p><p>第十章的老习惯：先在知道答案的地方试一试。 平板没有坡度，根号等于一，面积原样不变。 整个球面：两半加起来，正是熟悉的面积。</p><p>刚才其实悄悄拆开了球面，一张图像盖不住它。 一条竖线穿过球面两次，每点一个高度不够用。 拆成上下两半，各是一张图像。 两半的投影是同一个圆盘，各自带着自己的根号。 如果被积函数也上下对称，算一半再翻倍就好。 例二：在整个球面上，积分到球心距离的平方。 可在球面上，这个距离平方处处一样。 被积函数是常数，直接拿数值乘面积，连根号也省了。 读题诀窍：先在曲面上化简被积函数，再去碰根号。</p><p>第一个错误：在斜面上把根号丢了。 四十五度斜窗盖住一块方地，错算得一。 真实面积约是一点四一，缺的那部分就是根号。 第二个错误：把圆柱面直直地往下投影。 它的影子只是一圈圆周，根本没有面积可积。 切平面立得笔直，余弦变成零，公式就失灵了。 补救：切成前后两半往侧面投，或换成两个变量描述。 两半一加，就是熟悉的易拉罐侧面积。</p><h2>4 · 展望与衔接</h2><p>质量、质心、转动惯量：照搬二十一章，换成曲面小块。 回到生日礼物：买纸要看面积，别看影子。 第二十一章的极坐标，多半负责投影积分的收尾。 这一集是第二十章的孪生篇：从细线到曲面。</p><p>往后，曲面要分出侧，通量会化成立体上的积分。 展望：不是图像的曲面，用两个变量描述，只点个名。 图形引擎和地图软件，正是这样从高度图算出地形面积。 需要的纸，从来不是你看到的那块影子。</p></main></body></html>

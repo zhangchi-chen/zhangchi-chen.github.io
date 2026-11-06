@@ -1,0 +1,75 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Vector functions: the derivative is a matrix · Self-Quiz</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+
+/* ---- 手机自测单页覆盖层（深浅主题自适应：浅色文件有 --paper，深色有 --bg/--fg） ---- */
+html,body{margin:0;background:var(--bg,var(--paper));color:var(--fg,var(--ink));
+  font-family:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC","Source Han Sans SC",system-ui,-apple-system,sans-serif}
+/* 中和原幻灯片容器的隐藏/定位，让 section 直接作为文档流内容 */
+section.slide{display:block!important;position:static!important;width:auto!important;height:auto!important;
+  padding:0!important;background:none!important;box-shadow:none!important;transform:none!important}
+.page{max-width:720px;margin:0 auto;padding:18px 16px 60px}
+.topbar{display:flex;justify-content:space-between;align-items:baseline;gap:8px;
+  border-bottom:2px solid var(--grid,var(--line,var(--rule,#e3e0d6)));padding-bottom:10px;margin-bottom:6px}
+.topbar h1{font-size:20px;margin:0}
+.topbar a{color:var(--blue,#1f72b0);font-size:14px;text-decoration:none;white-space:nowrap}
+.lead{color:var(--muted);font-size:15px;margin:12px 0 2px;line-height:1.6}
+/* 表格 → 竖屏卡片（仅 slide 式页面有表格） */
+table.t{display:block;width:auto;border:0}
+table.t tbody,table.t tr,table.t td,table.t th{display:block;border:0;width:auto}
+table.t thead{display:none}
+table.t tr{background:var(--card);border:1.5px solid var(--rule);border-radius:14px;
+  padding:14px 16px;margin:14px 0;font-size:19px;line-height:1.7}
+table.t td{padding:6px 0}
+table.t td:last-child{border-top:1.5px dashed var(--rule);margin-top:6px;padding-top:10px}
+.q{display:block;text-align:center}
+.reveal{cursor:pointer;border:2px dashed var(--rule);border-radius:10px;
+  padding:6px 22px;color:var(--muted);font-size:16px;background:none;font-family:inherit}
+.ans{display:none;line-height:1.8}
+.shown .ans{display:block} .shown .reveal{display:none}
+/* quiz-section 式页面：原 section 自带卡片样式，仅收窄内边距 */
+section.quiz{padding:6px 2px;margin:8px 0;background:none;border:0}
+section.quiz .q{margin:12px 0;text-align:left}
+
+.ex{display:none}</style></head><body><div class="page"><div class="topbar"><h1>Vector functions: the derivative is a matrix</h1><div style="float:right;font-size:15px"><a href="../notes-en/23-01.html">← Notes</a> · <a href="index.html">Index</a></div></div><div class="quiz"><section class="quiz"><div class="q"><div class="qt">1. 1. f(x, y) = (x²y, x + 3y). What is its Jacobian matrix at (2, 1)?</div><ol><li data-ok="0"><span class="l">A</span>rows (4, 1) and (4, 3)</li><li data-ok="1"><span class="l">B</span>rows (4, 4) and (1, 3)</li><li data-ok="0"><span class="l">C</span>rows (4, 4) and (3, 1)</li><button type="button" data-show="Reveal answer" data-hide="Hide answer">Reveal answer</button><div class="ex"><b>Correct: B.</b> row i is the gradient of fᵢ: (2xy, x²) = (4, 4), then (1, 3); A is the transpose.</div></div><div class="q"><div class="qt">2. 2. For f: Rⁿ → Rᵐ at a point x₀, which implication always holds?</div><ol><li data-ok="0"><span class="l">A</span>continuous ⇒ differentiable</li><li data-ok="0"><span class="l">B</span>differentiable ⇒ all partials continuous at x₀</li><li data-ok="1"><span class="l">C</span>differentiable ⇒ continuous</li><button type="button" data-show="Reveal answer" data-hide="Hide answer">Reveal answer</button><div class="ex"><b>Correct: C.</b> Theorem 23.8. A fails for ‖x‖ at the origin; B fails for x² sin(1/x) (set to 0 at x = 0), viewed as a function of (x, y).</div></div><div class="q"><div class="qt">3. 3. f: R³ → R² and g: R² → R⁴ are differentiable, h = g∘f. Then h′(x₀) is…</div><ol><li data-ok="1"><span class="l">A</span>a 4×3 matrix, g′(y₀) f′(x₀)</li><li data-ok="0"><span class="l">B</span>a 3×4 matrix, f′(x₀) g′(y₀)</li><li data-ok="0"><span class="l">C</span>a 2×2 matrix</li><button type="button" data-show="Reveal answer" data-hide="Hide answer">Reveal answer</button><div class="ex"><b>Correct: A.</b> (4×2)(2×3) = 4×3; in the other order, (2×3)(4×2), the sizes do not even fit.</div></div><div class="q"><div class="qt">4. 4. In 21-03 the area element became r dr dθ. For the polar map f(r, θ) = (r cos θ, r sin θ), that factor r is…</div><ol><li data-ok="0"><span class="l">A</span>the entry ∂x/∂r</li><li data-ok="0"><span class="l">B</span>the sum of the diagonal entries of f′(r, θ)</li><li data-ok="1"><span class="l">C</span>det f′(r, θ)</li><button type="button" data-show="Reveal answer" data-hide="Hide answer">Reveal answer</button><div class="ex"><b>Correct: C.</b> det = cos θ · r cos θ − (−r sin θ) · sin θ = r; but ∂x/∂r = cos θ, and the diagonal sum is (1 + r) cos θ.</div></div><div class="q"><div class="qt">5. 5. ⚠️ All partial derivatives of f exist at x₀, so Jf(x₀) can be written down. Is f differentiable at x₀?</div><ol><li data-ok="0"><span class="l">A</span>Yes, that is what the Jacobian matrix means</li><li data-ok="1"><span class="l">B</span>Not necessarily: the course text says this does not guarantee it</li><li data-ok="0"><span class="l">C</span>Yes, at least when m = 1</li><button type="button" data-show="Reveal answer" data-hide="Hide answer">Reveal answer</button><div class="ex"><b>Correct: B.</b> xy/(x² + y²), set to 0 at the origin (m = 1), has both partials there but is not even continuous; so C fails too.</div></div><div class="q"><div class="qt">6. 6. Course text example 1: f(x₁, x₂) = (x₁²x₂³, ex₁+x₂, x₂, x₁ ln x₂). Which is the entry in row 4, column 2 of Jf(1, 1)?</div><ol><li data-ok="1"><span class="l">A</span>1</li><li data-ok="0"><span class="l">B</span>0</li><li data-ok="0"><span class="l">C</span>ln 2</li><button type="button" data-show="Reveal answer" data-hide="Hide answer">Reveal answer</button><div class="ex"><b>Correct: A.</b> ∂(x₁ ln x₂)/∂x₂ = x₁/x₂ = 1 at (1, 1); 0 is the entry to its left, ln 1.</div></div></section></div></div><script>document.querySelectorAll("button[data-show]").forEach(function(b){b.onclick=function(){var q=b.parentNode,ex=q.querySelector(".ex");var on=ex.style.display==="block";ex.style.display=on?"none":"block";b.textContent=on?b.dataset.show:b.dataset.hide;q.querySelectorAll("li[data-ok=\"1\"]").forEach(function(li){li.style.outline=on?"":"2px solid #80ED99";});};});</script></body></html>
