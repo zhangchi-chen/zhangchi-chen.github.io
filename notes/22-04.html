@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>22-04 斯托克斯公式：一家人同框</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+</style></head><body><div class="topbar"><a class="mv-home" href="../quiz/index.html">☰ 目录</a><span>22-04</span><a class="mv-quiz" href="../quiz/22-04.html">去自测 →</a></div><main><header><div class="tag">视频配套讲稿（朗读原文） · MATH SELF-CHECK: 34 claims re-derived, 3 fixed.</div><h1>22-04 斯托克斯公式</h1><p class="sub">一家人同框</p></header><h2>1 · 动机</h2><p>斯托克斯公式，一家人终于同框。 作业来了：一刀切开立方体，切口是六条边。 任务：把三项沿这一圈积分。 六条边，每条三项，一共十八个小积分。 先别急着硬算，问一句：以前见过吗？</p><p>像小组作业，前面三集各交了一份。 第一份来自第九章第三集：牛顿莱布尼茨公式。 导数在整个区间上积分，只有两端说话。 第二份来自二十一章第五集：格林公式。 在区域上积分，绕边界走一圈就有答案。 第三份来自二十二章第三集：高斯公式。 体内的散度加起来，等于穿出外皮的通量。 规律出现了：边界总比整体低一维。 第四份空着：一张弯面，加上它的边缘。 像全家福，鼻子全一样：一句话，四套装扮。 把导数在整体上积分，边界就给出答案。 今天，第四位亲戚走进照片：斯托克斯公式。</p><h2>2 · 定理与定义</h2><div class="card gold stmt">曲面S和边界L：整体与边界<br>两个选择要配对：S的侧，L的方向<br>课本用右手法则来配对<br>站在选定一侧走，曲面总在左手<br>像拧瓶盖：沿L转，盖子朝选定侧走<br>选上侧：从上往下看，L逆时针<br>定理22.6：斯托克斯公式<br>条件：曲面光滑，边界分段光滑<br>P,Q,R在S及L上一阶偏导连续<br>左边：S上的第二型曲面积分<br>曲面和侧来自22-01与22-02<br>右边：沿L一圈的第二型曲线积分<br>三个括号正是旋度rot A的分量<br>穿过S的旋度通量=沿L的环量<br>20-03搭的桥：环量两种写法都行<br>便于记忆的行列式形式<br>按第一行展开，三个括号就出来<br>第四行填好：曲面、边界线、旋度<br>A=(−y,x,0)配上半球面<br>它的旋度是常向量(0,0,2)<br>上侧配逆时针：两边都是2π<br>错配：下侧配原方向，得−2π<br>大小相同，符号相反：错在方向<br>同一边缘的任何盖子：都是2π<br>曲面积分难算？绕边界走一圈</div><p>整体是这张弯面，边界是它的边缘。 两个选择要配好：面的哪一侧，边缘往哪走。 课本用右手法则来配对。 头朝选定那一侧，沿边缘走，面总在你左手边。 像拧瓶盖：顺着边缘拧，盖子朝选定侧走。 选上侧，从上往下看，边缘就是逆时针。</p><p>定理二十二点六，斯托克斯公式原文。 先看条件：面要光滑，边缘分段光滑。 函数要够光滑：一阶偏导数连续，一直到边缘。 左边：在面上按选定一侧积分。 面和它的两侧，本章前两集已经备好。 右边：沿着边缘走一圈的积分。 这三个括号，正是一个东西的三个分量：旋度。 旋度穿过面的通量，等于沿边缘的环量。 第二十章第三集搭过桥：环量有两种写法。 装进一个行列式，就好记了。 沿第一排展开，三个括号就掉出来了。 第四份交齐了：一张面，它的边缘，再加旋度。</p><p>试一试：一个绕着转的场，罩上半个球面。 它的旋度处处一样：竖直朝上，大小是2。 上侧配逆时针：两边结果全是二派。 错配：换成下侧，边缘不动，面给出负二派。 大小一样，符号相反：错在约定，不在计算。 边缘不变，盖子随便换，全是二派。 面上积分难算，就改走边缘一圈。</p><h2>3 · 方法与证明</h2><p>为什么成立？先让这张面是一个函数的图像。 先只处理P那一部分，另外两部分照做。 往下投影：边缘落到平面区域的边界上。 代入高度，积分搬到投影上。 格林公式接手，化成整块区域上的积分。 唯一的新东西：沿着y走，高度跟着变。 链式法则多给出一项，里面带着坡度。 上侧法向带着同一个坡度，两边对上了。 斯托克斯，就是格林穿上了弯曲的外衣。 另外两部分照样做，三份加起来。</p><p>带着斯托克斯，回到那道六边形作业。 面就取这块平的六边形。 右手法则：从法向尖看，这圈逆时针。 关键一步：旋度点乘法向，竟是常数。 被积的是常数，通量就是常数乘面积。 截面是正六边形，顶点在六条棱的中点。 结果：负的二分之九倍a的立方。 十八个小积分，换成了一次乘法。</p><h2>4 · 展望与衔接</h2><p>第十章第三集许下的承诺，今天兑现：面积公式到站了。 空中一块斜放的平面上，画一个圈。 目标：把这个行列式沿着这一圈积分。 关键：里面的场，旋度恰好是两倍法向。 所以，这一圈积分正好是两倍面积。 现在把平面放平，法向竖直朝上。 它塌缩成老朋友：面积等于一圈积分的一半。 第十章初次见面，二十一章由格林证明，今天推广。 写成向量，它的第三个分量，正是我们的公式。 它的大小就是面积，方向就是法向。 第十章的面积公式，终于有了最一般的样子。</p><p>二十一章第六集搬进空间，成了定理二十二点七。 有了势函数，做的功只看起点和终点。 梯度：沿任何路径积分，只看两个端点。 散度：高斯公式把它在立体上加起来。 旋度：斯托克斯把它在面上加起来。 三种导数，四个公式，整章原来只是一句话。</p><p>学到微分形式，四个定理就成了一个。 整体上积导数，等于边界上积原式。 流形上的广义斯托克斯公式，是微分几何的门。 一句话，四套装扮：一家人终于同框。</p></main></body></html>

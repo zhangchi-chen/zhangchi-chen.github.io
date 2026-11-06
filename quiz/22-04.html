@@ -1,0 +1,75 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>斯托克斯公式 · 自测</title><style>
+:root{--bg:#0E1624;--panel:#18233A;--fg:#E8EEF5;--dim:#6F7D93;--gold:#F2C14E;--cyan:#4CC9F0;--coral:#F07167;--green:#80ED99;--red:#FF4D5E;--line:#24324D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 18px 80px}
+header .tag{color:var(--dim);font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-size:44px;margin:.2em 0 0}
+.sub{color:var(--gold);margin:0 0 28px;font-size:19px}
+h2{font-size:23px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 24px;margin:14px 0}
+.card.gold{border-color:var(--gold)}
+.stmt{text-align:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;line-height:1.9}
+.stmt .name{font-family:inherit;color:var(--gold);font-weight:700;font-size:16px;letter-spacing:.04em;font-family:system-ui,sans-serif}
+.stmt .big{font-size:30px}
+.m{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+i{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}h1{font-size:34px}}
+.report{border-radius:14px;padding:14px 16px;text-align:center;background:var(--panel);border:2px solid}
+.report .t{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.report .v{font-family:"Cambria Math","Times New Roman",serif;font-size:20px;margin-top:6px}
+.c{border-color:var(--cyan)} .c .t{color:var(--cyan)}
+.r{border-color:var(--coral)} .r .t{color:var(--coral)}
+.vs{display:flex;align-items:center;gap:12px}.vs>.report{flex:1}.vs .neq{color:var(--red);font-size:34px;font-weight:800}
+.concl{color:var(--red);font-weight:700;margin-top:10px}
+svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+svg text{paint-order:stroke;stroke:var(--bg);stroke-width:5px}
+svg .ax{fill:var(--dim);font-size:16px}
+figcaption{color:var(--dim);font-size:14px;text-align:center;margin-top:6px}
+ul.tools{list-style:none;padding:0;margin:0}
+ul.tools li{background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;padding:12px 16px;margin:10px 0}
+ul.tools b{color:var(--gold)}
+.pr{border-color:var(--green)} .pr h3{color:var(--green)} .rf{border-color:var(--red)} .rf h3{color:var(--red)}
+h3{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.quiz .q{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+.quiz .qt{font-weight:600}
+.quiz ol{list-style:none;padding:0;margin:10px 0}
+.quiz li{padding:6px 10px;border-radius:8px;margin:4px 0;border:1px solid transparent}
+.quiz li .l{color:var(--dim);font-weight:700;margin-right:8px}
+.quiz li.ok{border-color:var(--green);background:rgba(128,237,153,.10)}
+.quiz button{background:transparent;color:var(--gold);border:2px solid var(--gold);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+.quiz button:hover{background:rgba(242,193,78,.12)}
+.quiz .ex{display:none;margin-top:10px;color:var(--fg);border-left:3px solid var(--green);padding-left:12px}
+.quiz .q.open .ex{display:block}
+
+/* ---- 手机自测单页覆盖层（深浅主题自适应：浅色文件有 --paper，深色有 --bg/--fg） ---- */
+html,body{margin:0;background:var(--bg,var(--paper));color:var(--fg,var(--ink));
+  font-family:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC","Source Han Sans SC",system-ui,-apple-system,sans-serif}
+/* 中和原幻灯片容器的隐藏/定位，让 section 直接作为文档流内容 */
+section.slide{display:block!important;position:static!important;width:auto!important;height:auto!important;
+  padding:0!important;background:none!important;box-shadow:none!important;transform:none!important}
+.page{max-width:720px;margin:0 auto;padding:18px 16px 60px}
+.topbar{display:flex;justify-content:space-between;align-items:baseline;gap:8px;
+  border-bottom:2px solid var(--grid,var(--line,var(--rule,#e3e0d6)));padding-bottom:10px;margin-bottom:6px}
+.topbar h1{font-size:20px;margin:0}
+.topbar a{color:var(--blue,#1f72b0);font-size:14px;text-decoration:none;white-space:nowrap}
+.lead{color:var(--muted);font-size:15px;margin:12px 0 2px;line-height:1.6}
+/* 表格 → 竖屏卡片（仅 slide 式页面有表格） */
+table.t{display:block;width:auto;border:0}
+table.t tbody,table.t tr,table.t td,table.t th{display:block;border:0;width:auto}
+table.t thead{display:none}
+table.t tr{background:var(--card);border:1.5px solid var(--rule);border-radius:14px;
+  padding:14px 16px;margin:14px 0;font-size:19px;line-height:1.7}
+table.t td{padding:6px 0}
+table.t td:last-child{border-top:1.5px dashed var(--rule);margin-top:6px;padding-top:10px}
+.q{display:block;text-align:center}
+.reveal{cursor:pointer;border:2px dashed var(--rule);border-radius:10px;
+  padding:6px 22px;color:var(--muted);font-size:16px;background:none;font-family:inherit}
+.ans{display:none;line-height:1.8}
+.shown .ans{display:block} .shown .reveal{display:none}
+/* quiz-section 式页面：原 section 自带卡片样式，仅收窄内边距 */
+section.quiz{padding:6px 2px;margin:8px 0;background:none;border:0}
+section.quiz .q{margin:12px 0;text-align:left}
+
+.ex{display:none}</style></head><body><div class="page"><div class="topbar"><h1>斯托克斯公式</h1><div style="float:right;font-size:15px"><a href="../notes/22-04.html">← 讲稿</a> · <a href="index.html">目录</a></div></div><div class="quiz"><section class="quiz"><div class="q"><div class="qt">1. 1. 家族表中，立体V的边界是什么？</div><ol><li data-ok="0"><span class="l">A</span>一条闭曲线</li><li data-ok="1"><span class="l">B</span>一张闭曲面</li><li data-ok="0"><span class="l">C</span>两个端点</li><button type="button" data-show="显示答案" data-hide="隐藏答案">显示答案</button><div class="ex"><b>正确答案：B.</b> 立体是三维的，边界低一维：一张闭曲面，正如高斯公式。</div></div><div class="q"><div class="qt">2. 2. 斯托克斯公式在曲面S上积分的是哪种导数？</div><ol><li data-ok="0"><span class="l">A</span>（散度）</li><li data-ok="0"><span class="l">B</span>（梯度）</li><li data-ok="1"><span class="l">C</span>（旋度）</li><button type="button" data-show="显示答案" data-hide="隐藏答案">显示答案</button><div class="ex"><b>正确答案：C.</b> 定理22.6的三个括号正是rot A的分量；散度属于高斯公式。</div></div><div class="q"><div class="qt">3. 3. 上半单位球面，A = (−y, x, 0)。同学取下侧，L却取从上往下看的逆时针方向，算得曲面积分为−2π、曲线积分为2π。错在哪里？</div><ol><li data-ok="1"><span class="l">A</span>侧与方向错配：取下侧时，L应为从上往下看顺时针。</li><li data-ok="0"><span class="l">B</span>曲面积分算错了。</li><li data-ok="0"><span class="l">C</span>斯托克斯公式对半球面不成立。</li><button type="button" data-show="显示答案" data-hide="隐藏答案">显示答案</button><div class="ex"><b>正确答案：A.</b> 按右手法则，下侧配顺时针的L，两边都是−2π。</div></div><div class="q"><div class="qt">4. 4. L是平面x + y + z = 1被三个坐标面截出的三角形，从向量(1, 1, 1)所指一侧看为逆时针。用平的三角形面片计算 ∮L z dx + x dy + y dz，结果为</div><ol><li data-ok="0"><span class="l">A</span>1/2</li><li data-ok="0"><span class="l">B</span>√3</li><li data-ok="1"><span class="l">C</span>3/2</li><button type="button" data-show="显示答案" data-hide="隐藏答案">显示答案</button><div class="ex"><b>正确答案：C.</b> rot A = (1, 1, 1)，n = (1, 1, 1)/√3，rot A · n = √3；边长√2的正三角形面积为√3/2；乘积为3/2。</div></div><div class="q"><div class="qt">5. 是单位法向为n = (cos α, cos β, cos γ)的平面上的闭曲线，方向按右手法则，所围面积为S。行列式 |dx dy dz; cos α cos β cos γ; x y z| 沿L的积分等于</div><ol><li data-ok="0"><span class="l">A</span>S</li><li data-ok="1"><span class="l">B</span>2S</li><li data-ok="0"><span class="l">C</span>0</li><button type="button" data-show="显示答案" data-hide="隐藏答案">显示答案</button><div class="ex"><b>正确答案：B.</b> 场n × r的旋度是2n，由斯托克斯公式得∬ 2n · n dS = 2S。</div></div></section></div></div><script>document.querySelectorAll("button[data-show]").forEach(function(b){b.onclick=function(){var q=b.parentNode,ex=q.querySelector(".ex");var on=ex.style.display==="block";ex.style.display=on?"none":"block";b.textContent=on?b.dataset.show:b.dataset.hide;q.querySelectorAll("li[data-ok=\"1\"]").forEach(function(li){li.style.outline=on?"":"2px solid #80ED99";});};});</script></body></html>
