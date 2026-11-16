@@ -73,6 +73,20 @@ figcaption{color:var(--dim);font-size:14px;margin-top:6px}
 <div class="q"><div><b>4.</b> Where is equivalent replacement legal in general?</div><ul class="opts"><li data-ok="1"><b>A.</b> Inside products and quotients</li><li data-ok="0"><b>B.</b> Inside sums and differences</li><li data-ok="0"><b>C.</b> Anywhere in the expression</li></ul><button type="button" data-show="Show answer" data-hide="Hide answer">Show answer</button><div class="exp"><span class="ok">✓ A</span> — The correction factors 1 + o(1) pass through products and quotients; in a difference the main parts can cancel.</div></div>
 <div class="q"><div><b>5.</b> Why does replacing in (tan <i>x</i> − sin <i>x</i>)/<i>x</i>³ give the wrong answer 0?</div><ul class="opts"><li data-ok="0"><b>A.</b> tan <i>x</i> is not equivalent to <i>x</i></li><li data-ok="1"><b>B.</b> The main parts cancel, leaving o(<i>x</i>), and o(<i>x</i>)/<i>x</i>³ is undetermined</li><li data-ok="0"><b>C.</b> The limit does not exist</li></ul><button type="button" data-show="Show answer" data-hide="Hide answer">Show answer</button><div class="exp"><span class="ok">✓ B</span> — tan <i>x</i> − sin <i>x</i> = o(<i>x</i>) only; the remainders decide, and the true limit is 1/2.</div></div>
 <div class="q"><div><b>6.</b> For <i>u</i> = <i>x</i>·sin(1/<i>x</i>) and <i>v</i> = <i>x</i> (<i>x</i> → 0), which statement holds?</div><ul class="opts"><li data-ok="0"><b>A.</b> <i>u</i> ~ <i>v</i></li><li data-ok="1"><b>B.</b> <i>u</i> ∈ O(<i>v</i>), although lim <i>u</i>/<i>v</i> does not exist</li><li data-ok="0"><b>C.</b> <i>u</i> is not an infinitesimal</li></ul><button type="button" data-show="Show answer" data-hide="Hide answer">Show answer</button><div class="exp"><span class="ok">✓ B</span> — |<i>u</i>| ≤ |<i>v</i>| gives membership in O(<i>v</i>) with no ratio limit needed — why classes are sturdier.</div></div></section>
+
+<section class="echo-card-0311" style="border:1px solid #4a7a9b;border-left:6px solid #4a7a9b;background:rgba(74,122,155,.08);border-radius:10px;padding:18px 22px;margin:26px 0">
+<h2 style="margin:0 0 10px;font-size:1.15em">Echo · Where same-order earns its keep</h2>
+<p style="margin:8px 0">The biggest payoff of same-order infinitesimals arrives in Chapter 11:
+the <b>comparison principle</b> for improper integrals —
+<a href="../notes-en/11-03.html" style="color:#1a6fb0;font-weight:600;text-decoration:none;border-bottom:1px dotted #1a6fb0">11-03, Theorem 11.2</a>, Corollary 3 (limit form):
+if <i>x</i><sup>p</sup><i>f</i>(<i>x</i>) → λ ≠ 0 far out, then <i>f</i> is <b>same-order</b> as λ/<i>x</i><sup>p</sup>,
+and same order means same fate: converge together, or diverge together.</p>
+<p style="margin:8px 0">Chapter 12 replays the idea for series:
+<a href="../notes-en/12-02.html" style="color:#1a6fb0;font-weight:600;text-decoration:none;border-bottom:1px dotted #1a6fb0">12-02, limit-form comparison</a> —
+<i>a</i><sub>n</sub>/<i>b</i><sub>n</sub> → l with 0 &lt; l &lt; +∞ means the terms are same-order, so the series share their fate.
+The growth ladder of 02-08 (ln n ≪ n<sup>p</sup> ≪ c<sup>n</sup> ≪ n!) is the lookup table for picking the benchmark.</p>
+<p style="margin:8px 0"><b>In one line: Chapter 3 ranks how fast things vanish; Chapters 11–12 rank how long tails drag — the same scale.</b></p>
+</section>
 </main><script>
 document.querySelectorAll('.q button').forEach(function(b){
   b.addEventListener('click',function(){

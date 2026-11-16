@@ -93,6 +93,19 @@ figcaption{color:var(--dim);font-size:14px;margin-top:6px}
 <div class="q"><div><b>4.</b> 一般而言，等价替换在哪里合法？</div><ul class="opts"><li data-ok="1"><b>A.</b> 乘积与商之中</li><li data-ok="0"><b>B.</b> 和与差之中</li><li data-ok="0"><b>C.</b> 表达式中任何位置</li></ul><button type="button" data-show="显示答案" data-hide="隐藏答案">显示答案</button><div class="exp"><span class="ok">✓ A</span> — 修正因子 1 + o(1) 可以穿过乘除；而在差中，主部可能互相抵消。</div></div>
 <div class="q"><div><b>5.</b> 为什么在 (tan <i>x</i> − sin <i>x</i>)/<i>x</i>³ 中直接替换会得到错误的 0？</div><ul class="opts"><li data-ok="0"><b>A.</b> tan <i>x</i> 与 <i>x</i> 不等价</li><li data-ok="1"><b>B.</b> 主部抵消只剩 o(<i>x</i>)，而 o(<i>x</i>)/<i>x</i>³ 无法确定</li><li data-ok="0"><b>C.</b> 该极限不存在</li></ul><button type="button" data-show="显示答案" data-hide="隐藏答案">显示答案</button><div class="exp"><span class="ok">✓ B</span> — tan <i>x</i> − sin <i>x</i> 只知道属于 o(<i>x</i>)；由余项决定，真实极限是 1/2。</div></div>
 <div class="q"><div><b>6.</b> 对 <i>u</i> = <i>x</i>·sin(1/<i>x</i>)、<i>v</i> = <i>x</i>（<i>x</i> → 0），哪个结论成立？</div><ul class="opts"><li data-ok="0"><b>A.</b> <i>u</i> ~ <i>v</i></li><li data-ok="1"><b>B.</b> <i>u</i> ∈ O(<i>v</i>)，尽管 lim <i>u</i>/<i>v</i> 不存在</li><li data-ok="0"><b>C.</b> <i>u</i> 不是无穷小</li></ul><button type="button" data-show="显示答案" data-hide="隐藏答案">显示答案</button><div class="exp"><span class="ok">✓ B</span> — |<i>u</i>| ≤ |<i>v</i>| 即得 <i>u</i> ∈ O(<i>v</i>)，无需比值极限——这正是函数类更稳健之处。</div></div></section>
+
+<section class="echo-card-0311" style="border:1px solid #4a7a9b;border-left:6px solid #4a7a9b;background:rgba(74,122,155,.08);border-radius:10px;padding:18px 22px;margin:26px 0">
+<h2 style="margin:0 0 10px;font-size:1.15em">呼应 · “同阶”在后文的用武之地</h2>
+<p style="margin:8px 0">同阶无穷小这张“名片”，最重要的应用在第 11 章：<b>反常积分的比较原则</b>——
+<a href="../notes/11-03.html" style="color:#1a6fb0;font-weight:600;text-decoration:none;border-bottom:1px dotted #1a6fb0">11-03 定理 11.2</a> 的推论 3（极限形式）说的正是：
+远处 <i>x</i><sup>p</sup><i>f</i>(<i>x</i>) → λ ≠ 0，即 <i>f</i> 与 λ/<i>x</i><sup>p</sup> <b>同阶</b>，
+同阶者同命运：一起收敛，或一起发散。</p>
+<p style="margin:8px 0">第 12 章把同一思想搬到级数：
+<a href="../notes/12-02.html" style="color:#1a6fb0;font-weight:600;text-decoration:none;border-bottom:1px dotted #1a6fb0">12-02 正项级数的极限形式比较</a>——
+<i>a</i><sub>n</sub>/<i>b</i><sub>n</sub> → l（0 &lt; l &lt; +∞）即两通项<b>同阶</b>，敛散性相同。
+02-08 的增长率阶梯（ln n ≪ n<sup>p</sup> ≪ c<sup>n</sup> ≪ n!）是选基准时的速查表。</p>
+<p style="margin:8px 0;color:inherit"><b>一句话：第三章比的是“消失得多快”，第 11、12 章比的是“尾巴拖得多长”——同一杆秤。</b></p>
+</section>
 </main><script>
 document.querySelectorAll('.q button').forEach(function(b){
   b.addEventListener('click',function(){
